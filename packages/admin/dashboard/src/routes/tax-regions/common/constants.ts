@@ -1,7 +1,7 @@
 export enum TaxRateRuleReferenceType {
-  PRODUCT = "products",
-  PRODUCT_COLLECTION = "product_collections",
-  PRODUCT_TAG = "product_tags",
-  PRODUCT_TYPE = "product_types",
-  CUSTOMER_GROUP = "customer_groups",
+  PRODUCT = "product",
+  PRODUCT_COLLECTION = "product_collection",
+  PRODUCT_TAG = "product_tag",
+  PRODUCT_TYPE = "product_type",
+  CUSTOMER_GROUP = "customer_group",
 }
