@@ -8,7 +8,8 @@ export interface AdminOrderFilters extends FindParams, BaseOrderFilters {
   sales_channel_id?: string[]
   fulfillment_status?: FulfillmentStatus[]
   payment_status?: PaymentStatus[]
-  region_id?: string[]
+  region_id?: string[] | string
+  customer_id?: string[] | string
   q?: string
   created_at?: OperatorMap<string>
   updated_at?: OperatorMap<string>
