@@ -507,6 +507,10 @@ export const sidebar = numberSidebarItems(
             },
           ],
         },
+        {
+          type: "link",
+          path: "/learn/advanced-development/environment-variables"
+        }
       ],
     },
     {
