@@ -48,17 +48,17 @@ const TaxRegionCreateTaxOverrideSchema = z.object({
     .optional(),
   is_combinable: z.boolean().optional(),
   enabled_rules: z.object({
-    products: z.boolean(),
-    product_collections: z.boolean(),
-    product_tags: z.boolean(),
-    product_types: z.boolean(),
-    customer_groups: z.boolean(),
+    product: z.boolean(),
+    product_collection: z.boolean(),
+    product_tag: z.boolean(),
+    product_type: z.boolean(),
+    customer_group: z.boolean(),
   }),
-  products: z.array(TaxRateRuleReferenceSchema).optional(),
-  product_collections: z.array(TaxRateRuleReferenceSchema).optional(),
-  product_tags: z.array(TaxRateRuleReferenceSchema).optional(),
-  product_types: z.array(TaxRateRuleReferenceSchema).optional(),
-  customer_groups: z.array(TaxRateRuleReferenceSchema).optional(),
+  product: z.array(TaxRateRuleReferenceSchema).optional(),
+  product_collection: z.array(TaxRateRuleReferenceSchema).optional(),
+  product_tag: z.array(TaxRateRuleReferenceSchema).optional(),
+  product_type: z.array(TaxRateRuleReferenceSchema).optional(),
+  customer_group: z.array(TaxRateRuleReferenceSchema).optional(),
 })
 
 type TaxRegionCreateTaxOverrideFormProps = {
@@ -85,17 +85,17 @@ export const TaxRegionCreateTaxOverrideForm = ({
         value: "",
       },
       enabled_rules: {
-        products: true,
-        product_collections: false,
-        product_tags: false,
-        product_types: false,
-        customer_groups: false,
+        product: true,
+        product_collection: false,
+        product_tag: false,
+        product_type: false,
+        customer_group: false,
       },
-      products: [],
-      product_collections: [],
-      product_tags: [],
-      product_types: [],
-      customer_groups: [],
+      product: [],
+      product_collection: [],
+      product_tag: [],
+      product_type: [],
+      customer_group: [],
     },
     resolver: zodResolver(TaxRegionCreateTaxOverrideSchema),
   })
@@ -104,32 +104,32 @@ export const TaxRegionCreateTaxOverrideForm = ({
 
   const handleSubmit = form.handleSubmit(async (values) => {
     const {
-      products,
-      customer_groups,
-      product_collections,
-      product_tags,
-      product_types,
+      product,
+      customer_group,
+      product_collection,
+      product_tag,
+      product_type,
     } = values
 
     const productRules = createTaxRulePayload({
       reference_type: TaxRateRuleReferenceType.PRODUCT,
-      references: products || [],
+      references: product || [],
     })
     const customerGroupRules = createTaxRulePayload({
       reference_type: TaxRateRuleReferenceType.CUSTOMER_GROUP,
-      references: customer_groups || [],
+      references: customer_group || [],
     })
     const productCollectionRules = createTaxRulePayload({
       reference_type: TaxRateRuleReferenceType.PRODUCT_COLLECTION,
-      references: product_collections || [],
+      references: product_collection || [],
     })
     const productTagRules = createTaxRulePayload({
       reference_type: TaxRateRuleReferenceType.PRODUCT_TAG,
-      references: product_tags || [],
+      references: product_tag || [],
     })
     const productTypeRules = createTaxRulePayload({
       reference_type: TaxRateRuleReferenceType.PRODUCT_TYPE,
-      references: product_types || [],
+      references: product_type || [],
     })
 
     const rules = [
@@ -165,27 +165,27 @@ export const TaxRegionCreateTaxOverrideForm = ({
 
   const products = useFieldArray({
     control: form.control,
-    name: "products",
+    name: TaxRateRuleReferenceType.PRODUCT,
   })
 
   const productCollections = useFieldArray({
     control: form.control,
-    name: "product_collections",
+    name: TaxRateRuleReferenceType.PRODUCT_COLLECTION,
   })
 
   const productTags = useFieldArray({
     control: form.control,
-    name: "product_tags",
+    name: TaxRateRuleReferenceType.PRODUCT_TAG,
   })
 
   const productTypes = useFieldArray({
     control: form.control,
-    name: "product_types",
+    name: TaxRateRuleReferenceType.PRODUCT_TYPE,
   })
 
   const customerGroups = useFieldArray({
     control: form.control,
-    name: "customer_groups",
+    name: TaxRateRuleReferenceType.CUSTOMER_GROUP,
   })
 
   const getControls = (type: TaxRateRuleReferenceType) => {
