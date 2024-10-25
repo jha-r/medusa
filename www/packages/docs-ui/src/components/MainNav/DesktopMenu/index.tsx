@@ -23,7 +23,7 @@ import { MenuItem } from "types"
 export const MainNavDesktopMenu = () => {
   const [isOpen, setIsOpen] = useState(false)
   const { setDesktopSidebarOpen, isSidebarShown } = useSidebar()
-  const ref = useRef(null)
+  const ref = useRef<HTMLDivElement>(null)
 
   useClickOutside({
     elmRef: ref,

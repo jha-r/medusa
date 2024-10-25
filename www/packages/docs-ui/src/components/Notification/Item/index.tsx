@@ -18,16 +18,26 @@ export type NotificationItemProps = {
   closeButtonText?: string
 } & React.HTMLAttributes<HTMLDivElement>
 
-export const NotificationItem = ({
-  className = "",
-  placement = "bottom",
-  show = true,
-  layout = "default",
-  setShow,
-  onClose,
-  children,
-  ...rest
-}: NotificationItemProps) => {
+type EmptyLayoutProps = {
+  onClose?: () => void
+}
+
+export const NotificationItem = React.forwardRef<
+  HTMLDivElement,
+  NotificationItemProps
+>(function NotificationItem(
+  {
+    className = "",
+    placement = "bottom",
+    show = true,
+    layout = "default",
+    setShow,
+    onClose,
+    children,
+    ...rest
+  },
+  ref
+) {
   const handleClose = () => {
     setShow?.(false)
     onClose?.()
@@ -44,6 +54,7 @@ export const NotificationItem = ({
         !show && "!opacity-0",
         className
       )}
+      ref={ref}
     >
       {layout === "default" && (
         <NotificationItemLayoutDefault {...rest} handleClose={handleClose}>
@@ -53,11 +64,17 @@ export const NotificationItem = ({
       {layout === "empty" &&
         Children.map(children, (child) => {
           if (child) {
-            return React.cloneElement(child, {
-              onClose: handleClose,
-            })
+            return React.cloneElement<EmptyLayoutProps>(
+              child as React.ReactElement<
+                EmptyLayoutProps,
+                React.FunctionComponent<EmptyLayoutProps>
+              >,
+              {
+                onClose: handleClose,
+              }
+            )
           }
         })}
     </div>
   )
-}
+})

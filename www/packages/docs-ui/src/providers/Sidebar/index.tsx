@@ -53,7 +53,7 @@ export type SidebarContextType = {
   setDesktopSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>
   staticSidebarItems?: boolean
   shouldHandleHashChange: boolean
-  sidebarRef: React.RefObject<HTMLDivElement>
+  sidebarRef: React.RefObject<HTMLDivElement | null>
   goBack: () => void
   sidebarTopHeight: number
   setSidebarTopHeight: React.Dispatch<React.SetStateAction<number>>

@@ -94,6 +94,7 @@ export const Search = ({
           className="px-docs_1 pt-docs_1 bg-medusa-bg-base z-10"
         />
       )}
+      {/* @ts-expect-error React v19 doesn't see this type as a React element */}
       <InstantSearch
         indexName={algolia.mainIndexName}
         searchClient={searchClient}
@@ -102,6 +103,7 @@ export const Search = ({
         }}
       >
         <div className={clsx("bg-medusa-bg-base flex z-[1]")}>
+          {/* @ts-expect-error React v19 doesn't see this type as a React element */}
           <SearchBox
             classNames={{
               root: clsx(
@@ -128,7 +130,7 @@ export const Search = ({
             )}
             placeholder="Find something..."
             autoFocus
-            formRef={searchBoxRef}
+            formRef={searchBoxRef as React.RefObject<HTMLFormElement>}
             loadingIconComponent={() => <SpinnerLoading />}
           />
         </div>

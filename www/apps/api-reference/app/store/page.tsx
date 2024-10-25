@@ -1,5 +1,5 @@
 import AreaProvider from "@/providers/area"
-import StoreContent from "../_mdx/store.mdx"
+import StoreContent from "@/markdown/store.mdx"
 import Tags from "@/components/Tags"
 import PageTitleProvider from "@/providers/page-title"
 import { H1 } from "docs-ui"

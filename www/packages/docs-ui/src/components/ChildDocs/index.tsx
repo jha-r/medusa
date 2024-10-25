@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useMemo } from "react"
-import { Card, CardList, MDXComponents, useSidebar } from "../.."
+import { Card, CardList, H2, useSidebar } from "../.."
 import { InteractiveSidebarItem, SidebarItem, SidebarItemLink } from "types"
 import slugify from "slugify"
 
@@ -151,9 +151,7 @@ export const ChildDocs = ({
   const getAllLevelsElms = (items?: SidebarItem[]) =>
     filterNonInteractiveItems(items).map((item, key) => {
       const itemChildren = getChildrenForLevel(item)
-      const HeadingComponent = itemChildren?.length
-        ? MDXComponents["h2"]
-        : undefined
+      const HeadingComponent = itemChildren?.length ? H2 : undefined
 
       return (
         <React.Fragment key={key}>

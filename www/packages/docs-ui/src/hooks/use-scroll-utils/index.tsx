@@ -39,7 +39,7 @@ export function useEvent<T extends EventFunc>(callback: T): T {
  * Gets `value` from the last render.
  */
 export function usePrevious<T>(value: T): T | undefined {
-  const ref = useRef<T>()
+  const ref = useRef<T>(undefined)
 
   useLayoutEffect(() => {
     ref.current = value
