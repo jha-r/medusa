@@ -16,7 +16,8 @@ export interface BaseProductCategory {
    */
   description: string
   /**
-   * The category's handle.
+   * The product category's unique handle. Can be used to create
+   * human-readable URLs.
    */
   handle: string
   /**
