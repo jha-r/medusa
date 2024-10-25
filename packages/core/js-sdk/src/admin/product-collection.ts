@@ -215,7 +215,9 @@ export class ProductCollection {
   }
 
   /**
-   * This method manages the products of a collection to add or remove them.
+   * This method manages the products of a collection to add or remove them. It sends a request
+   * to the [Manage Products](https://docs.medusajs.com/api/admin#collections_postcollectionsidproducts)
+   * API route.
    * 
    * @param id - The collection's ID.
    * @param body - The products to add or remove.
