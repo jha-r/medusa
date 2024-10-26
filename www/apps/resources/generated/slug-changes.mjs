@@ -870,6 +870,11 @@ export const slugChanges = [
     "filePath": "/www/apps/resources/references/core_flows/Customer_Group/Steps_Customer_Group/functions/core_flows.Customer_Group.Steps_Customer_Group.deleteCustomerGroupStep/page.mdx"
   },
   {
+    "origSlug": "/references/core_flows/Customer_Group/Steps_Customer_Group/functions/core_flows.Customer_Group.Steps_Customer_Group.linkCustomerGroupsToCustomerStep",
+    "newSlug": "/references/medusa-workflows/steps/linkCustomerGroupsToCustomerStep",
+    "filePath": "/www/apps/resources/references/core_flows/Customer_Group/Steps_Customer_Group/functions/core_flows.Customer_Group.Steps_Customer_Group.linkCustomerGroupsToCustomerStep/page.mdx"
+  },
+  {
     "origSlug": "/references/core_flows/Customer_Group/Steps_Customer_Group/functions/core_flows.Customer_Group.Steps_Customer_Group.linkCustomersToCustomerGroupStep",
     "newSlug": "/references/medusa-workflows/steps/linkCustomersToCustomerGroupStep",
     "filePath": "/www/apps/resources/references/core_flows/Customer_Group/Steps_Customer_Group/functions/core_flows.Customer_Group.Steps_Customer_Group.linkCustomersToCustomerGroupStep/page.mdx"
@@ -888,6 +893,11 @@ export const slugChanges = [
     "origSlug": "/references/core_flows/Customer_Group/Workflows_Customer_Group/functions/core_flows.Customer_Group.Workflows_Customer_Group.deleteCustomerGroupsWorkflow",
     "newSlug": "/references/medusa-workflows/deleteCustomerGroupsWorkflow",
     "filePath": "/www/apps/resources/references/core_flows/Customer_Group/Workflows_Customer_Group/functions/core_flows.Customer_Group.Workflows_Customer_Group.deleteCustomerGroupsWorkflow/page.mdx"
+  },
+  {
+    "origSlug": "/references/core_flows/Customer_Group/Workflows_Customer_Group/functions/core_flows.Customer_Group.Workflows_Customer_Group.linkCustomerGroupsToCustomerWorkflow",
+    "newSlug": "/references/medusa-workflows/linkCustomerGroupsToCustomerWorkflow",
+    "filePath": "/www/apps/resources/references/core_flows/Customer_Group/Workflows_Customer_Group/functions/core_flows.Customer_Group.Workflows_Customer_Group.linkCustomerGroupsToCustomerWorkflow/page.mdx"
   },
   {
     "origSlug": "/references/core_flows/Customer_Group/Workflows_Customer_Group/functions/core_flows.Customer_Group.Workflows_Customer_Group.linkCustomersToCustomerGroupWorkflow",
