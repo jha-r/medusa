@@ -10,6 +10,7 @@
 <h1 align="center">
   Medusa
 </h1>
+</a>
 
 <h4 align="center">
   <a href="https://docs.medusajs.com">Documentation</a> |
