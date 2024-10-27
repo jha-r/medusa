@@ -44,7 +44,7 @@ export function setPricingContext() {
     if (req.user?.customer_id) {
       const customerGroups = await refetchEntities(
         "customer_group",
-        { customer_id: req.user?.customer_id },
+        { customer_id: req.auth_context?.actor_id },
         req.scope,
         ["id"]
       )
