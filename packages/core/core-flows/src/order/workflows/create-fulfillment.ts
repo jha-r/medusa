@@ -202,6 +202,13 @@ function prepareInventoryUpdate({
 
     const inputQuantity = inputItemsMap[item.id]?.quantity ?? item.quantity
 
+    if (MathBN.gt(inputQuantity, reservation.quantity)) {
+      throw new MedusaError(
+        MedusaError.Types.INVALID_DATA,
+        `Quantity to fulfill exceeds the reserved quantity for the item: ${item.id}`
+      )
+    }
+
     const remainingReservationQuantity = reservation.quantity - inputQuantity
 
     inventoryAdjustment.push({
