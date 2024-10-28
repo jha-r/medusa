@@ -56,9 +56,9 @@ export const AddExchangeInboundItemsTable = ({
     if (q) {
       results = results.filter((i) => {
         return (
-          i.variant.product.title.toLowerCase().includes(q.toLowerCase()) ||
-          i.variant.title.toLowerCase().includes(q.toLowerCase()) ||
-          i.variant.sku?.toLowerCase().includes(q.toLowerCase())
+          i.variant?.product.title.toLowerCase().includes(q.toLowerCase()) ||
+          i.variant?.title.toLowerCase().includes(q.toLowerCase()) ||
+          i.variant?.sku?.toLowerCase().includes(q.toLowerCase())
         )
       })
     }
@@ -133,14 +133,14 @@ const sortItems = (
     let bValue: any
 
     if (field === "product_title") {
-      aValue = a.variant.product.title
-      bValue = b.variant.product.title
+      aValue = a.variant?.product.title
+      bValue = b.variant?.product.title
     } else if (field === "variant_title") {
-      aValue = a.variant.title
-      bValue = b.variant.title
+      aValue = a.variant?.title
+      bValue = b.variant?.title
     } else if (field === "sku") {
-      aValue = a.variant.sku
-      bValue = b.variant.sku
+      aValue = a.variant?.sku
+      bValue = b.variant?.sku
     }
 
     if (aValue < bValue) {

@@ -53,10 +53,10 @@ function ReturnItem({
               <Text className="txt-small" as="span" weight="plus">
                 {item.title}{" "}
               </Text>
-              {item.variant.sku && <span>({item.variant.sku})</span>}
+              {item.variant?.sku && <span>({item.variant.sku})</span>}
             </div>
             <Text as="div" className="text-ui-fg-subtle txt-small">
-              {item.variant.product.title}
+              {item.variant?.product.title || "N/A"}
             </Text>
           </div>
         </div>

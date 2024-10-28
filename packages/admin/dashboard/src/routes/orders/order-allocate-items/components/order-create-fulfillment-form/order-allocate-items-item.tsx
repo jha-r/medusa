@@ -37,7 +37,7 @@ export function OrderAllocateItemsItem({
   const { t } = useTranslation()
 
   const variant = item.variant
-  const inventory = item.variant.inventory
+  const inventory = item.variant?.inventory
 
   const [isOpen, setIsOpen] = useState(false)
 
@@ -73,8 +73,8 @@ export function OrderAllocateItemsItem({
   const hasQuantityError =
     !hasInventoryKit &&
     availableQuantity &&
-    quantityField[`${item.id}-${item.variant.inventory[0].id}`] &&
-    quantityField[`${item.id}-${item.variant.inventory[0].id}`] >
+    quantityField[`${item.id}-${item.variant?.inventory[0].id}`] &&
+    quantityField[`${item.id}-${item.variant?.inventory[0].id}`] >
       availableQuantity
 
   const minValue = 0
@@ -95,9 +95,9 @@ export function OrderAllocateItemsItem({
             <div className="flex flex-col">
               <div className="flex flex-row">
                 <Text className="txt-small flex" as="span" weight="plus">
-                  {item.variant.product.title}
+                  {item.variant?.product.title || "N/A"}
                 </Text>
-                {item.variant.sku && (
+                {item.variant?.sku && (
                   <span className="text-ui-fg-subtle">
                     {" "}
                     ({item.variant.sku})
@@ -134,13 +134,13 @@ export function OrderAllocateItemsItem({
                     {availableQuantity &&
                       !hasInventoryKit &&
                       quantityField[
-                        `${item.id}-${item.variant.inventory[0].id}`
+                        `${item.id}-${item.variant?.inventory[0].id}`
                       ] && (
                         <span className="text-ui-fg-error txt-small ml-1">
                           -
                           {
                             quantityField[
-                              `${item.id}-${item.variant.inventory[0].id}`
+                              `${item.id}-${item.variant?.inventory[0].id}`
                             ]
                           }
                         </span>
@@ -173,7 +173,7 @@ export function OrderAllocateItemsItem({
                 name={
                   hasInventoryKit
                     ? `quantity.${item.id}-`
-                    : `quantity.${item.id}-${item.variant.inventory[0].id}`
+                    : `quantity.${item.id}-${item.variant?.inventory[0].id}`
                 }
                 rules={{
                   required: !hasInventoryKit,
@@ -196,7 +196,7 @@ export function OrderAllocateItemsItem({
                                 : Number(e.target.value)
 
                             onQuantityChange(
-                              item.variant.inventory[0],
+                              item.variant?.inventory[0],
                               item,
                               hasInventoryKit,
                               val,

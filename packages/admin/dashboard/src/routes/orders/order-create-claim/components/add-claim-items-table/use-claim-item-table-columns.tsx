@@ -52,7 +52,7 @@ export const useClaimItemTableColumns = (currencyCode: string) => {
         id: "product",
         header: () => <ProductHeader />,
         cell: ({ row }) => (
-          <ProductCell product={row.original.variant.product} />
+          <ProductCell product={row.original.variant?.product} />
         ),
       }),
       columnHelper.accessor("variant.sku", {
