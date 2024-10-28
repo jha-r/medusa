@@ -7393,6 +7393,14 @@ export const generatedSidebar = [
                         "loaded": true,
                         "isPathHref": true,
                         "type": "link",
+                        "path": "/references/tax/updateTaxRegions",
+                        "title": "updateTaxRegions",
+                        "children": []
+                      },
+                      {
+                        "loaded": true,
+                        "isPathHref": true,
+                        "type": "link",
                         "path": "/references/tax/upsertTaxRates",
                         "title": "upsertTaxRates",
                         "children": []
@@ -10666,6 +10674,14 @@ export const generatedSidebar = [
                     "loaded": true,
                     "isPathHref": true,
                     "type": "link",
+                    "path": "/references/medusa-workflows/linkCustomerGroupsToCustomerWorkflow",
+                    "title": "linkCustomerGroupsToCustomerWorkflow",
+                    "children": []
+                  },
+                  {
+                    "loaded": true,
+                    "isPathHref": true,
+                    "type": "link",
                     "path": "/references/medusa-workflows/linkCustomersToCustomerGroupWorkflow",
                     "title": "linkCustomersToCustomerGroupWorkflow",
                     "children": []
@@ -10699,6 +10715,14 @@ export const generatedSidebar = [
                     "type": "link",
                     "path": "/references/medusa-workflows/steps/deleteCustomerGroupStep",
                     "title": "deleteCustomerGroupStep",
+                    "children": []
+                  },
+                  {
+                    "loaded": true,
+                    "isPathHref": true,
+                    "type": "link",
+                    "path": "/references/medusa-workflows/steps/linkCustomerGroupsToCustomerStep",
+                    "title": "linkCustomerGroupsToCustomerStep",
                     "children": []
                   },
                   {
@@ -11243,6 +11267,14 @@ export const generatedSidebar = [
                     "type": "link",
                     "path": "/references/medusa-workflows/steps/updateInventoryLevelsStep",
                     "title": "updateInventoryLevelsStep",
+                    "children": []
+                  },
+                  {
+                    "loaded": true,
+                    "isPathHref": true,
+                    "type": "link",
+                    "path": "/references/medusa-workflows/steps/validateInventoryDeleteStep",
+                    "title": "validateInventoryDeleteStep",
                     "children": []
                   },
                   {
@@ -14663,6 +14695,14 @@ export const generatedSidebar = [
                     "type": "link",
                     "path": "/references/medusa-workflows/updateTaxRatesWorkflow",
                     "title": "updateTaxRatesWorkflow",
+                    "children": []
+                  },
+                  {
+                    "loaded": true,
+                    "isPathHref": true,
+                    "type": "link",
+                    "path": "/references/medusa-workflows/updateTaxRegionsWorkflow",
+                    "title": "updateTaxRegionsWorkflow",
                     "children": []
                   }
                 ],
