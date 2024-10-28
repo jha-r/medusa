@@ -204,7 +204,6 @@ export const generatedEditDates = {
   "app/troubleshooting/general-errors/page.mdx": "2024-05-03T17:36:38+03:00",
   "app/troubleshooting/s3/page.mdx": "2024-08-06T09:59:46+03:00",
   "app/troubleshooting/page.mdx": "2024-07-18T08:57:11+02:00",
-  "app/upgrade-guides/page.mdx": "2024-07-18T08:57:11+02:00",
   "app/usage/page.mdx": "2024-05-13T18:55:11+03:00",
   "app/page.mdx": "2024-10-16T11:40:59.669Z",
   "app/commerce-modules/auth/_events/_events-table/page.mdx": "2024-07-03T19:27:13+03:00",

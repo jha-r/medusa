@@ -9057,14 +9057,6 @@ export const generatedSidebar = [
         "loaded": true,
         "isPathHref": true,
         "type": "link",
-        "path": "/upgrade-guides",
-        "title": "Upgrade Guides",
-        "children": []
-      },
-      {
-        "loaded": true,
-        "isPathHref": true,
-        "type": "link",
         "path": "/deployment",
         "title": "Deployment Guides",
         "isChildSidebar": true,
