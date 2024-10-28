@@ -247,8 +247,8 @@ export const reducer = (
               loaded: parent.changeLoaded
                 ? true
                 : i.type === "link"
-                ? i.loaded
-                : true,
+                  ? i.loaded
+                  : true,
             }
           }
           return i

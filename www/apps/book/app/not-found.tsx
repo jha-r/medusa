@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { TightLayout } from "docs-ui"
 import Feedback from "../components/Feedback"
 import EditButton from "../components/EditButton"
@@ -15,6 +16,7 @@ const NotFoundPage = () => {
       editComponent={<EditButton />}
       ProvidersComponent={Providers}
     >
+      {/* @ts-ignore React v19 doesn't recognize MDX import as component */}
       <NotFoundContent />
     </TightLayout>
   )

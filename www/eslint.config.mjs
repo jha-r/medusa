@@ -1,4 +1,4 @@
-import prettier from "eslint-plugin-prettier";
+import prettier from "eslint-plugin-prettier/recommended";
 import globals from "globals";
 import babelParser from "@babel/eslint-parser";
 import typescriptEslintEslintPlugin from "@typescript-eslint/eslint-plugin";
@@ -16,17 +16,15 @@ const compat = new FlatCompat({
     allConfig: js.configs.all
 });
 
-export default [{
+export default [
+    prettier,
+    {
     ignores: ["**/dist", "**/build"],
 }, ...compat.extends(
     "eslint:recommended",
-    "plugin:prettier/recommended",
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
 ), {
-    plugins: {
-        prettier,
-    },
 
     languageOptions: {
         globals: {
@@ -36,8 +34,8 @@ export default [{
         },
 
         parser: babelParser,
-        ecmaVersion: 5,
-        sourceType: "commonjs",
+        ecmaVersion: 13,
+        sourceType: "module",
 
         parserOptions: {
             requireConfigFile: false,
@@ -45,6 +43,7 @@ export default [{
             ecmaFeatures: {
                 experimentalDecorators: true,
                 jsx: true,
+                modules: true
             },
 
             project: true,
@@ -127,8 +126,8 @@ export default [{
 
     languageOptions: {
         parser: tsParser,
-        ecmaVersion: 5,
-        sourceType: "script",
+        ecmaVersion: 13,
+        sourceType: "module",
 
         parserOptions: {
             project: "./tsconfig.json",
@@ -141,15 +140,15 @@ export default [{
         "@typescript-eslint/no-floating-promises": "error",
         "@typescript-eslint/await-thenable": "error",
         "@typescript-eslint/promise-function-async": "error",
-        "@typescript-eslint/keyword-spacing": "error",
+        "@/keyword-spacing": "error",
 
-        "@typescript-eslint/space-before-function-paren": ["error", {
+        "@/space-before-function-paren": ["error", {
             anonymous: "always",
             named: "never",
             asyncArrow: "always",
         }],
 
-        "@typescript-eslint/space-infix-ops": "error",
+        "@/space-infix-ops": "error",
         "@typescript-eslint/no-explicit-any": "warn",
         "@typescript-eslint/no-unused-vars": "warn",
     },

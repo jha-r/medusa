@@ -27,8 +27,8 @@ export const ChildDocs = ({
     return showItems !== undefined
       ? "show"
       : hideItems.length > 0
-      ? "hide"
-      : "all"
+        ? "hide"
+        : "all"
   }, [showItems, hideItems])
 
   const filterCondition = (item: SidebarItem): boolean => {
@@ -132,12 +132,12 @@ export const ChildDocs = ({
               childItem.type === "link"
                 ? childItem.path
                 : childItem.children?.length
-                ? (
-                    childItem.children.find(
-                      (item) => item.type === "link"
-                    ) as SidebarItemLink
-                  )?.path
-                : "#"
+                  ? (
+                      childItem.children.find(
+                        (item) => item.type === "link"
+                      ) as SidebarItemLink
+                    )?.path
+                  : "#"
             return {
               title: childItem.title,
               href,

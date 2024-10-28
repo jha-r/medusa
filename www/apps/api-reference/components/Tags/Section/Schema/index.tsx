@@ -116,6 +116,7 @@ const TagSectionSchema = ({ schema, tagName }: TagSectionSchemaProps) => {
   return (
     <Suspense>
       <InView
+        // @ts-expect-error Type is being read as undefined
         as="div"
         id={schemaSlug}
         initialInView={true}

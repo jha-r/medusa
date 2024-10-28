@@ -140,8 +140,8 @@ export const Sidebar = ({
                       item.type === "separator"
                         ? index
                         : item.type === "link"
-                        ? `${item.path}-${index}`
-                        : `${item.title}-${index}`
+                          ? `${item.path}-${index}`
+                          : `${item.title}-${index}`
                     return (
                       <Suspense
                         fallback={

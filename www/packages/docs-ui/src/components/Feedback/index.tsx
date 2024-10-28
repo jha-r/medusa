@@ -69,8 +69,8 @@ export const Feedback = ({
   const nodeRef = submittedFeedback
     ? inlineMessageRef
     : showForm
-    ? inlineQuestionRef
-    : inlineFeedbackRef
+      ? inlineQuestionRef
+      : inlineFeedbackRef
   const { loaded, track } = useAnalytics()
 
   function handleFeedback(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
@@ -133,8 +133,8 @@ export const Feedback = ({
             showForm
               ? "show_form"
               : !submittedFeedback
-              ? "feedback"
-              : "submitted_feedback"
+                ? "feedback"
+                : "submitted_feedback"
           }
           nodeRef={nodeRef}
           timeout={300}

@@ -33,18 +33,18 @@ export const Breadcrumbs = () => {
       item.parentItem?.type === "link"
         ? getLinkPath(item.parentItem)
         : (item.parentItem?.type === "category" &&
-            breadcrumbOptions?.showCategories) ||
-          item.parentItem?.type === "sub-category"
-        ? "#"
-        : undefined
+              breadcrumbOptions?.showCategories) ||
+            item.parentItem?.type === "sub-category"
+          ? "#"
+          : undefined
     const firstItemPath =
       item.default[0].type === "link"
         ? getLinkPath(item.default[0])
         : (item.default[0].type === "category" &&
-            breadcrumbOptions?.showCategories) ||
-          item.default[0].type === "sub-category"
-        ? "#"
-        : undefined
+              breadcrumbOptions?.showCategories) ||
+            item.default[0].type === "sub-category"
+          ? "#"
+          : undefined
 
     const breadcrumbPath = parentPath || firstItemPath || "/"
 
