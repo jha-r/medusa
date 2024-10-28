@@ -159,7 +159,7 @@ const nextConfig = {
       },
       {
         source: "/recipes/:path*",
-        destination: "/v1/recipes/:path*",
+        destination: "/resources/recipes",
         permanent: true
       },
       {
