@@ -1223,6 +1223,10 @@ class CartService extends TransactionBaseService {
         const originalCartCustomer = { ...(cart.customer ?? {}) }
         if (data.customer_id) {
           await this.updateCustomerId_(cart, data.customer_id)
+
+          if (isDefined(data.email)) {
+            cart.email = data.email
+          }
         } else if (isDefined(data.email)) {
           const customer = await this.createOrFetchGuestCustomerFromEmail_(
             data.email
