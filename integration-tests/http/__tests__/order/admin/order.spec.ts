@@ -290,6 +290,28 @@ medusaIntegrationTestRunner({
         expect(iitem.reserved_quantity).toBe(0)
       })
 
+      it("should throw if trying to fulfillment more items than it is reserved", async () => {
+        const orderItemId = order.items.find(
+          (i) => i.variant_id === productOverride3.variants[0].id
+        ).id
+
+        const res = await api
+          .post(
+            `/admin/orders/${order.id}/fulfillments`,
+            {
+              location_id: seeder.stockLocation.id,
+              items: [{ id: orderItemId, quantity: 5 }],
+            },
+            adminHeaders
+          )
+          .catch((e) => e)
+
+        expect(res.response.status).toBe(400)
+        expect(res.response.data.message).toBe(
+          `Quantity to fulfill exceeds the reserved quantity for the item: ${orderItemId}`
+        )
+      })
+
       it("should only create fulfillments grouped by shipping requirement", async () => {
         const {
           response: { data },
