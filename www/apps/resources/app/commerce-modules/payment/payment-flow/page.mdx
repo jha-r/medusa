@@ -44,7 +44,7 @@ Then, create a link between the payment collection and the resource it's storing
 ```ts
 import { 
   ContainerRegistrationKeys,
-  Modules
+  Modules,
 } from "@medusajs/framework/utils"
 
 // ...
@@ -56,11 +56,11 @@ const remoteLink = container.resolve(
 
 remoteLink.create({
   [Modules.CART]: {
-    cart_id: "cart_123"
+    cart_id: "cart_123",
   },
   [Modules.PAYMENT]: {
-    payment_collection_id: paymentCollection.id
-  }
+    payment_collection_id: paymentCollection.id,
+  },
 })
 ```
 

@@ -145,7 +145,7 @@ const myWorkflow = createWorkflow(
   function (input: WorkflowInput) {
     const message = transform(
       {
-        input
+        input,
       },
       (data) => data.input.message || "hello"
     )

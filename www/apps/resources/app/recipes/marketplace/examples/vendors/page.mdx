@@ -144,7 +144,7 @@ module.exports = defineConfig({
     {
       resolve: "./src/modules/marketplace",
     },
-  ]
+  ],
 })
 ```
 
@@ -1137,7 +1137,7 @@ import {
   useRemoteQueryStep,
   createRemoteLinkStep,
   completeCartWorkflow,
-  getOrderDetailWorkflow
+  getOrderDetailWorkflow,
 } from "@medusajs/medusa/core-flows"
 import { CartDTO } from "@medusajs/framework/types"
 import groupVendorItemsStep from "./steps/group-vendor-items"
@@ -1160,8 +1160,8 @@ const createVendorOrdersWorkflow = createWorkflow(
 
     const { id: orderId } = completeCartWorkflow.runAsStep({
       input: {
-        id: cart.id
-      }
+        id: cart.id,
+      },
     })
 
     const { vendorsItems } = groupVendorItemsStep({
@@ -1180,8 +1180,8 @@ const createVendorOrdersWorkflow = createWorkflow(
           "shipping_address.*",
           "billing_address.*",
           "shipping_methods.*",
-        ]
-      }
+        ],
+      },
     })
 
     const { 

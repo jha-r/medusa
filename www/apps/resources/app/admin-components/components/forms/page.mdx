@@ -38,24 +38,24 @@ import {
   Heading,
   Label,
   Input,
-  Button
+  Button,
 } from "@medusajs/ui"
 import { 
   useForm, 
   FormProvider,
-  Controller
+  Controller,
 } from "react-hook-form"
 import * as zod from "zod"
 
 const schema = zod.object({
-  name: zod.string()
+  name: zod.string(),
 })
 
 export const CreateForm = () => {
   const form = useForm<zod.infer<typeof schema>>({
     defaultValues: {
-      name: ""
-    }
+      name: "",
+    },
   })
 
   const handleSubmit = form.handleSubmit(({ name }) => {
@@ -137,7 +137,7 @@ In `src/admin/components/create-form.tsx`, create a validation schema with Zod f
 import * as zod from "zod"
 
 const schema = zod.object({
-  name: zod.string()
+  name: zod.string(),
 })
 ```
 
@@ -158,8 +158,8 @@ import { useForm } from "react-hook-form"
 export const CreateForm = () => {
   const form = useForm<zod.infer<typeof schema>>({
     defaultValues: {
-      name: ""
-    }
+      name: "",
+    },
   })
 
   const handleSubmit = form.handleSubmit(({ name }) => {
@@ -190,11 +190,11 @@ import {
   Heading,
   Label,
   Input,
-  Button
+  Button,
 } from "@medusajs/ui"
 import { 
   FormProvider,
-  Controller
+  Controller,
 } from "react-hook-form"
 
 export const CreateForm = () => {
@@ -290,8 +290,8 @@ const ProductWidget = () => {
         actions={[
           {
             type: "custom",
-            children: <CreateForm />
-          }
+            children: <CreateForm />,
+          },
         ]}
       />
     </Container>
@@ -323,24 +323,24 @@ import {
   Heading,
   Label,
   Input,
-  Button
+  Button,
 } from "@medusajs/ui"
 import { 
   useForm, 
   FormProvider,
-  Controller
+  Controller,
 } from "react-hook-form"
 import * as zod from "zod"
 
 const schema = zod.object({
-  name: zod.string()
+  name: zod.string(),
 })
 
 export const EditForm = () => {
   const form = useForm<zod.infer<typeof schema>>({
     defaultValues: {
-      name: ""
-    }
+      name: "",
+    },
   })
 
   const handleSubmit = form.handleSubmit(({ name }) => {
@@ -416,7 +416,7 @@ In `src/admin/components/edit-form.tsx`, create a validation schema with Zod for
 import * as zod from "zod"
 
 const schema = zod.object({
-  name: zod.string()
+  name: zod.string(),
 })
 ```
 
@@ -437,8 +437,8 @@ import { useForm } from "react-hook-form"
 export const EditForm = () => {
   const form = useForm<zod.infer<typeof schema>>({
     defaultValues: {
-      name: ""
-    }
+      name: "",
+    },
   })
 
   const handleSubmit = form.handleSubmit(({ name }) => {
@@ -469,11 +469,11 @@ import {
   Heading,
   Label,
   Input,
-  Button
+  Button,
 } from "@medusajs/ui"
 import { 
   FormProvider,
-  Controller
+  Controller,
 } from "react-hook-form"
 
 export const EditForm = () => {
@@ -563,8 +563,8 @@ const ProductWidget = () => {
         actions={[
           {
             type: "custom",
-            children: <EditForm />
-          }
+            children: <EditForm />,
+          },
         ]}
       />
     </Container>

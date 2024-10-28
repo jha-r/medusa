@@ -39,7 +39,7 @@ export const Table = ({
   pageSize,
   count,
   currentPage,
-  setCurrentPage
+  setCurrentPage,
 }: TableProps) => {
   const pageCount = useMemo(() => {
     return Math.ceil(data.length / pageSize)
@@ -200,7 +200,7 @@ const ProductWidget = () => {
         columns={[
           {
             key: "name",
-            label: "Name"
+            label: "Name",
           },
           {
             key: "is_enabled",
@@ -213,18 +213,18 @@ const ProductWidget = () => {
                   {isEnabled ? "Enabled" : "Disabled"}
                 </StatusBadge>
               )
-            }
-          }
+            },
+          },
         ]}
         data={[
           {
             name: "John",
-            is_enabled: true
+            is_enabled: true,
           },
           {
             name: "Jane",
-            is_enabled: false
-          }
+            is_enabled: false,
+          },
         ]}
         pageSize={2}
         count={2}

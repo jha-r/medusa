@@ -135,8 +135,8 @@ module.exports = defineConfig({
   modules: [
     {
       resolve: "./src/modules/hello",
-    }
-  ]
+    },
+  ],
 })
 ```
 
@@ -212,11 +212,11 @@ export async function GET(
   )
 
   const my_custom = await helloModuleService.createMyCustoms({
-    name: "test"
+    name: "test",
   })
 
   res.json({
-    my_custom
+    my_custom,
   })
 }
 ```

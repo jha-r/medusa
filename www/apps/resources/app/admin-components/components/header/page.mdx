@@ -45,7 +45,7 @@ export type HeadingProps = {
 export const Header = ({
   title,
   subtitle,
-  actions = []
+  actions = [],
 }: HeadingProps) => {
   return (
     <div className="flex items-center justify-between px-6 py-4">
@@ -172,9 +172,9 @@ const ProductWidget = () => {
               variant: "secondary",
               onClick: () => {
                 alert("You clicked the button.")
-              }
-            }
-          }
+              },
+            },
+          },
         ]}
       />
     </Container>
