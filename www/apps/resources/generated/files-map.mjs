@@ -2684,6 +2684,10 @@ export const filesMap = [
     "pathname": "/references/core_flows/Customer_Group/Steps_Customer_Group/functions/core_flows.Customer_Group.Steps_Customer_Group.deleteCustomerGroupStep"
   },
   {
+    "filePath": "/www/apps/resources/references/core_flows/Customer_Group/Steps_Customer_Group/functions/core_flows.Customer_Group.Steps_Customer_Group.linkCustomerGroupsToCustomerStep/page.mdx",
+    "pathname": "/references/core_flows/Customer_Group/Steps_Customer_Group/functions/core_flows.Customer_Group.Steps_Customer_Group.linkCustomerGroupsToCustomerStep"
+  },
+  {
     "filePath": "/www/apps/resources/references/core_flows/Customer_Group/Steps_Customer_Group/functions/core_flows.Customer_Group.Steps_Customer_Group.linkCustomersToCustomerGroupStep/page.mdx",
     "pathname": "/references/core_flows/Customer_Group/Steps_Customer_Group/functions/core_flows.Customer_Group.Steps_Customer_Group.linkCustomersToCustomerGroupStep"
   },
@@ -2698,6 +2702,10 @@ export const filesMap = [
   {
     "filePath": "/www/apps/resources/references/core_flows/Customer_Group/Steps_Customer_Group/variables/core_flows.Customer_Group.Steps_Customer_Group.deleteCustomerGroupStepId/page.mdx",
     "pathname": "/references/core_flows/Customer_Group/Steps_Customer_Group/variables/core_flows.Customer_Group.Steps_Customer_Group.deleteCustomerGroupStepId"
+  },
+  {
+    "filePath": "/www/apps/resources/references/core_flows/Customer_Group/Steps_Customer_Group/variables/core_flows.Customer_Group.Steps_Customer_Group.linkCustomerGroupsToCustomerStepId/page.mdx",
+    "pathname": "/references/core_flows/Customer_Group/Steps_Customer_Group/variables/core_flows.Customer_Group.Steps_Customer_Group.linkCustomerGroupsToCustomerStepId"
   },
   {
     "filePath": "/www/apps/resources/references/core_flows/Customer_Group/Steps_Customer_Group/variables/core_flows.Customer_Group.Steps_Customer_Group.linkCustomersToCustomerGroupStepId/page.mdx",
@@ -2716,6 +2724,10 @@ export const filesMap = [
     "pathname": "/references/core_flows/Customer_Group/Workflows_Customer_Group/functions/core_flows.Customer_Group.Workflows_Customer_Group.deleteCustomerGroupsWorkflow"
   },
   {
+    "filePath": "/www/apps/resources/references/core_flows/Customer_Group/Workflows_Customer_Group/functions/core_flows.Customer_Group.Workflows_Customer_Group.linkCustomerGroupsToCustomerWorkflow/page.mdx",
+    "pathname": "/references/core_flows/Customer_Group/Workflows_Customer_Group/functions/core_flows.Customer_Group.Workflows_Customer_Group.linkCustomerGroupsToCustomerWorkflow"
+  },
+  {
     "filePath": "/www/apps/resources/references/core_flows/Customer_Group/Workflows_Customer_Group/functions/core_flows.Customer_Group.Workflows_Customer_Group.linkCustomersToCustomerGroupWorkflow/page.mdx",
     "pathname": "/references/core_flows/Customer_Group/Workflows_Customer_Group/functions/core_flows.Customer_Group.Workflows_Customer_Group.linkCustomersToCustomerGroupWorkflow"
   },
@@ -2730,6 +2742,10 @@ export const filesMap = [
   {
     "filePath": "/www/apps/resources/references/core_flows/Customer_Group/Workflows_Customer_Group/variables/core_flows.Customer_Group.Workflows_Customer_Group.deleteCustomerGroupsWorkflowId/page.mdx",
     "pathname": "/references/core_flows/Customer_Group/Workflows_Customer_Group/variables/core_flows.Customer_Group.Workflows_Customer_Group.deleteCustomerGroupsWorkflowId"
+  },
+  {
+    "filePath": "/www/apps/resources/references/core_flows/Customer_Group/Workflows_Customer_Group/variables/core_flows.Customer_Group.Workflows_Customer_Group.linkCustomerGroupsToCustomerWorkflowId/page.mdx",
+    "pathname": "/references/core_flows/Customer_Group/Workflows_Customer_Group/variables/core_flows.Customer_Group.Workflows_Customer_Group.linkCustomerGroupsToCustomerWorkflowId"
   },
   {
     "filePath": "/www/apps/resources/references/core_flows/Customer_Group/Workflows_Customer_Group/variables/core_flows.Customer_Group.Workflows_Customer_Group.linkCustomersToCustomerGroupWorkflowId/page.mdx",
@@ -9602,6 +9618,10 @@ export const filesMap = [
   {
     "filePath": "/www/apps/resources/references/js_sdk/admin/Currency/properties/js_sdk.admin.Currency.client/page.mdx",
     "pathname": "/references/js_sdk/admin/Currency/properties/js_sdk.admin.Currency.client"
+  },
+  {
+    "filePath": "/www/apps/resources/references/js_sdk/admin/Customer/methods/js_sdk.admin.Customer.batchCustomerGroups/page.mdx",
+    "pathname": "/references/js_sdk/admin/Customer/methods/js_sdk.admin.Customer.batchCustomerGroups"
   },
   {
     "filePath": "/www/apps/resources/references/js_sdk/admin/Customer/methods/js_sdk.admin.Customer.create/page.mdx",
