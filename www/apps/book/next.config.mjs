@@ -157,6 +157,21 @@ const nextConfig = {
         destination: "/:path*",
         permanent: true,
       },
+      {
+        source: "/recipes/:path*",
+        destination: "/v1/recipes/:path*",
+        permanent: true
+      },
+      {
+        source: "/plugins/:path*",
+        destination: "/v1/plugins/:path*",
+        permanent: true
+      },
+      {
+        source: "/medusa-react/:path*",
+        destination: "/v1/medusa-react/:path*",
+        permanent: true
+      }
     ]
   },
 }
