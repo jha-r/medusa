@@ -1,23 +1,66 @@
-import Ajv from "ajv"
 import fs from "fs"
 import path from "path"
 import { describe, expect, test } from "vitest"
 
 import schema from "../$schema.json"
 
-const ajv = new Ajv()
-
-const validate = ajv.compile(schema)
 const translationsDir = path.join(__dirname, "..")
 
-describe("validate translations", () => {
-  const files = fs
-    .readdirSync(translationsDir)
-    .filter((file) => file.endsWith(".json") && file !== "$schema.json")
+function getRequiredKeysFromSchema(schema: any, prefix = ""): string[] {
+  const keys: string[] = []
 
-  test.each(files)("should validate %s", (file) => {
-    const filePath = path.join(translationsDir, file)
-    const translations = JSON.parse(fs.readFileSync(filePath, "utf-8"))
-    expect(validate(translations)).toBe(true)
+  if (schema.type === "object" && schema.properties) {
+    Object.entries(schema.properties).forEach(([key, value]: [string, any]) => {
+      const newPrefix = prefix ? `${prefix}.${key}` : key
+      if (value.type === "object") {
+        keys.push(...getRequiredKeysFromSchema(value, newPrefix))
+      } else {
+        keys.push(newPrefix)
+      }
+    })
+  }
+
+  return keys.sort()
+}
+
+function getTranslationKeys(obj: any, prefix = ""): string[] {
+  const keys: string[] = []
+
+  Object.entries(obj).forEach(([key, value]) => {
+    const newPrefix = prefix ? `${prefix}.${key}` : key
+    if (value && typeof value === "object") {
+      keys.push(...getTranslationKeys(value, newPrefix))
+    } else {
+      keys.push(newPrefix)
+    }
+  })
+
+  return keys.sort()
+}
+
+describe("translation schema validation", () => {
+  test("en.json should have all keys defined in schema", () => {
+    const enPath = path.join(translationsDir, "en.json")
+    const enTranslations = JSON.parse(fs.readFileSync(enPath, "utf-8"))
+
+    const schemaKeys = getRequiredKeysFromSchema(schema)
+    const translationKeys = getTranslationKeys(enTranslations)
+
+    const missingInTranslations = schemaKeys.filter(
+      (key) => !translationKeys.includes(key)
+    )
+    const extraInTranslations = translationKeys.filter(
+      (key) => !schemaKeys.includes(key)
+    )
+
+    if (missingInTranslations.length > 0) {
+      console.error("\nMissing keys in en.json:", missingInTranslations)
+    }
+    if (extraInTranslations.length > 0) {
+      console.error("\nExtra keys in en.json:", extraInTranslations)
+    }
+
+    expect(missingInTranslations).toEqual([])
+    expect(extraInTranslations).toEqual([])
   })
 })

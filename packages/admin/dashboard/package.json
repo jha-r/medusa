@@ -7,7 +7,8 @@
     "build": "tsup && node ./scripts/generate-types.js",
     "build:preview": "vite build",
     "preview": "vite preview",
-    "validate:translations": "node ./scripts/validate-translations.js",
+    "test": "vitest --run",
+    "validate:translation": "node ./scripts/validate-translations.js",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
   "main": "dist/app.js",
@@ -89,7 +90,8 @@
     "tsup": "^8.0.2",
     "typescript": "5.2.2",
     "vite": "^5.2.11",
-    "vite-plugin-inspect": "^0.8.7"
+    "vite-plugin-inspect": "^0.8.7",
+    "vitest": "^2.1.4"
   },
   "packageManager": "yarn@3.2.1"
 }
