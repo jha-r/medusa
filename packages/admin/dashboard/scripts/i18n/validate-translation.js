@@ -1,7 +1,7 @@
 const Ajv = require("ajv")
 const fs = require("fs")
 const path = require("path")
-const schema = require("../src/i18n/translations/$schema.json")
+const schema = require("../../src/i18n/translations/$schema.json")
 
 const ajv = new Ajv({ allErrors: true })
 const validate = ajv.compile(schema)
@@ -14,7 +14,7 @@ if (!fileName) {
   process.exit(1)
 }
 
-const filePath = path.join(__dirname, "../src/i18n/translations", fileName)
+const filePath = path.join(__dirname, "../../src/i18n/translations", fileName)
 
 try {
   const translations = JSON.parse(fs.readFileSync(filePath, "utf-8"))

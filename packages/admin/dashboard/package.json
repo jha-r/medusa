@@ -8,7 +8,8 @@
     "build:preview": "vite build",
     "preview": "vite preview",
     "test": "vitest --run",
-    "validate:translation": "node ./scripts/validate-translations.js",
+    "i18n:validate": "node ./scripts/i18n/validate-translation.js",
+    "i18n:schema": "node ./scripts/i18n/generate-schema.js",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
   "main": "dist/app.js",
