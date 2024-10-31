@@ -1,0 +1,80 @@
+---
+sidebar_label: "Nomodo"
+---
+
+import { Prerequisites, DetailsList } from "docs-ui"
+
+export const metadata = {
+  title: `Deploy Medusa Application and Admin to Nomodo`,
+}
+
+# {metadata.title}
+
+In this document, you’ll learn how to deploy your Medusa application to [Nomodo.io](https://nomodo.io/).
+
+
+## What You’ll Deploy
+
+1. PostgreSQL database.
+2. Redis database.
+3. Medusa application in server mode.
+4. Medusa Admin.
+5. (Optional) Storefront.
+6. SSL/TLS certificates.
+7. Automated PostgreSQL backups.
+
+---
+
+<Prerequisites items={[
+  { text: "GitHub account if you want to install the application code directly under your account." }
+]} />
+
+## Step-by-Step: Deploy Your Medusa Project on Nomodo.io
+
+### 1. Visit Nomodo.io’s Medusa.js Hosting Page
+
+Start by heading over to the [Medusa.js hosting page on Nomodo.io](https://admin.nomodo.io/create/medusajs?ref=docs.medusajs.com).
+
+### 2. Begin Your Free Trial
+
+- Click the **Medusa.js Free Trial** button to get started.
+- If you’re new to Nomodo.io, create an account—it only takes a minute.
+
+### 3. Create a New Medusa.js Project
+
+- In your Nomodo.io dashboard, select **Create New Medusa.js**.
+- Connect your GitHub account seamlessly or continue without integration.
+
+### 4. Customize Your Deployment
+
+- Name your project (e.g. “my awesome store”).
+- Select a region for your provider.
+- Click **Deploy Now** to initiate the deployment process.
+
+### 5. Sit Back and Relax
+
+Nomodo.io will handle the rest, and in just moments, your Medusa.js project will be live and fully operational.
+
+### 6. Test Deployed Application
+
+To test your deployed application, visit `<APP_URL>/health`. If everything is set up correctly, you’ll see an `OK` response.
+
+## Open Deployed Medusa Admin
+
+Click on link at **MedusaJS Admin URL** in Application detail and start work with the Admin.
+
+<Note title="Tip">
+Check out the [Integrations](../../../integrations/page.mdx) and [Architectural Modules](../../../architectural-modules/page.mdx) documentation for other modules and providers to use.
+</Note>
+
+
+## Why Choose Nomodo.io for Your Medusa.js Project?
+
+At Nomodo.io, speed and simplicity are top priorities. The platform is tailored for a streamlined Medusa.js deployment experience, enabling you to focus on building rather than configuring.
+
+### What You Get:
+
+- **User-Friendly**: No deep DevOps knowledge is needed.
+- **Ready-Made**: Pre-configured environment, ready to work on.
+- **Scalability**: Effortlessly grow your project as needed.
+
