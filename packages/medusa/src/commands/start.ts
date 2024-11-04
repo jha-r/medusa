@@ -87,11 +87,12 @@ function displayAdminUrl({
 
 async function start(args: {
   directory: string
+  host?: string
   port?: number
   types?: boolean
   cluster?: number
 }) {
-  const { port = 9000, directory, types } = args
+  const { port = 9000, host = "localhost", directory, types } = args
 
   async function internalStart(generateTypes: boolean) {
     track("CLI_START")
@@ -136,7 +137,7 @@ async function start(args: {
 
       const serverActivity = logger.activity(`Creating server`)
       const server = GracefulShutdownServer.create(
-        http_.listen(port).on("listening", () => {
+        http_.listen(port, host).on("listening", () => {
           logger.success(serverActivity, `Server is ready on port: ${port}`)
           displayAdminUrl({ container, port })
           track("CLI_START_COMPLETED")
