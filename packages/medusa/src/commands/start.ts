@@ -59,9 +59,11 @@ export async function registerInstrumentation(directory: string) {
 export var traceRequestHandler: (...args: any[]) => Promise<any> = void 0 as any
 
 function displayAdminUrl({
-  container,
+  host,
   port,
+  container,
 }: {
+  host: string
   port: string | number
   container: MedusaContainer
 }) {
@@ -82,7 +84,7 @@ function displayAdminUrl({
     return
   }
 
-  logger.info(`Admin URL → http://localhost:${port}${adminPath}`)
+  logger.info(`Admin URL → http://${host}:${port}${adminPath}`)
 }
 
 async function start(args: {
@@ -138,8 +140,11 @@ async function start(args: {
       const serverActivity = logger.activity(`Creating server`)
       const server = GracefulShutdownServer.create(
         http_.listen(port, host).on("listening", () => {
-          logger.success(serverActivity, `Server is ready on port: ${port}`)
-          displayAdminUrl({ container, port })
+          logger.success(
+            serverActivity,
+            `Server is ready on http://${host}:${port}`
+          )
+          displayAdminUrl({ container, host, port })
           track("CLI_START_COMPLETED")
         })
       )
