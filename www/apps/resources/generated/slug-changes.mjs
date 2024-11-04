@@ -870,6 +870,11 @@ export const slugChanges = [
     "filePath": "/www/apps/resources/references/core_flows/Customer_Group/Steps_Customer_Group/functions/core_flows.Customer_Group.Steps_Customer_Group.deleteCustomerGroupStep/page.mdx"
   },
   {
+    "origSlug": "/references/core_flows/Customer_Group/Steps_Customer_Group/functions/core_flows.Customer_Group.Steps_Customer_Group.linkCustomerGroupsToCustomerStep",
+    "newSlug": "/references/medusa-workflows/steps/linkCustomerGroupsToCustomerStep",
+    "filePath": "/www/apps/resources/references/core_flows/Customer_Group/Steps_Customer_Group/functions/core_flows.Customer_Group.Steps_Customer_Group.linkCustomerGroupsToCustomerStep/page.mdx"
+  },
+  {
     "origSlug": "/references/core_flows/Customer_Group/Steps_Customer_Group/functions/core_flows.Customer_Group.Steps_Customer_Group.linkCustomersToCustomerGroupStep",
     "newSlug": "/references/medusa-workflows/steps/linkCustomersToCustomerGroupStep",
     "filePath": "/www/apps/resources/references/core_flows/Customer_Group/Steps_Customer_Group/functions/core_flows.Customer_Group.Steps_Customer_Group.linkCustomersToCustomerGroupStep/page.mdx"
@@ -888,6 +893,11 @@ export const slugChanges = [
     "origSlug": "/references/core_flows/Customer_Group/Workflows_Customer_Group/functions/core_flows.Customer_Group.Workflows_Customer_Group.deleteCustomerGroupsWorkflow",
     "newSlug": "/references/medusa-workflows/deleteCustomerGroupsWorkflow",
     "filePath": "/www/apps/resources/references/core_flows/Customer_Group/Workflows_Customer_Group/functions/core_flows.Customer_Group.Workflows_Customer_Group.deleteCustomerGroupsWorkflow/page.mdx"
+  },
+  {
+    "origSlug": "/references/core_flows/Customer_Group/Workflows_Customer_Group/functions/core_flows.Customer_Group.Workflows_Customer_Group.linkCustomerGroupsToCustomerWorkflow",
+    "newSlug": "/references/medusa-workflows/linkCustomerGroupsToCustomerWorkflow",
+    "filePath": "/www/apps/resources/references/core_flows/Customer_Group/Workflows_Customer_Group/functions/core_flows.Customer_Group.Workflows_Customer_Group.linkCustomerGroupsToCustomerWorkflow/page.mdx"
   },
   {
     "origSlug": "/references/core_flows/Customer_Group/Workflows_Customer_Group/functions/core_flows.Customer_Group.Workflows_Customer_Group.linkCustomersToCustomerGroupWorkflow",
@@ -1138,6 +1148,11 @@ export const slugChanges = [
     "origSlug": "/references/core_flows/Inventory/Steps_Inventory/functions/core_flows.Inventory.Steps_Inventory.updateInventoryLevelsStep",
     "newSlug": "/references/medusa-workflows/steps/updateInventoryLevelsStep",
     "filePath": "/www/apps/resources/references/core_flows/Inventory/Steps_Inventory/functions/core_flows.Inventory.Steps_Inventory.updateInventoryLevelsStep/page.mdx"
+  },
+  {
+    "origSlug": "/references/core_flows/Inventory/Steps_Inventory/functions/core_flows.Inventory.Steps_Inventory.validateInventoryDeleteStep",
+    "newSlug": "/references/medusa-workflows/steps/validateInventoryDeleteStep",
+    "filePath": "/www/apps/resources/references/core_flows/Inventory/Steps_Inventory/functions/core_flows.Inventory.Steps_Inventory.validateInventoryDeleteStep/page.mdx"
   },
   {
     "origSlug": "/references/core_flows/Inventory/Steps_Inventory/functions/core_flows.Inventory.Steps_Inventory.validateInventoryItemsForCreate",
@@ -3108,6 +3123,11 @@ export const slugChanges = [
     "origSlug": "/references/core_flows/Tax/Workflows_Tax/functions/core_flows.Tax.Workflows_Tax.updateTaxRatesWorkflow",
     "newSlug": "/references/medusa-workflows/updateTaxRatesWorkflow",
     "filePath": "/www/apps/resources/references/core_flows/Tax/Workflows_Tax/functions/core_flows.Tax.Workflows_Tax.updateTaxRatesWorkflow/page.mdx"
+  },
+  {
+    "origSlug": "/references/core_flows/Tax/Workflows_Tax/functions/core_flows.Tax.Workflows_Tax.updateTaxRegionsWorkflow",
+    "newSlug": "/references/medusa-workflows/updateTaxRegionsWorkflow",
+    "filePath": "/www/apps/resources/references/core_flows/Tax/Workflows_Tax/functions/core_flows.Tax.Workflows_Tax.updateTaxRegionsWorkflow/page.mdx"
   },
   {
     "origSlug": "/references/core_flows/User/Steps_User/functions/core_flows.User.Steps_User.createUsersStep",
@@ -6648,6 +6668,11 @@ export const slugChanges = [
     "origSlug": "/references/tax/ITaxModuleService/methods/tax.ITaxModuleService.updateTaxRates",
     "newSlug": "/references/tax/updateTaxRates",
     "filePath": "/www/apps/resources/references/tax/ITaxModuleService/methods/tax.ITaxModuleService.updateTaxRates/page.mdx"
+  },
+  {
+    "origSlug": "/references/tax/ITaxModuleService/methods/tax.ITaxModuleService.updateTaxRegions",
+    "newSlug": "/references/tax/updateTaxRegions",
+    "filePath": "/www/apps/resources/references/tax/ITaxModuleService/methods/tax.ITaxModuleService.updateTaxRegions/page.mdx"
   },
   {
     "origSlug": "/references/tax/ITaxModuleService/methods/tax.ITaxModuleService.upsertTaxRates",
