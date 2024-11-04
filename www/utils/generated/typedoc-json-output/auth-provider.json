@@ -1,12 +1,12 @@
 {
-	"id": 34365,
+	"id": 34408,
 	"name": "auth-provider",
 	"variant": "project",
 	"kind": 1,
 	"flags": {},
 	"children": [
 		{
-			"id": 34366,
+			"id": 34409,
 			"name": "AbstractAuthModuleProvider",
 			"variant": "declaration",
 			"kind": 128,
@@ -27,7 +27,7 @@
 			},
 			"children": [
 				{
-					"id": 34367,
+					"id": 34410,
 					"name": "identifier",
 					"variant": "declaration",
 					"kind": 1024,
@@ -99,7 +99,7 @@
 					}
 				},
 				{
-					"id": 34368,
+					"id": 34411,
 					"name": "DISPLAY_NAME",
 					"variant": "declaration",
 					"kind": 1024,
@@ -131,7 +131,7 @@
 					}
 				},
 				{
-					"id": 34369,
+					"id": 34412,
 					"name": "validateOptions",
 					"variant": "declaration",
 					"kind": 2048,
@@ -140,7 +140,7 @@
 					},
 					"signatures": [
 						{
-							"id": 34370,
+							"id": 34413,
 							"name": "validateOptions",
 							"variant": "signature",
 							"kind": 4096,
@@ -174,7 +174,7 @@
 							},
 							"parameters": [
 								{
-									"id": 34371,
+									"id": 34414,
 									"name": "options",
 									"variant": "param",
 									"kind": 32768,
@@ -216,21 +216,21 @@
 					]
 				},
 				{
-					"id": 34372,
+					"id": 34415,
 					"name": "constructor",
 					"variant": "declaration",
 					"kind": 512,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 34373,
+							"id": 34416,
 							"name": "new AbstractAuthModuleProvider",
 							"variant": "signature",
 							"kind": 16384,
 							"flags": {},
 							"type": {
 								"type": "reference",
-								"target": 34366,
+								"target": 34409,
 								"name": "AbstractAuthModuleProvider",
 								"package": "@medusajs/utils"
 							}
@@ -238,7 +238,7 @@
 					]
 				},
 				{
-					"id": 34381,
+					"id": 34424,
 					"name": "authenticate",
 					"variant": "declaration",
 					"kind": 2048,
@@ -247,7 +247,7 @@
 					},
 					"signatures": [
 						{
-							"id": 34382,
+							"id": 34425,
 							"name": "authenticate",
 							"variant": "signature",
 							"kind": 4096,
@@ -256,7 +256,7 @@
 								"summary": [
 									{
 										"kind": "text",
-										"text": "This method authenticates the user.\n\nThe authentication happens either by directly authenticating or returning a redirect URL to continue\nthe authentication with a third party provider.\n\nRelated Read: [Learn about the different authentication flows in Medusa](https://docs.medusajs.com/v2/resources/commerce-modules/auth/authentication-route)."
+										"text": "This method authenticates the user.\n\nThe authentication happens either by directly authenticating or returning a redirect URL to continue\nthe authentication with a third party provider.\n\nRelated Read: [Learn about the different authentication flows in Medusa](https://docs.medusajs.com/resources/commerce-modules/auth/authentication-route)."
 									}
 								],
 								"blockTags": [
@@ -294,7 +294,7 @@
 							},
 							"parameters": [
 								{
-									"id": 34383,
+									"id": 34426,
 									"name": "data",
 									"variant": "param",
 									"kind": 32768,
@@ -318,7 +318,7 @@
 									}
 								},
 								{
-									"id": 34384,
+									"id": 34427,
 									"name": "authIdentityProviderService",
 									"variant": "param",
 									"kind": 32768,
@@ -392,14 +392,14 @@
 					}
 				},
 				{
-					"id": 34385,
+					"id": 34428,
 					"name": "register",
 					"variant": "declaration",
 					"kind": 2048,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 34386,
+							"id": 34429,
 							"name": "register",
 							"variant": "signature",
 							"kind": 4096,
@@ -416,7 +416,7 @@
 									},
 									{
 										"kind": "text",
-										"text": " provider, this method ensures that the provided email doesn't exist\nbefore creating the auth identity.\n\nThis method is only used in a basic authentication flow, such as when using an email and password\nto register and authenticate a user.\n\nRelated Read: [Learn about the different authentication flows in Medusa](https://docs.medusajs.com/v2/resources/commerce-modules/auth/authentication-route)."
+										"text": " provider, this method ensures that the provided email doesn't exist\nbefore creating the auth identity.\n\nThis method is only used in a basic authentication flow, such as when using an email and password\nto register and authenticate a user.\n\nRelated Read: [Learn about the different authentication flows in Medusa](https://docs.medusajs.com/resources/commerce-modules/auth/authentication-route)."
 									}
 								],
 								"blockTags": [
@@ -442,7 +442,7 @@
 							},
 							"parameters": [
 								{
-									"id": 34387,
+									"id": 34430,
 									"name": "data",
 									"variant": "param",
 									"kind": 32768,
@@ -466,7 +466,7 @@
 									}
 								},
 								{
-									"id": 34388,
+									"id": 34431,
 									"name": "authIdentityProviderService",
 									"variant": "param",
 									"kind": 32768,
@@ -540,14 +540,14 @@
 					}
 				},
 				{
-					"id": 34389,
+					"id": 34432,
 					"name": "update",
 					"variant": "declaration",
 					"kind": 2048,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 34390,
+							"id": 34433,
 							"name": "update",
 							"variant": "signature",
 							"kind": 4096,
@@ -590,7 +590,7 @@
 							},
 							"parameters": [
 								{
-									"id": 34391,
+									"id": 34434,
 									"name": "data",
 									"variant": "param",
 									"kind": 32768,
@@ -648,7 +648,7 @@
 									}
 								},
 								{
-									"id": 34392,
+									"id": 34435,
 									"name": "authIdentityProviderService",
 									"variant": "param",
 									"kind": 32768,
@@ -722,14 +722,14 @@
 					}
 				},
 				{
-					"id": 34393,
+					"id": 34436,
 					"name": "validateCallback",
 					"variant": "declaration",
 					"kind": 2048,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 34394,
+							"id": 34437,
 							"name": "validateCallback",
 							"variant": "signature",
 							"kind": 4096,
@@ -744,7 +744,7 @@
 										"kind": "inline-tag",
 										"tag": "@link",
 										"text": "authenticate",
-										"target": 34381,
+										"target": 34424,
 										"tsLinkText": ""
 									},
 									{
@@ -773,7 +773,7 @@
 									},
 									{
 										"kind": "text",
-										"text": ": Store metadata of the user's details. For example, if the third-party service returns the user's information such as email\nor name, you store this data in this property.\n\nRelated Guide: [Learn about the different authentication flows in Medusa](https://docs.medusajs.com/v2/resources/commerce-modules/auth/authentication-route)."
+										"text": ": Store metadata of the user's details. For example, if the third-party service returns the user's information such as email\nor name, you store this data in this property.\n\nRelated Guide: [Learn about the different authentication flows in Medusa](https://docs.medusajs.com/resources/commerce-modules/auth/authentication-route)."
 									}
 								],
 								"blockTags": [
@@ -799,7 +799,7 @@
 							},
 							"parameters": [
 								{
-									"id": 34395,
+									"id": 34438,
 									"name": "data",
 									"variant": "param",
 									"kind": 32768,
@@ -823,7 +823,7 @@
 									}
 								},
 								{
-									"id": 34396,
+									"id": 34439,
 									"name": "authIdentityProviderService",
 									"variant": "param",
 									"kind": 32768,
@@ -901,24 +901,24 @@
 				{
 					"title": "Constructors",
 					"children": [
-						34372
+						34415
 					]
 				},
 				{
 					"title": "Properties",
 					"children": [
-						34367,
-						34368
+						34410,
+						34411
 					]
 				},
 				{
 					"title": "Methods",
 					"children": [
-						34369,
-						34381,
-						34385,
-						34389,
-						34393
+						34412,
+						34424,
+						34428,
+						34432,
+						34436
 					]
 				}
 			],
@@ -939,101 +939,101 @@
 		{
 			"title": "Classes",
 			"children": [
-				34366
+				34409
 			]
 		}
 	],
 	"packageName": "@medusajs/utils",
 	"symbolIdMap": {
-		"34365": {
+		"34408": {
 			"sourceFileName": "../../../../packages/core/utils/src/auth/abstract-auth-provider.ts",
 			"qualifiedName": ""
 		},
-		"34366": {
+		"34409": {
 			"sourceFileName": "../../../../packages/core/utils/src/auth/abstract-auth-provider.ts",
 			"qualifiedName": "AbstractAuthModuleProvider"
 		},
-		"34367": {
+		"34410": {
 			"sourceFileName": "../../../../packages/core/utils/src/auth/abstract-auth-provider.ts",
 			"qualifiedName": "AbstractAuthModuleProvider.identifier"
 		},
-		"34368": {
+		"34411": {
 			"sourceFileName": "../../../../packages/core/utils/src/auth/abstract-auth-provider.ts",
 			"qualifiedName": "AbstractAuthModuleProvider.DISPLAY_NAME"
 		},
-		"34369": {
+		"34412": {
 			"sourceFileName": "../../../../packages/core/utils/src/auth/abstract-auth-provider.ts",
 			"qualifiedName": "AbstractAuthModuleProvider.validateOptions"
 		},
-		"34370": {
+		"34413": {
 			"sourceFileName": "../../../../packages/core/utils/src/auth/abstract-auth-provider.ts",
 			"qualifiedName": "AbstractAuthModuleProvider.validateOptions"
 		},
-		"34371": {
+		"34414": {
 			"sourceFileName": "../../../../packages/core/utils/src/auth/abstract-auth-provider.ts",
 			"qualifiedName": "options"
 		},
-		"34381": {
+		"34424": {
 			"sourceFileName": "../../../../packages/core/utils/src/auth/abstract-auth-provider.ts",
 			"qualifiedName": "AbstractAuthModuleProvider.authenticate"
 		},
-		"34382": {
+		"34425": {
 			"sourceFileName": "../../../../packages/core/utils/src/auth/abstract-auth-provider.ts",
 			"qualifiedName": "AbstractAuthModuleProvider.authenticate"
 		},
-		"34383": {
+		"34426": {
 			"sourceFileName": "../../../../packages/core/utils/src/auth/abstract-auth-provider.ts",
 			"qualifiedName": "data"
 		},
-		"34384": {
+		"34427": {
 			"sourceFileName": "../../../../packages/core/utils/src/auth/abstract-auth-provider.ts",
 			"qualifiedName": "authIdentityProviderService"
 		},
-		"34385": {
+		"34428": {
 			"sourceFileName": "../../../../packages/core/utils/src/auth/abstract-auth-provider.ts",
 			"qualifiedName": "AbstractAuthModuleProvider.register"
 		},
-		"34386": {
+		"34429": {
 			"sourceFileName": "../../../../packages/core/utils/src/auth/abstract-auth-provider.ts",
 			"qualifiedName": "AbstractAuthModuleProvider.register"
 		},
-		"34387": {
+		"34430": {
 			"sourceFileName": "../../../../packages/core/utils/src/auth/abstract-auth-provider.ts",
 			"qualifiedName": "data"
 		},
-		"34388": {
+		"34431": {
 			"sourceFileName": "../../../../packages/core/utils/src/auth/abstract-auth-provider.ts",
 			"qualifiedName": "authIdentityProviderService"
 		},
-		"34389": {
+		"34432": {
 			"sourceFileName": "../../../../packages/core/utils/src/auth/abstract-auth-provider.ts",
 			"qualifiedName": "AbstractAuthModuleProvider.update"
 		},
-		"34390": {
+		"34433": {
 			"sourceFileName": "../../../../packages/core/utils/src/auth/abstract-auth-provider.ts",
 			"qualifiedName": "AbstractAuthModuleProvider.update"
 		},
-		"34391": {
+		"34434": {
 			"sourceFileName": "../../../../packages/core/utils/src/auth/abstract-auth-provider.ts",
 			"qualifiedName": "data"
 		},
-		"34392": {
+		"34435": {
 			"sourceFileName": "../../../../packages/core/utils/src/auth/abstract-auth-provider.ts",
 			"qualifiedName": "authIdentityProviderService"
 		},
-		"34393": {
+		"34436": {
 			"sourceFileName": "../../../../packages/core/utils/src/auth/abstract-auth-provider.ts",
 			"qualifiedName": "AbstractAuthModuleProvider.validateCallback"
 		},
-		"34394": {
+		"34437": {
 			"sourceFileName": "../../../../packages/core/utils/src/auth/abstract-auth-provider.ts",
 			"qualifiedName": "AbstractAuthModuleProvider.validateCallback"
 		},
-		"34395": {
+		"34438": {
 			"sourceFileName": "../../../../packages/core/utils/src/auth/abstract-auth-provider.ts",
 			"qualifiedName": "data"
 		},
-		"34396": {
+		"34439": {
 			"sourceFileName": "../../../../packages/core/utils/src/auth/abstract-auth-provider.ts",
 			"qualifiedName": "authIdentityProviderService"
 		}
@@ -1043,7 +1043,7 @@
 			"1": "../../../../packages/core/utils/src/auth/abstract-auth-provider.ts"
 		},
 		"reflections": {
-			"1": 34365
+			"1": 34408
 		}
 	}
 }
