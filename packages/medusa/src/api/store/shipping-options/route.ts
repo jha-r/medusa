@@ -1,7 +1,7 @@
 import { listShippingOptionsForCartWorkflow } from "@medusajs/core-flows"
+import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
 import { HttpTypes, ICartModuleService } from "@medusajs/framework/types"
 import { MedusaError, Modules } from "@medusajs/framework/utils"
-import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
 import { StoreGetShippingOptionsType } from "./validators"
 
 export const GET = async (
@@ -25,6 +25,7 @@ export const GET = async (
       "id",
       "sales_channel_id",
       "currency_code",
+      "region_id",
       "shipping_address.city",
       "shipping_address.country_code",
       "shipping_address.province",
@@ -37,6 +38,7 @@ export const GET = async (
       cart_id: cart.id,
       sales_channel_id: cart.sales_channel_id,
       currency_code: cart.currency_code,
+      region_id: cart.region_id,
       is_return: !!is_return,
       shipping_address: {
         city: cart.shipping_address?.city,

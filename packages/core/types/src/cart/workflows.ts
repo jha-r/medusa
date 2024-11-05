@@ -112,6 +112,7 @@ export interface ListShippingOptionsForCartWorkflowInputDTO {
   cart_id: string
   is_return: boolean
   sales_channel_id?: string
+  region_id?: string
   currency_code: string
   shipping_address: {
     city?: string
