@@ -82,7 +82,7 @@ type FilterValue<T> =
   | FilterValue2<T>[]
   | null
 
-type PrevLimit = [never, 1, 2, 3]
+type PrevLimit = [never, 0, 1, 2]
 
 export type FilterQuery<T = any, Prev extends number = 3> = Prev extends never
   ? never

@@ -14,6 +14,13 @@ export const KeyboundForm = React.forwardRef<
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLFormElement>) => {
     if (event.key === "Enter") {
+      if (
+        event.target instanceof HTMLTextAreaElement &&
+        !(event.metaKey || event.ctrlKey)
+      ) {
+        return
+      }
+
       event.preventDefault()
 
       if (event.metaKey || event.ctrlKey) {
