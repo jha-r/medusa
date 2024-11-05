@@ -11,6 +11,20 @@ import {
 
 export const PUBLISHABLE_KEY_HEADER = "x-publishable-api-key"
 
+// We want to explicitly retrieve the base URL instead of relying on relative paths that differ in behavior between browsers.
+const getBaseUrl = (passedBaseUrl: string) => {
+  if (typeof window === "undefined") {
+    return passedBaseUrl
+  }
+
+  // If the passed base URL is empty or "/", we use the current origin from the browser.
+  if (passedBaseUrl === "" || passedBaseUrl === "/") {
+    return window.location.origin
+  }
+
+  return passedBaseUrl
+}
+
 const hasStorage = (storage: "localStorage" | "sessionStorage") => {
   if (typeof window !== "undefined") {
     return storage in window
@@ -90,7 +104,7 @@ export class Client {
   private token = ""
 
   constructor(config: Config) {
-    this.config = config
+    this.config = { ...config, baseUrl: getBaseUrl(config.baseUrl) }
     const logger = config.logger || {
       error: console.error,
       warn: console.warn,
