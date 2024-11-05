@@ -82,7 +82,10 @@ class Telemeter {
 
   getMedusaVersion() {
     try {
-      const packageJson = require.resolve(`@medusajs/medusa/package.json`)
+      const packageJson = join(
+        require.resolve(`@medusajs/medusa`).split(`${sep}dist`).shift(),
+        "package.json"
+      )
       const { version } = JSON.parse(fs.readFileSync(packageJson, `utf-8`))
       return version
     } catch (e) {
@@ -96,14 +99,9 @@ class Telemeter {
   getCliVersion() {
     try {
       const jsonfile = join(
-        require
-          .resolve(`@medusajs/medusa-cli`) // Resolve where current gatsby-cli would be loaded from.
-          .split(sep)
-          .slice(0, -2) // drop lib/index.js
-          .join(sep),
-        `package.json`
+        require.resolve(`@medusajs/cli`).split(`${sep}dist`).shift(),
+        "package.json"
       )
-
       const { version } = require(jsonfile)
       return version
     } catch (e) {
