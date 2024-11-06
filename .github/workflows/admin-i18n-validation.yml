@@ -4,10 +4,6 @@ on:
   pull_request:
     paths:
       - packages/admin/dashboard/src/i18n/translations/**
-    paths-ignore:
-      - 'packages/admin/dashboard/src/i18n/translations/$schema.json'
-      - 'packages/admin/dashboard/src/i18n/translations/index.ts'
-      - 'packages/admin/dashboard/src/i18n/translations/__tests__/**'
 
 
 jobs:
