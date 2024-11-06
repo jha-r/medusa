@@ -1,4 +1,4 @@
-name: i18n Admin Validation
+name: i18n Validation
 
 on:
   pull_request:
@@ -6,7 +6,7 @@ on:
       - packages/admin/dashboard/src/i18n/translations/**
 
 jobs:
-  validate-i18n:
+  i18n-validation-admin-dashboard:
     runs-on: ubuntu-latest
 
     steps:
@@ -28,7 +28,7 @@ jobs:
         run: |
           for file in src/i18n/translations/*; do
             filename=$(basename "$file")
-            if [ "$filename" != "$schema.json" ]; then
+            if [ "$filename" != "\$schema.json" ]; then
               yarn i18n:validate "$filename"
             fi
           done
