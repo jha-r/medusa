@@ -27,5 +27,8 @@ jobs:
         working-directory: packages/admin/dashboard
         run: |
           for file in src/i18n/translations/*; do
-            yarn i18n:validate "$file"
+            filename=$(basename "$file")
+            if [[ "$filename" != "schema.json" ]]; then
+              yarn i18n:validate "$filename"
+            fi
           done
