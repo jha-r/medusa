@@ -138,18 +138,7 @@ export function OrderCreateFulfillmentForm({
         onSubmit={handleSubmit}
         className="flex h-full flex-col overflow-hidden"
       >
-        <RouteFocusModal.Header>
-          <div className="flex items-center justify-end gap-x-2">
-            <RouteFocusModal.Close asChild>
-              <Button size="small" variant="secondary">
-                {t("actions.cancel")}
-              </Button>
-            </RouteFocusModal.Close>
-            <Button size="small" type="submit" isLoading={isMutating}>
-              {t("orders.fulfillment.create")}
-            </Button>
-          </div>
-        </RouteFocusModal.Header>
+        <RouteFocusModal.Header />
 
         <RouteFocusModal.Body className="flex h-full w-full flex-col items-center divide-y overflow-y-auto">
           <div className="flex size-full flex-col items-center overflow-auto p-16">
@@ -309,6 +298,18 @@ export function OrderCreateFulfillmentForm({
             </div>
           </div>
         </RouteFocusModal.Body>
+        <RouteFocusModal.Footer>
+          <div className="flex items-center justify-end gap-x-2">
+            <RouteFocusModal.Close asChild>
+              <Button size="small" variant="secondary">
+                {t("actions.cancel")}
+              </Button>
+            </RouteFocusModal.Close>
+            <Button size="small" type="submit" isLoading={isMutating}>
+              {t("orders.fulfillment.create")}
+            </Button>
+          </div>
+        </RouteFocusModal.Footer>
       </KeyboundForm>
     </RouteFocusModal.Form>
   )
