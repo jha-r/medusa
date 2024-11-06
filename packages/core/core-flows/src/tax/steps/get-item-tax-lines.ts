@@ -1,4 +1,7 @@
 import {
+  CartLineItemDTO,
+  CartShippingMethodDTO,
+  CartWorkflowDTO,
   ITaxModuleService,
   ItemTaxLineDTO,
   OrderLineItemDTO,
@@ -12,24 +15,24 @@ import {
 import { MedusaError, Modules } from "@medusajs/framework/utils"
 import { createStep, StepResponse } from "@medusajs/framework/workflows-sdk"
 
-export interface GetOrderItemTaxLinesStepInput {
-  order: OrderWorkflowDTO
-  items: OrderLineItemDTO[]
-  shipping_methods: OrderShippingMethodDTO[]
+export interface GetItemTaxLinesStepInput {
+  orderOrCart: OrderWorkflowDTO | CartWorkflowDTO
+  items: OrderLineItemDTO[] | CartLineItemDTO[]
+  shipping_methods: OrderShippingMethodDTO[] | CartShippingMethodDTO[]
   force_tax_calculation?: boolean
   is_return?: boolean
   shipping_address?: OrderWorkflowDTO["shipping_address"]
 }
 
 function normalizeTaxModuleContext(
-  order: OrderWorkflowDTO,
+  orderOrCart: OrderWorkflowDTO | CartWorkflowDTO,
   forceTaxCalculation: boolean,
   isReturn?: boolean,
   shippingAddress?: OrderWorkflowDTO["shipping_address"]
 ): TaxCalculationContext | null {
-  const address = shippingAddress ?? order.shipping_address
+  const address = shippingAddress ?? orderOrCart.shipping_address
   const shouldCalculateTax =
-    forceTaxCalculation || order.region?.automatic_taxes
+    forceTaxCalculation || orderOrCart.region?.automatic_taxes
 
   if (!shouldCalculateTax) {
     return null
@@ -46,10 +49,10 @@ function normalizeTaxModuleContext(
     return null
   }
 
-  const customer = order.customer && {
-    id: order.customer.id,
-    email: order.customer.email,
-    customer_groups: order.customer.groups?.map((g) => g.id) || [],
+  const customer = orderOrCart.customer && {
+    id: orderOrCart.customer.id,
+    email: orderOrCart.customer.email,
+    customer_groups: orderOrCart.customer.groups?.map((g) => g.id) || [],
   }
 
   return {
@@ -67,28 +70,25 @@ function normalizeTaxModuleContext(
 }
 
 function normalizeLineItemsForTax(
-  order: OrderWorkflowDTO,
-  items: OrderLineItemDTO[]
+  orderOrCart: OrderWorkflowDTO | CartWorkflowDTO,
+  items: OrderLineItemDTO[] | CartLineItemDTO[]
 ): TaxableItemDTO[] {
   return items.map(
     (item) =>
       ({
         id: item.id,
         product_id: item.product_id!,
-        product_name: item.variant_title,
-        product_sku: item.variant_sku,
-        product_type: item.product_type,
-        product_type_id: item.product_type,
+        product_type_id: item.product_type_id,
         quantity: item.quantity,
         unit_price: item.unit_price,
-        currency_code: order.currency_code,
+        currency_code: orderOrCart.currency_code,
       } as TaxableItemDTO)
   )
 }
 
 function normalizeLineItemsForShipping(
-  order: OrderWorkflowDTO,
-  shippingMethods: OrderShippingMethodDTO[]
+  orderOrCart: OrderWorkflowDTO | CartWorkflowDTO,
+  shippingMethods: OrderShippingMethodDTO[] | CartShippingMethodDTO[]
 ): TaxableShippingDTO[] {
   return shippingMethods.map(
     (shippingMethod) =>
@@ -96,20 +96,20 @@ function normalizeLineItemsForShipping(
         id: shippingMethod.id,
         shipping_option_id: shippingMethod.shipping_option_id!,
         unit_price: shippingMethod.amount,
-        currency_code: order.currency_code,
+        currency_code: orderOrCart.currency_code,
       } as TaxableShippingDTO)
   )
 }
 
-export const getOrderItemTaxLinesStepId = "get-order-item-tax-lines"
+export const getItemTaxLinesStepId = "get-item-tax-lines"
 /**
  * This step retrieves the tax lines for an order's line items and shipping methods.
  */
-export const getOrderItemTaxLinesStep = createStep(
-  getOrderItemTaxLinesStepId,
-  async (data: GetOrderItemTaxLinesStepInput, { container }) => {
+export const getItemTaxLinesStep = createStep(
+  getItemTaxLinesStepId,
+  async (data: GetItemTaxLinesStepInput, { container }) => {
     const {
-      order,
+      orderOrCart,
       items = [],
       shipping_methods: shippingMethods = [],
       force_tax_calculation: forceTaxCalculation = false,
@@ -119,7 +119,7 @@ export const getOrderItemTaxLinesStep = createStep(
     const taxService = container.resolve<ITaxModuleService>(Modules.TAX)
 
     const taxContext = normalizeTaxModuleContext(
-      order,
+      orderOrCart,
       forceTaxCalculation,
       isReturn,
       shippingAddress
@@ -136,14 +136,14 @@ export const getOrderItemTaxLinesStep = createStep(
 
     if (items.length) {
       stepResponseData.lineItemTaxLines = (await taxService.getTaxLines(
-        normalizeLineItemsForTax(order, items),
+        normalizeLineItemsForTax(orderOrCart, items),
         taxContext
       )) as ItemTaxLineDTO[]
     }
 
     if (shippingMethods.length) {
       stepResponseData.shippingMethodsTaxLines = (await taxService.getTaxLines(
-        normalizeLineItemsForShipping(order, shippingMethods),
+        normalizeLineItemsForShipping(orderOrCart, shippingMethods),
         taxContext
       )) as ShippingTaxLineDTO[]
     }
