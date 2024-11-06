@@ -3,7 +3,6 @@ import { ulid } from "ulid"
 import winston from "winston"
 import { inspect } from "util"
 import stackTrace from "stack-trace"
-import { isObject } from "@medusajs/utils"
 import { track } from "@medusajs/telemetry"
 import { panicHandler } from "./panic-handler"
 
