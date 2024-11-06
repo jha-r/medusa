@@ -1,5 +1,18 @@
 # @medusajs/utils
 
+## 2.0.2
+
+### Patch Changes
+
+- [#9917](https://github.com/medusajs/medusa/pull/9917) [`16b4cc433e996d1a54e4ff043daaa148981ba63d`](https://github.com/medusajs/medusa/commit/16b4cc433e996d1a54e4ff043daaa148981ba63d) Thanks [@adrien2p](https://github.com/adrien2p)! - fix(utils): Mikro orm repository update many to many should detach all items by default
+
+- [#9932](https://github.com/medusajs/medusa/pull/9932) [`879ce33090c7e99ae8b466c31c5dc0c67cdbc08f`](https://github.com/medusajs/medusa/commit/879ce33090c7e99ae8b466c31c5dc0c67cdbc08f) Thanks [@adrien2p](https://github.com/adrien2p)! - fix(utils/dml): set-relationship graphql generator from DML wrong managed belongsTo
+
+- [#9947](https://github.com/medusajs/medusa/pull/9947) [`b3cbc160eb94025402b5a0ef21653c207bbe8ccd`](https://github.com/medusajs/medusa/commit/b3cbc160eb94025402b5a0ef21653c207bbe8ccd) Thanks [@sradevski](https://github.com/sradevski)! - fix: Default to a relative path for backend URL in admin
+
+- Updated dependencies [[`bbf4af17258ea34adeeb8ff3a6cd213a12d67c76`](https://github.com/medusajs/medusa/commit/bbf4af17258ea34adeeb8ff3a6cd213a12d67c76), [`c1c85ef952441eacfe8b6c2ffa9304ac4433053f`](https://github.com/medusajs/medusa/commit/c1c85ef952441eacfe8b6c2ffa9304ac4433053f), [`b3cbc160eb94025402b5a0ef21653c207bbe8ccd`](https://github.com/medusajs/medusa/commit/b3cbc160eb94025402b5a0ef21653c207bbe8ccd)]:
+  - @medusajs/types@2.0.2
+
 ## 2.0.1
 
 ### Patch Changes

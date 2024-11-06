@@ -8,7 +8,8 @@ import {
   transform,
 } from "@medusajs/framework/workflows-sdk"
 import { useRemoteQueryStep } from "../../common"
-import { getItemTaxLinesStep, setTaxLinesForItemsStep } from "../steps"
+import { getItemTaxLinesStep } from "../../tax/steps/get-item-tax-lines"
+import { setTaxLinesForItemsStep } from "../steps"
 
 const cartFields = [
   "id",
@@ -23,6 +24,7 @@ const cartFields = [
   "items.product_description",
   "items.product_subtitle",
   "items.product_type",
+  "items.product_type_id",
   "items.product_collection",
   "items.product_handle",
   "items.variant_sku",
@@ -81,7 +83,7 @@ export const updateTaxLinesWorkflow = createWorkflow(
 
     const taxLineItems = getItemTaxLinesStep(
       transform({ input, cart }, (data) => ({
-        cart: data.cart,
+        orderOrCart: data.cart,
         items: data.input.items || data.cart.items,
         shipping_methods:
           data.input.shipping_methods || data.cart.shipping_methods,
