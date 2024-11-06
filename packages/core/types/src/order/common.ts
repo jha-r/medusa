@@ -806,6 +806,11 @@ export interface OrderLineItemDTO extends OrderLineItemTotalsDTO {
   product_subtitle?: string | null
 
   /**
+   * The ID of the type of the product associated with the line item.
+   */
+  product_type_id?: string | null
+
+  /**
    * The type of the product associated with the line item.
    */
   product_type?: string | null
