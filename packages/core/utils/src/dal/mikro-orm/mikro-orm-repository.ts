@@ -330,15 +330,84 @@ export function mikroOrmBaseRepositoryFactory<T extends object = object>(
       return entities
     }
 
+    /**
+     * On a many to many relation, we expect to detach all the pivot items in case an empty array is provided.
+     * In that case, this relation needs to be init as well as its counter part in order to be
+     * able to perform the removal action.
+     *
+     * This action performs the initialization in the provided entity and therefore mutate in place.
+     *
+     * @param {{entity, update}[]} data
+     * @param context
+     * @private
+     */
+    private async initManyToManyToDetachAllItemsIfNeeded(
+      data: { entity; update }[],
+      context?: Context
+    ) {
+      const manager = this.getActiveManager<EntityManager>(context)
+
+      const relations = manager
+        .getDriver()
+        .getMetadata()
+        .get(entity.name).relations
+
+      // In case an empty array is provided for a collection relation of type m:n, this relation needs to be init in order to be
+      // able to perform an application cascade action.
+      const collectionsToRemoveAllFrom: Map<
+        string,
+        { name: string; mappedBy?: string }
+      > = new Map()
+      data.forEach(({ update }) =>
+        Object.keys(update).filter((key) => {
+          const relation = relations.find((relation) => relation.name === key)
+          const shouldInit =
+            relation &&
+            relation.reference === ReferenceType.MANY_TO_MANY &&
+            Array.isArray(update[key]) &&
+            !update[key].length
+
+          if (shouldInit) {
+            collectionsToRemoveAllFrom.set(key, {
+              name: key,
+              mappedBy: relations.find((r) => r.name === key)?.mappedBy,
+            })
+          }
+        })
+      )
+
+      for (const [
+        collectionToRemoveAllFrom,
+        descriptor,
+      ] of collectionsToRemoveAllFrom) {
+        await promiseAll(
+          data.map(async ({ entity }) => {
+            if (!descriptor.mappedBy) {
+              return await entity[collectionToRemoveAllFrom].init()
+            }
+
+            await entity[collectionToRemoveAllFrom].init()
+            const items = entity[collectionToRemoveAllFrom]
+
+            for (const item of items) {
+              await item[descriptor.mappedBy!].init()
+            }
+          })
+        )
+      }
+    }
+
     async update(data: { entity; update }[], context?: Context): Promise<T[]> {
       const manager = this.getActiveManager<EntityManager>(context)
-      const entities = data.map((data_) => {
-        return manager.assign(data_.entity, data_.update)
+
+      await this.initManyToManyToDetachAllItemsIfNeeded(data, context)
+
+      data.map((_, index) => {
+        manager.assign(data[index].entity, data[index].update)
+        manager.persist(data[index].entity)
       })
 
-      manager.persist(entities)
-
-      return entities
+      return data.map((d) => d.entity)
     }
 
     async delete(
