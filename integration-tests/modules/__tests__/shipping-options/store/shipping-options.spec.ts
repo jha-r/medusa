@@ -241,7 +241,7 @@ medusaIntegrationTestRunner({
           )
         })
 
-        it("should get shipping options with region prices  for a cart successfully", async () => {
+        it("should get shipping options with region prices for a cart successfully", async () => {
           cart = (
             await api.post(
               `/store/carts`,
