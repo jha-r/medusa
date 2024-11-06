@@ -10,7 +10,6 @@ import { Thumbnail } from "../../../../../components/common/thumbnail/index"
 import { useProductVariant } from "../../../../../hooks/api/products"
 import { getFulfillableQuantity } from "../../../../../lib/order-item"
 import { CreateFulfillmentSchema } from "./constants"
-import { useReservationItems } from "../../../../../hooks/api/reservations"
 
 type OrderEditItemProps = {
   item: HttpTypes.AdminOrderLineItem
@@ -30,10 +29,13 @@ export function OrderCreateFulfillmentItem({
   const { t } = useTranslation()
 
   const { variant } = useProductVariant(
-    item.variant!.product_id!,
-    item.variant_id!,
+    item.variant?.product_id,
+    item.variant_id,
     {
       fields: "*inventory,*inventory.location_levels",
+    },
+    {
+      enabled: !!item.variant,
     }
   )
 
