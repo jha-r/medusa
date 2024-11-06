@@ -26,17 +26,15 @@ jobs:
         working-directory: packages/admin/dashboard
         run: yarn install
 
-      - name: Get newly added files
-        id: added_files
-        run: |
-          # List only newly added files in src/i18n/translations
-          git diff --name-only --diff-filter=A origin/develop HEAD -- packages/admin/dashboard/src/i18n/translations > i18n_added_files.txt
-          cat i18n_added_files.txt
 
       - name: Validate i18n translations
         working-directory: packages/admin/dashboard
         if: success() && steps.added_files.outputs
         run: |
+          git diff --name-only --diff-filter=A origin/develop HEAD -- src/i18n/translations > i18n_added_files.txt
+          
+          cat i18n_added_files.txt
+          
           while read -r file; do
             # Get the base name of the file
             filename=$(basename "$file")
@@ -48,4 +46,4 @@ jobs:
           
             # Run validation on the file
             yarn i18n:validate "$filename"
-          done < ../../../added_files.txt
+          done < i18n_added_files.txt
