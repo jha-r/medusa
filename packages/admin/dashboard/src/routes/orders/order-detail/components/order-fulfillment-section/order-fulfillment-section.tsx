@@ -73,7 +73,7 @@ const UnfulfilledItem = ({
           >
             {item.title}
           </Text>
-          {item.variant.sku && (
+          {item.variant?.sku && (
             <div className="flex items-center gap-x-1">
               <Text size="small">{item.variant?.sku || "N/A"}</Text>
               <Copy content={item.variant?.sku} className="text-ui-fg-muted" />

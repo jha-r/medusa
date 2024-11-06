@@ -161,7 +161,7 @@ export function OrderAllocateItemsForm({ order }: OrderAllocateItemsFormProps) {
         )
 
         if (value) {
-          const location = inventory.location_levels.find(
+          const location = inventory?.location_levels.find(
             (l) => l.location_id === selectedLocationId
           )
           if (location) {

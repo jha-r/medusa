@@ -37,7 +37,7 @@ export function OrderAllocateItemsItem({
   const { t } = useTranslation()
 
   const variant = item.variant
-  const inventory = item.variant?.inventory
+  const inventory = item.variant?.inventory || []
 
   const [isOpen, setIsOpen] = useState(false)
 
@@ -53,8 +53,6 @@ export function OrderAllocateItemsItem({
     if (!variant || !locationId) {
       return {}
     }
-
-    const { inventory } = variant
 
     const locationInventory = inventory[0]?.location_levels?.find(
       (inv) => inv.location_id === locationId
