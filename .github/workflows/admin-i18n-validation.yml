@@ -28,7 +28,7 @@ jobs:
         run: |
           for file in src/i18n/translations/*; do
             filename=$(basename "$file")
-            if [[ "$filename" != "$schema.json" ]]; then
+            if [ "$filename" != "$schema.json" ]; then
               yarn i18n:validate "$filename"
             fi
           done
