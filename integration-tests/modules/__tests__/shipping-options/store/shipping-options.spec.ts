@@ -38,11 +38,12 @@ medusaIntegrationTestRunner({
         appContainer = getContainer()
         fulfillmentModule = appContainer.resolve(Modules.FULFILLMENT)
         regionService = appContainer.resolve(Modules.REGION)
-        const publishableKey = await generatePublishableKey(appContainer)
-        storeHeaders = generateStoreHeaders({ publishableKey })
       })
 
       beforeEach(async () => {
+        const publishableKey = await generatePublishableKey(appContainer)
+        storeHeaders = generateStoreHeaders({ publishableKey })
+
         await createAdminUser(dbConnection, adminHeaders, appContainer)
         const remoteLinkService = appContainer.resolve(
           ContainerRegistrationKeys.REMOTE_LINK
@@ -240,7 +241,7 @@ medusaIntegrationTestRunner({
           )
         })
 
-        it("should get shipping options for a cart successfully", async () => {
+        it("should get shipping options with region prices  for a cart successfully", async () => {
           cart = (
             await api.post(
               `/store/carts`,
