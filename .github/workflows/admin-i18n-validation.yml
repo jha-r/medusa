@@ -1,0 +1,31 @@
+name: i18n Admin Validation
+
+on:
+  push:
+    paths:
+      - packages/admin/dashboard/src/i18n/translations/**
+
+jobs:
+  validate-i18n:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        working-directory: packages/admin/dashboard
+        run: yarn install
+
+      - name: Validate i18n translations
+        working-directory: packages/admin/dashboard
+        run: |
+          for file in src/i18n/translations/*; do
+            yarn i18n:validate "$file"
+          done
