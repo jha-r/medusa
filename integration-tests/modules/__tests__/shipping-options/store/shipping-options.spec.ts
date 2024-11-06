@@ -239,37 +239,24 @@ medusaIntegrationTestRunner({
               price_type: "flat",
             })
           )
-        })
 
-        it("should get shipping options with region prices for a cart successfully", async () => {
           cart = (
             await api.post(
-              `/store/carts`,
+              `/store/carts/${cart.id}`,
               {
                 region_id: regionTwo.id,
-                sales_channel_id: salesChannel.id,
-                currency_code: "dkk",
-                email: "test@admin.com",
-                items: [
-                  {
-                    variant_id: product.variants[0].id,
-                    quantity: 1,
-                  },
-                ],
               },
               storeHeaders
             )
           ).data.cart
 
-          const resp = await api.get(
+          const secondResp = await api.get(
             `/store/shipping-options?cart_id=${cart.id}`,
             storeHeaders
           )
 
-          const shippingOptions = resp.data.shipping_options
-
-          expect(shippingOptions).toHaveLength(1)
-          expect(shippingOptions[0]).toEqual(
+          expect(secondResp.data.shipping_options).toHaveLength(1)
+          expect(secondResp.data.shipping_options[0]).toEqual(
             expect.objectContaining({
               id: shippingOption.id,
               name: "Test shipping option",
