@@ -6,7 +6,7 @@ describe("defineConfig", function () {
     expect(defineConfig()).toMatchInlineSnapshot(`
       {
         "admin": {
-          "backendUrl": "http://localhost:9000",
+          "backendUrl": "/",
           "path": "/app",
         },
         "featureFlags": {},
@@ -159,7 +159,7 @@ describe("defineConfig", function () {
     ).toMatchInlineSnapshot(`
       {
         "admin": {
-          "backendUrl": "http://localhost:9000",
+          "backendUrl": "/",
           "path": "/app",
         },
         "featureFlags": {},
@@ -318,7 +318,7 @@ describe("defineConfig", function () {
     ).toMatchInlineSnapshot(`
       {
         "admin": {
-          "backendUrl": "http://localhost:9000",
+          "backendUrl": "/",
           "path": "/app",
         },
         "featureFlags": {},
@@ -483,7 +483,7 @@ describe("defineConfig", function () {
     ).toMatchInlineSnapshot(`
       {
         "admin": {
-          "backendUrl": "http://localhost:9000",
+          "backendUrl": "/",
           "path": "/app",
         },
         "featureFlags": {},
@@ -644,7 +644,7 @@ describe("defineConfig", function () {
     ).toMatchInlineSnapshot(`
       {
         "admin": {
-          "backendUrl": "http://localhost:9000",
+          "backendUrl": "/",
           "path": "/app",
         },
         "featureFlags": {},
@@ -800,7 +800,7 @@ describe("defineConfig", function () {
     ).toMatchInlineSnapshot(`
       {
         "admin": {
-          "backendUrl": "http://localhost:9000",
+          "backendUrl": "/",
           "path": "/app",
         },
         "featureFlags": {},
