@@ -155,7 +155,7 @@ describe("Google auth provider", () => {
         return {
           provider_identities: [
             {
-              entity_id: "test@admin.com",
+              entity_id: "113664482950786663866",
               provider: "google",
             },
           ],
@@ -180,7 +180,7 @@ describe("Google auth provider", () => {
       authIdentity: {
         provider_identities: [
           {
-            entity_id: "test@admin.com",
+            entity_id: "113664482950786663866",
             provider: "google",
           },
         ],
@@ -194,7 +194,7 @@ describe("Google auth provider", () => {
         return {
           provider_identities: [
             {
-              entity_id: "test@admin.com",
+              entity_id: "113664482950786663866",
               provider: "google",
             },
           ],
@@ -222,7 +222,7 @@ describe("Google auth provider", () => {
       authIdentity: {
         provider_identities: [
           {
-            entity_id: "test@admin.com",
+            entity_id: "113664482950786663866",
             provider: "google",
           },
         ],
