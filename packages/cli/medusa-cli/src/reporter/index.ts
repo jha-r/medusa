@@ -221,9 +221,8 @@ export class Reporter {
     this.loggerInstance_.log(toLog)
 
     /**
-     * In dev we print the error using `console.error`. I am not sure if
-     * we should be doing this, because now we are giving more info
-     * in Dev and less info in production
+     * In dev we print the error using `console.error`, because Winston
+     * CLI formatter does not print the error stack in that case
      */
     if (errorAsObject && IS_DEV) {
       console.error(errorAsObject)
