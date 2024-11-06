@@ -1,5 +1,6 @@
 import { track } from "@medusajs/telemetry"
 import ora from "ora"
+import { inspect } from "util"
 import stackTrace from "stack-trace"
 import { ulid } from "ulid"
 import winston from "winston"
@@ -174,11 +175,17 @@ export class Reporter {
    * Level 0
    */
   error(messageOrError: string | Error, error?: Error) {
-    let message = messageOrError as string
+    let message: string
+    let errorAsObject: Error | undefined
 
-    if (typeof messageOrError === "object") {
+    if (messageOrError && typeof messageOrError === "object") {
+      errorAsObject = messageOrError
       message = messageOrError.message
-      error = messageOrError
+    } else if (error) {
+      message = messageOrError
+      errorAsObject = error
+    } else {
+      message = messageOrError
     }
 
     const toLog = {
@@ -186,15 +193,39 @@ export class Reporter {
       message,
     }
 
-    if (error) {
-      toLog["stack"] = stackTrace.parse(error)
+    if (errorAsObject) {
+      toLog["message"] = errorAsObject.message
+      toLog["stack"] = stackTrace.parse(errorAsObject)
+      /**
+       * Winston only logs the error properties when they are
+       * string values. Hence we will have to self convert
+       * the error cause to a string
+       */
+      if ("cause" in errorAsObject) {
+        toLog["cause"] = inspect(errorAsObject.cause)
+      }
     }
 
+    /**
+     * If "errorAsObject" has a message property, then we will
+     * print the standalone message as one log item and then
+     * the actual error object as another log item.
+     *
+     * Otherwise, we always loose the message property from the
+     * actual error object
+     */
+    if (errorAsObject?.message && errorAsObject?.message !== message) {
+      this.loggerInstance_.log({ level: "error", message })
+    }
     this.loggerInstance_.log(toLog)
 
-    // Give stack traces and details in dev
-    if (error && IS_DEV) {
-      console.log(error)
+    /**
+     * In dev we print the error using `console.error`. I am not sure if
+     * we should be doing this, because now we are giving more info
+     * in Dev and less info in production
+     */
+    if (errorAsObject && IS_DEV) {
+      console.error(errorAsObject)
     }
   }
 
