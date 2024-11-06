@@ -179,7 +179,7 @@ export class Reporter {
     let message: string
     let errorAsObject: Error | undefined
 
-    if (isObject(messageOrError)) {
+    if (messageOrError && typeof messageOrError === "object") {
       errorAsObject = messageOrError
       message = messageOrError.message
     } else if (error) {
@@ -215,7 +215,7 @@ export class Reporter {
      * Otherwise, we always loose the message property from the
      * actual error object
      */
-    if (errorAsObject?.message !== message) {
+    if (errorAsObject?.message && errorAsObject?.message !== message) {
       this.loggerInstance_.log({ level: "error", message })
     }
     this.loggerInstance_.log(toLog)
