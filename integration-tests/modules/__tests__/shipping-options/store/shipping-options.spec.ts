@@ -202,7 +202,7 @@ medusaIntegrationTestRunner({
         ).data.shipping_option
       })
 
-      describe("GET /admin/shipping-options?cart_id=", () => {
+      describe("GET /store/shipping-options?cart_id=", () => {
         it("should get shipping options for a cart successfully", async () => {
           cart = (
             await api.post(
