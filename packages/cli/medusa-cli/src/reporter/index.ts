@@ -1,9 +1,10 @@
-import { track } from "@medusajs/telemetry"
 import ora from "ora"
-import { inspect } from "util"
-import stackTrace from "stack-trace"
 import { ulid } from "ulid"
 import winston from "winston"
+import { inspect } from "util"
+import stackTrace from "stack-trace"
+import { isObject } from "@medusajs/utils"
+import { track } from "@medusajs/telemetry"
 import { panicHandler } from "./panic-handler"
 
 const LOG_LEVEL = process.env.LOG_LEVEL || "http"
@@ -178,7 +179,7 @@ export class Reporter {
     let message: string
     let errorAsObject: Error | undefined
 
-    if (messageOrError && typeof messageOrError === "object") {
+    if (isObject(messageOrError)) {
       errorAsObject = messageOrError
       message = messageOrError.message
     } else if (error) {
@@ -214,7 +215,7 @@ export class Reporter {
      * Otherwise, we always loose the message property from the
      * actual error object
      */
-    if (errorAsObject?.message && errorAsObject?.message !== message) {
+    if (errorAsObject?.message !== message) {
       this.loggerInstance_.log({ level: "error", message })
     }
     this.loggerInstance_.log(toLog)
