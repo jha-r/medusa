@@ -35,7 +35,7 @@ jobs:
 
       - name: Validate i18n translations
         working-directory: packages/admin/dashboard
-        if: success() && steps.i18n_added_files.outputs
+        if: success() && steps.added_files.outputs
         run: |
           while read -r file; do
             # Get the base name of the file
