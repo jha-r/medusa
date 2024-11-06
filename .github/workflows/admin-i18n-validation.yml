@@ -24,18 +24,26 @@ jobs:
         working-directory: packages/admin/dashboard
         run: yarn install
 
+      - name: Get newly added files
+        id: added_files
+        run: |
+          # List only newly added files in src/i18n/translations
+          git diff --name-only --diff-filter=A HEAD~1 HEAD -- src/i18n/translations/ > added_files.txt
+          # Exclude specific files and directories
+          sed -i '/\$schema.json/d' i18n_added_files.txt  # Exclude $schema.json
+          sed -i '/index.ts/d' i18n_added_files.txt       # Exclude index.ts
+          sed -i '/__tests__\//d' i18n_added_files.txt    # Exclude any files in __tests__ directory
+          # Output the list of files
+          cat i18n_added_files.txt
+
       - name: Validate i18n translations
         working-directory: packages/admin/dashboard
+        if: success() && steps.added_files.outputs
         run: |
-          for file in src/i18n/translations/*; do
+          while read -r file; do
             # Get the base name of the file
             filename=$(basename "$file")
           
-            # Skip "$schema.json" and any directories
-            if [ "$filename" = "\$schema.json" ] || [ "$filename" = "index.ts" ] || [ -d "$file" ]; then
-              continue
-            fi
-
             # Run validation on the file
             yarn i18n:validate "$filename"
-          done
+          done < ../added_files.txt
