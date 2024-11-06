@@ -4,6 +4,11 @@ on:
   pull_request:
     paths:
       - packages/admin/dashboard/src/i18n/translations/**
+    paths-ignore:
+      - 'packages/admin/dashboard/src/i18n/translations/$schema.json'
+      - 'packages/admin/dashboard/src/i18n/translations/index.ts'
+      - 'packages/admin/dashboard/src/i18n/translations/__tests__/**'
+
 
 jobs:
   i18n-validation-admin-dashboard:
@@ -27,8 +32,14 @@ jobs:
         working-directory: packages/admin/dashboard
         run: |
           for file in src/i18n/translations/*; do
+            # Get the base name of the file
             filename=$(basename "$file")
-            if [ "$filename" != "\$schema.json" ]; then
-              yarn i18n:validate "$filename"
+          
+            # Skip "$schema.json" and any directories
+            if [ "$filename" = "\$schema.json" ] || [ "$filename" = "index.ts" ] || [ -d "$file" ]; then
+              continue
             fi
+
+            # Run validation on the file
+            yarn i18n:validate "$filename"
           done
