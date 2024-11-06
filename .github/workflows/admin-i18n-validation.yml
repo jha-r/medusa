@@ -1,7 +1,7 @@
 name: i18n Admin Validation
 
 on:
-  push:
+  pull_request:
     paths:
       - packages/admin/dashboard/src/i18n/translations/**
 
