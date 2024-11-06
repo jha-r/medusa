@@ -1085,6 +1085,11 @@ export interface OrderDTO {
   version: number
 
   /**
+   * The order's display ID.
+   */
+  display_id: number
+
+  /**
    * The active order change, if any.
    *
    * @expandable
