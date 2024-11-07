@@ -32,7 +32,7 @@ import {
 } from "../../../../../hooks/api/invites"
 import { useUserInviteTableQuery } from "../../../../../hooks/table/query/use-user-invite-table-query"
 import { useDataTable } from "../../../../../hooks/use-data-table"
-import { isFetchError } from "../../../../../lib/is-fetch-error.ts"
+import { isFetchError } from "../../../../../lib/is-fetch-error"
 
 const InviteUserSchema = zod.object({
   email: zod.string().email(),
@@ -168,6 +168,7 @@ export const InviteUserForm = () => {
                     search="autofocus"
                     isLoading={isLoading}
                     queryObject={raw}
+                    prefix={PREFIX}
                     orderBy={[
                       { key: "email", label: t("fields.email") },
                       { key: "created_at", label: t("fields.createdAt") },
