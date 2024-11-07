@@ -1,4 +1,5 @@
 import { RemoteLink } from "@medusajs/modules-sdk"
+import { medusaIntegrationTestRunner } from "@medusajs/test-utils"
 import {
   IApiKeyModuleService,
   ICartModuleService,
@@ -21,7 +22,6 @@ import {
   PromotionType,
   RuleOperator,
 } from "@medusajs/utils"
-import { medusaIntegrationTestRunner } from "@medusajs/test-utils"
 import {
   createAdminUser,
   generatePublishableKey,
@@ -1174,6 +1174,89 @@ medusaIntegrationTestRunner({
                   adjustments: [],
                 }),
               ],
+            })
+          )
+        })
+
+        it("should update a carts tax lines with a reduced product type rate", async () => {
+          await setupTaxStructure(taxModule)
+
+          const region = await regionModule.createRegions({
+            name: "US",
+            currency_code: "usd",
+            automatic_taxes: false,
+            countries: ["ca"],
+          })
+
+          const cart = await cartModule.createCarts({
+            currency_code: "usd",
+            region_id: region.id,
+            shipping_address: {
+              address_1: "test address 1",
+              address_2: "test address 2",
+              city: "CA",
+              country_code: "CA",
+              province: "QC",
+              postal_code: "94016",
+            },
+            items: [
+              {
+                id: "item-1",
+                unit_price: 2000,
+                quantity: 1,
+                title: "Test item",
+                product_id: "prod_tshirt_reduced_tax",
+                product_type_id: "product_type_id_3",
+              } as any,
+              {
+                id: "item-2",
+                unit_price: 1000,
+                quantity: 1,
+                title: "Test item two",
+                product_id: "prod_tshirt",
+              } as any,
+            ],
+          })
+
+          let updated = await api.post(
+            `/store/carts/${cart.id}/taxes`,
+            {},
+            storeHeaders
+          )
+
+          expect(updated.status).toEqual(200)
+
+          expect(updated.data.cart).toEqual(
+            expect.objectContaining({
+              id: cart.id,
+              items: expect.arrayContaining([
+                expect.objectContaining({
+                  id: "item-2",
+                  tax_lines: expect.arrayContaining([
+                    // Regional rate for Quebec, Canada
+                    expect.objectContaining({
+                      description: "QC Default Rate",
+                      code: "QCDEFAULT",
+                      rate: 2,
+                      provider_id: "system",
+                    }),
+                  ]),
+                  adjustments: [],
+                }),
+                expect.objectContaining({
+                  id: "item-1",
+                  tax_lines: expect.arrayContaining([
+                    // Reduced rate for product types in Quebec, Canada
+                    expect.objectContaining({
+                      description: "QC Reduced Rate for Product Type",
+                      code: "QCREDUCE_TYPE",
+                      rate: 1,
+                      provider_id: "system",
+                    }),
+                  ]),
+                  adjustments: [],
+                }),
+              ]),
             })
           )
         })

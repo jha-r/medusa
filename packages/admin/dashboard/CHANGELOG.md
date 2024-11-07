@@ -1,5 +1,16 @@
 # @medusajs/dashboard
 
+## 2.0.2
+
+### Patch Changes
+
+- [#9947](https://github.com/medusajs/medusa/pull/9947) [`b3cbc160eb94025402b5a0ef21653c207bbe8ccd`](https://github.com/medusajs/medusa/commit/b3cbc160eb94025402b5a0ef21653c207bbe8ccd) Thanks [@sradevski](https://github.com/sradevski)! - fix: Default to a relative path for backend URL in admin
+
+- Updated dependencies [[`30edc8fa40ff5ed6ecc8c55f555f9d975df497f5`](https://github.com/medusajs/medusa/commit/30edc8fa40ff5ed6ecc8c55f555f9d975df497f5)]:
+  - @medusajs/js-sdk@2.0.2
+  - @medusajs/admin-shared@2.0.2
+  - @medusajs/icons@2.0.2
+
 ## 2.0.1
 
 ### Patch Changes
