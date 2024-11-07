@@ -26,7 +26,7 @@ export default async function paymentWebhookhandler({
   const input = event.data
 
   if (
-    (input.payload.rawData as unknown as SerializedBuffer).type === "Buffer"
+    (input.payload?.rawData as unknown as SerializedBuffer)?.type === "Buffer"
   ) {
     input.payload.rawData = Buffer.from(
       (input.payload.rawData as unknown as SerializedBuffer).data
