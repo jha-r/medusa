@@ -1882,6 +1882,76 @@ medusaIntegrationTestRunner({
           })
         })
 
+        it("should keep the same customer when updating the cart if no email is provided", async () => {
+          const cart = (
+            await api.post(
+              `/store/carts`,
+              {
+                currency_code: "usd",
+                email: "tony@stark-industries.com",
+                shipping_address: {
+                  address_1: "test address 1",
+                  address_2: "test address 2",
+                  city: "ny",
+                  country_code: "us",
+                  province: "ny",
+                  postal_code: "94016",
+                },
+                sales_channel_id: salesChannel.id,
+              },
+              storeHeaders
+            )
+          ).data.cart
+
+          const originalCartCustomer = cart.customer
+
+          // update the cart without providing an email
+          await api.post(
+            `/store/carts/${cart.id}`,
+            {
+              metadata: {
+                test: "test updated",
+              },
+            },
+            storeHeaders
+          )
+
+          let currentCart = await api.get(
+            `/store/carts/${cart.id}`,
+            storeHeaders
+          )
+          let currentCartCustomer = currentCart.data.cart.customer
+
+          expect(currentCartCustomer).toEqual(originalCartCustomer)
+          expect(currentCart.data.cart.email).toEqual(
+            "tony@stark-industries.com"
+          )
+          expect(currentCart.data.cart.metadata).toEqual({
+            test: "test updated",
+          })
+
+          // update the cart providing an email
+          await api.post(
+            `/store/carts/${cart.id}`,
+            {
+              email: "foo@bar.com",
+              metadata: {
+                test: "test updated 2, new customer",
+              },
+            },
+            storeHeaders
+          )
+
+          currentCart = await api.get(`/store/carts/${cart.id}`, storeHeaders)
+          currentCartCustomer = currentCart.data.cart.customer
+
+          expect(currentCartCustomer).not.toEqual(originalCartCustomer)
+          expect(currentCart.data.cart.email).toEqual("foo@bar.com")
+          expect(currentCart.data.cart.metadata).toEqual({
+            test: "test updated 2, new customer",
+          })
+        })
+
         it("should return order when cart is already completed", async () => {
           const cart = (
             await api.post(

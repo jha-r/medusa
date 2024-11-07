@@ -34,18 +34,30 @@ export const updateCartWorkflow = createWorkflow(
     const cartToUpdate = useRemoteQueryStep({
       entry_point: "cart",
       variables: { id: input.id },
-      fields: ["id", "shipping_address.*", "region.*", "region.countries.*"],
+      fields: [
+        "id",
+        "email",
+        "customer_id",
+        "shipping_address.*",
+        "region.*",
+        "region.countries.*",
+      ],
       list: false,
       throw_if_key_not_found: true,
     }).config({ name: "get-cart" })
+
+    const customerDataInput = transform({ input, cartToUpdate }, (data) => {
+      return {
+        email: data.input.email ?? data.cartToUpdate.email,
+      }
+    })
 
     const [salesChannel, customerData] = parallelize(
       findSalesChannelStep({
         salesChannelId: input.sales_channel_id,
       }),
       findOrCreateCustomerStep({
-        customerId: input.customer_id,
-        email: input.email,
+        email: customerDataInput.email,
       })
     )
 
@@ -116,14 +128,8 @@ export const updateCartWorkflow = createWorkflow(
           }
         }
 
-        if (
-          isDefined(updateCartData.customer_id) ||
-          isDefined(updateCartData.email)
-        ) {
-          data_.customer_id = data.customerData.customer?.id || null
-          data_.email =
-            data.input?.email ?? (data.customerData.customer?.email || null)
-        }
+        data_.customer_id = data.customerData.customer?.id || null
+        data_.email = data.customerData.customer?.email || null
 
         if (isDefined(updateCartData.sales_channel_id)) {
           data_.sales_channel_id = data.salesChannel?.id || null
