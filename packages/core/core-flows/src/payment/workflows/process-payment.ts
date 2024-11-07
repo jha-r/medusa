@@ -16,12 +16,16 @@ export const processPaymentWorkflow = createWorkflow(
       entity: "payment",
       fields: ["id"],
       filters: { payment_session_id: input.data?.session_id },
+    }).config({
+      name: "payment-query",
     })
 
     const paymentSessionResult = useQueryStep({
       entity: "payment_session",
       fields: ["payment_collection_id"],
       filters: { id: input.data?.session_id },
+    }).config({
+      name: "payment-session-query",
     })
 
     const cartPaymentCollection = useQueryStep({
@@ -31,6 +35,8 @@ export const processPaymentWorkflow = createWorkflow(
         payment_collection_id:
           paymentSessionResult.data[0].payment_collection_id,
       },
+    }).config({
+      name: "cart-payment-query",
     })
 
     when({ cartPaymentCollection }, ({ cartPaymentCollection }) => {
