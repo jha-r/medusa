@@ -56,6 +56,7 @@ export const generateResetPasswordTokenWorkflow = createWorkflow(
       }
     )
 
+
     emitEventStep({
       eventName: AuthWorkflowEvents.PASSWORD_RESET,
       data: { entity_id: input.entityId, actorType: input.actorType, token },

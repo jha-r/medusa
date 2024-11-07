@@ -18,8 +18,7 @@ const handlerP =
   }
 
 function buildLocalCommands(cli, isLocalProject) {
-  const defaultHost = `localhost`
-  const defaultPort = `9000`
+  const defaultPort = "9000"
   const directory = path.resolve(`.`)
 
   const projectInfo = { directory }
@@ -290,10 +289,10 @@ function buildLocalCommands(cli, isLocalProject) {
           .option(`H`, {
             alias: `host`,
             type: `string`,
-            default: process.env.HOST || defaultHost,
+            default: process.env.HOST,
             describe: process.env.HOST
-              ? `Set host. Defaults to ${process.env.HOST} (set by env.HOST) (otherwise defaults ${defaultHost})`
-              : `Set host. Defaults to ${defaultHost}`,
+              ? `Set host. Defaults to ${process.env.HOST} (set by env.HOST)`
+              : "",
           })
           .option(`p`, {
             alias: `port`,
@@ -328,10 +327,10 @@ function buildLocalCommands(cli, isLocalProject) {
           .option(`H`, {
             alias: `host`,
             type: `string`,
-            default: process.env.HOST || defaultHost,
+            default: process.env.HOST,
             describe: process.env.HOST
-              ? `Set host. Defaults to ${process.env.HOST} (set by env.HOST) (otherwise defaults ${defaultHost})`
-              : `Set host. Defaults to ${defaultHost}`,
+              ? `Set host. Defaults to ${process.env.HOST} (set by env.HOST)`
+              : ``,
           })
           .option(`p`, {
             alias: `port`,

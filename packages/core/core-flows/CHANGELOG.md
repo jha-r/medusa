@@ -1,5 +1,11 @@
 # @medusajs/core-flows
 
+## 2.0.2
+
+### Patch Changes
+
+- [#9929](https://github.com/medusajs/medusa/pull/9929) [`c1c85ef952441eacfe8b6c2ffa9304ac4433053f`](https://github.com/medusajs/medusa/commit/c1c85ef952441eacfe8b6c2ffa9304ac4433053f) Thanks [@olivermrbl](https://github.com/olivermrbl)! - fix(core-flows,medusa): Include region_id in shipping option retrieval
+
 ## 2.0.1
 
 ## 2.0.0
