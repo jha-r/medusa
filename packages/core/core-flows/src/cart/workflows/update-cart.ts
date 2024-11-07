@@ -48,15 +48,17 @@ export const updateCartWorkflow = createWorkflow(
 
     const customerDataInput = transform({ input, cartToUpdate }, (data) => {
       return {
+        customer_id: data.cartToUpdate.customer_id,
         email: data.input.email ?? data.cartToUpdate.email,
       }
     })
 
-    const [salesChannel, customerData] = parallelize(
+    const [salesChannel] = parallelize(
       findSalesChannelStep({
         salesChannelId: input.sales_channel_id,
       }),
       findOrCreateCustomerStep({
+        customerId: customerDataInput.customer_id,
         email: customerDataInput.email,
       })
     )
@@ -78,7 +80,13 @@ export const updateCartWorkflow = createWorkflow(
     })
 
     const cartInput = transform(
-      { input, region, customerData, salesChannel, cartToUpdate },
+      {
+        input,
+        region,
+        customerDataInput,
+        salesChannel,
+        cartToUpdate,
+      },
       (data) => {
         const {
           promo_codes,
@@ -128,8 +136,9 @@ export const updateCartWorkflow = createWorkflow(
           }
         }
 
-        data_.customer_id = data.customerData.customer?.id || null
-        data_.email = data.customerData.customer?.email || null
+        if (isDefined(updateCartData.email)) {
+          data_.email = data.customerDataInput?.email
+        }
 
         if (isDefined(updateCartData.sales_channel_id)) {
           data_.sales_channel_id = data.salesChannel?.id || null
@@ -139,6 +148,7 @@ export const updateCartWorkflow = createWorkflow(
       }
     )
 
+    /*
     when({ cartInput }, ({ cartInput }) => {
       return isDefined(cartInput.customer_id) || isDefined(cartInput.email)
     }).then(() => {
@@ -147,6 +157,7 @@ export const updateCartWorkflow = createWorkflow(
         data: { id: input.id },
       }).config({ name: "emit-customer-updated" })
     })
+    */
 
     when({ input, cartToUpdate }, ({ input, cartToUpdate }) => {
       return (

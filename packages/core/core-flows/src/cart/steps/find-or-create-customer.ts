@@ -15,12 +15,14 @@ export interface FindOrCreateCustomerOutputStepOutput {
 interface StepCompensateInput {
   customer?: CustomerDTO
   customerWasCreated: boolean
+  customerWasUpdated: boolean
 }
 
 export const findOrCreateCustomerStepId = "find-or-create-customer"
 /**
  * This step either finds a customer matching the specified ID, or finds / create a customer
  * matching the specified email. If both ID and email are provided, ID takes precedence.
+ * If the customer is a guest, the email is updated to the provided email.
  */
 export const findOrCreateCustomerStep = createStep(
   findOrCreateCustomerStepId,
@@ -34,7 +36,10 @@ export const findOrCreateCustomerStep = createStep(
           customer: undefined,
           email: undefined,
         },
-        { customerWasCreated: false }
+        {
+          customerWasCreated: false,
+          customerWasUpdated: false,
+        }
       )
     }
 
@@ -44,29 +49,47 @@ export const findOrCreateCustomerStep = createStep(
       customer: null,
       email: null,
     }
+    let originalCustomer: CustomerDTO | null = null
     let customerWasCreated = false
+    let customerWasUpdated = false
 
     if (data.customerId) {
-      const customer = await service.retrieveCustomer(data.customerId)
-      customerData.customer = customer
-      customerData.email = customer.email
-
-      return new StepResponse(customerData, {
-        customerWasCreated,
-      })
+      originalCustomer = await service.retrieveCustomer(data.customerId)
+      customerData.customer = originalCustomer
+      customerData.email = originalCustomer.email
     }
 
     if (data.email) {
-      const validatedEmail = validateEmail(data.email)
+      const validatedEmail = (!originalCustomer &&
+        validateEmail(data.email)) as string
 
-      let [customer] = await service.listCustomers({
-        email: validatedEmail,
-        has_account: false,
-      })
+      let [customer] = originalCustomer
+        ? [originalCustomer]
+        : await service.listCustomers({
+            email: validatedEmail,
+          })
+
+      // if NOT a guest customer, return it
+      if (customer?.has_account) {
+        customerData.customer = customer
+        customerData.email = customer.email
+
+        return new StepResponse(customerData, {
+          customerWasCreated,
+          customerWasUpdated,
+        })
+      }
 
       if (!customer) {
         customer = await service.createCustomers({ email: validatedEmail })
         customerWasCreated = true
+      }
+
+      originalCustomer = customer
+
+      if (customer.email !== data.email) {
+        await service.updateCustomers(customer.id, { email: data.email })
+        customerWasUpdated = true
       }
 
       customerData.customer = customer
@@ -74,19 +97,27 @@ export const findOrCreateCustomerStep = createStep(
     }
 
     return new StepResponse(customerData, {
-      customer: customerData.customer,
+      customer: originalCustomer,
       customerWasCreated,
+      customerWasUpdated,
     })
   },
   async (compData, { container }) => {
-    const { customer, customerWasCreated } = compData as StepCompensateInput
+    const { customer, customerWasCreated, customerWasUpdated } =
+      compData as StepCompensateInput
 
-    if (!customerWasCreated || !customer?.id) {
+    if ((!customerWasCreated && !customerWasUpdated) || !customer?.id) {
       return
     }
 
     const service = container.resolve<ICustomerModuleService>(Modules.CUSTOMER)
 
-    await service.deleteCustomers(customer.id)
+    if (customerWasCreated) {
+      await service.deleteCustomers(customer.id)
+    }
+
+    if (customerWasUpdated) {
+      await service.updateCustomers(customer.id, { email: customer.email })
+    }
   }
 )
