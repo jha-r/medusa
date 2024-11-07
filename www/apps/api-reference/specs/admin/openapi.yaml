@@ -693,6 +693,8 @@ paths:
     $ref: paths/admin_customers_{id}_addresses.yaml
   /admin/customers/{id}/addresses/{address_id}:
     $ref: paths/admin_customers_{id}_addresses_{address_id}.yaml
+  /admin/customers/{id}/customer-groups:
+    $ref: paths/admin_customers_{id}_customer-groups.yaml
   /admin/draft-orders:
     $ref: paths/admin_draft-orders.yaml
   /admin/draft-orders/{id}:
