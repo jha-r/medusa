@@ -1,6 +1,6 @@
+import { medusaIntegrationTestRunner } from "@medusajs/test-utils"
 import { IOrderModuleService } from "@medusajs/types"
 import { Modules } from "@medusajs/utils"
-import { medusaIntegrationTestRunner } from "@medusajs/test-utils"
 import {
   adminHeaders,
   createAdminUser,
@@ -157,6 +157,7 @@ medusaIntegrationTestRunner({
               product_description: null,
               product_subtitle: null,
               product_type: null,
+              product_type_id: null,
               product_collection: null,
               product_handle: null,
               variant_sku: null,

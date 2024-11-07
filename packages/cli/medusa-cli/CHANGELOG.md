@@ -1,5 +1,15 @@
 # Change Log
 
+## 2.0.2
+
+### Patch Changes
+
+- [#9944](https://github.com/medusajs/medusa/pull/9944) [`c9a2b42252459fa4599fcdbc8792a381c6b5b5e3`](https://github.com/medusajs/medusa/commit/c9a2b42252459fa4599fcdbc8792a381c6b5b5e3) Thanks [@thetutlage](https://github.com/thetutlage)! - fix: log cause property from the error
+
+- Updated dependencies [[`de228d209f30dfbb5b500d5cb49932b63e06f52a`](https://github.com/medusajs/medusa/commit/de228d209f30dfbb5b500d5cb49932b63e06f52a), [`16b4cc433e996d1a54e4ff043daaa148981ba63d`](https://github.com/medusajs/medusa/commit/16b4cc433e996d1a54e4ff043daaa148981ba63d), [`879ce33090c7e99ae8b466c31c5dc0c67cdbc08f`](https://github.com/medusajs/medusa/commit/879ce33090c7e99ae8b466c31c5dc0c67cdbc08f), [`b3cbc160eb94025402b5a0ef21653c207bbe8ccd`](https://github.com/medusajs/medusa/commit/b3cbc160eb94025402b5a0ef21653c207bbe8ccd)]:
+  - @medusajs/telemetry@2.0.2
+  - @medusajs/utils@2.0.2
+
 ## 2.0.1
 
 ### Patch Changes

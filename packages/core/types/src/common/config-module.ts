@@ -50,7 +50,7 @@ export interface AdminOptions {
    */
   path: `/${string}`
   /**
-   * The URL of your Medusa application. This is useful to set when you deploy the Medusa application.
+   * The URL of your Medusa application. Defaults to the browser origin. This is useful to set when running the admin on a separate domain.
    *
    * @example
    * ```js title="medusa-config.js"
