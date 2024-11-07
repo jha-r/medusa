@@ -1,7 +1,4 @@
-import {
-  onPaymentProcessedWorkflow,
-  processPaymentWorkflow,
-} from "@medusajs/core-flows"
+import { processPaymentWorkflow } from "@medusajs/core-flows"
 import {
   IPaymentModuleService,
   ProviderWebhookPayload,
@@ -47,11 +44,6 @@ export default async function paymentWebhookhandler({
   }
 
   await processPaymentWorkflow(container).run({
-    input: processedEvent,
-  })
-
-  // We process the intended side effects of payment processing separately.
-  await onPaymentProcessedWorkflow(container).run({
     input: processedEvent,
   })
 }
