@@ -82,7 +82,7 @@ export function OrderCreateFulfillmentItem({
               {item.variant_sku && <span>({item.variant_sku})</span>}
             </div>
             <Text as="div" className="text-ui-fg-subtle txt-small">
-              {item.variant_title ?? ""}
+              {item.variant_title}
             </Text>
           </div>
         </div>
