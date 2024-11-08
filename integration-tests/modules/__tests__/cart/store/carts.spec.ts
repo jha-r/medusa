@@ -1882,7 +1882,7 @@ medusaIntegrationTestRunner({
           })
         })
 
-        it("should keep the same customer when updating the guest cart and update Cart's and Customer's email if provided", async () => {
+        it("should create another guest customer and update the cart email when an different email is provided", async () => {
           const cart = (
             await api.post(
               `/store/carts`,
@@ -1923,7 +1923,10 @@ medusaIntegrationTestRunner({
           let currentCartCustomer = currentCart.data.cart.customer
 
           let customerData = (
-            await api.get(`/admin/customers/${cart.customer_id}`, adminHeaders)
+            await api.get(
+              `/admin/customers/${currentCart.data.cart.customer_id}`,
+              adminHeaders
+            )
           ).data.customer
 
           expect(currentCartCustomer).toEqual(originalCartCustomer)
@@ -1950,13 +1953,21 @@ medusaIntegrationTestRunner({
           currentCart = await api.get(`/store/carts/${cart.id}`, storeHeaders)
 
           customerData = (
-            await api.get(`/admin/customers/${cart.customer_id}`, adminHeaders)
+            await api.get(
+              `/admin/customers/${currentCart.data.cart.customer_id}`,
+              adminHeaders
+            )
           ).data.customer
+
+          console.log(
+            JSON.stringify(customerData, null, 2),
+            JSON.stringify(currentCart.data.cart, null, 2)
+          )
 
           currentCartCustomer = currentCart.data.cart.customer
 
           expect(currentCartCustomer).not.toEqual(originalCartCustomer)
-          expect(currentCart.data.cart.customer_id).toEqual(
+          expect(currentCart.data.cart.customer_id).not.toEqual(
             originalCartCustomer.id
           )
           expect(customerData.email).toEqual(currentCart.data.cart.email)
@@ -2014,7 +2025,10 @@ medusaIntegrationTestRunner({
           let currentCartCustomer = currentCart.data.cart.customer
 
           let customerData = (
-            await api.get(`/admin/customers/${cart.customer_id}`, adminHeaders)
+            await api.get(
+              `/admin/customers/${currentCart.data.cart.customer_id}`,
+              adminHeaders
+            )
           ).data.customer
 
           expect(currentCartCustomer).toEqual(originalCartCustomer)
@@ -2039,7 +2053,10 @@ medusaIntegrationTestRunner({
           currentCart = await api.get(`/store/carts/${cart.id}`, storeHeaders)
 
           customerData = (
-            await api.get(`/admin/customers/${cart.customer_id}`, adminHeaders)
+            await api.get(
+              `/admin/customers/${currentCart.data.cart.customer_id}`,
+              adminHeaders
+            )
           ).data.customer
 
           currentCartCustomer = currentCart.data.cart.customer

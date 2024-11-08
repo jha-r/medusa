@@ -53,7 +53,7 @@ export const updateCartWorkflow = createWorkflow(
       }
     })
 
-    const [salesChannel] = parallelize(
+    const [salesChannel, customer] = parallelize(
       findSalesChannelStep({
         salesChannelId: input.sales_channel_id,
       }),
@@ -83,7 +83,7 @@ export const updateCartWorkflow = createWorkflow(
       {
         input,
         region,
-        customerDataInput,
+        customer,
         salesChannel,
         cartToUpdate,
       },
@@ -136,8 +136,16 @@ export const updateCartWorkflow = createWorkflow(
           }
         }
 
-        if (isDefined(updateCartData.email)) {
-          data_.email = data.customerDataInput?.email
+        if (isDefined(updateCartData.email) && data.customer?.customer) {
+          const currentCustomer = data.customer.customer!
+          data_.customer_id = currentCustomer.id
+
+          // registered customers can update the cart email
+          if (currentCustomer.has_account) {
+            data_.email = updateCartData.email
+          } else {
+            data_.email = data.customer.email
+          }
         }
 
         if (isDefined(updateCartData.sales_channel_id)) {

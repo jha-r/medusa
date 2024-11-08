@@ -1,6 +1,6 @@
 import { CustomerDTO, ICustomerModuleService } from "@medusajs/framework/types"
-import { Modules, validateEmail } from "@medusajs/framework/utils"
-import { StepResponse, createStep } from "@medusajs/framework/workflows-sdk"
+import { isDefined, Modules, validateEmail } from "@medusajs/framework/utils"
+import { createStep, StepResponse } from "@medusajs/framework/workflows-sdk"
 
 export interface FindOrCreateCustomerStepInput {
   customerId?: string | null
@@ -15,7 +15,6 @@ export interface FindOrCreateCustomerOutputStepOutput {
 interface StepCompensateInput {
   customer?: CustomerDTO
   customerWasCreated: boolean
-  customerWasUpdated: boolean
 }
 
 export const findOrCreateCustomerStepId = "find-or-create-customer"
@@ -27,10 +26,7 @@ export const findOrCreateCustomerStepId = "find-or-create-customer"
 export const findOrCreateCustomerStep = createStep(
   findOrCreateCustomerStepId,
   async (data: FindOrCreateCustomerStepInput, { container }) => {
-    if (
-      typeof data.customerId === undefined &&
-      typeof data.email === undefined
-    ) {
+    if (!isDefined(data.customerId) && !isDefined(data.email)) {
       return new StepResponse(
         {
           customer: undefined,
@@ -38,7 +34,6 @@ export const findOrCreateCustomerStep = createStep(
         },
         {
           customerWasCreated: false,
-          customerWasUpdated: false,
         }
       )
     }
@@ -51,7 +46,6 @@ export const findOrCreateCustomerStep = createStep(
     }
     let originalCustomer: CustomerDTO | null = null
     let customerWasCreated = false
-    let customerWasUpdated = false
 
     if (data.customerId) {
       originalCustomer = await service.retrieveCustomer(data.customerId)
@@ -60,8 +54,7 @@ export const findOrCreateCustomerStep = createStep(
     }
 
     if (data.email) {
-      const validatedEmail = (!originalCustomer &&
-        validateEmail(data.email)) as string
+      const validatedEmail = (data.email && validateEmail(data.email)) as string
 
       let [customer] = originalCustomer
         ? [originalCustomer]
@@ -76,21 +69,18 @@ export const findOrCreateCustomerStep = createStep(
 
         return new StepResponse(customerData, {
           customerWasCreated,
-          customerWasUpdated,
         })
       }
 
-      if (!customer) {
+      if (
+        !customer ||
+        (isDefined(data.email) && customer.email !== validatedEmail)
+      ) {
         customer = await service.createCustomers({ email: validatedEmail })
         customerWasCreated = true
       }
 
       originalCustomer = customer
-
-      if (customer.email !== data.email) {
-        await service.updateCustomers(customer.id, { email: data.email })
-        customerWasUpdated = true
-      }
 
       customerData.customer = customer
       customerData.email = customer.email
@@ -99,25 +89,17 @@ export const findOrCreateCustomerStep = createStep(
     return new StepResponse(customerData, {
       customer: originalCustomer,
       customerWasCreated,
-      customerWasUpdated,
     })
   },
   async (compData, { container }) => {
-    const { customer, customerWasCreated, customerWasUpdated } =
-      compData as StepCompensateInput
+    const { customer, customerWasCreated } = compData as StepCompensateInput
 
-    if ((!customerWasCreated && !customerWasUpdated) || !customer?.id) {
+    if (!customerWasCreated || !customer?.id) {
       return
     }
 
     const service = container.resolve<ICustomerModuleService>(Modules.CUSTOMER)
 
-    if (customerWasCreated) {
-      await service.deleteCustomers(customer.id)
-    }
-
-    if (customerWasUpdated) {
-      await service.updateCustomers(customer.id, { email: customer.email })
-    }
+    await service.deleteCustomers(customer.id)
   }
 )
