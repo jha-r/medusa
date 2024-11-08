@@ -48,8 +48,8 @@ export function OrderAllocateItemsForm({ order }: OrderAllocateItemsFormProps) {
   const filteredItems = useMemo(() => {
     return itemsToAllocate.filter(
       (i) =>
-        i.variant?.title.toLowerCase().includes(filterTerm) ||
-        i.variant?.product.title.toLowerCase().includes(filterTerm)
+        i.variant_title.toLowerCase().includes(filterTerm) ||
+        i.product_title.toLowerCase().includes(filterTerm)
     )
   }, [itemsToAllocate, filterTerm])
 

@@ -93,12 +93,12 @@ export function OrderAllocateItemsItem({
             <div className="flex flex-col">
               <div className="flex flex-row">
                 <Text className="txt-small flex" as="span" weight="plus">
-                  {item.variant?.product.title || "N/A"}
+                  {item.product_title || "N/A"}
                 </Text>
-                {item.variant?.sku && (
+                {item.variant_sku && (
                   <span className="text-ui-fg-subtle">
                     {" "}
-                    ({item.variant.sku})
+                    ({item.variant_sku})
                   </span>
                 )}
                 {hasInventoryKit && (
