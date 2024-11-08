@@ -40,6 +40,7 @@ export const CartPromotion: ModuleJoinerConfig = {
   extends: [
     {
       serviceName: Modules.CART,
+      entity: "Cart",
       fieldAlias: {
         promotions: {
           path: "cart_link.promotions",

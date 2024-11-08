@@ -1,6 +1,7 @@
+import { medusaIntegrationTestRunner } from "@medusajs/test-utils"
 import { IStoreModuleService } from "@medusajs/types"
 import { ApiKeyType, Modules, ProductStatus } from "@medusajs/utils"
-import { medusaIntegrationTestRunner } from "@medusajs/test-utils"
+import qs from "qs"
 import {
   adminHeaders,
   createAdminUser,
@@ -8,7 +9,6 @@ import {
   generateStoreHeaders,
 } from "../../../../helpers/create-admin-user"
 import { getProductFixture } from "../../../../helpers/fixtures"
-import qs from "qs"
 
 jest.setTimeout(30000)
 
@@ -587,6 +587,19 @@ medusaIntegrationTestRunner({
             id: product2.id,
           }),
         ])
+      })
+
+      it("should list all products excluding variants", async () => {
+        let response = await api.get(
+          `/admin/products?fields=-variants`,
+          adminHeaders
+        )
+
+        expect(response.data.count).toEqual(4)
+
+        for (let product of response.data.products) {
+          expect(product.variants).toBeUndefined()
+        }
       })
 
       it("should list all products for a sales channel", async () => {

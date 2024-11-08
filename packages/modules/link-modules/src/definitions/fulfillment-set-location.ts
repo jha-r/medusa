@@ -57,6 +57,7 @@ export const LocationFulfillmentSet: ModuleJoinerConfig = {
     },
     {
       serviceName: Modules.FULFILLMENT,
+      entity: "FulfillmentSet",
       fieldAlias: {
         location: "locations_link.location",
       },
