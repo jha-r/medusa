@@ -149,12 +149,16 @@
  *     description: Filter by region IDs to retrieve their associated orders.
  *     required: false
  *     schema:
- *       type: array
- *       description: Filter by region IDs to retrieve their associated orders.
- *       items:
- *         type: string
- *         title: region_id
- *         description: A region ID.
+ *       oneOf:
+ *         - type: string
+ *           title: region_id
+ *           description: The order's region id.
+ *         - type: array
+ *           description: The order's region id.
+ *           items:
+ *             type: string
+ *             title: region_id
+ *             description: The region id's details.
  *   - name: q
  *     in: query
  *     description: Search term to filter the order's searchable properties.
@@ -625,6 +629,20 @@
  *           type: boolean
  *           title: $exists
  *           description: Filter by whether a value for this parameter exists (not `null`).
+ *   - name: customer_id
+ *     in: query
+ *     required: false
+ *     schema:
+ *       oneOf:
+ *         - type: string
+ *           title: customer_id
+ *           description: The order's customer id.
+ *         - type: array
+ *           description: The order's customer id.
+ *           items:
+ *             type: string
+ *             title: customer_id
+ *             description: The customer id's details.
  * security:
  *   - api_token: []
  *   - cookie_auth: []
