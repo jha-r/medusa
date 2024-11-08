@@ -40,6 +40,7 @@ export const CartPaymentCollection: ModuleJoinerConfig = {
   extends: [
     {
       serviceName: Modules.CART,
+      entity: "Cart",
       fieldAlias: {
         payment_collection: "payment_collection_link.payment_collection",
       },
@@ -52,6 +53,7 @@ export const CartPaymentCollection: ModuleJoinerConfig = {
     },
     {
       serviceName: Modules.PAYMENT,
+      entity: "PaymentCollection",
       fieldAlias: {
         cart: "cart_link.cart",
       },
