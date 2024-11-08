@@ -132,10 +132,9 @@ export async function dbCreate({
     )
     logger.error(connectionState.error)
     return false
-  } else {
-    logger.info(`Connection established with the database "${dbName}"`)
   }
 
+  logger.info(`Connection established with the database "${dbName}"`)
   if (await dbExists(client, dbName)) {
     logger.info(`Database "${dbName}" already exists`)
 
