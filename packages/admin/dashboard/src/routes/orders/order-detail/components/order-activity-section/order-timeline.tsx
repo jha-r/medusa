@@ -369,6 +369,8 @@ const useActivityItems = (order: AdminOrder): Activity[] => {
         timestamp:
           edit.status === "requested"
             ? edit.requested_at
+            : edit.status === "confirmed"
+            ? edit.confirmed_at
             : edit.status === "declined"
             ? edit.declined_at
             : edit.status === "canceled"
