@@ -93,7 +93,7 @@ export function OrderAllocateItemsItem({
             <div className="flex flex-col">
               <div className="flex flex-row">
                 <Text className="txt-small flex" as="span" weight="plus">
-                  {item.product_title || "N/A"}
+                  {item.product_title}
                 </Text>
                 {item.variant_sku && (
                   <span className="text-ui-fg-subtle">

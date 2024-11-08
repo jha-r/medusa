@@ -56,7 +56,7 @@ function ReturnItem({
               {item.variant_sku && <span>({item.variant_sku})</span>}
             </div>
             <Text as="div" className="text-ui-fg-subtle txt-small">
-              {item.product_title || "N/A"}
+              {item.product_title}
             </Text>
           </div>
         </div>
