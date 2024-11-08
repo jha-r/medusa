@@ -1959,11 +1959,6 @@ medusaIntegrationTestRunner({
             )
           ).data.customer
 
-          console.log(
-            JSON.stringify(customerData, null, 2),
-            JSON.stringify(currentCart.data.cart, null, 2)
-          )
-
           currentCartCustomer = currentCart.data.cart.customer
 
           expect(currentCartCustomer).not.toEqual(originalCartCustomer)
