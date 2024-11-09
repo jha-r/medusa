@@ -43,6 +43,7 @@ export const OrderClaimPaymentCollection: ModuleJoinerConfig = {
   extends: [
     {
       serviceName: Modules.ORDER,
+      entity: "OrderClaim",
       fieldAlias: {
         claim_payment_collections: {
           path: "claim_payment_collections_link.payment_collection",
@@ -58,6 +59,7 @@ export const OrderClaimPaymentCollection: ModuleJoinerConfig = {
     },
     {
       serviceName: Modules.PAYMENT,
+      entity: "PaymentCollection",
       fieldAlias: {
         claim: "order_claim_link.order",
       },

@@ -40,6 +40,7 @@ export const OrderFulfillment: ModuleJoinerConfig = {
   extends: [
     {
       serviceName: Modules.ORDER,
+      entity: "Order",
       fieldAlias: {
         fulfillments: {
           path: "fulfillment_link.fulfillments",
@@ -56,6 +57,7 @@ export const OrderFulfillment: ModuleJoinerConfig = {
     },
     {
       serviceName: Modules.FULFILLMENT,
+      entity: "Fulfillment",
       fieldAlias: {
         order: "order_link.order",
       },
