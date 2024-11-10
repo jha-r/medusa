@@ -7,6 +7,7 @@ export const InventoryLevelStockLocation: ModuleJoinerConfig = {
   extends: [
     {
       serviceName: Modules.INVENTORY,
+      entity: "InventoryLevel",
       relationship: {
         serviceName: Modules.STOCK_LOCATION,
         entity: "StockLocation",

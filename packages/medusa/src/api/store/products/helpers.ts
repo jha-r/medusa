@@ -1,15 +1,15 @@
 import {
+  MedusaRequest,
+  refetchEntities,
+  refetchEntity,
+} from "@medusajs/framework/http"
+import {
   HttpTypes,
   ItemTaxLineDTO,
   MedusaContainer,
   TaxableItemDTO,
   TaxCalculationContext,
 } from "@medusajs/framework/types"
-import {
-  MedusaRequest,
-  refetchEntities,
-  refetchEntity,
-} from "@medusajs/framework/http"
 import { calculateAmountsWithTax, Modules } from "@medusajs/framework/utils"
 import { TaxModuleService } from "@medusajs/tax/dist/services"
 
@@ -114,12 +114,6 @@ const asTaxItem = (product: HttpTypes.StoreProduct): TaxableItemDTO[] => {
       return {
         id: variant.id,
         product_id: product.id,
-        product_name: product.title,
-        product_categories: product.categories?.map((c) => c.name),
-        // TODO: It is strange that we only accept a single category, revisit the tax module implementation
-        product_category_id: product.categories?.[0]?.id,
-        product_sku: variant.sku,
-        product_type: product.type,
         product_type_id: product.type_id,
         quantity: 1,
         unit_price: variant.calculated_price.calculated_amount,

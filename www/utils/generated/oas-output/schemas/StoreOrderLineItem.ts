@@ -28,6 +28,7 @@
  *   - product_title
  *   - product_description
  *   - product_subtitle
+ *   - product_type_id
  *   - product_type
  *   - product_collection
  *   - product_handle
@@ -4011,6 +4012,10 @@
  *     type: number
  *     title: refundable_total_per_unit
  *     description: The total refundable amount of the item's total for a single quantity.
+ *   product_type_id:
+ *     type: string
+ *     title: product_type_id
+ *     description: The item's product type id.
  * 
 */
 

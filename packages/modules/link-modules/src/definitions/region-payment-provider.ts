@@ -38,6 +38,7 @@ export const RegionPaymentProvider: ModuleJoinerConfig = {
   extends: [
     {
       serviceName: Modules.REGION,
+      entity: "Region",
       fieldAlias: {
         payment_providers: {
           path: "payment_provider_link.payment_provider",
@@ -54,6 +55,7 @@ export const RegionPaymentProvider: ModuleJoinerConfig = {
     },
     {
       serviceName: Modules.PAYMENT,
+      entity: "PaymentProvider",
       fieldAlias: {
         regions: {
           path: "region_link.region",

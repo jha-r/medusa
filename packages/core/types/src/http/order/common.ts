@@ -389,7 +389,11 @@ export interface BaseOrderLineItem {
    */
   product_subtitle: string | null
   /**
-   * The ID of the associated product's type.
+   * The ID of the associated product type.
+   */
+  product_type_id: string | null
+  /**
+   * The associated product type.
    */
   product_type: string | null
   /**

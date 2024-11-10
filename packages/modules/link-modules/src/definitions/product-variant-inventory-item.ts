@@ -49,6 +49,7 @@ export const ProductVariantInventoryItem: ModuleJoinerConfig = {
   extends: [
     {
       serviceName: Modules.PRODUCT,
+      entity: "ProductVariant",
       fieldAlias: {
         inventory: "inventory_items.inventory",
       },
@@ -62,6 +63,7 @@ export const ProductVariantInventoryItem: ModuleJoinerConfig = {
     },
     {
       serviceName: Modules.INVENTORY,
+      entity: "InventoryItem",
       fieldAlias: {
         variants: {
           path: "variant_link.variant",

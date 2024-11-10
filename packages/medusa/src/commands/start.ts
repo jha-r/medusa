@@ -63,7 +63,7 @@ function displayAdminUrl({
   port,
   container,
 }: {
-  host: string
+  host?: string
   port: string | number
   container: MedusaContainer
 }) {
@@ -84,7 +84,7 @@ function displayAdminUrl({
     return
   }
 
-  logger.info(`Admin URL → http://${host}:${port}${adminPath}`)
+  logger.info(`Admin URL → http://${host || "localhost"}:${port}${adminPath}`)
 }
 
 async function start(args: {
@@ -94,7 +94,7 @@ async function start(args: {
   types?: boolean
   cluster?: number
 }) {
-  const { port = 9000, host = "localhost", directory, types } = args
+  const { port = 9000, host, directory, types } = args
 
   async function internalStart(generateTypes: boolean) {
     track("CLI_START")
@@ -142,7 +142,7 @@ async function start(args: {
         http_.listen(port, host).on("listening", () => {
           logger.success(
             serverActivity,
-            `Server is ready on http://${host}:${port}`
+            `Server is ready on http://${host || "localhost"}:${port}`
           )
           displayAdminUrl({ container, host, port })
           track("CLI_START_COMPLETED")
