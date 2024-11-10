@@ -1,6 +1,6 @@
 import { generateResetPasswordTokenWorkflow } from "@medusajs/core-flows"
-import jwt from "jsonwebtoken"
 import { medusaIntegrationTestRunner } from "@medusajs/test-utils"
+import jwt from "jsonwebtoken"
 import {
   adminHeaders,
   createAdminUser,
@@ -258,6 +258,28 @@ medusaIntegrationTestRunner({
           .post(`/auth/user/emailpass/update?token=${result}`, {
             email: "test@medusa-commerce.com",
             password: "new_password",
+          })
+          .catch((e) => e)
+
+        expect(response.response.status).toEqual(401)
+        expect(response.response.data.message).toEqual("Invalid token")
+      })
+
+      it("should fail if no token is passed", async () => {
+        jest.useFakeTimers()
+
+        // Register user
+        await api.post("/auth/user/emailpass/register", {
+          email: "test@medusa-commerce.com",
+          password: "secret_password",
+        })
+
+        // Advance time by 15 minutes
+        jest.advanceTimersByTime(15 * 60 * 1000)
+
+        const response = await api
+          .post(`/auth/user/emailpass/update`, {
+            email: "test@medusa-commerce.com",
           })
           .catch((e) => e)
 

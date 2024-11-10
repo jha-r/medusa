@@ -83,10 +83,17 @@ export default async ({
   }
 
   if (!hasDefaultProvider) {
+    logger.info(
+      `Locking module: Using "${container.resolve(
+        LockingDefaultProvider
+      )}" as default.`
+    )
+    /*
     logger.warn(
       `No default locking provider explicit defined. Using "${container.resolve(
         LockingDefaultProvider
       )}" as default.`
     )
+    */
   }
 }

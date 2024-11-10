@@ -11424,6 +11424,85 @@ paths:
         '500':
           $ref: '#/components/responses/500_error'
       x-workflow: deleteCustomerAddressesWorkflow
+  /admin/customers/{id}/customer-groups:
+    post:
+      operationId: PostCustomersIdCustomerGroups
+      summary: Add Customer Group to Customer
+      description: Add a Customer Group to a customer
+      x-authenticated: true
+      parameters:
+        - name: id
+          in: path
+          description: The customer's ID.
+          required: true
+          schema:
+            type: string
+        - name: fields
+          in: query
+          description: |-
+            Comma-separated fields that should be included in the returned data.
+             * if a field is prefixed with `+` it will be added to the default fields, using `-` will remove it from the default fields.
+             * without prefix it will replace the entire default fields.
+          required: false
+          schema:
+            type: string
+            title: fields
+            description: Comma-separated fields that should be included in the returned data. If a field is prefixed with `+` it will be added to the default fields, using `-` will remove it from the default fields. Without prefix it will replace the entire default fields.
+            externalDocs:
+              url: '#select-fields-and-relations'
+      security:
+        - api_token: []
+        - cookie_auth: []
+        - jwt_token: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: SUMMARY
+              properties:
+                add:
+                  type: array
+                  description: The customer's add.
+                  items:
+                    type: string
+                    title: add
+                    description: The add's details.
+                remove:
+                  type: array
+                  description: The customer's remove.
+                  items:
+                    type: string
+                    title: remove
+                    description: The remove's details.
+      x-codeSamples:
+        - lang: Shell
+          label: cURL
+          source: |-
+            curl -X POST '{backend_url}/admin/customers/{id}/customer-groups' \
+            -H 'Authorization: Bearer {access_token}'
+      tags:
+        - Customers
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdminCustomerResponse'
+        '400':
+          $ref: '#/components/responses/400_error'
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '404':
+          $ref: '#/components/responses/not_found_error'
+        '409':
+          $ref: '#/components/responses/invalid_state_error'
+        '422':
+          $ref: '#/components/responses/invalid_request_error'
+        '500':
+          $ref: '#/components/responses/500_error'
+      x-workflow: linkCustomerGroupsToCustomerWorkflow
   /admin/draft-orders:
     get:
       operationId: GetDraftOrders
@@ -12393,12 +12472,16 @@ paths:
           description: Filter by region IDs to retrieve their associated draft orders.
           required: false
           schema:
-            type: array
-            description: Filter by region IDs to retrieve their associated draft orders.
-            items:
-              type: string
-              title: region_id
-              description: A region's ID.
+            oneOf:
+              - type: string
+                title: region_id
+                description: The draft order's region id.
+              - type: array
+                description: The draft order's region id.
+                items:
+                  type: string
+                  title: region_id
+                  description: The region id's details.
         - name: q
           in: query
           description: Search term to filter the order's searchable properties.
@@ -12869,6 +12952,20 @@ paths:
                 type: boolean
                 title: $exists
                 description: Filter by whether a value for this parameter exists (not `null`).
+        - name: customer_id
+          in: query
+          required: false
+          schema:
+            oneOf:
+              - type: string
+                title: customer_id
+                description: The draft order's customer id.
+              - type: array
+                description: The draft order's customer id.
+                items:
+                  type: string
+                  title: customer_id
+                  description: The customer id's details.
       security:
         - api_token: []
         - cookie_auth: []
@@ -16853,20 +16950,6 @@ paths:
             type: string
             title: order
             description: The field to sort the data by. By default, the sort order is ascending. To change the order to descending, prefix the field name with `-`.
-        - name: location_id
-          in: query
-          required: false
-          schema:
-            oneOf:
-              - type: string
-                title: location_id
-                description: Filter by an associated location's ID.
-              - type: array
-                description: Filter by associated location IDs.
-                items:
-                  type: string
-                  title: location_id
-                  description: An associated location ID.
         - name: $and
           in: query
           required: false
@@ -19031,12 +19114,16 @@ paths:
           description: Filter by region IDs to retrieve their associated orders.
           required: false
           schema:
-            type: array
-            description: Filter by region IDs to retrieve their associated orders.
-            items:
-              type: string
-              title: region_id
-              description: A region ID.
+            oneOf:
+              - type: string
+                title: region_id
+                description: The order's region id.
+              - type: array
+                description: The order's region id.
+                items:
+                  type: string
+                  title: region_id
+                  description: The region id's details.
         - name: q
           in: query
           description: Search term to filter the order's searchable properties.
@@ -19507,6 +19594,20 @@ paths:
                 type: boolean
                 title: $exists
                 description: Filter by whether a value for this parameter exists (not `null`).
+        - name: customer_id
+          in: query
+          required: false
+          schema:
+            oneOf:
+              - type: string
+                title: customer_id
+                description: The order's customer id.
+              - type: array
+                description: The order's customer id.
+                items:
+                  type: string
+                  title: customer_id
+                  description: The customer id's details.
       security:
         - api_token: []
         - cookie_auth: []
@@ -33451,12 +33552,16 @@ paths:
           description: Filter by region IDs to retrieve their associated returns.
           required: false
           schema:
-            type: array
-            description: Filter by region IDs to retrieve their associated returns.
-            items:
-              type: string
-              title: region_id
-              description: The region id's details.
+            oneOf:
+              - type: string
+                title: region_id
+                description: The return's region id.
+              - type: array
+                description: The return's region id.
+                items:
+                  type: string
+                  title: region_id
+                  description: The region id's details.
         - name: q
           in: query
           description: Search term to filter the return's searchable properties.
@@ -33927,6 +34032,20 @@ paths:
                 type: boolean
                 title: $exists
                 description: Filter by whether a value for this parameter exists (not `null`).
+        - name: customer_id
+          in: query
+          required: false
+          schema:
+            oneOf:
+              - type: string
+                title: customer_id
+                description: The return's customer id.
+              - type: array
+                description: The return's customer id.
+                items:
+                  type: string
+                  title: customer_id
+                  description: The customer id's details.
       security:
         - api_token: []
         - cookie_auth: []
@@ -48043,6 +48162,7 @@ components:
         - product_title
         - product_description
         - product_subtitle
+        - product_type_id
         - product_type
         - product_collection
         - product_handle
@@ -48229,6 +48349,10 @@ components:
           type: number
           title: refundable_total_per_unit
           description: The total refundable amount of the item's total for a single quantity.
+        product_type_id:
+          type: string
+          title: product_type_id
+          description: The item's product type id.
     AdminOrderPreview:
       type: object
       description: A preview of an order if a change, such as exchange, return, edit, or claim is applied on it.
@@ -55622,6 +55746,7 @@ components:
         - product_title
         - product_description
         - product_subtitle
+        - product_type_id
         - product_type
         - product_collection
         - product_handle
@@ -55822,6 +55947,10 @@ components:
           type: number
           title: refundable_total_per_unit
           description: The total refundable amount of the item's total for a single quantity.
+        product_type_id:
+          type: string
+          title: product_type_id
+          description: The item's product type id.
     BaseOrderLineItemAdjustment:
       type: object
       description: The adjustment's details.
@@ -56608,30 +56737,33 @@ components:
         - updated_at
         - deleted_at
       properties:
-        id:
-          type: string
-          title: id
-          description: The product's ID.
+        collection:
+          $ref: '#/components/schemas/BaseCollection'
+        categories:
+          type: array
+          description: The product's categories.
+          items:
+            $ref: '#/components/schemas/BaseProductCategory'
+        variants:
+          type: array
+          description: The product's variants.
+          items:
+            type: object
+        type:
+          $ref: '#/components/schemas/BaseProductType'
+        tags:
+          type: array
+          description: The product's tags.
+          items:
+            $ref: '#/components/schemas/BaseProductTag'
+        length:
+          type: number
+          title: length
+          description: The product's length.
         title:
           type: string
           title: title
           description: The product's title.
-        handle:
-          type: string
-          title: handle
-          description: The product's handle.
-        subtitle:
-          type: string
-          title: subtitle
-          description: The product's subtitle.
-        description:
-          type: string
-          title: description
-          description: The product's description.
-        is_giftcard:
-          type: boolean
-          title: is_giftcard
-          description: Whether the product is a gift card.
         status:
           type: string
           description: The product's status.
@@ -56640,10 +56772,48 @@ components:
             - proposed
             - published
             - rejected
+        options:
+          type: array
+          description: The product's options.
+          items:
+            $ref: '#/components/schemas/BaseProductOption'
+        description:
+          type: string
+          title: description
+          description: The product's description.
+        id:
+          type: string
+          title: id
+          description: The product's ID.
+        metadata:
+          type: object
+          description: The product's metadata, can hold custom key-value pairs.
+        created_at:
+          type: string
+          format: date-time
+          title: created_at
+          description: The date the product was created.
+        updated_at:
+          type: string
+          format: date-time
+          title: updated_at
+          description: The date the product was updated.
+        handle:
+          type: string
+          title: handle
+          description: The product's unique handle.
+        subtitle:
+          type: string
+          title: subtitle
+          description: The product's subtitle.
+        is_giftcard:
+          type: boolean
+          title: is_giftcard
+          description: Whether the product is a gift card.
         thumbnail:
           type: string
           title: thumbnail
-          description: The product's thumbnail URL.
+          description: The product's thumbnail.
         width:
           type: number
           title: width
@@ -56652,10 +56822,6 @@ components:
           type: number
           title: weight
           description: The product's weight.
-        length:
-          type: number
-          title: length
-          description: The product's length.
         height:
           type: number
           title: height
@@ -56667,47 +56833,23 @@ components:
         hs_code:
           type: string
           title: hs_code
-          description: The product's hs code.
+          description: The product's HS code.
         mid_code:
           type: string
           title: mid_code
-          description: The product's mid code.
+          description: The product's MID code.
         material:
           type: string
           title: material
           description: The product's material.
-        collection:
-          $ref: '#/components/schemas/BaseCollection'
         collection_id:
           type: string
           title: collection_id
-          description: The ID of the collection the product belongs to.
-        categories:
-          type: array
-          description: The product's categories.
-          items:
-            $ref: '#/components/schemas/BaseProductCategory'
-        type:
-          $ref: '#/components/schemas/BaseProductType'
+          description: The ID of the collection that the product belongs to.
         type_id:
           type: string
           title: type_id
-          description: The ID of the type the product belongs to.
-        tags:
-          type: array
-          description: The product's tags.
-          items:
-            $ref: '#/components/schemas/BaseProductTag'
-        variants:
-          type: array
-          description: The product's variants.
-          items:
-            type: object
-        options:
-          type: array
-          description: The product's options.
-          items:
-            $ref: '#/components/schemas/BaseProductOption'
+          description: The ID of the product's type.
         images:
           type: array
           description: The product's images.
@@ -56716,29 +56858,16 @@ components:
         discountable:
           type: boolean
           title: discountable
-          description: Whether the product is discountable.
+          description: Whether discounts can be applied on the product.
         external_id:
           type: string
           title: external_id
-          description: The ID of the product in an external or third-party system.
-        created_at:
-          type: string
-          format: date-time
-          title: created_at
-          description: The date the product was created.
-        updated_at:
-          type: string
-          format: date-time
-          title: updated_at
-          description: The date the product was updated.
+          description: The ID of a product in an external system, such as an ERP or CMS.
         deleted_at:
           type: string
           format: date-time
           title: deleted_at
           description: The date the product was deleted.
-        metadata:
-          type: object
-          description: The product's metadata, can hold custom key-value pairs.
     BaseProductCategory:
       type: object
       description: The product category's details.
@@ -56762,9 +56891,9 @@ components:
           type: array
           description: The category's children.
           items:
-            type: object
+            $ref: '#/components/schemas/AdminProductCategory'
         parent_category:
-          type: object
+          $ref: '#/components/schemas/AdminProductCategory'
         products:
           type: array
           description: The category's products.
@@ -58009,6 +58138,7 @@ components:
       required:
         - id
         - version
+        - display_id
         - status
         - currency_code
         - created_at
@@ -58211,6 +58341,10 @@ components:
           type: number
           title: original_shipping_tax_total
           description: The total taxes of the order's shipping excluding promotions.
+        display_id:
+          type: number
+          title: display_id
+          description: The order's display id.
     OrderAddress:
       type: object
       description: The address's details.
@@ -58673,8 +58807,19 @@ components:
           title: no_notification
           description: Whether to send the customer notifications when the exchange is updated.
         difference_due:
-          type: number
-          title: difference_due
+          oneOf:
+            - type: string
+              title: difference_due
+              description: The exchange's difference due.
+            - type: number
+              title: difference_due
+              description: The exchange's difference due.
+            - type: string
+              title: difference_due
+              description: The exchange's difference due.
+            - type: number
+              title: difference_due
+              description: The exchange's difference due.
           description: The amount to be exchanged or refunded. If the amount is negative, it must be refunded. If positive, additional payment is required from the customer.
         return:
           $ref: '#/components/schemas/Return'
@@ -59023,6 +59168,10 @@ components:
           type: number
           title: refundable_total_per_unit
           description: The total amount that can be refunded of a single quantity of the item.
+        product_type_id:
+          type: string
+          title: product_type_id
+          description: The item's product type id.
     OrderLineItemAdjustment:
       type: object
       description: The line item adjustment's details.
@@ -59553,8 +59702,19 @@ components:
             - received
             - partially_received
         refund_amount:
-          type: number
-          title: refund_amount
+          oneOf:
+            - type: string
+              title: refund_amount
+              description: The return order's refund amount.
+            - type: number
+              title: refund_amount
+              description: The return order's refund amount.
+            - type: string
+              title: refund_amount
+              description: The return order's refund amount.
+            - type: number
+              title: refund_amount
+              description: The return order's refund amount.
           description: The amount refunded by this return.
         order_id:
           type: string
@@ -61544,6 +61704,7 @@ components:
         - product_title
         - product_description
         - product_subtitle
+        - product_type_id
         - product_type
         - product_collection
         - product_handle
@@ -65527,6 +65688,10 @@ components:
           type: number
           title: refundable_total_per_unit
           description: The total refundable amount of the item's total for a single quantity.
+        product_type_id:
+          type: string
+          title: product_type_id
+          description: The item's product type id.
     StoreOrderResponse:
       type: object
       description: The order's details.
@@ -68394,6 +68559,9 @@ components:
           type: string
           title: phone
           description: The customer's phone.
+        metadata:
+          type: object
+          description: The customer's metadata.
     UpdateAddress:
       type: object
       description: The details to update in the address.

@@ -7,6 +7,7 @@ export const CartRegion: ModuleJoinerConfig = {
   extends: [
     {
       serviceName: Modules.CART,
+      entity: "Cart",
       relationship: {
         serviceName: Modules.REGION,
         entity: "Region",
@@ -20,6 +21,7 @@ export const CartRegion: ModuleJoinerConfig = {
     },
     {
       serviceName: Modules.REGION,
+      entity: "Region",
       relationship: {
         serviceName: Modules.CART,
         entity: "Cart",

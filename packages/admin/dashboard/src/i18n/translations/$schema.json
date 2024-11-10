@@ -1555,6 +1555,26 @@
           ],
           "additionalProperties": false
         },
+        "edit": {
+          "type": "object",
+          "properties": {
+            "header": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "successToast": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "header",
+            "description",
+            "successToast"
+          ],
+          "additionalProperties": false
+        },
         "create": {
           "type": "object",
           "properties": {
@@ -1892,9 +1912,6 @@
           "type": "string"
         },
         "attributes": {
-          "type": "string"
-        },
-        "editProduct": {
           "type": "string"
         },
         "editAttributes": {
@@ -2667,13 +2684,13 @@
       "required": [
         "domain",
         "list",
+        "edit",
         "create",
         "export",
         "import",
         "deleteWarning",
         "variants",
         "attributes",
-        "editProduct",
         "editAttributes",
         "editOptions",
         "editPrices",

@@ -42,6 +42,7 @@ export const PublishableApiKeySalesChannel: ModuleJoinerConfig = {
   extends: [
     {
       serviceName: Modules.API_KEY,
+      entity: "ApiKey",
       fieldAlias: {
         sales_channels: {
           path: "sales_channels_link.sales_channel",
@@ -58,6 +59,7 @@ export const PublishableApiKeySalesChannel: ModuleJoinerConfig = {
     },
     {
       serviceName: Modules.SALES_CHANNEL,
+      entity: "SalesChannel",
       fieldAlias: {
         publishable_api_keys: {
           path: "api_keys_link.api_key",
