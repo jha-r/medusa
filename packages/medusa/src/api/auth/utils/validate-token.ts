@@ -46,6 +46,7 @@ export const validateToken = () => {
       return next(errorObject)
     }
 
+    // E.g. token was requested for a customer, but attempted used for a user
     if (decoded?.actor_type !== actor_type) {
       return next(errorObject)
     }
