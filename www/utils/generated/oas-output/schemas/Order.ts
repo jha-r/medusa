@@ -212,7 +212,7 @@
  *   display_id:
  *     type: number
  *     title: display_id
- *     description: The order's display id.
+ *     description: The order's display ID.
  * 
 */
 
