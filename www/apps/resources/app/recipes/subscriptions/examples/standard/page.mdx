@@ -51,7 +51,11 @@ By following this example, you’ll have a subscription commerce store with the 
 
 ## Step 1: Create Subscription Module
 
-The first step is to create a subscription module that holds the subscription's data model and provides data-management features through its service.
+Medusa creates commerce features in modules. For example, product features and data models are created in the Product Module.
+
+You also create custom commerce data models and features in custom modules. They're integrated into the Medusa application similar to Medusa's modules without side effects.
+
+So, you'll create a subscription module that holds the data models related to a subscription and allows you to manage them.
 
 Create the directory `src/modules/subscription`.
 
@@ -176,7 +180,17 @@ module.exports = defineConfig({
 
 ## Step 2: Define Links
 
-In this step, you’ll define links between the Subscription Module’s `Subscription` data model and the data models of Medusa’s commerce modules.
+Modules are isolated in Medusa, making them reusable, replaceable, and integrable in your application without side effects.
+
+So, you can't have relations between data models in modules. Instead, you define a link between them.
+
+Links are relations between data models of different modules that maintain the isolation between the modules.
+
+In this step, you’ll define links between the Subscription Module’s `Subscription` data model and the data models of Medusa’s commerce modules:
+
+1. Link between the `Subscription` data model and the Cart Module's `Cart` model.
+2. Link between the `Subscription` data model and the Customer Module's `Customer` model.
+3. Link between the `Subscription` data model and the Order Module's `Order` model.
 
 ### Define a Link to Cart
 
@@ -436,6 +450,8 @@ This method is used in the next step.
 
 ## Step 5: Create Subscription Workflow
 
+To implement and expose a feature that manipulates data, you create a workflow that uses services to implement the functionality, then create an API route that executes that workflow.
+
 In this step, you’ll create the workflow that you’ll execute when a customer purchases a subscription.
 
 The workflow accepts a cart’s ID, and it has three steps:
@@ -647,6 +663,8 @@ The workflow returns the created subscription and order.
 ---
 
 ## Step 6: Override Complete Cart API Route
+
+To expose custom commerce features to frontend applications, such as the Medusa Admin dashboard or a storefront, you expose an endpoint by creating an API route.
 
 In this step, you’ll change what happens when the [Complete Cart API route](!api!/store#carts_postcartsidcomplete) is used to complete the customer’s purchase and place an order.
 
@@ -1075,6 +1093,8 @@ In the next section, you’ll extend the Medusa admin and use these API routes t
 ---
 
 ## Step 8: Extend Admin
+
+The Medusa Admin is customizable, allowing you to inject widgets into existing pages or add UI routes to create new pages.
 
 In this step, you’ll add two UI routes:
 
@@ -1873,6 +1893,8 @@ In the next step, you’ll execute the workflow in a scheduled job.
 ---
 
 ## Step 10: Create New Subscription Orders Scheduled Job
+
+A scheduled job is an asynchronous function executed at a specified interval pattern. Use scheduled jobs to execute a task at a regular interval.
 
 In this step, you’ll create a scheduled job that runs once a day. It finds all subscriptions whose `next_order_date` property is the current date and uses the workflow from the previous step to create an order for them.
 
