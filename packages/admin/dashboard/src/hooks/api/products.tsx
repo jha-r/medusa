@@ -243,7 +243,7 @@ export const useProduct = (
 ) => {
   const { data, ...rest } = useQuery({
     queryFn: () => sdk.admin.product.retrieve(id, query),
-    queryKey: productsQueryKeys.detail(id),
+    queryKey: productsQueryKeys.detail(id, query),
     ...options,
   })
 
