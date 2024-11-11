@@ -87,9 +87,14 @@ export const useDeleteProductOption = (
 export const useProductVariant = (
   productId: string,
   variantId: string,
-  query?: Record<string, any>,
+  query?: HttpTypes.AdminProductVariantParams,
   options?: Omit<
-    UseQueryOptions<any, FetchError, any, QueryKey>,
+    UseQueryOptions<
+      HttpTypes.AdminProductVariantResponse,
+      FetchError,
+      HttpTypes.AdminProductVariantResponse,
+      QueryKey
+    >,
     "queryFn" | "queryKey"
   >
 ) => {
