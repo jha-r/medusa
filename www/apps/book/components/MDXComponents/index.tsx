@@ -5,7 +5,7 @@ import Feedback from "../Feedback"
 const MDXComponents: MDXComponentsType = {
   ...UiMdxComponents,
   a: Link,
-  Feedback
+  Feedback,
 }
 
 export default MDXComponents
