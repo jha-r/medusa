@@ -104,6 +104,18 @@ export const completeCartWorkflow = createWorkflow(
       })
 
       const cartToOrder = transform({ cart }, ({ cart }) => {
+        const transactions =
+          cart.payment_collection?.payments?.flatMap((payment) =>
+            payment.captures.map((capture) => {
+              return {
+                amount: capture.raw_amount ?? capture.amount,
+                currency_code: payment.currency_code,
+                reference: "capture",
+                reference_id: capture.id,
+              }
+            })
+          ) ?? []
+
         const allItems = (cart.items ?? []).map((item) => {
           return prepareLineItemData({
             item,
@@ -158,6 +170,7 @@ export const completeCartWorkflow = createWorkflow(
           shipping_methods: shippingMethods,
           metadata: cart.metadata,
           promo_codes: promoCodes,
+          transactions,
         }
       })
 

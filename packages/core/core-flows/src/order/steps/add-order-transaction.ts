@@ -11,6 +11,21 @@ export const addOrderTransactionStep = createStep(
   async (data: CreateOrderTransactionDTO, { container }) => {
     const service = container.resolve(Modules.ORDER)
 
+    const existing = await service.listOrderTransactions(
+      {
+        order_id: data.order_id,
+        reference: data.reference,
+        reference_id: data.reference_id,
+      },
+      {
+        select: ["id"],
+      }
+    )
+
+    if (existing.length) {
+      return new StepResponse(null)
+    }
+
     const created = await service.addOrderTransactions(data)
 
     return new StepResponse(created, created.id)
