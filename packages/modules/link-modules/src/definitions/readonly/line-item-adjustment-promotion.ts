@@ -7,6 +7,7 @@ export const LineItemAdjustmentPromotion: ModuleJoinerConfig = {
   extends: [
     {
       serviceName: Modules.CART,
+      entity: "LineItemAdjustment",
       relationship: {
         serviceName: Modules.PROMOTION,
         entity: "Promotion",

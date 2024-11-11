@@ -67,6 +67,7 @@ medusaIntegrationTestRunner({
           extends: [
             {
               serviceName: "currency",
+              entity: "Currency",
               fieldAlias: {
                 region: {
                   path: "region_link.region",
@@ -85,6 +86,7 @@ medusaIntegrationTestRunner({
             },
             {
               serviceName: "region",
+              entity: "Region",
               fieldAlias: {
                 currency: {
                   path: "currency_link.currency",
@@ -164,6 +166,7 @@ medusaIntegrationTestRunner({
           extends: [
             {
               serviceName: "product",
+              entity: "ProductVariant",
               fieldAlias: {
                 region: {
                   path: "region_link.region",
@@ -182,6 +185,7 @@ medusaIntegrationTestRunner({
             },
             {
               serviceName: "region",
+              entity: "Region",
               fieldAlias: {
                 product_variant: {
                   path: "product_variant_link.product_variant",
@@ -266,6 +270,7 @@ medusaIntegrationTestRunner({
           extends: [
             {
               serviceName: "currency",
+              entity: "Currency",
               fieldAlias: {
                 region: {
                   path: "region_link.region",
@@ -284,6 +289,7 @@ medusaIntegrationTestRunner({
             },
             {
               serviceName: "region",
+              entity: "Region",
               fieldAlias: {
                 currency: {
                   path: "currency_link.currency",
@@ -362,6 +368,7 @@ medusaIntegrationTestRunner({
           extends: [
             {
               serviceName: "currency",
+              entity: "Currency",
               fieldAlias: {
                 regions: {
                   path: "region_link.region",
@@ -380,6 +387,7 @@ medusaIntegrationTestRunner({
             },
             {
               serviceName: "region",
+              entity: "Region",
               fieldAlias: {
                 currency: {
                   path: "currency_link.currency",

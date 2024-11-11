@@ -7,6 +7,7 @@ export const StoreCurrencies: ModuleJoinerConfig = {
   extends: [
     {
       serviceName: Modules.STORE,
+      entity: "Store",
       relationship: {
         serviceName: Modules.CURRENCY,
         entity: "Currency",

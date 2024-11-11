@@ -160,6 +160,7 @@ function prepareFulfillmentData({
       labels: input.labels ?? [],
       delivery_address: shippingAddress as any,
       packed_at: new Date(),
+      metadata: input.metadata,
     },
   }
 }

@@ -1,4 +1,3 @@
-import { pick } from "lodash"
 import { FindConfig, QueryConfig, RequestQueryFields } from "@medusajs/types"
 import {
   isDefined,
@@ -6,6 +5,7 @@ import {
   MedusaError,
   stringToSelectRelationObject,
 } from "@medusajs/utils"
+import { pick } from "lodash"
 
 export function pickByConfig<TModel>(
   obj: TModel | TModel[],
@@ -130,7 +130,16 @@ export function prepareListQuery<T extends RequestQueryFields, TEntity>(
         if (field.startsWith("+") || field.startsWith(" ")) {
           allFields.add(field.trim().replace(/^\+/, ""))
         } else if (field.startsWith("-")) {
-          allFields.delete(field.replace(/^-/, ""))
+          const fieldName = field.replace(/^-/, "")
+          for (const reqField of allFields) {
+            const reqFieldName = reqField.replace(/^\*/, "")
+            if (
+              reqFieldName === fieldName ||
+              reqFieldName.startsWith(fieldName + ".")
+            ) {
+              allFields.delete(reqField)
+            }
+          }
         } else {
           allFields.add(field)
         }
