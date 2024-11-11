@@ -1,5 +1,5 @@
 import { BaseFilterable, OperatorMap } from "../../dal"
-import { ChangeActionType, OrderChangeStatus } from "../../order"
+import { ChangeActionType, OrderChangeStatus, OrderStatus } from "../../order"
 import { BaseClaim } from "../claim/common"
 import { FindParams } from "../common"
 import { BaseExchange } from "../exchange/common"
@@ -389,7 +389,11 @@ export interface BaseOrderLineItem {
    */
   product_subtitle: string | null
   /**
-   * The ID of the associated product's type.
+   * The ID of the associated product type.
+   */
+  product_type_id: string | null
+  /**
+   * The associated product type.
    */
   product_type: string | null
   /**
@@ -914,14 +918,29 @@ export interface BaseOrder {
 export interface BaseOrderFilters
   extends FindParams,
     BaseFilterable<BaseOrderFilters> {
+  /**
+   * Filter by order ID(s).
+   */
   id?: string[] | string | OperatorMap<string | string[]>
-  status?: string[] | string | OperatorMap<string | string[]>
+  /**
+   * Filter by status(es).
+   */
+  status?: OrderStatus[] | OrderStatus | OperatorMap<OrderStatus | OrderStatus[]>
 }
 
 export interface BaseOrderChangesFilters
   extends BaseFilterable<BaseOrderChangesFilters> {
+  /**
+   * Filter by order change ID(s).
+   */
   id?: string[] | string | OperatorMap<string | string[]>
+  /**
+   * Filter by status(es).
+   */
   status?: string[] | string | OperatorMap<string | string[]>
+  /**
+   * Filter by order change type, such as `return`, `exchange`, `edit`, or `claim`.
+   */
   change_type?: string[] | string | OperatorMap<string | string[]>
 }
 

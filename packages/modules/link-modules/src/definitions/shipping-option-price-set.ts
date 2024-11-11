@@ -41,6 +41,7 @@ export const ShippingOptionPriceSet: ModuleJoinerConfig = {
   extends: [
     {
       serviceName: Modules.FULFILLMENT,
+      entity: "ShippingOption",
       fieldAlias: {
         prices: {
           path: "price_set_link.price_set.prices",
@@ -60,6 +61,7 @@ export const ShippingOptionPriceSet: ModuleJoinerConfig = {
     },
     {
       serviceName: Modules.PRICING,
+      entity: "PriceSet",
       relationship: {
         serviceName: LINKS.ShippingOptionPriceSet,
         primaryKey: "price_set_id",

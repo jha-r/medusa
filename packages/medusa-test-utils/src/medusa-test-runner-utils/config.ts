@@ -5,6 +5,7 @@ export async function configLoaderOverride(
   override: { clientUrl: string; debug?: boolean }
 ) {
   const { configManager } = await import("@medusajs/framework/config")
+  const { logger } = await import("@medusajs/framework")
   const { configModule, error } = await getConfigFile<
     ReturnType<typeof configManager.loadConfig>
   >(entryDirectory, "medusa-config")
@@ -25,6 +26,9 @@ export async function configLoaderOverride(
           },
           idle_in_transaction_session_timeout: 20000,
         }
+
+  logger.info("Disabling admin as we run integration tests")
+  Object.assign(configModule.admin ?? {}, { disable: true })
 
   configManager.loadConfig({
     projectConfig: configModule,

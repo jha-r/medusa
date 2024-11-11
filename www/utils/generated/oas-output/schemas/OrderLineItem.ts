@@ -194,6 +194,10 @@
  *     type: number
  *     title: refundable_total_per_unit
  *     description: The total amount that can be refunded of a single quantity of the item.
+ *   product_type_id:
+ *     type: string
+ *     title: product_type_id
+ *     description: The ID of the associated product's type.
  * 
 */
 

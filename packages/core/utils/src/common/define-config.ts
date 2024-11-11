@@ -14,7 +14,7 @@ import { normalizeImportPathWithSource } from "./normalize-import-path-with-sour
 import { resolveExports } from "./resolve-exports"
 
 const DEFAULT_SECRET = "supersecret"
-const DEFAULT_ADMIN_URL = "http://localhost:9000"
+const DEFAULT_ADMIN_URL = "/"
 const DEFAULT_STORE_CORS = "http://localhost:8000"
 const DEFAULT_DATABASE_URL = "postgres://localhost/medusa-starter-default"
 const DEFAULT_ADMIN_CORS =

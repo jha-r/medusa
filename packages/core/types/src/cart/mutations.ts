@@ -501,6 +501,11 @@ export interface CreateLineItemDTO {
   product_type?: string
 
   /**
+   * The ID of type of the associated product.
+   */
+  product_type_id?: string
+
+  /**
    * The collection of the associated product.
    */
   product_collection?: string

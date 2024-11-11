@@ -9057,14 +9057,6 @@ export const generatedSidebar = [
         "loaded": true,
         "isPathHref": true,
         "type": "link",
-        "path": "/upgrade-guides",
-        "title": "Upgrade Guides",
-        "children": []
-      },
-      {
-        "loaded": true,
-        "isPathHref": true,
-        "type": "link",
         "path": "/deployment",
         "title": "Deployment Guides",
         "isChildSidebar": true,
@@ -10217,14 +10209,6 @@ export const generatedSidebar = [
                     "type": "link",
                     "path": "/references/medusa-workflows/steps/getActionsToComputeFromPromotionsStep",
                     "title": "getActionsToComputeFromPromotionsStep",
-                    "children": []
-                  },
-                  {
-                    "loaded": true,
-                    "isPathHref": true,
-                    "type": "link",
-                    "path": "/references/medusa-workflows/steps/getItemTaxLinesStep",
-                    "title": "getItemTaxLinesStep",
                     "children": []
                   },
                   {
@@ -12293,14 +12277,6 @@ export const generatedSidebar = [
                     "type": "link",
                     "path": "/references/medusa-workflows/steps/deleteReturnsStep",
                     "title": "deleteReturnsStep",
-                    "children": []
-                  },
-                  {
-                    "loaded": true,
-                    "isPathHref": true,
-                    "type": "link",
-                    "path": "/references/medusa-workflows/steps/getOrderItemTaxLinesStep",
-                    "title": "getOrderItemTaxLinesStep",
                     "children": []
                   },
                   {

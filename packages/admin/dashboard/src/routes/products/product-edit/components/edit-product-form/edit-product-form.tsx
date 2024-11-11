@@ -1,4 +1,4 @@
-import { Button, Input, Select, Text, Textarea } from "@medusajs/ui"
+import { Button, Input, Select, Text, Textarea, toast } from "@medusajs/ui"
 import { useTranslation } from "react-i18next"
 import * as zod from "zod"
 
@@ -69,8 +69,14 @@ export const EditProductForm = ({ product }: EditProductFormProps) => {
         ...nullableData,
       },
       {
-        onSuccess: () => {
+        onSuccess: ({ product }) => {
+          toast.success(
+            t("products.edit.successToast", { title: product.title })
+          )
           handleSuccess()
+        },
+        onError: (e) => {
+          toast.error(e.message)
         },
       }
     )
