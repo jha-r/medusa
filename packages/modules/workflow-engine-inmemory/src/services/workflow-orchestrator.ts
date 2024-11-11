@@ -142,6 +142,8 @@ export class WorkflowOrchestratorService {
       container,
     } = options ?? {}
 
+    throwOnError ??= true
+
     const workflowId = isString(workflowIdOrWorkflow)
       ? workflowIdOrWorkflow
       : workflowIdOrWorkflow.getName()
@@ -172,7 +174,7 @@ export class WorkflowOrchestratorService {
 
     const ret = await exportedWorkflow.run({
       input,
-      throwOnError,
+      throwOnError: false,
       logOnError,
       resultFrom,
       context,
@@ -208,6 +210,10 @@ export class WorkflowOrchestratorService {
       })
 
       await this.triggerParentStep(ret.transaction, result)
+    }
+
+    if (throwOnError && ret.thrownError) {
+      throw ret.thrownError
     }
 
     return { acknowledgement, ...ret }
@@ -260,7 +266,7 @@ export class WorkflowOrchestratorService {
     },
     @MedusaContext() sharedContext: Context = {}
   ) {
-    const {
+    let {
       context,
       throwOnError,
       logOnError,
@@ -268,6 +274,8 @@ export class WorkflowOrchestratorService {
       container,
       events: eventHandlers,
     } = options ?? {}
+
+    throwOnError ??= true
 
     const [idempotencyKey_, { workflowId, transactionId }] =
       this.buildIdempotencyKeyAndParts(idempotencyKey)
@@ -287,7 +295,7 @@ export class WorkflowOrchestratorService {
       idempotencyKey: idempotencyKey_,
       context,
       resultFrom,
-      throwOnError,
+      throwOnError: false,
       logOnError,
       events,
       response: stepResponse,
@@ -308,6 +316,10 @@ export class WorkflowOrchestratorService {
       await this.triggerParentStep(ret.transaction, result)
     }
 
+    if (throwOnError && ret.thrownError) {
+      throw ret.thrownError
+    }
+
     return ret
   }
 
@@ -324,7 +336,7 @@ export class WorkflowOrchestratorService {
     },
     @MedusaContext() sharedContext: Context = {}
   ) {
-    const {
+    let {
       context,
       throwOnError,
       logOnError,
@@ -332,6 +344,8 @@ export class WorkflowOrchestratorService {
       container,
       events: eventHandlers,
     } = options ?? {}
+
+    throwOnError ??= true
 
     const [idempotencyKey_, { workflowId, transactionId }] =
       this.buildIdempotencyKeyAndParts(idempotencyKey)
@@ -351,7 +365,7 @@ export class WorkflowOrchestratorService {
       idempotencyKey: idempotencyKey_,
       context,
       resultFrom,
-      throwOnError,
+      throwOnError: false,
       logOnError,
       events,
       response: stepResponse,
@@ -370,6 +384,10 @@ export class WorkflowOrchestratorService {
       })
 
       await this.triggerParentStep(ret.transaction, result)
+    }
+
+    if (throwOnError && ret.thrownError) {
+      throw ret.thrownError
     }
 
     return ret

@@ -123,14 +123,20 @@ function createContextualWorkflowRunner<
       method === originalRegisterStepFailure &&
       transaction.getState() === TransactionState.REVERTED
 
+    let thrownError = null
+
     if (
-      throwOnError &&
       failedStatus.includes(transaction.getState()) &&
       !isCancelled &&
       !isRegisterStepFailure
     ) {
       const firstError = errors?.[0]?.error ?? new Error("Unknown error")
-      throw firstError
+
+      thrownError = firstError
+
+      if (throwOnError) {
+        throw firstError
+      }
     }
 
     let result
@@ -138,6 +144,8 @@ function createContextualWorkflowRunner<
       result = resolveValue(resultFrom, transaction.getContext())
       if (result instanceof Promise) {
         result = await result.catch((e) => {
+          thrownError = e
+
           if (throwOnError) {
             throw e
           }
@@ -154,6 +162,7 @@ function createContextualWorkflowRunner<
       errors,
       transaction,
       result,
+      thrownError,
     }
   }
 

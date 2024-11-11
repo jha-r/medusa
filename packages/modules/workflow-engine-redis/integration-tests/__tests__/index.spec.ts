@@ -213,6 +213,17 @@ moduleIntegrationTestRunner<IWorkflowEngineService>({
             }
           )
 
+          let done = false
+          void workflowOrcModule.subscribe({
+            workflowId: "workflow_2_revert_fail",
+            transactionId: acknowledgement.transactionId,
+            subscriber: (event) => {
+              if (event.eventType === "onFinish") {
+                done = true
+              }
+            },
+          })
+
           let executionsList = await query({
             workflow_executions: {
               fields: ["id"],
@@ -245,6 +256,7 @@ moduleIntegrationTestRunner<IWorkflowEngineService>({
 
           expect(executionsList).toHaveLength(1)
           expect(executionsList[0].state).toEqual("failed")
+          expect(done).toBe(true)
         })
 
         it("should revert the entire transaction when a step timeout expires", async () => {
