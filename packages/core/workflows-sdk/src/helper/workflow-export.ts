@@ -3,7 +3,6 @@ import {
   DistributedTransactionEvents,
   DistributedTransactionType,
   LocalWorkflow,
-  TransactionHandlerType,
   TransactionState,
 } from "@medusajs/orchestration"
 import {
@@ -18,6 +17,7 @@ import {
   isPresent,
   MedusaContextType,
   Modules,
+  TransactionHandlerType,
 } from "@medusajs/utils"
 import { EOL } from "os"
 import { ulid } from "ulid"
@@ -41,13 +41,11 @@ function createContextualWorkflowRunner<
 >({
   workflowId,
   defaultResult,
-  dataPreparation,
   options,
   container,
 }: {
   workflowId: string
   defaultResult?: string | Symbol
-  dataPreparation?: (data: TData) => Promise<unknown>
   options?: {
     wrappedInput?: boolean
     sourcePath?: string
@@ -110,7 +108,10 @@ function createContextualWorkflowRunner<
       events,
       flowMetadata,
     ]
-    const transaction = await method.apply(method, args) as DistributedTransactionType
+    const transaction = (await method.apply(
+      method,
+      args
+    )) as DistributedTransactionType
 
     let errors = transaction.getErrors(TransactionHandlerType.INVOKE)
 
@@ -118,14 +119,16 @@ function createContextualWorkflowRunner<
     const isCancelled =
       isCancel && transaction.getState() === TransactionState.REVERTED
 
+    const isRegisterStepFailure =
+      method === originalRegisterStepFailure &&
+      transaction.getState() === TransactionState.REVERTED
+
     if (
-      !isCancelled &&
+      throwOnError &&
       failedStatus.includes(transaction.getState()) &&
-      throwOnError
+      !isCancelled &&
+      !isRegisterStepFailure
     ) {
-      /*const errorMessage = errors
-        ?.map((err) => `${err.error?.message}${EOL}${err.error?.stack}`)
-        ?.join(`${EOL}`)*/
       const firstError = errors?.[0]?.error ?? new Error("Unknown error")
       throw firstError
     }
@@ -174,22 +177,6 @@ function createContextualWorkflowRunner<
 
     context.transactionId ??= ulid()
     context.eventGroupId ??= ulid()
-
-    if (typeof dataPreparation === "function") {
-      try {
-        const copyInput = input ? JSON.parse(JSON.stringify(input)) : input
-        input = await dataPreparation(copyInput as TData)
-      } catch (err) {
-        if (throwOnError) {
-          throw new Error(
-            `Data preparation failed: ${err.message}${EOL}${err.stack}`
-          )
-        }
-        return {
-          errors: [err],
-        }
-      }
-    }
 
     return await originalExecution(
       originalRun,
@@ -339,7 +326,6 @@ function createContextualWorkflowRunner<
 export const exportWorkflow = <TData = unknown, TResult = unknown>(
   workflowId: string,
   defaultResult?: string | Symbol,
-  dataPreparation?: (data: TData) => Promise<unknown>,
   options?: {
     wrappedInput?: boolean
     sourcePath?: string
@@ -364,7 +350,6 @@ export const exportWorkflow = <TData = unknown, TResult = unknown>(
     >({
       workflowId,
       defaultResult,
-      dataPreparation,
       options,
       container,
     })
@@ -390,7 +375,6 @@ export const exportWorkflow = <TData = unknown, TResult = unknown>(
     >({
       workflowId,
       defaultResult,
-      dataPreparation,
       options,
       container,
     })
