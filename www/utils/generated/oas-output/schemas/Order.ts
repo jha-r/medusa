@@ -6,6 +6,7 @@
  * required:
  *   - id
  *   - version
+ *   - display_id
  *   - status
  *   - currency_code
  *   - created_at
@@ -208,6 +209,10 @@
  *     type: number
  *     title: original_shipping_tax_total
  *     description: The total taxes of the order's shipping excluding promotions.
+ *   display_id:
+ *     type: number
+ *     title: display_id
+ *     description: The order's display id.
  * 
 */
 

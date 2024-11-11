@@ -70,12 +70,12 @@ const Root = <TData,>({
   const showExtraData = showJSON || showMetadata
 
   return (
-    <div className="flex flex-col gap-y-3">
+    <div className="flex w-full flex-col gap-y-3">
       {before.map((Component, i) => {
         return <Component {...widgetProps} key={i} />
       })}
-      <div className="flex flex-col gap-x-4 gap-y-3 xl:flex-row xl:items-start">
-        <div className="flex w-full flex-col gap-y-3">
+      <div className="flex w-full flex-col items-start gap-x-4 gap-y-3 xl:grid xl:grid-cols-[minmax(0,_1fr)_440px]">
+        <div className="flex w-full min-w-0 flex-col gap-y-3">
           {main}
           {after.map((Component, i) => {
             return <Component {...widgetProps} key={i} />
@@ -87,7 +87,7 @@ const Root = <TData,>({
             </div>
           )}
         </div>
-        <div className="flex w-full max-w-[100%] flex-col gap-y-3 xl:mt-0 xl:max-w-[440px]">
+        <div className="flex w-full flex-col gap-y-3 xl:mt-0">
           {sideBefore.map((Component, i) => {
             return <Component {...widgetProps} key={i} />
           })}
