@@ -52,7 +52,12 @@ export const useReturnItemTableColumns = (currencyCode: string) => {
         id: "product",
         header: () => <ProductHeader />,
         cell: ({ row }) => (
-          <ProductCell product={row.original.variant?.product} />
+          <ProductCell
+            product={{
+              thumbnail: row.original.thumbnail,
+              title: row.original.product_titl,
+            }}
+          />
         ),
       }),
       columnHelper.accessor("variant.sku", {
