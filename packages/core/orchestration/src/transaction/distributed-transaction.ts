@@ -1,4 +1,4 @@
-import { isDefined } from "@medusajs/utils"
+import { isDefined, isObject } from "@medusajs/utils"
 import { EventEmitter } from "events"
 import { IDistributedTransactionStorage } from "./datastore/abstract-storage"
 import { BaseInMemoryDistributedTransactionStorage } from "./datastore/base-in-memory-storage"
@@ -215,7 +215,7 @@ class DistributedTransaction extends EventEmitter {
       this.modelId,
       this.transactionId
     )
-    const rawData = JSON.parse(JSON.stringify(data))
+    const rawData = isObject(data) ? JSON.parse(JSON.stringify(data)) : data
     await DistributedTransaction.keyValueStore.save(key, rawData, ttl, options)
 
     return rawData
