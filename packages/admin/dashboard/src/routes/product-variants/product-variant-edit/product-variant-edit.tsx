@@ -42,15 +42,6 @@ export const ProductVariantEdit = () => {
 
   const ready = !isPending && !!variant && !isProductPending && !!product
 
-  console.log(
-    variant_id,
-    searchVariantId,
-    variant,
-    variant?.product_id,
-    isPending,
-    isProductPending
-  )
-
   if (isError) {
     throw error
   }

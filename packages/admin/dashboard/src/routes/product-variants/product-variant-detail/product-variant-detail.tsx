@@ -3,14 +3,14 @@ import { Outlet, useLoaderData, useParams } from "react-router-dom"
 import { JsonViewSection } from "../../../components/common/json-view-section"
 import { useProductVariant } from "../../../hooks/api/products"
 
-import { variantLoader } from "./loader"
-import { VARIANT_DETAIL_FIELDS } from "./constants"
 import { VariantGeneralSection } from "./components/variant-general-section"
 import {
   InventorySectionPlaceholder,
   VariantInventorySection,
 } from "./components/variant-inventory-section"
 import { VariantPricesSection } from "./components/variant-prices-section"
+import { VARIANT_DETAIL_FIELDS } from "./constants"
+import { variantLoader } from "./loader"
 
 export const ProductVariantDetail = () => {
   const initialData = useLoaderData() as Awaited<
@@ -20,7 +20,7 @@ export const ProductVariantDetail = () => {
   const { id, variant_id } = useParams()
   const { variant, isLoading, isError, error } = useProductVariant(
     id!,
-    variant_id,
+    variant_id!,
     { fields: VARIANT_DETAIL_FIELDS },
     {
       initialData: initialData,
