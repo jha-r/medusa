@@ -101,7 +101,7 @@ export const useProductVariant = (
   const { data, ...rest } = useQuery({
     queryFn: () =>
       sdk.admin.product.retrieveVariant(productId, variantId, query),
-    queryKey: variantsQueryKeys.detail(variantId),
+    queryKey: variantsQueryKeys.detail(variantId, query),
     ...options,
   })
 
