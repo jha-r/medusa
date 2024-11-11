@@ -88,7 +88,7 @@ export const generatedEditDates = {
   "app/learn/debugging-and-testing/instrumentation/page.mdx": "2024-09-17T08:53:15.910Z",
   "app/learn/advanced-development/api-routes/additional-data/page.mdx": "2024-09-30T08:43:53.120Z",
   "app/learn/advanced-development/workflows/page.mdx": "2024-09-18T08:00:57.364Z",
-  "app/learn/advanced-development/workflows/variable-manipulation/page.mdx": "2024-09-30T08:43:53.130Z",
+  "app/learn/advanced-development/workflows/variable-manipulation/page.mdx": "2024-11-11T13:33:41.270Z",
   "app/learn/customization/custom-features/api-route/page.mdx": "2024-09-12T12:42:34.201Z",
   "app/learn/customization/custom-features/module/page.mdx": "2024-10-16T08:49:44.676Z",
   "app/learn/customization/custom-features/workflow/page.mdx": "2024-09-30T08:43:53.133Z",
