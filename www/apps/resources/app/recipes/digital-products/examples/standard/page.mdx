@@ -51,7 +51,11 @@ By following this example, you’ll have a commerce application with the followi
 
 ## Step 1: Create the Digital Product Module
 
-The first step is to create a digital product module that holds the data models related to a digital product.
+Medusa creates commerce features in modules. For example, product features and data models are created in the Product Module.
+
+You also create custom commerce data models and features in custom modules. They're integrated into the Medusa application similar to Medusa's modules without side effects.
+
+So, you'll create a digital product module that holds the data models related to a digital product and allows you to manage them.
 
 Create the directory `src/modules/digital-product`.
 
@@ -211,7 +215,16 @@ module.exports = defineConfig({
 
 ## Step 2: Define Links
 
-In this step, you’ll define links between your module’s data models and data models from Medusa’s commerce modules.
+Modules are isolated in Medusa, making them reusable, replaceable, and integrable in your application without side effects.
+
+So, you can't have relations between data models in modules. Instead, you define a link between them.
+
+Links are relations between data models of different modules that maintain the isolation between the modules.
+
+In this step, you’ll define links between your module’s data models and data models from Medusa’s commerce modules:
+
+1. Link between the `DigitalProduct` model and the Product Module's `ProductVariant` model.
+2. Link between the `DigitalProductOrder` model and the Order Module's `Order` model.
 
 Start by creating the file `src/links/digital-product-variant.ts` with the following content:
 
@@ -278,6 +291,8 @@ npx medusa db:migrate
 ---
 
 ## Step 4: List Digital Products Admin API Route
+
+To expose custom commerce features to frontend applications, such as the Medusa Admin dashboard or a storefront, you expose an endpoint by creating an API route.
 
 In this step, you’ll create the admin API route to list digital products.
 
@@ -368,7 +383,9 @@ Make sure to replace `{token}` with the JWT token you retrieved.
 
 ## Step 5: Create Digital Product Workflow
 
-In this step, you’ll create a workflow that creates a digital product. You’ll use this workflow in the next section.
+To implement and expose a feature that manipulates data, you create a workflow that uses services to implement the functionality, then create an API route that executes that workflow.
+
+In this step, you’ll create a workflow that creates a digital product. You’ll use this workflow in an API route in the next section.
 
 This workflow has the following steps:
 
@@ -617,7 +634,7 @@ You’ll test out the workflow in the next section.
 
 ## Step 6: Create Digital Product API Route
 
-In this step, you’ll add the API route to create a digital product.
+In this step, you’ll add the API route to create a digital product using the `createDigitalProductWorkflow`.
 
 In the file `src/api/admin/digital-products/route.ts` add a new route handler:
 
@@ -716,15 +733,15 @@ This adds a validation middleware to ensure that the body of `POST` requests sen
 
 ## Step 7: Upload Digital Product Media API Route
 
-To upload the digital product media files, use Medusa’s file module.
-
-In this step, you’ll create an API route for uploading preview and main digital product media files.
+To upload the digital product media files, use Medusa’s File Module.
 
 <Note>
 
 Your Medusa application uses the local file module provider by default, which uploads files to a local directory. However, you can use other file module providers, such as the [S3 module provider](../../../../architectural-modules/file/s3/page.mdx).
 
 </Note>
+
+In this step, you’ll create an API route for uploading preview and main digital product media files.
 
 Before creating the API route, install the [multer express middleware](https://expressjs.com/en/resources/middleware/multer.html) to support file uploads:
 
@@ -808,6 +825,8 @@ You’ll test out this API route in the next step as you use these API routes in
 ---
 
 ## Step 8: Add Digital Products UI Route in Admin
+
+The Medusa Admin is customizable, allowing you to inject widgets into existing pages or add UI routes to create new pages.
 
 In this step, you’ll add a UI route to the Medusa Admin that displays a list of digital products.
 
@@ -1819,7 +1838,7 @@ In a later step, you’ll add an API route to allow customers to view and downlo
 
 ## Step 12: Fulfill Digital Order Workflow
 
-In this step, you'll create a workflow that fulfills a digital order by sending a notification to the customer. Later, you'll execute this workflow in a subscriber.
+In this step, you'll create a workflow that fulfills a digital order by sending a notification to the customer. Later, you'll execute this workflow in a subscriber that listens to the `digital_product_order.created` event.
 
 The workflow has the following steps:
 
@@ -2030,6 +2049,8 @@ module.exports = defineConfig({
 ---
 
 ## Step 13: Handle the Digital Product Order Event
+
+A subscriber is an asynchronous function that, when an event is emitted, is executed. You can implement in subscribers features that aren't essential to the original flow that emitted the event.
 
 In this step, you'll create a subscriber that listens to the `digital_product_order.created` event and executes the workflow from the above step.
 

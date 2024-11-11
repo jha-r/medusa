@@ -46,6 +46,11 @@ export const validateToken = () => {
       return next(errorObject)
     }
 
+    // E.g. token was requested for a customer, but attempted used for a user
+    if (decoded?.actor_type !== actor_type) {
+      return next(errorObject)
+    }
+
     const [providerIdentity] = await authModule.listProviderIdentities(
       {
         entity_id: decoded.entity_id,
@@ -60,17 +65,15 @@ export const validateToken = () => {
       return next(errorObject)
     }
 
-    let verified: JwtPayload | null = null
-
     try {
-      verified = verify(token as string, http.jwtSecret as string) as JwtPayload
+      verify(token as string, http.jwtSecret as string) as JwtPayload
     } catch (error) {
       return next(errorObject)
     }
 
     req_.auth_context = {
       actor_type,
-      auth_identity_id: verified.auth_identity_id!,
+      auth_identity_id: providerIdentity.auth_identity_id!,
       actor_id: providerIdentity.entity_id,
       app_metadata: {},
     }
