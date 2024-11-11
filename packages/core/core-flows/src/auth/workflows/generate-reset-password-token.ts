@@ -45,6 +45,7 @@ export const generateResetPasswordTokenWorkflow = createWorkflow(
           {
             entity_id: input.entityId,
             provider: input.provider,
+            actor_type: input.actorType,
           },
           {
             secret: input.secret,

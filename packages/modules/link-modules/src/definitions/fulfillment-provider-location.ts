@@ -52,6 +52,7 @@ export const LocationFulfillmentProvider: ModuleJoinerConfig = {
     },
     {
       serviceName: Modules.FULFILLMENT,
+      entity: "FulfillmentProvider",
       relationship: {
         serviceName: LINKS.LocationFulfillmentProvider,
         primaryKey: "fulfillment_provider_id",

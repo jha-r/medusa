@@ -40,6 +40,7 @@ export const OrderCart: ModuleJoinerConfig = {
   extends: [
     {
       serviceName: Modules.ORDER,
+      entity: "Order",
       fieldAlias: {
         cart: "cart_link.cart",
       },
@@ -52,6 +53,7 @@ export const OrderCart: ModuleJoinerConfig = {
     },
     {
       serviceName: Modules.CART,
+      entity: "Cart",
       fieldAlias: {
         order: "order_link.order",
       },
