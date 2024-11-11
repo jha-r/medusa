@@ -698,6 +698,10 @@ export interface FilterableProductProps
    */
   id?: string | string[]
   /**
+   * The external IDs to filter products by.
+   */
+  external_id?: string | string[]
+  /**
    * Filters only or excluding gift card products
    */
   is_giftcard?: boolean
