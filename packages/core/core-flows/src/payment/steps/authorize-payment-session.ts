@@ -43,7 +43,7 @@ export const authorizePaymentSessionStep = createStep(
     const paymentSession = await paymentModule.retrievePaymentSession(
       input.id,
       {
-        relations: ["payments", "payments.captures"],
+        relations: ["payment", "payment.captures"],
       }
     )
 
