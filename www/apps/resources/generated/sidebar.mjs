@@ -9066,8 +9066,15 @@ export const generatedSidebar = [
             "isPathHref": true,
             "type": "category",
             "title": "Medusa Application",
-            "autogenerate_path": "/deployment/medusa-application",
             "children": [
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "https://docs.medusajs.com/learn/deployment/general",
+                "title": "General",
+                "children": []
+              },
               {
                 "loaded": true,
                 "isPathHref": true,

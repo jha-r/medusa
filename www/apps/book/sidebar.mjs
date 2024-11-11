@@ -581,8 +581,21 @@ export const sidebar = numberSidebarItems(
     },
     {
       type: "link",
-      path: "/learn/deployment",
-      title: "Deployment",
+      path: "/learn/build",
+      title: "Build",
+      chapterTitle: "Production",
+      children: [
+        {
+          type: "link",
+          path: "/learn/deployment",
+          title: "Deployment Overview",
+        },
+        {
+          type: "link",
+          path: "/learn/deployment/general",
+          title: "General Deployment",
+        }
+      ]
     },
     {
       type: "link",

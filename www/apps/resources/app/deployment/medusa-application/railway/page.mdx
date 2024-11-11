@@ -2,7 +2,7 @@
 sidebar_label: "Railway"
 ---
 
-import { Prerequisites, DetailsList } from "docs-ui"
+import { Prerequisites } from "docs-ui"
 
 export const metadata = {
   title: `Deploy Medusa Application to Railway`,
@@ -81,6 +81,14 @@ module.exports = defineConfig({
 Later, you’ll set different values of the `DISABLE_MEDUSA_ADMIN` environment variable.
 
 ### Configure Redis URL
+
+The `redisUrl` configuration specifies the connection URL to Redis to store the Medusa server's session.
+
+<Note>
+
+Learn more in the [Medusa Configuration documentation](/references/medusa-config#redisurl).
+
+</Note>
 
 Add the following configuration in `medusa-config.ts` :
 
