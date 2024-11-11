@@ -13,9 +13,14 @@ export const POST = async (
 
   const authService = req.scope.resolve<IAuthModuleService>(Modules.AUTH)
 
+  const updateData = {
+    ...(req.body as Record<string, unknown>),
+    entity_id: req.auth_context.actor_id, // comes from the validated token
+  }
+
   const { authIdentity, success, error } = await authService.updateProvider(
     auth_provider,
-    req.body as Record<string, unknown>
+    updateData
   )
 
   if (success && authIdentity) {

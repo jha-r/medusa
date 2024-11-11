@@ -1,5 +1,11 @@
 # @medusajs/core-flows
 
+## 2.0.3
+
+### Patch Changes
+
+- [#9977](https://github.com/medusajs/medusa/pull/9977) [`1bae311a293096c9a8019b825a2fcd07e1918632`](https://github.com/medusajs/medusa/commit/1bae311a293096c9a8019b825a2fcd07e1918632) Thanks [@carlos-r-l-rodrigues](https://github.com/carlos-r-l-rodrigues)! - Keep customer when updating cart
+
 ## 2.0.2
 
 ### Patch Changes
