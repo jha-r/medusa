@@ -1784,5 +1784,98 @@ medusaIntegrationTestRunner({
         ).toEqual("40.9")
       })
     })
+
+    describe("Customer group price list management", () => {
+      let customerGroup;
+      let priceList;
+      let customer;
+      let variantWithPriceList;
+
+      beforeEach(async () => {
+        // Create a customer group
+        const customerGroupResponse = await api.post(
+          "/admin/customer-groups",
+          {
+            name: "VIP Customers",
+          },
+          adminHeaders
+        )
+        customerGroup = customerGroupResponse.data.customer_group
+
+        // Create a price list associated with the customer group
+        const priceListResponse = await api.post(
+          "/admin/price-lists",
+          {
+            name: "VIP Pricing",
+            description: "Exclusive price list for VIP customers",
+            status: "active",
+            type: "sale",
+            rules: {
+              customer_group_id: [customerGroup.id],
+            },
+            prices: [
+              {
+                amount: 2500, 
+                currency_code: "usd",
+                variant_id: variant.id, 
+              },
+            ],
+          },
+          adminHeaders
+        )
+        priceList = priceListResponse.data.price_list
+
+        // Create a customer and add them to the customer group
+        const customerResponse = await api.post(
+          "/admin/customers",
+          {
+            email: "vip.client@example.com",
+            first_name: "VIP",
+            last_name: "Client",
+          },
+          adminHeaders
+        )
+        customer = customerResponse.data.customer
+
+        await api.post(
+          `/admin/customer-groups/${customerGroup.id}/customers`,
+          {
+            add: [customer.id],
+          },
+          adminHeaders
+        )
+      })
+
+      it("correctly applies price list for customer belonging to VIP group", async () => {
+        // Authenticate VIP customer if needed
+        const authResponse = await api.post(
+          "/store/auth",
+          {
+            email: "vip.client@example.com",
+            password: "securepassword",
+          },
+          storeHeaders
+        )
+
+        const storeAuthHeaders = {
+          headers: {
+            ...adminHeaders.headers,
+            "x-publishable-api-key": publishableKey.token,
+            Cookie: authResponse.headers["set-cookie"][0],
+          },
+        }
+
+        // Retrieve product for VIP customer
+        const response = await api.get(`/store/products/${product.id}`, storeAuthHeaders)
+
+        expect(response.status).toEqual(200)
+        expect(response.data.product).toHaveProperty("variants")
+
+        const variant = response.data.product.variants.find((v) => v.id === priceList.prices[0].variant_id)
+        expect(variant).toBeDefined()
+        expect(variant.calculated_price.amount).toEqual(2500) 
+        expect(variant.original_price).toEqual(3000) 
+      })
+    })
   },
 })
