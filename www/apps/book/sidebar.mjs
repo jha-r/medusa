@@ -385,8 +385,9 @@ export const sidebar = numberSidebarItems(
               title: "Events Data Payload",
             },
             {
+              type: "link",
               path: "/learn/advanced-development/events-and-subscribers/emit-event",
-              title: "Emit an Event",
+              title: "Emit Event",
             },
           ],
         },

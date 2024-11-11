@@ -35,7 +35,7 @@ export const generatedEditDates = {
   "app/learn/advanced-development/events-and-subscribers/data-payload/page.mdx": "2024-07-16T17:12:05+01:00",
   "app/learn/advanced-development/data-models/default-properties/page.mdx": "2024-09-19T07:32:06.118Z",
   "app/learn/advanced-development/workflows/advanced-example/page.mdx": "2024-09-11T10:46:59.975Z",
-  "app/learn/advanced-development/events-and-subscribers/emit-event/page.mdx": "2024-09-30T08:43:53.125Z",
+  "app/learn/advanced-development/events-and-subscribers/emit-event/page.mdx": "2024-11-11T15:17:58.045Z",
   "app/learn/advanced-development/workflows/conditions/page.mdx": "2024-09-30T08:43:53.128Z",
   "app/learn/advanced-development/modules/module-link-directions/page.mdx": "2024-07-24T09:16:01+02:00",
   "app/learn/advanced-development/admin/page.mdx": "2024-10-07T12:39:13.178Z",
