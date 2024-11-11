@@ -19,7 +19,6 @@ export const editProductVariantLoader = async ({
 }: LoaderFunctionArgs) => {
   const id = params.id
 
-  // get search params
   const searchParams = new URL(request.url).searchParams
   const searchVariantId = searchParams.get("variant_id")
 
