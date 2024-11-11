@@ -55,7 +55,7 @@ export const useExchangeItemTableColumns = (currencyCode: string) => {
           <ProductCell
             product={{
               thumbnail: row.original.thumbnail,
-              title: row.original.product_titl,
+              title: row.original.product_title,
             }}
           />
         ),
