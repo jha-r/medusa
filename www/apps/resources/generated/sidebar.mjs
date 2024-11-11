@@ -9057,14 +9057,6 @@ export const generatedSidebar = [
         "loaded": true,
         "isPathHref": true,
         "type": "link",
-        "path": "/upgrade-guides",
-        "title": "Upgrade Guides",
-        "children": []
-      },
-      {
-        "loaded": true,
-        "isPathHref": true,
-        "type": "link",
         "path": "/deployment",
         "title": "Deployment Guides",
         "isChildSidebar": true,
@@ -10674,6 +10666,14 @@ export const generatedSidebar = [
                     "loaded": true,
                     "isPathHref": true,
                     "type": "link",
+                    "path": "/references/medusa-workflows/linkCustomerGroupsToCustomerWorkflow",
+                    "title": "linkCustomerGroupsToCustomerWorkflow",
+                    "children": []
+                  },
+                  {
+                    "loaded": true,
+                    "isPathHref": true,
+                    "type": "link",
                     "path": "/references/medusa-workflows/linkCustomersToCustomerGroupWorkflow",
                     "title": "linkCustomersToCustomerGroupWorkflow",
                     "children": []
@@ -10707,6 +10707,14 @@ export const generatedSidebar = [
                     "type": "link",
                     "path": "/references/medusa-workflows/steps/deleteCustomerGroupStep",
                     "title": "deleteCustomerGroupStep",
+                    "children": []
+                  },
+                  {
+                    "loaded": true,
+                    "isPathHref": true,
+                    "type": "link",
+                    "path": "/references/medusa-workflows/steps/linkCustomerGroupsToCustomerStep",
+                    "title": "linkCustomerGroupsToCustomerStep",
                     "children": []
                   },
                   {

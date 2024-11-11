@@ -50,7 +50,11 @@ By following this example, you’ll have a marketplace with the following featur
 
 ## Step 1: Create Marketplace Module
 
-The first step is to create a marketplace module that holds the data models for a vendor and an admin. 
+Medusa creates commerce features in modules. For example, product features and data models are created in the Product Module.
+
+You also create custom commerce data models and features in custom modules. They're integrated into the Medusa application similar to Medusa's modules without side effects.
+
+So, you'll create a marketplace module that holds the data models for a vendor and an admin and allows you to manage them.
 
 Create the directory `src/modules/marketplace`.
 
@@ -157,6 +161,12 @@ module.exports = defineConfig({
 
 ## Step 2: Define Links to Product and Order Data Models
 
+Modules are isolated in Medusa, making them reusable, replaceable, and integrable in your application without side effects.
+
+So, you can't have relations between data models in modules. Instead, you define a link between them.
+
+Links are relations between data models of different modules that maintain the isolation between the modules.
+
 Each vendor has products and orders. So, in this step, you’ll define links between the `Vendor` data model and the `Product` and `Order` data models from the Product and Order modules, respectively.
 
 <Note title="Tip">
@@ -227,7 +237,9 @@ npx medusa db:migrate
 
 ## Step 4: Create Vendor Admin Workflow
 
-In this step, you’ll create the workflow used to create a vendor admin.
+To implement and expose a feature that manipulates data, you create a workflow that uses services to implement the functionality, then create an API route that executes that workflow.
+
+In this step, you’ll create the workflow used to create a vendor admin. You'll use it in the next step in an API route.
 
 The workflow’s steps are:
 
@@ -346,6 +358,8 @@ You return the created vendor admin.
 ---
 
 ## Step 5: Create Vendor API Route
+
+To expose custom commerce features to frontend applications, such as the Medusa Admin dashboard or a storefront, you expose an endpoint by creating an API route.
 
 In this step, you’ll create the API route that runs the workflow from the previous step.
 

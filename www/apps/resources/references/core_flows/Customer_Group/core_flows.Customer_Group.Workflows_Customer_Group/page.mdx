@@ -4,6 +4,7 @@ import { TypeList, WorkflowDiagram } from "docs-ui"
 
 - [createCustomerGroupsWorkflow](../../../modules/core_flows/page.mdx#createcustomergroupsworkflow)
 - [deleteCustomerGroupsWorkflow](../../../modules/core_flows/page.mdx#deletecustomergroupsworkflow)
+- [linkCustomerGroupsToCustomerWorkflow](../../../modules/core_flows/page.mdx#linkcustomergroupstocustomerworkflow)
 - [linkCustomersToCustomerGroupWorkflow](../../../modules/core_flows/page.mdx#linkcustomerstocustomergroupworkflow)
 - [updateCustomerGroupsWorkflow](../../../modules/core_flows/page.mdx#updatecustomergroupsworkflow)
 
@@ -36,6 +37,20 @@ This workflow deletes one or more customer groups.
 ### Input
 
 <TypeList types={[{"name":"DeleteCustomerGroupsWorkflowInput","type":"[DeleteCustomerGroupsWorkflowInput](../../types/core_flows.DeleteCustomerGroupsWorkflowInput/page.mdx)","optional":false,"defaultValue":"","description":"","expandable":false,"children":[{"name":"ids","type":"`string`[]","description":"","optional":false,"defaultValue":"","expandable":false,"children":[]}]}]} expandUrl="https://docs.medusajs.com/v2/advanced-development/data-models/manage-relationships#retrieve-records-of-relation" sectionTitle="deleteCustomerGroupsWorkflow"/>
+
+___
+
+## linkCustomerGroupsToCustomerWorkflow
+
+This workflow creates one or more links between a customer and customer groups.
+
+### Steps
+
+<WorkflowDiagram workflow={{"name":"linkCustomerGroupsToCustomerWorkflow","steps":[{"type":"step","name":"linkCustomerGroupsToCustomerStep","description":"This step creates one or more links between a customer and customer groups records.","link":"../../core_flows.Steps_Customer_Group/page.mdx#linkcustomergroupstocustomerstep","depth":1}]}} />
+
+### Input
+
+<TypeList types={[{"name":"LinkWorkflowInput","type":"[LinkWorkflowInput](../../../types/CommonTypes/types/types.CommonTypes.LinkWorkflowInput/page.mdx)","optional":false,"defaultValue":"","description":"","expandable":false,"children":[{"name":"id","type":"`string`","description":"","optional":false,"defaultValue":"","expandable":false,"children":[]},{"name":"add","type":"`string`[]","description":"","optional":true,"defaultValue":"","expandable":false,"children":[]},{"name":"remove","type":"`string`[]","description":"","optional":true,"defaultValue":"","expandable":false,"children":[]}]}]} expandUrl="https://docs.medusajs.com/v2/advanced-development/data-models/manage-relationships#retrieve-records-of-relation" sectionTitle="linkCustomerGroupsToCustomerWorkflow"/>
 
 ___
 

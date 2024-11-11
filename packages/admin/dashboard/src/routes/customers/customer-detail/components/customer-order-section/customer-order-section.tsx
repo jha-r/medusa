@@ -1,6 +1,6 @@
 import { ArrowPath } from "@medusajs/icons"
 import { HttpTypes } from "@medusajs/types"
-import { Button, Container, Heading } from "@medusajs/ui"
+import { Container, Heading } from "@medusajs/ui"
 import { keepPreviousData } from "@tanstack/react-query"
 import { createColumnHelper } from "@tanstack/react-table"
 import { useMemo } from "react"
@@ -17,6 +17,7 @@ type CustomerGeneralSectionProps = {
   customer: HttpTypes.AdminCustomer
 }
 
+const PREFIX = "cusord"
 const PAGE_SIZE = 10
 const DEFAULT_RELATIONS = "*customer,*items,*sales_channel"
 const DEFAULT_FIELDS =
@@ -29,6 +30,7 @@ export const CustomerOrderSection = ({
 
   const { searchParams, raw } = useOrderTableQuery({
     pageSize: PAGE_SIZE,
+    prefix: PREFIX,
   })
   const { orders, count, isLoading, isError, error } = useOrders(
     {
@@ -50,6 +52,7 @@ export const CustomerOrderSection = ({
     enablePagination: true,
     count,
     pageSize: PAGE_SIZE,
+    prefix: PREFIX,
   })
 
   if (isError) {
@@ -60,11 +63,12 @@ export const CustomerOrderSection = ({
     <Container className="divide-y p-0">
       <div className="flex items-center justify-between px-6 py-4">
         <Heading level="h2">{t("orders.domain")}</Heading>
-        <div className="flex items-center gap-x-2">
-          <Button size="small" variant="secondary">
-            {t("actions.create")}
-          </Button>
-        </div>
+        {/*TODO: ENABLE WHEN DRAFT ORDERS ARE DONE*/}
+        {/*<div className="flex items-center gap-x-2">*/}
+        {/*  <Button size="small" variant="secondary">*/}
+        {/*    {t("actions.create")}*/}
+        {/*  </Button>*/}
+        {/*</div>*/}
       </div>
       <DataTable
         columns={columns}
@@ -82,6 +86,7 @@ export const CustomerOrderSection = ({
         ]}
         search={true}
         queryObject={raw}
+        prefix={PREFIX}
       />
     </Container>
   )
@@ -115,10 +120,11 @@ const useColumns = () => {
   return useMemo(
     () => [
       ...base,
-      columnHelper.display({
-        id: "actions",
-        cell: ({ row }) => <CustomerOrderActions order={row.original} />,
-      }),
+      // TODO: REENABLE WHEN TRANSFER OWNERSHIP IS IMPLEMENTED
+      // columnHelper.display({
+      //   id: "actions",
+      //   cell: ({ row }) => <CustomerOrderActions order={row.original} />,
+      // }),
     ],
     [base]
   )
