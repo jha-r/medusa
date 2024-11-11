@@ -6,6 +6,7 @@ import { addHours, atMidnight, dateToUnixTimestamp } from "../../../utils/time"
 
 import clsx from "clsx"
 import moment from "moment"
+import { useTranslation } from "react-i18next"
 import { DateFilters } from "../../../utils/filters"
 import { CalendarComponent } from "../../atoms/date-picker/date-picker"
 import Spinner from "../../atoms/spinner"
@@ -31,6 +32,7 @@ const FilterDropdownItem = ({
   onShowNext,
   onShowPrev,
 }) => {
+  const { t } = useTranslation()
   const prefilled = useMemo(() => {
     try {
       const toReturn = filters.reduce((acc, f) => {
@@ -148,7 +150,7 @@ const FilterDropdownItem = ({
             <div className="flex items-center justify-center py-1">
               <Spinner size={"large"} variant={"secondary"} />
             </div>
-          ) : filterTitle === "Date" ? (
+          ) : filterTitle === t("order-filter-dropdown-date", "Date") ? (
             <DateFilter
               options={options}
               open={open}
