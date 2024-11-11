@@ -1,5 +1,11 @@
 # @medusajs/payment-stripe
 
+## 2.0.3
+
+### Patch Changes
+
+- [#9789](https://github.com/medusajs/medusa/pull/9789) [`6ead7bf92d69036c7900bf5b1a8af67bbd7585ae`](https://github.com/medusajs/medusa/commit/6ead7bf92d69036c7900bf5b1a8af67bbd7585ae) Thanks [@oDestroyeRo](https://github.com/oDestroyeRo)! - feat(stripe): add promptpay
+
 ## 2.0.2
 
 ## 2.0.1
