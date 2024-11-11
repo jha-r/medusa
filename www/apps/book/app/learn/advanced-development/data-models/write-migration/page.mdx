@@ -68,3 +68,21 @@ npx medusa db:migrate
 ```
 
 This reflects the changes in the database as implemented in the migration's `up` method.
+
+---
+
+## Rollback the Migration
+
+To rollback or revert the last migration you ran for a module, run the following command:
+
+```bash
+npx medusa db:rollback helloModuleService
+```
+
+This rolls back the last ran migration on the Hello Module.
+
+---
+
+## More Database Commands
+
+To learn more about the Medusa CLI's database commands, refer to [this CLI reference](!resources!/medusa-cli/commands/db).

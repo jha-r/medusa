@@ -60,6 +60,7 @@ export const POST = async (
         type: error.type,
       },
     })
+    return;
   }
 
   const { data } = await query.graph({

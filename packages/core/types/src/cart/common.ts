@@ -609,6 +609,11 @@ export interface CartLineItemDTO extends CartLineItemTotalsDTO {
   product_type?: string
 
   /**
+   * The type of the associated product.
+   */
+  product_type_id?: string
+
+  /**
    * The collection of the associated product.
    */
   product_collection?: string

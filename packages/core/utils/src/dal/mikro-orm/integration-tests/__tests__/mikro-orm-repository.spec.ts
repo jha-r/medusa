@@ -162,6 +162,42 @@ describe("mikroOrmRepository", () => {
     await orm.close(true)
   })
 
+  it("should successfully update a many to many collection providing an empty array", async () => {
+    const entity1 = {
+      id: "1",
+      title: "en1",
+      entity3: [{ title: "en3-1" }, { title: "en3-2" }],
+    }
+
+    let manager = orm.em.fork()
+    await manager1().create([entity1], { transactionManager: manager })
+    await manager.flush()
+
+    const [createdEntity1] = await manager1().find({
+      where: { id: "1" },
+      options: { populate: ["entity3"] },
+    })
+
+    expect(createdEntity1.entity3.getItems()).toHaveLength(2)
+
+    manager = orm.em.fork()
+    await manager1().update(
+      [{ entity: createdEntity1, update: { entity3: [] } }],
+      {
+        transactionManager: manager,
+      }
+    )
+    await manager.flush()
+
+    const updatedEntity1 = await manager1().find({
+      where: { id: "1" },
+      options: { populate: ["entity3"] },
+    })
+
+    expect(updatedEntity1).toHaveLength(1)
+    expect(updatedEntity1[0].entity3.getItems()).toHaveLength(0)
+  })
+
   describe("upsert with replace", () => {
     it("should successfully create a flat entity", async () => {
       const entity1 = { id: "1", title: "en1", amount: 100 }

@@ -2093,11 +2093,6 @@ export const sidebar = sidebarAttachHrefCommonOptions([
       },
       {
         type: "link",
-        path: "/upgrade-guides",
-        title: "Upgrade Guides",
-      },
-      {
-        type: "link",
         path: "/deployment",
         title: "Deployment Guides",
         isChildSidebar: true,
