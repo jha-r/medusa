@@ -44,11 +44,10 @@ export const queryKeysFactory = <
     lists: () => [...queryKeyFactory.all, "list"],
     list: (query?: TListQueryType) => [...queryKeyFactory.lists(), { query }],
     details: () => [...queryKeyFactory.all, "detail"],
-    detail: (id: TDetailQueryType, query?: TListQueryType) => [
-      ...queryKeyFactory.details(),
-      id,
-      { query },
-    ],
+    detail: (id: TDetailQueryType, query?: TListQueryType) =>
+      [...queryKeyFactory.details(), id, query ? { query } : undefined].filter(
+        (k) => !!k
+      ),
   }
   return queryKeyFactory
 }
