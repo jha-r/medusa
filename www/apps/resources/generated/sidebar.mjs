@@ -10215,14 +10215,6 @@ export const generatedSidebar = [
                     "loaded": true,
                     "isPathHref": true,
                     "type": "link",
-                    "path": "/references/medusa-workflows/steps/getItemTaxLinesStep",
-                    "title": "getItemTaxLinesStep",
-                    "children": []
-                  },
-                  {
-                    "loaded": true,
-                    "isPathHref": true,
-                    "type": "link",
                     "path": "/references/medusa-workflows/steps/getLineItemActionsStep",
                     "title": "getLineItemActionsStep",
                     "children": []
@@ -12285,14 +12277,6 @@ export const generatedSidebar = [
                     "type": "link",
                     "path": "/references/medusa-workflows/steps/deleteReturnsStep",
                     "title": "deleteReturnsStep",
-                    "children": []
-                  },
-                  {
-                    "loaded": true,
-                    "isPathHref": true,
-                    "type": "link",
-                    "path": "/references/medusa-workflows/steps/getOrderItemTaxLinesStep",
-                    "title": "getOrderItemTaxLinesStep",
                     "children": []
                   },
                   {

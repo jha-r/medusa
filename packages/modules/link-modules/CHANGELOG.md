@@ -1,5 +1,13 @@
 # @medusajs/link-modules
 
+## 2.0.4
+
+## 2.0.3
+
+### Patch Changes
+
+- [#9955](https://github.com/medusajs/medusa/pull/9955) [`03f4b66b90625634f13409be35cd57081f0eb7d5`](https://github.com/medusajs/medusa/commit/03f4b66b90625634f13409be35cd57081f0eb7d5) Thanks [@carlos-r-l-rodrigues](https://github.com/carlos-r-l-rodrigues)! - Generate graph schema with readonly links
+
 ## 2.0.2
 
 ## 2.0.1

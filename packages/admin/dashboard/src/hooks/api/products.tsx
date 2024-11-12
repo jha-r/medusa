@@ -87,16 +87,21 @@ export const useDeleteProductOption = (
 export const useProductVariant = (
   productId: string,
   variantId: string,
-  query?: Record<string, any>,
+  query?: HttpTypes.AdminProductVariantParams,
   options?: Omit<
-    UseQueryOptions<any, FetchError, any, QueryKey>,
+    UseQueryOptions<
+      HttpTypes.AdminProductVariantResponse,
+      FetchError,
+      HttpTypes.AdminProductVariantResponse,
+      QueryKey
+    >,
     "queryFn" | "queryKey"
   >
 ) => {
   const { data, ...rest } = useQuery({
     queryFn: () =>
       sdk.admin.product.retrieveVariant(productId, variantId, query),
-    queryKey: variantsQueryKeys.detail(variantId),
+    queryKey: variantsQueryKeys.detail(variantId, query),
     ...options,
   })
 
@@ -238,7 +243,7 @@ export const useProduct = (
 ) => {
   const { data, ...rest } = useQuery({
     queryFn: () => sdk.admin.product.retrieve(id, query),
-    queryKey: productsQueryKeys.detail(id),
+    queryKey: productsQueryKeys.detail(id, query),
     ...options,
   })
 

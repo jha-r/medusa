@@ -70,9 +70,9 @@ export const AddClaimItemsTable = ({
     if (q) {
       results = results.filter((i) => {
         return (
-          i.variant.product.title.toLowerCase().includes(q.toLowerCase()) ||
-          i.variant.title.toLowerCase().includes(q.toLowerCase()) ||
-          i.variant.sku?.toLowerCase().includes(q.toLowerCase())
+          i.product_title.toLowerCase().includes(q.toLowerCase()) ||
+          i.variant_title.toLowerCase().includes(q.toLowerCase()) ||
+          i.variant_sku?.toLowerCase().includes(q.toLowerCase())
         )
       })
     }
@@ -173,14 +173,14 @@ const sortItems = (
     let bValue: any
 
     if (field === "product_title") {
-      aValue = a.variant.product.title
-      bValue = b.variant.product.title
+      aValue = a.product_title
+      bValue = b.product_title
     } else if (field === "variant_title") {
-      aValue = a.variant.title
-      bValue = b.variant.title
+      aValue = a.variant_title
+      bValue = b.variant_title
     } else if (field === "sku") {
-      aValue = a.variant.sku
-      bValue = b.variant.sku
+      aValue = a.variant_sku
+      bValue = b.variant_sku
     } else if (field === "returnable_quantity") {
       aValue = a.quantity - (a.returned_quantity || 0)
       bValue = b.quantity - (b.returned_quantity || 0)

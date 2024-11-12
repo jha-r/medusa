@@ -11441,8 +11441,8 @@ paths:
           in: query
           description: |-
             Comma-separated fields that should be included in the returned data.
-             * if a field is prefixed with `+` it will be added to the default fields, using `-` will remove it from the default fields.
-             * without prefix it will replace the entire default fields.
+            if a field is prefixed with `+` it will be added to the default fields, using `-` will remove it from the default fields.
+            without prefix it will replace the entire default fields.
           required: false
           schema:
             type: string
@@ -43651,7 +43651,7 @@ components:
           type: array
           description: The product variants to update.
           items:
-            $ref: '#/components/schemas/AdminUpdateProductVariant'
+            $ref: '#/components/schemas/AdminBatchUpdateProductVariant'
         delete:
           type: array
           description: The product variants to delete.
@@ -43702,6 +43702,92 @@ components:
               type: boolean
               title: deleted
               description: Whether the product variants were deleted.
+    AdminBatchUpdateProductVariant:
+      type: object
+      description: The properties to update of a product variant.
+      x-schemaName: AdminBatchUpdateProductVariant
+      properties:
+        title:
+          type: string
+          title: title
+          description: The product variant's title.
+        sku:
+          type: string
+          title: sku
+          description: The product variant's SKU.
+        ean:
+          type: string
+          title: ean
+          description: The product variant's EAN.
+        upc:
+          type: string
+          title: upc
+          description: The product variant's UPC.
+        barcode:
+          type: string
+          title: barcode
+          description: The product variant's barcode.
+        hs_code:
+          type: string
+          title: hs_code
+          description: The product variant's HS code.
+        mid_code:
+          type: string
+          title: mid_code
+          description: The product variant's MID code.
+        allow_backorder:
+          type: boolean
+          title: allow_backorder
+          description: Whether customers can order the variant even if it's not in stock.
+        manage_inventory:
+          type: boolean
+          title: manage_inventory
+          description: Whether the Medusa application manages the variant's inventory. If disabled, the product variant is always considered in stock.
+        variant_rank:
+          type: number
+          title: variant_rank
+          description: The product variant's rank among its siblings.
+        weight:
+          type: number
+          title: weight
+          description: The product variant's weight.
+        length:
+          type: number
+          title: length
+          description: The product variant's length.
+        height:
+          type: number
+          title: height
+          description: The product variant's height.
+        width:
+          type: number
+          title: width
+          description: The product variant's width.
+        origin_country:
+          type: string
+          title: origin_country
+          description: The product variant's origin country.
+        material:
+          type: string
+          title: material
+          description: The product variant's material.
+        metadata:
+          type: object
+          description: The product variant's metadata, can hold custom key-value pairs.
+        prices:
+          type: array
+          description: The product variant's prices.
+          items:
+            $ref: '#/components/schemas/AdminCreateProductVariantPrice'
+        options:
+          type: object
+          description: The product variant's options.
+        id:
+          type: string
+          title: id
+          description: The update's ID.
+      required:
+        - id
     AdminCampaign:
       type: object
       description: The campaign's details.
@@ -48352,7 +48438,7 @@ components:
         product_type_id:
           type: string
           title: product_type_id
-          description: The item's product type id.
+          description: The ID of the associated product's type.
     AdminOrderPreview:
       type: object
       description: A preview of an order if a change, such as exchange, return, edit, or claim is applied on it.
@@ -55950,7 +56036,7 @@ components:
         product_type_id:
           type: string
           title: product_type_id
-          description: The item's product type id.
+          description: The ID of the associated product's type.
     BaseOrderLineItemAdjustment:
       type: object
       description: The adjustment's details.
@@ -58344,7 +58430,7 @@ components:
         display_id:
           type: number
           title: display_id
-          description: The order's display id.
+          description: The order's display ID.
     OrderAddress:
       type: object
       description: The address's details.
@@ -58807,19 +58893,8 @@ components:
           title: no_notification
           description: Whether to send the customer notifications when the exchange is updated.
         difference_due:
-          oneOf:
-            - type: string
-              title: difference_due
-              description: The exchange's difference due.
-            - type: number
-              title: difference_due
-              description: The exchange's difference due.
-            - type: string
-              title: difference_due
-              description: The exchange's difference due.
-            - type: number
-              title: difference_due
-              description: The exchange's difference due.
+          type: number
+          title: difference_due
           description: The amount to be exchanged or refunded. If the amount is negative, it must be refunded. If positive, additional payment is required from the customer.
         return:
           $ref: '#/components/schemas/Return'
@@ -59171,7 +59246,7 @@ components:
         product_type_id:
           type: string
           title: product_type_id
-          description: The item's product type id.
+          description: The ID of the associated product's type.
     OrderLineItemAdjustment:
       type: object
       description: The line item adjustment's details.
@@ -59702,19 +59777,8 @@ components:
             - received
             - partially_received
         refund_amount:
-          oneOf:
-            - type: string
-              title: refund_amount
-              description: The return order's refund amount.
-            - type: number
-              title: refund_amount
-              description: The return order's refund amount.
-            - type: string
-              title: refund_amount
-              description: The return order's refund amount.
-            - type: number
-              title: refund_amount
-              description: The return order's refund amount.
+          type: number
+          title: refund_amount
           description: The amount refunded by this return.
         order_id:
           type: string
@@ -65691,7 +65755,7 @@ components:
         product_type_id:
           type: string
           title: product_type_id
-          description: The item's product type id.
+          description: The ID of the associated product's type.
     StoreOrderResponse:
       type: object
       description: The order's details.
@@ -68561,7 +68625,7 @@ components:
           description: The customer's phone.
         metadata:
           type: object
-          description: The customer's metadata.
+          description: The customer's metadata, can hold custom key-value pairs.
     UpdateAddress:
       type: object
       description: The details to update in the address.

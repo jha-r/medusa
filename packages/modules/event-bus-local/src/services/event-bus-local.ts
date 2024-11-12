@@ -9,6 +9,7 @@ import {
 } from "@medusajs/framework/types"
 import { AbstractEventBusModuleService } from "@medusajs/framework/utils"
 import { EventEmitter } from "events"
+import { setTimeout } from "timers/promises"
 import { ulid } from "ulid"
 
 type InjectedDependencies = {
@@ -69,7 +70,10 @@ export default class LocalEventBusService extends AbstractEventBusModuleService 
         )
       }
 
-      await this.groupOrEmitEvent(eventData)
+      await this.groupOrEmitEvent({
+        ...eventData,
+        options,
+      })
     }
   }
 
@@ -86,7 +90,13 @@ export default class LocalEventBusService extends AbstractEventBusModuleService 
       await this.groupEvent(eventGroupId, eventData)
     } else {
       const { options, ...eventBody } = eventData
-      this.eventEmitter_.emit(eventData.name, eventBody)
+
+      const options_ = options as { delay: number }
+      const delay = options?.delay ? setTimeout : async () => {}
+
+      delay(options_?.delay).then(() =>
+        this.eventEmitter_.emit(eventData.name, eventBody)
+      )
     }
   }
 
@@ -108,7 +118,12 @@ export default class LocalEventBusService extends AbstractEventBusModuleService 
     for (const event of groupedEvents) {
       const { options, ...eventBody } = event
 
-      this.eventEmitter_.emit(event.name, eventBody)
+      const options_ = options as { delay: number }
+      const delay = options?.delay ? setTimeout : async () => {}
+
+      delay(options_?.delay).then(() =>
+        this.eventEmitter_.emit(event.name, eventBody)
+      )
     }
 
     await this.clearGroupedEvents(eventGroupId)

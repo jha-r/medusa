@@ -197,7 +197,7 @@
  *   product_type_id:
  *     type: string
  *     title: product_type_id
- *     description: The item's product type id.
+ *     description: The ID of the associated product's type.
  * 
 */
 

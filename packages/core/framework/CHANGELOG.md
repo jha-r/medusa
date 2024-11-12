@@ -1,5 +1,31 @@
 # @medusajs/framework
 
+## 2.0.4
+
+### Patch Changes
+
+- Updated dependencies [[`34f4f695c0b8359a6e9efd45fd081ea743a1c439`](https://github.com/medusajs/medusa/commit/34f4f695c0b8359a6e9efd45fd081ea743a1c439), [`bc2d556c2c57adab637308fb65247b17b8cd2ed5`](https://github.com/medusajs/medusa/commit/bc2d556c2c57adab637308fb65247b17b8cd2ed5)]:
+  - @medusajs/types@2.0.4
+  - @medusajs/modules-sdk@2.0.4
+  - @medusajs/orchestration@2.0.4
+  - @medusajs/utils@2.0.4
+  - @medusajs/workflows-sdk@2.0.4
+  - @medusajs/telemetry@2.0.4
+
+## 2.0.3
+
+### Patch Changes
+
+- [#9979](https://github.com/medusajs/medusa/pull/9979) [`6496789c65a032b7c83f5b2a9c285c2620d4288a`](https://github.com/medusajs/medusa/commit/6496789c65a032b7c83f5b2a9c285c2620d4288a) Thanks [@carlos-r-l-rodrigues](https://github.com/carlos-r-l-rodrigues)! - Exclude nested fields when excluding field from endpoint
+
+- Updated dependencies [[`03f4b66b90625634f13409be35cd57081f0eb7d5`](https://github.com/medusajs/medusa/commit/03f4b66b90625634f13409be35cd57081f0eb7d5)]:
+  - @medusajs/types@2.0.3
+  - @medusajs/utils@2.0.3
+  - @medusajs/modules-sdk@2.0.3
+  - @medusajs/orchestration@2.0.3
+  - @medusajs/workflows-sdk@2.0.3
+  - @medusajs/telemetry@2.0.3
+
 ## 2.0.2
 
 ### Patch Changes
