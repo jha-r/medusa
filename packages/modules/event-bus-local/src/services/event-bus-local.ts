@@ -70,7 +70,10 @@ export default class LocalEventBusService extends AbstractEventBusModuleService 
         )
       }
 
-      await this.groupOrEmitEvent(eventData)
+      await this.groupOrEmitEvent({
+        ...eventData,
+        options,
+      })
     }
   }
 
