@@ -26,7 +26,7 @@ const jsSdkOptions: FormattingOptionsType = {
   },
   "^js_sdk/store/Store/properties/": {
     frontmatterData: {
-      slug: "/references/js-sdk/admin/{{alias}}",
+      slug: "/references/js-sdk/store/{{alias}}",
       sidebar_label: "{{alias}}",
     },
     reflectionTitle: {
