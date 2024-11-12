@@ -14,7 +14,7 @@ This chapter covers how to extend the Create Product API route to link a product
 
 ## Additional Data in API Routes
 
-Some API routes, including the [Create Product API route](https://docs.medusajs.com/v2/api/admin#products_postproducts), accept an `additional_data` request body parameter.
+Some API routes, including the [Create Product API route](!api!/admin#products_postproducts), accept an `additional_data` request body parameter.
 
 It's useful when you want to pass custom data, such as the brand ID, then perform an action based on this data, such as link the brand to the product.
 
@@ -94,7 +94,7 @@ import BrandModuleService from "../../modules/brand/service"
 
 createProductsWorkflow.hooks.productsCreated(
   (async ({ products, additional_data }, { container }) => {
-    if (!additional_data.brand_id) {
+    if (!additional_data?.brand_id) {
       return new StepResponse([], [])
     }
 
@@ -215,7 +215,7 @@ In the Medusa application's logs, you'll find the message `Linked brand to produ
 
 ---
 
-## Worflows and API Routes References
+## Workflows and API Routes References
 
 Medusa exposes hooks in many of its workflows that you can consume to add custom logic.
 

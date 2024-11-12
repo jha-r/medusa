@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from "express"
-import { ZodObject } from "zod"
+import { ZodNullable, ZodObject, ZodOptional } from "zod"
 
 import {
   FindConfig,
@@ -7,6 +7,7 @@ import {
   RequestQueryFields,
 } from "@medusajs/types"
 import { MedusaContainer } from "../container"
+import { RestrictedFields } from "./utils/restricted-fields"
 
 /**
  * List of all the supported HTTP methods
@@ -135,6 +136,9 @@ export interface MedusaRequest<Body = unknown>
   session?: any
   rawBody?: any
   requestId?: string
+
+  restrictedFields?: RestrictedFields
+
   /**
    * An object that carries the context that is used to calculate prices for variants
    */
@@ -148,7 +152,7 @@ export interface MedusaRequest<Body = unknown>
    * Custom validator to validate the `additional_data` property in
    * requests that allows for additional_data
    */
-  additionalDataValidator?: ZodObject<any, any>
+  additionalDataValidator?: ZodOptional<ZodNullable<ZodObject<any, any>>>
 }
 
 export interface AuthContext {

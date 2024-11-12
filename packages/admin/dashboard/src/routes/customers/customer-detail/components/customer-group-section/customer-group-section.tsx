@@ -28,12 +28,14 @@ import { useCustomerGroupTableQuery } from "../../../../../hooks/table/query/use
 import { useDataTable } from "../../../../../hooks/use-data-table.tsx"
 import { sdk } from "../../../../../lib/client/index.ts"
 import { queryClient } from "../../../../../lib/query-client.ts"
+import { useBatchCustomerCustomerGroups } from "../../../../../hooks/api"
 
 type CustomerGroupSectionProps = {
   customer: HttpTypes.AdminCustomer
 }
 
 const PAGE_SIZE = 10
+const PREFIX = "cusgr"
 
 export const CustomerGroupSection = ({
   customer,
@@ -43,6 +45,7 @@ export const CustomerGroupSection = ({
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({})
   const { raw, searchParams } = useCustomerGroupTableQuery({
     pageSize: PAGE_SIZE,
+    prefix: PREFIX,
   })
 
   const { customer_groups, count, isLoading, isError, error } =
@@ -57,6 +60,9 @@ export const CustomerGroupSection = ({
       }
     )
 
+  const { mutateAsync: batchCustomerCustomerGroups } =
+    useBatchCustomerCustomerGroups(customer.id)
+
   const filters = useCustomerGroupTableFilters()
   const columns = useColumns(customer.id)
 
@@ -68,6 +74,7 @@ export const CustomerGroupSection = ({
     enablePagination: true,
     enableRowSelection: true,
     pageSize: PAGE_SIZE,
+    prefix: PREFIX,
     rowSelection: {
       state: rowSelection,
       updater: setRowSelection,
@@ -94,20 +101,15 @@ export const CustomerGroupSection = ({
     }
 
     try {
-      /**
-       * TODO: use this for now until add customer groups to customers batch is implemented
-       */
-      const promises = customerGroupIds.map((id) =>
-        sdk.admin.customerGroup.batchCustomers(id, {
-          remove: [customer.id],
+      await batchCustomerCustomerGroups({ remove: customerGroupIds })
+
+      toast.success(
+        t("customers.groups.removed.success", {
+          groups: customer_groups!
+            .filter((cg) => customerGroupIds.includes(cg.id))
+            .map((cg) => cg?.name),
         })
       )
-
-      await Promise.all(promises)
-
-      await queryClient.invalidateQueries({
-        queryKey: customerGroupsQueryKeys.lists(),
-      })
     } catch (e) {
       toast.error(e.message)
     }
@@ -133,11 +135,16 @@ export const CustomerGroupSection = ({
         pageSize={PAGE_SIZE}
         isLoading={isLoading}
         count={count}
+        prefix={PREFIX}
         navigateTo={(row) => `/customer-groups/${row.id}`}
         filters={filters}
         search
         pagination
-        orderBy={["name", "created_at", "updated_at"]}
+        orderBy={[
+          { key: "name", label: t("fields.name") },
+          { key: "created_at", label: t("fields.createdAt") },
+          { key: "updated_at", label: t("fields.updatedAt") },
+        ]}
         commands={[
           {
             action: handleRemove,

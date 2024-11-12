@@ -73,14 +73,14 @@ const UnfulfilledItem = ({
           >
             {item.title}
           </Text>
-          {item.variant.sku && (
+          {item.variant_sku && (
             <div className="flex items-center gap-x-1">
-              <Text size="small">{item.variant.sku}</Text>
-              <Copy content={item.variant.sku} className="text-ui-fg-muted" />
+              <Text size="small">{item.variant_sku}</Text>
+              <Copy content={item.variant_sku} className="text-ui-fg-muted" />
             </div>
           )}
           <Text size="small">
-            {item.variant.options.map((o) => o.value).join(" · ")}
+            {item.variant?.options.map((o) => o.value).join(" · ")}
           </Text>
         </div>
       </div>
@@ -117,7 +117,6 @@ const UnfulfilledItemBreakdown = ({ order }: { order: AdminOrder }) => {
   const unfulfilledItemsWithoutShipping = order.items!.filter(
     (i) => !i.requires_shipping && i.detail.fulfilled_quantity < i.quantity
   )
-
 
   return (
     <>
@@ -428,7 +427,7 @@ const Fulfillment = ({
       </div>
 
       {(showShippingButton || showDeliveryButton) && (
-        <div className="bg-ui-bg-subtle flex items-center justify-end rounded-b-xl px-4 py-4 gap-x-2">
+        <div className="bg-ui-bg-subtle flex items-center justify-end gap-x-2 rounded-b-xl px-4 py-4">
           {showDeliveryButton && (
             <Button onClick={handleMarkAsDelivered} variant="secondary">
               {t("orders.fulfillment.markAsDelivered")}

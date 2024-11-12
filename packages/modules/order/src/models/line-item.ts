@@ -36,6 +36,13 @@ const ProductIdIndex = createPsqlIndexStatementHelper({
   where: "deleted_at IS NOT NULL",
 })
 
+const ProductTypeIdIndex = createPsqlIndexStatementHelper({
+  name: "IDX_line_item_product_type_id",
+  tableName: "order_line_item",
+  columns: "product_type_id",
+  where: "deleted_at IS NOT NULL AND product_type_id IS NOT NULL",
+}).MikroORMIndex
+
 const VariantIdIndex = createPsqlIndexStatementHelper({
   tableName: "order_line_item",
   columns: "variant_id",
@@ -84,6 +91,10 @@ export default class OrderLineItem {
 
   @Property({ columnType: "text", nullable: true })
   product_type: string | null = null
+
+  @ProductTypeIdIndex()
+  @Property({ columnType: "text", nullable: true })
+  product_type_id: string | null = null
 
   @Property({ columnType: "text", nullable: true })
   product_collection: string | null = null

@@ -7,6 +7,7 @@ export const OrderProduct: ModuleJoinerConfig = {
   extends: [
     {
       serviceName: Modules.ORDER,
+      entity: "OrderLineItem",
       relationship: {
         serviceName: Modules.PRODUCT,
         entity: "Product",
@@ -20,6 +21,7 @@ export const OrderProduct: ModuleJoinerConfig = {
     },
     {
       serviceName: Modules.ORDER,
+      entity: "OrderLineItem",
       relationship: {
         serviceName: Modules.PRODUCT,
         entity: "ProductVariant",
@@ -33,6 +35,7 @@ export const OrderProduct: ModuleJoinerConfig = {
     },
     {
       serviceName: Modules.PRODUCT,
+      entity: "ProductVariant",
       relationship: {
         serviceName: Modules.ORDER,
         entity: "OrderLineItem",

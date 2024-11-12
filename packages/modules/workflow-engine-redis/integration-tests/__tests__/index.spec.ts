@@ -15,13 +15,13 @@ import {
   TransactionHandlerType,
   TransactionStepState,
 } from "@medusajs/framework/utils"
-import { asValue } from "awilix"
 import { moduleIntegrationTestRunner } from "@medusajs/test-utils"
+import { asValue } from "awilix"
 import { setTimeout } from "timers/promises"
+import { WorkflowsModuleService } from "../../src/services"
 import "../__fixtures__"
 import { createScheduled } from "../__fixtures__/workflow_scheduled"
 import { TestDatabase } from "../utils"
-import { WorkflowsModuleService } from "../../src/services"
 
 jest.setTimeout(999900000)
 
@@ -165,6 +165,98 @@ moduleIntegrationTestRunner<IWorkflowEngineService>({
           })
 
           expect(executionsList).toHaveLength(1)
+        })
+
+        it("should return a list of failed workflow executions and keep it saved when there is a retentionTime set", async () => {
+          await workflowOrcModule.run("workflow_2", {
+            input: {
+              value: "123",
+            },
+            transactionId: "transaction_1",
+          })
+
+          let executionsList = await query({
+            workflow_executions: {
+              fields: ["id"],
+            },
+          })
+
+          expect(executionsList).toHaveLength(1)
+
+          await workflowOrcModule.setStepFailure({
+            idempotencyKey: {
+              action: TransactionHandlerType.INVOKE,
+              stepId: "new_step_name",
+              workflowId: "workflow_2",
+              transactionId: "transaction_1",
+            },
+            stepResponse: { uhuuuu: "yeaah!" },
+          })
+
+          executionsList = await query({
+            workflow_executions: {
+              fields: ["id", "state"],
+            },
+          })
+
+          expect(executionsList).toHaveLength(1)
+          expect(executionsList[0].state).toEqual("reverted")
+        })
+
+        it("should throw if setStepFailure fails", async () => {
+          const { acknowledgement } = await workflowOrcModule.run(
+            "workflow_2_revert_fail",
+            {
+              input: {
+                value: "123",
+              },
+            }
+          )
+
+          let done = false
+          void workflowOrcModule.subscribe({
+            workflowId: "workflow_2_revert_fail",
+            transactionId: acknowledgement.transactionId,
+            subscriber: (event) => {
+              if (event.eventType === "onFinish") {
+                done = true
+              }
+            },
+          })
+
+          let executionsList = await query({
+            workflow_executions: {
+              fields: ["id"],
+            },
+          })
+
+          expect(executionsList).toHaveLength(1)
+
+          const setStepError = await workflowOrcModule
+            .setStepFailure({
+              idempotencyKey: {
+                action: TransactionHandlerType.INVOKE,
+                stepId: "broken_step_2",
+                workflowId: "workflow_2_revert_fail",
+                transactionId: acknowledgement.transactionId,
+              },
+              stepResponse: { uhuuuu: "yeaah!" },
+            })
+            .catch((e) => {
+              return e
+            })
+
+          expect(setStepError).toEqual({ uhuuuu: "yeaah!" })
+
+          executionsList = await query({
+            workflow_executions: {
+              fields: ["id", "state", "context"],
+            },
+          })
+
+          expect(executionsList).toHaveLength(1)
+          expect(executionsList[0].state).toEqual("failed")
+          expect(done).toBe(true)
         })
 
         it("should revert the entire transaction when a step timeout expires", async () => {

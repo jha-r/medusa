@@ -58,6 +58,7 @@ const customOptions: Record<string, Partial<TypeDocOptions>> = {
     tsConfigName: "js-sdk.json",
     name: "js-sdk",
     enableInternalResolve: true,
+    exclude: [...(baseOptions.exclude || []), "**/dist/**"],
   }),
   "helper-steps": getOptions({
     entryPointPath: "packages/core/core-flows/src/common/index.ts",
@@ -135,7 +136,12 @@ const customOptions: Record<string, Partial<TypeDocOptions>> = {
     enableInternalResolve: true,
     exclude: [
       ...(baseOptions.exclude || []),
-      ...modules.map((moduleName) => `**/${moduleName}/**/!(workflows).ts`),
+      ...modules.map((moduleName) =>
+        path.join(
+          rootPathPrefix,
+          `packages/core/types/src/${moduleName}/**/!(workflows).ts`
+        )
+      ),
     ],
   }),
   "modules-sdk": getOptions({

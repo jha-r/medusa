@@ -59,6 +59,8 @@ export default async function ({
           user_id: user.id,
         },
       })
+
+      logger.info("User created successfully.")
     }
   } catch (err) {
     console.error(err)

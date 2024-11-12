@@ -60,7 +60,6 @@ export const createRouteMap = (
   }
 
   routes.forEach(({ path, Component }) => {
-    // Remove the ignore segment from the path if it is provided
     const cleanedPath = ignore
       ? path.replace(ignore, "").replace(/^\/+/, "")
       : path.replace(/^\/+/, "")

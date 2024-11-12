@@ -11,7 +11,7 @@ export interface AdminBatchProductRequest
 export interface AdminBatchProductVariantRequest
   extends BatchMethodRequest<
     AdminCreateProductVariant,
-    AdminUpdateProductVariant
+    AdminBatchUpdateProductVariant
   > {}
 
 export interface AdminBatchProductVariantInventoryItemRequest
@@ -69,6 +69,7 @@ export interface AdminCreateProduct {
   handle?: string
   status?: ProductStatus
   type_id?: string
+  external_id?: string
   collection_id?: string
   categories?: { id: string }[]
   tags?: { id: string }[]
@@ -108,6 +109,10 @@ export interface AdminUpdateProductVariant {
   options?: Record<string, string>
 }
 
+export interface AdminBatchUpdateProductVariant extends AdminUpdateProductVariant {
+  id: string
+}
+
 export interface AdminUpdateProduct {
   title?: string
   subtitle?: string | null
@@ -119,6 +124,7 @@ export interface AdminUpdateProduct {
   handle?: string
   status?: ProductStatus
   type_id?: string | null
+  external_id?: string | null
   collection_id?: string | null
   categories?: { id: string }[]
   tags?: { id: string }[]

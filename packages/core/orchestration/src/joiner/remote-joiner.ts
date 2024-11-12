@@ -10,8 +10,10 @@ import {
 } from "@medusajs/types"
 import {
   deduplicate,
+  FilterOperatorMap,
   GraphQLUtils,
   isDefined,
+  isObject,
   isString,
   MedusaError,
 } from "@medusajs/utils"
@@ -440,9 +442,15 @@ export class RemoteJoiner {
   }> {
     const { expand, pkField, ids, relationship, options } = params
 
-    let uniqueIds = Array.isArray(ids) ? ids : ids ? [ids] : undefined
+    let uniqueIds: unknown[] | undefined
+    if (ids != null) {
+      const isIdsUsingOperatorMap =
+        isObject(ids) &&
+        Object.keys(ids).some((key) => !!FilterOperatorMap[key])
+      uniqueIds = isIdsUsingOperatorMap ? ids : Array.isArray(ids) ? ids : [ids]
+    }
 
-    if (uniqueIds) {
+    if (uniqueIds && Array.isArray(uniqueIds)) {
       const isCompositeKey = Array.isArray(uniqueIds[0])
       if (isCompositeKey) {
         const seen = new Set()

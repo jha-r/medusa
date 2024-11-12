@@ -20,6 +20,9 @@
  *     type: string
  *     title: phone
  *     description: The customer's phone.
+ *   metadata:
+ *     type: object
+ *     description: The customer's metadata, can hold custom key-value pairs.
  * 
 */
 

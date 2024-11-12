@@ -64,7 +64,6 @@ export const EditRegionForm = ({
         currency_code: values.currency_code.toLowerCase(),
         payment_providers: values.payment_providers,
         is_tax_inclusive: values.is_tax_inclusive,
-        automatic_taxes: values.automatic_taxes,
       },
       {
         onSuccess: () => {

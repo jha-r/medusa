@@ -472,6 +472,11 @@ export interface CaptureDTO {
   amount: BigNumberValue
 
   /**
+   * The raw captured amount.
+   */
+  raw_amount?: BigNumberValue
+
+  /**
    * The creation date of the capture.
    */
   created_at: Date
@@ -501,6 +506,11 @@ export interface RefundDTO {
    * The refunded amount.
    */
   amount: BigNumberValue
+
+  /**
+   * The raw refunded amount.
+   */
+  raw_amount?: BigNumberValue
 
   /**
    * The id of the refund_reason that is associated with the refund
