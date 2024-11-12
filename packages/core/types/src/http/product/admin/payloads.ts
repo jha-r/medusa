@@ -11,7 +11,7 @@ export interface AdminBatchProductRequest
 export interface AdminBatchProductVariantRequest
   extends BatchMethodRequest<
     AdminCreateProductVariant,
-    AdminUpdateProductVariant
+    AdminBatchUpdateProductVariant
   > {}
 
 export interface AdminBatchProductVariantInventoryItemRequest
@@ -107,6 +107,10 @@ export interface AdminUpdateProductVariant {
   metadata?: Record<string, unknown> | null
   prices?: AdminCreateProductVariantPrice[]
   options?: Record<string, string>
+}
+
+export interface AdminBatchUpdateProductVariant extends AdminUpdateProductVariant {
+  id: string
 }
 
 export interface AdminUpdateProduct {

@@ -32,7 +32,7 @@ const Feedback = (props: FeedbackProps) => {
       event="survey"
       pathName={feedbackPathname}
       reportLink={reportLink}
-      question="Was this chapter helpful?"
+      question={props.question || "Was this chapter helpful?"}
       {...props}
     />
   )

@@ -591,9 +591,10 @@ The compensation function receives the subscription as a parameter. It cancels t
 Create the file `src/workflows/create-subscription/index.ts` with the following content:
 
 export const createSubscriptionWorkflowHighlights = [
-  ["25", "completeCartWorkflow", "Complete the cart and create the order."],
-  ["31", "createSubscriptionStep", "Create the subscription."],
-  ["38", "createRemoteLinkStep", "Create the links returned by the previous step."]
+  ["26", "completeCartWorkflow", "Complete the cart and create the order."],
+  ["32", "useRemoteQueryStep", "Retrieve the order's details."],
+  ["44", "createSubscriptionStep", "Create the subscription."],
+  ["51", "createRemoteLinkStep", "Create the links returned by the previous step."]
 ]
 
 ```ts title="src/workflows/create-subscription/index.ts" highlights={createSubscriptionWorkflowHighlights} collapsibleLines="1-13" expandMoreLabel="Show Imports"
@@ -604,6 +605,7 @@ import {
 import { 
   createRemoteLinkStep,
   completeCartWorkflow,
+  useRemoteQueryStep
 } from "@medusajs/medusa/core-flows"
 import { 
   SubscriptionInterval,
@@ -621,10 +623,22 @@ type WorkflowInput = {
 const createSubscriptionWorkflow = createWorkflow(
   "create-subscription",
   (input: WorkflowInput) => {
-    const order = completeCartWorkflow.runAsStep({
+    const { id } = completeCartWorkflow.runAsStep({
       input: {
-        id: input.cart_id,
+        id: input.cart_id
+      }
+    })
+
+    const order = useRemoteQueryStep({
+      entry_point: "order",
+      fields: ["*", "id", "customer_id"],
+      variables: {
+        filters: {
+          id
+        }
       },
+      list: false,
+      throw_if_key_not_found: true
     })
 
     const { subscription, linkDefs } = createSubscriptionStep({
@@ -649,8 +663,9 @@ export default createSubscriptionWorkflow
 This workflow accepts the cart’s ID, along with the subscription details. It executes the following steps:
 
 1. `completeCartWorkflow` from `@medusajs/medusa/core-flows` that completes a cart and creates an order.
-2. `createSubscriptionStep`, which is the step you created previously.
-3. `createRemoteLinkStep` from `@medusajs/medusa/core-flows`, which accepts links to create. These links are in the `linkDefs` array returned by the previous step.
+2. `useRemoteQueryStep` from `@medusajs/medusa/core-flows` to retrieve the order's details.
+3. `createSubscriptionStep`, which is the step you created previously.
+4. `createRemoteLinkStep` from `@medusajs/medusa/core-flows`, which accepts links to create. These links are in the `linkDefs` array returned by the previous step.
 
 The workflow returns the created subscription and order.
 
