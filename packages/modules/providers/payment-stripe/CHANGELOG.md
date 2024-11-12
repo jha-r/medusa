@@ -1,5 +1,28 @@
 # @medusajs/payment-stripe
 
+## 2.0.4
+
+## 2.0.3
+
+### Patch Changes
+
+- [#9789](https://github.com/medusajs/medusa/pull/9789) [`6ead7bf92d69036c7900bf5b1a8af67bbd7585ae`](https://github.com/medusajs/medusa/commit/6ead7bf92d69036c7900bf5b1a8af67bbd7585ae) Thanks [@oDestroyeRo](https://github.com/oDestroyeRo)! - feat(stripe): add promptpay
+
+## 2.0.2
+
+## 2.0.1
+
+## 2.0.0
+
+### Major Changes
+
+- [#7341](https://github.com/medusajs/medusa/pull/7341) [`2e42e053d4c9d5445d227bdc268c66713aad8e2e`](https://github.com/medusajs/medusa/commit/2e42e053d4c9d5445d227bdc268c66713aad8e2e) Thanks [@olivermrbl](https://github.com/olivermrbl)! - chore: Medusa 2.0
+
+### Patch Changes
+
+- Updated dependencies [[`2e42e053d4c9d5445d227bdc268c66713aad8e2e`](https://github.com/medusajs/medusa/commit/2e42e053d4c9d5445d227bdc268c66713aad8e2e)]:
+  - @medusajs/framework@2.0.0
+
 ## 0.0.2
 
 ### Patch Changes

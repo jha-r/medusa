@@ -1,14 +1,14 @@
 "use client"
 
-import React, { useMemo, useRef } from "react"
+import React, { Suspense, useMemo, useRef } from "react"
 import { useSidebar } from "@/providers"
 import clsx from "clsx"
-import { DottedSeparator, Loading } from "@/components"
+import { Loading } from "@/components"
 import { SidebarItem } from "./Item"
 import { CSSTransition, SwitchTransition } from "react-transition-group"
 import { SidebarTop, SidebarTopProps } from "./Top"
-import useResizeObserver from "@react-hook/resize-observer"
 import { useClickOutside, useKeyboardShortcut } from "@/hooks"
+import useResizeObserver from "@react-hook/resize-observer"
 
 export type SidebarProps = {
   className?: string
@@ -30,10 +30,9 @@ export const Sidebar = ({
     setMobileSidebarOpen,
     staticSidebarItems,
     sidebarRef,
-    sidebarTopHeight,
-    setSidebarTopHeight,
     desktopSidebarOpen,
     setDesktopSidebarOpen,
+    setSidebarTopHeight,
   } = useSidebar()
   useClickOutside({
     elmRef: sidebarWrapperRef,
@@ -92,11 +91,6 @@ export const Sidebar = ({
         ref={sidebarWrapperRef}
       >
         <ul className={clsx("h-full w-full", "flex flex-col")}>
-          <SidebarTop
-            {...sidebarTopProps}
-            parentItem={sidebarItems.parentItem}
-            ref={sidebarTopRef}
-          />
           <SwitchTransition>
             <CSSTransition
               key={sidebarItems.parentItem?.title || "home"}
@@ -110,14 +104,16 @@ export const Sidebar = ({
               <div
                 className={clsx(
                   "overflow-y-scroll clip",
-                  "py-docs_0.75 flex-1"
+                  "pb-docs_0.75 flex-1 max-h-screen"
                 )}
                 ref={sidebarRef}
-                style={{
-                  maxHeight: `calc(100vh - ${sidebarTopHeight}px)`,
-                }}
                 id="sidebar"
               >
+                <SidebarTop
+                  {...sidebarTopProps}
+                  parentItem={sidebarItems.parentItem}
+                  ref={sidebarTopRef}
+                />
                 {/* MOBILE SIDEBAR - keeping this in case we need it in the future */}
                 {/* <div className={clsx("lg:hidden")}>
                   {!sidebarItems.mobile.length && !staticSidebarItems && (
@@ -134,18 +130,38 @@ export const Sidebar = ({
                   {sidebarItems.mobile.length > 0 && <DottedSeparator />}
                 </div> */}
                 {/* DESKTOP SIDEBAR */}
-                <div className="mt-docs_0.75 lg:mt-0">
+                <div className="pt-docs_0.75">
                   {!sidebarItems.default.length && !staticSidebarItems && (
                     <Loading className="px-0" />
                   )}
-                  {sidebarItems.default.map((item, index) => (
-                    <SidebarItem
-                      item={item}
-                      key={index}
-                      expandItems={expandItems}
-                      hasNextItems={index !== sidebarItems.default.length - 1}
-                    />
-                  ))}
+                  {sidebarItems.default.map((item, index) => {
+                    const itemKey =
+                      item.type === "separator"
+                        ? index
+                        : item.type === "link"
+                        ? `${item.path}-${index}`
+                        : `${item.title}-${index}`
+                    return (
+                      <Suspense
+                        fallback={
+                          <Loading
+                            count={1}
+                            className="!mb-0 !px-docs_0.5"
+                            barClassName="h-[20px]"
+                          />
+                        }
+                        key={itemKey}
+                      >
+                        <SidebarItem
+                          item={item}
+                          expandItems={expandItems}
+                          hasNextItems={
+                            index !== sidebarItems.default.length - 1
+                          }
+                        />
+                      </Suspense>
+                    )
+                  })}
                 </div>
               </div>
             </CSSTransition>

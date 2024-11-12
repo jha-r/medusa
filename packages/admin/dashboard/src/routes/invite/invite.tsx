@@ -9,10 +9,10 @@ import { decodeToken } from "react-jwt"
 import { Link, useSearchParams } from "react-router-dom"
 import * as z from "zod"
 import { Form } from "../../components/common/form"
+import AvatarBox from "../../components/common/logo-box/avatar-box"
 import { useSignUpWithEmailPass } from "../../hooks/api/auth"
 import { useAcceptInvite } from "../../hooks/api/invites"
 import { isFetchError } from "../../lib/is-fetch-error"
-import AvatarBox from "../../components/common/logo-box/avatar-box"
 
 const CreateAccountSchema = z
   .object({
@@ -139,7 +139,7 @@ const LoginLink = () => {
       <Link
         key="login-link"
         to="/login"
-        className="text-ui-fg-interactive txt-small !text-ui-fg-base font-medium transition-fg hover:text-ui-fg-interactive-hover focus-visible:text-ui-fg-interactive-hover outline-none"
+        className="txt-small text-ui-fg-base transition-fg hover:text-ui-fg-base-hover focus-visible:text-ui-fg-base-hover font-medium outline-none"
       >
         {t("invite.backToLogin")}
       </Link>
@@ -345,7 +345,7 @@ const CreateView = ({
               }}
             />
             {validationError && (
-              <div className="text-center mt-6">
+              <div className="mt-6 text-center">
                 <Hint className="inline-flex" variant={"error"}>
                   {validationError}
                 </Hint>
@@ -353,7 +353,7 @@ const CreateView = ({
             )}
             {serverError && (
               <Alert
-                className="p-2 bg-ui-bg-base items-center"
+                className="bg-ui-bg-base items-center p-2"
                 dismissible
                 variant="error"
               >
@@ -396,7 +396,7 @@ const SuccessView = () => {
       <Link
         key="login-link"
         to="/login"
-        className="text-ui-fg-interactive txt-small !text-ui-fg-base transition-fg hover:text-ui-fg-interactive-hover focus-visible:text-ui-fg-interactive-hover mt-3 font-medium outline-none"
+        className="txt-small text-ui-fg-base transition-fg hover:text-ui-fg-base-hover focus-visible:text-ui-fg-base-hover mt-3 font-medium outline-none"
       >
         {t("invite.backToLogin")}
       </Link>

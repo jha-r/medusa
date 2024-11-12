@@ -23,6 +23,9 @@ export type BasePaymentSessionStatus =
   | "canceled"
 
 export interface BasePaymentProvider {
+  /**
+   * The provider's ID.
+   */
   id: string
 }
 
@@ -469,5 +472,8 @@ export interface BasePaymentProviderFilters
 }
 
 export interface BasePaymentFilters extends BaseFilterable<BasePaymentFilters> {
+  /**
+   * Filter by payment ID(s).
+   */
   id?: string | string[]
 }

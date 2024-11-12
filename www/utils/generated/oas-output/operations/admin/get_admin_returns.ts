@@ -5,14 +5,6 @@
  * description: Retrieve a list of returns. The returns can be filtered by fields such as `id`. The returns can also be sorted or paginated.
  * x-authenticated: true
  * parameters:
- *   - name: expand
- *     in: query
- *     description: Comma-separated relations that should be expanded in the returned data.
- *     required: false
- *     schema:
- *       type: string
- *       title: expand
- *       description: Comma-separated relations that should be expanded in the returned data.
  *   - name: fields
  *     in: query
  *     description: Comma-separated fields that should be included in the returned data. if a field is prefixed with `+` it will be added to the default fields, using `-` will remove it from the default
@@ -157,12 +149,16 @@
  *     description: Filter by region IDs to retrieve their associated returns.
  *     required: false
  *     schema:
- *       type: array
- *       description: Filter by region IDs to retrieve their associated returns.
- *       items:
- *         type: string
- *         title: region_id
- *         description: The region id's details.
+ *       oneOf:
+ *         - type: string
+ *           title: region_id
+ *           description: The return's region id.
+ *         - type: array
+ *           description: The return's region id.
+ *           items:
+ *             type: string
+ *             title: region_id
+ *             description: The region id's details.
  *   - name: q
  *     in: query
  *     description: Search term to filter the return's searchable properties.
@@ -633,6 +629,20 @@
  *           type: boolean
  *           title: $exists
  *           description: Filter by whether a value for this parameter exists (not `null`).
+ *   - name: customer_id
+ *     in: query
+ *     required: false
+ *     schema:
+ *       oneOf:
+ *         - type: string
+ *           title: customer_id
+ *           description: The return's customer id.
+ *         - type: array
+ *           description: The return's customer id.
+ *           items:
+ *             type: string
+ *             title: customer_id
+ *             description: The customer id's details.
  * security:
  *   - api_token: []
  *   - cookie_auth: []

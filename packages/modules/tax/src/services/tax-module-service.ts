@@ -405,7 +405,7 @@ export default class TaxModuleService
     const toReturn = await promiseAll(
       items.map(async (item) => {
         const regionIds = regions.map((r) => r.id)
-        const rateQuery = this.geTaxRateQueryForItem(item, regionIds)
+        const rateQuery = this.getTaxRateQueryForItem(item, regionIds)
         const candidateRates = await this.taxRateService_.list(
           rateQuery,
           {
@@ -414,7 +414,7 @@ export default class TaxModuleService
           sharedContext
         )
 
-        const applicableRates = await this.geTaxRatesForItem(
+        const applicableRates = await this.getTaxRatesForItem(
           item,
           candidateRates
         )
@@ -566,7 +566,7 @@ export default class TaxModuleService
     }
   }
 
-  private async geTaxRatesForItem(
+  private async getTaxRatesForItem(
     item: TaxTypes.TaxableItemDTO | TaxTypes.TaxableShippingDTO,
     rates: TaxRate[]
   ): Promise<TaxRate[]> {
@@ -598,7 +598,7 @@ export default class TaxModuleService
     return ratesToReturn
   }
 
-  private geTaxRateQueryForItem(
+  private getTaxRateQueryForItem(
     item: TaxTypes.TaxableItemDTO | TaxTypes.TaxableShippingDTO,
     regionIds: string[]
   ) {
@@ -698,6 +698,7 @@ export default class TaxModuleService
       } else if (isDefault && !isProvince) {
         decoratedRate.priority_score = 6
       }
+
       return decoratedRate
     }) as (TaxRate & {
       priority_score: number

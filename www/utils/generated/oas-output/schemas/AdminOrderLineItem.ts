@@ -5,10 +5,8 @@
  * x-schemaName: AdminOrderLineItem
  * required:
  *   - title
- *   - metadata
  *   - id
- *   - subtitle
- *   - thumbnail
+ *   - metadata
  *   - created_at
  *   - updated_at
  *   - item_total
@@ -22,11 +20,14 @@
  *   - tax_total
  *   - discount_total
  *   - discount_tax_total
+ *   - subtitle
+ *   - thumbnail
  *   - variant_id
  *   - product_id
  *   - product_title
  *   - product_description
  *   - product_subtitle
+ *   - product_type_id
  *   - product_type
  *   - product_collection
  *   - product_handle
@@ -213,6 +214,10 @@
  *     type: number
  *     title: refundable_total_per_unit
  *     description: The total refundable amount of the item's total for a single quantity.
+ *   product_type_id:
+ *     type: string
+ *     title: product_type_id
+ *     description: The ID of the associated product's type.
  * 
 */
 

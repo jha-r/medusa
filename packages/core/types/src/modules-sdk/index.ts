@@ -46,7 +46,6 @@ export type CustomModuleDefinition = {
 
 export type InternalModuleDeclaration = {
   scope: "internal"
-  resources: "shared" | "isolated"
   dependencies?: string[]
   definition?: CustomModuleDefinition // That represent the definition of the module, such as the one we have for the medusa supported modules. This property is used for custom made modules.
   resolve?: string | ModuleExports
@@ -199,6 +198,7 @@ export type ModuleJoinerConfig = Omit<
   relationships?: ModuleJoinerRelationship[]
   extends?: {
     serviceName: string
+    entity?: string
     fieldAlias?: Record<
       string,
       | string

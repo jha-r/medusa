@@ -123,6 +123,7 @@ describe("LocalEventBusService", () => {
           data: { test: "1234" },
           metadata: { eventGroupId: "test" },
           name: "test-event",
+          options: {},
         })
 
         jest.clearAllMocks()

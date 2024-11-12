@@ -1,8 +1,8 @@
-import { z } from "zod"
-import { omit } from "lodash"
-import { NextFunction } from "express"
-import { MedusaError, removeUndefinedProperties } from "@medusajs/utils"
 import { BaseEntity, QueryConfig, RequestQueryFields } from "@medusajs/types"
+import { MedusaError, removeUndefinedProperties } from "@medusajs/utils"
+import { NextFunction } from "express"
+import { omit } from "lodash"
+import { z } from "zod"
 
 import { zodValidator } from "../../zod/zod-helpers"
 import { MedusaRequest, MedusaResponse } from "../types"
@@ -68,18 +68,29 @@ export function validateAndTransformQuery<TEntity extends BaseEntity>(
     next: NextFunction
   ) {
     try {
-      const allowed = (req.allowed ?? queryConfig.allowed ?? []) as string[]
+      const restricted = req.restrictedFields?.list()
+      const allowed = queryConfig.allowed ?? []
+
+      // If any custom allowed fields are set, we add them to the allowed list along side the one configured in the query config if any
+      if (req.allowed?.length) {
+        allowed.push(...req.allowed)
+      }
+
       delete req.allowed
       const query = normalizeQuery(req)
 
       const validated = await zodValidator(zodSchema, query)
       const cnf = queryConfig.isList
-        ? prepareListQuery(validated, { ...queryConfig, allowed })
-        : prepareRetrieveQuery(validated, { ...queryConfig, allowed })
+        ? prepareListQuery(validated, { ...queryConfig, allowed, restricted })
+        : prepareRetrieveQuery(validated, {
+            ...queryConfig,
+            allowed,
+            restricted,
+          })
 
       req.validatedQuery = validated
       req.filterableFields = getFilterableFields(req.validatedQuery)
-      req.remoteQueryConfig = cnf.remoteQueryConfig
+      req.remoteQueryConfig = cnf.remoteQueryConfig as any
       req.listConfig = (cnf as any).listConfig
       req.retrieveConfig = (cnf as any).retrieveConfig
 

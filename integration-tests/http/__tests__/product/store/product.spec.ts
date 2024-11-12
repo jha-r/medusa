@@ -1,6 +1,7 @@
+import { medusaIntegrationTestRunner } from "@medusajs/test-utils"
 import { IStoreModuleService } from "@medusajs/types"
 import { ApiKeyType, Modules, ProductStatus } from "@medusajs/utils"
-import { medusaIntegrationTestRunner } from "@medusajs/test-utils"
+import qs from "qs"
 import {
   adminHeaders,
   createAdminUser,
@@ -588,6 +589,19 @@ medusaIntegrationTestRunner({
         ])
       })
 
+      it("should list all products excluding variants", async () => {
+        let response = await api.get(
+          `/admin/products?fields=-variants`,
+          adminHeaders
+        )
+
+        expect(response.data.count).toEqual(4)
+
+        for (let product of response.data.products) {
+          expect(product.variants).toBeUndefined()
+        }
+      })
+
       it("should list all products for a sales channel", async () => {
         const salesChannel = await createSalesChannel(
           { name: "sales channel test" },
@@ -627,6 +641,35 @@ medusaIntegrationTestRunner({
 
         const response = await api.get(
           `/store/products?category_id[]=${category.id}&category_id[]=${category2.id}`,
+          storeHeaders
+        )
+
+        expect(response.status).toEqual(200)
+        expect(response.data.count).toEqual(1)
+        expect(response.data.products).toEqual([
+          expect.objectContaining({
+            id: product.id,
+          }),
+        ])
+      })
+
+      it("should list all products for a category using $and filters", async () => {
+        const category = await createCategory(
+          { name: "test", is_internal: false, is_active: true },
+          [product.id]
+        )
+
+        const category2 = await createCategory(
+          { name: "test2", is_internal: true, is_active: true },
+          [product4.id]
+        )
+
+        const searchParam = qs.stringify({
+          $and: [{ category_id: [category.id, category2.id] }],
+        })
+
+        const response = await api.get(
+          `/store/products?${searchParam}`,
           storeHeaders
         )
 

@@ -698,6 +698,10 @@ export interface FilterableProductProps
    */
   id?: string | string[]
   /**
+   * The external IDs to filter products by.
+   */
+  external_id?: string | string[]
+  /**
    * Filters only or excluding gift card products
    */
   is_giftcard?: boolean
@@ -1454,6 +1458,10 @@ export interface CreateProductDTO {
    */
   images?: UpsertProductImageDTO[]
   /**
+   * The id of the product in an external system
+   */
+  external_id?: string
+  /**
    * The product type id to associate with the product.
    */
   type_id?: string
@@ -1569,6 +1577,10 @@ export interface UpdateProductDTO {
    * The associated images to create or update.
    */
   images?: UpsertProductImageDTO[]
+  /**
+   * The id of the product in an external system
+   */
+  external_id?: string | null
   /**
    * The product type to associate with the product.
    */

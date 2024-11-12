@@ -86,6 +86,7 @@ export const listShippingOptionsForCartWorkflow = createWorkflow(
         calculated_price: {
           context: {
             currency_code: input.currency_code,
+            region_id: input.region_id,
           },
         },
       },

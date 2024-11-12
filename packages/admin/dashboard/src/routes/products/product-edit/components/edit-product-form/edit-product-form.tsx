@@ -1,4 +1,4 @@
-import { Button, Input, Select, Text, Textarea } from "@medusajs/ui"
+import { Button, Input, Select, Text, Textarea, toast } from "@medusajs/ui"
 import { useTranslation } from "react-i18next"
 import * as zod from "zod"
 
@@ -10,6 +10,7 @@ import { useExtendableForm } from "../../../../../extensions/forms/hooks"
 import { useUpdateProduct } from "../../../../../hooks/api/products"
 import { transformNullableFormData } from "../../../../../lib/form-helpers"
 
+import { KeyboundForm } from "../../../../../components/utilities/keybound-form"
 import {
   FormExtensionZone,
   useDashboardExtension,
@@ -68,8 +69,14 @@ export const EditProductForm = ({ product }: EditProductFormProps) => {
         ...nullableData,
       },
       {
-        onSuccess: () => {
+        onSuccess: ({ product }) => {
+          toast.success(
+            t("products.edit.successToast", { title: product.title })
+          )
           handleSuccess()
+        },
+        onError: (e) => {
+          toast.error(e.message)
         },
       }
     )
@@ -77,7 +84,7 @@ export const EditProductForm = ({ product }: EditProductFormProps) => {
 
   return (
     <RouteDrawer.Form form={form}>
-      <form
+      <KeyboundForm
         onSubmit={handleSubmit}
         className="flex flex-1 flex-col overflow-hidden"
       >
@@ -230,7 +237,7 @@ export const EditProductForm = ({ product }: EditProductFormProps) => {
             </Button>
           </div>
         </RouteDrawer.Footer>
-      </form>
+      </KeyboundForm>
     </RouteDrawer.Form>
   )
 }

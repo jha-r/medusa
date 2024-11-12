@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next"
 import * as zod from "zod"
 
 import { RouteFocusModal, useRouteModal } from "../../../components/modals"
+import { KeyboundForm } from "../../../components/utilities/keybound-form"
 import { useUpdateProductVariantsBatch } from "../../../hooks/api/products"
 import { useRegions } from "../../../hooks/api/regions"
 import { castNumber } from "../../../lib/cast-number"
@@ -50,12 +51,12 @@ export const PricingEdit = ({
   }, [regions])
 
   const variants = variantId
-    ? product.variants.filter((v) => v.id === variantId)
+    ? product.variants?.filter((v) => v.id === variantId)
     : product.variants
 
   const form = useForm<UpdateVariantPricesSchemaType>({
     defaultValues: {
-      variants: variants.map((variant: any) => ({
+      variants: variants?.map((variant: any) => ({
         title: variant.title,
         prices: variant.prices.reduce((acc: any, price: any) => {
           if (price.rules?.region_id) {
@@ -89,11 +90,11 @@ export const PricingEdit = ({
           let existingId = undefined
 
           if (regionId) {
-            existingId = variants[ind].prices.find(
+            existingId = variants?.[ind]?.prices?.find(
               (p) => p.rules["region_id"] === regionId
             )?.id
           } else {
-            existingId = variants[ind].prices.find(
+            existingId = variants?.[ind]?.prices?.find(
               (p) =>
                 p.currency_code === currencyCode &&
                 Object.keys(p.rules ?? {}).length === 0
@@ -120,7 +121,7 @@ export const PricingEdit = ({
 
   return (
     <RouteFocusModal.Form form={form}>
-      <form onSubmit={handleSubmit} className="flex size-full flex-col">
+      <KeyboundForm onSubmit={handleSubmit} className="flex size-full flex-col">
         <RouteFocusModal.Header />
         <RouteFocusModal.Body className="flex flex-col overflow-hidden">
           <VariantPricingForm form={form as any} />
@@ -142,7 +143,7 @@ export const PricingEdit = ({
             </Button>
           </div>
         </RouteFocusModal.Footer>
-      </form>
+      </KeyboundForm>
     </RouteFocusModal.Form>
   )
 }

@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 import * as zod from "zod"
 
@@ -8,17 +8,18 @@ import { Alert, Button, Select, Switch, toast } from "@medusajs/ui"
 import { useForm, useWatch } from "react-hook-form"
 
 import { OrderLineItemDTO } from "@medusajs/types"
-import { useSearchParams } from "react-router-dom"
 import { Form } from "../../../../../components/common/form"
 import {
   RouteFocusModal,
   useRouteModal,
 } from "../../../../../components/modals"
+import { KeyboundForm } from "../../../../../components/utilities/keybound-form"
 import { useCreateOrderFulfillment } from "../../../../../hooks/api/orders"
 import { useStockLocations } from "../../../../../hooks/api/stock-locations"
 import { getFulfillableQuantity } from "../../../../../lib/order-item"
 import { CreateFulfillmentSchema } from "./constants"
 import { OrderCreateFulfillmentItem } from "./order-create-fulfillment-item"
+import { useReservationItems } from "../../../../../hooks/api"
 
 type OrderCreateFulfillmentFormProps = {
   order: AdminOrder
@@ -31,10 +32,19 @@ export function OrderCreateFulfillmentForm({
 }: OrderCreateFulfillmentFormProps) {
   const { t } = useTranslation()
   const { handleSuccess } = useRouteModal()
-  const [searchParams] = useSearchParams()
 
   const { mutateAsync: createOrderFulfillment, isPending: isMutating } =
     useCreateOrderFulfillment(order.id)
+
+  const { reservations } = useReservationItems({
+    line_item_id: order.items.map((i) => i.id),
+  })
+
+  const itemReservedQuantitiesMap = useMemo(
+    () =>
+      new Map((reservations || []).map((r) => [r.line_item_id, r.quantity])),
+    [reservations]
+  )
 
   const [fulfillableItems, setFulfillableItems] = useState(() =>
     (order.items || []).filter(
@@ -46,13 +56,10 @@ export function OrderCreateFulfillmentForm({
 
   const form = useForm<zod.infer<typeof CreateFulfillmentSchema>>({
     defaultValues: {
-      quantity: fulfillableItems.reduce(
-        (acc, item) => {
-          acc[item.id] = getFulfillableQuantity(item)
-          return acc
-        },
-        {} as Record<string, number>
-      ),
+      quantity: fulfillableItems.reduce((acc, item) => {
+        acc[item.id] = getFulfillableQuantity(item)
+        return acc
+      }, {} as Record<string, number>),
       send_notification: !order.no_notification,
     },
     resolver: zodResolver(CreateFulfillmentSchema),
@@ -117,35 +124,21 @@ export function OrderCreateFulfillmentForm({
       })
     }
 
-    const quantityMap = itemsToFulfill.reduce(
-      (acc, item) => {
-        acc[item.id] = getFulfillableQuantity(item as OrderLineItemDTO)
-        return acc
-      },
-      {} as Record<string, number>
-    )
+    const quantityMap = itemsToFulfill.reduce((acc, item) => {
+      acc[item.id] = getFulfillableQuantity(item as OrderLineItemDTO)
+      return acc
+    }, {} as Record<string, number>)
 
     form.setValue("quantity", quantityMap)
   }, [...fulfilledQuantityArray, requiresShipping])
 
   return (
     <RouteFocusModal.Form form={form}>
-      <form
+      <KeyboundForm
         onSubmit={handleSubmit}
         className="flex h-full flex-col overflow-hidden"
       >
-        <RouteFocusModal.Header>
-          <div className="flex items-center justify-end gap-x-2">
-            <RouteFocusModal.Close asChild>
-              <Button size="small" variant="secondary">
-                {t("actions.cancel")}
-              </Button>
-            </RouteFocusModal.Close>
-            <Button size="small" type="submit" isLoading={isMutating}>
-              {t("orders.fulfillment.create")}
-            </Button>
-          </div>
-        </RouteFocusModal.Header>
+        <RouteFocusModal.Header />
 
         <RouteFocusModal.Body className="flex h-full w-full flex-col items-center divide-y overflow-y-auto">
           <div className="flex size-full flex-col items-center overflow-auto p-16">
@@ -192,7 +185,7 @@ export function OrderCreateFulfillmentForm({
                   />
                 </div>
 
-                {/*<div className="py-8">*/}
+                {/* <div className="py-8">*/}
                 {/*  <Form.Field*/}
                 {/*    control={form.control}*/}
                 {/*    name="shipping_option_id"*/}
@@ -233,7 +226,7 @@ export function OrderCreateFulfillmentForm({
                 {/*      )*/}
                 {/*    }}*/}
                 {/*  />*/}
-                {/*</div>*/}
+                {/* </div>*/}
                 <div>
                   <Form.Item className="mt-8">
                     <Form.Label>
@@ -251,6 +244,9 @@ export function OrderCreateFulfillmentForm({
                             form={form}
                             item={item}
                             locationId={selectedLocationId}
+                            itemReservedQuantitiesMap={
+                              itemReservedQuantitiesMap
+                            }
                           />
                         )
                       })}
@@ -302,7 +298,19 @@ export function OrderCreateFulfillmentForm({
             </div>
           </div>
         </RouteFocusModal.Body>
-      </form>
+        <RouteFocusModal.Footer>
+          <div className="flex items-center justify-end gap-x-2">
+            <RouteFocusModal.Close asChild>
+              <Button size="small" variant="secondary">
+                {t("actions.cancel")}
+              </Button>
+            </RouteFocusModal.Close>
+            <Button size="small" type="submit" isLoading={isMutating}>
+              {t("orders.fulfillment.create")}
+            </Button>
+          </div>
+        </RouteFocusModal.Footer>
+      </KeyboundForm>
     </RouteFocusModal.Form>
   )
 }
