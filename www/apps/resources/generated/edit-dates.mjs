@@ -236,7 +236,7 @@ export const generatedEditDates = {
   "app/architectural-modules/cache/create/page.mdx": "2024-10-16T08:51:35.074Z",
   "app/admin-widget-injection-zones/page.mdx": "2024-09-30T08:43:53.147Z",
   "app/architectural-modules/notification/page.mdx": "2024-10-15T12:51:28.735Z",
-  "app/architectural-modules/event/create/page.mdx": "2024-10-16T08:51:41.334Z",
+  "app/architectural-modules/event/create/page.mdx": "2024-11-12T11:54:51.583Z",
   "references/core_flows/Order/functions/core_flows.Order.orderEditUpdateItemQuantityValidationStep/page.mdx": "2024-08-20T00:10:58.913Z",
   "references/core_flows/Order/functions/core_flows.Order.orderEditUpdateItemQuantityWorkflow/page.mdx": "2024-08-20T00:10:58.949Z",
   "references/core_flows/Order/functions/core_flows.Order.updateOrderEditItemQuantityValidationStep/page.mdx": "2024-08-20T00:10:59.121Z",
