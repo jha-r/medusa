@@ -175,18 +175,20 @@ export class WorkflowOrchestratorService {
     options?: WorkflowOrchestratorRunOptions<T>,
     @MedusaContext() sharedContext: Context = {}
   ) {
-    let {
+    const {
       input,
-      context,
       transactionId,
       resultFrom,
-      throwOnError,
       logOnError,
       events: eventHandlers,
       container,
     } = options ?? {}
 
+    let { throwOnError, context } = options ?? {}
+
     throwOnError ??= true
+    context ??= {}
+    context.transactionId ??= transactionId ?? ulid()
 
     const workflowId = isString(workflowIdOrWorkflow)
       ? workflowIdOrWorkflow
@@ -195,9 +197,6 @@ export class WorkflowOrchestratorService {
     if (!workflowId) {
       throw new Error("Workflow ID is required")
     }
-
-    context ??= {}
-    context.transactionId ??= transactionId ?? ulid()
 
     const events: FlowRunOptions["events"] = this.buildWorkflowEvents({
       customEventHandlers: eventHandlers,
@@ -303,15 +302,15 @@ export class WorkflowOrchestratorService {
     },
     @MedusaContext() sharedContext: Context = {}
   ) {
-    let {
+    const {
       context,
-      throwOnError,
       logOnError,
       resultFrom,
       container,
       events: eventHandlers,
     } = options ?? {}
 
+    let { throwOnError } = options ?? {}
     throwOnError ??= true
 
     const [idempotencyKey_, { workflowId, transactionId }] =
@@ -373,15 +372,15 @@ export class WorkflowOrchestratorService {
     },
     @MedusaContext() sharedContext: Context = {}
   ) {
-    let {
+    const {
       context,
-      throwOnError,
       logOnError,
       resultFrom,
       container,
       events: eventHandlers,
     } = options ?? {}
 
+    let { throwOnError } = options ?? {}
     throwOnError ??= true
 
     const [idempotencyKey_, { workflowId, transactionId }] =
