@@ -91,7 +91,7 @@ Any subscribers listening to the event are executed.
 
 To emit a service event:
 
-1. Resolve `event_bus` from the Module's container in your service's constructor:
+1. Resolve `event_bus` from the module's container in your service's constructor:
 
 <CodeTabs group="service_type">
   <CodeTab label="Extending Service Factory" value="service_factory">
@@ -160,7 +160,7 @@ The method accepts an object having the following properties:
 - `name`: The event's name. 
 - `data`: The data payload as an object. You can pass any properties in the object, and subscribers listening to the event will receive this data in the event's payload.
 
-3. By default, the event module's service isn't injected into your Module's container. To add it to the container, pass it in the module's registration object in `medusa-config.ts` in the `dependencies` property:
+3. By default, the Event Module's service isn't injected into your module's container. To add it to the container, pass it in the module's registration object in `medusa-config.ts` in the `dependencies` property:
 
 export const depsHighlight = [
   ["8", "dependencies", "An array of module registration names to inject into the Module's container."],
@@ -182,7 +182,7 @@ module.exports = defineConfig({
 })
 ```
 
-The `dependencies` property accepts an array of module registration keys. The specified modules' main services are injected into the Module's container.
+The `dependencies` property accepts an array of module registration keys. The specified modules' main services are injected into the module's container.
 
 That's how you can resolve it in your module's main service's constructor.
 
