@@ -50,7 +50,10 @@ export const Breadcrumbs = () => {
 
     tempBreadcrumbItems.set(
       breadcrumbPath,
-      item.parentItem?.childSidebarTitle || item.parentItem?.title || ""
+      item.parentItem?.childSidebarTitle ||
+        item.parentItem?.chapterTitle ||
+        item.parentItem?.title ||
+        ""
     )
 
     return tempBreadcrumbItems
@@ -76,12 +79,14 @@ export const Breadcrumbs = () => {
           sidebarActiveItem.parentItem.type === "link"
             ? getLinkPath(sidebarActiveItem.parentItem) || "#"
             : "#",
-          sidebarActiveItem.parentItem.title || ""
+          sidebarActiveItem.parentItem.chapterTitle ||
+            sidebarActiveItem.parentItem.title ||
+            ""
         )
       }
       tempBreadcrumbItems.set(
         getLinkPath(sidebarActiveItem) || "/",
-        sidebarActiveItem.title || ""
+        sidebarActiveItem.chapterTitle || sidebarActiveItem.title || ""
       )
     }
 
