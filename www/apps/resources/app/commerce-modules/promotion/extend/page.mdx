@@ -68,13 +68,13 @@ Learn more about module links in [this guide](!docs!/module-links).
 Create the file `src/links/promotion-custom.ts` with the following content:
 
 ```ts title="src/links/promotion-custom.ts"
-import { defineLink } from "@medusajs/framework/utils";
+import { defineLink } from "@medusajs/framework/utils"
 import HelloModule from "../modules/hello"
 import PromotionModule from "@medusajs/medusa/promotion"
 
 export default defineLink(
   PromotionModule.linkable.promotion,
-  HelloModule.linkable.custom,
+  HelloModule.linkable.custom
 )
 ```
 
@@ -234,29 +234,29 @@ export const createCustomFromPromotionWorkflow = createWorkflow(
   (input: CreateCustomFromPromotionWorkflowInput) => {
     const customName = transform(
       {
-        input
+        input,
       },
       (data) => data.input.additional_data.custom_name || ""
     )
 
     const custom = createCustomStep({
-      custom_name: customName
+      custom_name: customName,
     })
 
     when(({ custom }), ({ custom }) => custom !== undefined)
       .then(() => {
         createRemoteLinkStep([{
           [Modules.PROMOTION]: {
-            promotion_id: input.promotion.id
+            promotion_id: input.promotion.id,
           },
           [HELLO_MODULE]: {
-            custom_id: custom.id
-          }
+            custom_id: custom.id,
+          },
         }])
       })
 
     return new WorkflowResponse({
-      custom
+      custom,
     })
   }
 )
@@ -282,19 +282,19 @@ To consume the hook, create the file `src/workflow/hooks/promotion-created.ts` w
 import { createPromotionsWorkflow } from "@medusajs/medusa/core-flows"
 import { 
   createCustomFromPromotionWorkflow, 
-  CreateCustomFromPromotionWorkflowInput
+  CreateCustomFromPromotionWorkflowInput,
 } from "../create-custom-from-promotion"
 
 createPromotionsWorkflow.hooks.promotionsCreated(
 	async ({ promotions, additional_data }, { container }) => {
     const workflow = createCustomFromPromotionWorkflow(container)
     
-    for (let promotion of promotions) {
+    for (const promotion of promotions) {
       await workflow.run({
         input: {
           promotion,
-          additional_data
-        } as CreateCustomFromPromotionWorkflowInput
+          additional_data,
+        } as CreateCustomFromPromotionWorkflowInput,
       })
     }
 	}
@@ -562,16 +562,16 @@ const created = when({
 )
 .then(() => {
   const custom = createCustomStep({
-    custom_name: input.additional_data.custom_name
+    custom_name: input.additional_data.custom_name,
   })
 
   createRemoteLinkStep([{
     [Modules.PROMOTION]: {
-      promotion_id: input.promotion.id
+      promotion_id: input.promotion.id,
     },
     [HELLO_MODULE]: {
-      custom_id: custom.id
-    }
+      custom_id: custom.id,
+    },
   }])
 
   return custom
@@ -634,7 +634,7 @@ const updated = when({
 return new WorkflowResponse({
   created,
   updated,
-  deleted
+  deleted,
 })
 ```
 
@@ -652,19 +652,19 @@ Create the file `src/workflows/hooks/promotion-updated.ts` with the following co
 import { updatePromotionsWorkflow } from "@medusajs/medusa/core-flows"
 import { 
   UpdateCustomFromPromotionStepInput, 
-  updateCustomFromPromotionWorkflow
+  updateCustomFromPromotionWorkflow,
 } from "../update-custom-from-promotion"
 
 updatePromotionsWorkflow.hooks.promotionsUpdated(
 	async ({ promotions, additional_data }, { container }) => {
     const workflow = updateCustomFromPromotionWorkflow(container)
     
-    for (let promotion of promotions) {
+    for (const promotion of promotions) {
       await workflow.run({
         input: {
           promotion,
-          additional_data
-        } as UpdateCustomFromPromotionStepInput
+          additional_data,
+        } as UpdateCustomFromPromotionStepInput,
       })
     }
 	}

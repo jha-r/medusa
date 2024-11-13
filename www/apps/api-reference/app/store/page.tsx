@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import AreaProvider from "@/providers/area"
-import StoreContent from "../_mdx/store.mdx"
+import StoreContent from "@/markdown/store.mdx"
 import Tags from "@/components/Tags"
 import PageTitleProvider from "@/providers/page-title"
 import { H1 } from "docs-ui"
@@ -23,6 +24,7 @@ const StorePage = async () => {
           >
             Medusa V2 Store API Reference
           </H1>
+          {/* @ts-ignore React v19 doesn't see MDX as valid component */}
           <StoreContent />
           <Tags tags={data?.tags} />
         </PageTitleProvider>
