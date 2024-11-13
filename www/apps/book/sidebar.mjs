@@ -473,6 +473,11 @@ export const sidebar = numberSidebarItems(
               path: "/learn/advanced-development/workflows/execute-another-workflow",
               title: "Execute Another Workflow",
             },
+            {
+              type: "link",
+              path: "/learn/advanced-development/workflows/multiple-step-usage",
+              title: "Multiple Step Usage",
+            },
           ],
         },
         {

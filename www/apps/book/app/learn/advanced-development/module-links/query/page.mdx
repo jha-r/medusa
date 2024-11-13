@@ -8,12 +8,6 @@ export const metadata = {
 
 In this chapter, you’ll learn about the Query utility and how to use it to fetch data from modules.
 
-<Note type="soon" title="In Development">
-
-Query is in development and is subject to change in future releases.
-
-</Note>
-
 ## What is Query?
 
 Query fetches data across modules. It’s a set of methods registered in the Medusa container under the `query` key.
@@ -227,3 +221,126 @@ When you provide the pagination fields, the `query.graph` method's returned obje
     description: "The total number of records."
   }
 ]} sectionTitle="Apply Pagination" />
+
+---
+
+## Request Query Configurations
+
+For API routes that retrieve a single or list of resources, Medusa provides a `validateAndTransformQuery` middleware that:
+
+- Validates accepted query parameters, as explained in [this documentation](../../api-routes/validation/page.mdx).
+- Parses configurations that are received as query parameters to be passed to Query.
+
+Using this middleware allows you to have default configurations for retrieved fields and relations or pagination, while allowing clients to customize them per request.
+
+### Step 1: Add Middleware
+
+The first step is to use the `validateAndTransformQuery` middleware on the `GET` route. You add the middleware in `src/api/middlewares.ts`:
+
+```ts title="src/api/middlewares.ts"
+import { defineMiddlewares } from "@medusajs/medusa"
+import { 
+  validateAndTransformQuery,
+} from "@medusajs/framework/http"
+import { createFindParams } from "@medusajs/medusa/api/utils/validators"
+
+export const GetCustomSchema = createFindParams()
+
+export default defineMiddlewares({
+  routes: [
+    {
+      matcher: "/customs",
+      method: "GET",
+      middlewares: [
+        validateAndTransformQuery(
+          GetCustomSchema,
+          {
+            defaults: [
+              "id",
+              "name",
+              "products.*"
+            ],
+            isList: true
+          }
+        ),
+      ],
+    },
+  ],
+})
+```
+
+The `validateAndTransformQuery` accepts two parameters:
+
+1. A Zod validation schema for the query parameters, which you can learn more about in the [API Route Validation documentation](../../api-routes/validation/page.mdx). Medusa has a `createFindParams` utility that generates a Zod schema that accepts four query parameters:
+    1. `fields`: The fields and relations to retrieve in the returned resources.
+    2. `offset`: The number of items to skip before retrieving the returned items.
+    3. `limit`: The maximum number of items to return.
+    4. `order`: The fields to order the returned items by in ascending or descending order.
+2. A Query configuration object. It accepts the following properties:
+    1. `defaults`: An array of default fields and relations to retrieve in each resource.
+    2. `isList`: A boolean indicating whether a list of items are returned in the response.
+    3. `allowed`: An array of fields and relations allowed to be passed in the `fields` query parameter.
+    4. `defaultLimit`: A number indicating the default limit to use if no limit is provided. By default, it's `50`.
+
+### Step 2: Use Configurations in API Route
+
+After applying this middleware, your API route now accepts the `fields`, `offset`, `limit`, and `order` query parameters mentioned above.
+
+The middleware transforms these parameters to configurations that you can pass to Query in your API route handler. These configurations are stored in the `remoteQueryConfig` parameter of the `MedusaRequest` object.
+
+For example, Create the file `src/api/customs/route.ts` with the following content:
+
+export const queryConfigHighlights = [
+  ["17", "req.remoteQueryConfig", "Pass the parsed request Query configurations to the Query graph execution."]
+]
+
+```ts title="src/api/customs/route.ts"
+import {
+  MedusaRequest,
+  MedusaResponse,
+} from "@medusajs/framework/http"
+import {
+  ContainerRegistrationKeys,
+} from "@medusajs/framework/utils"
+
+export const GET = async (
+  req: MedusaRequest,
+  res: MedusaResponse
+) => {
+  const query = req.scope.resolve(ContainerRegistrationKeys.QUERY)
+
+  const { data: myCustoms } = await query.graph({
+    entity: "my_custom",
+    ...req.remoteQueryConfig
+  })
+
+  res.json({ my_customs: myCustoms })
+}
+```
+
+This adds a `GET` API route at `/customs`, which is the API route you added the middleware for.
+
+In the API route, you pass `req.remoteQueryConfig` to `query.graph`. `remoteQueryConfig` has properties like `fields` and `pagination` to configure the query based on the default values you specified in the middleware, and the query parameters passed in the request.
+
+### Test it Out
+
+To test it out, start your Medusa application and send a `GET` request to the `/customs` API route. A list of records are retrieved with the specified fields in the middleware.
+
+```json title="Returned Data"
+{
+  "my_customs": [
+    {
+      "id": "123",
+      "name": "test"
+    }
+  ]
+}
+```
+
+Try passing one of the Query configuration parameters, like `fields` or `limit`, and you'll see its impact on the returned result.
+
+<Note>
+
+Learn more about [specifing fields and relations](!api!/store#select-fields-and-relations) and [pagination](!api!/store#pagination) in the API reference.
+
+</Note>

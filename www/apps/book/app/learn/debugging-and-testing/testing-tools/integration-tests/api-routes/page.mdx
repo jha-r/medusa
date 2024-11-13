@@ -12,7 +12,7 @@ In this chapter, you'll learn how to write integration tests for API routes usin
   items={[
     {
       text: "Testing Tools Setup",
-      link: "/debugging-and-testing/testing-tools"
+      link: "/learn/debugging-and-testing/testing-tools"
     }
   ]}
 />
@@ -60,6 +60,8 @@ medusaIntegrationTestRunner({
     })
   },
 })
+
+jest.setTimeout(60 * 1000)
 ```
 
 You use the `medusaIntegrationTestRunner` to write your tests.
@@ -85,6 +87,15 @@ If you don't have a `test:integration` script in `package.json`, refer to the [M
 </Note>
 
 This runs your Medusa application and runs the tests available under the `src/integrations/http` directory.
+
+### Jest Timeout
+
+Since your tests connect to the database and perform actions that require more time than the typical tests, make sure to increase the timeout in your test:
+
+```ts title="integration-tests/http/custom-routes.spec.ts"
+// in your test's file
+jest.setTimeout(60 * 1000)
+```
 
 ---
 
