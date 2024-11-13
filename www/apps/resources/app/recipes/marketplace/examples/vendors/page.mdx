@@ -148,7 +148,7 @@ module.exports = defineConfig({
     {
       resolve: "./src/modules/marketplace",
     },
-  ]
+  ],
 })
 ```
 
@@ -1151,7 +1151,7 @@ import {
   useQueryGraphStep,
   createRemoteLinkStep,
   completeCartWorkflow,
-  getOrderDetailWorkflow
+  getOrderDetailWorkflow,
 } from "@medusajs/medusa/core-flows"
 import groupVendorItemsStep from "./steps/group-vendor-items"
 import createVendorOrdersStep from "./steps/create-vendor-orders"
@@ -1194,8 +1194,8 @@ const createVendorOrdersWorkflow = createWorkflow(
           "shipping_address.*",
           "billing_address.*",
           "shipping_methods.*",
-        ]
-      }
+        ],
+      },
     })
 
     const { 
