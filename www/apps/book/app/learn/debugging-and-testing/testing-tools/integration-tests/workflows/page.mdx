@@ -12,7 +12,7 @@ In this chapter, you'll learn how to write integration tests for workflows using
   items={[
     {
       text: "Testing Tools Setup",
-      link: "/debugging-and-testing/testing-tools"
+      link: "/learn/debugging-and-testing/testing-tools"
     }
   ]}
 />
@@ -61,9 +61,20 @@ medusaIntegrationTestRunner({
     })
   },
 })
+
+jest.setTimeout(60 * 1000)
 ```
 
 You use the `medusaIntegrationTestRunner` to write an integration test for the workflow. The test pases if the workflow returns the string `"Hello, World!"`.
+
+### Jest Timeout
+
+Since your tests connect to the database and perform actions that require more time than the typical tests, make sure to increase the timeout in your test:
+
+```ts title="integration-tests/http/custom-routes.spec.ts"
+// in your test's file
+jest.setTimeout(60 * 1000)
+```
 
 ---
 

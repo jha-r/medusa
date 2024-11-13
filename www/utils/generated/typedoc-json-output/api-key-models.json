@@ -1,33 +1,33 @@
 {
-	"id": 310,
+	"id": 312,
 	"name": "api-key-models",
 	"variant": "project",
 	"kind": 1,
 	"flags": {},
 	"children": [
 		{
-			"id": 311,
+			"id": 313,
 			"name": "ApiKey",
 			"variant": "declaration",
 			"kind": 128,
 			"flags": {},
 			"children": [
 				{
-					"id": 312,
+					"id": 314,
 					"name": "constructor",
 					"variant": "declaration",
 					"kind": 512,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 313,
+							"id": 315,
 							"name": "new ApiKey",
 							"variant": "signature",
 							"kind": 16384,
 							"flags": {},
 							"type": {
 								"type": "reference",
-								"target": 311,
+								"target": 313,
 								"name": "ApiKey",
 								"package": "@medusajs/api-key",
 								"qualifiedName": "default"
@@ -36,7 +36,7 @@
 					]
 				},
 				{
-					"id": 314,
+					"id": 316,
 					"name": "id",
 					"variant": "declaration",
 					"kind": 1024,
@@ -47,7 +47,7 @@
 					}
 				},
 				{
-					"id": 315,
+					"id": 317,
 					"name": "token",
 					"variant": "declaration",
 					"kind": 1024,
@@ -58,7 +58,7 @@
 					}
 				},
 				{
-					"id": 316,
+					"id": 318,
 					"name": "salt",
 					"variant": "declaration",
 					"kind": 1024,
@@ -69,7 +69,7 @@
 					}
 				},
 				{
-					"id": 317,
+					"id": 319,
 					"name": "redacted",
 					"variant": "declaration",
 					"kind": 1024,
@@ -80,7 +80,7 @@
 					}
 				},
 				{
-					"id": 318,
+					"id": 320,
 					"name": "title",
 					"variant": "declaration",
 					"kind": 1024,
@@ -91,7 +91,7 @@
 					}
 				},
 				{
-					"id": 319,
+					"id": 321,
 					"name": "type",
 					"variant": "declaration",
 					"kind": 1024,
@@ -111,7 +111,7 @@
 					}
 				},
 				{
-					"id": 320,
+					"id": 322,
 					"name": "last_used_at",
 					"variant": "declaration",
 					"kind": 1024,
@@ -137,7 +137,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 321,
+					"id": 323,
 					"name": "created_by",
 					"variant": "declaration",
 					"kind": 1024,
@@ -148,7 +148,7 @@
 					}
 				},
 				{
-					"id": 322,
+					"id": 324,
 					"name": "created_at",
 					"variant": "declaration",
 					"kind": 1024,
@@ -164,7 +164,7 @@
 					}
 				},
 				{
-					"id": 323,
+					"id": 325,
 					"name": "updated_at",
 					"variant": "declaration",
 					"kind": 1024,
@@ -182,7 +182,7 @@
 					}
 				},
 				{
-					"id": 324,
+					"id": 326,
 					"name": "revoked_by",
 					"variant": "declaration",
 					"kind": 1024,
@@ -203,7 +203,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 325,
+					"id": 327,
 					"name": "revoked_at",
 					"variant": "declaration",
 					"kind": 1024,
@@ -229,14 +229,14 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 326,
+					"id": 328,
 					"name": "onCreate",
 					"variant": "declaration",
 					"kind": 2048,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 327,
+							"id": 329,
 							"name": "onCreate",
 							"variant": "signature",
 							"kind": 4096,
@@ -249,14 +249,14 @@
 					]
 				},
 				{
-					"id": 328,
+					"id": 330,
 					"name": "onInit",
 					"variant": "declaration",
 					"kind": 2048,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 329,
+							"id": 331,
 							"name": "onInit",
 							"variant": "signature",
 							"kind": 4096,
@@ -273,14 +273,12 @@
 				{
 					"title": "Constructors",
 					"children": [
-						312
+						314
 					]
 				},
 				{
 					"title": "Properties",
 					"children": [
-						314,
-						315,
 						316,
 						317,
 						318,
@@ -290,14 +288,16 @@
 						322,
 						323,
 						324,
-						325
+						325,
+						326,
+						327
 					]
 				},
 				{
 					"title": "Methods",
 					"children": [
-						326,
-						328
+						328,
+						330
 					]
 				}
 			]
@@ -307,81 +307,81 @@
 		{
 			"title": "Classes",
 			"children": [
-				311
+				313
 			]
 		}
 	],
 	"packageName": "@medusajs/api-key",
 	"symbolIdMap": {
-		"310": {
+		"312": {
 			"sourceFileName": "../../../../packages/modules/api-key/src/models/index.ts",
 			"qualifiedName": ""
 		},
-		"311": {
+		"313": {
 			"sourceFileName": "../../../../packages/modules/api-key/src/models/api-key.ts",
 			"qualifiedName": "default"
 		},
-		"314": {
+		"316": {
 			"sourceFileName": "../../../../packages/modules/api-key/src/models/api-key.ts",
 			"qualifiedName": "default.id"
 		},
-		"315": {
+		"317": {
 			"sourceFileName": "../../../../packages/modules/api-key/src/models/api-key.ts",
 			"qualifiedName": "default.token"
 		},
-		"316": {
+		"318": {
 			"sourceFileName": "../../../../packages/modules/api-key/src/models/api-key.ts",
 			"qualifiedName": "default.salt"
 		},
-		"317": {
+		"319": {
 			"sourceFileName": "../../../../packages/modules/api-key/src/models/api-key.ts",
 			"qualifiedName": "default.redacted"
 		},
-		"318": {
+		"320": {
 			"sourceFileName": "../../../../packages/modules/api-key/src/models/api-key.ts",
 			"qualifiedName": "default.title"
 		},
-		"319": {
+		"321": {
 			"sourceFileName": "../../../../packages/modules/api-key/src/models/api-key.ts",
 			"qualifiedName": "default.type"
 		},
-		"320": {
+		"322": {
 			"sourceFileName": "../../../../packages/modules/api-key/src/models/api-key.ts",
 			"qualifiedName": "default.last_used_at"
 		},
-		"321": {
+		"323": {
 			"sourceFileName": "../../../../packages/modules/api-key/src/models/api-key.ts",
 			"qualifiedName": "default.created_by"
 		},
-		"322": {
+		"324": {
 			"sourceFileName": "../../../../packages/modules/api-key/src/models/api-key.ts",
 			"qualifiedName": "default.created_at"
 		},
-		"323": {
+		"325": {
 			"sourceFileName": "../../../../packages/modules/api-key/src/models/api-key.ts",
 			"qualifiedName": "default.updated_at"
 		},
-		"324": {
+		"326": {
 			"sourceFileName": "../../../../packages/modules/api-key/src/models/api-key.ts",
 			"qualifiedName": "default.revoked_by"
 		},
-		"325": {
+		"327": {
 			"sourceFileName": "../../../../packages/modules/api-key/src/models/api-key.ts",
 			"qualifiedName": "default.revoked_at"
 		},
-		"326": {
-			"sourceFileName": "../../../../packages/modules/api-key/src/models/api-key.ts",
-			"qualifiedName": "default.onCreate"
-		},
-		"327": {
-			"sourceFileName": "../../../../packages/modules/api-key/src/models/api-key.ts",
-			"qualifiedName": "default.onCreate"
-		},
 		"328": {
+			"sourceFileName": "../../../../packages/modules/api-key/src/models/api-key.ts",
+			"qualifiedName": "default.onCreate"
+		},
+		"329": {
+			"sourceFileName": "../../../../packages/modules/api-key/src/models/api-key.ts",
+			"qualifiedName": "default.onCreate"
+		},
+		"330": {
 			"sourceFileName": "../../../../packages/modules/api-key/src/models/api-key.ts",
 			"qualifiedName": "default.onInit"
 		},
-		"329": {
+		"331": {
 			"sourceFileName": "../../../../packages/modules/api-key/src/models/api-key.ts",
 			"qualifiedName": "default.onInit"
 		}
@@ -391,7 +391,7 @@
 			"1": "../../../../packages/modules/api-key/src/models/index.ts"
 		},
 		"reflections": {
-			"1": 310
+			"1": 312
 		}
 	}
 }

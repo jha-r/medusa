@@ -1,10 +1,10 @@
+import { medusaIntegrationTestRunner } from "@medusajs/test-utils"
 import {
   ContainerRegistrationKeys,
   Modules,
   OrderChangeStatus,
   RuleOperator,
 } from "@medusajs/utils"
-import { medusaIntegrationTestRunner } from "@medusajs/test-utils"
 import {
   adminHeaders,
   createAdminUser,
@@ -417,6 +417,31 @@ medusaIntegrationTestRunner({
 
         expect(result.summary.current_order_total).toEqual(124)
         expect(result.summary.original_order_total).toEqual(60)
+
+        const updatedItem = result.items.find((i) => i.id === item.id)
+        expect(updatedItem.actions).toEqual([
+          expect.objectContaining({
+            details: expect.objectContaining({
+              quantity: 2,
+              unit_price: 25,
+              quantity_diff: 0,
+            }),
+          }),
+          expect.objectContaining({
+            details: expect.objectContaining({
+              quantity: 3,
+              unit_price: 25,
+              quantity_diff: 1,
+            }),
+          }),
+          expect.objectContaining({
+            details: expect.objectContaining({
+              quantity: 3,
+              unit_price: 30,
+              quantity_diff: 1,
+            }),
+          }),
+        ])
 
         // Remove the item by setting the quantity to 0
         result = (

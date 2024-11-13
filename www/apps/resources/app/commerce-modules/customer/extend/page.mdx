@@ -504,7 +504,7 @@ Finally, you'll create the workflow. Create the file `src/workflows/update-custo
 ```ts title="src/workflows/update-custom-from-customer/index.ts" collapsibleLines="1-9" expandButtonLabel="Show Imports"
 import { CustomerDTO } from "@medusajs/framework/types"
 import { createWorkflow, when, WorkflowResponse } from "@medusajs/framework/workflows-sdk"
-import { createRemoteLinkStep, dismissRemoteLinkStep, useRemoteQueryStep } from "@medusajs/medusa/core-flows"
+import { createRemoteLinkStep, dismissRemoteLinkStep, useQueryGraphStep } from "@medusajs/medusa/core-flows"
 import { createCustomStep } from "../create-custom-from-customer/steps/create-custom"
 import { Modules } from "@medusajs/framework/utils"
 import { HELLO_MODULE } from "../../modules/hello"
@@ -521,15 +521,12 @@ export type UpdateCustomFromCustomerStepInput = {
 export const updateCustomFromCustomerWorkflow = createWorkflow(
   "update-custom-from-customer",
   (input: UpdateCustomFromCustomerStepInput) => {
-    const customerData = useRemoteQueryStep({
-      entry_point: "customer",
+    const { data: customers } = useQueryGraphStep({
+      entity: "customer",
       fields: ["custom.*"],
-      variables: {
-        filters: {
-          id: input.customer.id,
-        },
-      },
-      list: false,
+      filters: {
+        id: input.customer.id,
+      }
     })
 
     // TODO create, update, or delete Custom record
@@ -546,9 +543,9 @@ Next, replace the `TODO` with the following:
 ```ts title="src/workflows/update-custom-from-customer/index.ts"
 const created = when({
   input,
-  customerData,
+  customers,
 }, (data) => 
-  !data.customerData.custom && 
+  !data.customers[0].custom && 
   data.input.additional_data?.custom_name?.length > 0
 )
 .then(() => {
@@ -580,25 +577,25 @@ Next, replace the new `TODO` with the following:
 ```ts title="src/workflows/update-custom-from-customer/index.ts"
 const deleted = when({
   input,
-  customerData,
+  customers,
 }, (data) => 
-  data.customerData.custom && (
+  data.customers[0].custom && (
     data.input.additional_data?.custom_name === null || 
     data.input.additional_data?.custom_name.length === 0
   )
 )
 .then(() => {
   deleteCustomStep({
-    custom: customerData.custom,
+    custom: customers[0].custom,
   })
 
   dismissRemoteLinkStep({
     [HELLO_MODULE]: {
-      custom_id: customerData.custom.id,
+      custom_id: customers[0].custom.id,
     },
   })
 
-  return customerData.custom.id
+  return customers[0].custom.id
 })
 
 // TODO delete Custom record
@@ -611,11 +608,11 @@ Finally, replace the new `TODO` with the following:
 ```ts title="src/workflows/update-custom-from-customer/index.ts"
 const updated = when({
   input,
-  customerData,
-}, (data) => data.customerData.custom && data.input.additional_data?.custom_name?.length > 0)
+  customers,
+}, (data) => data.customers[0].custom && data.input.additional_data?.custom_name?.length > 0)
 .then(() => {
   const custom = updateCustomStep({
-    id: customerData.custom.id,
+    id: customers[0].custom.id,
     custom_name: input.additional_data.custom_name,
   })
 

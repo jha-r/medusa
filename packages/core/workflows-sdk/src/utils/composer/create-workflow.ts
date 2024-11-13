@@ -152,15 +152,10 @@ export function createWorkflow<TData, TResult, THooks extends any[]>(
     WorkflowManager.register(name, context.flow, handlers, options)
   }
 
-  const workflow = exportWorkflow<TData, TResult>(
-    name,
-    returnedStep,
-    undefined,
-    {
-      wrappedInput: true,
-      sourcePath: fileSourcePath,
-    }
-  )
+  const workflow = exportWorkflow<TData, TResult>(name, returnedStep, {
+    wrappedInput: true,
+    sourcePath: fileSourcePath,
+  })
 
   const mainFlow = <TDataOverride = undefined, TResultOverride = undefined>(
     container?: LoadedModule[] | MedusaContainer

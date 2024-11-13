@@ -51,12 +51,12 @@ export const PricingEdit = ({
   }, [regions])
 
   const variants = variantId
-    ? product.variants.filter((v) => v.id === variantId)
+    ? product.variants?.filter((v) => v.id === variantId)
     : product.variants
 
   const form = useForm<UpdateVariantPricesSchemaType>({
     defaultValues: {
-      variants: variants.map((variant: any) => ({
+      variants: variants?.map((variant: any) => ({
         title: variant.title,
         prices: variant.prices.reduce((acc: any, price: any) => {
           if (price.rules?.region_id) {
@@ -90,11 +90,11 @@ export const PricingEdit = ({
           let existingId = undefined
 
           if (regionId) {
-            existingId = variants[ind].prices.find(
+            existingId = variants?.[ind]?.prices?.find(
               (p) => p.rules["region_id"] === regionId
             )?.id
           } else {
-            existingId = variants[ind].prices.find(
+            existingId = variants?.[ind]?.prices?.find(
               (p) =>
                 p.currency_code === currencyCode &&
                 Object.keys(p.rules ?? {}).length === 0

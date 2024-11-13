@@ -8616,7 +8616,7 @@ export const generatedSidebar = [
                 "loaded": true,
                 "isPathHref": true,
                 "type": "link",
-                "path": "/references/js-sdk/admin/cart",
+                "path": "/references/js-sdk/store/cart",
                 "title": "cart",
                 "children": []
               },
@@ -8624,7 +8624,7 @@ export const generatedSidebar = [
                 "loaded": true,
                 "isPathHref": true,
                 "type": "link",
-                "path": "/references/js-sdk/admin/category",
+                "path": "/references/js-sdk/store/category",
                 "title": "category",
                 "children": []
               },
@@ -8632,7 +8632,7 @@ export const generatedSidebar = [
                 "loaded": true,
                 "isPathHref": true,
                 "type": "link",
-                "path": "/references/js-sdk/admin/collection",
+                "path": "/references/js-sdk/store/collection",
                 "title": "collection",
                 "children": []
               },
@@ -8640,7 +8640,7 @@ export const generatedSidebar = [
                 "loaded": true,
                 "isPathHref": true,
                 "type": "link",
-                "path": "/references/js-sdk/admin/customer",
+                "path": "/references/js-sdk/store/customer",
                 "title": "customer",
                 "children": []
               },
@@ -8648,7 +8648,7 @@ export const generatedSidebar = [
                 "loaded": true,
                 "isPathHref": true,
                 "type": "link",
-                "path": "/references/js-sdk/admin/fulfillment",
+                "path": "/references/js-sdk/store/fulfillment",
                 "title": "fulfillment",
                 "children": []
               },
@@ -8656,7 +8656,7 @@ export const generatedSidebar = [
                 "loaded": true,
                 "isPathHref": true,
                 "type": "link",
-                "path": "/references/js-sdk/admin/order",
+                "path": "/references/js-sdk/store/order",
                 "title": "order",
                 "children": []
               },
@@ -8664,7 +8664,7 @@ export const generatedSidebar = [
                 "loaded": true,
                 "isPathHref": true,
                 "type": "link",
-                "path": "/references/js-sdk/admin/payment",
+                "path": "/references/js-sdk/store/payment",
                 "title": "payment",
                 "children": []
               },
@@ -8672,7 +8672,7 @@ export const generatedSidebar = [
                 "loaded": true,
                 "isPathHref": true,
                 "type": "link",
-                "path": "/references/js-sdk/admin/product",
+                "path": "/references/js-sdk/store/product",
                 "title": "product",
                 "children": []
               },
@@ -8680,7 +8680,7 @@ export const generatedSidebar = [
                 "loaded": true,
                 "isPathHref": true,
                 "type": "link",
-                "path": "/references/js-sdk/admin/region",
+                "path": "/references/js-sdk/store/region",
                 "title": "region",
                 "children": []
               }

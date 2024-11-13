@@ -7,7 +7,7 @@ const HomepageLinksSection = () => {
       title: "Customize Medusa Application",
       links: [
         {
-          href: "/learn",
+          href: "/learn/installation",
           text: "Create your first application",
         },
         {

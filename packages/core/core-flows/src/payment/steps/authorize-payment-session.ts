@@ -40,7 +40,12 @@ export const authorizePaymentSessionStep = createStep(
       )
     }
 
-    const paymentSession = await paymentModule.retrievePaymentSession(input.id)
+    const paymentSession = await paymentModule.retrievePaymentSession(
+      input.id,
+      {
+        relations: ["payment", "payment.captures"],
+      }
+    )
 
     // Throw a special error type when the status is requires_more as it requires a specific further action
     // from the consumer
