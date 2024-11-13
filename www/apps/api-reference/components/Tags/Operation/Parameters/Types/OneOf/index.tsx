@@ -77,7 +77,7 @@ const TagOperationParamatersOneOf = ({
                   "focus:shadow-borders-interactive-with-focus transition-colors",
                   activeTab === index && [
                     "text-medusa-fg-base bg-medusa-bg-base",
-                    "shadow-elevation-card-rest dark:shadow-elevation-card-rest-dark"
+                    "shadow-elevation-card-rest dark:shadow-elevation-card-rest-dark",
                   ],
                   activeTab !== index && [
                     "text-medusa-fg-muted hover:text-medusa-fg-base",
