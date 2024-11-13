@@ -746,7 +746,7 @@ const InventoryKitBreakdown = ({ item }: { item: AdminOrderLineItem }) => {
 
   const [isOpen, setIsOpen] = useState(false)
 
-  const inventory = item.variant.inventory_items
+  const inventory = item.variant?.inventory_items || []
 
   return (
     <>

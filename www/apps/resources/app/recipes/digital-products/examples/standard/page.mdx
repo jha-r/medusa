@@ -1567,8 +1567,8 @@ To customize the cart completion flow, you’ll create a workflow and then use t
 
 ```mermaid
 graph TD
-  completeCartWorkflow["completeCartWorkflow (Medusa)"] --> useRemoteQueryStep["useRemoteQueryStep (Medusa)"]
-  useRemoteQueryStep --> when{order has digital products?}
+  completeCartWorkflow["completeCartWorkflow (Medusa)"] --> useQueryGraphStep["useQueryGraphStep (Medusa)"]
+  useQueryGraphStep --> when{order has digital products?}
   when -->|Yes| createDigitalProductOrderStep
   createDigitalProductOrderStep --> createRemoteLinkStep["createRemoteLinkStep (Medusa)"]
   createRemoteLinkStep --> createOrderFulfillmentWorkflow["createOrderFulfillmentWorkflow (Medusa)"]
@@ -1580,7 +1580,7 @@ graph TD
 The workflow has the following steps:
 
 1. `completeCartWorkflow` to create a Medusa order from the cart. Medusa provides this workflow through the `@medusajs/medusa/core-flows` package and you can use it as a step.
-2. `useRemoteQueryStep` to retrieve the order’s items with the digital products associated with the purchased product variants. Medusa provides this step through the `@medusajs/medusa/core-flows` package.
+2. `useQueryGraphStep` to retrieve the order’s items with the digital products associated with the purchased product variants. Medusa provides this step through the `@medusajs/medusa/core-flows` package.
 3. If the order has digital products, you:
     1. create the digital product order.
     2. link the digital product order with the Medusa order. Medusa provides a `createRemoteLinkStep` in the `@medusajs/medusa/core-flows` package that can be used here.
@@ -1665,14 +1665,14 @@ In the compensation function, you delete the digital product order.
 Create the file `src/workflows/create-digital-product-order/index.ts` with the following content:
 
 export const createDpoWorkflowHighlights = [
-  ["25", "completeCartWorkflow", "Create an order for the cart."],
-  ["31", "useRemoteQueryStep", "Retrieve the order's items and their associated variants and linked digital products."],
-  ["56", "when", "Check whether the order has any digital products."],
-  ["61", "then", "Perform the callback function if an order has digital products."],
-  ["64", "createDigitalProductOrderStep", "Create the digital product order."],
-  ["66", "createRemoteLinkStep", "Link the digital product order to the Medusa order."],
-  ["75", "createOrderFulfillmentWorkflow", "Create a fulfillment for the digital products in the order."],
-  ["89", "emitEventStep", "Emit the `digital_product_order.created` event."]
+  ["27", "completeCartWorkflow", "Create an order for the cart."],
+  ["33", "useQueryGraphStep", "Retrieve the order's items and their associated variants and linked digital products."],
+  ["57", "when", "Check whether the order has any digital products."],
+  ["60", "then", "Perform the callback function if an order has digital products."],
+  ["63", "createDigitalProductOrderStep", "Create the digital product order."],
+  ["67", "createRemoteLinkStep", "Link the digital product order to the Medusa order."],
+  ["76", "createOrderFulfillmentWorkflow", "Create a fulfillment for the digital products in the order."],
+  ["90", "emitEventStep", "Emit the `digital_product_order.created` event."]
 ]
 
 ```ts title="src/workflows/create-digital-product-order/index.ts" highlights={createDpoWorkflowHighlights} collapsibleLines="1-17" expandMoreLabel="Show Imports"
@@ -1680,16 +1680,18 @@ import {
   createWorkflow,
   transform,
   when,
-  WorkflowResponse,
+  WorkflowResponse
 } from "@medusajs/framework/workflows-sdk"
 import {
   completeCartWorkflow,
-  useRemoteQueryStep,
+  useQueryGraphStep,
   createRemoteLinkStep,
   createOrderFulfillmentWorkflow,
-  emitEventStep,
+  emitEventStep
 } from "@medusajs/medusa/core-flows"
-import { Modules } from "@medusajs/framework/utils"
+import {
+  Modules
+} from "@medusajs/framework/utils"
 import createDigitalProductOrderStep from "./steps/create-digital-product-order"
 import { DIGITAL_PRODUCT_MODULE } from "../../modules/digital-product"
 
@@ -1700,35 +1702,34 @@ type WorkflowInput = {
 const createDigitalProductOrderWorkflow = createWorkflow(
   "create-digital-product-order",
   (input: WorkflowInput) => {
-    const order = completeCartWorkflow.runAsStep({
+    const { id } = completeCartWorkflow.runAsStep({
       input: {
-        id: input.cart_id,
-      },
+        id: input.cart_id
+      }
     })
 
-    const { items } = useRemoteQueryStep({
-      entry_point: "order",
+    const { data: orders } = useQueryGraphStep({
+      entity: "order",
       fields: [
         "*",
         "items.*",
         "items.variant.*",
-        "items.variant.digital_product.*",
+        "items.variant.digital_product.*"
       ],
-      variables: {
-        filters: {
-          id: order.id,
-        },
+      filters: {
+        id
       },
-      throw_if_key_not_found: true,
-      list: false,
+      options: {
+        throwIfKeyNotFound: true
+      }
     })
 
     const itemsWithDigitalProducts = transform({
-      items,
+      orders
     },
     (data) => {
-      return data.items.filter((item) => item.variant.digital_product !== undefined)
-    }
+        return data.orders[0].items.filter((item) => item.variant.digital_product !== undefined)
+      }
     )
 
     const digital_product_order = when(itemsWithDigitalProducts, (itemsWithDigitalProducts) => {
@@ -1737,44 +1738,46 @@ const createDigitalProductOrderWorkflow = createWorkflow(
     .then(() => {
       const { 
         digital_product_order,
-      } = createDigitalProductOrderStep({ items })
+      } = createDigitalProductOrderStep({
+        items: orders[0].items
+      })
   
       createRemoteLinkStep([{
         [DIGITAL_PRODUCT_MODULE]: {
-          digital_product_order_id: digital_product_order.id,
+          digital_product_order_id: digital_product_order.id
         },
         [Modules.ORDER]: {
-          order_id: order.id,
-        },
+          order_id: id
+        }
       }])
 
       createOrderFulfillmentWorkflow.runAsStep({
         input: {
-          order_id: order.id,
+          order_id: id,
           items: transform({
-            itemsWithDigitalProducts,
+            itemsWithDigitalProducts
           }, (data) => {
             return data.itemsWithDigitalProducts.map((item) => ({
               id: item.id,
-              quantity: item.quantity,
+              quantity: item.quantity
             }))
-          }),
-        },
+          })
+        }
       })
   
       emitEventStep({
         eventName: "digital_product_order.created",
         data: {
-          id: digital_product_order.id,
-        },
+          id: digital_product_order.id
+        }
       })
 
       return digital_product_order
     })
 
     return new WorkflowResponse({
-      order,
-      digital_product_order,
+      order: orders[0],
+      digital_product_order
     })
   }
 )
@@ -1785,7 +1788,7 @@ export default createDigitalProductOrderWorkflow
 This creates the workflow `createDigitalProductOrderWorkflow`. It runs the following steps:
 
 1. `completeCartWorkflow` as a step to create the Medusa order.
-2. `useRemoteQueryStep` to retrieve the order’s items with their associated variants and linked digital products.
+2. `useQueryGraphStep` to retrieve the order’s items with their associated variants and linked digital products.
 3. Use `when` to check whether the order has digital products. If so:
     1. Use the `createDigitalProductOrderStep` to create the digital product order.
     2. Use the `createRemoteLinkStep` to link the digital product order to the Medusa order.
@@ -1842,7 +1845,7 @@ In this step, you'll create a workflow that fulfills a digital order by sending 
 
 The workflow has the following steps:
 
-1. Retrieve the digital product order's details. For this, you'll use the `useRemoteQueryStep` imported from `@medusajs/medusa/core-flows`.
+1. Retrieve the digital product order's details. For this, you'll use the `useQueryGraphStep` imported from `@medusajs/medusa/core-flows`.
 2. Send a notification to the customer with the digital products to download.
 
 So, you only need to implement the second step.
@@ -1959,17 +1962,17 @@ You use the `createNotifications` method of the Notification Module's main servi
 Create the workflow in the file `src/workflows/fulfill-digital-order/index.ts`:
 
 export const fulfillWorkflowHighlights = [
-  ["17", "useRemoteQueryStep", "Retrieve the digital product order's details."],
+  ["17", "useQueryGraphStep", "Retrieve the digital product order's details."],
   ["33", "sendDigitalOrderNotificationStep", "Send a notification to the customer."]
 ]
 
 ```ts title="src/workflows/fulfill-digital-order/index.ts" highlights={fulfillWorkflowHighlights} collapsibleLines="1-10" expandMoreLabel="Show Imports"
 import {
   createWorkflow,
-  WorkflowResponse,
+  WorkflowResponse
 } from "@medusajs/framework/workflows-sdk"
 import {
-  useRemoteQueryStep,
+  useQueryGraphStep,
 } from "@medusajs/medusa/core-flows"
 import { sendDigitalOrderNotificationStep } from "./steps/send-digital-order-notification"
 
@@ -1980,29 +1983,28 @@ type FulfillDigitalOrderWorkflowInput = {
 export const fulfillDigitalOrderWorkflow = createWorkflow(
   "fulfill-digital-order",
   ({ id }: FulfillDigitalOrderWorkflowInput) => {
-    const digitalProductOrder = useRemoteQueryStep({
-      entry_point: "digital_product_order",
+    const { data: digitalProductOrders } = useQueryGraphStep({
+      entity: "digital_product_order",
       fields: [
         "*",
         "products.*",
         "products.medias.*",
-        "order.*",
+        "order.*"
       ],
-      variables: {
-        filters: {
-          id,
-        },
+      filters: {
+        id,
       },
-      list: false,
-      throw_if_key_not_found: true,
+      options: {
+        throwIfKeyNotFound: true
+      }
     })
 
     sendDigitalOrderNotificationStep({
-      digital_product_order: digitalProductOrder,
+      digital_product_order: digitalProductOrders[0]
     })
 
     return new WorkflowResponse(
-      digitalProductOrder
+      digitalProductOrders[0]
     )
   }
 )
@@ -2010,7 +2012,7 @@ export const fulfillDigitalOrderWorkflow = createWorkflow(
 
 In the workflow, you:
 
-1. Retrieve the digital product order's details using the `useRemoteQueryStep` imported from `@medusajs/medusa/core-flows`.
+1. Retrieve the digital product order's details using the `useQueryGraphStep` imported from `@medusajs/medusa/core-flows`.
 2. Send a notification to the customer with the digital product download links using the `sendDigitalOrderNotificationStep`.
 
 ### Configure Notification Module Provider

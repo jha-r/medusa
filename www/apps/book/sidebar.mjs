@@ -8,12 +8,19 @@ export const sidebar = numberSidebarItems(
       type: "link",
       path: "/learn",
       title: "Introduction",
-    },
-    {
-      type: "link",
-      path: "/learn/first-customizations",
-      title: "Your First Customizations",
-      chapterTitle: "First Customization",
+      children: [
+        {
+          type: "link",
+          path: "/learn/installation",
+          title: "Installation",
+        },
+        {
+          type: "link",
+          path: "/learn/first-customizations",
+          title: "Your First Customizations",
+          chapterTitle: "First Customization",
+        },
+      ],
     },
     {
       type: "link",
@@ -409,12 +416,12 @@ export const sidebar = numberSidebarItems(
             {
               type: "link",
               path: "/learn/advanced-development/workflows/variable-manipulation",
-              title: "Variable Manipulation",
+              title: "Transform Variables",
             },
             {
               type: "link",
               path: "/learn/advanced-development/workflows/conditions",
-              title: "Using Conditions",
+              title: "When-Then Conditions",
             },
             {
               type: "link",
@@ -465,6 +472,11 @@ export const sidebar = numberSidebarItems(
               type: "link",
               path: "/learn/advanced-development/workflows/execute-another-workflow",
               title: "Execute Another Workflow",
+            },
+            {
+              type: "link",
+              path: "/learn/advanced-development/workflows/multiple-step-usage",
+              title: "Multiple Step Usage",
             },
           ],
         },

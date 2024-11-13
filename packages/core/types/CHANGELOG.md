@@ -1,5 +1,19 @@
 # @medusajs/types
 
+## 2.0.4
+
+### Patch Changes
+
+- [#10009](https://github.com/medusajs/medusa/pull/10009) [`34f4f695c0b8359a6e9efd45fd081ea743a1c439`](https://github.com/medusajs/medusa/commit/34f4f695c0b8359a6e9efd45fd081ea743a1c439) Thanks [@kasperkristensen](https://github.com/kasperkristensen)! - fix(types): Add AdminBatchUpdateProductVariant type, which includes ID.
+
+- [#10018](https://github.com/medusajs/medusa/pull/10018) [`bc2d556c2c57adab637308fb65247b17b8cd2ed5`](https://github.com/medusajs/medusa/commit/bc2d556c2c57adab637308fb65247b17b8cd2ed5) Thanks [@thetutlage](https://github.com/thetutlage)! - breaking: pluralize type helper to account for uncountable nouns and special rules
+
+## 2.0.3
+
+### Patch Changes
+
+- [#9955](https://github.com/medusajs/medusa/pull/9955) [`03f4b66b90625634f13409be35cd57081f0eb7d5`](https://github.com/medusajs/medusa/commit/03f4b66b90625634f13409be35cd57081f0eb7d5) Thanks [@carlos-r-l-rodrigues](https://github.com/carlos-r-l-rodrigues)! - Generate graph schema with readonly links
+
 ## 2.0.2
 
 ### Patch Changes

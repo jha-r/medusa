@@ -565,11 +565,6 @@ export const slugChanges = [
     "filePath": "/www/apps/resources/references/core_flows/Cart/Steps_Cart/functions/core_flows.Cart.Steps_Cart.getActionsToComputeFromPromotionsStep/page.mdx"
   },
   {
-    "origSlug": "/references/core_flows/Cart/Steps_Cart/functions/core_flows.Cart.Steps_Cart.getItemTaxLinesStep",
-    "newSlug": "/references/medusa-workflows/steps/getItemTaxLinesStep",
-    "filePath": "/www/apps/resources/references/core_flows/Cart/Steps_Cart/functions/core_flows.Cart.Steps_Cart.getItemTaxLinesStep/page.mdx"
-  },
-  {
     "origSlug": "/references/core_flows/Cart/Steps_Cart/functions/core_flows.Cart.Steps_Cart.getLineItemActionsStep",
     "newSlug": "/references/medusa-workflows/steps/getLineItemActionsStep",
     "filePath": "/www/apps/resources/references/core_flows/Cart/Steps_Cart/functions/core_flows.Cart.Steps_Cart.getLineItemActionsStep/page.mdx"
@@ -1393,11 +1388,6 @@ export const slugChanges = [
     "origSlug": "/references/core_flows/Order/Steps_Order/functions/core_flows.Order.Steps_Order.deleteReturnsStep",
     "newSlug": "/references/medusa-workflows/steps/deleteReturnsStep",
     "filePath": "/www/apps/resources/references/core_flows/Order/Steps_Order/functions/core_flows.Order.Steps_Order.deleteReturnsStep/page.mdx"
-  },
-  {
-    "origSlug": "/references/core_flows/Order/Steps_Order/functions/core_flows.Order.Steps_Order.getOrderItemTaxLinesStep",
-    "newSlug": "/references/medusa-workflows/steps/getOrderItemTaxLinesStep",
-    "filePath": "/www/apps/resources/references/core_flows/Order/Steps_Order/functions/core_flows.Order.Steps_Order.getOrderItemTaxLinesStep/page.mdx"
   },
   {
     "origSlug": "/references/core_flows/Order/Steps_Order/functions/core_flows.Order.Steps_Order.previewOrderChangeStep",
@@ -4346,47 +4336,47 @@ export const slugChanges = [
   },
   {
     "origSlug": "/references/js_sdk/store/Store/properties/js_sdk.store.Store.cart",
-    "newSlug": "/references/js-sdk/admin/cart",
+    "newSlug": "/references/js-sdk/store/cart",
     "filePath": "/www/apps/resources/references/js_sdk/store/Store/properties/js_sdk.store.Store.cart/page.mdx"
   },
   {
     "origSlug": "/references/js_sdk/store/Store/properties/js_sdk.store.Store.category",
-    "newSlug": "/references/js-sdk/admin/category",
+    "newSlug": "/references/js-sdk/store/category",
     "filePath": "/www/apps/resources/references/js_sdk/store/Store/properties/js_sdk.store.Store.category/page.mdx"
   },
   {
     "origSlug": "/references/js_sdk/store/Store/properties/js_sdk.store.Store.collection",
-    "newSlug": "/references/js-sdk/admin/collection",
+    "newSlug": "/references/js-sdk/store/collection",
     "filePath": "/www/apps/resources/references/js_sdk/store/Store/properties/js_sdk.store.Store.collection/page.mdx"
   },
   {
     "origSlug": "/references/js_sdk/store/Store/properties/js_sdk.store.Store.customer",
-    "newSlug": "/references/js-sdk/admin/customer",
+    "newSlug": "/references/js-sdk/store/customer",
     "filePath": "/www/apps/resources/references/js_sdk/store/Store/properties/js_sdk.store.Store.customer/page.mdx"
   },
   {
     "origSlug": "/references/js_sdk/store/Store/properties/js_sdk.store.Store.fulfillment",
-    "newSlug": "/references/js-sdk/admin/fulfillment",
+    "newSlug": "/references/js-sdk/store/fulfillment",
     "filePath": "/www/apps/resources/references/js_sdk/store/Store/properties/js_sdk.store.Store.fulfillment/page.mdx"
   },
   {
     "origSlug": "/references/js_sdk/store/Store/properties/js_sdk.store.Store.order",
-    "newSlug": "/references/js-sdk/admin/order",
+    "newSlug": "/references/js-sdk/store/order",
     "filePath": "/www/apps/resources/references/js_sdk/store/Store/properties/js_sdk.store.Store.order/page.mdx"
   },
   {
     "origSlug": "/references/js_sdk/store/Store/properties/js_sdk.store.Store.payment",
-    "newSlug": "/references/js-sdk/admin/payment",
+    "newSlug": "/references/js-sdk/store/payment",
     "filePath": "/www/apps/resources/references/js_sdk/store/Store/properties/js_sdk.store.Store.payment/page.mdx"
   },
   {
     "origSlug": "/references/js_sdk/store/Store/properties/js_sdk.store.Store.product",
-    "newSlug": "/references/js-sdk/admin/product",
+    "newSlug": "/references/js-sdk/store/product",
     "filePath": "/www/apps/resources/references/js_sdk/store/Store/properties/js_sdk.store.Store.product/page.mdx"
   },
   {
     "origSlug": "/references/js_sdk/store/Store/properties/js_sdk.store.Store.region",
-    "newSlug": "/references/js-sdk/admin/region",
+    "newSlug": "/references/js-sdk/store/region",
     "filePath": "/www/apps/resources/references/js_sdk/store/Store/properties/js_sdk.store.Store.region/page.mdx"
   },
   {

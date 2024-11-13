@@ -69,8 +69,9 @@ The `authenticate` middleware function accepts three parameters:
 
 1. The type of user authenticating. Use `user` for authenticating admin users, and `customer` for authenticating customers. You can also pass `*` to allow all types of users.
 2. An array of types of authentication methods allowed. Both `user` and `customer` scopes support `session` and `bearer`. The `admin` scope also supports the `api-key` authentication method.
-3. An optional object of configurations accepting the following property:
+3. An optional object of configurations accepting the following properties:
     - `allowUnauthenticated`: (default: `false`) A boolean indicating whether authentication is required. For example, you may have an API route where you want to access the logged-in customer if available, but guest customers can still access it too.
+    - `allowUnregistered` (default: `false`): A boolean indicating if unregistered users should be allowed access. This is useful when you want to allow users who aren’t registered to access certain routes.
 
 ---
 

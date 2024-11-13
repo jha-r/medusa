@@ -31,7 +31,7 @@ The same Medusa project is used to deploy the server and worker modes. Learn mor
 <Prerequisites items={[
   {
     text: "Medusa application’s codebase hosted on GitHub repository.",
-    link: "!docs!"
+    link: "!docs!/learn/installation"
   },
 ]} />
 
@@ -326,7 +326,7 @@ To add environment variables to the Medusa application in worker mode:
 ```bash
 COOKIE_SECRET=supersecret # TODO GENERATE SECURE SECRET
 JWT_SECRET=supersecret  # TODO GENERATE SECURE SECRET
-DISABLE_MEDUSA_ADMIN=false
+DISABLE_MEDUSA_ADMIN=true
 MEDUSA_WORKER_MODE=worker
 PORT=9000
 DATABASE_URL=${{Postgres.DATABASE_PUBLIC_URL}}

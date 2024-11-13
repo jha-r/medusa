@@ -364,7 +364,7 @@ export const CodeBlock = ({
               ...actionsProps,
               inHeader: true,
             }}
-            showActions={!hasTabs}
+            hideActions={hasTabs}
           />
         )}
         <div

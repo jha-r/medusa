@@ -1,5 +1,5 @@
 ---
-slug: /references/js-sdk/admin/cart
+slug: /references/js-sdk/store/cart
 sidebar_label: cart
 ---
 
@@ -69,7 +69,7 @@ ___
 
 ## retrieve
 
-This method retrieves a cart by its ID. It sends a request to the 
+This method retrieves a cart by its ID. It sends a request to the
 [Get Cart](https://docs.medusajs.com/api/store#carts\_getcartsid) API route.
 
 Related guide: [How to retrieve a cart in the storefront](https://docs.medusajs.com/resources/storefront-development/cart/retrieve).
@@ -139,7 +139,7 @@ ___
 
 ## updateLineItem
 
-This method updates a line item in a cart. It sends a request to the 
+This method updates a line item in a cart. It sends a request to the
 [Update Line Item](https://docs.medusajs.com/api/store#carts\_postcartsidlineitemsline\_id) API route.
 
 Related guide: [How to manage a cart's line items in the storefront](https://docs.medusajs.com/resources/storefront-development/cart/manage-items).
@@ -148,7 +148,7 @@ Related guide: [How to manage a cart's line items in the storefront](https://doc
 
 ```ts
 sdk.store.cart.updateLineItem(
-  "cart_123", 
+  "cart_123",
   "li_123",
   {
     quantity: 1
@@ -200,7 +200,7 @@ ___
 
 ## addShippingMethod
 
-This method adds a shipping method to a cart. It sends a request to 
+This method adds a shipping method to a cart. It sends a request to
 the [Add Shipping Method](https://docs.medusajs.com/api/store#carts\_postcartsidshippingmethods) API routes.
 
 Related guide: [Implement shipping step during checkout](https://docs.medusajs.com/resources/storefront-development/checkout/shipping).
@@ -318,7 +318,7 @@ ___
 
 ## retrieve
 
-This method retrieves a cart by its ID. It sends a request to the 
+This method retrieves a cart by its ID. It sends a request to the
 [Get Cart](https://docs.medusajs.com/api/store#carts\_getcartsid) API route.
 
 Related guide: [How to retrieve a cart in the storefront](https://docs.medusajs.com/resources/storefront-development/cart/retrieve).
@@ -388,7 +388,7 @@ ___
 
 ## updateLineItem
 
-This method updates a line item in a cart. It sends a request to the 
+This method updates a line item in a cart. It sends a request to the
 [Update Line Item](https://docs.medusajs.com/api/store#carts\_postcartsidlineitemsline\_id) API route.
 
 Related guide: [How to manage a cart's line items in the storefront](https://docs.medusajs.com/resources/storefront-development/cart/manage-items).
@@ -397,7 +397,7 @@ Related guide: [How to manage a cart's line items in the storefront](https://doc
 
 ```ts
 sdk.store.cart.updateLineItem(
-  "cart_123", 
+  "cart_123",
   "li_123",
   {
     quantity: 1
@@ -449,7 +449,7 @@ ___
 
 ## addShippingMethod
 
-This method adds a shipping method to a cart. It sends a request to 
+This method adds a shipping method to a cart. It sends a request to
 the [Add Shipping Method](https://docs.medusajs.com/api/store#carts\_postcartsidshippingmethods) API routes.
 
 Related guide: [Implement shipping step during checkout](https://docs.medusajs.com/resources/storefront-development/checkout/shipping).
