@@ -4703,7 +4703,7 @@ describe("Entity builder", () => {
       })
     })
 
-    test("define relationship with self via hasMany", () => {
+    test("define entity with relationship to itself via hasMany", () => {
       const user = model.define("user", {
         id: model.number(),
         username: model.text(),
@@ -4722,6 +4722,11 @@ describe("Entity builder", () => {
           username: string
           deleted_at: Date | null
         }
+        children: {
+          id: number
+          username: string
+          deleted_at: Date | null
+        }[]
       }>()
 
       const metaData = MetadataStorage.getMetadataFromDecorator(User)
@@ -4827,6 +4832,11 @@ describe("Entity builder", () => {
         username: string
         deleted_at: Date | null
         parent: {
+          id: number
+          username: string
+          deleted_at: Date | null
+        }
+        child: {
           id: number
           username: string
           deleted_at: Date | null
