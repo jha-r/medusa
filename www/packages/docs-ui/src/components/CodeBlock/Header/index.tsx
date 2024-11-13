@@ -26,7 +26,7 @@ export const CodeBlockHeader = ({
   badgeLabel,
   actionsProps,
   badgeColor,
-  hideActions = false
+  hideActions = false,
 }: CodeBlockHeaderProps) => {
   const { colorMode } = useColorMode()
 
