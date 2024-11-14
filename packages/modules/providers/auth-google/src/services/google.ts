@@ -145,6 +145,7 @@ export class GoogleAuthService extends AbstractAuthModuleProvider {
     const entity_id = payload.sub
     const userMetadata = {
       name: payload.name,
+      email: payload.email,
       picture: payload.picture,
       given_name: payload.given_name,
       family_name: payload.family_name,

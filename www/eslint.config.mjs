@@ -19,7 +19,7 @@ const compat = new FlatCompat({
 export default [
     prettier,
     {
-    ignores: ["**/dist", "**/build"],
+    ignores: ["**/dist", "**/build", "**/global-config.ts"],
 }, ...compat.extends(
     "eslint:recommended",
     "plugin:react/recommended",

@@ -8,6 +8,474 @@ export const metadata = {
 
 This documentation page includes the list of injection zones you can add Admin Widgets to.
 
+## Campaign Pages
+
+<Table>
+  <Table.Header>
+    <Table.Row>
+      <Table.HeaderCell className="w-1/3">Injection Zone Name</Table.HeaderCell>
+      <Table.HeaderCell className="w-1/3">Description</Table.HeaderCell>
+      <Table.HeaderCell className="w-1/3">Additional Props</Table.HeaderCell>
+    </Table.Row>
+  </Table.Header>
+  <Table.Body>
+    <Table.Row>
+      <Table.Cell>
+
+        `campaign.list.before`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the top of the campaigns list page.
+
+      </Table.Cell>
+      <Table.Cell>
+
+        \-
+
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+
+        `campaign.list.after`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the bottom of the campaigns list page.
+
+      </Table.Cell>
+      <Table.Cell>
+
+        \-
+
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+
+        `campaign.details.before`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the top of a campaign's details page.
+
+      </Table.Cell>
+      <Table.Cell>
+      
+        Type `DetailWidgetProps<AdminCampaign>` imported from `@medusajs/framework/types`
+
+        ```ts blockStyle="inline"
+        {
+          data, // AdminCampaign object
+        }
+        ```
+
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+
+        `campaign.details.after`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the bottom of a campaign's details page.
+
+      </Table.Cell>
+      <Table.Cell>
+      
+        Type `DetailWidgetProps<AdminCampaign>` imported from `@medusajs/framework/types`
+
+        ```ts blockStyle="inline"
+        {
+          data, // AdminCampaign object
+        }
+        ```
+
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+
+        `campaign.details.side.before`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the top of the second column in the campaign details page.
+
+      </Table.Cell>
+      <Table.Cell>
+      
+        Type `DetailWidgetProps<AdminCampaign>` imported from `@medusajs/framework/types`
+
+        ```ts blockStyle="inline"
+        {
+          data, // AdminCampaign object
+        }
+        ```
+
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+
+        `campaign.details.side.after`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the bottom of the second column in the campaign details page.
+
+      </Table.Cell>
+      <Table.Cell>
+      
+        Type `DetailWidgetProps<AdminCampaign>` imported from `@medusajs/framework/types`
+
+        ```ts blockStyle="inline"
+        {
+          data, // AdminCampaign object
+        }
+        ```
+
+      </Table.Cell>
+    </Table.Row>
+  </Table.Body>
+</Table>
+
+## Customer Pages
+
+<Table>
+  <Table.Header>
+    <Table.Row>
+      <Table.HeaderCell className="w-1/3">Injection Zone Name</Table.HeaderCell>
+      <Table.HeaderCell className="w-1/3">Description</Table.HeaderCell>
+      <Table.HeaderCell className="w-1/3">Additional Props</Table.HeaderCell>
+    </Table.Row>
+  </Table.Header>
+  <Table.Body>
+    <Table.Row>
+      <Table.Cell>
+
+        `customer.list.before`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the top of the customers list page.
+
+      </Table.Cell>
+      <Table.Cell>
+
+        \-
+
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+
+        `customer.list.after`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the bottom of the customers list page.
+
+      </Table.Cell>
+      <Table.Cell>
+
+        \-
+
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+
+        `customer.details.before`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the top of the customer details page.
+
+      </Table.Cell>
+      <Table.Cell>
+      
+        Type `DetailWidgetProps<AdminCustomer>` imported from `@medusajs/framework/types`
+
+        ```ts blockStyle="inline"
+        {
+          data, // AdminCustomer object
+        }
+        ```
+
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+
+        `customer.details.after`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the bottom of the customer details page.
+
+      </Table.Cell>
+      <Table.Cell>
+      
+        Type `DetailWidgetProps<AdminCustomer>` imported from `@medusajs/framework/types`
+
+        ```ts blockStyle="inline"
+        {
+          data, // AdminCustomer object
+        }
+        ```
+
+      </Table.Cell>
+    </Table.Row>
+  </Table.Body>
+</Table>
+
+## Customer Group Pages
+
+<Table>
+  <Table.Header>
+    <Table.Row>
+      <Table.HeaderCell className="w-1/3">Injection Zone Name</Table.HeaderCell>
+      <Table.HeaderCell className="w-1/3">Description</Table.HeaderCell>
+      <Table.HeaderCell className="w-1/3">Additional Props</Table.HeaderCell>
+    </Table.Row>
+  </Table.Header>
+  <Table.Body>
+    <Table.Row>
+      <Table.Cell>
+
+        `customer_group.list.before`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the top of the customer groups list page.
+
+      </Table.Cell>
+      <Table.Cell>
+
+        \-
+
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+
+        `customer_group.list.after`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the bottom of the customer groups list page.
+
+      </Table.Cell>
+      <Table.Cell>
+
+        \-
+
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+
+        `customer_group.details.before`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the top of the customer group details page.
+
+      </Table.Cell>
+      <Table.Cell>
+      
+        Type `DetailWidgetProps<AdminCustomerGroup>` imported from `@medusajs/framework/types`
+
+        ```ts blockStyle="inline"
+        {
+          data, // AdminCustomerGroup object
+        }
+        ```
+
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+
+        `customer_group.details.after`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the bottom of the customer group details page.
+
+      </Table.Cell>
+      <Table.Cell>
+      
+        Type `DetailWidgetProps<AdminCustomerGroup>` imported from `@medusajs/framework/types`
+
+        ```ts blockStyle="inline"
+        {
+          data, // AdminCustomerGroup object
+        }
+        ```
+
+      </Table.Cell>
+    </Table.Row>
+  </Table.Body>
+</Table>
+
+## Inventory Pages
+
+<Table>
+  <Table.Header>
+    <Table.Row>
+      <Table.HeaderCell className="w-1/3">Injection Zone Name</Table.HeaderCell>
+      <Table.HeaderCell className="w-1/3">Description</Table.HeaderCell>
+      <Table.HeaderCell className="w-1/3">Additional Props</Table.HeaderCell>
+    </Table.Row>
+  </Table.Header>
+  <Table.Body>
+    <Table.Row>
+      <Table.Cell>
+
+        `inventory_item.list.before`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the top of the inventory list page.
+
+      </Table.Cell>
+      <Table.Cell>
+
+        \-
+
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+
+        `inventory_item.list.after`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the bottom of the inventory list page.
+
+      </Table.Cell>
+      <Table.Cell>
+
+        \-
+
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+
+        `inventory_item.details.before`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the top of the inventory item details page.
+
+      </Table.Cell>
+      <Table.Cell>
+      
+        Type `DetailWidgetProps<AdminInventoryItem>` imported from `@medusajs/framework/types`
+
+        ```ts blockStyle="inline"
+        {
+          data, // AdminInventoryItem object
+        }
+        ```
+
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+
+        `inventory_item.details.after`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the bottom of the inventory item details page.
+
+      </Table.Cell>
+      <Table.Cell>
+      
+        Type `DetailWidgetProps<AdminInventoryItem>` imported from `@medusajs/framework/types`
+
+        ```ts blockStyle="inline"
+        {
+          data, // AdminInventoryItem object
+        }
+        ```
+
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+
+        `inventory_item.details.side.before`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the top of the second column in the inventory item details page.
+
+      </Table.Cell>
+      <Table.Cell>
+      
+        Type `DetailWidgetProps<AdminInventoryItem>` imported from `@medusajs/framework/types`
+
+        ```ts blockStyle="inline"
+        {
+          data, // AdminInventoryItem object
+        }
+        ```
+
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+
+        `inventory_item.details.side.after`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the end of the second column in the inventory item details page.
+
+      </Table.Cell>
+      <Table.Cell>
+      
+        Type `DetailWidgetProps<AdminInventoryItem>` imported from `@medusajs/framework/types`
+
+        ```ts blockStyle="inline"
+        {
+          data, // AdminInventoryItem object
+        }
+        ```
+
+      </Table.Cell>
+    </Table.Row>
+  </Table.Body>
+</Table>
+
 ## Login Page
 
 <Table>
@@ -173,7 +641,7 @@ This documentation page includes the list of injection zones you can add Admin W
     <Table.Row>
       <Table.Cell>
 
-        `order.details.side.before`
+        `order.details.side.after`
 
       </Table.Cell>
       <Table.Cell>
@@ -196,7 +664,7 @@ This documentation page includes the list of injection zones you can add Admin W
   </Table.Body>
 </Table>
 
-## Customer Pages
+## Price List Pages
 
 <Table>
   <Table.Header>
@@ -210,29 +678,12 @@ This documentation page includes the list of injection zones you can add Admin W
     <Table.Row>
       <Table.Cell>
 
-        `customer.list.before`
+        `price_list.list.before`
 
       </Table.Cell>
       <Table.Cell>
 
-        Added at the top of the customers list page.
-
-      </Table.Cell>
-      <Table.Cell>
-
-        \-
-
-      </Table.Cell>
-    </Table.Row>
-    <Table.Row>
-      <Table.Cell>
-
-        `customer.list.after`
-
-      </Table.Cell>
-      <Table.Cell>
-
-        Added at the bottom of the customers list page.
+        Added at the top of the Pricing list page.
 
       </Table.Cell>
       <Table.Cell>
@@ -244,21 +695,38 @@ This documentation page includes the list of injection zones you can add Admin W
     <Table.Row>
       <Table.Cell>
 
-        `customer.details.before`
+        `price_list.list.after`
 
       </Table.Cell>
       <Table.Cell>
 
-        Added at the top of the customer details page.
+        Added at the bottom of the Pricing list page.
+
+      </Table.Cell>
+      <Table.Cell>
+
+        \-
+
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+
+        `price_list.details.before`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the top of a price list's details page.
 
       </Table.Cell>
       <Table.Cell>
       
-        Type `DetailWidgetProps<AdminCustomer>` imported from `@medusajs/framework/types`
+        Type `DetailWidgetProps<AdminPriceList>` imported from `@medusajs/framework/types`
 
         ```ts blockStyle="inline"
         {
-          data, // AdminCustomer object
+          data, // AdminPriceList object
         }
         ```
 
@@ -267,21 +735,21 @@ This documentation page includes the list of injection zones you can add Admin W
     <Table.Row>
       <Table.Cell>
 
-        `customer.details.after`
+        `price_list.details.after`
 
       </Table.Cell>
       <Table.Cell>
 
-        Added at the bottom of the customer details page.
+        Added at the bottom of a price list's details page.
 
       </Table.Cell>
       <Table.Cell>
       
-        Type `DetailWidgetProps<AdminCustomer>` imported from `@medusajs/framework/types`
+        Type `DetailWidgetProps<AdminPriceList>` imported from `@medusajs/framework/types`
 
         ```ts blockStyle="inline"
         {
-          data, // AdminCustomer object
+          data, // AdminPriceList object
         }
         ```
 
@@ -290,55 +758,21 @@ This documentation page includes the list of injection zones you can add Admin W
     <Table.Row>
       <Table.Cell>
 
-        `customer_group.list.before`
+        `price_list.details.side.before`
 
       </Table.Cell>
       <Table.Cell>
 
-        Added at the top of the customer groups list page.
-
-      </Table.Cell>
-      <Table.Cell>
-
-        \-
-
-      </Table.Cell>
-    </Table.Row>
-    <Table.Row>
-      <Table.Cell>
-
-        `customer_group.list.after`
-
-      </Table.Cell>
-      <Table.Cell>
-
-        Added at the bottom of the customer groups list page.
-
-      </Table.Cell>
-      <Table.Cell>
-
-        \-
-
-      </Table.Cell>
-    </Table.Row>
-    <Table.Row>
-      <Table.Cell>
-
-        `customer_group.details.before`
-
-      </Table.Cell>
-      <Table.Cell>
-
-        Added at the top of the customer group details page.
+        Added at the top of the second column in the price list details page.
 
       </Table.Cell>
       <Table.Cell>
       
-        Type `DetailWidgetProps<AdminCustomerGroup>` imported from `@medusajs/framework/types`
+        Type `DetailWidgetProps<AdminPriceList>` imported from `@medusajs/framework/types`
 
         ```ts blockStyle="inline"
         {
-          data, // AdminCustomerGroup object
+          data, // AdminPriceList object
         }
         ```
 
@@ -347,21 +781,21 @@ This documentation page includes the list of injection zones you can add Admin W
     <Table.Row>
       <Table.Cell>
 
-        `customer_group.details.after`
+        `price_list.details.side.after`
 
       </Table.Cell>
       <Table.Cell>
 
-        Added at the bottom of the customer group details page.
+        Added at the bottom of the second column in the price list details page.
 
       </Table.Cell>
       <Table.Cell>
       
-        Type `DetailWidgetProps<AdminCustomerGroup>` imported from `@medusajs/framework/types`
+        Type `DetailWidgetProps<AdminPriceList>` imported from `@medusajs/framework/types`
 
         ```ts blockStyle="inline"
         {
-          data, // AdminCustomerGroup object
+          data, // AdminPriceList object
         }
         ```
 
@@ -507,6 +941,20 @@ This documentation page includes the list of injection zones you can add Admin W
 
       </Table.Cell>
     </Table.Row>
+  </Table.Body>
+</Table>
+
+## Product Collection Pages
+
+<Table>
+  <Table.Header>
+    <Table.Row>
+      <Table.HeaderCell className="w-1/3">Injection Zone Name</Table.HeaderCell>
+      <Table.HeaderCell className="w-1/3">Description</Table.HeaderCell>
+      <Table.HeaderCell className="w-1/3">Additional Props</Table.HeaderCell>
+    </Table.Row>
+  </Table.Header>
+  <Table.Body>
     <Table.Row>
       <Table.Cell>
 
@@ -587,6 +1035,20 @@ This documentation page includes the list of injection zones you can add Admin W
 
       </Table.Cell>
     </Table.Row>
+  </Table.Body>
+</Table>
+
+## Product Category Pages
+
+<Table>
+  <Table.Header>
+    <Table.Row>
+      <Table.HeaderCell className="w-1/3">Injection Zone Name</Table.HeaderCell>
+      <Table.HeaderCell className="w-1/3">Description</Table.HeaderCell>
+      <Table.HeaderCell className="w-1/3">Additional Props</Table.HeaderCell>
+    </Table.Row>
+  </Table.Header>
+  <Table.Body>
     <Table.Row>
       <Table.Cell>
 
@@ -716,145 +1178,7 @@ This documentation page includes the list of injection zones you can add Admin W
   </Table.Body>
 </Table>
 
-## Pricing Pages
 
-<Table>
-  <Table.Header>
-    <Table.Row>
-      <Table.HeaderCell className="w-1/3">Injection Zone Name</Table.HeaderCell>
-      <Table.HeaderCell className="w-1/3">Description</Table.HeaderCell>
-      <Table.HeaderCell className="w-1/3">Additional Props</Table.HeaderCell>
-    </Table.Row>
-  </Table.Header>
-  <Table.Body>
-    <Table.Row>
-      <Table.Cell>
-
-        `price_list.list.before`
-
-      </Table.Cell>
-      <Table.Cell>
-
-        Added at the top of the Pricing list page.
-
-      </Table.Cell>
-      <Table.Cell>
-
-        \-
-
-      </Table.Cell>
-    </Table.Row>
-    <Table.Row>
-      <Table.Cell>
-
-        `price_list.list.after`
-
-      </Table.Cell>
-      <Table.Cell>
-
-        Added at the bottom of the Pricing list page.
-
-      </Table.Cell>
-      <Table.Cell>
-
-        \-
-
-      </Table.Cell>
-    </Table.Row>
-    <Table.Row>
-      <Table.Cell>
-
-        `price_list.details.before`
-
-      </Table.Cell>
-      <Table.Cell>
-
-        Added at the top of a price list's details page.
-
-      </Table.Cell>
-      <Table.Cell>
-      
-        Type `DetailWidgetProps<AdminPriceList>` imported from `@medusajs/framework/types`
-
-        ```ts blockStyle="inline"
-        {
-          data, // AdminPriceList object
-        }
-        ```
-
-      </Table.Cell>
-    </Table.Row>
-    <Table.Row>
-      <Table.Cell>
-
-        `price_list.details.after`
-
-      </Table.Cell>
-      <Table.Cell>
-
-        Added at the bottom of a price list's details page.
-
-      </Table.Cell>
-      <Table.Cell>
-      
-        Type `DetailWidgetProps<AdminPriceList>` imported from `@medusajs/framework/types`
-
-        ```ts blockStyle="inline"
-        {
-          data, // AdminPriceList object
-        }
-        ```
-
-      </Table.Cell>
-    </Table.Row>
-    <Table.Row>
-      <Table.Cell>
-
-        `price_list.details.side.before`
-
-      </Table.Cell>
-      <Table.Cell>
-
-        Added at the top of the second column in the price list details page.
-
-      </Table.Cell>
-      <Table.Cell>
-      
-        Type `DetailWidgetProps<AdminPriceList>` imported from `@medusajs/framework/types`
-
-        ```ts blockStyle="inline"
-        {
-          data, // AdminPriceList object
-        }
-        ```
-
-      </Table.Cell>
-    </Table.Row>
-    <Table.Row>
-      <Table.Cell>
-
-        `price_list.details.side.after`
-
-      </Table.Cell>
-      <Table.Cell>
-
-        Added at the bottom of the second column in the price list details page.
-
-      </Table.Cell>
-      <Table.Cell>
-      
-        Type `DetailWidgetProps<AdminPriceList>` imported from `@medusajs/framework/types`
-
-        ```ts blockStyle="inline"
-        {
-          data, // AdminPriceList object
-        }
-        ```
-
-      </Table.Cell>
-    </Table.Row>
-  </Table.Body>
-</Table>
 
 ## Promotion Pages
 
@@ -993,138 +1317,12 @@ This documentation page includes the list of injection zones you can add Admin W
 
       </Table.Cell>
     </Table.Row>
-    <Table.Row>
-      <Table.Cell>
-
-        `campaign.list.before`
-
-      </Table.Cell>
-      <Table.Cell>
-
-        Added at the top of the campaigns list page.
-
-      </Table.Cell>
-      <Table.Cell>
-
-        \-
-
-      </Table.Cell>
-    </Table.Row>
-    <Table.Row>
-      <Table.Cell>
-
-        `campaign.list.after`
-
-      </Table.Cell>
-      <Table.Cell>
-
-        Added at the bottom of the campaigns list page.
-
-      </Table.Cell>
-      <Table.Cell>
-
-        \-
-
-      </Table.Cell>
-    </Table.Row>
-    <Table.Row>
-      <Table.Cell>
-
-        `campaign.details.before`
-
-      </Table.Cell>
-      <Table.Cell>
-
-        Added at the top of a campaign's details page.
-
-      </Table.Cell>
-      <Table.Cell>
-      
-        Type `DetailWidgetProps<AdminCampaign>` imported from `@medusajs/framework/types`
-
-        ```ts blockStyle="inline"
-        {
-          data, // AdminCampaign object
-        }
-        ```
-
-      </Table.Cell>
-    </Table.Row>
-    <Table.Row>
-      <Table.Cell>
-
-        `campaign.details.after`
-
-      </Table.Cell>
-      <Table.Cell>
-
-        Added at the bottom of a campaign's details page.
-
-      </Table.Cell>
-      <Table.Cell>
-      
-        Type `DetailWidgetProps<AdminCampaign>` imported from `@medusajs/framework/types`
-
-        ```ts blockStyle="inline"
-        {
-          data, // AdminCampaign object
-        }
-        ```
-
-      </Table.Cell>
-    </Table.Row>
-    <Table.Row>
-      <Table.Cell>
-
-        `campaign.details.side.before`
-
-      </Table.Cell>
-      <Table.Cell>
-
-        Added at the top of the second column in the campaign details page.
-
-      </Table.Cell>
-      <Table.Cell>
-      
-        Type `DetailWidgetProps<AdminCampaign>` imported from `@medusajs/framework/types`
-
-        ```ts blockStyle="inline"
-        {
-          data, // AdminCampaign object
-        }
-        ```
-
-      </Table.Cell>
-    </Table.Row>
-    <Table.Row>
-      <Table.Cell>
-
-        `campaign.details.side.after`
-
-      </Table.Cell>
-      <Table.Cell>
-
-        Added at the bottom of the second column in the campaign details page.
-
-      </Table.Cell>
-      <Table.Cell>
-      
-        Type `DetailWidgetProps<AdminCampaign>` imported from `@medusajs/framework/types`
-
-        ```ts blockStyle="inline"
-        {
-          data, // AdminCampaign object
-        }
-        ```
-
-      </Table.Cell>
-    </Table.Row>
   </Table.Body>
 </Table>
 
 ## Setting Pages
 
-### User Pages
+### API Key Pages
 
 <Table>
   <Table.Header>
@@ -1138,29 +1336,12 @@ This documentation page includes the list of injection zones you can add Admin W
     <Table.Row>
       <Table.Cell>
 
-        `user.list.before`
+        `api_key.list.before`
 
       </Table.Cell>
       <Table.Cell>
 
-        Added at the top of the users list page.
-
-      </Table.Cell>
-      <Table.Cell>
-
-        \-
-
-      </Table.Cell>
-    </Table.Row>
-    <Table.Row>
-      <Table.Cell>
-
-        `user.list.after`
-
-      </Table.Cell>
-      <Table.Cell>
-
-        Added at the bottom of the users list page.
+        Added at the top of the API keys list page.
 
       </Table.Cell>
       <Table.Cell>
@@ -1172,21 +1353,38 @@ This documentation page includes the list of injection zones you can add Admin W
     <Table.Row>
       <Table.Cell>
 
-        `user.details.before`
+        `api_key.list.after`
 
       </Table.Cell>
       <Table.Cell>
 
-        Added at the top of a user's details page.
+        Added at the bottom of the API keys list page.
+
+      </Table.Cell>
+      <Table.Cell>
+
+        \-
+
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+
+        `api_key.details.before`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the top of a API key's details page.
 
       </Table.Cell>
       <Table.Cell>
       
-        Type `DetailWidgetProps<AdminUser>` imported from `@medusajs/framework/types`
+        Type `DetailWidgetProps<AdminApiKey>` imported from `@medusajs/framework/types`
 
         ```ts blockStyle="inline"
         {
-          data, // AdminUser object
+          data, // AdminApiKey object
         }
         ```
 
@@ -1195,21 +1393,21 @@ This documentation page includes the list of injection zones you can add Admin W
     <Table.Row>
       <Table.Cell>
 
-        `user.details.after`
+        `api_key.details.after`
 
       </Table.Cell>
       <Table.Cell>
 
-        Added at the bottom of a user's details page.
+        Added at the bottom of a API key's details page.
 
       </Table.Cell>
       <Table.Cell>
       
-        Type `DetailWidgetProps<AdminUser>` imported from `@medusajs/framework/types`
+        Type `DetailWidgetProps<AdminApiKey>` imported from `@medusajs/framework/types`
 
         ```ts blockStyle="inline"
         {
-          data, // AdminUser object
+          data, // AdminApiKey object
         }
         ```
 
@@ -1218,7 +1416,7 @@ This documentation page includes the list of injection zones you can add Admin W
   </Table.Body>
 </Table>
 
-### Store Pages
+### Location Pages
 
 <Table>
   <Table.Header>
@@ -1232,21 +1430,55 @@ This documentation page includes the list of injection zones you can add Admin W
     <Table.Row>
       <Table.Cell>
 
-        `store.details.before`
+        `location.list.before`
 
       </Table.Cell>
       <Table.Cell>
 
-        Added at the top of a store's details page.
+        Added at the top of the locations list page.
+
+      </Table.Cell>
+      <Table.Cell>
+
+        \-
+
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+
+        `location.list.after`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the bottom of the locations list page.
+
+      </Table.Cell>
+      <Table.Cell>
+
+        \-
+
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+
+        `location.details.before`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the top of a location's details page.
 
       </Table.Cell>
       <Table.Cell>
       
-        Type `DetailWidgetProps<AdminStore>` imported from `@medusajs/framework/types`
+        Type `DetailWidgetProps<AdminStockLocation>` imported from `@medusajs/framework/types`
 
         ```ts blockStyle="inline"
         {
-          data, // AdminStore object
+          data, // AdminStockLocation object
         }
         ```
 
@@ -1255,21 +1487,67 @@ This documentation page includes the list of injection zones you can add Admin W
     <Table.Row>
       <Table.Cell>
 
-        `store.details.after`
+        `location.details.after`
 
       </Table.Cell>
       <Table.Cell>
 
-        Added at the bottom of a store's details page.
+        Added at the bottom of a location's details page.
 
       </Table.Cell>
       <Table.Cell>
       
-        Type `DetailWidgetProps<AdminStore>` imported from `@medusajs/framework/types`
+        Type `DetailWidgetProps<AdminStockLocation>` imported from `@medusajs/framework/types`
 
         ```ts blockStyle="inline"
         {
-          data, // AdminStore object
+          data, // AdminStockLocation object
+        }
+        ```
+
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+
+        `location.details.side.before`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the top of the second column in the location details page.
+
+      </Table.Cell>
+      <Table.Cell>
+      
+        Type `DetailWidgetProps<AdminStockLocation>` imported from `@medusajs/framework/types`
+
+        ```ts blockStyle="inline"
+        {
+          data, // AdminStockLocation object
+        }
+        ```
+
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+
+        `location.details.side.after`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the bottom of the second column in the location details page.
+
+      </Table.Cell>
+      <Table.Cell>
+      
+        Type `DetailWidgetProps<AdminStockLocation>` imported from `@medusajs/framework/types`
+
+        ```ts blockStyle="inline"
+        {
+          data, // AdminStockLocation object
         }
         ```
 
@@ -1432,334 +1710,6 @@ This documentation page includes the list of injection zones you can add Admin W
   </Table.Body>
 </Table>
 
-### Shipping Profile Pages
-
-<Table>
-  <Table.Header>
-    <Table.Row>
-      <Table.HeaderCell className="w-1/3">Injection Zone Name</Table.HeaderCell>
-      <Table.HeaderCell className="w-1/3">Description</Table.HeaderCell>
-      <Table.HeaderCell className="w-1/3">Additional Props</Table.HeaderCell>
-    </Table.Row>
-  </Table.Header>
-  <Table.Body>
-    <Table.Row>
-      <Table.Cell>
-
-        `shipping_profile.list.before`
-
-      </Table.Cell>
-      <Table.Cell>
-
-        Added at the top of the shipping profiles list page.
-
-      </Table.Cell>
-      <Table.Cell>
-
-        \-
-
-      </Table.Cell>
-    </Table.Row>
-    <Table.Row>
-      <Table.Cell>
-
-        `shipping_profile.list.after`
-
-      </Table.Cell>
-      <Table.Cell>
-
-        Added at the bottom of the shipping profiles list page.
-
-      </Table.Cell>
-      <Table.Cell>
-
-        \-
-
-      </Table.Cell>
-    </Table.Row>
-    <Table.Row>
-      <Table.Cell>
-
-        `shipping_profile.details.before`
-
-      </Table.Cell>
-      <Table.Cell>
-
-        Added at the top of a shipping profile's details page.
-
-      </Table.Cell>
-      <Table.Cell>
-      
-        Type `DetailWidgetProps<AdminShippingProfile>` imported from `@medusajs/framework/types`
-
-        ```ts blockStyle="inline"
-        {
-          data, // AdminShippingProfile object
-        }
-        ```
-
-      </Table.Cell>
-    </Table.Row>
-    <Table.Row>
-      <Table.Cell>
-
-        `shipping_profile.details.after`
-
-      </Table.Cell>
-      <Table.Cell>
-
-        Added at the bottom of a shipping profile's details page.
-
-      </Table.Cell>
-      <Table.Cell>
-      
-        Type `DetailWidgetProps<AdminShippingProfile>` imported from `@medusajs/framework/types`
-
-        ```ts blockStyle="inline"
-        {
-          data, // AdminShippingProfile object
-        }
-        ```
-
-      </Table.Cell>
-    </Table.Row>
-  </Table.Body>
-</Table>
-
-### Location Pages
-
-<Table>
-  <Table.Header>
-    <Table.Row>
-      <Table.HeaderCell className="w-1/3">Injection Zone Name</Table.HeaderCell>
-      <Table.HeaderCell className="w-1/3">Description</Table.HeaderCell>
-      <Table.HeaderCell className="w-1/3">Additional Props</Table.HeaderCell>
-    </Table.Row>
-  </Table.Header>
-  <Table.Body>
-    <Table.Row>
-      <Table.Cell>
-
-        `location.list.before`
-
-      </Table.Cell>
-      <Table.Cell>
-
-        Added at the top of the locations list page.
-
-      </Table.Cell>
-      <Table.Cell>
-
-        \-
-
-      </Table.Cell>
-    </Table.Row>
-    <Table.Row>
-      <Table.Cell>
-
-        `location.list.after`
-
-      </Table.Cell>
-      <Table.Cell>
-
-        Added at the bottom of the locations list page.
-
-      </Table.Cell>
-      <Table.Cell>
-
-        \-
-
-      </Table.Cell>
-    </Table.Row>
-    <Table.Row>
-      <Table.Cell>
-
-        `location.details.before`
-
-      </Table.Cell>
-      <Table.Cell>
-
-        Added at the top of a location's details page.
-
-      </Table.Cell>
-      <Table.Cell>
-      
-        Type `DetailWidgetProps<AdminStockLocation>` imported from `@medusajs/framework/types`
-
-        ```ts blockStyle="inline"
-        {
-          data, // AdminStockLocation object
-        }
-        ```
-
-      </Table.Cell>
-    </Table.Row>
-    <Table.Row>
-      <Table.Cell>
-
-        `location.details.after`
-
-      </Table.Cell>
-      <Table.Cell>
-
-        Added at the bottom of a location's details page.
-
-      </Table.Cell>
-      <Table.Cell>
-      
-        Type `DetailWidgetProps<AdminStockLocation>` imported from `@medusajs/framework/types`
-
-        ```ts blockStyle="inline"
-        {
-          data, // AdminStockLocation object
-        }
-        ```
-
-      </Table.Cell>
-    </Table.Row>
-    <Table.Row>
-      <Table.Cell>
-
-        `location.details.side.before`
-
-      </Table.Cell>
-      <Table.Cell>
-
-        Added at the top of the second column in the location details page.
-
-      </Table.Cell>
-      <Table.Cell>
-      
-        Type `DetailWidgetProps<AdminStockLocation>` imported from `@medusajs/framework/types`
-
-        ```ts blockStyle="inline"
-        {
-          data, // AdminStockLocation object
-        }
-        ```
-
-      </Table.Cell>
-    </Table.Row>
-    <Table.Row>
-      <Table.Cell>
-
-        `location.details.side.after`
-
-      </Table.Cell>
-      <Table.Cell>
-
-        Added at the bottom of the second column in the location details page.
-
-      </Table.Cell>
-      <Table.Cell>
-      
-        Type `DetailWidgetProps<AdminStockLocation>` imported from `@medusajs/framework/types`
-
-        ```ts blockStyle="inline"
-        {
-          data, // AdminStockLocation object
-        }
-        ```
-
-      </Table.Cell>
-    </Table.Row>
-  </Table.Body>
-</Table>
-
-### Sales Channel Pages
-
-<Table>
-  <Table.Header>
-    <Table.Row>
-      <Table.HeaderCell className="w-1/3">Injection Zone Name</Table.HeaderCell>
-      <Table.HeaderCell className="w-1/3">Description</Table.HeaderCell>
-      <Table.HeaderCell className="w-1/3">Additional Props</Table.HeaderCell>
-    </Table.Row>
-  </Table.Header>
-  <Table.Body>
-    <Table.Row>
-      <Table.Cell>
-
-        `sales_channel.list.before`
-
-      </Table.Cell>
-      <Table.Cell>
-
-        Added at the top of the sales channels list page.
-
-      </Table.Cell>
-      <Table.Cell>
-
-        \-
-
-      </Table.Cell>
-    </Table.Row>
-    <Table.Row>
-      <Table.Cell>
-
-        `sales_channel.list.after`
-
-      </Table.Cell>
-      <Table.Cell>
-
-        Added at the bottom of the sales channels list page.
-
-      </Table.Cell>
-      <Table.Cell>
-
-        \-
-
-      </Table.Cell>
-    </Table.Row>
-    <Table.Row>
-      <Table.Cell>
-
-        `sales_channel.details.before`
-
-      </Table.Cell>
-      <Table.Cell>
-
-        Added at the top of a sales channel's details page.
-
-      </Table.Cell>
-      <Table.Cell>
-      
-        Type `DetailWidgetProps<AdminSalesChannel>` imported from `@medusajs/framework/types`
-
-        ```ts blockStyle="inline"
-        {
-          data, // AdminSalesChannel object
-        }
-        ```
-
-      </Table.Cell>
-    </Table.Row>
-    <Table.Row>
-      <Table.Cell>
-
-        `sales_channel.details.after`
-
-      </Table.Cell>
-      <Table.Cell>
-
-        Added at the bottom of a sales channel's details page.
-
-      </Table.Cell>
-      <Table.Cell>
-      
-        Type `DetailWidgetProps<AdminSalesChannel>` imported from `@medusajs/framework/types`
-
-        ```ts blockStyle="inline"
-        {
-          data, // AdminSalesChannel object
-        }
-        ```
-
-      </Table.Cell>
-    </Table.Row>
-  </Table.Body>
-</Table>
-
 ### Reservation Pages
 
 <Table>
@@ -1900,7 +1850,7 @@ This documentation page includes the list of injection zones you can add Admin W
   </Table.Body>
 </Table>
 
-### API Key Pages
+### Return Reason Pages
 
 <Table>
   <Table.Header>
@@ -1914,29 +1864,12 @@ This documentation page includes the list of injection zones you can add Admin W
     <Table.Row>
       <Table.Cell>
 
-        `api_key.list.before`
+        `return_reason.list.before`
 
       </Table.Cell>
       <Table.Cell>
 
-        Added at the top of the API keys list page.
-
-      </Table.Cell>
-      <Table.Cell>
-
-        \-
-
-      </Table.Cell>
-    </Table.Row>
-    <Table.Row>
-      <Table.Cell>
-
-        `api_key.list.after`
-
-      </Table.Cell>
-      <Table.Cell>
-
-        Added at the bottom of the API keys list page.
+        Added at the top of the return reasons list page.
 
       </Table.Cell>
       <Table.Cell>
@@ -1948,21 +1881,86 @@ This documentation page includes the list of injection zones you can add Admin W
     <Table.Row>
       <Table.Cell>
 
-        `api_key.details.before`
+        `return_reason.list.after`
 
       </Table.Cell>
       <Table.Cell>
 
-        Added at the top of a API key's details page.
+        Added at the bottom of the return reasons list page.
+
+      </Table.Cell>
+      <Table.Cell>
+
+        \-
+
+      </Table.Cell>
+    </Table.Row>
+  </Table.Body>
+</Table>
+
+### Sales Channel Pages
+
+<Table>
+  <Table.Header>
+    <Table.Row>
+      <Table.HeaderCell className="w-1/3">Injection Zone Name</Table.HeaderCell>
+      <Table.HeaderCell className="w-1/3">Description</Table.HeaderCell>
+      <Table.HeaderCell className="w-1/3">Additional Props</Table.HeaderCell>
+    </Table.Row>
+  </Table.Header>
+  <Table.Body>
+    <Table.Row>
+      <Table.Cell>
+
+        `sales_channel.list.before`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the top of the sales channels list page.
+
+      </Table.Cell>
+      <Table.Cell>
+
+        \-
+
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+
+        `sales_channel.list.after`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the bottom of the sales channels list page.
+
+      </Table.Cell>
+      <Table.Cell>
+
+        \-
+
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+
+        `sales_channel.details.before`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the top of a sales channel's details page.
 
       </Table.Cell>
       <Table.Cell>
       
-        Type `DetailWidgetProps<AdminApiKey>` imported from `@medusajs/framework/types`
+        Type `DetailWidgetProps<AdminSalesChannel>` imported from `@medusajs/framework/types`
 
         ```ts blockStyle="inline"
         {
-          data, // AdminApiKey object
+          data, // AdminSalesChannel object
         }
         ```
 
@@ -1971,21 +1969,21 @@ This documentation page includes the list of injection zones you can add Admin W
     <Table.Row>
       <Table.Cell>
 
-        `api_key.details.after`
+        `sales_channel.details.after`
 
       </Table.Cell>
       <Table.Cell>
 
-        Added at the bottom of a API key's details page.
+        Added at the bottom of a sales channel's details page.
 
       </Table.Cell>
       <Table.Cell>
       
-        Type `DetailWidgetProps<AdminApiKey>` imported from `@medusajs/framework/types`
+        Type `DetailWidgetProps<AdminSalesChannel>` imported from `@medusajs/framework/types`
 
         ```ts blockStyle="inline"
         {
-          data, // AdminApiKey object
+          data, // AdminSalesChannel object
         }
         ```
 
@@ -1994,7 +1992,7 @@ This documentation page includes the list of injection zones you can add Admin W
   </Table.Body>
 </Table>
 
-### Workflow Pages
+### Shipping Profile Pages
 
 <Table>
   <Table.Header>
@@ -2008,29 +2006,12 @@ This documentation page includes the list of injection zones you can add Admin W
     <Table.Row>
       <Table.Cell>
 
-        `workflow.list.before`
+        `shipping_profile.list.before`
 
       </Table.Cell>
       <Table.Cell>
 
-        Added at the top of the workflows list page.
-
-      </Table.Cell>
-      <Table.Cell>
-
-        \-
-
-      </Table.Cell>
-    </Table.Row>
-    <Table.Row>
-      <Table.Cell>
-
-        `workflow.list.after`
-
-      </Table.Cell>
-      <Table.Cell>
-
-        Added at the bottom of the workflows list page.
+        Added at the top of the shipping profiles list page.
 
       </Table.Cell>
       <Table.Cell>
@@ -2042,21 +2023,38 @@ This documentation page includes the list of injection zones you can add Admin W
     <Table.Row>
       <Table.Cell>
 
-        `workflow.details.before`
+        `shipping_profile.list.after`
 
       </Table.Cell>
       <Table.Cell>
 
-        Added at the top of a workflow execution's details page.
+        Added at the bottom of the shipping profiles list page.
+
+      </Table.Cell>
+      <Table.Cell>
+
+        \-
+
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+
+        `shipping_profile.details.before`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the top of a shipping profile's details page.
 
       </Table.Cell>
       <Table.Cell>
       
-        Type `DetailWidgetProps<AdminWorkflowExecution>` imported from `@medusajs/framework/types`
+        Type `DetailWidgetProps<AdminShippingProfile>` imported from `@medusajs/framework/types`
 
         ```ts blockStyle="inline"
         {
-          data, // AdminWorkflowExecution object
+          data, // AdminShippingProfile object
         }
         ```
 
@@ -2065,21 +2063,81 @@ This documentation page includes the list of injection zones you can add Admin W
     <Table.Row>
       <Table.Cell>
 
-        `workflow.details.after`
+        `shipping_profile.details.after`
 
       </Table.Cell>
       <Table.Cell>
 
-        Added at the bottom of a workflow execution's details page.
+        Added at the bottom of a shipping profile's details page.
 
       </Table.Cell>
       <Table.Cell>
       
-        Type `DetailWidgetProps<AdminWorkflowExecution>` imported from `@medusajs/framework/types`
+        Type `DetailWidgetProps<AdminShippingProfile>` imported from `@medusajs/framework/types`
 
         ```ts blockStyle="inline"
         {
-          data, // AdminWorkflowExecution object
+          data, // AdminShippingProfile object
+        }
+        ```
+
+      </Table.Cell>
+    </Table.Row>
+  </Table.Body>
+</Table>
+
+### Store Pages
+
+<Table>
+  <Table.Header>
+    <Table.Row>
+      <Table.HeaderCell className="w-1/3">Injection Zone Name</Table.HeaderCell>
+      <Table.HeaderCell className="w-1/3">Description</Table.HeaderCell>
+      <Table.HeaderCell className="w-1/3">Additional Props</Table.HeaderCell>
+    </Table.Row>
+  </Table.Header>
+  <Table.Body>
+    <Table.Row>
+      <Table.Cell>
+
+        `store.details.before`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the top of a store's details page.
+
+      </Table.Cell>
+      <Table.Cell>
+      
+        Type `DetailWidgetProps<AdminStore>` imported from `@medusajs/framework/types`
+
+        ```ts blockStyle="inline"
+        {
+          data, // AdminStore object
+        }
+        ```
+
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+
+        `store.details.after`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the bottom of a store's details page.
+
+      </Table.Cell>
+      <Table.Cell>
+      
+        Type `DetailWidgetProps<AdminStore>` imported from `@medusajs/framework/types`
+
+        ```ts blockStyle="inline"
+        {
+          data, // AdminStore object
         }
         ```
 
@@ -2174,6 +2232,194 @@ This documentation page includes the list of injection zones you can add Admin W
         ```ts blockStyle="inline"
         {
           data, // AdminTaxRegion object
+        }
+        ```
+
+      </Table.Cell>
+    </Table.Row>
+  </Table.Body>
+</Table>
+
+### User Pages
+
+<Table>
+  <Table.Header>
+    <Table.Row>
+      <Table.HeaderCell className="w-1/3">Injection Zone Name</Table.HeaderCell>
+      <Table.HeaderCell className="w-1/3">Description</Table.HeaderCell>
+      <Table.HeaderCell className="w-1/3">Additional Props</Table.HeaderCell>
+    </Table.Row>
+  </Table.Header>
+  <Table.Body>
+    <Table.Row>
+      <Table.Cell>
+
+        `user.list.before`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the top of the users list page.
+
+      </Table.Cell>
+      <Table.Cell>
+
+        \-
+
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+
+        `user.list.after`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the bottom of the users list page.
+
+      </Table.Cell>
+      <Table.Cell>
+
+        \-
+
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+
+        `user.details.before`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the top of a user's details page.
+
+      </Table.Cell>
+      <Table.Cell>
+      
+        Type `DetailWidgetProps<AdminUser>` imported from `@medusajs/framework/types`
+
+        ```ts blockStyle="inline"
+        {
+          data, // AdminUser object
+        }
+        ```
+
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+
+        `user.details.after`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the bottom of a user's details page.
+
+      </Table.Cell>
+      <Table.Cell>
+      
+        Type `DetailWidgetProps<AdminUser>` imported from `@medusajs/framework/types`
+
+        ```ts blockStyle="inline"
+        {
+          data, // AdminUser object
+        }
+        ```
+
+      </Table.Cell>
+    </Table.Row>
+  </Table.Body>
+</Table>
+
+### Workflow Pages
+
+<Table>
+  <Table.Header>
+    <Table.Row>
+      <Table.HeaderCell className="w-1/3">Injection Zone Name</Table.HeaderCell>
+      <Table.HeaderCell className="w-1/3">Description</Table.HeaderCell>
+      <Table.HeaderCell className="w-1/3">Additional Props</Table.HeaderCell>
+    </Table.Row>
+  </Table.Header>
+  <Table.Body>
+    <Table.Row>
+      <Table.Cell>
+
+        `workflow.list.before`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the top of the workflows list page.
+
+      </Table.Cell>
+      <Table.Cell>
+
+        \-
+
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+
+        `workflow.list.after`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the bottom of the workflows list page.
+
+      </Table.Cell>
+      <Table.Cell>
+
+        \-
+
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+
+        `workflow.details.before`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the top of a workflow execution's details page.
+
+      </Table.Cell>
+      <Table.Cell>
+      
+        Type `DetailWidgetProps<AdminWorkflowExecution>` imported from `@medusajs/framework/types`
+
+        ```ts blockStyle="inline"
+        {
+          data, // AdminWorkflowExecution object
+        }
+        ```
+
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+
+        `workflow.details.after`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the bottom of a workflow execution's details page.
+
+      </Table.Cell>
+      <Table.Cell>
+      
+        Type `DetailWidgetProps<AdminWorkflowExecution>` imported from `@medusajs/framework/types`
+
+        ```ts blockStyle="inline"
+        {
+          data, // AdminWorkflowExecution object
         }
         ```
 
