@@ -306,13 +306,17 @@ export const confirmClaimRequestWorkflow = createWorkflow(
     when({ returnId }, ({ returnId }) => {
       return !!returnId
     }).then(() => {
-      updateReturnsStep([
-        {
-          id: returnId,
-          status: ReturnStatus.REQUESTED,
-          requested_at: new Date(),
-        },
-      ])
+      const data = transform({ returnId }, ({ returnId }) => {
+        return [
+          {
+            id: returnId,
+            status: ReturnStatus.REQUESTED,
+            requested_at: new Date(),
+          },
+        ]
+      })
+
+      updateReturnsStep(data)
     })
 
     const claimId = transform(
