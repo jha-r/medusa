@@ -113,7 +113,6 @@ export const generatedEditDates = {
   "app/commerce-modules/user/user-creation-flows/page.mdx": "2024-10-15T14:51:37.311Z",
   "app/commerce-modules/user/page.mdx": "2024-10-15T14:44:19.628Z",
   "app/commerce-modules/page.mdx": "2024-10-07T13:55:08.014Z",
-  "app/contribution-guidelines/_admin-translations/page.mdx": "2024-05-13T18:55:11+03:00",
   "app/contribution-guidelines/docs/page.mdx": "2024-10-16T15:48:04.071Z",
   "app/create-medusa-app/page.mdx": "2024-08-05T11:10:55+03:00",
   "app/deployment/admin/vercel/page.mdx": "2024-10-16T08:10:29.377Z",
@@ -3251,5 +3250,6 @@ export const generatedEditDates = {
   "references/types/types/types.UncountableRules/page.mdx": "2024-11-12T09:36:21.340Z",
   "references/product/interfaces/product.FilterableProductProps/page.mdx": "2024-11-12T09:36:53.124Z",
   "references/types/HttpTypes/interfaces/types.HttpTypes.AdminBatchProductVariantRequest/page.mdx": "2024-11-12T09:36:22.780Z",
-  "references/types/WorkflowTypes/ProductWorkflow/interfaces/types.WorkflowTypes.ProductWorkflow.ExportProductsDTO/page.mdx": "2024-11-12T09:36:24.232Z"
+  "references/types/WorkflowTypes/ProductWorkflow/interfaces/types.WorkflowTypes.ProductWorkflow.ExportProductsDTO/page.mdx": "2024-11-12T09:36:24.232Z",
+  "app/contribution-guidelines/admin-translations/page.mdx": "2024-11-14T08:54:15.369Z"
 }
