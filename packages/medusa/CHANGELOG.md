@@ -1,5 +1,56 @@
 # Change Log
 
+## 2.0.4
+
+### Patch Changes
+
+- [#10027](https://github.com/medusajs/medusa/pull/10027) [`0ef92cce2848ed447028434c43e4041f094cb402`](https://github.com/medusajs/medusa/commit/0ef92cce2848ed447028434c43e4041f094cb402) Thanks [@shahednasser](https://github.com/shahednasser)! - chore(medusa): show success message after user is created
+
+- Updated dependencies []:
+  - @medusajs/admin-bundler@2.0.4
+  - @medusajs/core-flows@2.0.4
+  - @medusajs/telemetry@2.0.4
+  - @medusajs/api-key@2.0.4
+  - @medusajs/auth@2.0.4
+  - @medusajs/cache-inmemory@2.0.4
+  - @medusajs/cache-redis@2.0.4
+  - @medusajs/cart@2.0.4
+  - @medusajs/currency@2.0.4
+  - @medusajs/customer@2.0.4
+  - @medusajs/event-bus-local@2.0.4
+  - @medusajs/event-bus-redis@2.0.4
+  - @medusajs/file@2.0.4
+  - @medusajs/fulfillment@2.0.4
+  - @medusajs/index@2.0.4
+  - @medusajs/inventory@2.0.4
+  - @medusajs/link-modules@2.0.4
+  - @medusajs/locking@2.0.4
+  - @medusajs/notification@2.0.4
+  - @medusajs/order@2.0.4
+  - @medusajs/payment@2.0.4
+  - @medusajs/pricing@2.0.4
+  - @medusajs/product@2.0.4
+  - @medusajs/promotion@2.0.4
+  - @medusajs/auth-emailpass@2.0.4
+  - @medusajs/auth-github@2.0.4
+  - @medusajs/auth-google@2.0.4
+  - @medusajs/file-local@2.0.4
+  - @medusajs/file-s3@2.0.4
+  - @medusajs/fulfillment-manual@2.0.4
+  - @medusajs/locking-postgres@2.0.4
+  - @medusajs/locking-redis@2.0.4
+  - @medusajs/notification-local@2.0.4
+  - @medusajs/notification-sendgrid@2.0.4
+  - @medusajs/payment-stripe@2.0.4
+  - @medusajs/region@2.0.4
+  - @medusajs/sales-channel@2.0.4
+  - @medusajs/stock-location@2.0.4
+  - @medusajs/store@2.0.4
+  - @medusajs/tax@2.0.4
+  - @medusajs/user@2.0.4
+  - @medusajs/workflow-engine-inmemory@2.0.4
+  - @medusajs/workflow-engine-redis@2.0.4
+
 ## 2.0.3
 
 ### Patch Changes

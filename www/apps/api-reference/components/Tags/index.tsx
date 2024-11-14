@@ -14,9 +14,7 @@ type TagsProps = {
 const Tags = ({ tags }: TagsProps) => {
   return (
     <Suspense>
-      {tags?.map((tag) => (
-        <TagSection tag={tag} key={tag.name} />
-      ))}
+      {tags?.map((tag) => <TagSection tag={tag} key={tag.name} />)}
     </Suspense>
   )
 }

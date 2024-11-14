@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useRef, useState } from "react"
+// @ts-expect-error can't install the types package because it doesn't support React v19
 import { CSSTransition, SwitchTransition } from "react-transition-group"
 import { Solutions } from "./Solutions"
 import { ExtraData, useAnalytics } from "@/providers/Analytics"
@@ -65,11 +66,11 @@ export const Feedback = ({
   const [medusaVersion, setMedusaVersion] = useState("")
   const [errorFix, setErrorFix] = useState("")
   const [contactInfo, setContactInfo] = useState("")
-  const nodeRef: React.RefObject<HTMLDivElement> = submittedFeedback
+  const nodeRef = submittedFeedback
     ? inlineMessageRef
     : showForm
-    ? inlineQuestionRef
-    : inlineFeedbackRef
+      ? inlineQuestionRef
+      : inlineFeedbackRef
   const { loaded, track } = useAnalytics()
 
   function handleFeedback(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
@@ -132,12 +133,12 @@ export const Feedback = ({
             showForm
               ? "show_form"
               : !submittedFeedback
-              ? "feedback"
-              : "submitted_feedback"
+                ? "feedback"
+                : "submitted_feedback"
           }
           nodeRef={nodeRef}
           timeout={300}
-          addEndListener={(done) => {
+          addEndListener={(done: () => void) => {
             nodeRef.current?.addEventListener("transitionend", done, false)
           }}
           classNames={{

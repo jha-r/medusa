@@ -1,11 +1,13 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import AreaProvider from "@/providers/area"
-import AdminContent from "../_mdx/admin.mdx"
+import AdminContent from "@/markdown/admin.mdx"
 import Tags from "@/components/Tags"
 import PageTitleProvider from "@/providers/page-title"
 import { H1 } from "docs-ui"
 import { getBaseSpecs } from "../../lib"
 import BaseSpecsProvider from "../../providers/base-specs"
 import clsx from "clsx"
+import React from "react"
 
 const AdminPage = async () => {
   const data = await getBaseSpecs("admin")
@@ -23,6 +25,7 @@ const AdminPage = async () => {
           >
             Medusa V2 Admin API Reference
           </H1>
+          {/* @ts-ignore React v19 doesn't see MDX as valid component */}
           <AdminContent />
           <Tags tags={data?.tags} />
         </PageTitleProvider>

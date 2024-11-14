@@ -325,7 +325,7 @@ export const ReturnCreateForm = ({
           return true
         }
 
-        if (!item.variant.manage_inventory) {
+        if (!item.variant?.manage_inventory) {
           return true
         }
 
@@ -355,7 +355,7 @@ export const ReturnCreateForm = ({
               return undefined
             }
             return await sdk.admin.product.retrieveVariant(
-              item.variant.product.id,
+              item.product_id,
               item.variant_id,
               { fields: "*inventory,*inventory.location_levels" }
             )

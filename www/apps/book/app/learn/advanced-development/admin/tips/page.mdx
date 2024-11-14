@@ -55,7 +55,7 @@ import { DetailWidgetProps, HttpTypes } from "@medusajs/framework/types"
 const ProductWidget = () => {
   const { data, isLoading } = useQuery({
     queryFn: () => sdk.admin.product.list(),
-    queryKey: ["products"]
+    queryKey: ["products"],
   })
   
   return (
@@ -95,17 +95,17 @@ import { sdk } from "../lib/config"
 import { DetailWidgetProps, HttpTypes } from "@medusajs/framework/types"
 
 const ProductWidget = ({ 
-  data: productData
+  data: productData,
 }: DetailWidgetProps<HttpTypes.AdminProduct>) => {
   const { mutateAsync } = useMutation({
     mutationFn: (payload: HttpTypes.AdminUpdateProduct) => 
       sdk.admin.product.update(productData.id, payload),
-    onSuccess: () => alert("updated product")
+    onSuccess: () => alert("updated product"),
   })
 
   const handleUpdate = () => {
     mutateAsync({
-      title: "New Product Title"
+      title: "New Product Title",
     })
   }
   

@@ -17,6 +17,7 @@ type CodeBlockHeaderProps = {
   title?: string
   blockStyle?: CodeBlockStyle
   actionsProps: CodeBlockActionsProps
+  hideActions?: boolean
 } & CodeBlockHeaderMeta
 
 export const CodeBlockHeader = ({
@@ -25,6 +26,7 @@ export const CodeBlockHeader = ({
   badgeLabel,
   actionsProps,
   badgeColor,
+  hideActions = false,
 }: CodeBlockHeaderProps) => {
   const { colorMode } = useColorMode()
 
@@ -54,7 +56,7 @@ export const CodeBlockHeader = ({
           </div>
         )}
       </div>
-      <CodeBlockActions {...actionsProps} />
+      {!hideActions && <CodeBlockActions {...actionsProps} />}
     </CodeBlockHeaderWrapper>
   )
 }

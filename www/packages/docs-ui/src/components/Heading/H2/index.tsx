@@ -7,7 +7,7 @@ import { useIsBrowser } from "../../../providers"
 
 type H2Props = React.HTMLAttributes<HTMLHeadingElement> & {
   id?: string
-  passRef?: React.RefObject<HTMLHeadingElement>
+  passRef?: React.RefObject<HTMLHeadingElement | null>
 }
 
 export const H2 = ({ className, children, passRef, ...props }: H2Props) => {

@@ -20,7 +20,7 @@ To create a component that shows this menu in your customizations, create the fi
 import { 
   DropdownMenu,
   IconButton,
-  clx
+  clx,
 } from "@medusajs/ui"
 import { EllipsisHorizontal } from "@medusajs/icons"
 import { Link } from "react-router-dom"
@@ -202,10 +202,10 @@ const ProductWidget = () => {
               label: "Edit",
               onClick: () => {
                 alert("You clicked the edit action!")
-              }
-            }
-          ]
-        }
+              },
+            },
+          ],
+        },
       ]} />
     </Container>
   )
@@ -250,13 +250,13 @@ const ProductWidget = () => {
                       label: "Edit",
                       onClick: () => {
                         alert("You clicked the edit action!")
-                      }
-                    }
-                  ]
-                }
-              ]
-            }
-          }
+                      },
+                    },
+                  ],
+                },
+              ],
+            },
+          },
         ]}
       />
     </Container>

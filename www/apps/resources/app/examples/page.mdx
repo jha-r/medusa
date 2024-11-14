@@ -454,7 +454,7 @@ export default defineMiddlewares({
         authenticate(
           "user", 
           ["session", "bearer", "api-key"]
-        )
+        ),
       ],
     },
   ],
@@ -480,7 +480,7 @@ export default defineMiddlewares({
     {
       matcher: "/custom/customer*",
       middlewares: [
-        authenticate("customer", ["session", "bearer"])
+        authenticate("customer", ["session", "bearer"]),
       ],
     },
   ],
@@ -676,8 +676,8 @@ export default defineMiddlewares({
       matcher: "/webhooks/*",
       bodyParser: { preserveRawBody: true },
       method: ["POST"],
-    }
-  ]
+    },
+  ],
 })
 ```
 
@@ -762,8 +762,8 @@ module.exports = defineConfig({
   modules: [
     {
       resolve: "./modules/hello",
-    }
-  ]
+    },
+  ],
 })
 ```
 
@@ -790,11 +790,11 @@ export async function GET(
   )
 
   const my_custom = await helloModuleService.createMyCustoms({
-    name: "test"
+    name: "test",
   })
 
   res.json({
-    my_custom
+    my_custom,
   })
 }
 ```
@@ -863,7 +863,7 @@ module.exports = defineConfig({
         apiKey: true,
       },
     },
-  ]
+  ],
 })
 ```
 
@@ -2043,7 +2043,7 @@ export const GET = async (
     my_customs: myCustoms,
     count,
     take,
-    skip
+    skip,
   })
 }
 ```
@@ -2915,7 +2915,7 @@ import {
   LoaderOptions,
 } from "@medusajs/framework/types"
 import { 
-  ContainerRegistrationKeys
+  ContainerRegistrationKeys,
 } from "@medusajs/framework/utils"
 
 export default async function helloWorldLoader({
@@ -2972,7 +2972,7 @@ export default async function helloWorldLoader({
   container.registerAdd(
     "custom_data",
     asValue({
-      test: true
+      test: true,
     })
   )
 }
@@ -3690,7 +3690,7 @@ To accept payment using the Payment Module's main service:
 ```ts
 import { 
   ContainerRegistrationKeys,
-  Modules
+  Modules,
 } from "@medusajs/framework/utils"
 
 // ...
@@ -3710,11 +3710,11 @@ const remoteLink = container.resolve(
 // create a link between the cart and payment collection
 remoteLink.create({
   [Modules.CART]: {
-    cart_id: "cart_123"
+    cart_id: "cart_123",
   },
   [Modules.PAYMENT]: {
-    payment_collection_id: paymentCollection.id
-  }
+    payment_collection_id: paymentCollection.id,
+  },
 })
 ```
 
@@ -3814,7 +3814,7 @@ import {
 } from "@medusajs/framework/types"
 import { 
   QueryContext,
-  calculateAmountsWithTax
+  calculateAmountsWithTax,
 } from "@medusajs/framework/utils"
 // other imports...
 

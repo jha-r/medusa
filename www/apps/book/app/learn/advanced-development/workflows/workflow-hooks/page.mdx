@@ -85,7 +85,7 @@ For example:
 ```ts title="src/workflows/hooks/product-created.ts"
 import { createProductsWorkflow } from "@medusajs/medusa/core-flows"
 
-createProductsWorkflow.productCreated(
+createProductsWorkflow.hooks.productCreated(
   async ({ productId }, { container }) => {
     // TODO perform an action
 
