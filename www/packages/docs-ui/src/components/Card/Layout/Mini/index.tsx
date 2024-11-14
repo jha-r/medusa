@@ -89,7 +89,11 @@ export const CardLayoutMini = ({
           {isExternal ? <ArrowUpRightOnBox /> : <TriangleRightMini />}
         </span>
         {href && (
-          <Link href={href} className="absolute left-0 top-0 w-full h-full" />
+          <Link
+            href={href}
+            className="absolute left-0 top-0 w-full h-full"
+            prefetch={false}
+          />
         )}
       </div>
     </div>

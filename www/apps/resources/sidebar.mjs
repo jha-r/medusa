@@ -2104,12 +2104,12 @@ export const sidebar = sidebarAttachHrefCommonOptions([
               {
                 type: "link",
                 path: "https://docs.medusajs.com/learn/deployment/general",
-                title: "General"
+                title: "General",
               },
               {
                 type: "link",
                 path: "/deployment/medusa-application/railway",
-                title: "Railway"
+                title: "Railway",
               },
             ],
           },
@@ -2393,10 +2393,11 @@ export const sidebar = sidebarAttachHrefCommonOptions([
             path: "/contribution-guidelines/docs",
             title: "Docs",
           },
-          // {
-          //   path: "/contribution-guidelines/admin-translations",
-          //   title: "Admin Translations",
-          // },
+          {
+            type: "link",
+            path: "/contribution-guidelines/admin-translations",
+            title: "Admin Translations",
+          },
         ],
       },
       {

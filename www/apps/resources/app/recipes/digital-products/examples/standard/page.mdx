@@ -1455,6 +1455,7 @@ Then, create the file `src/modules/digital-product-fulfillment/service.ts` with 
 
 ```ts title="src/modules/digital-product-fulfillment/service.ts"
 import { AbstractFulfillmentProviderService } from "@medusajs/framework/utils"
+import { FulfillmentOption } from "@medusajs/framework/types"
 
 class DigitalProductFulfillmentService extends AbstractFulfillmentProviderService {
   static identifier = "digital"

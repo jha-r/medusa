@@ -5,24 +5,15 @@ import {
   NotificationItemType,
   useNotifications,
 } from "@/providers"
-import React, { useEffect, useRef } from "react"
+import React from "react"
 import { NotificationItem } from "./Item"
 // @ts-expect-error can't install the types package because it doesn't support React v19
-import { CSSTransition, TransitionGroup } from "react-transition-group"
+import { TransitionGroup } from "react-transition-group"
 import clsx from "clsx"
 
 export const NotificationContainer = () => {
   const { notifications, removeNotification } =
     useNotifications() as NotificationContextType
-
-  const notificationRefs = useRef([])
-
-  useEffect(() => {
-    notificationRefs.current = notificationRefs.current.slice(
-      0,
-      notifications.length
-    )
-  }, [notifications])
 
   const handleClose = (notification: NotificationItemType) => {
     notification.onClose?.()
@@ -45,26 +36,16 @@ export const NotificationContainer = () => {
           className
         )}
       >
-        {notifications.filter(condition).map((notification, index) => (
-          <CSSTransition
+        {notifications.filter(condition).map((notification) => (
+          <NotificationItem
+            {...notification}
+            onClose={() => handleClose(notification)}
+            className={clsx(
+              notification.className,
+              "!relative !top-0 !bottom-0 !right-0"
+            )}
             key={notification.id}
-            timeout={200}
-            classNames={{
-              enter: "animate-slideInRight animate-fast",
-              exit: "animate-slideOutRight animate-fast",
-            }}
-            nodeRef={notificationRefs.current[index]}
-          >
-            <NotificationItem
-              {...notification}
-              onClose={() => handleClose(notification)}
-              ref={notificationRefs.current[index]}
-              className={clsx(
-                notification.className,
-                "!relative !top-0 !bottom-0 !right-0"
-              )}
-            />
-          </CSSTransition>
+          />
         ))}
       </TransitionGroup>
     )
