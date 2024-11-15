@@ -208,8 +208,6 @@ export const CodeTabs = ({
       return
     }
 
-    console.log(selectedTab)
-
     return {
       source: selectedTab?.codeProps.source,
       blockStyle,
