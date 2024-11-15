@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import clsx from "clsx"
 import { BookIcon, Card, IconHeadline, WindowPaintbrushIcon } from "docs-ui"
 import { basePathUrl } from "../../../utils/base-path-url"

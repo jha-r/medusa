@@ -4702,6 +4702,236 @@ describe("Entity builder", () => {
         },
       })
     })
+
+    test("define entity with relationship to itself via hasMany", () => {
+      const user = model.define("user", {
+        id: model.number(),
+        username: model.text(),
+        parent: model.belongsTo(() => user, { mappedBy: "children" }),
+        children: model.hasMany(() => user, { mappedBy: "parent" }),
+      })
+
+      const [User] = toMikroOrmEntities([user])
+
+      expectTypeOf(new User()).toMatchTypeOf<{
+        id: number
+        username: string
+        deleted_at: Date | null
+        parent: {
+          id: number
+          username: string
+          deleted_at: Date | null
+        }
+        children: {
+          id: number
+          username: string
+          deleted_at: Date | null
+        }[]
+      }>()
+
+      const metaData = MetadataStorage.getMetadataFromDecorator(User)
+      expect(metaData.className).toEqual("User")
+      expect(metaData.path).toEqual("User")
+      expect(metaData.properties).toEqual({
+        id: {
+          reference: "scalar",
+          type: "number",
+          columnType: "integer",
+          name: "id",
+          fieldName: "id",
+          nullable: false,
+          getter: false,
+          setter: false,
+        },
+        username: {
+          reference: "scalar",
+          type: "string",
+          columnType: "text",
+          name: "username",
+          fieldName: "username",
+          nullable: false,
+          getter: false,
+          setter: false,
+        },
+        parent: {
+          name: "parent",
+          reference: "m:1",
+          entity: "User",
+          persist: false,
+          nullable: false,
+        },
+        parent_id: {
+          name: "parent_id",
+          reference: "m:1",
+          entity: "User",
+          columnType: "text",
+          fieldName: "parent_id",
+          mapToPk: true,
+          nullable: false,
+          onDelete: undefined,
+          isForeignKey: true,
+        },
+        children: {
+          cascade: undefined,
+          entity: "User",
+          mappedBy: "parent",
+          name: "children",
+          orphanRemoval: true,
+          reference: "1:m",
+        },
+        created_at: {
+          reference: "scalar",
+          type: "date",
+          columnType: "timestamptz",
+          name: "created_at",
+          fieldName: "created_at",
+          defaultRaw: "now()",
+          onCreate: expect.any(Function),
+          nullable: false,
+          getter: false,
+          setter: false,
+        },
+        updated_at: {
+          reference: "scalar",
+          type: "date",
+          columnType: "timestamptz",
+          name: "updated_at",
+          fieldName: "updated_at",
+          defaultRaw: "now()",
+          onCreate: expect.any(Function),
+          onUpdate: expect.any(Function),
+          nullable: false,
+          getter: false,
+          setter: false,
+        },
+        deleted_at: {
+          reference: "scalar",
+          type: "date",
+          columnType: "timestamptz",
+          name: "deleted_at",
+          fieldName: "deleted_at",
+          nullable: true,
+          getter: false,
+          setter: false,
+        },
+      })
+    })
+
+    test("define relationship with self via hasOne", () => {
+      const user = model.define("user", {
+        id: model.number(),
+        username: model.text(),
+        parent: model.belongsTo(() => user, { mappedBy: "child" }),
+        child: model.hasOne(() => user, { mappedBy: "parent" }),
+      })
+
+      const [User] = toMikroOrmEntities([user])
+
+      expectTypeOf(new User()).toMatchTypeOf<{
+        id: number
+        username: string
+        deleted_at: Date | null
+        parent: {
+          id: number
+          username: string
+          deleted_at: Date | null
+        }
+        child: {
+          id: number
+          username: string
+          deleted_at: Date | null
+        }
+      }>()
+
+      const metaData = MetadataStorage.getMetadataFromDecorator(User)
+      expect(metaData.className).toEqual("User")
+      expect(metaData.path).toEqual("User")
+      expect(metaData.properties).toEqual({
+        id: {
+          reference: "scalar",
+          type: "number",
+          columnType: "integer",
+          name: "id",
+          fieldName: "id",
+          nullable: false,
+          getter: false,
+          setter: false,
+        },
+        username: {
+          reference: "scalar",
+          type: "string",
+          columnType: "text",
+          name: "username",
+          fieldName: "username",
+          nullable: false,
+          getter: false,
+          setter: false,
+        },
+        parent: {
+          name: "parent",
+          mappedBy: "child",
+          reference: "1:1",
+          entity: "User",
+          nullable: false,
+          onDelete: undefined,
+          owner: true,
+        },
+        parent_id: {
+          name: "parent_id",
+          type: "string",
+          columnType: "text",
+          isForeignKey: true,
+          persist: false,
+          reference: "scalar",
+          getter: false,
+          setter: false,
+          nullable: false,
+        },
+        child: {
+          cascade: undefined,
+          entity: "User",
+          mappedBy: "parent",
+          name: "child",
+          nullable: false,
+          reference: "1:1",
+        },
+        created_at: {
+          reference: "scalar",
+          type: "date",
+          columnType: "timestamptz",
+          name: "created_at",
+          fieldName: "created_at",
+          defaultRaw: "now()",
+          onCreate: expect.any(Function),
+          nullable: false,
+          getter: false,
+          setter: false,
+        },
+        updated_at: {
+          reference: "scalar",
+          type: "date",
+          columnType: "timestamptz",
+          name: "updated_at",
+          fieldName: "updated_at",
+          defaultRaw: "now()",
+          onCreate: expect.any(Function),
+          onUpdate: expect.any(Function),
+          nullable: false,
+          getter: false,
+          setter: false,
+        },
+        deleted_at: {
+          reference: "scalar",
+          type: "date",
+          columnType: "timestamptz",
+          name: "deleted_at",
+          fieldName: "deleted_at",
+          nullable: true,
+          getter: false,
+          setter: false,
+        },
+      })
+    })
   })
 
   describe("Entity builder | manyToMany", () => {

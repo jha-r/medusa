@@ -138,7 +138,7 @@ export async function dbCreate({
   if (await dbExists(client, dbName)) {
     logger.info(`Database "${dbName}" already exists`)
 
-    envEditor.set("DB_NAME", dbName)
+    envEditor.set("DB_NAME", dbName, { withEmptyTemplateValue: true })
     await envEditor.save()
     logger.info(`Updated .env file with "DB_NAME=${dbName}"`)
 

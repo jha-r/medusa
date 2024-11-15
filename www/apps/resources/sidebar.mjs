@@ -2100,7 +2100,18 @@ export const sidebar = sidebarAttachHrefCommonOptions([
           {
             type: "category",
             title: "Medusa Application",
-            autogenerate_path: "/deployment/medusa-application",
+            children: [
+              {
+                type: "link",
+                path: "https://docs.medusajs.com/learn/deployment/general",
+                title: "General",
+              },
+              {
+                type: "link",
+                path: "/deployment/medusa-application/railway",
+                title: "Railway",
+              },
+            ],
           },
           {
             type: "category",
@@ -2382,10 +2393,11 @@ export const sidebar = sidebarAttachHrefCommonOptions([
             path: "/contribution-guidelines/docs",
             title: "Docs",
           },
-          // {
-          //   path: "/contribution-guidelines/admin-translations",
-          //   title: "Admin Translations",
-          // },
+          {
+            type: "link",
+            path: "/contribution-guidelines/admin-translations",
+            title: "Admin Translations",
+          },
         ],
       },
       {
