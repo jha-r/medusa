@@ -132,6 +132,7 @@ Some caveats for nested UI routes in the sidebar:
 
 - Nested dynamic UI routes, such as one created at `src/admin/routes/custom/[id]/page.tsx` aren't added to the sidebar as it's not possible to link to a dynamic route. If the dynamic route exports route configurations, a warning is logged in the browser's console.
 - Nested routes in setting pages aren't shown in the sidebar to follow the admin's design conventions.
+- The `icon` configuration is ignored for the sidebar item of nested UI route to follow the admin's design conventions.
 
 ---
 
