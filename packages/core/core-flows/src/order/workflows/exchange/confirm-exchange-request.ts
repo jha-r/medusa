@@ -203,6 +203,18 @@ function extractShippingOption({ orderPreview, orderExchange, returnId }) {
   }
 }
 
+function getUpdateReturnData({ returnId }: { returnId: string }) {
+  return transform({ returnId }, ({ returnId }) => {
+    return [
+      {
+        id: returnId,
+        status: ReturnStatus.REQUESTED,
+        requested_at: new Date(),
+      },
+    ]
+  })
+}
+
 export const confirmExchangeRequestWorkflowId = "confirm-exchange-request"
 /**
  * This workflow confirms an exchange request.
@@ -294,13 +306,8 @@ export const confirmExchangeRequestWorkflow = createWorkflow(
     when({ returnId }, ({ returnId }) => {
       return !!returnId
     }).then(() => {
-      updateReturnsStep([
-        {
-          id: returnId,
-          status: ReturnStatus.REQUESTED,
-          requested_at: new Date(),
-        },
-      ])
+      const updateReturnData = getUpdateReturnData({ returnId })
+      updateReturnsStep(updateReturnData)
     })
 
     const exchangeId = transform(

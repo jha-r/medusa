@@ -8,6 +8,7 @@ import { useColorMode } from "@/providers"
 import { CodeBlockHeader, CodeBlockHeaderMeta } from "./Header"
 import { CodeBlockLine } from "./Line"
 import { ApiAuthType, ApiDataOptions, ApiMethod } from "types"
+// @ts-expect-error can't install the types package because it doesn't support React v19
 import { CSSTransition } from "react-transition-group"
 import { useCollapsibleCodeLines } from "../.."
 import { HighlightProps as CollapsibleHighlightProps } from "@/hooks"

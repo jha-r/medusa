@@ -108,8 +108,8 @@ export const useActiveOnScroll = ({
     const halfway = isElmWindow(scrollableElement)
       ? scrollableElement.innerHeight / 2
       : scrollableElement
-      ? scrollableElement.scrollHeight / 2
-      : 0
+        ? scrollableElement.scrollHeight / 2
+        : 0
 
     headings?.forEach((heading) => {
       if (heading.id === hash) {
@@ -145,12 +145,12 @@ export const useActiveOnScroll = ({
       chosenClosest
         ? (chosenClosest as HTMLHeadingElement).id
         : selectedHeadingByHash
-        ? (selectedHeadingByHash as HTMLHeadingElement).id
-        : items.length
-        ? useDefaultIfNoActive
-          ? items[0].heading.id
-          : ""
-        : ""
+          ? (selectedHeadingByHash as HTMLHeadingElement).id
+          : items.length
+            ? useDefaultIfNoActive
+              ? items[0].heading.id
+              : ""
+            : ""
     )
   }, [getHeadingsInElm, items, enable])
 

@@ -94,8 +94,8 @@ const TagOperationParametersObject = ({
           properties[property2].isRequired
           ? 0
           : properties[property1].isRequired
-          ? -1
-          : 1
+            ? -1
+            : 1
       }
     )
     const content = (

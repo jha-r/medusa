@@ -1,12 +1,12 @@
 "use state"
 
-import React, { useEffect, useMemo, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useIsBrowser, useSiteConfig } from "../../../providers"
 import Link from "next/link"
 import { Tooltip } from "../../Tooltip"
 import clsx from "clsx"
 
-const LOCAL_STORAGE_SUFFIX = "-seen"
+const LOCAL_STORAGE_SUFFIX = "last-version"
 
 export const MainNavVersion = () => {
   const {
@@ -14,20 +14,17 @@ export const MainNavVersion = () => {
   } = useSiteConfig()
   const [showNewBadge, setShowNewBadge] = useState(false)
   const { isBrowser } = useIsBrowser()
-  const localStorageKey = useMemo(
-    () => `${version.number}${LOCAL_STORAGE_SUFFIX}`,
-    [version]
-  )
 
   useEffect(() => {
     if (!isBrowser) {
       return
     }
 
-    if (!localStorage.getItem(localStorageKey)) {
+    const storedVersion = localStorage.getItem(LOCAL_STORAGE_SUFFIX)
+    if (storedVersion !== version.number) {
       setShowNewBadge(true)
     }
-  }, [isBrowser, localStorageKey])
+  }, [isBrowser])
 
   const afterHover = () => {
     if (!showNewBadge) {
@@ -35,7 +32,7 @@ export const MainNavVersion = () => {
     }
 
     setShowNewBadge(false)
-    localStorage.setItem(localStorageKey, "true")
+    localStorage.setItem(LOCAL_STORAGE_SUFFIX, version.number)
   }
 
   return (

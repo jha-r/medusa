@@ -4,6 +4,7 @@ import { useProductVariant } from "../../../hooks/api/products"
 
 import { TwoColumnPageSkeleton } from "../../../components/common/skeleton"
 import { TwoColumnPage } from "../../../components/layout/pages"
+import { useDashboardExtension } from "../../../extensions"
 import { VariantGeneralSection } from "./components/variant-general-section"
 import {
   InventorySectionPlaceholder,
@@ -28,6 +29,8 @@ export const ProductVariantDetail = () => {
     }
   )
 
+  const { getWidgets } = useDashboardExtension()
+
   if (isLoading || !variant) {
     return (
       <TwoColumnPageSkeleton
@@ -49,12 +52,11 @@ export const ProductVariantDetail = () => {
       hasOutlet
       showJSON
       showMetadata
-      // TODO: Add widgets zones for variant detail page
       widgets={{
-        after: [],
-        before: [],
-        sideAfter: [],
-        sideBefore: [],
+        after: getWidgets("product_variant.details.after"),
+        before: getWidgets("product_variant.details.before"),
+        sideAfter: getWidgets("product_variant.details.side.after"),
+        sideBefore: getWidgets("product_variant.details.side.before"),
       }}
     >
       <TwoColumnPage.Main>

@@ -113,7 +113,6 @@ export const generatedEditDates = {
   "app/commerce-modules/user/user-creation-flows/page.mdx": "2024-10-15T14:51:37.311Z",
   "app/commerce-modules/user/page.mdx": "2024-10-15T14:44:19.628Z",
   "app/commerce-modules/page.mdx": "2024-10-07T13:55:08.014Z",
-  "app/contribution-guidelines/_admin-translations/page.mdx": "2024-05-13T18:55:11+03:00",
   "app/contribution-guidelines/docs/page.mdx": "2024-10-16T15:48:04.071Z",
   "app/create-medusa-app/page.mdx": "2024-08-05T11:10:55+03:00",
   "app/deployment/admin/vercel/page.mdx": "2024-10-16T08:10:29.377Z",
@@ -234,7 +233,7 @@ export const generatedEditDates = {
   "app/architectural-modules/file/page.mdx": "2024-07-01T10:21:19+03:00",
   "app/architectural-modules/event/page.mdx": "2024-05-28T13:25:03+03:00",
   "app/architectural-modules/cache/create/page.mdx": "2024-10-16T08:51:35.074Z",
-  "app/admin-widget-injection-zones/page.mdx": "2024-09-30T08:43:53.147Z",
+  "app/admin-widget-injection-zones/page.mdx": "2024-11-14T15:10:36.495Z",
   "app/architectural-modules/notification/page.mdx": "2024-10-15T12:51:28.735Z",
   "app/architectural-modules/event/create/page.mdx": "2024-11-12T11:54:51.583Z",
   "references/core_flows/Order/functions/core_flows.Order.orderEditUpdateItemQuantityValidationStep/page.mdx": "2024-08-20T00:10:58.913Z",
@@ -3251,5 +3250,6 @@ export const generatedEditDates = {
   "references/types/types/types.UncountableRules/page.mdx": "2024-11-12T09:36:21.340Z",
   "references/product/interfaces/product.FilterableProductProps/page.mdx": "2024-11-12T09:36:53.124Z",
   "references/types/HttpTypes/interfaces/types.HttpTypes.AdminBatchProductVariantRequest/page.mdx": "2024-11-12T09:36:22.780Z",
-  "references/types/WorkflowTypes/ProductWorkflow/interfaces/types.WorkflowTypes.ProductWorkflow.ExportProductsDTO/page.mdx": "2024-11-12T09:36:24.232Z"
+  "references/types/WorkflowTypes/ProductWorkflow/interfaces/types.WorkflowTypes.ProductWorkflow.ExportProductsDTO/page.mdx": "2024-11-12T09:36:24.232Z",
+  "app/contribution-guidelines/admin-translations/page.mdx": "2024-11-14T08:54:15.369Z"
 }

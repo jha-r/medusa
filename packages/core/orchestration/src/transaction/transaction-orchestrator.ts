@@ -17,12 +17,16 @@ import {
   TransactionStepStatus,
 } from "./types"
 
-import { MedusaError, promiseAll, TransactionStepState } from "@medusajs/utils"
-import { EventEmitter } from "events"
 import {
   isErrorLike,
-  PermanentStepFailureError,
+  MedusaError,
+  promiseAll,
   serializeError,
+  TransactionStepState,
+} from "@medusajs/utils"
+import { EventEmitter } from "events"
+import {
+  PermanentStepFailureError,
   SkipStepResponse,
   TransactionStepTimeoutError,
   TransactionTimeoutError,

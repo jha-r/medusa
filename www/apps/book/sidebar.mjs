@@ -523,8 +523,8 @@ export const sidebar = numberSidebarItems(
         {
           type: "link",
           title: "Environment Variables",
-          path: "/learn/advanced-development/environment-variables"
-        }
+          path: "/learn/advanced-development/environment-variables",
+        },
       ],
     },
     {
@@ -607,8 +607,8 @@ export const sidebar = numberSidebarItems(
           type: "link",
           path: "/learn/deployment/general",
           title: "General Deployment",
-        }
-      ]
+        },
+      ],
     },
     {
       type: "link",
