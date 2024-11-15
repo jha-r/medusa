@@ -99,20 +99,27 @@ export const NavItem = ({
 
   const navLinkClassNames = useCallback(
     ({
+      to,
       isActive,
       isNested = false,
       isSetting = false,
     }: {
+      to: string
       isActive: boolean
       isNested?: boolean
       isSetting?: boolean
-    }) =>
-      clx(BASE_NAV_LINK_CLASSES, {
+    }) => {
+      if (["core", "setting"].includes(type)) {
+        isActive = pathname.startsWith(to)
+      }
+
+      return clx(BASE_NAV_LINK_CLASSES, {
         [NESTED_NAV_LINK_CLASSES]: isNested,
         [ACTIVE_NAV_LINK_CLASSES]: isActive,
         [SETTING_NAV_LINK_CLASSES]: isSetting,
-      }),
-    []
+      })
+    },
+    [type, pathname]
   )
 
   const isSetting = type === "setting"
@@ -130,11 +137,11 @@ export const NavItem = ({
                 }
               : undefined
           }
-          className={(props) =>
-            clx(navLinkClassNames({ ...props, isSetting }), {
+          className={({ isActive }) => {
+            return clx(navLinkClassNames({ isActive, isSetting, to }), {
               "max-lg:hidden": !!items?.length,
             })
-          }
+          }}
         >
           {type !== "setting" && (
             <div className="flex size-6 items-center justify-center">
@@ -169,15 +176,16 @@ export const NavItem = ({
                     <NavLink
                       to={to}
                       end
-                      className={(props) =>
-                        clx(
+                      className={({ isActive }) => {
+                        return clx(
                           navLinkClassNames({
-                            ...props,
-                            isNested: true,
+                            to,
+                            isActive,
                             isSetting,
+                            isNested: true,
                           })
                         )
-                      }
+                      }}
                     >
                       <Text size="small" weight="plus" leading="compact">
                         {label}
@@ -192,15 +200,16 @@ export const NavItem = ({
                         <NavLink
                           to={item.to}
                           end
-                          className={(props) =>
-                            clx(
+                          className={({ isActive }) => {
+                            return clx(
                               navLinkClassNames({
-                                ...props,
-                                isNested: true,
+                                to: item.to,
+                                isActive,
                                 isSetting,
+                                isNested: true,
                               })
                             )
-                          }
+                          }}
                         >
                           <Text size="small" weight="plus" leading="compact">
                             {item.label}

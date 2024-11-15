@@ -556,8 +556,8 @@ export const filesMap = [
     "pathname": "/commerce-modules/user/user-creation-flows"
   },
   {
-    "filePath": "/www/apps/resources/app/contribution-guidelines/_admin-translations/page.mdx",
-    "pathname": "/contribution-guidelines/_admin-translations"
+    "filePath": "/www/apps/resources/app/contribution-guidelines/admin-translations/page.mdx",
+    "pathname": "/contribution-guidelines/admin-translations"
   },
   {
     "filePath": "/www/apps/resources/app/contribution-guidelines/docs/page.mdx",

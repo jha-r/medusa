@@ -14925,6 +14925,14 @@ export const generatedSidebar = [
             "path": "/contribution-guidelines/docs",
             "title": "Docs",
             "children": []
+          },
+          {
+            "loaded": true,
+            "isPathHref": true,
+            "type": "link",
+            "path": "/contribution-guidelines/admin-translations",
+            "title": "Admin Translations",
+            "children": []
           }
         ]
       },

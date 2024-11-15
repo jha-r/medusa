@@ -158,6 +158,18 @@ function extractReturnShippingOptionId({ orderPreview, orderReturn }) {
   return returnShippingMethod.shipping_option_id
 }
 
+function getUpdateReturnData({ orderReturn }: { orderReturn: { id: string } }) {
+  return transform({ orderReturn }, ({ orderReturn }) => {
+    return [
+      {
+        id: orderReturn.id,
+        status: ReturnStatus.REQUESTED,
+        requested_at: new Date(),
+      },
+    ]
+  })
+}
+
 export const confirmReturnRequestWorkflowId = "confirm-return-request"
 /**
  * This workflow confirms a return request.
@@ -277,14 +289,10 @@ export const confirmReturnRequestWorkflow = createWorkflow(
       createRemoteLinkStep(link)
     })
 
+    const updateReturnData = getUpdateReturnData({ orderReturn })
+
     parallelize(
-      updateReturnsStep([
-        {
-          id: orderReturn.id,
-          status: ReturnStatus.REQUESTED,
-          requested_at: new Date(),
-        },
-      ]),
+      updateReturnsStep(updateReturnData),
       confirmOrderChanges({
         changes: [orderChange],
         orderId: order.id,
