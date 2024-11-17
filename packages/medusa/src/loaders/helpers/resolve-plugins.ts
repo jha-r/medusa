@@ -93,6 +93,24 @@ function resolvePlugin(pluginName: string): {
         includeExtensionDirectoryPath: true,
       })
     }
+
+    resolvedPath = path.resolve(`${process.cwd()}/node_modules/${pluginName}`)
+    const doesExistsInNodeModules = existsSync(resolvedPath)
+    if (doesExistsInNodeModules) {
+      const packageJSON = JSON.parse(
+        fs.readFileSync(`${resolvedPath}/package.json`, `utf-8`)
+      )
+
+      const computedResolvedPath = path.join(resolvedPath, "dist")
+
+      return {
+        resolve: computedResolvedPath,
+        id: createPluginId(packageJSON.name),
+        name: packageJSON.name,
+        options: {},
+        version: packageJSON.version,
+      }
+    }
   }
 
   try {
