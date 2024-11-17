@@ -93,8 +93,6 @@ function resolvePlugin(pluginName: string): {
         includeExtensionDirectoryPath: true,
       })
     }
-
-    throw new Error(`Unable to find the plugin "${pluginName}".`)
   }
 
   try {
