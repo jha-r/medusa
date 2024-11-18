@@ -3,6 +3,7 @@ import {
   AuthenticationResponse,
   AuthIdentityProviderService,
   AuthTypes,
+  Logger,
 } from "@medusajs/framework/types"
 import { AuthProviderRegistrationPrefix } from "@types"
 
@@ -10,13 +11,18 @@ type InjectedDependencies = {
   [
     key: `${typeof AuthProviderRegistrationPrefix}${string}`
   ]: AuthTypes.IAuthProvider
+  logger?: Logger
 }
 
 export default class AuthProviderService {
   protected dependencies: InjectedDependencies
+  #logger: Logger
 
   constructor(container: InjectedDependencies) {
     this.dependencies = container
+    this.#logger = container["logger"]
+      ? container.logger
+      : (console as unknown as Logger)
   }
 
   protected retrieveProviderRegistration(
@@ -26,9 +32,10 @@ export default class AuthProviderService {
       return this.dependencies[`${AuthProviderRegistrationPrefix}${providerId}`]
     } catch (err) {
       const errMessage = `
-      Unable to retreieve the auth provider with id: ${providerId}
+      Unable to retrieve the auth provider with id: ${providerId}
       Please make sure that the provider is registered in the container and it is configured correctly in your project configuration file.
       `
+      this.#logger.error(errMessage)
       throw new Error(errMessage)
     }
   }

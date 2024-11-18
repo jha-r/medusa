@@ -85,7 +85,7 @@ moduleIntegrationTestRunner({
         expect(err).toEqual({
           success: false,
           error:
-            "\n      Unable to retreieve the auth provider with id: facebook\n      Please make sure that the provider is registered in the container and it is configured correctly in your project configuration file.\n      ",
+            "\n      Unable to retrieve the auth provider with id: facebook\n      Please make sure that the provider is registered in the container and it is configured correctly in your project configuration file.\n      ",
         })
       })
 
