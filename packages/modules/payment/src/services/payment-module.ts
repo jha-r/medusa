@@ -327,18 +327,18 @@ export default class PaymentModuleService
         )
       )[0]
     } catch (error) {
-      if (paymentSession) {
-        await this.paymentSessionService_.delete(
-          paymentSession.id,
-          sharedContext
-        )
-      }
-
       if (providerPaymentSession) {
         await this.paymentProviderService_.deleteSession({
           provider_id: input.provider_id,
           data: input.data,
         })
+      }
+
+      if (paymentSession) {
+        await this.paymentSessionService_.delete(
+          paymentSession.id,
+          sharedContext
+        )
       }
 
       throw error
