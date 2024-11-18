@@ -328,19 +328,17 @@ export default class PaymentModuleService
       )[0]
     } catch (error) {
       if (paymentSession) {
-        // In case the session is created, but fails to be updated in Medusa,
-        // we catch the error and delete the session and rethrow.
+        await this.paymentSessionService_.delete(
+          paymentSession.id,
+          sharedContext
+        )
+      }
+
+      if (providerSessionSession) {
         await this.paymentProviderService_.deleteSession({
           provider_id: input.provider_id,
           data: input.data,
         })
-
-        if (providerSessionSession) {
-          await this.paymentSessionService_.delete(
-            paymentSession.id,
-            sharedContext
-          )
-        }
       }
 
       throw error
