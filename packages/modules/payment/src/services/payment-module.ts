@@ -299,6 +299,7 @@ export default class PaymentModuleService
     @MedusaContext() sharedContext?: Context
   ): Promise<PaymentSessionDTO> {
     let paymentSession: PaymentSession | undefined
+    let providerSessionSession: Record<string, unknown> | undefined
 
     try {
       paymentSession = await this.createPaymentSession_(
@@ -307,12 +308,14 @@ export default class PaymentModuleService
         sharedContext
       )
 
-      const providerSessionSession =
-        await this.paymentProviderService_.createSession(input.provider_id, {
+      providerSessionSession = await this.paymentProviderService_.createSession(
+        input.provider_id,
+        {
           context: { ...input.context, session_id: paymentSession.id },
           amount: input.amount,
           currency_code: input.currency_code,
-        })
+        }
+      )
 
       paymentSession = (
         await this.paymentSessionService_.update(
@@ -331,18 +334,19 @@ export default class PaymentModuleService
           provider_id: input.provider_id,
           data: input.data,
         })
-        await this.paymentSessionService_.delete(
-          paymentSession.id,
-          sharedContext
-        )
+
+        if (providerSessionSession) {
+          await this.paymentSessionService_.delete(
+            paymentSession.id,
+            sharedContext
+          )
+        }
       }
 
       throw error
     }
 
-    return await this.baseRepository_.serialize(paymentSession, {
-      populate: true,
-    })
+    return await this.baseRepository_.serialize(paymentSession)
   }
 
   @InjectTransactionManager()
@@ -573,9 +577,7 @@ export default class PaymentModuleService
     // NOTE: currently there is no update with the provider but maybe data could be updated
     const result = await this.paymentService_.update(data, sharedContext)
 
-    return await this.baseRepository_.serialize<PaymentDTO>(result[0], {
-      populate: true,
-    })
+    return await this.baseRepository_.serialize<PaymentDTO>(result[0])
   }
 
   @InjectManager()
