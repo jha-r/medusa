@@ -26,10 +26,11 @@ export default class AuthProviderService {
     try {
       return this.dependencies[`${AuthProviderRegistrationPrefix}${providerId}`]
     } catch (err) {
-      throw new MedusaError(
-        MedusaError.Types.NOT_FOUND,
-        `Could not find a auth provider with id: ${providerId}`
-      )
+      const errMessage = `
+      Unable to retreieve the auth provider with id: ${providerId}
+      Please make sure that the provider is registered in the container and it is configured correctly in your project configuration file.
+      `
+      throw new Error(errMessage)
     }
   }
 
