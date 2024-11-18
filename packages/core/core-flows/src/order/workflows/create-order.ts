@@ -88,7 +88,7 @@ export const createOrdersWorkflowId = "create-orders"
 /**
  * This workflow creates an order.
  */
-export const createOrdersWorkflow = createWorkflow(
+export const createOrderWorkflow = createWorkflow(
   createOrdersWorkflowId,
   (input: WorkflowData<CreateOrderDTO & AdditionalData>) => {
     const variantIds = transform({ input }, (data) => {
@@ -189,3 +189,9 @@ export const createOrdersWorkflow = createWorkflow(
     })
   }
 )
+
+/**
+ * @deprecated
+ * Instead use the singular name "createOrderWorkflow"
+ */
+export const createOrdersWorkflow = createOrderWorkflow
