@@ -299,7 +299,7 @@ export default class PaymentModuleService
     @MedusaContext() sharedContext?: Context
   ): Promise<PaymentSessionDTO> {
     let paymentSession: PaymentSession | undefined
-    let providerSessionSession: Record<string, unknown> | undefined
+    let providerPaymentSession: Record<string, unknown> | undefined
 
     try {
       paymentSession = await this.createPaymentSession_(
@@ -308,7 +308,7 @@ export default class PaymentModuleService
         sharedContext
       )
 
-      providerSessionSession = await this.paymentProviderService_.createSession(
+      providerPaymentSession = await this.paymentProviderService_.createSession(
         input.provider_id,
         {
           context: { ...input.context, session_id: paymentSession.id },
@@ -321,7 +321,7 @@ export default class PaymentModuleService
         await this.paymentSessionService_.update(
           {
             id: paymentSession.id,
-            data: { ...input.data, ...providerSessionSession },
+            data: { ...input.data, ...providerPaymentSession },
           },
           sharedContext
         )
@@ -334,7 +334,7 @@ export default class PaymentModuleService
         )
       }
 
-      if (providerSessionSession) {
+      if (providerPaymentSession) {
         await this.paymentProviderService_.deleteSession({
           provider_id: input.provider_id,
           data: input.data,
