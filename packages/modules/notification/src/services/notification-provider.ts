@@ -3,7 +3,7 @@ import {
   InferEntityType,
   NotificationTypes,
 } from "@medusajs/framework/types"
-import { MedusaError, ModulesSdkUtils } from "@medusajs/framework/utils"
+import { ModulesSdkUtils } from "@medusajs/framework/utils"
 import { NotificationProvider } from "@models"
 import { NotificationProviderRegistrationPrefix } from "@types"
 
