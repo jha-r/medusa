@@ -71,10 +71,13 @@ export class LocalFileService extends AbstractFileProviderService {
 
     const filePath = this.getUploadFilePath(baseDir, file.fileKey)
     try {
-      await fs.access(filePath, fs.constants.F_OK)
+      await fs.access(filePath, fs.constants.W_OK)
       await fs.unlink(filePath)
     } catch (e) {
-      // The file does not exist, so it's a noop.
+      // The file does not exist, we don't do anything
+      if (e.code !== "ENOENT") {
+        throw e
+      }
     }
 
     return

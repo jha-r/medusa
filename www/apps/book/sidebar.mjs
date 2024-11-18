@@ -392,8 +392,9 @@ export const sidebar = numberSidebarItems(
               title: "Events Data Payload",
             },
             {
+              type: "link",
               path: "/learn/advanced-development/events-and-subscribers/emit-event",
-              title: "Emit an Event",
+              title: "Emit Event",
             },
           ],
         },
@@ -473,6 +474,11 @@ export const sidebar = numberSidebarItems(
               path: "/learn/advanced-development/workflows/execute-another-workflow",
               title: "Execute Another Workflow",
             },
+            {
+              type: "link",
+              path: "/learn/advanced-development/workflows/multiple-step-usage",
+              title: "Multiple Step Usage",
+            },
           ],
         },
         {
@@ -517,8 +523,8 @@ export const sidebar = numberSidebarItems(
         {
           type: "link",
           title: "Environment Variables",
-          path: "/learn/advanced-development/environment-variables"
-        }
+          path: "/learn/advanced-development/environment-variables",
+        },
       ],
     },
     {
@@ -588,8 +594,21 @@ export const sidebar = numberSidebarItems(
     },
     {
       type: "link",
-      path: "/learn/deployment",
-      title: "Deployment",
+      path: "/learn/build",
+      title: "Build",
+      chapterTitle: "Production",
+      children: [
+        {
+          type: "link",
+          path: "/learn/deployment",
+          title: "Deployment Overview",
+        },
+        {
+          type: "link",
+          path: "/learn/deployment/general",
+          title: "General Deployment",
+        },
+      ],
     },
     {
       type: "link",

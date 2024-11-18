@@ -3,12 +3,13 @@ import { NextResponse } from "next/server"
 import path from "path"
 
 type DownloadParams = {
-  params: {
+  params: Promise<{
     area: string
-  }
+  }>
 }
 
-export function GET(request: Request, { params }: DownloadParams) {
+export async function GET(request: Request, props: DownloadParams) {
+  const params = await props.params
   const { area } = params
   const filePath = path.join(process.cwd(), "specs", area, "openapi.full.yaml")
 

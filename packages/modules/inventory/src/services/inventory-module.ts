@@ -746,10 +746,18 @@ export default class InventoryModuleService
     const availabilityData = input.map((data) => {
       const reservation = reservationMap.get(data.id)!
 
+      let adjustment = data.quantity
+        ? MathBN.sub(data.quantity, reservation.quantity)
+        : 0
+
+      if (MathBN.lt(adjustment, 0)) {
+        adjustment = 0
+      }
+
       return {
         inventory_item_id: reservation.inventory_item_id,
         location_id: data.location_id ?? reservation.location_id,
-        quantity: data.quantity ?? reservation.quantity,
+        quantity: adjustment,
         allow_backorder:
           data.allow_backorder || reservation.allow_backorder || false,
       }

@@ -95,6 +95,12 @@ export const GET = async (
 
 The value of `req.query.name` is the value passed in `?name=John`, for example.
 
+### Validate Query Parameters
+
+You can apply validation rules on received query parameters to ensure they match specified rules and types.
+
+Learn more in [this documentation](../validation/page.mdx#how-to-validate-request-query-paramters).
+
 ---
 
 ## Request Body Parameters
@@ -153,3 +159,9 @@ This returns the following JSON object:
   "message": "[POST] Hello John!"
 }
 ```
+
+### Validate Body Parameters
+
+You can apply validation rules on received body parameters to ensure they match specified rules and types.
+
+Learn more in [this documentation](../validation/page.mdx#how-to-validate-request-body).

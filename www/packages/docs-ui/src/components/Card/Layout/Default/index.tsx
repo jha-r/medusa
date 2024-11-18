@@ -68,6 +68,7 @@ export const CardDefaultLayout = ({
         <Link
           href={href}
           className="absolute left-0 top-0 h-full w-full rounded"
+          prefetch={false}
         />
       )}
     </div>

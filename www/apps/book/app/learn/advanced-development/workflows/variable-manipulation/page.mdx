@@ -6,7 +6,7 @@ export const metadata = {
 
 In this chapter, you'll learn how to use the `transform` utility to manipulate variables in a workflow.
 
-## Why Variable Manipulation isn't Allowed in Workflows?
+## Why Variable Manipulation isn't Allowed in Workflows
 
 Medusa creates an internal representation of the workflow definition you pass to `createWorkflow` to track and store its steps.
 
@@ -117,6 +117,29 @@ You then pass the `ids` variable as a parameter to the `doSomethingStep`.
 
 ---
 
+## Example: Creating a Date
+
+If you create a date with `new Date()` in a workflow's constructor function, Medusa evaluates the date's value when it creates the internal representation of the workflow, not when the workflow is executed.
+
+So, use `transform` instead to create a date variable with `new Date()`.
+
+For example:
+
+```ts
+const myWorkflow = createWorkflow(
+  "hello-world",
+  () => {
+    const today = transform({}, () => new Date())
+
+    doSomethingStep(today)
+  }
+)
+```
+
+In this workflow, `today` is only evaluated when the workflow is executed.
+
+---
+
 ## Caveats
 
 ### Transform Evaluation
@@ -179,7 +202,7 @@ const myWorkflow = createWorkflow(
   "hello-world", 
   function (input) {
     validateHasStr1({
-      input
+      input,
     })
 
     // workflow continues its execution only if 

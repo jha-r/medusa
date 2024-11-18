@@ -84,7 +84,12 @@ const Section = ({ title, links }: SectionProps) => {
     <div className="flex flex-col gap-0.5 flex-1">
       <h3 className="text-h3 text-medusa-fg-base">{title}</h3>
       {links.map((link, index) => (
-        <Link key={index} className="text-compact-small-plus" href={link.href}>
+        <Link
+          key={index}
+          className="text-compact-small-plus"
+          href={link.href}
+          prefetch={false}
+        >
           {link.text}
         </Link>
       ))}

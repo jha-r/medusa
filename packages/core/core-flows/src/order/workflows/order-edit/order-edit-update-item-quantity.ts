@@ -4,7 +4,12 @@ import {
   OrderPreviewDTO,
   OrderWorkflow,
 } from "@medusajs/framework/types"
-import { ChangeActionType, OrderChangeStatus } from "@medusajs/framework/utils"
+import {
+  BigNumber,
+  ChangeActionType,
+  MathBN,
+  OrderChangeStatus,
+} from "@medusajs/framework/utils"
 import {
   WorkflowData,
   WorkflowResponse,
@@ -75,19 +80,30 @@ export const orderEditUpdateItemQuantityWorkflow = createWorkflow(
     const orderChangeActionInput = transform(
       { order, orderChange, items: input.items },
       ({ order, orderChange, items }) => {
-        return items.map((item) => ({
-          order_change_id: orderChange.id,
-          order_id: order.id,
-          version: orderChange.version,
-          action: ChangeActionType.ITEM_UPDATE,
-          internal_note: item.internal_note,
-          details: {
-            reference_id: item.id,
-            quantity: item.quantity,
-            unit_price: item.unit_price,
-            compare_at_unit_price: item.compare_at_unit_price,
-          },
-        }))
+        return items.map((item) => {
+          const existing = order?.items?.find(
+            (exItem) => exItem.id === item.id
+          )!
+
+          const quantityDiff = new BigNumber(
+            MathBN.sub(item.quantity, existing.quantity)
+          )
+
+          return {
+            order_change_id: orderChange.id,
+            order_id: order.id,
+            version: orderChange.version,
+            action: ChangeActionType.ITEM_UPDATE,
+            internal_note: item.internal_note,
+            details: {
+              reference_id: item.id,
+              quantity: item.quantity,
+              unit_price: item.unit_price,
+              compare_at_unit_price: item.compare_at_unit_price,
+              quantity_diff: quantityDiff,
+            },
+          }
+        })
       }
     )
 
