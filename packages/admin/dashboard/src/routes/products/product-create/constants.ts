@@ -25,7 +25,6 @@ const ProductCreateVariantSchema = z.object({
   weight: optionalInt,
   material: z.string().optional(),
   origin_country: z.string().optional(),
-  custom_title: z.string().optional(),
   sku: z.string().optional(),
   manage_inventory: z.boolean().optional(),
   allow_backorder: z.boolean().optional(),

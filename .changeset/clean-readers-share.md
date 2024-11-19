@@ -3,4 +3,4 @@
 "@medusajs/utils": patch
 ---
 
-feat: add optional fields
+Revert "feat: add optional fields"

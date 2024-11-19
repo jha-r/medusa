@@ -21,7 +21,6 @@ import SectionDivider from "../../Section/Divider"
 import clsx from "clsx"
 import { Feedback, Loading, Link } from "docs-ui"
 import { usePathname, useRouter } from "next/navigation"
-import formatReportLink from "@/utils/format-report-link"
 import { PathsObject, SchemaObject, TagObject } from "@/types/openapi"
 import { TagSectionSchemaProps } from "./Schema"
 import checkElementInViewport from "../../../utils/check-element-in-viewport"
@@ -165,7 +164,6 @@ const TagSectionComponent = ({ tag }: TagSectionProps) => {
                 section: tag.name,
               }}
               pathName={pathname}
-              reportLink={formatReportLink(area, tag.name)}
               vertical
               question="Was this section helpful?"
             />

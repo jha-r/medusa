@@ -12,7 +12,6 @@ describe("Big Number property", () => {
         name: "bigNumber",
       },
       nullable: false,
-      optional: false,
       indexes: [],
       relationships: [],
     })

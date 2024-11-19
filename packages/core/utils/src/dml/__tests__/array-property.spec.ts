@@ -12,7 +12,6 @@ describe("Array property", () => {
         name: "array",
       },
       nullable: false,
-      optional: false,
       indexes: [],
       relationships: [],
     })

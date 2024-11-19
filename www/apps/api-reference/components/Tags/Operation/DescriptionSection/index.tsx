@@ -10,7 +10,6 @@ import MDXContentClient from "@/components/MDXContent/Client"
 import { useArea } from "../../../../providers/area"
 import { Feedback, Badge, Link, FeatureFlagNotice } from "docs-ui"
 import { usePathname } from "next/navigation"
-import formatReportLink from "../../../../utils/format-report-link"
 import { TagsOperationDescriptionSectionWorkflowBadgeProps } from "./WorkflowBadge"
 
 const TagsOperationDescriptionSectionSecurity =
@@ -82,7 +81,6 @@ const TagsOperationDescriptionSection = ({
           section: operation.summary,
         }}
         pathName={pathname}
-        reportLink={formatReportLink(area, operation.summary)}
         className="!my-2"
         vertical={true}
         question="Did this API Route run successfully?"

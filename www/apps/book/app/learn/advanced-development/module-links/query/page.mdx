@@ -121,6 +121,68 @@ const { data: myCustoms } = await query.graph({
 })
 ```
 
+### Apply Filters and Pagination on Linked Records
+
+Consider you want to apply filters or pagination configurations on the product(s) linked to `my_custom`. To do that, you must query the module link's table instead.
+
+As mentioned in the [Module Link](../page.mdx) documentation, Medusa creates a table for your module link. So, not only can you retrieve linked records, but you can also retrieve the records in a module link's table.
+
+A module link's definition, exported by a file under `src/links`, has a special `entryPoint` property. Use this property when specifying the `entity` property in Query's `graph` method.
+
+For example:
+
+export const queryLinkTableHighlights = [
+  ["1", "", "Import the module link."],
+  ["6", "productBrandLink.entryPoint", "Pass the `entryPoint` property of the link to Query"],
+  ["7", `"product.*"`, "Retrieve the fields of a product record linked to a `MyCustom` record."],
+  ["7", `"brand.*"`, "Retrieve the fields of a `MyCustom` record linked to a product record."]
+]
+
+```ts highlights={queryLinkTableHighlights}
+import productCustomLink from "../../../links/product-custom"
+
+// ...
+
+const { data: productCustoms } = await query.graph({
+  entity: productCustomLink.entryPoint,
+  fields: ["*", "product.*", "my_custom.*"],
+  pagination: {
+    take: 5,
+    skip: 0,
+  },
+});
+```
+
+In the object passed to the `graph` method:
+
+- You pass the `entryPoint` property of the link definition as the value for `entity`. So, Query will retrieve records from the module link's table.
+- You pass three items to the `field` property:
+    - `*` to retrieve the link table's fields. This is useful if the link table has [custom columns](../custom-columns/page.mdx).
+    - `product.*` to retrieve the fields of a product record linked to a `MyCustom` record.
+    - `my_custom.*` to retrieve the fields of a `MyCustom` record linked to a product record.
+
+You can then apply any [filters](#apply-filters) or [pagination configurations](#apply-pagination).
+
+The returned `data` is similar to the following:
+
+```json title="Example Result"
+[{
+  "id": "123",
+  "product_id": "prod_123",
+  "my_custom_id": "123",
+  "product": {
+    "id": "prod_123",
+    // other product fields...
+  },
+  "my_custom": {
+    "id": "123",
+    // other my_custom fields...
+  }
+}]
+```
+
+
+
 ---
 
 ## Apply Filters
@@ -150,37 +212,6 @@ Filters don't apply on fields of linked data models from other modules.
 
 ---
 
-## Sort Records
-
-```ts highlights={[["5"], ["6"], ["7"]]}
-const { data: myCustoms } = await query.graph({
-  entity: "my_custom",
-  fields: ["id", "name"],
-  pagination: {
-    order: {
-      name: "DESC",
-    },
-  },
-})
-```
-
-<Note>
-
-Sorting doesn't work on fields of linked data models from other modules.
-
-</Note>
-
-The `graph` method's object parameter accepts a `pagination` property to configure the pagination of retrieved records.
-
-To sort returned records, pass an `order` property to `pagination`.
-
-The `order` property is an object whose keys are property names, and values are either:
-
-- `ASC` to sort records by that property in ascending order.
-- `DESC` to sort records by that property in descending order.
-
----
-
 ## Apply Pagination
 
 ```ts highlights={[["8", "skip", "The number of records to skip before fetching the results."], ["9", "take", "The number of records to fetch."]]}
@@ -196,6 +227,8 @@ const {
   },
 })
 ```
+
+The `graph` method's object parameter accepts a `pagination` property to configure the pagination of retrieved records.
 
 To paginate the returned records, pass the following properties to `pagination`:
 
@@ -221,6 +254,33 @@ When you provide the pagination fields, the `query.graph` method's returned obje
     description: "The total number of records."
   }
 ]} sectionTitle="Apply Pagination" />
+
+### Sort Records
+
+```ts highlights={[["5"], ["6"], ["7"]]}
+const { data: myCustoms } = await query.graph({
+  entity: "my_custom",
+  fields: ["id", "name"],
+  pagination: {
+    order: {
+      name: "DESC",
+    },
+  },
+})
+```
+
+<Note>
+
+Sorting doesn't work on fields of linked data models from other modules.
+
+</Note>
+
+To sort returned records, pass an `order` property to `pagination`.
+
+The `order` property is an object whose keys are property names, and values are either:
+
+- `ASC` to sort records by that property in ascending order.
+- `DESC` to sort records by that property in descending order.
 
 ---
 

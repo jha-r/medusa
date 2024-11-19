@@ -274,7 +274,7 @@ export type ProjectConfigOptions = {
    * module.exports = defineConfig({
    *   projectConfig: {
    *     databaseDriverOptions: process.env.NODE_ENV !== "development" ?
-   *       { ssl: { rejectUnauthorized: false } } : {}
+   *       { connection: { ssl: { rejectUnauthorized: false } } } : {}
    *     // ...
    *   },
    *   // ...
