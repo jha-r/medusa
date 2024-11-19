@@ -232,7 +232,7 @@ medusaIntegrationTestRunner({
       })
     })
 
-    describe("Transfer Order flow (Admin)", () => {
+    describe("Transfer Order flow (Store, self-serve)", () => {
       let order
       let customer
       let storeHeaders
