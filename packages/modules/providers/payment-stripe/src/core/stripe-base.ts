@@ -186,6 +186,11 @@ abstract class StripeBase extends AbstractPaymentProvider<StripeOptions> {
   ): Promise<PaymentProviderError | PaymentProviderSessionResponse["data"]> {
     try {
       const id = paymentSessionData.id as string
+
+      if (!id) {
+        return paymentSessionData
+      }
+
       return (await this.stripe_.paymentIntents.cancel(
         id
       )) as unknown as PaymentProviderSessionResponse["data"]
