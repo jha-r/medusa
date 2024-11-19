@@ -941,6 +941,36 @@ export class Store {
         }
       )
     },
+
+    /**
+     * This method updates the customer of a cart.
+     *
+     * @param id - The cart's ID.
+     * @param body - The data to update in the cart.
+     * @param query - Configure the fields to retrieve in the cart.
+     * @param headers - Headers to pass in the request.
+     * @returns The updated cart.
+     *
+     * @example
+     * sdk.store.cart.transferCart("cart_123")
+     * .then(({ cart }) => {
+     *   console.log(cart)
+     * })
+     */
+    transferCart: async (
+      id: string,
+      query?: SelectParams,
+      headers?: ClientHeaders
+    ) => {
+      return this.client.fetch<HttpTypes.StoreCartResponse>(
+        `/store/carts/${id}/customer`,
+        {
+          method: "POST",
+          headers,
+          query,
+        }
+      )
+    },
   }
 
   public order = {

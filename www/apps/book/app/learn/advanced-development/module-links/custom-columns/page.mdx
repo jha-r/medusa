@@ -111,15 +111,9 @@ await remoteLink.create({
 
 ## Retrieve Custom Column with Link
 
-To retrieve linked records with their custom columns, use Query and pass the link definition as the `entity` property's value.
+To retrieve linked records with their custom columns, use [Query](../query/page.mdx). A module link's definition, exported by a file under `src/links`, has a special `entryPoint` property. Use this property when specifying the `entity` property in Query's `graph` method.
 
 For example:
-
-<Note>
-
-Learn more about Query and how to resolve use it [this chapter](../remote-link/page.mdx).
-
-</Note>
 
 export const retrieveHighlights = [
   ["1", "productHelloLink", "Import the exported link definition."],
