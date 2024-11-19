@@ -12,6 +12,7 @@ describe("Boolean property", () => {
         name: "boolean",
       },
       nullable: false,
+      optional: false,
       indexes: [],
       relationships: [],
     })
