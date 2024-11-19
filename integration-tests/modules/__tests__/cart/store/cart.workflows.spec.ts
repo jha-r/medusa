@@ -2162,7 +2162,7 @@ medusaIntegrationTestRunner({
       })
 
       describe("updateTaxLinesWorkflow", () => {
-        it("should create a payment collection and link it to cart", async () => {
+        it("should include shipping address metadata in tax calculation context", async () => {
           const cart = await cartModuleService.createCarts({
             currency_code: "dkk",
             region_id: defaultRegion.id,
