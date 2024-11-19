@@ -14,6 +14,7 @@ import {
   AdminOrderChanges,
   AdminOrderCreateFulfillment,
   AdminOrderCreateShipment,
+  AdminTransferOrder,
 } from "./validators"
 
 export const adminOrderRoutesMiddlewares: MiddlewareRoute[] = [
@@ -138,6 +139,17 @@ export const adminOrderRoutesMiddlewares: MiddlewareRoute[] = [
     matcher: "/admin/orders/:id/fulfillments/:fulfillment_id/mark-as-delivered",
     middlewares: [
       validateAndTransformBody(AdminMarkOrderFulfillmentDelivered),
+      validateAndTransformQuery(
+        AdminGetOrdersOrderParams,
+        QueryConfig.retrieveTransformQueryConfig
+      ),
+    ],
+  },
+  {
+    method: ["POST"],
+    matcher: "/admin/orders/:id/transfer",
+    middlewares: [
+      validateAndTransformBody(AdminTransferOrder),
       validateAndTransformQuery(
         AdminGetOrdersOrderParams,
         QueryConfig.retrieveTransformQueryConfig

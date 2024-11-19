@@ -12,6 +12,7 @@ describe("JSON property", () => {
         name: "json",
       },
       nullable: false,
+      optional: false,
       indexes: [],
       relationships: [],
     })
@@ -30,6 +31,7 @@ describe("JSON property", () => {
         a: 1,
       },
       nullable: false,
+      optional: false,
       indexes: [],
       relationships: [],
     })
