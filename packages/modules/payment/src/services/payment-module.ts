@@ -299,6 +299,7 @@ export default class PaymentModuleService
     @MedusaContext() sharedContext?: Context
   ): Promise<PaymentSessionDTO> {
     let paymentSession: PaymentSession | undefined
+    let providerPaymentSession: Record<string, unknown> | undefined
 
     try {
       paymentSession = await this.createPaymentSession_(
@@ -307,30 +308,33 @@ export default class PaymentModuleService
         sharedContext
       )
 
-      const providerSessionSession =
-        await this.paymentProviderService_.createSession(input.provider_id, {
+      providerPaymentSession = await this.paymentProviderService_.createSession(
+        input.provider_id,
+        {
           context: { ...input.context, session_id: paymentSession.id },
           amount: input.amount,
           currency_code: input.currency_code,
-        })
+        }
+      )
 
       paymentSession = (
         await this.paymentSessionService_.update(
           {
             id: paymentSession.id,
-            data: { ...input.data, ...providerSessionSession },
+            data: { ...input.data, ...providerPaymentSession },
           },
           sharedContext
         )
       )[0]
     } catch (error) {
-      if (paymentSession) {
-        // In case the session is created, but fails to be updated in Medusa,
-        // we catch the error and delete the session and rethrow.
+      if (providerPaymentSession) {
         await this.paymentProviderService_.deleteSession({
           provider_id: input.provider_id,
           data: input.data,
         })
+      }
+
+      if (paymentSession) {
         await this.paymentSessionService_.delete(
           paymentSession.id,
           sharedContext
@@ -340,9 +344,7 @@ export default class PaymentModuleService
       throw error
     }
 
-    return await this.baseRepository_.serialize(paymentSession, {
-      populate: true,
-    })
+    return await this.baseRepository_.serialize(paymentSession)
   }
 
   @InjectTransactionManager()
@@ -573,9 +575,7 @@ export default class PaymentModuleService
     // NOTE: currently there is no update with the provider but maybe data could be updated
     const result = await this.paymentService_.update(data, sharedContext)
 
-    return await this.baseRepository_.serialize<PaymentDTO>(result[0], {
-      populate: true,
-    })
+    return await this.baseRepository_.serialize<PaymentDTO>(result[0])
   }
 
   @InjectManager()
