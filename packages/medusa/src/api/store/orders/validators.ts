@@ -26,3 +26,10 @@ export const StoreAcceptOrderTransfer = z.object({
 export type StoreAcceptOrderTransferType = z.infer<
   typeof StoreAcceptOrderTransfer
 >
+
+export type StoreRequestOrderTransferType = z.infer<
+  typeof StoreRequestOrderTransfer
+>
+export const StoreRequestOrderTransfer = z.object({
+  description: z.string().optional(),
+})
