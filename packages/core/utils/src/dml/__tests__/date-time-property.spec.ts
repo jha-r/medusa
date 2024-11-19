@@ -12,7 +12,6 @@ describe("DateTime property", () => {
         name: "dateTime",
       },
       nullable: false,
-      optional: false,
       indexes: [],
       relationships: [],
     })
