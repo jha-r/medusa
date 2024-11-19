@@ -556,8 +556,8 @@ export const filesMap = [
     "pathname": "/commerce-modules/user/user-creation-flows"
   },
   {
-    "filePath": "/www/apps/resources/app/contribution-guidelines/_admin-translations/page.mdx",
-    "pathname": "/contribution-guidelines/_admin-translations"
+    "filePath": "/www/apps/resources/app/contribution-guidelines/admin-translations/page.mdx",
+    "pathname": "/contribution-guidelines/admin-translations"
   },
   {
     "filePath": "/www/apps/resources/app/contribution-guidelines/docs/page.mdx",
@@ -16328,6 +16328,10 @@ export const filesMap = [
     "pathname": "/references/types/HttpTypes/interfaces/types.HttpTypes.AdminBatchUpdateInventoryLevelLocation"
   },
   {
+    "filePath": "/www/apps/resources/references/types/HttpTypes/interfaces/types.HttpTypes.AdminBatchUpdateProductVariant/page.mdx",
+    "pathname": "/references/types/HttpTypes/interfaces/types.HttpTypes.AdminBatchUpdateProductVariant"
+  },
+  {
     "filePath": "/www/apps/resources/references/types/HttpTypes/interfaces/types.HttpTypes.AdminCampaign/page.mdx",
     "pathname": "/references/types/HttpTypes/interfaces/types.HttpTypes.AdminCampaign"
   },
@@ -20540,6 +20544,10 @@ export const filesMap = [
     "pathname": "/references/types/types/types.PlannerActionLinkDescriptor"
   },
   {
+    "filePath": "/www/apps/resources/references/types/types/types.PluralizationSpecialRules/page.mdx",
+    "pathname": "/references/types/types/types.PluralizationSpecialRules"
+  },
+  {
     "filePath": "/www/apps/resources/references/types/types/types.PrevLimit/page.mdx",
     "pathname": "/references/types/types/types.PrevLimit"
   },
@@ -20642,6 +20650,10 @@ export const filesMap = [
   {
     "filePath": "/www/apps/resources/references/types/types/types.TypeOnly-2/page.mdx",
     "pathname": "/references/types/types/types.TypeOnly-2"
+  },
+  {
+    "filePath": "/www/apps/resources/references/types/types/types.UncountableRules/page.mdx",
+    "pathname": "/references/types/types/types.UncountableRules"
   },
   {
     "filePath": "/www/apps/resources/references/types/types/types.UpdateFulfillmentShippingOptionRulesWorkflowDTO/page.mdx",

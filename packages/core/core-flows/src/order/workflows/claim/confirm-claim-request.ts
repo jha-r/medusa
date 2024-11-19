@@ -47,6 +47,18 @@ export type ConfirmClaimRequestWorkflowInput = {
   confirmed_by?: string
 }
 
+function getUpdateReturnData({ returnId }: { returnId: string }) {
+  return transform({ returnId }, ({ returnId }) => {
+    return [
+      {
+        id: returnId,
+        status: ReturnStatus.REQUESTED,
+        requested_at: new Date(),
+      },
+    ]
+  })
+}
+
 /**
  * This step validates that a requested claim can be confirmed.
  */
@@ -306,13 +318,8 @@ export const confirmClaimRequestWorkflow = createWorkflow(
     when({ returnId }, ({ returnId }) => {
       return !!returnId
     }).then(() => {
-      updateReturnsStep([
-        {
-          id: returnId,
-          status: ReturnStatus.REQUESTED,
-          requested_at: new Date(),
-        },
-      ])
+      const updateReturnDate = getUpdateReturnData({ returnId })
+      updateReturnsStep(updateReturnDate)
     })
 
     const claimId = transform(

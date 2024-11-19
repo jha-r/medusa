@@ -20,4 +20,5 @@ export declare type DocsConfig = {
     number: string
     releaseUrl: string
   }
+  reportIssueLink?: string
 }

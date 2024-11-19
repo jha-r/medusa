@@ -4,6 +4,7 @@ import {
   InferEntityType,
   INotificationModuleService,
   InternalModuleDeclaration,
+  Logger,
   ModulesSdkTypes,
   NotificationTypes,
 } from "@medusajs/framework/types"
@@ -22,6 +23,7 @@ import { eventBuilders } from "@utils"
 import NotificationProviderService from "./notification-provider"
 
 type InjectedDependencies = {
+  logger?: Logger
   baseRepository: DAL.RepositoryService
   notificationService: ModulesSdkTypes.IMedusaInternalService<
     typeof Notification

@@ -33,24 +33,27 @@ export const Breadcrumbs = () => {
       item.parentItem?.type === "link"
         ? getLinkPath(item.parentItem)
         : (item.parentItem?.type === "category" &&
-            breadcrumbOptions?.showCategories) ||
-          item.parentItem?.type === "sub-category"
-        ? "#"
-        : undefined
+              breadcrumbOptions?.showCategories) ||
+            item.parentItem?.type === "sub-category"
+          ? "#"
+          : undefined
     const firstItemPath =
       item.default[0].type === "link"
         ? getLinkPath(item.default[0])
         : (item.default[0].type === "category" &&
-            breadcrumbOptions?.showCategories) ||
-          item.default[0].type === "sub-category"
-        ? "#"
-        : undefined
+              breadcrumbOptions?.showCategories) ||
+            item.default[0].type === "sub-category"
+          ? "#"
+          : undefined
 
     const breadcrumbPath = parentPath || firstItemPath || "/"
 
     tempBreadcrumbItems.set(
       breadcrumbPath,
-      item.parentItem?.childSidebarTitle || item.parentItem?.title || ""
+      item.parentItem?.childSidebarTitle ||
+        item.parentItem?.chapterTitle ||
+        item.parentItem?.title ||
+        ""
     )
 
     return tempBreadcrumbItems
@@ -76,12 +79,14 @@ export const Breadcrumbs = () => {
           sidebarActiveItem.parentItem.type === "link"
             ? getLinkPath(sidebarActiveItem.parentItem) || "#"
             : "#",
-          sidebarActiveItem.parentItem.title || ""
+          sidebarActiveItem.parentItem.chapterTitle ||
+            sidebarActiveItem.parentItem.title ||
+            ""
         )
       }
       tempBreadcrumbItems.set(
         getLinkPath(sidebarActiveItem) || "/",
-        sidebarActiveItem.title || ""
+        sidebarActiveItem.chapterTitle || sidebarActiveItem.title || ""
       )
     }
 

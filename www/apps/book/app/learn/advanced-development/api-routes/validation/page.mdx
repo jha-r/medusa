@@ -1,24 +1,33 @@
 export const metadata = {
-  title: `${pageNumber} Request Body Parameter Validation`,
+  title: `${pageNumber} Request Body and Query Parameter Validation`,
 }
 
 # {metadata.title}
 
-In this chapter, you'll learn how to validate request body parameters in your custom API route.
+In this chapter, you'll learn how to validate request body and query parameters in your custom API route.
 
-## Example Scenario
+## Request Validation
 
 Consider you're creating a `POST` API route at `/custom`. It accepts two parameters `a` and `b` that are required numbers, and returns their sum.
 
-The next steps explain how to add validation to this API route, as an example.
+Medusa provides two middlewares to validate the request body and query paramters of incoming requests to your custom API routes:
+
+- `validateAndTransformBody` to validate the request's body parameters against a schema.
+- `validateAndTransformQuery` to validate the request's query parameters against a schema.
+
+Both middlewares accept a [Zod](https://zod.dev/) schema as a parameter, which gives you flexibility in how you define your validation schema with complex rules.
+
+The next steps explain how to add request body and query parameter validation to the API route mentioned earlier.
 
 ---
 
-## Step 1: Create Zod Schema
+## How to Validate Request Body
 
-Medusa uses [Zod](https://zod.dev/) to validate the body parameters of an incoming request.
+### Step 1: Create Validation Schema
 
-To use Zod to validate your custom schemas, create a `validators.ts` file in any `src/api` subfolder. This file holds Zod schemas for each of your API routes.
+Medusa uses [Zod](https://zod.dev/) to create validation schemas. These schemas are then used to validate incoming request bodies or query parameters.
+
+To create a validation schema with Zod, create a `validators.ts` file in any `src/api` subfolder. This file holds Zod schemas for each of your API routes.
 
 For example, create the file `src/api/custom/validators.ts` with the following content:
 
@@ -37,11 +46,9 @@ The `PostStoreCustomSchema` variable is a Zod schema that indicates the request 
 2. It has a property `a` that is a required number.
 3. It has a property `b` that is a required number.
 
----
+### Step 2: Add Request Body Validation Middleware
 
-## Step 2: Add Validation Middleware
-
-To use this schema for validating the body parameters of requests to `/custom`, use the `validateAndTransformBody` middleware provided by `@medusajs/framework/utils`. It accepts the Zod schema as a parameter.
+To use this schema for validating the body parameters of requests to `/custom`, use the `validateAndTransformBody` middleware provided by `@medusajs/framework/http`. It accepts the Zod schema as a parameter.
 
 For example, create the file `src/api/middlewares.ts` with the following content:
 
@@ -49,7 +56,7 @@ For example, create the file `src/api/middlewares.ts` with the following content
 import { defineMiddlewares } from "@medusajs/medusa"
 import { 
   validateAndTransformBody,
-} from "@medusajs/framework/utils"
+} from "@medusajs/framework/http"
 import { PostStoreCustomSchema } from "./custom/validators"
 
 export default defineMiddlewares({
@@ -67,15 +74,13 @@ export default defineMiddlewares({
 
 This applies the `validateAndTransformBody` middleware on `POST` requests to `/custom`. It uses the `PostStoreCustomSchema` as the validation schema.
 
-### How the Validation Works
+#### How the Validation Works
 
 If a request's body parameters don't pass the validation, the `validateAndTransformBody` middleware throws an error indicating the validation errors.
 
 If a request's body parameters are validated successfully, the middleware sets the validated body parameters in the `validatedBody` property of `MedusaRequest`.
 
----
-
-## Step 3: Use Validated Body in API Route
+### Step 3: Use Validated Body in API Route
 
 In your API route, consume the validated body using the `validatedBody` property of `MedusaRequest`.
 
@@ -113,11 +118,131 @@ To pass the request body's type as a type parameter to `MedusaRequest`, use Zod'
 
 </Note>
 
+### Test it Out
+
+To test out the validation, send a `POST` request to `/custom` passing `a` and `b` body parameters. You can try sending incorrect request body parameters to test out the validation.
+
+For example, if you omit the `a` parameter, you'll receive a `400` response code with the following response data:
+
+```json
+{
+  "type": "invalid_data",
+  "message": "Invalid request: Field 'a' is required"
+}
+```
+
 ---
 
-## Test it Out
+## How to Validate Request Query Paramters
 
-To test out the validation, send a `POST` request to `/custom`. You can try sending incorrect request body parameters.
+The steps to validate the request query parameters are the similar to that of [validating the body](#how-to-validate-request-body).
+
+### Step 1: Create Validation Schema
+
+The first step is to create a schema with Zod with the rules of the accepted query parameters.
+
+Consider that the API route accepts two query parameters `a` and `b` that are numbers, similar to the previous section.
+
+Create the file `src/api/custom/validators.ts` with the following content:
+
+```ts title="src/api/custom/validators.ts"
+import { z } from "zod"
+
+export const PostStoreCustomSchema = z.object({
+  a: z.preprocess(
+      (val) => {
+        if (val && typeof val === "string") {
+          return parseInt(val)
+        }
+        return val
+      },
+      z
+        .number()
+    ),
+  b: z.preprocess(
+    (val) => {
+      if (val && typeof val === "string") {
+        return parseInt(val)
+      }
+      return val
+    },
+    z
+      .number()
+  ),
+})
+```
+
+Since a query parameter's type is originally a string or array of strings, you have to use Zod's `preprocess` method to validate other query types, such as numbers.
+
+For both `a` and `b`, you transform the query parameter's value to an integer first if it's a string, then, you check that the resulting value is a number.
+
+### Step 2: Add Request Query Validation Middleware
+
+Next, you'll use the schema to validate incoming requests' query parameters to the `/custom` API route.
+
+Add the `validateAndTransformQuery` middleware to the API route in the file `src/api/middlewares.ts`:
+
+```ts title="src/api/middlewares.ts"
+import { defineMiddlewares } from "@medusajs/medusa"
+import { 
+  validateAndTransformQuery,
+} from "@medusajs/framework/http"
+import { PostStoreCustomSchema } from "./custom/validators"
+
+export default defineMiddlewares({
+  routes: [
+    {
+      matcher: "/custom",
+      method: "POST",
+      middlewares: [
+        validateAndTransformQuery(
+          PostStoreCustomSchema,
+          {}
+        ),
+      ],
+    },
+  ],
+})
+```
+
+The `validateAndTransformQuery` accepts two parameters:
+
+- The first one is the Zod schema to validate the query parameters against.
+- The second one is an object of options for retrieving data using Query, which you can learn more about in [this chapter](../../module-links/query/page.mdx).
+
+#### How the Validation Works
+
+If a request's query parameters don't pass the validation, the `validateAndTransformQuery` middleware throws an error indicating the validation errors.
+
+If a request's query parameters are validated successfully, the middleware sets the validated query parameters in the `validatedQuery` property of `MedusaRequest`.
+
+### Step 3: Use Validated Query in API Route
+
+Finally, use the validated query in the API route. The `MedusaRequest` parameter has a `validatedQuery` parameter that you can use to access the validated parameters.
+
+For example, create the file `src/api/custom/route.ts` with the following content:
+
+```ts title="src/api/custom/route.ts"
+import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
+
+export const GET = async (
+  req: MedusaRequest,
+  res: MedusaResponse
+) => {
+  const a = req.validatedQuery.a as number
+  const b = req.validatedQuery.b as number
+
+  res.json({
+    sum: a + b
+  })
+}
+```
+
+In the API route, you use the `validatedQuery` property of `MedusaRequest` to access the values of the `a` and `b` properties as numbers, then return in the response their sum.
+
+### Test it Out
+
+To test out the validation, send a `POST` request to `/custom` with `a` and `b` query parameters. You can try sending incorrect query parameters to see how the validation works.
 
 For example, if you omit the `a` parameter, you'll receive a `400` response code with the following response data:
 

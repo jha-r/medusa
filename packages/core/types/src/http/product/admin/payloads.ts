@@ -369,6 +369,10 @@ export interface AdminUpdateProductVariant {
   options?: Record<string, string>
 }
 
+export interface AdminBatchUpdateProductVariant extends AdminUpdateProductVariant {
+  id: string
+}
+
 export interface AdminUpdateProduct {
   /**
    * The product's title.

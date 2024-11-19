@@ -3,6 +3,7 @@
 import React, { createContext, useContext } from "react"
 import { useAnalytics } from "@/providers"
 import { AiAssistant } from "@/components"
+// @ts-expect-error can't install the types package because it doesn't support React v19
 import ReCAPTCHA from "react-google-recaptcha"
 
 export type AiAssistantFeedbackType = "upvote" | "downvote"

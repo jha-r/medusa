@@ -9,6 +9,7 @@ export const cartFieldsForRefreshSteps = [
   "currency_code",
   "metadata",
   "completed_at",
+  "sales_channel_id",
   "region.*",
   "items.*",
   "items.product.id",

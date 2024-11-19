@@ -45,6 +45,9 @@ const helperStepsOptions: FormattingOptionsType = {
       typeParameters: false,
       suffix: "- Helper Steps API Reference",
     },
+    reflectionGroups: {
+      "Type Parameters": false,
+    },
   },
 }
 

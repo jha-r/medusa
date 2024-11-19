@@ -4,9 +4,9 @@ export const metadata = {
 
 # {metadata.title}
 
-In this chapter, you'll learn how to manipulate variables in a workflow using the transform utility.
+In this chapter, you'll learn how to use the `transform` utility to manipulate variables in a workflow.
 
-## Why Variable Manipulation isn't Allowed in Workflows?
+## Why Variable Manipulation isn't Allowed in Workflows
 
 Medusa creates an internal representation of the workflow definition you pass to `createWorkflow` to track and store its steps.
 
@@ -114,3 +114,99 @@ This workflow receives an `items` array in its input.
 You use the `transform` utility to create an `ids` variable, which is an array of strings holding the `id` of each item in the `items` array.
 
 You then pass the `ids` variable as a parameter to the `doSomethingStep`.
+
+---
+
+## Example: Creating a Date
+
+If you create a date with `new Date()` in a workflow's constructor function, Medusa evaluates the date's value when it creates the internal representation of the workflow, not when the workflow is executed.
+
+So, use `transform` instead to create a date variable with `new Date()`.
+
+For example:
+
+```ts
+const myWorkflow = createWorkflow(
+  "hello-world",
+  () => {
+    const today = transform({}, () => new Date())
+
+    doSomethingStep(today)
+  }
+)
+```
+
+In this workflow, `today` is only evaluated when the workflow is executed.
+
+---
+
+## Caveats
+
+### Transform Evaluation
+
+The transform utility's value is only evaluated if you pass its output to a step or in the workflow response.
+
+For example, if you have the following workflow:
+
+```ts
+const myWorkflow = createWorkflow(
+  "hello-world", 
+  function (input) {
+    const str = transform(
+      { input },
+      (data) => `${data.input.str1}${data.input.str2}`
+    )
+
+    return new WorkflowResponse("done")
+  }
+)
+```
+
+Since `str`'s value isn't used as a step's input or passed to `WorkflowResponse`, its value is never evaluated.
+
+### Data Validation
+
+The `transform` utility should only be used to perform variable or data manipulation.
+
+If you want to perform some validation on the data, use a step or the [when-then utility](../conditions/page.mdx) instead.
+
+For example:
+
+```ts
+// DON'T
+const myWorkflow = createWorkflow(
+  "hello-world", 
+  function (input) {
+    const str = transform(
+      { input },
+      (data) => {
+        if (!input.str1) {
+          throw new Error("Not allowed!")
+        }
+      }
+    )
+  }
+)
+
+// DO
+const validateHasStr1Step = createStep(
+  "validate-has-str1",
+  ({ input }) => {
+    if (!input.str1) {
+      throw new Error("Not allowed!")
+    }
+  }
+)
+
+const myWorkflow = createWorkflow(
+  "hello-world", 
+  function (input) {
+    validateHasStr1({
+      input,
+    })
+
+    // workflow continues its execution only if 
+    // the step doesn't throw the error.
+  }
+)
+```

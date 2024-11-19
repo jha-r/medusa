@@ -148,7 +148,7 @@ module.exports = defineConfig({
     {
       resolve: "./src/modules/marketplace",
     },
-  ]
+  ],
 })
 ```
 
@@ -803,14 +803,14 @@ In this step, you’ll create a workflow that’s executed when the customer pla
 
 ```mermaid
 graph TD
-  retrieveCartStep["Retrieve Cart (useRemoteQueryStep from Medusa)"] --> completeCartWorkflow["completeCartWorkflow (Medusa)"]
+  retrieveCartStep["Retrieve Cart (useQueryGraphStep from Medusa)"] --> completeCartWorkflow["completeCartWorkflow (Medusa)"]
   completeCartWorkflow["completeCartWorkflow (Medusa)"] --> groupVendorItemsStep
   groupVendorItemsStep --> getOrderDetailWorkflow
   getOrderDetailWorkflow --> createVendorOrdersStep
   createVendorOrdersStep --> createRemoteLinkStep["Create Links (createRemoteLinkStep from Medusa)"]
 ```
 
-1. Retrieve the cart using its ID. Medusa provides a `useRemoteQueryStep` in the `@medusajs/medusa/core-flows` package that you can use.
+1. Retrieve the cart using its ID. Medusa provides a `useQueryGraphStep` in the `@medusajs/medusa/core-flows` package that you can use.
 2. Create a parent order for the cart and its items. Medusa also has a `completeCartWorkflow` in the `@medusajs/medusa/core-flows` package that you can use as a step.
 3. Group the cart items by their product’s associated vendor.
 4. Retrieve the order's details using Medusa's `getOrderDetailWorkflow` exported by the `@medusajs/medusa/core-flows` package.
@@ -1135,25 +1135,24 @@ The compensation function cancels all child orders received from the step. It us
 Finally, create the workflow at the file `src/workflows/marketplace/create-vendor-orders/index.ts`:
 
 export const createVendorOrdersWorkflowHighlights = [
-  ["21", "useRemoteQueryStep", "Retrieve the cart's details."],
-  ["29", "completeCartWorkflow", "Create the parent order from the cart."],
-  ["35", "groupVendorItemsStep", "Group the items by their vendor."],
-  ["42", "createVendorOrdersStep", "Create child orders for each vendor"],
-  ["47", "createRemoteLinkStep", "Create the links returned by the previous step."]
+  ["21", "useQueryGraphStep", "Retrieve the cart's details."],
+  ["30", "completeCartWorkflow", "Create the parent order from the cart."],
+  ["36", "groupVendorItemsStep", "Group the items by their vendor."],
+  ["59", "createVendorOrdersStep", "Create child orders for each vendor"],
+  ["64", "createRemoteLinkStep", "Create the links returned by the previous step."]
 ]
 
 ```ts title="src/workflows/marketplace/create-vendor-orders/index.ts" collapsibleLines="1-13" expandMoreLabel="Show Imports"
 import { 
   createWorkflow,
-  WorkflowResponse,
+  WorkflowResponse
 } from "@medusajs/framework/workflows-sdk"
 import { 
-  useRemoteQueryStep,
+  useQueryGraphStep,
   createRemoteLinkStep,
   completeCartWorkflow,
-  getOrderDetailWorkflow
+  getOrderDetailWorkflow,
 } from "@medusajs/medusa/core-flows"
-import { CartDTO } from "@medusajs/framework/types"
 import groupVendorItemsStep from "./steps/group-vendor-items"
 import createVendorOrdersStep from "./steps/create-vendor-orders"
 
@@ -1164,24 +1163,25 @@ type WorkflowInput = {
 const createVendorOrdersWorkflow = createWorkflow(
   "create-vendor-order",
   (input: WorkflowInput) => {
-    const cart = useRemoteQueryStep({
-      entry_point: "cart",
-      fields: ["items.*"],
-      variables: { id: input.cart_id },
-      list: false,
-      throw_if_key_not_found: true,
-    }) as CartDTO
+    const { data: carts } = useQueryGraphStep({
+      entity: "cart",
+      fields: ['items.*'],
+      filters: { id: input.cart_id },
+      options: {
+        throwIfKeyNotFound: true
+      }
+    })
 
     const { id: orderId } = completeCartWorkflow.runAsStep({
       input: {
-        id: cart.id
+        id: carts[0].id
       }
     })
 
     const { vendorsItems } = groupVendorItemsStep({
-      cart,
+      cart: carts[0].id
     })
-
+    
     const order = getOrderDetailWorkflow.runAsStep({
       input: {
         order_id: orderId,
@@ -1194,23 +1194,23 @@ const createVendorOrdersWorkflow = createWorkflow(
           "shipping_address.*",
           "billing_address.*",
           "shipping_methods.*",
-        ]
-      }
+        ],
+      },
     })
 
     const { 
       orders: vendorOrders, 
-      linkDefs,
+      linkDefs
     } = createVendorOrdersStep({
       parentOrder: order,
-      vendorsItems,
+      vendorsItems
     })
 
     createRemoteLinkStep(linkDefs)
 
     return new WorkflowResponse({
       parent_order: order,
-      vendor_orders: vendorOrders,
+      vendor_orders: vendorOrders
     })
   }
 )
@@ -1220,11 +1220,12 @@ export default createVendorOrdersWorkflow
 
 In the workflow, you run the following steps:
 
-1. `useRemoteQueryStep` to retrieve the cart's details.
+1. `useQueryGraphStep` to retrieve the cart's details.
 2. `completeCartWorkflow` to complete the cart and create a parent order.
 3. `groupVendorItemsStep` to group the order's items by their vendor.
-4. `createVendorOrdersStep` to create child orders for each vendor's items.
-5. `createRemoteLinkStep` to create the links returned by the previous step.
+4. `getOrderDetailWorkflow` to retrieve an order's details.
+5. `createVendorOrdersStep` to create child orders for each vendor's items.
+6. `createRemoteLinkStep` to create the links returned by the previous step.
 
 You return the parent and vendor orders.
 

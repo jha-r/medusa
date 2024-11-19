@@ -399,6 +399,15 @@ moduleIntegrationTestRunner<IInventoryService>({
           const updated = await service.updateReservationItems(update)
 
           expect(updated).toEqual(expect.objectContaining(update))
+
+          const update2 = {
+            id: reservationItem.id,
+            quantity: 10,
+          }
+
+          const updated2 = await service.updateReservationItems(update2)
+
+          expect(updated2).toEqual(expect.objectContaining(update2))
         })
 
         it("should adjust reserved_quantity of inventory level after updates increasing reserved quantity", async () => {
@@ -438,7 +447,7 @@ moduleIntegrationTestRunner<IInventoryService>({
         it("should throw error when increasing reserved quantity beyond availability", async () => {
           const update = {
             id: reservationItem.id,
-            quantity: 10,
+            quantity: 11,
           }
 
           const error = await service

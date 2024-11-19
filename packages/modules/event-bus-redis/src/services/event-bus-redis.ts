@@ -276,18 +276,18 @@ export default class RedisEventBusService extends AbstractEventBusModuleService 
           metadata: data.metadata,
         }
 
-        return await subscriber(event)
-          .then(async (data) => {
+        try {
+          return await subscriber(event).then((data) => {
             // For every subscriber that completes successfully, add their id to the list of completed subscribers
             completedSubscribersInCurrentAttempt.push(id)
             return data
           })
-          .catch((err) => {
-            this.logger_.warn(
-              `An error occurred while processing ${name}: ${err}`
-            )
-            return err
-          })
+        } catch (err) {
+          this.logger_?.warn(`An error occurred while processing ${name}:`)
+          this.logger_?.warn(err)
+
+          return err
+        }
       })
     )
 

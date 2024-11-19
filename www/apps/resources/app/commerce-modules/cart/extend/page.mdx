@@ -492,7 +492,7 @@ Finally, you'll create the workflow. Create the file `src/workflows/update-custo
 ```ts title="src/workflows/update-custom-from-cart/index.ts" collapsibleLines="1-9" expandButtonLabel="Show Imports"
 import { CartDTO } from "@medusajs/framework/types"
 import { createWorkflow, when, WorkflowResponse } from "@medusajs/framework/workflows-sdk"
-import { createRemoteLinkStep, dismissRemoteLinkStep, useRemoteQueryStep } from "@medusajs/medusa/core-flows"
+import { createRemoteLinkStep, dismissRemoteLinkStep, useQueryGraphStep } from "@medusajs/medusa/core-flows"
 import { createCustomStep } from "../create-custom-from-cart/steps/create-custom"
 import { Modules } from "@medusajs/framework/utils"
 import { HELLO_MODULE } from "../../modules/hello"
@@ -509,15 +509,12 @@ export type UpdateCustomFromCartStepInput = {
 export const updateCustomFromCartWorkflow = createWorkflow(
   "update-custom-from-cart",
   (input: UpdateCustomFromCartStepInput) => {
-    const cartData = useRemoteQueryStep({
-      entry_point: "cart",
+    const { data: carts } = useQueryGraphStep({
+      entity: "cart",
       fields: ["custom.*"],
-      variables: {
-        filters: {
-          id: input.cart.id,
-        },
-      },
-      list: false,
+      filters: {
+        id: input.cart.id
+      }
     })
 
     // TODO create, update, or delete Custom record
@@ -534,9 +531,9 @@ Next, replace the `TODO` with the following:
 ```ts title="src/workflows/update-custom-from-cart/index.ts"
 const created = when({
   input,
-  cartData,
+  carts,
 }, (data) => 
-  !data.cartData.custom && 
+  !data.carts[0].custom && 
   data.input.additional_data?.custom_name?.length > 0
 )
 .then(() => {
@@ -568,25 +565,25 @@ Next, replace the new `TODO` with the following:
 ```ts title="src/workflows/update-custom-from-cart/index.ts"
 const deleted = when({
   input,
-  cartData,
+  carts,
 }, (data) => 
-  data.cartData.custom && (
+  data.carts[0].custom && (
     data.input.additional_data?.custom_name === null || 
     data.input.additional_data?.custom_name.length === 0
   )
 )
 .then(() => {
   deleteCustomStep({
-    custom: cartData.custom,
+    custom: carts[0].custom,
   })
 
   dismissRemoteLinkStep({
     [HELLO_MODULE]: {
-      custom_id: cartData.custom.id,
+      custom_id: carts[0].custom.id,
     },
   })
 
-  return cartData.custom.id
+  return carts[0].custom.id
 })
 
 // TODO delete Custom record
@@ -599,11 +596,11 @@ Finally, replace the new `TODO` with the following:
 ```ts title="src/workflows/update-custom-from-cart/index.ts"
 const updated = when({
   input,
-  cartData,
-}, (data) => data.cartData.custom && data.input.additional_data?.custom_name?.length > 0)
+  carts,
+}, (data) => data.carts[0].custom && data.input.additional_data?.custom_name?.length > 0)
 .then(() => {
   const custom = updateCustomStep({
-    id: cartData.custom.id,
+    id: carts[0].custom.id,
     custom_name: input.additional_data.custom_name,
   })
 

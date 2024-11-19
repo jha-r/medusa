@@ -1,10 +1,8 @@
 "use client"
 
 import {
-  formatReportLink,
   getNavDropdownItems,
   MainNavProvider as UiMainNavProvider,
-  useIsBrowser,
 } from "docs-ui"
 import { useMemo } from "react"
 import { config } from "../config"
@@ -16,7 +14,6 @@ type MainNavProviderProps = {
 }
 
 export const MainNavProvider = ({ children }: MainNavProviderProps) => {
-  const { isBrowser } = useIsBrowser()
   const pathname = usePathname()
   const navigationDropdownItems = useMemo(
     () =>
@@ -24,15 +21,6 @@ export const MainNavProvider = ({ children }: MainNavProviderProps) => {
         basePath: config.baseUrl,
       }),
     []
-  )
-
-  const reportLink = useMemo(
-    () =>
-      formatReportLink(
-        config.titleSuffix || "",
-        isBrowser ? document.title : ""
-      ),
-    [isBrowser]
   )
 
   const editDate = useMemo(
@@ -44,11 +32,7 @@ export const MainNavProvider = ({ children }: MainNavProviderProps) => {
   )
 
   return (
-    <UiMainNavProvider
-      navItems={navigationDropdownItems}
-      reportIssueLink={reportLink}
-      editDate={editDate}
-    >
+    <UiMainNavProvider navItems={navigationDropdownItems} editDate={editDate}>
       {children}
     </UiMainNavProvider>
   )
