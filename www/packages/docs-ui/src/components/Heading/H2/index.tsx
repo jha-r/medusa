@@ -4,6 +4,7 @@ import clsx from "clsx"
 import React, { useMemo } from "react"
 import { CopyButton, Link } from "@/components"
 import { useIsBrowser } from "../../../providers"
+import { usePathname } from "next/navigation"
 
 type H2Props = React.HTMLAttributes<HTMLHeadingElement> & {
   id?: string
@@ -12,20 +13,15 @@ type H2Props = React.HTMLAttributes<HTMLHeadingElement> & {
 
 export const H2 = ({ className, children, passRef, ...props }: H2Props) => {
   const { isBrowser } = useIsBrowser()
+  const pathname = usePathname()
   const copyText = useMemo(() => {
-    const url = `#${props.id}`
+    const hash = `#${props.id}`
     if (!isBrowser) {
-      return url
+      return hash
     }
 
-    const hashIndex = window.location.href.indexOf("#")
-    return (
-      window.location.href.substring(
-        0,
-        hashIndex !== -1 ? hashIndex : window.location.href.length
-      ) + url
-    )
-  }, [props.id, isBrowser])
+    return `${window.location.origin}${pathname}${hash}`
+  }, [props.id, isBrowser, pathname])
   return (
     <h2
       className={clsx(
@@ -42,7 +38,7 @@ export const H2 = ({ className, children, passRef, ...props }: H2Props) => {
           text={copyText}
           className="opacity-0 group-hover/h2:opacity-100 transition-opacity ml-docs_0.5 inline-block"
         >
-          <Link href={`#${props.id}`} scroll={false}>
+          <Link href={`#${props.id}`} scroll={false} prefetch={false}>
             #
           </Link>
         </CopyButton>
