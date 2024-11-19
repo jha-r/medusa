@@ -1130,7 +1130,7 @@ moduleIntegrationTestRunner<Service>({
           )
         })
 
-        it(`should update the mpath of the fulle descenden tree successfully when moving the grand parent in the hierarchy`, async () => {
+        it(`should update the mpath of the full descendent tree successfully when moving the grand parent in the hierarchy`, async () => {
           for (const entry of eletronicsCategoriesData) {
             await service.create([entry])
           }
