@@ -21,18 +21,18 @@ Create the file `src/modules/my-event/service.ts` that holds the implementation 
 The Event Module's main service must extend the `AbstractEventBusModuleService` class imported from `@medusajs/framework/utils`:
 
 ```ts title="src/modules/my-event/service.ts"
-import { AbstractEventBusModuleService } from "@medusajs/framework/utils";
-import { Message } from "@medusajs/types";
+import { AbstractEventBusModuleService } from "@medusajs/framework/utils"
+import { Message } from "@medusajs/types"
 
 class MyEventService extends AbstractEventBusModuleService {
   async emit<T>(data: Message<T> | Message<T>[], options: Record<string, unknown>): Promise<void> {
-    throw new Error("Method not implemented.");
+    throw new Error("Method not implemented.")
   }
   async releaseGroupedEvents(eventGroupId: string): Promise<void> {
-    throw new Error("Method not implemented.");
+    throw new Error("Method not implemented.")
   }
   async clearGroupedEvents(eventGroupId: string): Promise<void> {
-    throw new Error("Method not implemented.");
+    throw new Error("Method not implemented.")
   }
 }
 
