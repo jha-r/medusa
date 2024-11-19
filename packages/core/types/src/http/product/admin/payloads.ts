@@ -19,12 +19,6 @@ interface AdminBatchUpdateProduct extends AdminUpdateProduct {
 export interface AdminBatchProductRequest
   extends BatchMethodRequest<AdminCreateProduct, AdminBatchUpdateProduct> {}
 
-interface AdminBatchUpdateProductVariant extends AdminUpdateProductVariant {
-  /**
-   * The ID of the variant to update.
-   */
-  id: string
-}
 export interface AdminBatchProductVariantRequest
   extends BatchMethodRequest<
     AdminCreateProductVariant,
@@ -370,6 +364,9 @@ export interface AdminUpdateProductVariant {
 }
 
 export interface AdminBatchUpdateProductVariant extends AdminUpdateProductVariant {
+  /**
+   * The ID of the variant to update.
+   */
   id: string
 }
 
