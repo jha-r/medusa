@@ -952,14 +952,13 @@ export class Store {
      * @returns The updated cart.
      *
      * @example
-     * sdk.store.cart.updateCustomer("cart_123", {})
+     * sdk.store.cart.transferCart("cart_123")
      * .then(({ cart }) => {
      *   console.log(cart)
      * })
      */
-    updateCustomer: async (
+    transferCart: async (
       id: string,
-      body: HttpTypes.StoreUpdateCartCustomer,
       query?: SelectParams,
       headers?: ClientHeaders
     ) => {
@@ -968,7 +967,6 @@ export class Store {
         {
           method: "POST",
           headers,
-          body,
           query,
         }
       )
