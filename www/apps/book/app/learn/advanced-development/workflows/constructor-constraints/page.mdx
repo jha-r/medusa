@@ -34,7 +34,7 @@ You can’t directly manipulate variables within the workflow's constructor func
 
 <Note>
 
-Learn more about why you can't manipulate variables [in this chapter](../conditions/page.mdx#why-if-conditions-arent-allowed-in-workflows)
+Learn more about why you can't manipulate variables [in this chapter](../variable-manipulation/page.mdx)
 
 </Note>
 
@@ -76,6 +76,49 @@ const myWorkflow = createWorkflow(
   )
 
   return new WorkflowResponse(result)
+})
+```
+
+### Create Dates in transform
+
+When you use `new Date()` in a workflow's constructor function, the date is evaluated when Medusa creates the internal representation of the workflow, not during execution.
+
+Instead, create the date using `transform`.
+
+<Note>
+
+Learn more about how Medusa creates an internal representation of a workflow [in this chapter](../variable-manipulation/page.mdx).
+
+</Note>
+
+For example:
+
+export const dateHighlights = [
+  ["5", "new Date()", "Don't create a date directly in the constructor function."],
+  ["16", "transform", "Use the `transform` function to create a date variable."]
+]
+
+```ts highlights={dateHighlights}
+// Don't
+const myWorkflow = createWorkflow(
+  "hello-world", 
+  function (input: WorkflowInput) {
+  const today = new Date()
+
+  return new WorkflowResponse({
+    today
+  })
+})
+
+// Do
+const myWorkflow = createWorkflow(
+  "hello-world", 
+  function (input: WorkflowInput) {
+  const today = transform({}, () => new Date())
+
+  return new WorkflowResponse({
+    today
+  })
 })
 ```
 

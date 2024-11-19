@@ -99,6 +99,41 @@ The configuration object is created using the `defineRouteConfig` function impor
 
 The above example adds a new sidebar item with the label `Custom Route` and an icon from the [Medusa UI Icons package](!ui!/icons/overview).
 
+### Nested UI Routes
+
+Consider that along the UI route above at `src/admin/routes/custom/page.tsx` you create a nested UI route at `src/admin/routes/custom/nested/page.tsx` that also exports route configurations:
+
+```tsx title="src/admin/routes/custom/nested/page.tsx"
+import { defineRouteConfig } from "@medusajs/admin-sdk"
+import { Container, Heading } from "@medusajs/ui"
+
+const NestedCustomPage = () => {
+  return (
+    <Container className="divide-y p-0">
+      <div className="flex items-center justify-between px-6 py-4">
+        <Heading level="h2">This is my nested custom route</Heading>
+      </div>
+    </Container>
+  )
+}
+
+export const config = defineRouteConfig({
+  label: "Nested Route",
+})
+
+export default NestedCustomPage
+```
+
+This UI route is shown in the sidebar as an item nested in the parent "Custom Route" item. Nested items are only shown when the parent sidebar items (in this case, "Custom Route") are clicked.
+
+#### Caveats
+
+Some caveats for nested UI routes in the sidebar:
+
+- Nested dynamic UI routes, such as one created at `src/admin/routes/custom/[id]/page.tsx` aren't added to the sidebar as it's not possible to link to a dynamic route. If the dynamic route exports route configurations, a warning is logged in the browser's console.
+- Nested routes in setting pages aren't shown in the sidebar to follow the admin's design conventions.
+- The `icon` configuration is ignored for the sidebar item of nested UI route to follow the admin's design conventions.
+
 ---
 
 ## Create Settings Page

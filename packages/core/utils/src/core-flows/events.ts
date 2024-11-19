@@ -25,6 +25,8 @@ export const OrderWorkflowEvents = {
 
   CLAIM_CREATED: "order.claim_created",
   EXCHANGE_CREATED: "order.exchange_created",
+
+  TRANSFER_REQUESTED: "order.transfer_requested",
 }
 
 export const UserWorkflowEvents = {

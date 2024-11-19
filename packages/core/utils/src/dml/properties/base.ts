@@ -1,5 +1,6 @@
 import { PropertyMetadata, PropertyType } from "@medusajs/types"
 import { NullableModifier } from "./nullable"
+import { OptionalModifier } from "./optional"
 
 /**
  * The BaseProperty class offers shared affordances to define
@@ -15,7 +16,7 @@ export abstract class BaseProperty<T> implements PropertyType<T> {
   /**
    * Default value for the property
    */
-  #defaultValue?: T
+  #defaultValue?: T | ((schema: any) => T)
 
   /**
    * The runtime dataType for the schema. It is not the same as
@@ -46,6 +47,25 @@ export abstract class BaseProperty<T> implements PropertyType<T> {
    */
   nullable() {
     return new NullableModifier<T, this>(this)
+  }
+
+  /**
+   * This method indicates that a property's value can be `optional`.
+   *
+   * @example
+   * import { model } from "@medusajs/framework/utils"
+   *
+   * const MyCustom = model.define("my_custom", {
+   *   price: model.bigNumber().optional(),
+   *   // ...
+   * })
+   *
+   * export default MyCustom
+   *
+   * @customNamespace Property Configuration Methods
+   */
+  optional() {
+    return new OptionalModifier<T, this>(this)
   }
 
   /**
@@ -119,7 +139,7 @@ export abstract class BaseProperty<T> implements PropertyType<T> {
    *
    * @customNamespace Property Configuration Methods
    */
-  default(value: T) {
+  default(value: T | ((schema: any) => T)) {
     this.#defaultValue = value
     return this
   }
@@ -132,6 +152,7 @@ export abstract class BaseProperty<T> implements PropertyType<T> {
       fieldName,
       dataType: this.dataType,
       nullable: false,
+      optional: false,
       defaultValue: this.#defaultValue,
       indexes: this.#indexes,
       relationships: this.#relationships,

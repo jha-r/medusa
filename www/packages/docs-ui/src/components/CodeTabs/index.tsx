@@ -53,6 +53,36 @@ export const CodeTabs = ({
     return "source" in typedProps
   }
 
+  const getCodeBlockProps = (
+    codeBlock: React.ReactElement<
+      unknown,
+      string | React.JSXElementConstructor<any>
+    >
+  ): CodeBlockProps | undefined => {
+    if (typeof codeBlock.props !== "object" || !codeBlock.props) {
+      return undefined
+    }
+
+    if ("source" in codeBlock.props) {
+      return codeBlock.props as CodeBlockProps
+    }
+
+    if (
+      "children" in codeBlock.props &&
+      typeof codeBlock.props.children === "object" &&
+      codeBlock.props.children
+    ) {
+      return getCodeBlockProps(
+        codeBlock.props.children as React.ReactElement<
+          unknown,
+          string | React.JSXElementConstructor<any>
+        >
+      )
+    }
+
+    return undefined
+  }
+
   const tabs: CodeTab[] = useMemo(() => {
     const tempTabs: CodeTab[] = []
     Children.forEach(children, (child) => {
@@ -79,10 +109,19 @@ export const CodeTabs = ({
 
       const codeBlockProps = codeBlock.props as CodeBlockProps
 
+      const modifiedProps: CodeBlockProps = {
+        ...(getCodeBlockProps(codeBlock) || {
+          source: "",
+        }),
+        badgeLabel: undefined,
+        hasTabs: true,
+        className: clsx("!my-0", codeBlockProps.className),
+      }
+
       tempTabs.push({
         label: typedChildProps.label,
         value: typedChildProps.value,
-        codeProps: codeBlockProps,
+        codeProps: modifiedProps,
         codeBlock: {
           ...codeBlock,
           props: {
@@ -91,14 +130,7 @@ export const CodeTabs = ({
               ...(typeof codeBlockProps.children === "object"
                 ? codeBlockProps.children
                 : {}),
-              props: {
-                ...(React.isValidElement(codeBlockProps.children)
-                  ? (codeBlockProps.children.props as Record<string, unknown>)
-                  : {}),
-                badgeLabel: undefined,
-                hasTabs: true,
-                className: clsx("!my-0", codeBlockProps.className),
-              },
+              props: modifiedProps,
             },
           },
         },

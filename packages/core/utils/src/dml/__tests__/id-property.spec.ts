@@ -13,6 +13,7 @@ describe("Id property", () => {
         options: {},
       },
       nullable: false,
+      optional: false,
       indexes: [],
       relationships: [],
     })
@@ -29,6 +30,7 @@ describe("Id property", () => {
         options: {},
       },
       nullable: false,
+      optional: false,
       indexes: [],
       relationships: [],
       primaryKey: true,

@@ -27,6 +27,13 @@ export function applyChangesToOrder(
   const summariesToUpsert: any[] = []
   const orderToUpdate: any[] = []
 
+  const orderEditableAttributes = [
+    "customer_id",
+    "sales_channel_id",
+    "email",
+    "no_notification",
+  ]
+
   const calculatedOrders = {}
   for (const order of orders) {
     const calculated = calculateOrderChange({
@@ -41,6 +48,17 @@ export function applyChangesToOrder(
     calculatedOrders[order.id] = calculated
 
     const version = actionsMap[order.id]?.[0]?.version ?? order.version
+    const orderAttributes: {
+      version?: number
+      customer_id?: string
+    } = {}
+
+    // Editable attributes that have changed
+    for (const attr of orderEditableAttributes) {
+      if (order[attr] !== calculated.order[attr]) {
+        orderAttributes[attr] = calculated.order[attr]
+      }
+    }
 
     for (const item of calculated.order.items) {
       if (MathBN.lte(item.quantity, 0)) {
@@ -113,12 +131,16 @@ export function applyChangesToOrder(
         }
       }
 
+      orderAttributes.version = version
+    }
+
+    if (Object.keys(orderAttributes).length > 0) {
       orderToUpdate.push({
         selector: {
           id: order.id,
         },
         data: {
-          version,
+          ...orderAttributes,
         },
       })
     }
