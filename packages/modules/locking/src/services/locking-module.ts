@@ -2,6 +2,7 @@ import {
   Context,
   ILockingModule,
   InternalModuleDeclaration,
+  Logger,
 } from "@medusajs/types"
 import { EntityManager } from "@mikro-orm/core"
 import { LockingDefaultProvider } from "@types"
@@ -10,6 +11,7 @@ import LockingProviderService from "./locking-provider"
 type InjectedDependencies = {
   manager: EntityManager
   lockingProviderService: LockingProviderService
+  logger?: Logger
   [LockingDefaultProvider]: string
 }
 

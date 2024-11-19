@@ -175,7 +175,7 @@ For example, create the file `src/admin/routes/custom/[id]/page.tsx` with the fo
 
 ```tsx title="src/admin/routes/custom/[id]/page.tsx" highlights={[["5", "", "Retrieve the path parameter."], ["10", "{id}", "Show the path parameter."]]}
 import { useParams } from "react-router-dom"
-import { Container } from "@medusajs/ui"
+import { Container, Heading } from "@medusajs/ui"
 
 const CustomPage = () => {
   const { id } = useParams()
