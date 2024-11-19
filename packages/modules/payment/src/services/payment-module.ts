@@ -13,6 +13,7 @@ import {
   FindConfig,
   InternalModuleDeclaration,
   IPaymentModuleService,
+  Logger,
   ModuleJoinerConfig,
   ModulesSdkTypes,
   PaymentCollectionDTO,
@@ -54,6 +55,7 @@ import { joinerConfig } from "../joiner-config"
 import PaymentProviderService from "./payment-provider"
 
 type InjectedDependencies = {
+  logger?: Logger
   baseRepository: DAL.RepositoryService
   paymentService: ModulesSdkTypes.IMedusaInternalService<any>
   captureService: ModulesSdkTypes.IMedusaInternalService<any>

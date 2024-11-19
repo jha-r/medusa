@@ -1,24 +1,26 @@
 import { PropertyType } from "@medusajs/types"
-import { OptionalModifier } from "./optional"
+import { NullableModifier } from "./nullable"
 
-const IsNullableModifier = Symbol.for("isNullableModifier")
+const IsOptionalModifier = Symbol.for("IsOptionalModifier")
+
 /**
- * Nullable modifier marks a schema node as nullable
+ * Nullable modifier marks a schema node as optional and
+ * allows for default values
  */
-export class NullableModifier<T, Schema extends PropertyType<NoInfer<T>>>
-  implements PropertyType<T | null>
+export class OptionalModifier<T, Schema extends PropertyType<T>>
+  implements PropertyType<T | undefined>
 {
-  [IsNullableModifier]: true = true
+  [IsOptionalModifier]: true = true
 
-  static isNullableModifier(obj: any): obj is NullableModifier<any, any> {
-    return !!obj?.[IsNullableModifier]
+  static isOptionalModifier(obj: any): obj is OptionalModifier<any, any> {
+    return !!obj?.[IsOptionalModifier]
   }
 
   /**
    * A type-only property to infer the JavScript data-type
    * of the schema property
    */
-  declare $dataType: T | null
+  declare $dataType: T | undefined
 
   /**
    * The parent schema on which the nullable modifier is
@@ -31,13 +33,13 @@ export class NullableModifier<T, Schema extends PropertyType<NoInfer<T>>>
   }
 
   /**
-   * This method indicates that a property's value can be `optional`.
+   * This method indicates that a property's value can be `null`.
    *
    * @example
    * import { model } from "@medusajs/framework/utils"
    *
    * const MyCustom = model.define("my_custom", {
-   *   price: model.bigNumber().optional(),
+   *   price: model.bigNumber().optional().nullable(),
    *   // ...
    * })
    *
@@ -45,8 +47,8 @@ export class NullableModifier<T, Schema extends PropertyType<NoInfer<T>>>
    *
    * @customNamespace Property Configuration Methods
    */
-  optional() {
-    return new OptionalModifier<T | null, this>(this)
+  nullable() {
+    return new NullableModifier<T | undefined, this>(this)
   }
 
   /**
@@ -54,7 +56,7 @@ export class NullableModifier<T, Schema extends PropertyType<NoInfer<T>>>
    */
   parse(fieldName: string) {
     const schema = this.#schema.parse(fieldName)
-    schema.nullable = true
+    schema.optional = true
     return schema
   }
 }
