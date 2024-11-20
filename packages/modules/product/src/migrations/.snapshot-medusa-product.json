@@ -279,93 +279,6 @@
           "nullable": false,
           "mappedType": "text"
         },
-        "url": {
-          "name": "url",
-          "type": "text",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "mappedType": "text"
-        },
-        "metadata": {
-          "name": "metadata",
-          "type": "jsonb",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": true,
-          "mappedType": "json"
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamptz",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "length": 6,
-          "default": "now()",
-          "mappedType": "datetime"
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamptz",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "length": 6,
-          "default": "now()",
-          "mappedType": "datetime"
-        },
-        "deleted_at": {
-          "name": "deleted_at",
-          "type": "timestamptz",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": true,
-          "length": 6,
-          "mappedType": "datetime"
-        }
-      },
-      "name": "image",
-      "schema": "public",
-      "indexes": [
-        {
-          "columnNames": [
-            "deleted_at"
-          ],
-          "composite": false,
-          "keyName": "IDX_product_image_deleted_at",
-          "primary": false,
-          "unique": false
-        },
-        {
-          "keyName": "image_pkey",
-          "columnNames": [
-            "id"
-          ],
-          "composite": false,
-          "primary": true,
-          "unique": true
-        }
-      ],
-      "checks": [],
-      "foreignKeys": {}
-    },
-    {
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "text",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "mappedType": "text"
-        },
         "value": {
           "name": "value",
           "type": "text",
@@ -1044,8 +957,8 @@
           "nullable": false,
           "mappedType": "text"
         },
-        "product_id": {
-          "name": "product_id",
+        "url": {
+          "name": "url",
           "type": "text",
           "unsigned": false,
           "autoincrement": false,
@@ -1053,14 +966,46 @@
           "nullable": false,
           "mappedType": "text"
         },
-        "image_id": {
-          "name": "image_id",
-          "type": "text",
+        "metadata": {
+          "name": "metadata",
+          "type": "jsonb",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "mappedType": "json"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamptz",
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
           "nullable": false,
-          "mappedType": "text"
+          "length": 6,
+          "default": "now()",
+          "mappedType": "datetime"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamptz",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 6,
+          "default": "now()",
+          "mappedType": "datetime"
+        },
+        "deleted_at": {
+          "name": "deleted_at",
+          "type": "timestamptz",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "length": 6,
+          "mappedType": "datetime"
         },
         "rank": {
           "name": "rank",
@@ -1071,13 +1016,31 @@
           "nullable": false,
           "default": "0",
           "mappedType": "integer"
+        },
+        "product_id": {
+          "name": "product_id",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "mappedType": "text"
         }
       },
-      "name": "product_images",
+      "name": "image",
       "schema": "public",
       "indexes": [
         {
-          "keyName": "product_images_pkey",
+          "columnNames": [
+            "deleted_at"
+          ],
+          "composite": false,
+          "keyName": "IDX_product_image_deleted_at",
+          "primary": false,
+          "unique": false
+        },
+        {
+          "keyName": "image_pkey",
           "columnNames": [
             "id"
           ],
@@ -1088,28 +1051,17 @@
       ],
       "checks": [],
       "foreignKeys": {
-        "product_images_product_id_foreign": {
-          "constraintName": "product_images_product_id_foreign",
+        "image_product_id_foreign": {
+          "constraintName": "image_product_id_foreign",
           "columnNames": [
             "product_id"
           ],
-          "localTableName": "public.product_images",
+          "localTableName": "public.image",
           "referencedColumnNames": [
             "id"
           ],
           "referencedTableName": "public.product",
-          "updateRule": "cascade"
-        },
-        "product_images_image_id_foreign": {
-          "constraintName": "product_images_image_id_foreign",
-          "columnNames": [
-            "image_id"
-          ],
-          "localTableName": "public.product_images",
-          "referencedColumnNames": [
-            "id"
-          ],
-          "referencedTableName": "public.image",
+          "deleteRule": "cascade",
           "updateRule": "cascade"
         }
       }

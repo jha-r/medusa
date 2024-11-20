@@ -1,13 +1,13 @@
 import {
   BeforeCreate,
-  Collection,
   Entity,
   Filter,
   Index,
-  ManyToMany,
+  ManyToOne,
   OnInit,
   PrimaryKey,
   Property,
+  Rel,
 } from "@mikro-orm/core"
 
 import {
@@ -16,7 +16,6 @@ import {
   generateEntityId,
 } from "@medusajs/framework/utils"
 import Product from "./product"
-import ProductImageProduct from "./product-image-product"
 
 const imageUrlIndexName = "IDX_product_image_url"
 const imageUrlIndexStatement = createPsqlIndexStatementHelper({
@@ -59,21 +58,34 @@ class ProductImage {
   @Property({ columnType: "timestamptz", nullable: true })
   deleted_at?: Date
 
-  @ManyToMany({
-    entity: () => Product,
-    pivotEntity: () => ProductImageProduct,
-    mappedBy: (product) => product.images,
+  @Property({ columnType: "integer", default: 0 })
+  rank: number
+
+  @ManyToOne(() => Product, {
+    columnType: "text",
+    nullable: true,
+    onDelete: "cascade",
+    fieldName: "product_id",
+    mapToPk: true,
   })
-  products = new Collection<Product>(this)
+  product_id: string | null
+
+  @ManyToOne(() => Product, {
+    persist: false,
+    nullable: true,
+  })
+  product: Rel<Product> | null
 
   @OnInit()
   onInit() {
     this.id = generateEntityId(this.id, "img")
+    this.product_id ??= this.product?.id ?? null
   }
 
   @BeforeCreate()
   onCreate() {
     this.id = generateEntityId(this.id, "img")
+    this.product_id ??= this.product?.id ?? null
   }
 }
 

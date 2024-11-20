@@ -1,5 +1,6 @@
 import {
   BeforeCreate,
+  Cascade,
   Collection,
   Entity,
   Enum,
@@ -24,7 +25,6 @@ import {
 import ProductCategory from "./product-category"
 import ProductCollection from "./product-collection"
 import ProductImage from "./product-image"
-import ProductImageProduct from "./product-image-product"
 import ProductOption from "./product-option"
 import ProductTag from "./product-tag"
 import ProductType from "./product-type"
@@ -167,11 +167,8 @@ class Product {
   })
   tags = new Collection<ProductTag>(this)
 
-  @ManyToMany({
-    owner: true,
-    entity: () => ProductImage,
-    pivotEntity: () => ProductImageProduct,
-    mappedBy: (image) => image.products,
+  @OneToMany(() => ProductImage, (image) => image.product_id, {
+    cascade: [Cascade.PERSIST, Cascade.REMOVE],
   })
   images = new Collection<ProductImage>(this)
 

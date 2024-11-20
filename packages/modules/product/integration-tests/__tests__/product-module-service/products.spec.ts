@@ -1238,25 +1238,88 @@ moduleIntegrationTestRunner<IProductModuleService>({
       })
 
       describe("images", function () {
-        it("should upsert images and pivot records", async () => {
-          const images = [{ url: "image-1" }, { url: "image-2" }, { url: "image-3" }]
+        it("should create images with correct rank", async () => {
+          const images = [
+            { url: "image-1" },
+            { url: "image-2" },
+            { url: "image-3" },
+          ]
 
           const [product] = await service.createProducts([
-            buildProductAndRelationsData({ images })
+            buildProductAndRelationsData({ images }),
           ])
 
           expect(product.images).toHaveLength(3)
           expect(product.images).toEqual([
             expect.objectContaining({
               url: "image-1",
+              rank: 0,
             }),
             expect.objectContaining({
               url: "image-2",
+              rank: 1,
             }),
             expect.objectContaining({
               url: "image-3",
+              rank: 2,
             }),
           ])
+        })
+
+        it("should update images with correct rank", async () => {
+          const images = [
+            { url: "image-1" },
+            { url: "image-2" },
+            { url: "image-3" },
+          ]
+
+          const [product] = await service.createProducts([
+            buildProductAndRelationsData({ images }),
+          ])
+
+          const reversedImages = [...product.images].reverse()
+
+          const updatedProduct = await service.updateProducts(product.id, {
+            images: reversedImages,
+          })
+
+          expect(updatedProduct.images).toEqual([
+            expect.objectContaining({
+              url: "image-3",
+              rank: 0,
+            }),
+            expect.objectContaining({
+              url: "image-2",
+              rank: 1,
+            }),
+            expect.objectContaining({
+              url: "image-1",
+              rank: 2,
+            }),
+          ])
+        })
+
+        it("should retrieve images with correct rank", async () => {
+          const images = Array.from({ length: 1000 }, (_, i) => ({
+            url: `image-${i + 1}`,
+          }))
+
+          const [product] = await service.createProducts([
+            buildProductAndRelationsData({ images }),
+          ])
+
+          const retrievedProduct = await service.retrieveProduct(product.id, {
+            relations: ["images"],
+          })
+
+          expect(retrievedProduct.images).toEqual(
+            Array.from({ length: 1000 }, (_, i) =>
+              expect.objectContaining({
+                url: `image-${i + 1}`,
+                rank: i,
+              })
+            )
+          )
         })
       })
     })
