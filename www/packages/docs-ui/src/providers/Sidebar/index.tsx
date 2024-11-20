@@ -40,7 +40,8 @@ export type SidebarContextType = {
   setActivePath: (path: string | null) => void
   isLinkActive: (item: SidebarItem, checkChildren?: boolean) => boolean
   isChildrenActive: (item: SidebarItemCategory) => boolean
-  addItems: (item: SidebarItem[], options?: ActionOptionsType) => void
+  addItems: (items: SidebarItem[], options?: ActionOptionsType) => void
+  removeItems: (items: SidebarItem[]) => void
   findItemInSection: (
     section: SidebarItem[],
     item: Partial<SidebarItem>,
@@ -52,7 +53,7 @@ export type SidebarContextType = {
   setDesktopSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>
   staticSidebarItems?: boolean
   shouldHandleHashChange: boolean
-  sidebarRef: React.RefObject<HTMLDivElement>
+  sidebarRef: React.RefObject<HTMLDivElement | null>
   goBack: () => void
   sidebarTopHeight: number
   setSidebarTopHeight: React.Dispatch<React.SetStateAction<number>>
@@ -61,6 +62,7 @@ export type SidebarContextType = {
   updatePersistedCategoryState: (title: string, opened: boolean) => void
   getPersistedCategoryState: (title: string) => boolean | undefined
   persistState: boolean
+  isSidebarShown: boolean
 } & SidebarStyleOptions
 
 export const SidebarContext = createContext<SidebarContextType | null>(null)
@@ -85,6 +87,10 @@ export type ActionType =
   | {
       type: "replace"
       replacementItems: SidebarSectionItems
+    }
+  | {
+      type: "remove"
+      items: SidebarItem[]
     }
 
 type LinksMap = Map<string, SidebarItemLinkWithParent>
@@ -151,9 +157,45 @@ const getLinksMap = (
   return map
 }
 
-export const reducer = (state: SidebarSectionItems, actionData: ActionType) => {
+export const reducer = (
+  state: SidebarSectionItems,
+  actionData: ActionType
+): SidebarSectionItems => {
   if (actionData.type === "replace") {
     return actionData.replacementItems
+  }
+  if (actionData.type === "remove") {
+    return {
+      ...state,
+      default: state.default.filter((item) => {
+        if (item.type === "separator") {
+          return true
+        }
+
+        const found = actionData.items.some((itemToRemove) => {
+          if (
+            itemToRemove.type === "separator" ||
+            itemToRemove.type !== item.type
+          ) {
+            return false
+          }
+
+          if (
+            itemToRemove.type === "category" ||
+            itemToRemove.type === "sub-category"
+          ) {
+            return itemToRemove.title === item.title
+          }
+
+          return (
+            itemToRemove.path === (item as SidebarItemLink).path &&
+            itemToRemove.title === (item as SidebarItemLink).title
+          )
+        })
+
+        return !found
+      }),
+    }
   }
   const { type, options } = actionData
   let { items } = actionData
@@ -205,8 +247,8 @@ export const reducer = (state: SidebarSectionItems, actionData: ActionType) => {
               loaded: parent.changeLoaded
                 ? true
                 : i.type === "link"
-                ? i.loaded
-                : true,
+                  ? i.loaded
+                  : true,
             }
           }
           return i
@@ -280,6 +322,13 @@ export const SidebarProvider = ({
   const getResolvedScrollableElement = useCallback(() => {
     return scrollableElement || window
   }, [scrollableElement])
+  const isSidebarShown = useMemo(() => {
+    if (!isBrowser) {
+      return true
+    }
+
+    return document.getElementsByTagName("aside").length > 0
+  }, [isBrowser])
 
   const isItemLoaded = useCallback(
     (path: string) => {
@@ -295,6 +344,13 @@ export const SidebarProvider = ({
       type: options?.parent ? "update" : "add",
       items: newItems,
       options,
+    })
+  }
+
+  const removeItems = (itemsToRemove: SidebarItem[]) => {
+    dispatch({
+      type: "remove",
+      items: itemsToRemove,
     })
   }
 
@@ -508,6 +564,7 @@ export const SidebarProvider = ({
   useEffect(() => {
     if (resetOnCondition?.()) {
       resetItems()
+      setActivePath(null)
     }
   }, [resetOnCondition, resetItems])
 
@@ -567,6 +624,7 @@ export const SidebarProvider = ({
         items,
         currentItems,
         addItems,
+        removeItems,
         activePath,
         setActivePath,
         isLinkActive: isLinkActive,
@@ -589,6 +647,7 @@ export const SidebarProvider = ({
         updatePersistedCategoryState,
         getPersistedCategoryState,
         persistState,
+        isSidebarShown,
       }}
     >
       {children}

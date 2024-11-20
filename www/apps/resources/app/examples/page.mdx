@@ -454,7 +454,7 @@ export default defineMiddlewares({
         authenticate(
           "user", 
           ["session", "bearer", "api-key"]
-        )
+        ),
       ],
     },
   ],
@@ -480,7 +480,7 @@ export default defineMiddlewares({
     {
       matcher: "/custom/customer*",
       middlewares: [
-        authenticate("customer", ["session", "bearer"])
+        authenticate("customer", ["session", "bearer"]),
       ],
     },
   ],
@@ -676,8 +676,8 @@ export default defineMiddlewares({
       matcher: "/webhooks/*",
       bodyParser: { preserveRawBody: true },
       method: ["POST"],
-    }
-  ]
+    },
+  ],
 })
 ```
 
@@ -762,8 +762,8 @@ module.exports = defineConfig({
   modules: [
     {
       resolve: "./modules/hello",
-    }
-  ]
+    },
+  ],
 })
 ```
 
@@ -790,11 +790,11 @@ export async function GET(
   )
 
   const my_custom = await helloModuleService.createMyCustoms({
-    name: "test"
+    name: "test",
   })
 
   res.json({
-    my_custom
+    my_custom,
   })
 }
 ```
@@ -863,7 +863,7 @@ module.exports = defineConfig({
         apiKey: true,
       },
     },
-  ]
+  ],
 })
 ```
 
@@ -2043,7 +2043,7 @@ export const GET = async (
     my_customs: myCustoms,
     count,
     take,
-    skip
+    skip,
   })
 }
 ```
@@ -2388,7 +2388,7 @@ export const myWorkflow = createWorkflow(
 )
 ```
 
-Learn more in [this documentation](https://docs.medusajs.com/v2/advanced-development/workflows/add-workflow-hook).
+Learn more in [this documentation](!book!/learn/advanced-development/workflows/add-workflow-hook).
 
 ### Retry Steps
 
@@ -2915,7 +2915,7 @@ import {
   LoaderOptions,
 } from "@medusajs/framework/types"
 import { 
-  ContainerRegistrationKeys
+  ContainerRegistrationKeys,
 } from "@medusajs/framework/utils"
 
 export default async function helloWorldLoader({
@@ -2972,7 +2972,7 @@ export default async function helloWorldLoader({
   container.registerAdd(
     "custom_data",
     asValue({
-      test: true
+      test: true,
     })
   )
 }
@@ -3230,7 +3230,7 @@ Learn more in [this documentation](!docs!/advanced-development/admin/tips#routin
 
 ## Integration Tests
 
-Medusa provides a `medusa-test-utils` package with utility tools to create integration tests for your custom API routes, modules, or other Medusa customizations.
+Medusa provides a `@medusajs/test-utils` package with utility tools to create integration tests for your custom API routes, modules, or other Medusa customizations.
 
 <Note>
 
@@ -3243,7 +3243,7 @@ For details on setting up your project for integration tests, refer to [this doc
 To create a test for a custom API route, create the file `integration-tests/http/custom-routes.spec.ts` with the following content:
 
 ```ts title="integration-tests/http/custom-routes.spec.ts"
-import { medusaIntegrationTestRunner } from "medusa-test-utils"
+import { medusaIntegrationTestRunner } from "@medusajs/test-utils"
 
 medusaIntegrationTestRunner({
   testSuite: ({ api, getContainer }) => {
@@ -3277,7 +3277,7 @@ Learn more in [this documentation](!docs!/debugging-and-testing/testing-tools/in
 To create a test for a workflow, create the file `integration-tests/http/workflow.spec.ts` with the following content:
 
 ```ts title="integration-tests/http/workflow.spec.ts"
-import { medusaIntegrationTestRunner } from "medusa-test-utils"
+import { medusaIntegrationTestRunner } from "@medusajs/test-utils"
 import { helloWorldWorkflow } from "../../src/workflows/hello-world"
 
 medusaIntegrationTestRunner({
@@ -3309,7 +3309,7 @@ To create a test for a module's service, create the test under the `__tests__` d
 For example, create the file `src/modules/hello/__tests__/service.spec.ts` with the following content:
 
 ```ts title="src/modules/hello/__tests__/service.spec.ts"
-import { moduleIntegrationTestRunner } from "medusa-test-utils"
+import { moduleIntegrationTestRunner } from "@medusajs/test-utils"
 import { HELLO_MODULE } from ".."
 import HelloModuleService from "../service"
 import MyCustom from "../models/my-custom"
@@ -3690,7 +3690,7 @@ To accept payment using the Payment Module's main service:
 ```ts
 import { 
   ContainerRegistrationKeys,
-  Modules
+  Modules,
 } from "@medusajs/framework/utils"
 
 // ...
@@ -3710,11 +3710,11 @@ const remoteLink = container.resolve(
 // create a link between the cart and payment collection
 remoteLink.create({
   [Modules.CART]: {
-    cart_id: "cart_123"
+    cart_id: "cart_123",
   },
   [Modules.PAYMENT]: {
-    payment_collection_id: paymentCollection.id
-  }
+    payment_collection_id: paymentCollection.id,
+  },
 })
 ```
 
@@ -3814,7 +3814,7 @@ import {
 } from "@medusajs/framework/types"
 import { 
   QueryContext,
-  calculateAmountsWithTax
+  calculateAmountsWithTax,
 } from "@medusajs/framework/utils"
 // other imports...
 

@@ -241,38 +241,152 @@ export interface NumericalComparisonOperator {
 }
 
 /**
+ * The keywords that does not have a plural form
+ */
+type UncountableRules =
+  | "adulthood"
+  | "advice"
+  | "agenda"
+  | "aid"
+  | "aircraft"
+  | "alcohol"
+  | "ammo"
+  | "analytics"
+  | "anime"
+  | "athletics"
+  | "audio"
+  | "bison"
+  | "blood"
+  | "bream"
+  | "buffalo"
+  | "butter"
+  | "carp"
+  | "cash"
+  | "chassis"
+  | "chess"
+  | "clothing"
+  | "cod"
+  | "commerce"
+  | "cooperation"
+  | "corps"
+  | "debris"
+  | "diabetes"
+  | "digestion"
+  | "elk"
+  | "energy"
+  | "equipment"
+  | "excretion"
+  | "expertise"
+  | "firmware"
+  | "flounder"
+  | "fun"
+  | "gallows"
+  | "garbage"
+  | "graffiti"
+  | "hardware"
+  | "headquarters"
+  | "health"
+  | "herpes"
+  | "highjinks"
+  | "homework"
+  | "housework"
+  | "information"
+  | "jeans"
+  | "justice"
+  | "kudos"
+  | "labour"
+  | "literature"
+  | "machinery"
+  | "mackerel"
+  | "mail"
+  | "media"
+  | "mews"
+  | "moose"
+  | "music"
+  | "mud"
+  | "manga"
+  | "news"
+  | "only"
+  | "personnel"
+  | "pike"
+  | "plankton"
+  | "pliers"
+  | "police"
+  | "pollution"
+  | "premises"
+  | "rain"
+  | "research"
+  | "rice"
+  | "salmon"
+  | "scissors"
+  | "series"
+  | "sewage"
+  | "shambles"
+  | "shrimp"
+  | "software"
+  | "staff"
+  | "swine"
+  | "tennis"
+  | "traffic"
+  | "transportation"
+  | "trout"
+  | "tuna"
+  | "wealth"
+  | "welfare"
+  | "whiting"
+  | "wildebeest"
+  | "wildlife"
+  | "you"
+  | "deer"
+  | "sheep"
+
+type PluralizationSpecialRules = {
+  person: "people"
+  child: "children"
+  man: "men"
+  criterion: "criteria"
+  tooth: "teeth"
+  foot: "feet"
+}
+
+/**
  * @ignore
  */
-export type Pluralize<Singular extends string> = Singular extends `${infer R}ss`
-  ? `${Singular}es`
-  : Singular extends `${infer R}sis`
-  ? `${R}ses`
-  : Singular extends `${infer R}is`
-  ? `${R}ises`
-  : Singular extends `${infer R}s`
-  ? `${Singular}`
-  : Singular extends `${infer R}ey`
-  ? `${R}eys`
-  : Singular extends `${infer R}y`
-  ? `${R}ies`
-  : Singular extends `${infer R}es`
-  ? `${Singular}`
-  : Singular extends
-      | `${infer R}sh`
-      | `${infer R}ch`
-      | `${infer R}x`
-      | `${infer R}z`
-      | `${infer R}o`
-  ? `${Singular}es`
-  : Singular extends `${infer R}fe`
-  ? `${R}ves`
-  : Singular extends `${infer R}ex` | `${infer R}ix`
-  ? `${R}ices`
-  : Singular extends `${infer R}eau`
-  ? `${R}eaux`
-  : Singular extends `${infer R}ieu`
-  ? `${R}ieux`
-  : `${Singular}s`
+export type Pluralize<Singular extends string> =
+  Lowercase<Singular> extends keyof PluralizationSpecialRules
+    ? PluralizationSpecialRules[Lowercase<Singular>]
+    : Lowercase<Singular> extends UncountableRules
+    ? Singular
+    : Singular extends `${infer R}ss`
+    ? `${Singular}es`
+    : Singular extends `${infer R}sis`
+    ? `${R}ses`
+    : Singular extends `${infer R}is`
+    ? `${R}ises`
+    : Singular extends `${infer R}s`
+    ? `${Singular}`
+    : Singular extends `${infer R}ey`
+    ? `${R}eys`
+    : Singular extends `${infer R}y`
+    ? `${R}ies`
+    : Singular extends `${infer R}es`
+    ? `${Singular}`
+    : Singular extends
+        | `${infer R}sh`
+        | `${infer R}ch`
+        | `${infer R}x`
+        | `${infer R}z`
+        | `${infer R}o`
+    ? `${Singular}es`
+    : Singular extends `${infer R}fe`
+    ? `${R}ves`
+    : Singular extends `${infer R}ex` | `${infer R}ix`
+    ? `${R}ices`
+    : Singular extends `${infer R}eau`
+    ? `${R}eaux`
+    : Singular extends `${infer R}ieu`
+    ? `${R}ieux`
+    : `${Singular}s`
 
 export type SnakeCase<S extends string> =
   S extends `${infer T}${infer U}${infer V}`
@@ -300,14 +414,22 @@ export type RawRounding = {
  */
 export type QueryConfig<TEntity> = {
   /**
-   * Default fields and relations to return
+   * Default fields and relations to return.
+   * use `*` or `.*` to select all fields from a relations (e.g '*products' or 'products.*' will select all products properties)
    */
   defaults?: (keyof TEntity | string)[]
   /**
-   * Fields and relations that are allowed to be requested
+   * Fields and relations that are allowed to be requested.
+   * Symbol such as `*`, `+` and `-` should be removed as they dont make sense for
+   * the authorization search.
    */
   allowed?: string[]
   defaultLimit?: number
+  /**
+   * If the route that will use that configuration is supposed to return a list of entities. This
+   * will change the configuration that will be created on req.listConfig and req.remoteQueryConfig (among
+   * other things it will include pagination and sorting)
+   */
   isList?: boolean
 }
 

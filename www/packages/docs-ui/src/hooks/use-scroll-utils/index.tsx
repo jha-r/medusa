@@ -39,7 +39,7 @@ export function useEvent<T extends EventFunc>(callback: T): T {
  * Gets `value` from the last render.
  */
 export function usePrevious<T>(value: T): T | undefined {
-  const ref = useRef<T>()
+  const ref = useRef<T>(undefined)
 
   useLayoutEffect(() => {
     ref.current = value
@@ -96,10 +96,10 @@ function useScrollControllerContextValue({
       parentTop !== undefined
         ? parentTop
         : isElmWindow(scrollableElement)
-        ? 0
-        : scrollableElement instanceof HTMLElement
-        ? scrollableElement.offsetTop
-        : 0
+          ? 0
+          : scrollableElement instanceof HTMLElement
+            ? scrollableElement.offsetTop
+            : 0
 
     scrollableElement?.scrollTo({
       // 56 is the height of the navbar
@@ -137,7 +137,7 @@ export function ScrollControllerProvider({
   children: ReactNode
   scrollableSelector?: string
   restoreScrollOnReload?: boolean
-}): JSX.Element {
+}) {
   const value = useScrollControllerContextValue({
     scrollableSelector,
   })

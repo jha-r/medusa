@@ -7,6 +7,7 @@ export const CartSalesChannel: ModuleJoinerConfig = {
   extends: [
     {
       serviceName: Modules.CART,
+      entity: "Cart",
       relationship: {
         serviceName: Modules.SALES_CHANNEL,
         entity: "SalesChannel",
@@ -20,6 +21,7 @@ export const CartSalesChannel: ModuleJoinerConfig = {
     },
     {
       serviceName: Modules.SALES_CHANNEL,
+      entity: "SalesChannel",
       relationship: {
         serviceName: Modules.CART,
         entity: "Cart",

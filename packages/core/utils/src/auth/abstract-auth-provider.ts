@@ -13,13 +13,6 @@ import {
  *
  * If you're creating a client or establishing a connection with a third-party service, do it in the constructor.
  *
- * In the constructor, you must pass to the parent constructor two parameters:
- *
- * 1. The first one is an empty object.
- * 2. The second is an object having two properties:
- *    - `provider`: The ID of the provider. For example, `emailpass`.
- *    - `displayName`: The label or displayable name of the provider. For example, `Email and Password Authentication`.
- *
  * #### Example
  *
  * ```ts
@@ -35,6 +28,7 @@ import {
  * }
  *
  * class MyAuthProviderService extends AbstractAuthModuleProvider {
+ *   static identifier = "my-auth"
  *   protected logger_: Logger
  *   protected options_: Options
  *   // assuming you're initializing a client
@@ -44,13 +38,7 @@ import {
  *     { logger }: InjectedDependencies,
  *     options: Options
  *   ) {
- *     super(
- *       {},
- *       {
- *         provider: "my-auth",
- *         displayName: "My Custom Authentication"
- *       }
- *     )
+ *     super(...arguments)
  *
  *     this.logger_ = logger
  *     this.options_ = options
@@ -67,24 +55,49 @@ import {
  */
 export abstract class AbstractAuthModuleProvider implements IAuthProvider {
   /**
-   * @ignore
+   * Every auth provider must have an `identifier` static property. The provider's ID
+   * will be stored as `au_{identifier}_{id}`, where `{id}` is the provider's `id` 
+   * property in the `medusa-config.ts`.
+   * 
+   * @example
+   * class MyAuthProviderService extends AbstractAuthModuleProvider {
+   *   static identifier = "my-auth"
+   *   // ...
+   * }
    */
-  private static PROVIDER: string
+  static identifier: string
   /**
-   * @ignore
+   * This property indicates the name used when displaying the provider on a frontend application.
+   * 
+   * @example
+   * class MyAuthProviderService extends AbstractAuthModuleProvider {
+   *   static DISPLAY_NAME = "My Auth"
+   *   // ...
+   * }
+   * 
    */
-  private static DISPLAY_NAME: string
+  static DISPLAY_NAME: string
 
   /**
    * @ignore
    */
   protected readonly container_: any
+
   /**
+   * @deprecated Use `identifier` instead.
    * @ignore
    */
   public get provider() {
-    return (this.constructor as typeof AbstractAuthModuleProvider).PROVIDER
+    return (this.constructor as typeof AbstractAuthModuleProvider).identifier
   }
+
+  /**
+   * @ignore
+   */
+  public get identifier() {
+    return (this.constructor as typeof AbstractAuthModuleProvider).identifier
+  }
+
   /**
    * @ignore
    */
@@ -93,25 +106,27 @@ export abstract class AbstractAuthModuleProvider implements IAuthProvider {
   }
 
   /**
-   * Override this static method in order for the loader to validate the options provided to the module provider.
-   * @param options
+   * This method validates the options of the provider set in `medusa-config.ts`.
+   * Implementing this method is optional. It's useful if your provider requires custom validation.
+   * 
+   * If the options aren't valid, throw an error.
+   * 
+   * @param options - The provider's options.
+   * 
+   * @example
+   * class MyAuthProviderService extends AbstractAuthModuleProvider {
+   *   static validateOptions(options: Record<any, any>) {
+   *     if (!options.apiKey) {
+   *       throw new MedusaError(
+   *         MedusaError.Types.INVALID_DATA,
+   *         "API key is required in the provider's options."
+   *       )
+   *     }
+   *   }
+   *   // ...
+   * }
    */
   static validateOptions(options: Record<any, any>): void | never {}
-
-  /**
-   * @ignore
-   *
-   * @privateRemarks
-   * Documenting the constructor in the class's TSDocs as it's difficult to relay
-   * the necessary information with this constructor's signature.
-   */
-  protected constructor({}, config: { provider: string; displayName: string }) {
-    this.container_ = arguments[0]
-    ;(this.constructor as typeof AbstractAuthModuleProvider).PROVIDER ??=
-      config.provider
-    ;(this.constructor as typeof AbstractAuthModuleProvider).DISPLAY_NAME ??=
-      config.displayName
-  }
 
   /**
    * This method authenticates the user.
@@ -119,7 +134,7 @@ export abstract class AbstractAuthModuleProvider implements IAuthProvider {
    * The authentication happens either by directly authenticating or returning a redirect URL to continue
    * the authentication with a third party provider.
    *
-   * Related Read: [Learn about the different authentication flows in Medusa](https://docs.medusajs.com/v2/resources/commerce-modules/auth/authentication-route).
+   * Related Read: [Learn about the different authentication flows in Medusa](https://docs.medusajs.com/resources/commerce-modules/auth/authentication-route).
    *
    * @param {AuthenticationInput} data - The details of the authentication request.
    * @param {AuthIdentityProviderService} authIdentityProviderService - The service used to retrieve or
@@ -224,7 +239,7 @@ export abstract class AbstractAuthModuleProvider implements IAuthProvider {
    * This method is only used in a basic authentication flow, such as when using an email and password
    * to register and authenticate a user.
    *
-   * Related Read: [Learn about the different authentication flows in Medusa](https://docs.medusajs.com/v2/resources/commerce-modules/auth/authentication-route).
+   * Related Read: [Learn about the different authentication flows in Medusa](https://docs.medusajs.com/resources/commerce-modules/auth/authentication-route).
    *
    * @param {AuthenticationInput} data - The details of the authentication request.
    * @param {AuthIdentityProviderService} authIdentityProviderService - The service used to retrieve or
@@ -357,7 +372,7 @@ export abstract class AbstractAuthModuleProvider implements IAuthProvider {
    * - `user_metadata`: Store metadata of the user's details. For example, if the third-party service returns the user's information such as email
    * or name, you store this data in this property.
    *
-   * Related Guide: [Learn about the different authentication flows in Medusa](https://docs.medusajs.com/v2/resources/commerce-modules/auth/authentication-route).
+   * Related Guide: [Learn about the different authentication flows in Medusa](https://docs.medusajs.com/resources/commerce-modules/auth/authentication-route).
    *
    * @param {AuthenticationInput} data - The details of the authentication request.
    * @param {AuthIdentityProviderService} authIdentityProviderService - The service used to retrieve or

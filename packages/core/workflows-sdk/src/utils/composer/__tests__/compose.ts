@@ -16,6 +16,7 @@ import {
   createStep,
   createWorkflow,
   parallelize,
+  StepFunction,
   StepResponse,
   transform,
   WorkflowResponse,
@@ -739,6 +740,153 @@ describe("Workflow composer", function () {
         ],
         obj: "return from 4",
       })
+    })
+
+    it("should compose a new workflow with parallelize steps and rollback them all in case of error", async () => {
+      const step1CompensationFn = jest.fn().mockImplementation(() => {
+        return "step1 compensation"
+      })
+      const step2CompensationFn = jest.fn().mockImplementation(() => {
+        return "step2 compensation"
+      })
+      const step3CompensationFn = jest.fn().mockImplementation(() => {
+        return "step3 compensation"
+      })
+      const step4CompensationFn = jest.fn().mockImplementation(() => {
+        return "step4 compensation"
+      })
+      const mockStep1Fn = jest.fn().mockImplementation(() => {
+        return "step1"
+      })
+      const mockStep2Fn = jest.fn().mockImplementation(() => {
+        return "step2"
+      })
+      const mockStep3Fn = jest.fn().mockImplementation(() => {
+        return "step3"
+      })
+      const mockStep4Fn = jest.fn().mockImplementation(() => {
+        throw new Error("An error occured in step 4.")
+      })
+
+      const step1 = createStep(
+        "step1",
+        mockStep1Fn as unknown as StepFunction<never, StepResponse<string>>,
+        step1CompensationFn
+      )
+      const step2 = createStep(
+        "step2",
+        mockStep2Fn as unknown as StepFunction<never, StepResponse<string>>,
+        step2CompensationFn
+      )
+      const step3 = createStep(
+        "step3",
+        mockStep3Fn as unknown as StepFunction<never, StepResponse<string>>,
+        step3CompensationFn
+      )
+      const step4 = createStep(
+        "step4",
+        mockStep4Fn as unknown as StepFunction<never, never>,
+        step4CompensationFn
+      )
+
+      const workflow = createWorkflow("workflow1", function (input) {
+        const [step1Res] = parallelize(step1(), step2(), step3(), step4())
+        return new WorkflowResponse(step1Res)
+      })
+
+      await workflow.run({
+        throwOnError: false,
+      })
+
+      expect(mockStep1Fn).toHaveBeenCalledTimes(1)
+      expect(mockStep2Fn).toHaveBeenCalledTimes(1)
+      expect(mockStep3Fn).toHaveBeenCalledTimes(1)
+      expect(mockStep4Fn).toHaveBeenCalledTimes(1)
+
+      expect(step1CompensationFn).toHaveBeenCalledTimes(1)
+      expect(step1CompensationFn.mock.calls[0][0]).toBe("step1")
+      expect(step2CompensationFn).toHaveBeenCalledTimes(1)
+      expect(step2CompensationFn.mock.calls[0][0]).toBe("step2")
+      expect(step3CompensationFn).toHaveBeenCalledTimes(1)
+      expect(step3CompensationFn.mock.calls[0][0]).toBe("step3")
+      expect(step4CompensationFn).toHaveBeenCalledTimes(1)
+      expect(step4CompensationFn.mock.calls[0][0]).not.toBeDefined()
+    })
+
+    it("should compose a new workflow with parallelize steps with config and rollback them all in case of error", async () => {
+      const step1CompensationFn = jest.fn().mockImplementation(() => {
+        return "step1 compensation"
+      })
+      const step2CompensationFn = jest.fn().mockImplementation(() => {
+        return "step2 compensation"
+      })
+      const step3CompensationFn = jest.fn().mockImplementation(() => {
+        return "step3 compensation"
+      })
+      const step4CompensationFn = jest.fn().mockImplementation(() => {
+        return "step4 compensation"
+      })
+      const mockStep1Fn = jest.fn().mockImplementation(() => {
+        return "step1"
+      })
+      const mockStep2Fn = jest.fn().mockImplementation(() => {
+        return "step2"
+      })
+      const mockStep3Fn = jest.fn().mockImplementation(() => {
+        return "step3"
+      })
+      const mockStep4Fn = jest.fn().mockImplementation(() => {
+        throw new Error("An error occured in step 4.")
+      })
+
+      const step1 = createStep(
+        "step1",
+        mockStep1Fn as unknown as StepFunction<never, StepResponse<string>>,
+        step1CompensationFn
+      )
+      const step2 = createStep(
+        "step2",
+        mockStep2Fn as unknown as StepFunction<never, StepResponse<string>>,
+        step2CompensationFn
+      )
+      const step3 = createStep(
+        "step3",
+        mockStep3Fn as unknown as StepFunction<never, StepResponse<string>>,
+        step3CompensationFn
+      )
+      const step4 = createStep(
+        "step4",
+        mockStep4Fn as unknown as StepFunction<never, never>,
+        step4CompensationFn
+      )
+
+      const workflow = createWorkflow("workflow1", function (input) {
+        const [step1Res] = parallelize(
+          step1().config({ name: "newStep1Name" }),
+          step2(),
+          step3(),
+          step4()
+        )
+        return new WorkflowResponse(step1Res)
+      })
+
+      await workflow.run({
+        throwOnError: false,
+      })
+
+      expect(mockStep1Fn).toHaveBeenCalledTimes(1)
+      expect(mockStep2Fn).toHaveBeenCalledTimes(1)
+      expect(mockStep3Fn).toHaveBeenCalledTimes(1)
+      expect(mockStep4Fn).toHaveBeenCalledTimes(1)
+
+      expect(step1CompensationFn).toHaveBeenCalledTimes(1)
+      expect(step1CompensationFn.mock.calls[0][0]).toBe("step1")
+      expect(step2CompensationFn).toHaveBeenCalledTimes(1)
+      expect(step2CompensationFn.mock.calls[0][0]).toBe("step2")
+      expect(step3CompensationFn).toHaveBeenCalledTimes(1)
+      expect(step3CompensationFn.mock.calls[0][0]).toBe("step3")
+      expect(step4CompensationFn).toHaveBeenCalledTimes(1)
+      expect(step4CompensationFn.mock.calls[0][0]).not.toBeDefined()
     })
 
     it("should transform the values before forward them to the next step", async () => {
@@ -1681,6 +1829,153 @@ describe("Workflow composer", function () {
         ],
         obj: "return from 4",
       })
+    })
+
+    it("should compose a new workflow with parallelize steps and rollback them all in case of error", async () => {
+      const step1CompensationFn = jest.fn().mockImplementation(() => {
+        return new StepResponse("step1 compensation")
+      })
+      const step2CompensationFn = jest.fn().mockImplementation(() => {
+        return new StepResponse("step2 compensation")
+      })
+      const step3CompensationFn = jest.fn().mockImplementation(() => {
+        return new StepResponse("step3 compensation")
+      })
+      const step4CompensationFn = jest.fn().mockImplementation(() => {
+        return new StepResponse("step4 compensation")
+      })
+      const mockStep1Fn = jest.fn().mockImplementation(() => {
+        return new StepResponse("step1")
+      })
+      const mockStep2Fn = jest.fn().mockImplementation(() => {
+        return new StepResponse("step2")
+      })
+      const mockStep3Fn = jest.fn().mockImplementation(() => {
+        return new StepResponse("step3")
+      })
+      const mockStep4Fn = jest.fn().mockImplementation(() => {
+        throw new Error("An error occured in step 4.")
+      })
+
+      const step1 = createStep(
+        "step1",
+        mockStep1Fn as unknown as StepFunction<never, StepResponse<string>>,
+        step1CompensationFn
+      )
+      const step2 = createStep(
+        "step2",
+        mockStep2Fn as unknown as StepFunction<never, StepResponse<string>>,
+        step2CompensationFn
+      )
+      const step3 = createStep(
+        "step3",
+        mockStep3Fn as unknown as StepFunction<never, StepResponse<string>>,
+        step3CompensationFn
+      )
+      const step4 = createStep(
+        "step4",
+        mockStep4Fn as unknown as StepFunction<never, never>,
+        step4CompensationFn
+      )
+
+      const workflow = createWorkflow("workflow1", function (input) {
+        const [step1Res] = parallelize(step1(), step2(), step3(), step4())
+        return new WorkflowResponse(step1Res)
+      })
+
+      await workflow.run({
+        throwOnError: false,
+      })
+
+      expect(mockStep1Fn).toHaveBeenCalledTimes(1)
+      expect(mockStep2Fn).toHaveBeenCalledTimes(1)
+      expect(mockStep3Fn).toHaveBeenCalledTimes(1)
+      expect(mockStep4Fn).toHaveBeenCalledTimes(1)
+
+      expect(step1CompensationFn).toHaveBeenCalledTimes(1)
+      expect(step1CompensationFn.mock.calls[0][0]).toBe("step1")
+      expect(step2CompensationFn).toHaveBeenCalledTimes(1)
+      expect(step2CompensationFn.mock.calls[0][0]).toBe("step2")
+      expect(step3CompensationFn).toHaveBeenCalledTimes(1)
+      expect(step3CompensationFn.mock.calls[0][0]).toBe("step3")
+      expect(step4CompensationFn).toHaveBeenCalledTimes(1)
+      expect(step4CompensationFn.mock.calls[0][0]).not.toBeDefined()
+    })
+
+    it("should compose a new workflow with parallelize steps with config and rollback them all in case of error", async () => {
+      const step1CompensationFn = jest.fn().mockImplementation(() => {
+        return new StepResponse("step1 compensation")
+      })
+      const step2CompensationFn = jest.fn().mockImplementation(() => {
+        return new StepResponse("step2 compensation")
+      })
+      const step3CompensationFn = jest.fn().mockImplementation(() => {
+        return new StepResponse("step3 compensation")
+      })
+      const step4CompensationFn = jest.fn().mockImplementation(() => {
+        return new StepResponse("step4 compensation")
+      })
+      const mockStep1Fn = jest.fn().mockImplementation(() => {
+        return new StepResponse("step1")
+      })
+      const mockStep2Fn = jest.fn().mockImplementation(() => {
+        return new StepResponse("step2")
+      })
+      const mockStep3Fn = jest.fn().mockImplementation(() => {
+        return new StepResponse("step3")
+      })
+      const mockStep4Fn = jest.fn().mockImplementation(() => {
+        throw new Error("An error occured in step 4.")
+      })
+
+      const step1 = createStep(
+        "step1",
+        mockStep1Fn as unknown as StepFunction<never, StepResponse<string>>,
+        step1CompensationFn
+      )
+      const step2 = createStep(
+        "step2",
+        mockStep2Fn as unknown as StepFunction<never, StepResponse<string>>,
+        step2CompensationFn
+      )
+      const step3 = createStep(
+        "step3",
+        mockStep3Fn as unknown as StepFunction<never, StepResponse<string>>,
+        step3CompensationFn
+      )
+      const step4 = createStep(
+        "step4",
+        mockStep4Fn as unknown as StepFunction<never, never>,
+        step4CompensationFn
+      )
+
+      const workflow = createWorkflow("workflow1", function (input) {
+        const [step1Res] = parallelize(
+          step1().config({ name: "newStep1Name" }),
+          step2(),
+          step3(),
+          step4()
+        )
+        return new WorkflowResponse(step1Res)
+      })
+
+      await workflow.run({
+        throwOnError: false,
+      })
+
+      expect(mockStep1Fn).toHaveBeenCalledTimes(1)
+      expect(mockStep2Fn).toHaveBeenCalledTimes(1)
+      expect(mockStep3Fn).toHaveBeenCalledTimes(1)
+      expect(mockStep4Fn).toHaveBeenCalledTimes(1)
+
+      expect(step1CompensationFn).toHaveBeenCalledTimes(1)
+      expect(step1CompensationFn.mock.calls[0][0]).toBe("step1")
+      expect(step2CompensationFn).toHaveBeenCalledTimes(1)
+      expect(step2CompensationFn.mock.calls[0][0]).toBe("step2")
+      expect(step3CompensationFn).toHaveBeenCalledTimes(1)
+      expect(step3CompensationFn.mock.calls[0][0]).toBe("step3")
+      expect(step4CompensationFn).toHaveBeenCalledTimes(1)
+      expect(step4CompensationFn.mock.calls[0][0]).not.toBeDefined()
     })
 
     it("should transform the values before forward them to the next step", async () => {

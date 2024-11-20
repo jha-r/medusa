@@ -34,7 +34,7 @@ const Providers = ({ children }: ProvidersProps) => {
                       <HooksLoader
                         options={{
                           pageScrollManager: true,
-                          currentLearningPath: true,
+                          currentLearningPath: false,
                         }}
                       >
                         {children}

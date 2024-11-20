@@ -7,6 +7,7 @@ import {
   FulfillmentTypes,
   IFulfillmentModuleService,
   InternalModuleDeclaration,
+  Logger,
   ModuleJoinerConfig,
   ModulesSdkTypes,
   ShippingOptionDTO,
@@ -76,6 +77,7 @@ type InjectedDependencies = {
   shippingOptionTypeService: ModulesSdkTypes.IMedusaInternalService<any>
   fulfillmentProviderService: FulfillmentProviderService
   fulfillmentService: ModulesSdkTypes.IMedusaInternalService<any>
+  logger?: Logger
 }
 
 export default class FulfillmentModuleService

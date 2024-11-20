@@ -16,4 +16,9 @@ export declare type DocsConfig = {
     key: string
   }
   breadcrumbOptions?: BreadcrumbOptions
+  version: {
+    number: string
+    releaseUrl: string
+  }
+  reportIssueLink?: string
 }

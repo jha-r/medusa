@@ -1,12 +1,12 @@
 import { Modules } from "../../modules-sdk"
-import { defineConfig } from "../define-config"
+import { DEFAULT_STORE_RESTRICTED_FIELDS, defineConfig } from "../define-config"
 
 describe("defineConfig", function () {
   it("should merge empty config with the defaults", function () {
     expect(defineConfig()).toMatchInlineSnapshot(`
       {
         "admin": {
-          "backendUrl": "http://localhost:9000",
+          "backendUrl": "/",
           "path": "/app",
         },
         "featureFlags": {},
@@ -19,7 +19,7 @@ describe("defineConfig", function () {
               "providers": [
                 {
                   "id": "emailpass",
-                  "resolve": "@medusajs/auth-emailpass",
+                  "resolve": "@medusajs/medusa/auth-emailpass",
                 },
               ],
             },
@@ -45,7 +45,7 @@ describe("defineConfig", function () {
               "providers": [
                 {
                   "id": "local",
-                  "resolve": "@medusajs/file-local-next",
+                  "resolve": "@medusajs/medusa/file-local",
                 },
               ],
             },
@@ -56,14 +56,14 @@ describe("defineConfig", function () {
               "providers": [
                 {
                   "id": "manual",
-                  "resolve": "@medusajs/fulfillment-manual",
+                  "resolve": "@medusajs/medusa/fulfillment-manual",
                 },
               ],
             },
             "resolve": "@medusajs/medusa/fulfillment",
           },
           "inventory": {
-            "resolve": "@medusajs/medusa/inventory-next",
+            "resolve": "@medusajs/medusa/inventory",
           },
           "locking": {
             "resolve": "@medusajs/medusa/locking",
@@ -79,7 +79,7 @@ describe("defineConfig", function () {
                     ],
                     "name": "Local Notification Provider",
                   },
-                  "resolve": "@medusajs/notification-local",
+                  "resolve": "@medusajs/medusa/notification-local",
                 },
               ],
             },
@@ -107,7 +107,7 @@ describe("defineConfig", function () {
             "resolve": "@medusajs/medusa/sales-channel",
           },
           "stock_location": {
-            "resolve": "@medusajs/medusa/stock-location-next",
+            "resolve": "@medusajs/medusa/stock-location",
           },
           "store": {
             "resolve": "@medusajs/medusa/store",
@@ -133,6 +133,13 @@ describe("defineConfig", function () {
             "authCors": "http://localhost:7000,http://localhost:7001,http://localhost:5173",
             "cookieSecret": "supersecret",
             "jwtSecret": "supersecret",
+            "restrictedFields": {
+              "store": [
+                ${DEFAULT_STORE_RESTRICTED_FIELDS.map((v) => `"${v}"`).join(
+                  ",\n                "
+                )},
+              ],
+            },
             "storeCors": "http://localhost:8000",
           },
         },
@@ -152,7 +159,7 @@ describe("defineConfig", function () {
     ).toMatchInlineSnapshot(`
       {
         "admin": {
-          "backendUrl": "http://localhost:9000",
+          "backendUrl": "/",
           "path": "/app",
         },
         "featureFlags": {},
@@ -168,7 +175,7 @@ describe("defineConfig", function () {
               "providers": [
                 {
                   "id": "emailpass",
-                  "resolve": "@medusajs/auth-emailpass",
+                  "resolve": "@medusajs/medusa/auth-emailpass",
                 },
               ],
             },
@@ -194,7 +201,7 @@ describe("defineConfig", function () {
               "providers": [
                 {
                   "id": "local",
-                  "resolve": "@medusajs/file-local-next",
+                  "resolve": "@medusajs/medusa/file-local",
                 },
               ],
             },
@@ -205,14 +212,14 @@ describe("defineConfig", function () {
               "providers": [
                 {
                   "id": "manual",
-                  "resolve": "@medusajs/fulfillment-manual",
+                  "resolve": "@medusajs/medusa/fulfillment-manual",
                 },
               ],
             },
             "resolve": "@medusajs/medusa/fulfillment",
           },
           "inventory": {
-            "resolve": "@medusajs/medusa/inventory-next",
+            "resolve": "@medusajs/medusa/inventory",
           },
           "locking": {
             "resolve": "@medusajs/medusa/locking",
@@ -228,7 +235,7 @@ describe("defineConfig", function () {
                     ],
                     "name": "Local Notification Provider",
                   },
-                  "resolve": "@medusajs/notification-local",
+                  "resolve": "@medusajs/medusa/notification-local",
                 },
               ],
             },
@@ -256,7 +263,7 @@ describe("defineConfig", function () {
             "resolve": "@medusajs/medusa/sales-channel",
           },
           "stock_location": {
-            "resolve": "@medusajs/medusa/stock-location-next",
+            "resolve": "@medusajs/medusa/stock-location",
           },
           "store": {
             "resolve": "@medusajs/medusa/store",
@@ -282,6 +289,13 @@ describe("defineConfig", function () {
             "authCors": "http://localhost:7000,http://localhost:7001,http://localhost:5173",
             "cookieSecret": "supersecret",
             "jwtSecret": "supersecret",
+            "restrictedFields": {
+              "store": [
+                ${DEFAULT_STORE_RESTRICTED_FIELDS.map((v) => `"${v}"`).join(
+                  ",\n                "
+                )},
+              ],
+            },
             "storeCors": "http://localhost:8000",
           },
         },
@@ -304,7 +318,7 @@ describe("defineConfig", function () {
     ).toMatchInlineSnapshot(`
       {
         "admin": {
-          "backendUrl": "http://localhost:9000",
+          "backendUrl": "/",
           "path": "/app",
         },
         "featureFlags": {},
@@ -325,7 +339,7 @@ describe("defineConfig", function () {
               "providers": [
                 {
                   "id": "emailpass",
-                  "resolve": "@medusajs/auth-emailpass",
+                  "resolve": "@medusajs/medusa/auth-emailpass",
                 },
               ],
             },
@@ -351,7 +365,7 @@ describe("defineConfig", function () {
               "providers": [
                 {
                   "id": "local",
-                  "resolve": "@medusajs/file-local-next",
+                  "resolve": "@medusajs/medusa/file-local",
                 },
               ],
             },
@@ -362,14 +376,14 @@ describe("defineConfig", function () {
               "providers": [
                 {
                   "id": "manual",
-                  "resolve": "@medusajs/fulfillment-manual",
+                  "resolve": "@medusajs/medusa/fulfillment-manual",
                 },
               ],
             },
             "resolve": "@medusajs/medusa/fulfillment",
           },
           "inventory": {
-            "resolve": "@medusajs/medusa/inventory-next",
+            "resolve": "@medusajs/medusa/inventory",
           },
           "locking": {
             "resolve": "@medusajs/medusa/locking",
@@ -385,7 +399,7 @@ describe("defineConfig", function () {
                     ],
                     "name": "Local Notification Provider",
                   },
-                  "resolve": "@medusajs/notification-local",
+                  "resolve": "@medusajs/medusa/notification-local",
                 },
               ],
             },
@@ -413,7 +427,7 @@ describe("defineConfig", function () {
             "resolve": "@medusajs/medusa/sales-channel",
           },
           "stock_location": {
-            "resolve": "@medusajs/medusa/stock-location-next",
+            "resolve": "@medusajs/medusa/stock-location",
           },
           "store": {
             "resolve": "@medusajs/medusa/store",
@@ -439,6 +453,13 @@ describe("defineConfig", function () {
             "authCors": "http://localhost:7000,http://localhost:7001,http://localhost:5173",
             "cookieSecret": "supersecret",
             "jwtSecret": "supersecret",
+            "restrictedFields": {
+              "store": [
+                ${DEFAULT_STORE_RESTRICTED_FIELDS.map((v) => `"${v}"`).join(
+                  ",\n                "
+                )},
+              ],
+            },
             "storeCors": "http://localhost:8000",
           },
         },
@@ -462,7 +483,7 @@ describe("defineConfig", function () {
     ).toMatchInlineSnapshot(`
       {
         "admin": {
-          "backendUrl": "http://localhost:9000",
+          "backendUrl": "/",
           "path": "/app",
         },
         "featureFlags": {},
@@ -483,7 +504,7 @@ describe("defineConfig", function () {
               "providers": [
                 {
                   "id": "emailpass",
-                  "resolve": "@medusajs/auth-emailpass",
+                  "resolve": "@medusajs/medusa/auth-emailpass",
                 },
               ],
             },
@@ -509,7 +530,7 @@ describe("defineConfig", function () {
               "providers": [
                 {
                   "id": "local",
-                  "resolve": "@medusajs/file-local-next",
+                  "resolve": "@medusajs/medusa/file-local",
                 },
               ],
             },
@@ -520,14 +541,14 @@ describe("defineConfig", function () {
               "providers": [
                 {
                   "id": "manual",
-                  "resolve": "@medusajs/fulfillment-manual",
+                  "resolve": "@medusajs/medusa/fulfillment-manual",
                 },
               ],
             },
             "resolve": "@medusajs/medusa/fulfillment",
           },
           "inventory": {
-            "resolve": "@medusajs/medusa/inventory-next",
+            "resolve": "@medusajs/medusa/inventory",
           },
           "locking": {
             "resolve": "@medusajs/medusa/locking",
@@ -543,7 +564,7 @@ describe("defineConfig", function () {
                     ],
                     "name": "Local Notification Provider",
                   },
-                  "resolve": "@medusajs/notification-local",
+                  "resolve": "@medusajs/medusa/notification-local",
                 },
               ],
             },
@@ -571,7 +592,7 @@ describe("defineConfig", function () {
             "resolve": "@medusajs/medusa/sales-channel",
           },
           "stock_location": {
-            "resolve": "@medusajs/medusa/stock-location-next",
+            "resolve": "@medusajs/medusa/stock-location",
           },
           "store": {
             "resolve": "@medusajs/medusa/store",
@@ -597,6 +618,13 @@ describe("defineConfig", function () {
             "authCors": "http://localhost:7000,http://localhost:7001,http://localhost:5173",
             "cookieSecret": "supersecret",
             "jwtSecret": "supersecret",
+            "restrictedFields": {
+              "store": [
+                ${DEFAULT_STORE_RESTRICTED_FIELDS.map((v) => `"${v}"`).join(
+                  ",\n                "
+                )},
+              ],
+            },
             "storeCors": "http://localhost:8000",
           },
         },
@@ -616,7 +644,7 @@ describe("defineConfig", function () {
     ).toMatchInlineSnapshot(`
       {
         "admin": {
-          "backendUrl": "http://localhost:9000",
+          "backendUrl": "/",
           "path": "/app",
         },
         "featureFlags": {},
@@ -629,7 +657,7 @@ describe("defineConfig", function () {
               "providers": [
                 {
                   "id": "emailpass",
-                  "resolve": "@medusajs/auth-emailpass",
+                  "resolve": "@medusajs/medusa/auth-emailpass",
                 },
               ],
             },
@@ -655,7 +683,7 @@ describe("defineConfig", function () {
               "providers": [
                 {
                   "id": "local",
-                  "resolve": "@medusajs/file-local-next",
+                  "resolve": "@medusajs/medusa/file-local",
                 },
               ],
             },
@@ -666,14 +694,14 @@ describe("defineConfig", function () {
               "providers": [
                 {
                   "id": "manual",
-                  "resolve": "@medusajs/fulfillment-manual",
+                  "resolve": "@medusajs/medusa/fulfillment-manual",
                 },
               ],
             },
             "resolve": "@medusajs/medusa/fulfillment",
           },
           "inventory": {
-            "resolve": "@medusajs/medusa/inventory-next",
+            "resolve": "@medusajs/medusa/inventory",
           },
           "locking": {
             "resolve": "@medusajs/medusa/locking",
@@ -689,7 +717,7 @@ describe("defineConfig", function () {
                     ],
                     "name": "Local Notification Provider",
                   },
-                  "resolve": "@medusajs/notification-local",
+                  "resolve": "@medusajs/medusa/notification-local",
                 },
               ],
             },
@@ -717,7 +745,7 @@ describe("defineConfig", function () {
             "resolve": "@medusajs/medusa/sales-channel",
           },
           "stock_location": {
-            "resolve": "@medusajs/medusa/stock-location-next",
+            "resolve": "@medusajs/medusa/stock-location",
           },
           "store": {
             "resolve": "@medusajs/medusa/store",
@@ -743,6 +771,13 @@ describe("defineConfig", function () {
             "authCors": "http://localhost:7000,http://localhost:7001,http://localhost:5173",
             "cookieSecret": "supersecret",
             "jwtSecret": "supersecret",
+            "restrictedFields": {
+              "store": [
+                ${DEFAULT_STORE_RESTRICTED_FIELDS.map((v) => `"${v}"`).join(
+                  ",\n                "
+                )},
+              ],
+            },
             "storeCors": "http://localhost:8000",
           },
         },
@@ -765,7 +800,7 @@ describe("defineConfig", function () {
     ).toMatchInlineSnapshot(`
       {
         "admin": {
-          "backendUrl": "http://localhost:9000",
+          "backendUrl": "/",
           "path": "/app",
         },
         "featureFlags": {},
@@ -778,7 +813,7 @@ describe("defineConfig", function () {
               "providers": [
                 {
                   "id": "emailpass",
-                  "resolve": "@medusajs/auth-emailpass",
+                  "resolve": "@medusajs/medusa/auth-emailpass",
                 },
               ],
             },
@@ -801,7 +836,7 @@ describe("defineConfig", function () {
               "providers": [
                 {
                   "id": "local",
-                  "resolve": "@medusajs/file-local-next",
+                  "resolve": "@medusajs/medusa/file-local",
                 },
               ],
             },
@@ -812,14 +847,14 @@ describe("defineConfig", function () {
               "providers": [
                 {
                   "id": "manual",
-                  "resolve": "@medusajs/fulfillment-manual",
+                  "resolve": "@medusajs/medusa/fulfillment-manual",
                 },
               ],
             },
             "resolve": "@medusajs/medusa/fulfillment",
           },
           "inventory": {
-            "resolve": "@medusajs/medusa/inventory-next",
+            "resolve": "@medusajs/medusa/inventory",
           },
           "locking": {
             "resolve": "@medusajs/medusa/locking",
@@ -835,7 +870,7 @@ describe("defineConfig", function () {
                     ],
                     "name": "Local Notification Provider",
                   },
-                  "resolve": "@medusajs/notification-local",
+                  "resolve": "@medusajs/medusa/notification-local",
                 },
               ],
             },
@@ -863,7 +898,7 @@ describe("defineConfig", function () {
             "resolve": "@medusajs/medusa/sales-channel",
           },
           "stock_location": {
-            "resolve": "@medusajs/medusa/stock-location-next",
+            "resolve": "@medusajs/medusa/stock-location",
           },
           "store": {
             "resolve": "@medusajs/medusa/store",
@@ -889,6 +924,13 @@ describe("defineConfig", function () {
             "authCors": "http://localhost:7000,http://localhost:7001,http://localhost:5173",
             "cookieSecret": "supersecret",
             "jwtSecret": "supersecret",
+            "restrictedFields": {
+              "store": [
+                ${DEFAULT_STORE_RESTRICTED_FIELDS.map((v) => `"${v}"`).join(
+                  ",\n                "
+                )},
+              ],
+            },
             "storeCors": "http://localhost:8000",
           },
         },

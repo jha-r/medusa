@@ -10,21 +10,19 @@ import { useForm } from "react-hook-form"
 import { useTranslation } from "react-i18next"
 import * as zod from "zod"
 
+import { HttpTypes } from "@medusajs/types"
 import {
   RouteFocusModal,
   useRouteModal,
 } from "../../../../../components/modals"
 import { DataTable } from "../../../../../components/table/data-table"
-import {
-  customerGroupsQueryKeys,
-  useCustomerGroups,
-} from "../../../../../hooks/api/customer-groups"
+import { KeyboundForm } from "../../../../../components/utilities/keybound-form"
+import { useCustomerGroups } from "../../../../../hooks/api/customer-groups"
 import { useCustomerGroupTableColumns } from "../../../../../hooks/table/columns/use-customer-group-table-columns"
 import { useCustomerGroupTableFilters } from "../../../../../hooks/table/filters/use-customer-group-table-filters"
 import { useCustomerGroupTableQuery } from "../../../../../hooks/table/query/use-customer-group-table-query"
 import { useDataTable } from "../../../../../hooks/use-data-table"
-import { client, sdk } from "../../../../../lib/client"
-import { queryClient } from "../../../../../lib/query-client"
+import { useBatchCustomerCustomerGroups } from "../../../../../hooks/api"
 
 type AddCustomerGroupsFormProps = {
   customerId: string
@@ -42,6 +40,9 @@ export const AddCustomerGroupsForm = ({
   const { t } = useTranslation()
   const { handleSuccess } = useRouteModal()
   const [isPending, setIsPending] = useState(false)
+
+  const { mutateAsync: batchCustomerCustomerGroups } =
+    useBatchCustomerCustomerGroups(customerId)
 
   const form = useForm<zod.infer<typeof AddCustomerGroupsSchema>>({
     defaultValues: {
@@ -115,30 +116,16 @@ export const AddCustomerGroupsForm = ({
   const handleSubmit = form.handleSubmit(async (data) => {
     setIsPending(true)
     try {
-      /**
-       * TODO: use this for now until add customer groups to customers batch is implemented
-       */
-      const promises = data.customer_group_ids.map((id) =>
-        sdk.admin.customerGroup.batchCustomers(id, {
-          add: [customerId],
-        })
-      )
+      await batchCustomerCustomerGroups({ add: data.customer_group_ids })
 
-      await Promise.all(promises)
-
-      toast.success(t("general.success"), {
-        description: t("customers.groups.add.success", {
+      toast.success(
+        t("customers.groups.add.success", {
           groups: data.customer_group_ids
             .map((id) => customer_groups?.find((g) => g.id === id))
             .filter(Boolean)
-            .map((cg) => cg.name),
-        }),
-        dismissLabel: t("actions.close"),
-      })
-
-      await queryClient.invalidateQueries({
-        queryKey: customerGroupsQueryKeys.lists(),
-      })
+            .map((cg) => cg?.name),
+        })
+      )
 
       handleSuccess(`/customers/${customerId}`)
     } catch (e) {
@@ -154,7 +141,7 @@ export const AddCustomerGroupsForm = ({
 
   return (
     <RouteFocusModal.Form form={form}>
-      <form
+      <KeyboundForm
         className="flex h-full flex-col overflow-hidden"
         onSubmit={handleSubmit}
       >
@@ -174,7 +161,11 @@ export const AddCustomerGroupsForm = ({
             pageSize={PAGE_SIZE}
             count={count}
             filters={filters}
-            orderBy={["name", "created_at", "updated_at"]}
+            orderBy={[
+              { key: "name", label: t("fields.name") },
+              { key: "created_at", label: t("fields.createdAt") },
+              { key: "updated_at", label: t("fields.updatedAt") },
+            ]}
             isLoading={isLoading}
             layout="fill"
             search="autofocus"
@@ -199,7 +190,7 @@ export const AddCustomerGroupsForm = ({
             {t("actions.save")}
           </Button>
         </RouteFocusModal.Footer>
-      </form>
+      </KeyboundForm>
     </RouteFocusModal.Form>
   )
 }

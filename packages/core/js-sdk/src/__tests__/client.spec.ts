@@ -82,6 +82,23 @@ const server = setupServer(
       statusText: "Internal Server Error",
     })
   }),
+  http.get(`${baseUrl}/nostore`, ({ request }) => {
+    if (!request.headers.get("authorization")) {
+      return HttpResponse.json({
+        test: "test",
+      })
+    }
+
+    return new HttpResponse(null, {
+      status: 500,
+      statusText: "Internal Server Error",
+    })
+  }),
+  http.get(`https://test.com/baseUrl`, ({ request, params, cookies }) => {
+    return HttpResponse.json({
+      test: "test",
+    })
+  }),
   http.all("*", ({ request, params, cookies }) => {
     return new HttpResponse(null, {
       status: 404,
@@ -102,7 +119,7 @@ describe("Client", () => {
   afterEach(() => server.resetHandlers())
   afterAll(() => server.close())
 
-  describe("header configuration", () => {
+  describe("configuration", () => {
     it("should allow passing custom request headers while the defaults are preserved", async () => {
       const resp = await client.fetch<any>("header", {
         headers: { "X-custom-header": "test" },
@@ -150,6 +167,23 @@ describe("Client", () => {
       const resp = await pubClient.fetch<any>("pubkey")
       expect(resp).toEqual({ test: "test" })
     })
+
+    it("should gracefully handle a root base URL", async () => {
+      global.window = {
+        location: {
+          origin: "https://test.com",
+        },
+      } as any
+
+      const pubClient = new Client({
+        baseUrl: "/",
+      })
+
+      const resp = await pubClient.fetch<any>("baseUrl")
+      expect(resp).toEqual({ test: "test" })
+
+      global.window = undefined as any
+    })
   })
 
   describe("GET requests", () => {
@@ -185,11 +219,11 @@ describe("Client", () => {
   })
 
   describe("Authrized requests", () => {
-    it("should set the token in memory by default", async () => {
+    it("should not store the token by default", async () => {
       const token = "token-123" // Eg. from a response after a successful authentication
       client.setToken(token)
 
-      const resp = await client.fetch<any>("jwt")
+      const resp = await client.fetch<any>("nostore")
       expect(resp).toEqual({ test: "test" })
     })
 

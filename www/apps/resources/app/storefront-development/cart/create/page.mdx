@@ -117,24 +117,4 @@ This is necessary, as only products matching the cart's sales channel(s) can be 
 
 ## Associate Customer with Cart
 
-When creating the cart, you can associate the logged-in customer's ID with the cart by passing a `customer_id` request body parameter.
-
-For example:
-
-export const customerHighlights = [
-  ["5", "customer.id", "Assuming you have the customer object."]
-]
-
-```ts highlights={customerHighlights}
-fetch(`http://localhost:9000/store/carts`, {
-  // ...
-  body: JSON.stringify({
-    // ...
-    customer_id: customer.id,
-  }),
-})
-.then((res) => res.json())
-.then(({ cart }) => {
-  localStorage.setItem("cart_id", cart.id)
-})
-```
+When the cart is created for a logged-in customer, it's automatically associated with that customer.

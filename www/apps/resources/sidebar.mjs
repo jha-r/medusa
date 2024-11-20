@@ -2047,6 +2047,33 @@ export const sidebar = sidebarAttachHrefCommonOptions([
       },
       {
         type: "link",
+        path: "/js-sdk",
+        title: "JS SDK",
+        isChildSidebar: true,
+        childSidebarTitle: "JS SDK Reference",
+        children: [
+          {
+            type: "category",
+            title: "Auth",
+            autogenerate_path: "/references/js_sdk/auth/Auth/methods",
+            initialOpen: true,
+          },
+          {
+            type: "category",
+            title: "Store",
+            autogenerate_path: "/references/js_sdk/store/Store/properties",
+            initialOpen: true,
+          },
+          {
+            type: "category",
+            title: "Admin",
+            autogenerate_path: "/references/js_sdk/admin/Admin/properties",
+            initialOpen: true,
+          },
+        ],
+      },
+      {
+        type: "link",
         path: "/nextjs-starter",
         title: "Next.js Starter",
       },
@@ -2066,11 +2093,6 @@ export const sidebar = sidebarAttachHrefCommonOptions([
       },
       {
         type: "link",
-        path: "/upgrade-guides",
-        title: "Upgrade Guides",
-      },
-      {
-        type: "link",
         path: "/deployment",
         title: "Deployment Guides",
         isChildSidebar: true,
@@ -2078,7 +2100,18 @@ export const sidebar = sidebarAttachHrefCommonOptions([
           {
             type: "category",
             title: "Medusa Application",
-            autogenerate_path: "/deployment/medusa-application",
+            children: [
+              {
+                type: "link",
+                path: "https://docs.medusajs.com/learn/deployment/general",
+                title: "General",
+              },
+              {
+                type: "link",
+                path: "/deployment/medusa-application/railway",
+                title: "Railway",
+              },
+            ],
           },
           {
             type: "category",
@@ -2184,11 +2217,6 @@ export const sidebar = sidebarAttachHrefCommonOptions([
                 title: "S3 Module Provider Errors",
               },
             ],
-          },
-          {
-            type: "link",
-            path: "/troubleshooting/deployment",
-            title: "Deployment",
           },
         ],
       },
@@ -2365,10 +2393,11 @@ export const sidebar = sidebarAttachHrefCommonOptions([
             path: "/contribution-guidelines/docs",
             title: "Docs",
           },
-          // {
-          //   path: "/contribution-guidelines/admin-translations",
-          //   title: "Admin Translations",
-          // },
+          {
+            type: "link",
+            path: "/contribution-guidelines/admin-translations",
+            title: "Admin Translations",
+          },
         ],
       },
       {

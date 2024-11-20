@@ -10,6 +10,7 @@ export const AdminGetOrdersOrderParams = createSelectParams().merge(
   z.object({
     id: z.union([z.string(), z.array(z.string())]).optional(),
     status: z.union([z.string(), z.array(z.string())]).optional(),
+    version: z.number().optional(),
     created_at: createOperatorMap().optional(),
     updated_at: createOperatorMap().optional(),
     deleted_at: createOperatorMap().optional(),
@@ -17,6 +18,18 @@ export const AdminGetOrdersOrderParams = createSelectParams().merge(
 )
 
 export type AdminGetOrdersOrderParamsType = z.infer<
+  typeof AdminGetOrdersOrderParams
+>
+
+export const AdminGetOrdersOrderItemsParams = createSelectParams().merge(
+  z.object({
+    id: z.union([z.string(), z.array(z.string())]).optional(),
+    item_id: z.union([z.string(), z.array(z.string())]).optional(),
+    version: z.number().optional(),
+  })
+)
+
+export type AdminGetOrdersOrderItemsParamsType = z.infer<
   typeof AdminGetOrdersOrderParams
 >
 
@@ -38,7 +51,8 @@ export const AdminGetOrdersParams = createFindParams({
     sales_channel_id: z.array(z.string()).optional(),
     fulfillment_status: z.array(z.string()).optional(),
     payment_status: z.array(z.string()).optional(),
-    region_id: z.array(z.string()).optional(),
+    region_id: z.union([z.string(), z.array(z.string())]).optional(),
+    customer_id: z.union([z.string(), z.array(z.string())]).optional(),
     q: z.string().optional(),
     created_at: createOperatorMap().optional(),
     updated_at: createOperatorMap().optional(),
@@ -106,3 +120,10 @@ export type AdminMarkOrderFulfillmentDeliveredType = z.infer<
   typeof AdminMarkOrderFulfillmentDelivered
 >
 export const AdminMarkOrderFulfillmentDelivered = z.object({})
+
+export type AdminTransferOrderType = z.infer<typeof AdminTransferOrder>
+export const AdminTransferOrder = z.object({
+  customer_id: z.string(),
+  description: z.string().optional(),
+  internal_note: z.string().optional(),
+})

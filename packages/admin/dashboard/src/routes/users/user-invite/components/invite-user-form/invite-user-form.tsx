@@ -23,6 +23,7 @@ import { ActionMenu } from "../../../../../components/common/action-menu"
 import { Form } from "../../../../../components/common/form"
 import { RouteFocusModal } from "../../../../../components/modals/index.ts"
 import { DataTable } from "../../../../../components/table/data-table"
+import { KeyboundForm } from "../../../../../components/utilities/keybound-form/keybound-form.tsx"
 import {
   useCreateInvite,
   useDeleteInvite,
@@ -31,7 +32,7 @@ import {
 } from "../../../../../hooks/api/invites"
 import { useUserInviteTableQuery } from "../../../../../hooks/table/query/use-user-invite-table-query"
 import { useDataTable } from "../../../../../hooks/use-data-table"
-import { isFetchError } from "../../../../../lib/is-fetch-error.ts"
+import { isFetchError } from "../../../../../lib/is-fetch-error"
 
 const InviteUserSchema = zod.object({
   email: zod.string().email(),
@@ -101,7 +102,7 @@ export const InviteUserForm = () => {
 
   return (
     <RouteFocusModal.Form form={form}>
-      <form
+      <KeyboundForm
         onSubmit={handleSubmit}
         className="flex h-full flex-col overflow-hidden"
       >
@@ -167,14 +168,19 @@ export const InviteUserForm = () => {
                     search="autofocus"
                     isLoading={isLoading}
                     queryObject={raw}
-                    orderBy={["email", "created_at", "updated_at"]}
+                    prefix={PREFIX}
+                    orderBy={[
+                      { key: "email", label: t("fields.email") },
+                      { key: "created_at", label: t("fields.createdAt") },
+                      { key: "updated_at", label: t("fields.updatedAt") },
+                    ]}
                   />
                 </Container>
               </div>
             </div>
           </div>
         </RouteFocusModal.Body>
-      </form>
+      </KeyboundForm>
     </RouteFocusModal.Form>
   )
 }

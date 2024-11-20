@@ -1,11 +1,12 @@
-import { MiddlewareRoute } from "@medusajs/framework/http"
 import {
   validateAndTransformBody,
   validateAndTransformQuery,
 } from "@medusajs/framework"
+import { MiddlewareRoute } from "@medusajs/framework/http"
 import * as QueryConfig from "./query-config"
 import {
   AdminCompleteOrder,
+  AdminGetOrdersOrderItemsParams,
   AdminGetOrdersOrderParams,
   AdminGetOrdersParams,
   AdminMarkOrderFulfillmentDelivered,
@@ -13,6 +14,7 @@ import {
   AdminOrderChanges,
   AdminOrderCreateFulfillment,
   AdminOrderCreateShipment,
+  AdminTransferOrder,
 } from "./validators"
 
 export const adminOrderRoutesMiddlewares: MiddlewareRoute[] = [
@@ -33,6 +35,16 @@ export const adminOrderRoutesMiddlewares: MiddlewareRoute[] = [
       validateAndTransformQuery(
         AdminGetOrdersOrderParams,
         QueryConfig.retrieveTransformQueryConfig
+      ),
+    ],
+  },
+  {
+    method: ["GET"],
+    matcher: "/admin/orders/:id/line-items",
+    middlewares: [
+      validateAndTransformQuery(
+        AdminGetOrdersOrderItemsParams,
+        QueryConfig.listOrderItemsQueryConfig
       ),
     ],
   },
@@ -127,6 +139,17 @@ export const adminOrderRoutesMiddlewares: MiddlewareRoute[] = [
     matcher: "/admin/orders/:id/fulfillments/:fulfillment_id/mark-as-delivered",
     middlewares: [
       validateAndTransformBody(AdminMarkOrderFulfillmentDelivered),
+      validateAndTransformQuery(
+        AdminGetOrdersOrderParams,
+        QueryConfig.retrieveTransformQueryConfig
+      ),
+    ],
+  },
+  {
+    method: ["POST"],
+    matcher: "/admin/orders/:id/transfer",
+    middlewares: [
+      validateAndTransformBody(AdminTransferOrder),
       validateAndTransformQuery(
         AdminGetOrdersOrderParams,
         QueryConfig.retrieveTransformQueryConfig

@@ -24,6 +24,7 @@ export type ChangeActionType =
   | "SHIP_ITEM"
   | "WRITE_OFF_ITEM"
   | "REINSTATE_ITEM"
+  | "TRANSFER_CUSTOMER"
 
 export type OrderChangeStatus =
   | "confirmed"
@@ -806,6 +807,11 @@ export interface OrderLineItemDTO extends OrderLineItemTotalsDTO {
   product_subtitle?: string | null
 
   /**
+   * The ID of the type of the product associated with the line item.
+   */
+  product_type_id?: string | null
+
+  /**
    * The type of the product associated with the line item.
    */
   product_type?: string | null
@@ -1083,6 +1089,11 @@ export interface OrderDTO {
    * The version of the order.
    */
   version: number
+
+  /**
+   * The order's display ID.
+   */
+  display_id: number
 
   /**
    * The active order change, if any.
@@ -2106,7 +2117,7 @@ export interface OrderChangeDTO {
   /**
    * The type of the order change
    */
-  change_type?: "return" | "exchange" | "claim" | "edit"
+  change_type?: "return" | "exchange" | "claim" | "edit" | "transfer"
 
   /**
    * The ID of the associated order
@@ -2309,65 +2320,6 @@ export interface OrderChangeActionDTO {
 
   /**
    * When the order change action was updated
-   */
-  updated_at: Date | string
-}
-
-/**
- * The order transaction details.
- */
-export interface OrderTransactionDTO {
-  /**
-   * The ID of the transaction
-   */
-  id: string
-
-  /**
-   * The ID of the associated order
-   */
-  order_id: string
-
-  /**
-   * The associated order
-   *
-   * @expandable
-   */
-  order: OrderDTO
-
-  /**
-   * The amount of the transaction
-   */
-  amount: BigNumberValue
-
-  /**
-   * The raw amount of the transaction
-   *
-   * @ignore
-   */
-  raw_amount: BigNumberRawValue
-
-  /**
-   * The currency code of the transaction
-   */
-  currency_code: string
-
-  /**
-   * The reference of the transaction
-   */
-  reference: string
-
-  /**
-   * The ID of the reference
-   */
-  reference_id: string
-
-  /**
-   * When the transaction was created
-   */
-  created_at: Date | string
-
-  /**
-   * When the transaction was updated
    */
   updated_at: Date | string
 }

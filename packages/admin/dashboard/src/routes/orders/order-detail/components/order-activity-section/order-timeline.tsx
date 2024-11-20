@@ -16,7 +16,7 @@ import {
 import { useTranslation } from "react-i18next"
 
 import { AdminOrderLineItem } from "@medusajs/types"
-import { useOrderChanges } from "../../../../../hooks/api"
+import { useOrderChanges, useOrderLineItems } from "../../../../../hooks/api"
 import { useCancelClaim, useClaims } from "../../../../../hooks/api/claims"
 import {
   useCancelExchange,
@@ -112,14 +112,36 @@ type Activity = {
 const useActivityItems = (order: AdminOrder): Activity[] => {
   const { t } = useTranslation()
 
-  const itemsMap = useMemo(
-    () => new Map(order?.items?.map((i) => [i.id, i])),
-    [order.items]
+  const { order_changes: orderChanges = [] } = useOrderChanges(order.id, {
+    change_type: ["edit", "claim", "exchange", "return"],
+  })
+
+  const missingLineItemIds = getMissingLineItemIds(order, orderChanges)
+  const { order_items: removedLineItems = [] } = useOrderLineItems(
+    order.id,
+
+    {
+      fields: "+quantity",
+      item_id: missingLineItemIds,
+    },
+    {
+      enabled: !!orderChanges.length,
+    }
   )
 
-  const { order_changes: orderChanges = [] } = useOrderChanges(order.id, {
-    change_type: "edit",
-  })
+  const itemsMap = useMemo(() => {
+    const _itemsMap = new Map(order?.items?.map((i) => [i.id, i]))
+
+    for (const id of missingLineItemIds) {
+      const i = removedLineItems.find((i) => i.item.id === id)
+
+      if (i) {
+        _itemsMap.set(id, { ...i.item, quantity: i.quantity }) // copy quantity from OrderItem to OrderLineItem
+      }
+    }
+
+    return _itemsMap
+  }, [order.items, removedLineItems, missingLineItemIds])
 
   const { returns = [] } = useReturns({
     order_id: order.id,
@@ -226,9 +248,7 @@ const useActivityItems = (order: AdminOrder): Activity[] => {
         items.push({
           title: t("orders.activity.events.fulfillment.delivered"),
           timestamp: fulfillment.delivered_at,
-          children: (
-            <FulfillmentCreatedBody fulfillment={fulfillment} />
-          ),
+          children: <FulfillmentCreatedBody fulfillment={fulfillment} />,
         })
       }
 
@@ -334,7 +354,7 @@ const useActivityItems = (order: AdminOrder): Activity[] => {
       })
     }
 
-    for (const edit of orderChanges) {
+    for (const edit of orderChanges.filter((oc) => oc.change_type === "edit")) {
       const isConfirmed = edit.status === "confirmed"
       const isPending = edit.status === "pending"
 
@@ -349,14 +369,14 @@ const useActivityItems = (order: AdminOrder): Activity[] => {
         timestamp:
           edit.status === "requested"
             ? edit.requested_at
+            : edit.status === "confirmed"
+            ? edit.confirmed_at
             : edit.status === "declined"
-              ? edit.declined_at
-              : edit.status === "canceled"
-                ? edit.canceled_at
-                : edit.created_at,
-        children: isConfirmed ? (
-          <OrderEditBody edit={edit} itemsMap={itemsMap} />
-        ) : null,
+            ? edit.declined_at
+            : edit.status === "canceled"
+            ? edit.canceled_at
+            : edit.created_at,
+        children: isConfirmed ? <OrderEditBody edit={edit} /> : null,
       })
     }
 
@@ -390,7 +410,16 @@ const useActivityItems = (order: AdminOrder): Activity[] => {
     }
 
     return [...sortedActivities, createdAt]
-  }, [order, payments, returns, exchanges, orderChanges, notes, isLoading])
+  }, [
+    order,
+    payments,
+    returns,
+    exchanges,
+    orderChanges,
+    notes,
+    isLoading,
+    itemsMap,
+  ])
 }
 
 type OrderActivityItemProps = PropsWithChildren<{
@@ -808,18 +837,11 @@ const ExchangeBody = ({
   )
 }
 
-const OrderEditBody = ({
-  edit,
-  itemsMap,
-}: {
-  edit: AdminOrderChange
-  isRequested: boolean
-  itemsMap: Record<string, AdminOrderLineItem>
-}) => {
+const OrderEditBody = ({ edit }: { edit: AdminOrderChange }) => {
   const { t } = useTranslation()
 
   const [itemsAdded, itemsRemoved] = useMemo(
-    () => countItemsChange(edit.actions, itemsMap),
+    () => countItemsChange(edit.actions),
     [edit]
   )
 
@@ -840,35 +862,52 @@ const OrderEditBody = ({
   )
 }
 
-function countItemsChange(
-  actions: AdminOrderChange["actions"],
-  itemsMap: Record<string, AdminOrderLineItem>
-) {
+/**
+ * Returns count of added and removed item quantity
+ */
+function countItemsChange(actions: AdminOrderChange["actions"]) {
   let added = 0
   let removed = 0
 
   actions.forEach((action) => {
     if (action.action === "ITEM_ADD") {
-      added += action.details.quantity
+      added += action.details!.quantity as number
     }
     if (action.action === "ITEM_UPDATE") {
-      const newQuantity: number = action.details!.quantity
-      const originalQuantity: number | undefined = itemsMap.get(
-        action.details!.reference_id
-      )?.quantity
+      const quantityDiff = action.details!.quantity_diff as number
 
-      if (typeof originalQuantity === "number") {
-        const diff = Math.abs(newQuantity - originalQuantity)
-
-        if (newQuantity > originalQuantity) {
-          added += diff
-        }
-        if (newQuantity < originalQuantity) {
-          removed += diff
-        }
+      if (quantityDiff > 0) {
+        added += quantityDiff
+      } else {
+        removed += Math.abs(quantityDiff)
       }
     }
   })
 
   return [added, removed]
+}
+
+/**
+ * Get IDs of missing line items that were removed from the order.
+ */
+function getMissingLineItemIds(order: AdminOrder, changes: AdminOrderChange[]) {
+  if (!changes?.length) {
+    return []
+  }
+
+  const retIds = new Set<string>()
+  const existingItemsMap = new Map(order.items.map((item) => [item.id, true]))
+
+  changes.forEach((change) => {
+    change.actions.forEach((action) => {
+      if (
+        (action.details!.reference_id as string).startsWith("ordli_") &&
+        !existingItemsMap.has(action.details!.reference_id as string)
+      ) {
+        retIds.add(action.details!.reference_id as string)
+      }
+    })
+  })
+
+  return Array.from(retIds)
 }

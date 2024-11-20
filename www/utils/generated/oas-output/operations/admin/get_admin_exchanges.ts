@@ -5,14 +5,6 @@
  * description: Retrieve a list of exchanges. The exchanges can be filtered by fields such as `id`. The exchanges can also be sorted or paginated.
  * x-authenticated: true
  * parameters:
- *   - name: expand
- *     in: query
- *     description: Comma-separated relations that should be expanded in the returned data.
- *     required: false
- *     schema:
- *       type: string
- *       title: expand
- *       description: Comma-separated relations that should be expanded in the returned data.
  *   - name: fields
  *     in: query
  *     description: Comma-separated fields that should be included in the returned data. if a field is prefixed with `+` it will be added to the default fields, using `-` will remove it from the default
@@ -284,14 +276,6 @@
  *           type: boolean
  *           title: $exists
  *           description: Filter by whether a value for this parameter exists (not `null`).
- *   - name: q
- *     in: query
- *     description: Search term to apply on an exchange's searchable properties.
- *     required: false
- *     schema:
- *       type: string
- *       title: q
- *       description: Search term to apply on an exchange's searchable properties.
  *   - name: id
  *     in: query
  *     required: false
@@ -796,26 +780,6 @@
  *           type: boolean
  *           title: $exists
  *           description: Filter by whether a value for this parameter exists (not `null`).
- *   - name: $and
- *     in: query
- *     description: Join query parameters with an AND condition. Each object's content is the same type as the expected query parameters.
- *     required: false
- *     schema:
- *       type: array
- *       description: Join query parameters with an AND condition. Each object's content is the same type as the expected query parameters.
- *       items:
- *         type: object
- *       title: $and
- *   - name: $or
- *     in: query
- *     description: Join query parameters with an OR condition. Each object's content is the same type as the expected query parameters.
- *     required: false
- *     schema:
- *       type: array
- *       description: Join query parameters with an OR condition. Each object's content is the same type as the expected query parameters.
- *       items:
- *         type: object
- *       title: $or
  * security:
  *   - api_token: []
  *   - cookie_auth: []

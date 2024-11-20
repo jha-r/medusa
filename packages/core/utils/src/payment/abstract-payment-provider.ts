@@ -14,8 +14,24 @@ export abstract class AbstractPaymentProvider<TConfig = Record<string, unknown>>
   implements IPaymentProvider
 {
   /**
-   * Override this static method in order for the loader to validate the options provided to the module provider.
-   * @param options
+   * This method validates the options of the provider set in `medusa-config.ts`.
+   * Implementing this method is optional. It's useful if your provider requires custom validation.
+   * 
+   * If the options aren't valid, throw an error.
+   * 
+   * @param options - The provider's options.
+   * 
+   * @example
+   * class MyPaymentProviderService extends AbstractPaymentProvider<Options> {
+   *   static validateOptions(options: Record<any, any>) {
+   *     if (!options.apiKey) {
+   *       throw new MedusaError(
+   *         MedusaError.Types.INVALID_DATA,
+   *         "API key is required in the provider's options."
+   *       )
+   *     }
+   *   }
+   * }
    */
   static validateOptions(options: Record<any, any>): void | never {}
 
@@ -48,6 +64,7 @@ export abstract class AbstractPaymentProvider<TConfig = Record<string, unknown>>
    * class MyPaymentProviderService extends AbstractPaymentProvider<
    *   Options
    * > {
+   *   static identifier = "my-payment"
    *   protected logger_: Logger
    *   protected options_: Options
    *   // Assuming you're using a client to integrate
@@ -92,7 +109,9 @@ export abstract class AbstractPaymentProvider<TConfig = Record<string, unknown>>
   }
 
   /**
-   * Each payment provider has a unique identifier defined in its class.
+   * Each payment provider has a unique identifier defined in its class. The provider's ID
+   * will be stored as `pp_{identifier}_{id}`, where `{id}` is the provider's `id` 
+   * property in the `medusa-config.ts`.
    *
    * @example
    * class MyPaymentProviderService extends AbstractPaymentProvider<
@@ -125,7 +144,7 @@ export abstract class AbstractPaymentProvider<TConfig = Record<string, unknown>>
    *
    * - The {@link authorizePayment} method returns the status `captured`, which automatically executed this method after authorization.
    * - The merchant requests to capture the payment after its associated payment session was authorized.
-   * - A webhook event occurred that instructs the payment provider to capture the payment session. Learn more about handing webhook events in [this guide](https://docs.medusajs.com/v2/resources/commerce-modules/payment/webhook-events).
+   * - A webhook event occurred that instructs the payment provider to capture the payment session. Learn more about handing webhook events in [this guide](https://docs.medusajs.com/resources/commerce-modules/payment/webhook-events).
    *
    * In this method, use the third-party provider to capture the payment.
    *
@@ -175,7 +194,7 @@ export abstract class AbstractPaymentProvider<TConfig = Record<string, unknown>>
    * This method authorizes a payment session. When authorized successfully, a payment is created by the Payment
    * Module which can be later captured using the {@link capturePayment} method.
    *
-   * Refer to [this guide](https://docs.medusajs.com/v2/resources/commerce-modules/payment/payment-flow#3-authorize-payment-session)
+   * Refer to [this guide](https://docs.medusajs.com/resources/commerce-modules/payment/payment-flow#3-authorize-payment-session)
    * to learn more about how this fits into the payment flow and how to handle required actions.
    *
    * To automatically capture the payment after authorization, return the status `captured`.
@@ -600,7 +619,7 @@ export abstract class AbstractPaymentProvider<TConfig = Record<string, unknown>>
    * This method is executed when a webhook event is received from the third-party payment provider. Use it
    * to process the action of the payment provider.
    *
-   * Learn more in [this documentation](https://docs.medusajs.com/v2/resources/commerce-modules/payment/webhook-events)
+   * Learn more in [this documentation](https://docs.medusajs.com/resources/commerce-modules/payment/webhook-events)
    *
    * @param data - The webhook event's data
    * @returns The webhook result. If the `action`'s value is `captured`, the payment is captured within Medusa as well.

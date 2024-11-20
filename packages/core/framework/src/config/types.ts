@@ -72,7 +72,7 @@ export type AdminOptions = {
    */
   outDir?: string
   /**
-   * The URL of your Medusa application. This is useful to set when you deploy the Medusa application.
+   * The URL of your Medusa application. Defaults to the browser origin. This is useful to set when running the admin on a separate domain.
    *
    * @example
    * ```ts title="medusa-config.ts"
@@ -274,7 +274,7 @@ export type ProjectConfigOptions = {
    * module.exports = defineConfig({
    *   projectConfig: {
    *     databaseDriverOptions: process.env.NODE_ENV !== "development" ?
-   *       { ssl: { rejectUnauthorized: false } } : {}
+   *       { connection: { ssl: { rejectUnauthorized: false } } } : {}
    *     // ...
    *   },
    *   // ...
@@ -574,7 +574,7 @@ export type ProjectConfigOptions = {
      * However, some platforms don't offer access to the HTTP layer and in those cases, this is a good alternative.
      *
      * If you enable HTTP compression and you want to disable it for specific API Routes, you can pass in the request header `"x-no-compression": true`.
-     * Learn more in the [API Reference](https://docs.medusajs.com/v2/api/store#http-compression).
+     * Learn more in the [API Reference](https://docs.medusajs.com/api/store#http-compression).
      *
      * @example
      * ```ts title="medusa-config.ts"
@@ -730,6 +730,27 @@ export type ProjectConfigOptions = {
      * ```
      */
     authMethodsPerActor?: Record<string, string[]>
+
+    /**
+     * Specifies the fields that can't be selected in the response unless specified in the allowed query config.
+     * This is useful to restrict sensitive fields from being exposed in the API.
+     *
+     * @example
+     *
+     * ```js title="medusa-config.js"
+     * module.exports = defineConfig({
+     *   projectConfig: {
+     *     http: {
+     *       restrictedFields: {
+     *         store: ["order", "orders"],
+     *       }
+     *     }
+     * ```
+     */
+    restrictedFields?: {
+      store?: string[]
+      /*admin?: string[]*/
+    }
   }
 }
 

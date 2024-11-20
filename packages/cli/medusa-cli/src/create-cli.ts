@@ -1,5 +1,5 @@
 import { sync as existsSync } from "fs-exists-cached"
-import { setTelemetryEnabled } from "medusa-telemetry"
+import { setTelemetryEnabled } from "@medusajs/telemetry"
 import path from "path"
 import resolveCwd from "resolve-cwd"
 import { newStarter } from "./commands/new"
@@ -18,8 +18,7 @@ const handlerP =
   }
 
 function buildLocalCommands(cli, isLocalProject) {
-  const defaultHost = `localhost`
-  const defaultPort = `9000`
+  const defaultPort = "9000"
   const directory = path.resolve(`.`)
 
   const projectInfo = { directory }
@@ -290,8 +289,10 @@ function buildLocalCommands(cli, isLocalProject) {
           .option(`H`, {
             alias: `host`,
             type: `string`,
-            default: defaultHost,
-            describe: `Set host. Defaults to ${defaultHost}`,
+            default: process.env.HOST,
+            describe: process.env.HOST
+              ? `Set host. Defaults to ${process.env.HOST} (set by env.HOST)`
+              : "",
           })
           .option(`p`, {
             alias: `port`,
@@ -326,8 +327,10 @@ function buildLocalCommands(cli, isLocalProject) {
           .option(`H`, {
             alias: `host`,
             type: `string`,
-            default: defaultHost,
-            describe: `Set host. Defaults to ${defaultHost}`,
+            default: process.env.HOST,
+            describe: process.env.HOST
+              ? `Set host. Defaults to ${process.env.HOST} (set by env.HOST)`
+              : ``,
           })
           .option(`p`, {
             alias: `port`,

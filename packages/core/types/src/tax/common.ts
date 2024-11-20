@@ -43,7 +43,7 @@ export interface TaxRateDTO {
   /**
    * Whether the tax rate should be combined with parent rates.
    *
-   * Learn more [here](https://docs.medusajs.com/v2/resources/commerce-modules/tax/tax-rates-and-rules#combinable-tax-rates).
+   * Learn more [here](https://docs.medusajs.com/resources/commerce-modules/tax/tax-rates-and-rules#combinable-tax-rates).
    */
   is_combinable: boolean
 
@@ -365,31 +365,6 @@ export interface TaxableItemDTO {
   product_id: string
 
   /**
-   * The name of the item's product.
-   */
-  product_name?: string
-
-  /**
-   * The ID of the category of the item's product.
-   */
-  product_category_id?: string
-
-  /**
-   * The categories of the item's product.
-   */
-  product_categories?: string[]
-
-  /**
-   * The SKU of the item's product.
-   */
-  product_sku?: string
-
-  /**
-   * The type of the item's product.
-   */
-  product_type?: string
-
-  /**
    * The ID of the type of the item's product.
    */
   product_type_id?: string
@@ -473,6 +448,11 @@ export interface TaxCalculationContext {
      * The postal code.
      */
     postal_code?: string
+
+    /**
+     * Address metadata.
+     */
+    metadata?: Record<string, unknown> | null
   }
 
   /**
@@ -493,6 +473,11 @@ export interface TaxCalculationContext {
      * The groups that the customer belongs to.
      */
     customer_groups: string[]
+
+    /**
+     * Customer metadata.
+     */
+    metadata?: Record<string, unknown> | null
   }
 
   /**

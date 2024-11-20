@@ -85,6 +85,7 @@ export function createMikrORMEntity() {
         applySearchable(MikroORMEntity, field)
       } else {
         defineRelationship(MikroORMEntity, field, cascades, context)
+        applySearchable(MikroORMEntity, field)
       }
     })
 

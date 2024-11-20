@@ -21,7 +21,7 @@ import {
   ProductModuleService,
   ProductService,
 } from "@services"
-import { moduleIntegrationTestRunner } from "medusa-test-utils"
+import { moduleIntegrationTestRunner } from "@medusajs/test-utils"
 import {
   categoriesData,
   productsData,
@@ -55,6 +55,7 @@ moduleIntegrationTestRunner<Service>({
         "product",
         "productVariant",
         "productOption",
+        "productOptionValue",
         "productType",
         "productImage",
         "productTag",
@@ -99,6 +100,15 @@ moduleIntegrationTestRunner<Service>({
             primaryKey: "id",
             serviceName: "product",
             field: "productOption",
+          },
+        },
+        productOptionValue: {
+          id: {
+            linkable: "product_option_value_id",
+            entity: "ProductOptionValue",
+            primaryKey: "id",
+            serviceName: "product",
+            field: "productOptionValue",
           },
         },
         productType: {

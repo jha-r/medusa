@@ -28,7 +28,7 @@ Consider you have a Hello Module defined in the `/src/modules/hello` directory.
 
 <Note title="Tip">
 
-If you don't have a module, follow [this guide](!docs!/basics/modules) to create one.
+If you don't have a module, follow [this guide](!docs!/learn/basics/modules) to create one.
 
 </Note>
 
@@ -49,7 +49,7 @@ This creates a `Custom` data model that has the `id` and `custom_name` propertie
 
 <Note title="Tip">
 
-Learn more about data models in [this guide](!docs!/data-models).
+Learn more about data models in [this guide](!docs!/learn/data-models).
 
 </Note>
 
@@ -61,7 +61,7 @@ Next, you'll define a module link between the `Custom` and `Customer` data model
 
 <Note title="Tip">
 
-Learn more about module links in [this guide](!docs!/module-links).
+Learn more about module links in [this guide](!docs!/learn/module-links).
 
 </Note>
 
@@ -88,7 +88,7 @@ This defines a link between the `Customer` and `Custom` data models. Using this 
   items={[
     {
       text: "Module must be registered in medusa-config.ts",
-      link: "!docs!/basics/modules#4-add-module-to-configurations"
+      link: "!docs!/learn/basics/modules#4-add-module-to-configurations"
     }
   ]}
 />
@@ -121,7 +121,7 @@ To do that, you'll consume the [customersCreated](/resources/references/medusa-w
 
 <Note title="Tip">
 
-Learn more about workflow hooks in [this guide](!docs!/advanced-development/workflows/workflow-hooks).
+Learn more about workflow hooks in [this guide](!docs!/learn/advanced-development/workflows/workflow-hooks).
 
 </Note>
 
@@ -156,7 +156,7 @@ In the snippet above, you add a validation rule indicating that `custom_name` is
 
 <Note title="Tip">
 
-Learn more about additional data validation in [this guide](!docs!/advanced-development/api-routes/additional-data).
+Learn more about additional data validation in [this guide](!docs!/learn/advanced-development/api-routes/additional-data).
 
 </Note>
 
@@ -208,7 +208,7 @@ In the compensation function that undoes the step's actions in case of an error,
 
 <Note title="Tip">
 
-Learn more about compensation functions in [this guide](!docs!/advanced-development/workflows/compensation-function).
+Learn more about compensation functions in [this guide](!docs!/learn/advanced-development/workflows/compensation-function).
 
 </Note>
 
@@ -266,9 +266,9 @@ The workflow accepts as an input the created customer and the `additional_data` 
 
 In the workflow, you:
 
-1. Use the `transform` utility to get the value of `custom_name` based on whether it's set in `additional_data`. Learn more about why you can't use conditional operators in a workflow without using `transform` in [this guide](!docs!/advanced-development/workflows/conditions#why-if-conditions-arent-allowed-in-workflows).
+1. Use the `transform` utility to get the value of `custom_name` based on whether it's set in `additional_data`. Learn more about why you can't use conditional operators in a workflow without using `transform` in [this guide](!docs!/learn/advanced-development/workflows/conditions#why-if-conditions-arent-allowed-in-workflows).
 2. Create the `Custom` record using the `createCustomStep`.
-3. Use the `when-then` utility to link the customer to the `Custom` record if it was created. Learn more about why you can't use if-then conditions in a workflow without using `when-then` in [this guide](!docs!/advanced-development/workflows/conditions#why-if-conditions-arent-allowed-in-workflows).
+3. Use the `when-then` utility to link the customer to the `Custom` record if it was created. Learn more about why you can't use if-then conditions in a workflow without using `when-then` in [this guide](!docs!/learn/advanced-development/workflows/conditions#why-if-conditions-arent-allowed-in-workflows).
 
 You'll next execute the workflow in the hook handler.
 
@@ -321,7 +321,7 @@ curl -X POST 'localhost:9000/admin/customers' \
 
 Make sure to replace `{token}` with an admin user's JWT token. Learn how to retrieve it in the [API reference](!api!/admin#1-bearer-authorization-with-jwt-tokens).
 
-The request will return the customer's details. You'll learn how to retrive the `custom_name` property with the customer's details in the next section.
+The request will return the customer's details. You'll learn how to retrieve the `custom_name` property with the customer's details in the next section.
 
 ---
 
@@ -367,7 +367,7 @@ Among the returned `customer` object, you'll find a `custom` property which hold
 
 ### Retrieve using Query
 
-You can also retrieve the `Custom` record linked to a customer in your code using [Query](!docs!/advanced-development/module-links/query).
+You can also retrieve the `Custom` record linked to a customer in your code using [Query](!docs!/learn/advanced-development/module-links/query).
 
 For example:
 
@@ -381,7 +381,7 @@ const { data: [customer] } = await query.graph({
 })
 ```
 
-Learn more about how to use Query in [this guide](!docs!/advanced-development/module-links/query).
+Learn more about how to use Query in [this guide](!docs!/learn/advanced-development/module-links/query).
 
 ---
 
@@ -504,7 +504,7 @@ Finally, you'll create the workflow. Create the file `src/workflows/update-custo
 ```ts title="src/workflows/update-custom-from-customer/index.ts" collapsibleLines="1-9" expandButtonLabel="Show Imports"
 import { CustomerDTO } from "@medusajs/framework/types"
 import { createWorkflow, when, WorkflowResponse } from "@medusajs/framework/workflows-sdk"
-import { createRemoteLinkStep, dismissRemoteLinkStep, useRemoteQueryStep } from "@medusajs/medusa/core-flows"
+import { createRemoteLinkStep, dismissRemoteLinkStep, useQueryGraphStep } from "@medusajs/medusa/core-flows"
 import { createCustomStep } from "../create-custom-from-customer/steps/create-custom"
 import { Modules } from "@medusajs/framework/utils"
 import { HELLO_MODULE } from "../../modules/hello"
@@ -521,15 +521,12 @@ export type UpdateCustomFromCustomerStepInput = {
 export const updateCustomFromCustomerWorkflow = createWorkflow(
   "update-custom-from-customer",
   (input: UpdateCustomFromCustomerStepInput) => {
-    const customerData = useRemoteQueryStep({
-      entry_point: "customer",
+    const { data: customers } = useQueryGraphStep({
+      entity: "customer",
       fields: ["custom.*"],
-      variables: {
-        filters: {
-          id: input.customer.id,
-        },
-      },
-      list: false,
+      filters: {
+        id: input.customer.id,
+      }
     })
 
     // TODO create, update, or delete Custom record
@@ -546,9 +543,9 @@ Next, replace the `TODO` with the following:
 ```ts title="src/workflows/update-custom-from-customer/index.ts"
 const created = when({
   input,
-  customerData,
+  customers,
 }, (data) => 
-  !data.customerData.custom && 
+  !data.customers[0].custom && 
   data.input.additional_data?.custom_name?.length > 0
 )
 .then(() => {
@@ -580,25 +577,25 @@ Next, replace the new `TODO` with the following:
 ```ts title="src/workflows/update-custom-from-customer/index.ts"
 const deleted = when({
   input,
-  customerData,
+  customers,
 }, (data) => 
-  data.customerData.custom && (
+  data.customers[0].custom && (
     data.input.additional_data?.custom_name === null || 
     data.input.additional_data?.custom_name.length === 0
   )
 )
 .then(() => {
   deleteCustomStep({
-    custom: customerData.custom,
+    custom: customers[0].custom,
   })
 
   dismissRemoteLinkStep({
     [HELLO_MODULE]: {
-      custom_id: customerData.custom.id,
+      custom_id: customers[0].custom.id,
     },
   })
 
-  return customerData.custom.id
+  return customers[0].custom.id
 })
 
 // TODO delete Custom record
@@ -611,11 +608,11 @@ Finally, replace the new `TODO` with the following:
 ```ts title="src/workflows/update-custom-from-customer/index.ts"
 const updated = when({
   input,
-  customerData,
-}, (data) => data.customerData.custom && data.input.additional_data?.custom_name?.length > 0)
+  customers,
+}, (data) => data.customers[0].custom && data.input.additional_data?.custom_name?.length > 0)
 .then(() => {
   const custom = updateCustomStep({
-    id: customerData.custom.id,
+    id: customers[0].custom.id,
     custom_name: input.additional_data.custom_name,
   })
 
@@ -629,7 +626,7 @@ return new WorkflowResponse({
 })
 ```
 
-Using the `when-then` utility, you check if the customer has a linked `Custom` record and `custom_name` is passed in the `additional_data`. If so, you update the linked `Custom` recod.
+Using the `when-then` utility, you check if the customer has a linked `Custom` record and `custom_name` is passed in the `additional_data`. If so, you update the linked `Custom` record.
 
 You return in the workflow response the created, updated, and deleted `Custom` record.
 

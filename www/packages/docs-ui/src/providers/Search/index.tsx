@@ -18,6 +18,7 @@ import {
   SearchResponse,
 } from "algoliasearch/lite"
 import clsx from "clsx"
+// @ts-expect-error can't install the types package because it doesn't support React v19
 import { CSSTransition, SwitchTransition } from "react-transition-group"
 
 export type SearchCommand = {
@@ -208,6 +209,8 @@ export const SearchProvider = ({
     }
   }, [initialDefaultFilters])
 
+  const componentWrapperRef = useRef(null)
+
   return (
     <SearchContext.Provider
       value={{
@@ -228,7 +231,7 @@ export const SearchProvider = ({
           "!p-0 overflow-hidden relative h-full",
           "flex flex-col justify-between"
         )}
-        modalContainerClassName="sm:h-[480px] sm:max-h-[480px]"
+        modalContainerClassName="!h-[480px] max-h-[480px]"
         open={isOpen}
         onClose={() => setIsOpen(false)}
         passedRef={modalRef}
@@ -248,13 +251,14 @@ export const SearchProvider = ({
             }}
             timeout={250}
             key={command?.name || "search"}
+            nodeRef={componentWrapperRef}
           >
-            <>
+            <div ref={componentWrapperRef} className="h-full">
               {command === null && (
                 <Search {...searchProps} algolia={algolia} />
               )}
               {command?.component}
-            </>
+            </div>
           </CSSTransition>
         </SwitchTransition>
       </Modal>

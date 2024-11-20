@@ -2,7 +2,11 @@ import {
   AdditionalData,
   UpdateCartWorkflowInputDTO,
 } from "@medusajs/framework/types"
-import { MedusaError } from "@medusajs/framework/utils"
+import {
+  CartWorkflowEvents,
+  isDefined,
+  MedusaError,
+} from "@medusajs/framework/utils"
 import {
   createHook,
   createWorkflow,
@@ -12,7 +16,7 @@ import {
   WorkflowData,
   WorkflowResponse,
 } from "@medusajs/framework/workflows-sdk"
-import { useRemoteQueryStep } from "../../common"
+import { emitEventStep, useRemoteQueryStep } from "../../common"
 import {
   findOrCreateCustomerStep,
   findSalesChannelStep,
@@ -30,18 +34,32 @@ export const updateCartWorkflow = createWorkflow(
     const cartToUpdate = useRemoteQueryStep({
       entry_point: "cart",
       variables: { id: input.id },
-      fields: ["id", "shipping_address.*", "region.*", "region.countries.*"],
+      fields: [
+        "id",
+        "email",
+        "customer_id",
+        "shipping_address.*",
+        "region.*",
+        "region.countries.*",
+      ],
       list: false,
       throw_if_key_not_found: true,
     }).config({ name: "get-cart" })
 
-    const [salesChannel, customerData] = parallelize(
+    const customerDataInput = transform({ input, cartToUpdate }, (data) => {
+      return {
+        customer_id: data.cartToUpdate.customer_id,
+        email: data.input.email ?? data.cartToUpdate.email,
+      }
+    })
+
+    const [salesChannel, customer] = parallelize(
       findSalesChannelStep({
         salesChannelId: input.sales_channel_id,
       }),
       findOrCreateCustomerStep({
-        customerId: input.customer_id,
-        email: input.email,
+        customerId: customerDataInput.customer_id,
+        email: customerDataInput.email,
       })
     )
 
@@ -62,7 +80,13 @@ export const updateCartWorkflow = createWorkflow(
     })
 
     const cartInput = transform(
-      { input, region, customerData, salesChannel, cartToUpdate },
+      {
+        input,
+        region,
+        customer,
+        salesChannel,
+        cartToUpdate,
+      },
       (data) => {
         const {
           promo_codes,
@@ -112,16 +136,19 @@ export const updateCartWorkflow = createWorkflow(
           }
         }
 
-        if (
-          updateCartData.customer_id !== undefined ||
-          updateCartData.email !== undefined
-        ) {
-          data_.customer_id = data.customerData.customer?.id || null
-          data_.email =
-            data.input?.email ?? (data.customerData.customer?.email || null)
+        if (isDefined(updateCartData.email) && data.customer?.customer) {
+          const currentCustomer = data.customer.customer!
+          data_.customer_id = currentCustomer.id
+
+          // registered customers can update the cart email
+          if (currentCustomer.has_account) {
+            data_.email = updateCartData.email
+          } else {
+            data_.email = data.customer.email
+          }
         }
 
-        if (updateCartData.sales_channel_id !== undefined) {
+        if (isDefined(updateCartData.sales_channel_id)) {
           data_.sales_channel_id = data.salesChannel?.id || null
         }
 
@@ -129,7 +156,36 @@ export const updateCartWorkflow = createWorkflow(
       }
     )
 
-    updateCartsStep([cartInput])
+    /*
+    when({ cartInput }, ({ cartInput }) => {
+      return isDefined(cartInput.customer_id) || isDefined(cartInput.email)
+    }).then(() => {
+      emitEventStep({
+        eventName: CartWorkflowEvents.CUSTOMER_UPDATED,
+        data: { id: input.id },
+      }).config({ name: "emit-customer-updated" })
+    })
+    */
+
+    when({ input, cartToUpdate }, ({ input, cartToUpdate }) => {
+      return (
+        isDefined(input.region_id) &&
+        input.region_id !== cartToUpdate?.region?.id
+      )
+    }).then(() => {
+      emitEventStep({
+        eventName: CartWorkflowEvents.REGION_UPDATED,
+        data: { id: input.id },
+      }).config({ name: "emit-region-updated" })
+    })
+
+    parallelize(
+      updateCartsStep([cartInput]),
+      emitEventStep({
+        eventName: CartWorkflowEvents.UPDATED,
+        data: { id: input.id },
+      })
+    )
 
     const cart = refreshCartItemsWorkflow.runAsStep({
       input: { cart_id: cartInput.id, promo_codes: input.promo_codes },

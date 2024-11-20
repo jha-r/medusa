@@ -129,7 +129,7 @@ export interface UpdateTaxRateDTO {
   /**
    * Whether the tax rate is combinable.
    *
-   * Learn more [here](https://docs.medusajs.com/v2/resources/commerce-modules/tax/tax-rates-and-rules#combinable-tax-rates).
+   * Learn more [here](https://docs.medusajs.com/resources/commerce-modules/tax/tax-rates-and-rules#combinable-tax-rates).
    */
   is_combinable?: boolean
 
@@ -204,6 +204,26 @@ export interface CreateTaxRegionDTO {
      */
     metadata?: MetadataType
   }
+}
+
+/**
+ * The tax region to be updated.
+ */
+export interface UpdateTaxRegionDTO {
+  /**
+   * The id of the tax region to update
+   */
+  id: string
+
+  /**
+   * The province code of the tax region.
+   */
+  province_code?: string | null
+
+  /**
+   * Holds custom data in key-value pairs.
+   */
+  metadata?: MetadataType
 }
 
 /**

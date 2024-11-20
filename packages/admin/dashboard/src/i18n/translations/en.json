@@ -98,6 +98,8 @@
   "actions": {
     "save": "Save",
     "saveAsDraft": "Save as draft",
+    "copy": "Copy",
+    "copied": "Copied",
     "duplicate": "Duplicate",
     "publish": "Publish",
     "create": "Create",
@@ -117,6 +119,7 @@
     "showMore": "Show more",
     "continue": "Continue",
     "continueWithEmail": "Continue with Email",
+    "idCopiedToClipboard": "ID copied to clipboard",
     "addReason": "Add Reason",
     "addNote": "Add Note",
     "reset": "Reset",
@@ -377,6 +380,11 @@
     "list": {
       "noRecordsMessage": "Create your first product to start selling."
     },
+    "edit": {
+      "header": "Edit Product",
+      "description": "Edit the product details.",
+      "successToast": "Product {{title}} was successfully updated."
+    },
     "create": {
       "header": "General",
       "tabs": {
@@ -459,7 +467,6 @@
     "deleteWarning": "You are about to delete the product {{title}}. This action cannot be undone.",
     "variants": "Variants",
     "attributes": "Attributes",
-    "editProduct": "Edit Product",
     "editAttributes": "Edit Attributes",
     "editOptions": "Edit Options",
     "editPrices": "Edit prices",
@@ -826,6 +833,12 @@
         "list": {
           "noRecordsMessage": "Please create a customer group first."
         }
+      },
+      "removed": {
+        "success": "Customer removed from: {{groups}}.",
+        "list": {
+          "noRecordsMessage": "Please create a customer group first."
+        }
       }
     },
     "edit": {
@@ -844,7 +857,8 @@
       "groups": "Groups"
     },
     "registered": "Registered",
-    "guest": "Guest"
+    "guest": "Guest",
+    "hasAccount": "Has account"
   },
   "customerGroups": {
     "domain": "Customer Groups",
@@ -898,13 +912,22 @@
       "allocateItems": "Allocate items",
       "editOrder": "Edit order",
       "editOrderContinue": "Continue order edit",
-      "inventoryKit": "Consists of {{count}}x inventory items"
+      "inventoryKit": "Consists of {{count}}x inventory items",
+      "itemTotal": "Item Total",
+      "shippingTotal": "Shipping Total",
+      "discountTotal": "Discount Total",
+      "taxTotalIncl": "Tax Total (included)",
+      "itemSubtotal": "Item Subtotal",
+      "shippingSubtotal": "Shipping Subtotal",
+      "discountSubtotal": "Discount Subtotal",
+      "taxTotal": "Tax Total"
     },
     "payment": {
       "title": "Payments",
-      "isReadyToBeCaptured": "Payment {{id}} is ready to be captured.",
+      "isReadyToBeCaptured": "Payment <0/> is ready to be captured.",
       "totalPaidByCustomer": "Total paid by customer",
       "capture": "Capture payment",
+      "capture_short": "Capture",
       "refund": "Refund",
       "markAsPaid": "Mark as paid",
       "statusLabel": "Payment status",
@@ -1256,6 +1279,11 @@
           "confirmed": "Order edit #{{editId}} confirmed"
         }
       }
+    },
+    "fields": {
+      "displayId": "Display ID",
+      "refundableAmount": "Refundable amount",
+      "returnableQuantity": "Returnable quantity"
     }
   },
   "draftOrders": {
@@ -1877,6 +1905,7 @@
     },
     "edit": {
       "header": "Edit Campaign",
+      "description": "Edit the details of the campaign.",
       "successToast": "Campaign '{{name}}' was successfully updated."
     },
     "configuration": {
@@ -1888,6 +1917,8 @@
       }
     },
     "create": {
+      "title": "Create Campaign",
+      "description": "Create a promotional campaign.",
       "hint": "Create a promotional campaign.",
       "header": "Create Campaign",
       "successToast": "Campaign '{{name}}' was successfully created."
@@ -2301,9 +2332,12 @@
     },
     "edit": {
       "header": "Edit API Key",
+      "description": "Edit the API key's title.",
       "successToast": "API key {{title}} was successfully updated."
     },
     "salesChannels": {
+      "title": "Add Sales Channels",
+      "description": "Add the sales channels that the API key should be limited to.",
       "successToast_one": "{{count}} sales channel was successfully added to the API key.",
       "successToast_other": "{{count}} sales channels were successfully added to the API key.",
       "alreadyAddedTooltip": "The sales channel has already been added to the API key.",
@@ -2376,7 +2410,7 @@
       },
       "label": { "label": "Label", "placeholder": "Wrong size" },
       "description": {
-        "label": "Descriptions",
+        "label": "Description",
         "placeholder": "Customer received the wrong size"
       }
     }
@@ -2388,13 +2422,13 @@
   },
   "invite": {
     "title": "Welcome to Medusa",
-    "hint": "Create you account below",
+    "hint": "Create your account below",
     "backToLogin": "Back to login",
     "createAccount": "Create account",
     "alreadyHaveAccount": "Already have an account? - <0>Log in</0>",
     "emailTooltip": "Your email cannot be changed. If you would like to use another email, a new invite must be sent.",
     "invalidInvite": "The invite is invalid or has expired.",
-    "successTitle": "Your account has is registered",
+    "successTitle": "Your account has been registered",
     "successHint": "Get started with Medusa Admin right away.",
     "successAction": "Start Medusa Admin",
     "invalidTokenTitle": "Your invite token is invalid",

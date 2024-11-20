@@ -14,11 +14,20 @@ import { normalizeImportPathWithSource } from "./normalize-import-path-with-sour
 import { resolveExports } from "./resolve-exports"
 
 const DEFAULT_SECRET = "supersecret"
-const DEFAULT_ADMIN_URL = "http://localhost:9000"
+const DEFAULT_ADMIN_URL = "/"
 const DEFAULT_STORE_CORS = "http://localhost:8000"
 const DEFAULT_DATABASE_URL = "postgres://localhost/medusa-starter-default"
 const DEFAULT_ADMIN_CORS =
   "http://localhost:7000,http://localhost:7001,http://localhost:5173"
+
+export const DEFAULT_STORE_RESTRICTED_FIELDS = [
+  "order",
+  "orders",
+  /*"customer",
+  "customers",
+  "payment_collection",
+  "payment_collections"*/
+]
 
 type InternalModuleDeclarationOverride = InternalModuleDeclaration & {
   /**
@@ -79,6 +88,9 @@ export function defineConfig(config: Config = {}): ConfigModule {
       authCors: process.env.AUTH_CORS || DEFAULT_ADMIN_CORS,
       jwtSecret: process.env.JWT_SECRET || DEFAULT_SECRET,
       cookieSecret: process.env.COOKIE_SECRET || DEFAULT_SECRET,
+      restrictedFields: {
+        store: DEFAULT_STORE_RESTRICTED_FIELDS,
+      },
       ...http,
     },
     ...restOfProjectConfig,
@@ -154,7 +166,7 @@ function resolveModules(
       options: {
         providers: [
           {
-            resolve: "@medusajs/auth-emailpass",
+            resolve: "@medusajs/medusa/auth-emailpass",
             id: "emailpass",
           },
         ],
@@ -171,7 +183,7 @@ function resolveModules(
       options: {
         providers: [
           {
-            resolve: "@medusajs/file-local-next",
+            resolve: "@medusajs/medusa/file-local",
             id: "local",
           },
         ],
@@ -182,7 +194,7 @@ function resolveModules(
       options: {
         providers: [
           {
-            resolve: "@medusajs/fulfillment-manual",
+            resolve: "@medusajs/medusa/fulfillment-manual",
             id: "manual",
           },
         ],
@@ -193,7 +205,7 @@ function resolveModules(
       options: {
         providers: [
           {
-            resolve: "@medusajs/notification-local",
+            resolve: "@medusajs/medusa/notification-local",
             id: "local",
             options: {
               name: "Local Notification Provider",

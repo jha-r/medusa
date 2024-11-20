@@ -7393,6 +7393,14 @@ export const generatedSidebar = [
                         "loaded": true,
                         "isPathHref": true,
                         "type": "link",
+                        "path": "/references/tax/updateTaxRegions",
+                        "title": "updateTaxRegions",
+                        "children": []
+                      },
+                      {
+                        "loaded": true,
+                        "isPathHref": true,
+                        "type": "link",
                         "path": "/references/tax/upsertTaxRates",
                         "title": "upsertTaxRates",
                         "children": []
@@ -7968,136 +7976,6 @@ export const generatedSidebar = [
     "children": []
   },
   {
-    "type": "separator"
-  },
-  {
-    "loaded": true,
-    "isPathHref": true,
-    "type": "category",
-    "title": "SDKs and Tools",
-    "children": [
-      {
-        "loaded": true,
-        "isPathHref": true,
-        "type": "link",
-        "path": "/create-medusa-app",
-        "title": "create-medusa-app",
-        "children": []
-      },
-      {
-        "loaded": true,
-        "isPathHref": true,
-        "type": "link",
-        "path": "/medusa-cli",
-        "title": "Medusa CLI",
-        "isChildSidebar": true,
-        "childSidebarTitle": "Medusa CLI Reference",
-        "children": [
-          {
-            "loaded": true,
-            "isPathHref": true,
-            "type": "link",
-            "path": "/medusa-cli",
-            "title": "Overview",
-            "children": []
-          },
-          {
-            "type": "separator"
-          },
-          {
-            "loaded": true,
-            "isPathHref": true,
-            "type": "category",
-            "title": "Commands",
-            "autogenerate_path": "medusa-cli/commands",
-            "children": [
-              {
-                "loaded": true,
-                "isPathHref": true,
-                "type": "link",
-                "path": "/medusa-cli/commands/new",
-                "title": "new",
-                "children": []
-              },
-              {
-                "loaded": true,
-                "isPathHref": true,
-                "type": "link",
-                "path": "/medusa-cli/commands/develop",
-                "title": "develop",
-                "children": []
-              },
-              {
-                "loaded": true,
-                "isPathHref": true,
-                "type": "link",
-                "path": "/medusa-cli/commands/start",
-                "title": "start",
-                "children": []
-              },
-              {
-                "loaded": true,
-                "isPathHref": true,
-                "type": "link",
-                "path": "/medusa-cli/commands/user",
-                "title": "user",
-                "children": []
-              },
-              {
-                "loaded": true,
-                "isPathHref": true,
-                "type": "link",
-                "path": "/medusa-cli/commands/build",
-                "title": "build",
-                "children": []
-              },
-              {
-                "loaded": true,
-                "isPathHref": true,
-                "type": "link",
-                "path": "/medusa-cli/commands/db",
-                "title": "db",
-                "children": []
-              },
-              {
-                "loaded": true,
-                "isPathHref": true,
-                "type": "link",
-                "path": "/medusa-cli/commands/exec",
-                "title": "exec",
-                "children": []
-              },
-              {
-                "loaded": true,
-                "isPathHref": true,
-                "type": "link",
-                "path": "/medusa-cli/commands/start-cluster",
-                "title": "start-cluster",
-                "children": []
-              },
-              {
-                "loaded": true,
-                "isPathHref": true,
-                "type": "link",
-                "path": "/medusa-cli/commands/telemtry",
-                "title": "telemetry",
-                "children": []
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "loaded": true,
-        "isPathHref": true,
-        "type": "link",
-        "path": "/nextjs-starter",
-        "title": "Next.js Starter",
-        "children": []
-      }
-    ]
-  },
-  {
     "loaded": true,
     "isPathHref": true,
     "type": "link",
@@ -8538,6 +8416,633 @@ export const generatedSidebar = [
     "loaded": true,
     "isPathHref": true,
     "type": "category",
+    "title": "SDKs and Tools",
+    "children": [
+      {
+        "loaded": true,
+        "isPathHref": true,
+        "type": "link",
+        "path": "/create-medusa-app",
+        "title": "create-medusa-app",
+        "children": []
+      },
+      {
+        "loaded": true,
+        "isPathHref": true,
+        "type": "link",
+        "path": "/medusa-cli",
+        "title": "Medusa CLI",
+        "isChildSidebar": true,
+        "childSidebarTitle": "Medusa CLI Reference",
+        "children": [
+          {
+            "loaded": true,
+            "isPathHref": true,
+            "type": "link",
+            "path": "/medusa-cli",
+            "title": "Overview",
+            "children": []
+          },
+          {
+            "type": "separator"
+          },
+          {
+            "loaded": true,
+            "isPathHref": true,
+            "type": "category",
+            "title": "Commands",
+            "autogenerate_path": "medusa-cli/commands",
+            "children": [
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/medusa-cli/commands/new",
+                "title": "new",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/medusa-cli/commands/develop",
+                "title": "develop",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/medusa-cli/commands/start",
+                "title": "start",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/medusa-cli/commands/user",
+                "title": "user",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/medusa-cli/commands/build",
+                "title": "build",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/medusa-cli/commands/db",
+                "title": "db",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/medusa-cli/commands/exec",
+                "title": "exec",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/medusa-cli/commands/start-cluster",
+                "title": "start-cluster",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/medusa-cli/commands/telemtry",
+                "title": "telemetry",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "loaded": true,
+        "isPathHref": true,
+        "type": "link",
+        "path": "/js-sdk",
+        "title": "JS SDK",
+        "isChildSidebar": true,
+        "childSidebarTitle": "JS SDK Reference",
+        "children": [
+          {
+            "loaded": true,
+            "isPathHref": true,
+            "type": "category",
+            "title": "Auth",
+            "autogenerate_path": "/references/js_sdk/auth/Auth/methods",
+            "initialOpen": true,
+            "children": [
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/auth/callback",
+                "title": "callback",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/auth/login",
+                "title": "login",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/auth/logout",
+                "title": "logout",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/auth/refresh",
+                "title": "refresh",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/auth/register",
+                "title": "register",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/auth/resetPassword",
+                "title": "resetPassword",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/auth/updateProvider",
+                "title": "updateProvider",
+                "children": []
+              }
+            ]
+          },
+          {
+            "loaded": true,
+            "isPathHref": true,
+            "type": "category",
+            "title": "Store",
+            "autogenerate_path": "/references/js_sdk/store/Store/properties",
+            "initialOpen": true,
+            "children": [
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/store/cart",
+                "title": "cart",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/store/category",
+                "title": "category",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/store/collection",
+                "title": "collection",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/store/customer",
+                "title": "customer",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/store/fulfillment",
+                "title": "fulfillment",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/store/order",
+                "title": "order",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/store/payment",
+                "title": "payment",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/store/product",
+                "title": "product",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/store/region",
+                "title": "region",
+                "children": []
+              }
+            ]
+          },
+          {
+            "loaded": true,
+            "isPathHref": true,
+            "type": "category",
+            "title": "Admin",
+            "autogenerate_path": "/references/js_sdk/admin/Admin/properties",
+            "initialOpen": true,
+            "children": [
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/admin/apiKey",
+                "title": "apiKey",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/admin/campaign",
+                "title": "campaign",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/admin/claim",
+                "title": "claim",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/admin/currency",
+                "title": "currency",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/admin/customer",
+                "title": "customer",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/admin/customerGroup",
+                "title": "customerGroup",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/admin/exchange",
+                "title": "exchange",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/admin/fulfillment",
+                "title": "fulfillment",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/admin/fulfillmentProvider",
+                "title": "fulfillmentProvider",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/admin/fulfillmentSet",
+                "title": "fulfillmentSet",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/admin/inventoryItem",
+                "title": "inventoryItem",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/admin/invite",
+                "title": "invite",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/admin/notification",
+                "title": "notification",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/admin/order",
+                "title": "order",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/admin/orderEdit",
+                "title": "orderEdit",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/admin/payment",
+                "title": "payment",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/admin/paymentCollection",
+                "title": "paymentCollection",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/admin/priceList",
+                "title": "priceList",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/admin/pricePreference",
+                "title": "pricePreference",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/admin/product",
+                "title": "product",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/admin/productCategory",
+                "title": "productCategory",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/admin/productCollection",
+                "title": "productCollection",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/admin/productTag",
+                "title": "productTag",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/admin/productType",
+                "title": "productType",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/admin/productVariant",
+                "title": "productVariant",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/admin/promotion",
+                "title": "promotion",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/admin/refundReason",
+                "title": "refundReason",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/admin/region",
+                "title": "region",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/admin/reservation",
+                "title": "reservation",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/admin/return",
+                "title": "return",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/admin/returnReason",
+                "title": "returnReason",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/admin/salesChannel",
+                "title": "salesChannel",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/admin/shippingOption",
+                "title": "shippingOption",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/admin/shippingProfile",
+                "title": "shippingProfile",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/admin/stockLocation",
+                "title": "stockLocation",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/admin/store",
+                "title": "store",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/admin/taxRate",
+                "title": "taxRate",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/admin/taxRegion",
+                "title": "taxRegion",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/admin/upload",
+                "title": "upload",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/admin/user",
+                "title": "user",
+                "children": []
+              },
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "/references/js-sdk/admin/workflowExecution",
+                "title": "workflowExecution",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "loaded": true,
+        "isPathHref": true,
+        "type": "link",
+        "path": "/nextjs-starter",
+        "title": "Next.js Starter",
+        "children": []
+      }
+    ]
+  },
+  {
+    "type": "separator"
+  },
+  {
+    "loaded": true,
+    "isPathHref": true,
+    "type": "category",
     "title": "General",
     "children": [
       {
@@ -8546,14 +9051,6 @@ export const generatedSidebar = [
         "type": "link",
         "path": "/references/medusa-config",
         "title": "Medusa Configurations",
-        "children": []
-      },
-      {
-        "loaded": true,
-        "isPathHref": true,
-        "type": "link",
-        "path": "/upgrade-guides",
-        "title": "Upgrade Guides",
         "children": []
       },
       {
@@ -8569,8 +9066,15 @@ export const generatedSidebar = [
             "isPathHref": true,
             "type": "category",
             "title": "Medusa Application",
-            "autogenerate_path": "/deployment/medusa-application",
             "children": [
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "https://docs.medusajs.com/learn/deployment/general",
+                "title": "General",
+                "children": []
+              },
               {
                 "loaded": true,
                 "isPathHref": true,
@@ -8753,21 +9257,10 @@ export const generatedSidebar = [
                 "children": []
               }
             ]
-          },
-          {
-            "loaded": true,
-            "isPathHref": true,
-            "type": "link",
-            "path": "/troubleshooting/deployment",
-            "title": "Deployment",
-            "children": []
           }
         ]
       }
     ]
-  },
-  {
-    "type": "separator"
   },
   {
     "loaded": true,
@@ -9729,14 +10222,6 @@ export const generatedSidebar = [
                     "loaded": true,
                     "isPathHref": true,
                     "type": "link",
-                    "path": "/references/medusa-workflows/steps/getItemTaxLinesStep",
-                    "title": "getItemTaxLinesStep",
-                    "children": []
-                  },
-                  {
-                    "loaded": true,
-                    "isPathHref": true,
-                    "type": "link",
                     "path": "/references/medusa-workflows/steps/getLineItemActionsStep",
                     "title": "getLineItemActionsStep",
                     "children": []
@@ -10180,6 +10665,14 @@ export const generatedSidebar = [
                     "loaded": true,
                     "isPathHref": true,
                     "type": "link",
+                    "path": "/references/medusa-workflows/linkCustomerGroupsToCustomerWorkflow",
+                    "title": "linkCustomerGroupsToCustomerWorkflow",
+                    "children": []
+                  },
+                  {
+                    "loaded": true,
+                    "isPathHref": true,
+                    "type": "link",
                     "path": "/references/medusa-workflows/linkCustomersToCustomerGroupWorkflow",
                     "title": "linkCustomersToCustomerGroupWorkflow",
                     "children": []
@@ -10213,6 +10706,14 @@ export const generatedSidebar = [
                     "type": "link",
                     "path": "/references/medusa-workflows/steps/deleteCustomerGroupStep",
                     "title": "deleteCustomerGroupStep",
+                    "children": []
+                  },
+                  {
+                    "loaded": true,
+                    "isPathHref": true,
+                    "type": "link",
+                    "path": "/references/medusa-workflows/steps/linkCustomerGroupsToCustomerStep",
+                    "title": "linkCustomerGroupsToCustomerStep",
                     "children": []
                   },
                   {
@@ -10757,6 +11258,14 @@ export const generatedSidebar = [
                     "type": "link",
                     "path": "/references/medusa-workflows/steps/updateInventoryLevelsStep",
                     "title": "updateInventoryLevelsStep",
+                    "children": []
+                  },
+                  {
+                    "loaded": true,
+                    "isPathHref": true,
+                    "type": "link",
+                    "path": "/references/medusa-workflows/steps/validateInventoryDeleteStep",
+                    "title": "validateInventoryDeleteStep",
                     "children": []
                   },
                   {
@@ -11775,14 +12284,6 @@ export const generatedSidebar = [
                     "type": "link",
                     "path": "/references/medusa-workflows/steps/deleteReturnsStep",
                     "title": "deleteReturnsStep",
-                    "children": []
-                  },
-                  {
-                    "loaded": true,
-                    "isPathHref": true,
-                    "type": "link",
-                    "path": "/references/medusa-workflows/steps/getOrderItemTaxLinesStep",
-                    "title": "getOrderItemTaxLinesStep",
                     "children": []
                   },
                   {
@@ -14178,6 +14679,14 @@ export const generatedSidebar = [
                     "path": "/references/medusa-workflows/updateTaxRatesWorkflow",
                     "title": "updateTaxRatesWorkflow",
                     "children": []
+                  },
+                  {
+                    "loaded": true,
+                    "isPathHref": true,
+                    "type": "link",
+                    "path": "/references/medusa-workflows/updateTaxRegionsWorkflow",
+                    "title": "updateTaxRegionsWorkflow",
+                    "children": []
                   }
                 ],
                 "loaded": true
@@ -14415,6 +14924,14 @@ export const generatedSidebar = [
             "type": "link",
             "path": "/contribution-guidelines/docs",
             "title": "Docs",
+            "children": []
+          },
+          {
+            "loaded": true,
+            "isPathHref": true,
+            "type": "link",
+            "path": "/contribution-guidelines/admin-translations",
+            "title": "Admin Translations",
             "children": []
           }
         ]

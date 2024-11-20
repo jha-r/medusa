@@ -5,15 +5,15 @@ import { Trans, useTranslation } from "react-i18next"
 import { Link, useNavigate, useSearchParams } from "react-router-dom"
 import * as z from "zod"
 
+import { useState } from "react"
+import { decodeToken } from "react-jwt"
 import { Form } from "../../components/common/form"
 import { LogoBox } from "../../components/common/logo-box"
+import { i18n } from "../../components/utilities/i18n"
 import {
   useResetPasswordForEmailPass,
   useUpdateProviderForEmailPass,
 } from "../../hooks/api/auth"
-import { useState } from "react"
-import { decodeToken } from "react-jwt"
-import { i18n } from "../../components/utilities/i18n"
 
 const ResetPasswordInstructionsSchema = z.object({
   email: z.string().email(),
@@ -117,19 +117,26 @@ const ChooseNewPassword = ({ token }: { token: string }) => {
   const { mutateAsync, isPending } = useUpdateProviderForEmailPass()
 
   const handleSubmit = form.handleSubmit(async ({ password }) => {
-    try {
-      await mutateAsync({
+    if (!invite) {
+      return
+    }
+
+    await mutateAsync(
+      {
         email: invite.entity_id,
         password,
-      })
-
-      form.setValue("password", "")
-      form.setValue("repeat_password", "")
-
-      setShowAlert(true)
-    } catch (error) {
-      toast.error(error.message)
-    }
+      },
+      {
+        onSuccess: () => {
+          form.setValue("password", "")
+          form.setValue("repeat_password", "")
+          setShowAlert(true)
+        },
+        onError: (error) => {
+          toast.error(error.message)
+        },
+      }
+    )
   })
 
   if (!isValidResetPasswordToken) {
@@ -137,8 +144,8 @@ const ChooseNewPassword = ({ token }: { token: string }) => {
   }
 
   return (
-    <div className="bg-ui-bg-base flex min-h-dvh w-dvw items-center justify-center">
-      <div className="m-4 flex w-full max-w-[300px] flex-col items-center">
+    <div className="bg-ui-bg-subtle flex min-h-dvh w-dvw items-center justify-center">
+      <div className="m-4 flex w-full max-w-[280px] flex-col items-center">
         <LogoBox className="mb-4" />
         <div className="mb-6 flex flex-col items-center">
           <Heading>{t("resetPassword.resetPassword")}</Heading>
@@ -218,7 +225,7 @@ const ChooseNewPassword = ({ token }: { token: string }) => {
               <Link
                 key="login-link"
                 to="/login"
-                className="text-ui-fg-interactive transition-fg hover:text-ui-fg-interactive-hover focus-visible:text-ui-fg-interactive-hover outline-none"
+                className="text-ui-fg-base transition-fg hover:text-ui-fg-base-hover focus-visible:text-ui-fg-base-hover outline-none"
               />,
             ]}
           />
@@ -245,15 +252,20 @@ export const ResetPassword = () => {
   const { mutateAsync, isPending } = useResetPasswordForEmailPass()
 
   const handleSubmit = form.handleSubmit(async ({ email }) => {
-    try {
-      await mutateAsync({
+    await mutateAsync(
+      {
         email,
-      })
-      form.setValue("email", "")
-      setShowAlert(true)
-    } catch (error) {
-      toast.error(error.message)
-    }
+      },
+      {
+        onSuccess: () => {
+          form.setValue("email", "")
+          setShowAlert(true)
+        },
+        onError: (error) => {
+          toast.error(error.message)
+        },
+      }
+    )
   })
 
   if (token) {
@@ -319,7 +331,7 @@ export const ResetPassword = () => {
               <Link
                 key="login-link"
                 to="/login"
-                className="text-ui-fg-interactive transition-fg hover:text-ui-fg-interactive-hover focus-visible:text-ui-fg-interactive-hover outline-none"
+                className="text-ui-fg-base transition-fg hover:text-ui-fg-base-hover focus-visible:text-ui-fg-base-hover outline-none"
               />,
             ]}
           />

@@ -1,6 +1,6 @@
 import { ProductCategoryService } from "@services"
 
-import { moduleIntegrationTestRunner } from "medusa-test-utils"
+import { moduleIntegrationTestRunner } from "@medusajs/test-utils"
 import {
   eletronicsCategoriesData,
   productCategoriesData,
@@ -235,38 +235,38 @@ moduleIntegrationTestRunner<Service>({
               mpath:
                 "electronics.computers.laptops.gaming-laptops.high-performance.4k-gaming",
               parent_category_id: "high-performance",
-              parent_category: {
+              parent_category: expect.objectContaining({
                 id: "high-performance",
                 parent_category_id: "gaming-laptops",
                 handle: "high-performance-gaming-laptops",
                 mpath:
                   "electronics.computers.laptops.gaming-laptops.high-performance",
-                parent_category: {
+                parent_category: expect.objectContaining({
                   id: "gaming-laptops",
                   handle: "gaming-laptops",
                   mpath: "electronics.computers.laptops.gaming-laptops",
                   parent_category_id: "laptops",
-                  parent_category: {
+                  parent_category: expect.objectContaining({
                     id: "laptops",
                     parent_category_id: "computers",
                     handle: "laptops",
                     mpath: "electronics.computers.laptops",
-                    parent_category: {
+                    parent_category: expect.objectContaining({
                       id: "computers",
                       handle: "computers-&-accessories",
                       mpath: "electronics.computers",
                       parent_category_id: "electronics",
-                      parent_category: {
+                      parent_category: expect.objectContaining({
                         id: "electronics",
                         parent_category_id: null,
                         handle: "electronics",
                         mpath: "electronics",
                         parent_category: null,
-                      },
-                    },
-                  },
-                },
-              },
+                      }),
+                    }),
+                  }),
+                }),
+              }),
             },
           ])
         })
@@ -421,38 +421,38 @@ moduleIntegrationTestRunner<Service>({
               handle: "category-1-a",
               mpath: "category-0.category-1.category-1-a",
               parent_category_id: "category-1",
-              parent_category: {
+              parent_category: expect.objectContaining({
                 id: "category-1",
                 handle: "category-1",
                 mpath: "category-0.category-1",
                 parent_category_id: "category-0",
-                parent_category: {
+                parent_category: expect.objectContaining({
                   id: "category-0",
                   handle: "category-0",
                   mpath: "category-0",
                   parent_category_id: null,
                   parent_category: null,
-                },
-              },
+                }),
+              }),
             },
             {
               id: "category-1-b",
               handle: "category-1-b",
               mpath: "category-0.category-1.category-1-b",
               parent_category_id: "category-1",
-              parent_category: {
+              parent_category: expect.objectContaining({
                 id: "category-1",
                 handle: "category-1",
                 mpath: "category-0.category-1",
                 parent_category_id: "category-0",
-                parent_category: {
+                parent_category: expect.objectContaining({
                   id: "category-0",
                   handle: "category-0",
                   mpath: "category-0",
                   parent_category_id: null,
                   parent_category: null,
-                },
-              },
+                }),
+              }),
             },
           ])
         })
@@ -469,29 +469,25 @@ moduleIntegrationTestRunner<Service>({
             }
           )
 
-          const serializedObject = JSON.parse(
-            JSON.stringify(productCategoryResults)
-          )
-
-          expect(serializedObject).toEqual([
+          expect(productCategoryResults).toEqual([
             {
               id: "category-1-a",
               handle: "category-1-a",
               mpath: "category-0.category-1.category-1-a",
               parent_category_id: "category-1",
-              parent_category: {
+              parent_category: expect.objectContaining({
                 id: "category-1",
                 handle: "category-1",
                 mpath: "category-0.category-1",
                 parent_category_id: "category-0",
-                parent_category: {
+                parent_category: expect.objectContaining({
                   id: "category-0",
                   handle: "category-0",
                   mpath: "category-0",
                   parent_category_id: null,
                   parent_category: null,
-                },
-              },
+                }),
+              }),
               category_children: [],
             },
             {
@@ -499,26 +495,26 @@ moduleIntegrationTestRunner<Service>({
               handle: "category-1-b",
               mpath: "category-0.category-1.category-1-b",
               parent_category_id: "category-1",
-              parent_category: {
+              parent_category: expect.objectContaining({
                 id: "category-1",
                 handle: "category-1",
                 mpath: "category-0.category-1",
                 parent_category_id: "category-0",
-                parent_category: {
+                parent_category: expect.objectContaining({
                   id: "category-0",
                   handle: "category-0",
                   mpath: "category-0",
                   parent_category_id: null,
                   parent_category: null,
-                },
-              },
+                }),
+              }),
               category_children: [
-                {
+                expect.objectContaining({
                   id: "category-1-b-1",
                   handle: "category-1-b-1",
                   mpath: "category-0.category-1.category-1-b.category-1-b-1",
                   parent_category_id: "category-1-b",
-                },
+                }),
               ],
             },
           ])
@@ -1131,6 +1127,109 @@ moduleIntegrationTestRunner<Service>({
                 rank: 3,
               }),
             ])
+          )
+        })
+
+        it(`should update the mpath of the full descendent tree successfully when moving the grand parent in the hierarchy`, async () => {
+          for (const entry of eletronicsCategoriesData) {
+            await service.create([entry])
+          }
+
+          let [productCategory] = await service.list(
+            {
+              id: "laptops",
+            },
+            {
+              select: ["id", "handle"],
+            }
+          )
+
+          await service.update([
+            {
+              id: productCategory.id,
+              parent_category_id: "gaming-desktops",
+            },
+          ])
+          ;[productCategory] = await service.list({
+            id: "laptops",
+            include_descendants_tree: true,
+          })
+
+          expect(productCategory).toEqual(
+            expect.objectContaining({
+              id: "laptops",
+              mpath: "electronics.computers.desktops.gaming-desktops.laptops",
+              parent_category_id: "gaming-desktops",
+              category_children: [
+                expect.objectContaining({
+                  id: "gaming-laptops",
+                  mpath:
+                    "electronics.computers.desktops.gaming-desktops.laptops.gaming-laptops",
+                  category_children: [
+                    expect.objectContaining({
+                      id: "budget-gaming",
+                      mpath:
+                        "electronics.computers.desktops.gaming-desktops.laptops.gaming-laptops.budget-gaming",
+                      parent_category_id: "gaming-laptops",
+                    }),
+                    expect.objectContaining({
+                      id: "high-performance",
+                      parent_category_id: "gaming-laptops",
+                      mpath:
+                        "electronics.computers.desktops.gaming-desktops.laptops.gaming-laptops.high-performance",
+                      category_children: [
+                        expect.objectContaining({
+                          id: "4k-gaming",
+                          mpath:
+                            "electronics.computers.desktops.gaming-desktops.laptops.gaming-laptops.high-performance.4k-gaming",
+                          parent_category_id: "high-performance",
+                        }),
+                        expect.objectContaining({
+                          id: "vr-ready",
+                          mpath:
+                            "electronics.computers.desktops.gaming-desktops.laptops.gaming-laptops.high-performance.vr-ready",
+                          parent_category_id: "high-performance",
+                        }),
+                      ],
+                    }),
+                  ],
+                }),
+                expect.objectContaining({
+                  id: "ultrabooks",
+                  mpath:
+                    "electronics.computers.desktops.gaming-desktops.laptops.ultrabooks",
+                  parent_category_id: "laptops",
+                  category_children: [
+                    expect.objectContaining({
+                      id: "convertible-ultrabooks",
+                      mpath:
+                        "electronics.computers.desktops.gaming-desktops.laptops.ultrabooks.convertible-ultrabooks",
+                      parent_category_id: "ultrabooks",
+                      category_children: [
+                        expect.objectContaining({
+                          id: "detachable-ultrabooks",
+                          mpath:
+                            "electronics.computers.desktops.gaming-desktops.laptops.ultrabooks.convertible-ultrabooks.detachable-ultrabooks",
+                          parent_category_id: "convertible-ultrabooks",
+                        }),
+                        expect.objectContaining({
+                          id: "touchscreen-ultrabooks",
+                          mpath:
+                            "electronics.computers.desktops.gaming-desktops.laptops.ultrabooks.convertible-ultrabooks.touchscreen-ultrabooks",
+                          parent_category_id: "convertible-ultrabooks",
+                        }),
+                      ],
+                    }),
+                    expect.objectContaining({
+                      id: "thin-light",
+                      mpath:
+                        "electronics.computers.desktops.gaming-desktops.laptops.ultrabooks.thin-light",
+                      parent_category_id: "ultrabooks",
+                    }),
+                  ],
+                }),
+              ],
+            })
           )
         })
       })
