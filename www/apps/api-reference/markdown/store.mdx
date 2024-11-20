@@ -6,7 +6,6 @@ import {
 } from "@/layouts/DividedMarkdown/Sections"
 import Section from "@/components/Section"
 import { Feedback, CodeTabs, CodeTab } from "docs-ui"
-import formatReportLink from "@/utils/format-report-link"
 
 import ClientLibraries from "./client-libraries.mdx"
 
@@ -28,7 +27,6 @@ All API Routes are prefixed with `/store`. So, during development, the API Route
     area: "store",
     section: "introduction"
   }}
-  reportLink={formatReportLink("store", "Introduction")}
   pathName="/api/store"
   question="Was this section helpful?"
   vertical={true}
@@ -242,7 +240,6 @@ fetch(`<BACKEND_URL>/store/products`, {
     area: "store",
     section: "authentication-cookie"
   }}
-  reportLink={formatReportLink("store", "Authentication - Cookie Session ID")}
   pathName="/api/store"
   question="Was this section helpful?"
   vertical={true}
@@ -307,7 +304,6 @@ Where `{your_publishable_api_key}` is the token of the publishable API key.
     area: "store",
     section: "publishable-api-key"
   }}
-  reportLink={formatReportLink("store", "Publishable API Key")}
   pathName="/api/store"
   question="Was this section helpful?"
   vertical={true}
@@ -357,7 +353,6 @@ x-no-compression: true
     area: "store",
     section: "http-compression"
   }}
-  reportLink={formatReportLink("store", "HTTP Compression")}
   pathName="/api/store"
   question="Was this section helpful?"
   vertical={true}
@@ -481,7 +476,6 @@ This returns the variants of each product, but the variants only have their `id`
     area: "store",
     section: "select-fields"
   }}
-  reportLink={formatReportLink("store", "Selecting Fields")}
   pathName="/api/store"
   question="Was this section helpful?"
   vertical={true}
@@ -694,7 +688,6 @@ curl -g "http://localhost:9000/store/products?created_at[$lt]=2023-02-17&created
     area: "store",
     section: "query-parameters"
   }}
-  reportLink={formatReportLink("store", "Query Parameter Types")}
   pathName="/api/store"
   question="Was this section helpful?"
   vertical={true}
@@ -819,7 +812,6 @@ This sorts the products by their `created_at` field in the descending order.
     area: "store",
     section: "pagination"
   }}
-  reportLink={formatReportLink("store", "Pagination")}
   pathName="/api/store"
   question="Was this section helpful?"
   vertical={true}
@@ -847,7 +839,6 @@ Refer to [this guide](https://docs.medusajs.com/customization/extend-models/exte
     area: "admin",
     section: "workflows"
   }}
-  reportLink={formatReportLink("admin", "Workflows")}
   pathName="/api/admin"
   question="Was this section helpful?"
   vertical={true}

@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useRef, useState } from "react"
+import React, { useMemo, useRef, useState } from "react"
 // @ts-expect-error can't install the types package because it doesn't support React v19
 import { CSSTransition, SwitchTransition } from "react-transition-group"
 import { Solutions } from "./Solutions"
@@ -16,6 +16,7 @@ import {
 } from "@/components"
 import { ChatBubbleLeftRight, ThumbDown, ThumbUp } from "@medusajs/icons"
 import Link from "next/link"
+import { useSiteConfig } from "../../providers"
 
 export type FeedbackProps = {
   event: string
@@ -39,7 +40,7 @@ export type FeedbackProps = {
 export const Feedback = ({
   event,
   pathName,
-  reportLink,
+  reportLink: initReportLink,
   question = "Was this page helpful?",
   positiveBtn = "It was helpful",
   negativeBtn = "It wasn't helpful",
@@ -54,6 +55,12 @@ export const Feedback = ({
   showLongForm = false,
   showDottedSeparator = true,
 }: FeedbackProps) => {
+  const {
+    config: { reportIssueLink },
+  } = useSiteConfig()
+  const reportLink = useMemo(() => {
+    return initReportLink || reportIssueLink
+  }, [initReportLink, reportIssueLink])
   const [showForm, setShowForm] = useState(false)
   const [submittedFeedback, setSubmittedFeedback] = useState(false)
   const [loading, setLoading] = useState(false)

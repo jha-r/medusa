@@ -1,3 +1,4 @@
+import { medusaIntegrationTestRunner } from "@medusajs/test-utils"
 import {
   Modules,
   PriceListStatus,
@@ -6,38 +7,18 @@ import {
   PromotionRuleOperator,
   PromotionType,
 } from "@medusajs/utils"
-import { medusaIntegrationTestRunner } from "@medusajs/test-utils"
 import {
   createAdminUser,
   generatePublishableKey,
   generateStoreHeaders,
 } from "../../../../helpers/create-admin-user"
 import { setupTaxStructure } from "../../../../modules/__tests__/fixtures"
+import { createAuthenticatedCustomer } from "../../../../modules/helpers/create-authenticated-customer"
 
 jest.setTimeout(100000)
 
 const env = { MEDUSA_FF_MEDUSA_V2: true }
 const adminHeaders = { headers: { "x-medusa-access-token": "test_token" } }
-
-const generateStoreHeadersWithCustomer = async ({
-  api,
-  storeHeaders,
-  customer,
-}) => {
-  const registeredCustomerToken = (
-    await api.post("/auth/customer/emailpass/register", {
-      email: customer.email,
-      password: "password",
-    })
-  ).data.token
-
-  return {
-    headers: {
-      ...storeHeaders.headers,
-      authorization: `Bearer ${registeredCustomerToken}`,
-    },
-  }
-}
 
 const shippingAddressData = {
   address_1: "test address 1",
@@ -136,22 +117,19 @@ medusaIntegrationTestRunner({
         const publishableKey = await generatePublishableKey(appContainer)
         storeHeaders = generateStoreHeaders({ publishableKey })
 
-        customer = (
-          await api.post(
-            "/admin/customers",
-            {
-              first_name: "tony",
-              email: "tony@stark-industries.com",
-            },
-            adminHeaders
-          )
-        ).data.customer
-
-        storeHeadersWithCustomer = await generateStoreHeadersWithCustomer({
-          storeHeaders,
-          api,
-          customer,
+        const result = await createAuthenticatedCustomer(api, storeHeaders, {
+          first_name: "tony",
+          last_name: "stark",
+          email: "tony@stark-industries.com",
         })
+
+        customer = result.customer
+        storeHeadersWithCustomer = {
+          headers: {
+            ...storeHeaders.headers,
+            authorization: `Bearer ${result.jwt}`,
+          },
+        }
 
         await setupTaxStructure(appContainer.resolve(Modules.TAX))
 
@@ -582,21 +560,17 @@ medusaIntegrationTestRunner({
         let otherRegion
 
         beforeEach(async () => {
-          cart = (
-            await api.post(
-              `/store/carts`,
-              {
-                email: "tony@stark.com",
-                currency_code: "usd",
-                sales_channel_id: salesChannel.id,
-                region_id: region.id,
-                shipping_address: shippingAddressData,
-                items: [{ variant_id: product.variants[0].id, quantity: 1 }],
-                promo_codes: [promotion.code],
-              },
-              storeHeadersWithCustomer
-            )
-          ).data.cart
+          const cartData = {
+            currency_code: "usd",
+            sales_channel_id: salesChannel.id,
+            region_id: region.id,
+            shipping_address: shippingAddressData,
+            items: [{ variant_id: product.variants[0].id, quantity: 1 }],
+            promo_codes: [promotion.code],
+          }
+
+          cart = (await api.post(`/store/carts`, cartData, storeHeaders)).data
+            .cart
 
           otherRegion = (
             await api.post(
@@ -751,7 +725,7 @@ medusaIntegrationTestRunner({
         it("should not generate tax lines if automatic taxes is false", async () => {
           let updated = await api.post(
             `/store/carts/${cart.id}`,
-            { email: "another@tax.com" },
+            {},
             storeHeaders
           )
 
@@ -776,7 +750,7 @@ medusaIntegrationTestRunner({
 
           updated = await api.post(
             `/store/carts/${cart.id}`,
-            { email: "another@tax.com", region_id: noAutomaticRegion.id },
+            { region_id: noAutomaticRegion.id },
             storeHeaders
           )
 
@@ -1233,6 +1207,242 @@ medusaIntegrationTestRunner({
             expect.objectContaining({
               id: cart.id,
               shipping_methods: [],
+            })
+          )
+        })
+
+        it("should update email irregardless of registered customer", async () => {
+          const updateEmailWithoutCustomer = await api.post(
+            `/store/carts/${cart.id}`,
+            { email: "tony@stark.com" },
+            storeHeaders
+          )
+
+          expect(updateEmailWithoutCustomer.data.cart).toEqual(
+            expect.objectContaining({
+              email: "tony@stark.com",
+              customer: expect.objectContaining({
+                email: "tony@stark.com",
+              }),
+            })
+          )
+
+          const updateCartCustomer = await api.post(
+            `/store/carts/${cart.id}/customer`,
+            {},
+            storeHeadersWithCustomer
+          )
+
+          expect(updateCartCustomer.data.cart).toEqual(
+            expect.objectContaining({
+              email: "tony@stark-industries.com",
+              customer: expect.objectContaining({
+                id: customer.id,
+                email: "tony@stark-industries.com",
+              }),
+            })
+          )
+
+          const updateEmailWithCustomer = await api.post(
+            `/store/carts/${cart.id}`,
+            { email: "new@stark.com" },
+            storeHeaders
+          )
+
+          expect(updateEmailWithCustomer.data.cart).toEqual(
+            expect.objectContaining({
+              email: "new@stark.com",
+              customer: expect.objectContaining({
+                id: customer.id,
+                email: "tony@stark-industries.com",
+              }),
+            })
+          )
+        })
+      })
+
+      describe("POST /store/carts/:id/customer", () => {
+        beforeEach(async () => {
+          cart = (
+            await api.post(
+              `/store/carts`,
+              {
+                currency_code: "usd",
+                sales_channel_id: salesChannel.id,
+                region_id: region.id,
+                items: [{ variant_id: product.variants[0].id, quantity: 1 }],
+              },
+              storeHeaders
+            )
+          ).data.cart
+        })
+
+        it("should throw 401 when user is not logged in as a customer", async () => {
+          const { response } = await api
+            .post(`/store/carts/${cart.id}/customer`, {}, storeHeaders)
+            .catch((e) => e)
+
+          expect(response.status).toEqual(401)
+        })
+
+        it("should throw error when cart does not exist", async () => {
+          const { response } = await api
+            .post(
+              `/store/carts/does-not-exist/customer`,
+              {},
+              storeHeadersWithCustomer
+            )
+            .catch((e) => e)
+
+          expect(response.status).toEqual(404)
+          expect(response.data.message).toEqual(
+            "Cart id not found: does-not-exist"
+          )
+        })
+
+        it("should throw error when trying to update a cart that belongs to a customer that has an account", async () => {
+          const customerUpdate1 = await api.post(
+            `/store/carts/${cart.id}/customer`,
+            {},
+            storeHeadersWithCustomer
+          )
+
+          expect(customerUpdate1.status).toEqual(200)
+          expect(customerUpdate1.data.cart).toEqual(
+            expect.objectContaining({
+              email: customer.email,
+              customer: expect.objectContaining({
+                id: customer.id,
+                email: customer.email,
+              }),
+            })
+          )
+
+          const { jwt: jwt2 } = await createAuthenticatedCustomer(
+            api,
+            storeHeaders,
+            {
+              first_name: "tony2",
+              last_name: "stark",
+              email: "tony2@stark-industries.com",
+            }
+          )
+
+          const storeHeadersWithCustomer2 = {
+            headers: {
+              ...storeHeaders.headers,
+              authorization: `Bearer ${jwt2}`,
+            },
+          }
+
+          const { response } = await api
+            .post(
+              `/store/carts/${cart.id}/customer`,
+              {},
+              storeHeadersWithCustomer2
+            )
+            .catch((e) => e)
+
+          expect(response.status).toEqual(400)
+          expect(response.data.message).toEqual(
+            "Cannot update cart customer when its assigned to a different customer"
+          )
+        })
+
+        it("should successfully update cart customer when cart is without customer", async () => {
+          const updated = await api.post(
+            `/store/carts/${cart.id}/customer`,
+            {},
+            storeHeadersWithCustomer
+          )
+
+          expect(updated.status).toEqual(200)
+          expect(updated.data.cart).toEqual(
+            expect.objectContaining({
+              email: customer.email,
+              customer: expect.objectContaining({
+                id: customer.id,
+                email: customer.email,
+              }),
+            })
+          )
+        })
+
+        it("should successfully update cart customer when cart has a guest customer", async () => {
+          const guestEmail = "tony@guest.com"
+          const updatedCart = await api.post(
+            `/store/carts/${cart.id}`,
+            { email: guestEmail },
+            storeHeadersWithCustomer
+          )
+
+          expect(updatedCart.status).toEqual(200)
+          expect(updatedCart.data.cart).toEqual(
+            expect.objectContaining({
+              email: guestEmail,
+              customer: expect.objectContaining({
+                email: guestEmail,
+              }),
+            })
+          )
+
+          const updated = await api.post(
+            `/store/carts/${cart.id}/customer`,
+            {},
+            storeHeadersWithCustomer
+          )
+
+          expect(updated.status).toEqual(200)
+          expect(updated.data.cart).toEqual(
+            expect.objectContaining({
+              email: customer.email,
+              customer: expect.objectContaining({
+                id: customer.id,
+                email: customer.email,
+              }),
+            })
+          )
+        })
+
+        it("should successfully update cart customer when customer already owns the cart", async () => {
+          const guestEmail = "tony@guest.com"
+
+          await api.post(
+            `/store/carts/${cart.id}/customer`,
+            {},
+            storeHeadersWithCustomer
+          )
+
+          const updatedCart = await api.post(
+            `/store/carts/${cart.id}`,
+            { email: guestEmail },
+            storeHeadersWithCustomer
+          )
+
+          expect(updatedCart.status).toEqual(200)
+          expect(updatedCart.data.cart).toEqual(
+            expect.objectContaining({
+              email: guestEmail,
+              customer: expect.objectContaining({
+                email: customer.email,
+              }),
+            })
+          )
+
+          const updated = await api.post(
+            `/store/carts/${cart.id}/customer`,
+            {},
+            storeHeadersWithCustomer
+          )
+
+          expect(updated.status).toEqual(200)
+          expect(updated.data.cart).toEqual(
+            expect.objectContaining({
+              email: guestEmail,
+              customer: expect.objectContaining({
+                id: customer.id,
+                email: customer.email,
+              }),
             })
           )
         })

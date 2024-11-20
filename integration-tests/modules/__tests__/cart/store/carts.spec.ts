@@ -417,7 +417,8 @@ medusaIntegrationTestRunner({
 
         it("should create cart with logged-in customer", async () => {
           const { customer, jwt } = await createAuthenticatedCustomer(
-            appContainer
+            api,
+            storeHeaders
           )
 
           const response = await api.post(

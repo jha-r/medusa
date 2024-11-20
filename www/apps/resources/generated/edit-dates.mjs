@@ -53,10 +53,10 @@ export const generatedEditDates = {
   "app/commerce-modules/payment/payment/page.mdx": "2024-10-09T10:59:08.463Z",
   "app/commerce-modules/payment/payment-collection/page.mdx": "2024-10-09T10:56:49.510Z",
   "app/commerce-modules/payment/payment-flow/page.mdx": "2024-10-09T11:18:53.332Z",
-  "app/commerce-modules/payment/payment-provider/stripe/page.mdx": "2024-10-15T12:51:45.236Z",
+  "app/commerce-modules/payment/payment-provider/stripe/page.mdx": "2024-11-19T11:46:31.140Z",
   "app/commerce-modules/payment/payment-provider/page.mdx": "2024-10-09T11:07:27.269Z",
   "app/commerce-modules/payment/payment-session/page.mdx": "2024-10-09T10:58:00.960Z",
-  "app/commerce-modules/payment/webhook-events/page.mdx": "2024-10-09T11:11:05.413Z",
+  "app/commerce-modules/payment/webhook-events/page.mdx": "2024-11-19T11:45:02.167Z",
   "app/commerce-modules/payment/page.mdx": "2024-10-09T10:39:37.362Z",
   "app/commerce-modules/pricing/_events/_events-table/page.mdx": "2024-07-03T19:27:13+03:00",
   "app/commerce-modules/pricing/_events/page.mdx": "2024-07-03T19:27:13+03:00",
@@ -119,7 +119,7 @@ export const generatedEditDates = {
   "app/deployment/medusa-application/railway/page.mdx": "2024-11-11T11:50:10.517Z",
   "app/deployment/storefront/vercel/page.mdx": "2024-07-26T07:21:31+00:00",
   "app/deployment/page.mdx": "2024-07-25T09:55:22+03:00",
-  "app/integrations/page.mdx": "2024-10-15T12:26:39.839Z",
+  "app/integrations/page.mdx": "2024-11-19T10:09:54.075Z",
   "app/medusa-cli/page.mdx": "2024-08-28T11:25:32.382Z",
   "app/medusa-container-resources/page.mdx": "2024-09-30T08:43:53.173Z",
   "app/medusa-workflows-reference/page.mdx": "2024-09-30T08:43:53.174Z",
@@ -3251,5 +3251,6 @@ export const generatedEditDates = {
   "references/product/interfaces/product.FilterableProductProps/page.mdx": "2024-11-12T09:36:53.124Z",
   "references/types/HttpTypes/interfaces/types.HttpTypes.AdminBatchProductVariantRequest/page.mdx": "2024-11-12T09:36:22.780Z",
   "references/types/WorkflowTypes/ProductWorkflow/interfaces/types.WorkflowTypes.ProductWorkflow.ExportProductsDTO/page.mdx": "2024-11-12T09:36:24.232Z",
-  "app/contribution-guidelines/admin-translations/page.mdx": "2024-11-14T08:54:15.369Z"
+  "app/contribution-guidelines/admin-translations/page.mdx": "2024-11-14T08:54:15.369Z",
+  "app/integrations/guides/sanity/page.mdx": "2024-11-19T10:07:24.519Z"
 }

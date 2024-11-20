@@ -106,6 +106,7 @@ export type RelationshipMetadata = {
   entity: unknown
   nullable: boolean
   mappedBy?: string
+  searchable: boolean
   options: Record<string, any>
 }
 

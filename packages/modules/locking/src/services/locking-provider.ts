@@ -1,16 +1,25 @@
-import { Constructor, ILockingProvider } from "@medusajs/framework/types"
+import {
+  Constructor,
+  ILockingProvider,
+  Logger,
+} from "@medusajs/framework/types"
 import { MedusaError } from "@medusajs/framework/utils"
 import { LockingProviderRegistrationPrefix } from "../types"
 
 type InjectedDependencies = {
   [key: `lp_${string}`]: ILockingProvider
+  logger?: Logger
 }
 
 export default class LockingProviderService {
   protected __container__: InjectedDependencies
+  #logger: Logger
 
   constructor(container: InjectedDependencies) {
     this.__container__ = container
+    this.#logger = container["logger"]
+      ? container.logger
+      : (console as unknown as Logger)
   }
 
   static getRegistrationIdentifier(
@@ -31,10 +40,12 @@ export default class LockingProviderService {
         `${LockingProviderRegistrationPrefix}${providerId}`
       ]
     } catch (err) {
-      throw new MedusaError(
-        MedusaError.Types.NOT_FOUND,
-        `Could not find a locking provider with id: ${providerId}`
-      )
+      const errMessage = `
+      Unable to retrieve the locking provider with id: ${providerId}
+      Please make sure that the provider is registered in the container and it is configured correctly in your project configuration file.
+      `
+      this.#logger.error(errMessage)
+      throw new Error(errMessage)
     }
   }
 }

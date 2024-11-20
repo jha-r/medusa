@@ -71,6 +71,8 @@ export interface StoreUpdateCart {
   promo_codes?: string[]
 }
 
+export interface StoreUpdateCartCustomer {}
+
 export interface StoreAddCartLineItem {
   /**
    * The ID of the product variant to add to the cart.
@@ -104,7 +106,7 @@ export interface StoreAddCartShippingMethods {
   option_id: string
   /**
    * Data useful for the associated fulfillment provider.
-   * 
+   *
    * Learn more in [this documentation](https://docs.medusajs.com/resources/commerce-modules/fulfillment/shipping-option#data-property).
    */
   data?: Record<string, unknown>

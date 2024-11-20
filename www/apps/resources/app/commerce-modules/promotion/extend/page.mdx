@@ -538,7 +538,7 @@ export const updateCustomFromPromotionWorkflow = createWorkflow(
       fields: ["custom.*"],
       filters: {
         id: input.promotion.id,
-      }
+      },
     })
 
     // TODO create, update, or delete Custom record
@@ -555,7 +555,7 @@ Next, replace the `TODO` with the following:
 ```ts title="src/workflows/update-custom-from-promotion/index.ts"
 const created = when({
   input,
-  promotions
+  promotions,
 }, (data) => 
   !data.promotions[0].custom && 
   data.input.additional_data?.custom_name?.length > 0
@@ -589,7 +589,7 @@ Next, replace the new `TODO` with the following:
 ```ts title="src/workflows/update-custom-from-promotion/index.ts"
 const deleted = when({
   input,
-  promotions
+  promotions,
 }, (data) => 
   data.promotions[0].custom && (
     data.input.additional_data?.custom_name === null || 
@@ -598,13 +598,13 @@ const deleted = when({
 )
 .then(() => {
   deleteCustomStep({
-    custom: promotions[0].custom
+    custom: promotions[0].custom,
   })
 
   dismissRemoteLinkStep({
     [HELLO_MODULE]: {
-      custom_id: promotions[0].custom.id
-    }
+      custom_id: promotions[0].custom.id,
+    },
   })
 
   return promotions[0].custom.id
@@ -620,12 +620,12 @@ Finally, replace the new `TODO` with the following:
 ```ts title="src/workflows/update-custom-from-promotion/index.ts"
 const updated = when({
   input,
-  promotions
+  promotions,
 }, (data) => data.promotions[0].custom && data.input.additional_data?.custom_name?.length > 0)
 .then(() => {
   const custom = updateCustomStep({
     id: promotions[0].custom.id,
-    custom_name: input.additional_data.custom_name
+    custom_name: input.additional_data.custom_name,
   })
 
   return custom
