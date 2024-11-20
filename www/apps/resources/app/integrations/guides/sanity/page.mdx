@@ -11,6 +11,8 @@ In this guide, you'll learn how to integrate Medusa with Sanity.
 
 Sanity is a Content Management System (CMS) that simplifies managing content from third-party sources into a single interface. By integrating it with Medusa, you can manage your storefront and commerce-related content, such as product details, from a single interface. You also benefit from advanced content-management features, such as live-preview editing.
 
+You integrate a CMS with Medusa by creating a custom module, which is a re-usable package that integrates into the Medusa application. The module provides the interface to connect to the CMS. Then, you build flows that use the module to connect to the CMS and perform tasks, such as syncing data to and from the CMS. You can execute these flows when an action occurs; at a scheduled time; or when an HTTP request is received.
+
 This guide will teach you how to:
 
 - Install and set up Medusa.
@@ -81,6 +83,7 @@ In this step, you'll install [Sanity's JavaScript client SDK](https://www.sanity
 In your terminal, move to the Medusa application's directory and run the following command:
 
 ```bash npm2yarn
+cd project-name # replace with directory name
 npm install @sanity/client
 ```
 
@@ -94,7 +97,12 @@ So, before building the integration in Medusa, create a project in Sanity using 
 
 1. [Sign in or sign up on the Sanity website.](https://www.sanity.io/login)
 2. On your account's dashboard, click the "Create new project" button.
+
+![The Create new project button is at the top of the dashboard page.](https://res.cloudinary.com/dza7lstvk/image/upload/v1732091565/Medusa%20Resources/Screenshot_2024-11-20_at_10.31.10_AM_vvq7y6.png)
+
 3. Enter a project name and click "Create Project"
+
+![A pop-up form will open where you can choose project name and organization.](https://res.cloudinary.com/dza7lstvk/image/upload/v1732091565/Medusa%20Resources/Screenshot_2024-11-20_at_10.32.33_AM_xb0rsn.png)
 
 You'll go back to the project's setting page in a later step.
 
@@ -102,19 +110,15 @@ You'll go back to the project's setting page in a later step.
 
 ## Step 4: Create Sanity Module
 
-To integrate third-party services into Medusa, you create a custom module. A module is a package with functionalities related to a single feature or domain. For example, each commerce domain in Medusa has its own module, such as the Product or Order modules.
+To integrate third-party services into Medusa, you create a custom module. A module is a re-usable package with functionalities related to a single feature or domain. Medusa integrates the module into your application without implications or side effects on your setup.
 
-Modules are [isolated](!docs!/learn/advanced-development/modules/isolation) from other resources. Medusa integrates them into your application without implications or side effects on your setup. They're also re-usable across your Medusa projects.
-
-Modules can define tables to create in the database and manage them, or provide the interface to connect to a third-party service. Then, you use your module in other customizations that implement a bigger flow, such as syncing data to third-party service when it's updated in Medusa.
+In this step, you'll create a Sanity Module that provides the interface to connect to and interact with Sanity. In later steps, you'll use the functionalities provided by this module to sync products to Sanity or retrieve documents from it.
 
 <Note>
 
 Learn more about modules in [this documentation](!docs!/learn/basics/modules).
 
 </Note>
-
-In this step, you'll create a Sanity Module that provides the interface to connect to and interact with Sanity. In later steps, you'll use the functionalities provided by this module to sync products to Sanity or retrieve documents from it.
 
 ### Create Module Directory
 
@@ -485,7 +489,7 @@ module.exports = defineConfig({
   // ...
   modules: [
     {
-      resolve: "./modules/sanity",
+      resolve: "./src/modules/sanity",
       options: {
         api_token: process.env.SANITY_API_TOKEN,
         project_id: process.env.SANITY_PROJECT_ID,
@@ -519,9 +523,21 @@ Where:
 
 - `SANITY_API_TOKEN`: The API key token to connect to Sanity, which you can retrieve from the Sanity project's dashboard:
     - Go to the API tab.
+
+![The API tab is at the top of the project dashboard next to Settings.](https://res.cloudinary.com/dza7lstvk/image/upload/v1732091810/Medusa%20Resources/Screenshot_2024-11-20_at_10.35.29_AM_ltj7cd.png)
+
     - Scroll down to Tokens and click on the "Add API Token" button.
+
+![The Add API token button is at the top right of the Tokens section.](https://res.cloudinary.com/dza7lstvk/image/upload/v1732091810/Medusa%20Resources/Screenshot_2024-11-20_at_10.35.52_AM_ccgsum.png)
+
     - Enter a name for the API token, choose "Editor" for the permissions, then click Save.
+
+![In the Token form, enter the name and choose "Editor" for permisions.](https://res.cloudinary.com/dza7lstvk/image/upload/v1732091811/Medusa%20Resources/Screenshot_2024-11-20_at_10.36.25_AM_nqxa5y.png)
+
 - `SANITY_PROJECT_ID`: The ID of the project, which you can find at the top section of your Sanity project's dashboard.
+
+![The project ID is in the top information of the project.](https://res.cloudinary.com/dza7lstvk/image/upload/v1732091988/Medusa%20Resources/Screenshot_2024-11-20_at_10.39.24_AM_cscir8.png)
+
 - `SANITY_STUDIO_URL`: The URL to access the studio. You'll set the studio up in a later section, but for now set it to `http://localhost:8000/studio`.
 
 ### Test the Module
@@ -550,7 +566,7 @@ In the next steps, you'll build a flow around the Sanity Module to sync data.
 
 After integrating Sanity with a custom module, you now want to sync product data from Medusa to Sanity, automatically and manually. To implement the sync logic, you need a workflow.
 
-A workflow is a series of queries and actions, called steps, that complete a task. You construct a workflow like you construct a function, but it's a special function that you can track and manage its executions' progress, define roll-back logic for each step, and control its configuration for more advanced features. You'll see how all of this works in the upcoming sections.
+A workflow is a series of queries and actions, called steps, that complete a task. You construct a workflow like you construct a function, but it's a special function that allows you to track its executions' progress, define roll-back logic, and configure other advanced features. You'll see how all of this works in the upcoming sections.
 
 Within a workflow's steps, you resolve modules to use their service's functionalities as part of a bigger flow. Then, you can execute the workflow from other customizations, such as in response to an event or in an API route.
 
