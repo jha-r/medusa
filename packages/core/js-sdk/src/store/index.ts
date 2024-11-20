@@ -776,7 +776,6 @@ export class Store {
      * This method updates the customer of a cart.
      *
      * @param id - The cart's ID.
-     * @param body - The data to update in the cart.
      * @param query - Configure the fields to retrieve in the cart.
      * @param headers - Headers to pass in the request.
      * @returns The updated cart.
