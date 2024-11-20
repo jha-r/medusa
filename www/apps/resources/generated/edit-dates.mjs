@@ -119,7 +119,7 @@ export const generatedEditDates = {
   "app/deployment/medusa-application/railway/page.mdx": "2024-11-11T11:50:10.517Z",
   "app/deployment/storefront/vercel/page.mdx": "2024-07-26T07:21:31+00:00",
   "app/deployment/page.mdx": "2024-07-25T09:55:22+03:00",
-  "app/integrations/page.mdx": "2024-10-15T12:26:39.839Z",
+  "app/integrations/page.mdx": "2024-11-19T10:09:54.075Z",
   "app/medusa-cli/page.mdx": "2024-08-28T11:25:32.382Z",
   "app/medusa-container-resources/page.mdx": "2024-09-30T08:43:53.173Z",
   "app/medusa-workflows-reference/page.mdx": "2024-09-30T08:43:53.174Z",
@@ -3251,5 +3251,6 @@ export const generatedEditDates = {
   "references/product/interfaces/product.FilterableProductProps/page.mdx": "2024-11-12T09:36:53.124Z",
   "references/types/HttpTypes/interfaces/types.HttpTypes.AdminBatchProductVariantRequest/page.mdx": "2024-11-12T09:36:22.780Z",
   "references/types/WorkflowTypes/ProductWorkflow/interfaces/types.WorkflowTypes.ProductWorkflow.ExportProductsDTO/page.mdx": "2024-11-12T09:36:24.232Z",
-  "app/contribution-guidelines/admin-translations/page.mdx": "2024-11-14T08:54:15.369Z"
+  "app/contribution-guidelines/admin-translations/page.mdx": "2024-11-14T08:54:15.369Z",
+  "app/integrations/guides/sanity/page.mdx": "2024-11-19T10:07:24.519Z"
 }
