@@ -1,7 +1,7 @@
 import { dynamicImport, promiseAll } from "@medusajs/utils"
-import { logger } from "../logger"
 import { access, readdir } from "fs/promises"
 import { join } from "path"
+import { logger } from "../logger"
 
 export class WorkflowLoader {
   /**
@@ -58,7 +58,7 @@ export class WorkflowLoader {
 
         return await promiseAll(
           fileEntries.map(async (entry) => {
-            const fullPath = join(entry.path, entry.name)
+            const fullPath = join(sourcePath, entry.name)
             return await dynamicImport(fullPath)
           })
         )

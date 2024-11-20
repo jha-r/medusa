@@ -151,7 +151,7 @@ export class SubscriberLoader {
       logger.debug(`Registering subscribers from ${dirPath}.`)
 
       return fileEntries.flatMap(async (entry) => {
-        const fullPath = join(entry.path, entry.name)
+        const fullPath = join(dirPath, entry.name)
         return await this.createDescriptor(fullPath)
       })
     })

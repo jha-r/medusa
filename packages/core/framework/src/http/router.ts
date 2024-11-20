@@ -532,7 +532,7 @@ export class ApiRoutesLoader {
         withFileTypes: true,
       }).then((entries) => {
         const fileEntries = entries.filter((entry) => {
-          const fullPathFromSource = join(entry.path, entry.name).replace(
+          const fullPathFromSource = join(this.#sourceDir, entry.name).replace(
             this.#sourceDir,
             ""
           )
@@ -550,7 +550,7 @@ export class ApiRoutesLoader {
         })
 
         return fileEntries.map(async (entry) => {
-          const path = join(entry.path, entry.name)
+          const path = join(this.#sourceDir, entry.name)
           return this.createRoutesDescriptor(path)
         })
       })
