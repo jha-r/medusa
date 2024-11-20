@@ -10,8 +10,14 @@ export interface AdminImportProductRequest {
    */
   file: File
 }
+interface AdminBatchUpdateProduct extends AdminUpdateProduct {
+  /**
+   * The ID of the product to update.
+   */
+  id: string
+}
 export interface AdminBatchProductRequest
-  extends BatchMethodRequest<AdminCreateProduct, AdminUpdateProduct> {}
+  extends BatchMethodRequest<AdminCreateProduct, AdminBatchUpdateProduct> {}
 
 export interface AdminBatchProductVariantRequest
   extends BatchMethodRequest<
