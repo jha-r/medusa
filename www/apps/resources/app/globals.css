@@ -5,7 +5,8 @@
 @layer base {
 
   html {
-    --webkit-font-smoothing: antialiased;
+    @apply antialiased;
+    text-rendering: optimizeLegibility;
     overscroll-behavior-y: none;
   }
 

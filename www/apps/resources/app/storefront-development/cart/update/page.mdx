@@ -31,7 +31,7 @@ fetch(`http://localhost:9000/store/carts/${cartId}`, {
   headers: {
     "Content-Type": "application/json",
     headers: {
-      "x-publishable-api-key": process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY,
+      "x-publishable-api-key": process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY || "temp",
     },
   },
   body: JSON.stringify({
