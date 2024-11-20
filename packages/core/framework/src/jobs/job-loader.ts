@@ -11,6 +11,7 @@ import {
   createWorkflow,
   StepResponse,
 } from "@medusajs/workflows-sdk"
+import { Dirent } from "fs"
 import { access, readdir } from "fs/promises"
 import { join } from "path"
 import { logger } from "../logger"
@@ -142,18 +143,23 @@ export class JobLoader {
         recursive: true,
         withFileTypes: true,
       }).then(async (entries) => {
-        const fileEntries = entries.filter((entry) => {
-          return (
-            !entry.isDirectory() &&
-            !this.#excludes.some((exclude) => exclude.test(entry.name))
-          )
-        })
+        const fileEntries = entries.filter(
+          (entry: Dirent & { parentPath?: string }) => {
+            return (
+              !entry.isDirectory() &&
+              !this.#excludes.some((exclude) => exclude.test(entry.name))
+            )
+          }
+        )
 
         logger.debug(`Registering jobs from ${sourcePath}.`)
 
         return await promiseAll(
-          fileEntries.map(async (entry) => {
-            const fullPath = join(sourcePath, entry.name)
+          fileEntries.map(async (entry: Dirent & { parentPath?: string }) => {
+            const fullPath = join(
+              entry.path ?? entry.parentPath ?? sourcePath,
+              entry.name
+            )
 
             const module_ = await dynamicImport(fullPath)
 

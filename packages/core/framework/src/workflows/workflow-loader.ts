@@ -1,4 +1,5 @@
 import { dynamicImport, promiseAll } from "@medusajs/utils"
+import { Dirent } from "fs"
 import { access, readdir } from "fs/promises"
 import { join } from "path"
 import { logger } from "../logger"
@@ -47,18 +48,23 @@ export class WorkflowLoader {
         recursive: true,
         withFileTypes: true,
       }).then(async (entries) => {
-        const fileEntries = entries.filter((entry) => {
-          return (
-            !entry.isDirectory() &&
-            !this.#excludes.some((exclude) => exclude.test(entry.name))
-          )
-        })
+        const fileEntries = entries.filter(
+          (entry: Dirent & { parentPath?: string }) => {
+            return (
+              !entry.isDirectory() &&
+              !this.#excludes.some((exclude) => exclude.test(entry.name))
+            )
+          }
+        )
 
         logger.debug(`Registering workflows from ${sourcePath}.`)
 
         return await promiseAll(
-          fileEntries.map(async (entry) => {
-            const fullPath = join(sourcePath, entry.name)
+          fileEntries.map(async (entry: Dirent & { parentPath?: string }) => {
+            const fullPath = join(
+              entry.path ?? entry.parentPath ?? sourcePath,
+              entry.name
+            )
             return await dynamicImport(fullPath)
           })
         )

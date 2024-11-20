@@ -14,6 +14,7 @@ import {
   text,
   urlencoded,
 } from "express"
+import { Dirent } from "fs"
 import { readdir } from "fs/promises"
 import { extname, join, parse, sep } from "path"
 import { configManager } from "../config"
@@ -531,28 +532,35 @@ export class ApiRoutesLoader {
         recursive: true,
         withFileTypes: true,
       }).then((entries) => {
-        const fileEntries = entries.filter((entry) => {
-          const fullPathFromSource = join(this.#sourceDir, entry.name).replace(
-            this.#sourceDir,
-            ""
-          )
-          const isExcluded = fullPathFromSource
-            .split(sep)
-            .some((segment) =>
-              this.#excludes.some((exclude) => exclude.test(segment))
+        const fileEntries = entries.filter(
+          (entry: Dirent & { parentPath?: string }) => {
+            const fullPathFromSource = join(
+              entry.path ?? entry.parentPath ?? this.#sourceDir,
+              entry.name
+            ).replace(this.#sourceDir, "")
+            const isExcluded = fullPathFromSource
+              .split(sep)
+              .some((segment) =>
+                this.#excludes.some((exclude) => exclude.test(segment))
+              )
+
+            return (
+              !entry.isDirectory() &&
+              !isExcluded &&
+              parse(entry.name).name === ROUTE_NAME
             )
+          }
+        )
 
-          return (
-            !entry.isDirectory() &&
-            !isExcluded &&
-            parse(entry.name).name === ROUTE_NAME
-          )
-        })
-
-        return fileEntries.map(async (entry) => {
-          const path = join(this.#sourceDir, entry.name)
-          return this.createRoutesDescriptor(path)
-        })
+        return fileEntries.map(
+          async (entry: Dirent & { parentPath?: string }) => {
+            const path = join(
+              entry.path ?? entry.parentPath ?? this.#sourceDir,
+              entry.name
+            )
+            return this.createRoutesDescriptor(path)
+          }
+        )
       })
     )
   }

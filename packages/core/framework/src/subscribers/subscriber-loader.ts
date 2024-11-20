@@ -9,6 +9,7 @@ import {
 import { access, readdir } from "fs/promises"
 import { join, parse } from "path"
 
+import { Dirent } from "fs"
 import { configManager } from "../config"
 import { container } from "../container"
 import { logger } from "../logger"
@@ -150,10 +151,15 @@ export class SubscriberLoader {
 
       logger.debug(`Registering subscribers from ${dirPath}.`)
 
-      return fileEntries.flatMap(async (entry) => {
-        const fullPath = join(dirPath, entry.name)
-        return await this.createDescriptor(fullPath)
-      })
+      return fileEntries.flatMap(
+        async (entry: Dirent & { parentPath?: string }) => {
+          const fullPath = join(
+            entry.path ?? entry.parentPath ?? dirPath,
+            entry.name
+          )
+          return await this.createDescriptor(fullPath)
+        }
+      )
     })
 
     await promiseAll(promises)
