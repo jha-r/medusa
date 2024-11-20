@@ -16,7 +16,11 @@ import {
 import { useTranslation } from "react-i18next"
 
 import { AdminOrderLineItem } from "@medusajs/types"
-import { useOrderChanges, useOrderLineItems } from "../../../../../hooks/api"
+import {
+  useCustomer,
+  useOrderChanges,
+  useOrderLineItems,
+} from "../../../../../hooks/api"
 import { useCancelClaim, useClaims } from "../../../../../hooks/api/claims"
 import {
   useCancelExchange,
@@ -391,7 +395,7 @@ const useActivityItems = (order: AdminOrder): Activity[] => {
             transferId: transfer.id.slice(-7),
           }),
           timestamp: transfer.requested_at,
-          children: null, // TODO: add body
+          children: <TransferOrderRequestBody transfer={transfer} />,
         })
       }
 
@@ -401,7 +405,6 @@ const useActivityItems = (order: AdminOrder): Activity[] => {
             transferId: transfer.id.slice(-7),
           }),
           timestamp: transfer.confirmed_at,
-          children: null, // TODO: add body
         })
       }
     }
@@ -884,6 +887,36 @@ const OrderEditBody = ({ edit }: { edit: AdminOrderChange }) => {
           {t("labels.removed")}: {itemsRemoved}
         </Text>
       )}
+    </div>
+  )
+}
+
+const TransferOrderRequestBody = ({
+  transfer,
+}: {
+  transfer: AdminOrderChange
+}) => {
+  const { t } = useTranslation()
+
+  const action = transfer.actions[0]
+  const { customer } = useCustomer(action.reference_id)
+
+  /**
+   * TODO: change original_email to customer info when action details is changed
+   */
+
+  return (
+    <div>
+      <Text size="small" className="text-ui-fg-subtle">
+        {t("orders.activity.from")}: {action.details?.original_email}
+      </Text>
+
+      <Text size="small" className="text-ui-fg-subtle">
+        {t("orders.activity.to")}:{" "}
+        {customer?.first_name
+          ? `${customer?.first_name} ${customer?.last_name}`
+          : customer?.email}
+      </Text>
     </div>
   )
 }

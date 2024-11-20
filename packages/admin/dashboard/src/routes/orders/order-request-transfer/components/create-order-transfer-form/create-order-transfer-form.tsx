@@ -12,6 +12,7 @@ import { useComboboxData } from "../../../../../hooks/use-combobox-data"
 import { Combobox } from "../../../../../components/inputs/combobox"
 import { useRequestTransferOrder } from "../../../../../hooks/api"
 import { sdk } from "../../../../../lib/client"
+import { TransferHeader } from "./transfer-header"
 
 type CreateOrderTransferFormProps = {
   order: HttpTypes.AdminOrder
@@ -19,7 +20,7 @@ type CreateOrderTransferFormProps = {
 
 const CreateOrderTransferSchema = zod.object({
   customer_id: zod.string().min(1),
-  currentEmail: zod.string().min(1),
+  currentCustomerDetails: zod.string().min(1),
 })
 
 export function CreateOrderTransferForm({
@@ -31,7 +32,9 @@ export function CreateOrderTransferForm({
   const form = useForm<zod.infer<typeof CreateOrderTransferSchema>>({
     defaultValues: {
       customer_id: "",
-      currentEmail: order.email!,
+      currentCustomerDetails: order.customer?.first_name
+        ? `${order.customer?.first_name} ${order.customer?.last_name} (${order.customer?.email}) `
+        : order.customer?.email,
     },
     resolver: zodResolver(CreateOrderTransferSchema),
   })
@@ -68,14 +71,18 @@ export function CreateOrderTransferForm({
         className="flex size-full flex-col overflow-hidden"
       >
         <RouteDrawer.Body className="flex-1 overflow-auto">
-          <div className="flex flex-col gap-y-4">
+          <div className="flex flex-col gap-y-8">
+            <TransferHeader />
             <Form.Field
               control={form.control}
-              name="currentEmail"
+              name="currentCustomerDetails"
               render={({ field }) => {
                 return (
                   <Form.Item>
                     <Form.Label>{t("orders.transfer.currentOwner")}</Form.Label>
+                    <span className="txt-small text-ui-fg-muted">
+                      {t("orders.transfer.currentOwnerDescription")}
+                    </span>
 
                     <Form.Control>
                       <Input type="email" {...field} disabled />
@@ -94,6 +101,9 @@ export function CreateOrderTransferForm({
                 return (
                   <Form.Item>
                     <Form.Label>{t("orders.transfer.newOwner")}</Form.Label>
+                    <span className="txt-small text-ui-fg-muted">
+                      {t("orders.transfer.newOwnerDescription")}
+                    </span>
 
                     <Form.Control>
                       <Combobox
