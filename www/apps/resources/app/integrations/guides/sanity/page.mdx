@@ -937,11 +937,19 @@ The Next.js Starter runs on the `8000` port, so you must add it to the allowed C
 In your Sanity project's dashboard:
 
 1. Click on the API tab.
-2. Scroll down to CORS origins.
-3. Click the "Add CORS origin" button.
-4. Enter `http://localhost:8000` in the Origin field.
-5. Enable the "Allow credentials" checkbox.
-6. Click the Save button.
+
+![Find the API tab at the top of the dashboard.](https://res.cloudinary.com/dza7lstvk/image/upload/v1732096643/Medusa%20Resources/Screenshot_2024-11-20_at_10.35.29_AM_ltj7cd.png)
+
+2. Scroll down to CORS origins and click the "Add CORS origin" button.
+
+![Find the CORS origins section and click the Add CORS origin button at its top right.](https://res.cloudinary.com/dza7lstvk/image/upload/v1732096997/Medusa%20Resources/Screenshot_2024-11-20_at_12.02.50_PM_ahsthb.png)
+
+3. Enter `http://localhost:8000` in the Origin field.
+4. Enable the "Allow credentials" checkbox.
+
+![After filling out the Origin field, click on the Allow credentials checkbox to enable it.](https://res.cloudinary.com/dza7lstvk/image/upload/v1732097074/Medusa%20Resources/Screenshot_2024-11-20_at_12.04.09_PM_nxdvwh.png)
+
+5. Click the Save button.
 
 ### Open Sanity Studio
 
@@ -1197,6 +1205,8 @@ There are cases where you need to trigger the syncing of products manually, such
 The Medusa Admin dashboard is customizable, allowing you to either inject components, called [widgets](!docs!/learn/advanced-development/admin/widgets), into existing pages, or adding new pages, called [UI routes](!docs!/learn/advanced-development/admin/ui-routes). In these customizations, you can send requests to the Medusa application to perform custom operations.
 
 In this step, you'll add a widget to the product's details page. In that page, you'll show whether a product is synced with Sanity, and allow the admin user to trigger syncing it manually.
+
+![The widget in the product details page.](https://res.cloudinary.com/dza7lstvk/image/upload/v1732093722/Medusa%20Resources/Screenshot_2024-11-20_at_11.08.23_AM_wzftfv.png)
 
 Before you do that, however, you need two new API routes in your Medusa application: one to retrieve a document from Sanity, and one to trigger syncing the product data.
 
@@ -1541,6 +1551,8 @@ You'll find a new "Sanity Status" section showing you whether the product is syn
 ## Step 11: Add Track Syncs Page to Medusa Admin
 
 Earlier in this guide when introducing workflows, you learned that you can track the execution of a workflow. As a last step of this guide, you'll add a new page in the admin dashboard that shows the executions of the `sanitySyncProductsWorkflow` and their status. You'll also add the ability to sync all products to Sanity from that page.
+
+![A screenshot of the page to track and trigger syncs.](https://res.cloudinary.com/dza7lstvk/image/upload/v1732095185/Medusa%20Resources/Screenshot_2024-11-20_at_11.09.42_AM_te8xic.png)
 
 ### Retrieve Sync Executions API Route
 
