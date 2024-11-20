@@ -530,35 +530,28 @@ export class ApiRoutesLoader {
   protected async createRoutesMap(): Promise<void> {
     await promiseAll(
       await readFilesRecursive(this.#sourceDir).then((entries) => {
-        const fileEntries = entries.filter(
-          (entry: Dirent & { parentPath?: string }) => {
-            const fullPathFromSource = join(
-              entry.path ?? entry.parentPath ?? this.#sourceDir,
-              entry.name
-            ).replace(this.#sourceDir, "")
-            const isExcluded = fullPathFromSource
-              .split(sep)
-              .some((segment) =>
-                this.#excludes.some((exclude) => exclude.test(segment))
-              )
-
-            return (
-              !entry.isDirectory() &&
-              !isExcluded &&
-              parse(entry.name).name === ROUTE_NAME
+        const fileEntries = entries.filter((entry: Dirent) => {
+          const fullPathFromSource = join(entry.path, entry.name).replace(
+            this.#sourceDir,
+            ""
+          )
+          const isExcluded = fullPathFromSource
+            .split(sep)
+            .some((segment) =>
+              this.#excludes.some((exclude) => exclude.test(segment))
             )
-          }
-        )
 
-        return fileEntries.map(
-          async (entry: Dirent & { parentPath?: string }) => {
-            const path = join(
-              entry.path ?? entry.parentPath ?? this.#sourceDir,
-              entry.name
-            )
-            return this.createRoutesDescriptor(path)
-          }
-        )
+          return (
+            !entry.isDirectory() &&
+            !isExcluded &&
+            parse(entry.name).name === ROUTE_NAME
+          )
+        })
+
+        return fileEntries.map(async (entry: Dirent) => {
+          const path = join(entry.path, entry.name)
+          return this.createRoutesDescriptor(path)
+        })
       })
     )
   }

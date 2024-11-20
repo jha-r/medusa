@@ -149,15 +149,10 @@ export class SubscriberLoader {
 
       logger.debug(`Registering subscribers from ${dirPath}.`)
 
-      return fileEntries.flatMap(
-        async (entry: Dirent & { parentPath?: string }) => {
-          const fullPath = join(
-            entry.path ?? entry.parentPath ?? dirPath,
-            entry.name
-          )
-          return await this.createDescriptor(fullPath)
-        }
-      )
+      return fileEntries.flatMap(async (entry: Dirent) => {
+        const fullPath = join(entry.path, entry.name)
+        return await this.createDescriptor(fullPath)
+      })
     })
 
     await promiseAll(promises)

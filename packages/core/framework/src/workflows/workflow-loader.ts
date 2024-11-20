@@ -45,23 +45,18 @@ export class WorkflowLoader {
       }
 
       return await readFilesRecursive(sourcePath).then(async (entries) => {
-        const fileEntries = entries.filter(
-          (entry: Dirent & { parentPath?: string }) => {
-            return (
-              !entry.isDirectory() &&
-              !this.#excludes.some((exclude) => exclude.test(entry.name))
-            )
-          }
-        )
+        const fileEntries = entries.filter((entry: Dirent) => {
+          return (
+            !entry.isDirectory() &&
+            !this.#excludes.some((exclude) => exclude.test(entry.name))
+          )
+        })
 
         logger.debug(`Registering workflows from ${sourcePath}.`)
 
         return await promiseAll(
-          fileEntries.map(async (entry: Dirent & { parentPath?: string }) => {
-            const fullPath = join(
-              entry.path ?? entry.parentPath ?? sourcePath,
-              entry.name
-            )
+          fileEntries.map(async (entry: Dirent) => {
+            const fullPath = join(entry.path, entry.name)
             return await dynamicImport(fullPath)
           })
         )

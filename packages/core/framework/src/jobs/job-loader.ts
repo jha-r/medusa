@@ -141,23 +141,18 @@ export class JobLoader {
       }
 
       return await readFilesRecursive(sourcePath).then(async (entries) => {
-        const fileEntries = entries.filter(
-          (entry: Dirent & { parentPath?: string }) => {
-            return (
-              !entry.isDirectory() &&
-              !this.#excludes.some((exclude) => exclude.test(entry.name))
-            )
-          }
-        )
+        const fileEntries = entries.filter((entry: Dirent) => {
+          return (
+            !entry.isDirectory() &&
+            !this.#excludes.some((exclude) => exclude.test(entry.name))
+          )
+        })
 
         logger.debug(`Registering jobs from ${sourcePath}.`)
 
         return await promiseAll(
-          fileEntries.map(async (entry: Dirent & { parentPath?: string }) => {
-            const fullPath = join(
-              entry.path ?? entry.parentPath ?? sourcePath,
-              entry.name
-            )
+          fileEntries.map(async (entry: Dirent) => {
+            const fullPath = join(entry.path, entry.name)
 
             const module_ = await dynamicImport(fullPath)
 
