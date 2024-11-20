@@ -1,4 +1,4 @@
-import { dynamicImport, promiseAll, readFilesRecursive } from "@medusajs/utils"
+import { dynamicImport, promiseAll, readDirRecursive } from "@medusajs/utils"
 import { Dirent } from "fs"
 import { access } from "fs/promises"
 import { join } from "path"
@@ -44,7 +44,7 @@ export class WorkflowLoader {
         return
       }
 
-      return await readFilesRecursive(sourcePath).then(async (entries) => {
+      return await readDirRecursive(sourcePath).then(async (entries) => {
         const fileEntries = entries.filter((entry: Dirent) => {
           return (
             !entry.isDirectory() &&

@@ -2,7 +2,7 @@ import { Dirent } from "fs"
 import { readdir } from "fs/promises"
 import { join } from "path"
 
-export async function readFilesRecursive(dir: string): Promise<Dirent[]> {
+export async function readDirRecursive(dir: string): Promise<Dirent[]> {
   let allEntries: Dirent[] = []
   const readRecursive = async (dir) => {
     const entries = await readdir(dir, { withFileTypes: true })

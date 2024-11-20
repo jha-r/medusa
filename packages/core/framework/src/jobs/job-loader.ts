@@ -5,7 +5,7 @@ import {
   isObject,
   MedusaError,
   promiseAll,
-  readFilesRecursive,
+  readDirRecursive,
 } from "@medusajs/utils"
 import {
   createStep,
@@ -140,7 +140,7 @@ export class JobLoader {
         return
       }
 
-      return await readFilesRecursive(sourcePath).then(async (entries) => {
+      return await readDirRecursive(sourcePath).then(async (entries) => {
         const fileEntries = entries.filter((entry: Dirent) => {
           return (
             !entry.isDirectory() &&

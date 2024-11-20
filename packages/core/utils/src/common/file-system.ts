@@ -8,7 +8,7 @@ import {
   type WriteFileOptions,
 } from "fs"
 import { dirname, join } from "path"
-import { readFilesRecursive } from "./read-files-recursive"
+import { readDirRecursive } from "./read-dir-recursive"
 
 const { rm, stat, mkdir, access, readFile, writeFile } = promises
 
@@ -128,7 +128,7 @@ export class FileSystem {
    */
   readDir(dirPath?: string): Promise<Dirent[]> {
     const location = dirPath ? this.makePath(dirPath) : this.basePath
-    return readFilesRecursive(location)
+    return readDirRecursive(location)
   }
 
   /**

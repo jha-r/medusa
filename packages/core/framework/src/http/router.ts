@@ -2,7 +2,7 @@ import {
   dynamicImport,
   parseCorsOrigins,
   promiseAll,
-  readFilesRecursive,
+  readDirRecursive,
   resolveExports,
   wrapHandler,
 } from "@medusajs/utils"
@@ -529,7 +529,7 @@ export class ApiRoutesLoader {
 
   protected async createRoutesMap(): Promise<void> {
     await promiseAll(
-      await readFilesRecursive(this.#sourceDir).then((entries) => {
+      await readDirRecursive(this.#sourceDir).then((entries) => {
         const fileEntries = entries.filter((entry: Dirent) => {
           const fullPathFromSource = join(entry.path, entry.name).replace(
             this.#sourceDir,

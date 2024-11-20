@@ -8,7 +8,7 @@ import {
   isString,
   isTruthy,
   objectFromStringPath,
-  readFilesRecursive,
+  readDirRecursive,
 } from "@medusajs/utils"
 import { asFunction } from "awilix"
 import { join, normalize } from "path"
@@ -95,7 +95,7 @@ export async function featureFlagsLoader(
 
   const flagDir = normalize(sourcePath)
 
-  await readFilesRecursive(flagDir).then(async (files) => {
+  await readDirRecursive(flagDir).then(async (files) => {
     if (!files?.length) {
       return
     }
