@@ -9,11 +9,11 @@ export async function readFilesRecursive(dir: string): Promise<Dirent[]> {
 
     for (const entry of entries) {
       const fullPath = join(dir, entry.name)
+      entry.path = dir
+      allEntries.push(entry)
+
       if (entry.isDirectory()) {
         await readRecursive(fullPath)
-      } else {
-        entry.path = dir
-        allEntries.push(entry)
       }
     }
   }
