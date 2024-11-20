@@ -423,7 +423,8 @@ You also need methods to manage the Sanity documents without transformations. So
 export const methodsHighlights = [
   ["3", "retrieve", "Retrieve a document from Sanity."],
   ["7", "delete", "Delete a document from Sanity."],
-  ["11", "update", "Updates a document in Sanity."]
+  ["11", "update", "Updates a document in Sanity."],
+  ["17", "list", "Retrieves a list of Sanity documents."]
 ]
 
 ```ts title="src/modules/sanity/service.ts" highlights={methodsHighlights}
@@ -442,6 +443,21 @@ class SanityModuleService {
       set: data,
     }).commit()
   }
+
+  async list(
+    filter: {
+      id: string | string[]
+    }
+  ) {
+    const data = await this.client.getDocuments(
+      Array.isArray(filter.id) ? filter.id : [filter.id]
+    )
+
+    return data.map((doc) => ({
+      id: doc?._id,
+      ...doc,
+    }))
+  }
 }
 ```
 
@@ -450,6 +466,7 @@ You add other three methods:
 - `retrieve` to retrieve a document by its ID.
 - `delete` to delete a document by its ID.
 - `update` to update a document by its ID with new data.
+- `list` to list documents, with ability to filter them by their IDs. Since a Sanity document's ID is a product's ID, you can pass product IDs as a filter to retrieve their documents.
 
 ### Export Module Definition
 
@@ -558,11 +575,59 @@ info:    Connected to Sanity
 
 That means your Sanity credentials were correct, and Medusa was able to connect to Sanity.
 
-In the next steps, you'll build a flow around the Sanity Module to sync data.
+In the next steps, you'll create a link between the Product and Sanity modules to retrieve data between them easily, and build a flow around the Sanity Module to sync data.
 
 ---
 
-## Step 5: Sync Data to Sanity
+## Step 5: Link Product and Sanity Modules
+
+Since a product has a document in Sanity, you want to build an association between the [Product](../../../commerce-modules/product/page.mdx) and Sanity modules so that when you retrieve a product, you also retrieve its associated Sanity document.
+
+However, modules are [isolated](!docs!/learn/advanced-development/modules/isolation) to ensure they're re-usable and don't have side effects when integrated into the Medusa application. So, to build associations between modules, you define [module links](!docs!/learn/advanced-development/module-links).
+
+A Module Link associates two modules' data models while maintaining module isolation. A data model can be a table in the database or a virtual model from an external systems.
+
+In this section, you'll define a link between the Product and Sanity modules.
+
+Links are defined in a TypeScript or JavaScript file under the `src/links` directory. So, create the file `src/links/product-sanity.ts` with the following content:
+
+```ts title="src/links/product-sanity.ts"
+import { defineLink } from "@medusajs/framework/utils"
+import ProductModule from "@medusajs/medusa/product"
+import { SANITY_MODULE } from "../modules/sanity"
+
+defineLink(
+  {
+    ...ProductModule.linkable.product.id,
+    field: "id",
+  },
+  {
+    linkable: {
+      serviceName: SANITY_MODULE,
+      alias: "sanity_product",
+      primaryKey: "id",
+    },
+  },
+  {
+    readOnly: true,
+  }
+)
+```
+
+You define a link using the `defineLink` utility. It accepts three parameters:
+
+1. The first data model part of the link. In this case, it's the Product Module's `product` data model. A module has a special `linkable` property that contain link configurations for its data models.
+2. The second data model part of the link. Since the Sanity Module doesn't have a Medusa data model, you specify the configurations in a `linkable` object that has the following properties:
+    - `serviceName`: The registration name in the Medusa container of the service managing the data model, which in this case is the Sanity Module's name (since the module's service is registered under that name).
+    - `alias`: The name to refer to the model part of this link, such as when retrieving the Sanity document of a product. You'll use this in a later section.
+    - `primaryKey`: The name of the data model's primary key field.
+3. An object of configurations for the module link. By default, Medusa creates a table in the database to represent the link you define. Since the module link isn't created between two Medusa data models, you enable the `readOnly` configuration, which will tell Medusa not to create a table in the database for this link.
+
+In the next steps, you'll see how this link allows you to retrieve documents when retrieving products.
+
+---
+
+## Step 6: Sync Data to Sanity
 
 After integrating Sanity with a custom module, you now want to sync product data from Medusa to Sanity, automatically and manually. To implement the sync logic, you need a workflow.
 
@@ -585,17 +650,16 @@ The syncing workflow will have a single step that syncs products provided as an 
 So, to implement that step, create the file `src/workflows/sanity-sync-products/steps/sync.ts` with the following content:
 
 export const syncStepHighlights = [
-  ["14", "createStep", "Create a step."],
-  ["16", "container", "The Medusa container to resolve resources."],
-  ["35", "listAndCountProducts", "Retrieve a paginated list of products."]
+  ["13", "createStep", "Create a step."],
+  ["15", "container", "The Medusa container to resolve resources."],
+  ["36", "graph", "Retrieve a paginated list of products with their sanity document."]
 ]
 
 ```ts title="src/workflows/sanity-sync-products/steps/sync.ts" highlights={syncStepHighlights}
 import { createStep, StepResponse } from "@medusajs/framework/workflows-sdk"
-import { FilterableProductProps } from "@medusajs/framework/types"
+import { ProductDTO } from "@medusajs/framework/types"
 import { 
-  isDefined, 
-  Modules,
+  ContainerRegistrationKeys,
 } from "@medusajs/framework/utils"
 import SanityModuleService from "../../../modules/sanity/service"
 import { SANITY_MODULE } from "../../../modules/sanity"
@@ -607,8 +671,8 @@ export type SyncStepInput = {
 export const syncStep = createStep(
   { name: "sync-step", async: true },
   async (input: SyncStepInput, { container }) => {
-    const productModule = container.resolve(Modules.PRODUCT)
     const sanityModule: SanityModuleService = container.resolve(SANITY_MODULE)
+    const query = container.resolve(ContainerRegistrationKeys.QUERY)
 
     const total = 0
     const upsertMap: {
@@ -619,21 +683,32 @@ export const syncStep = createStep(
     const batchSize = 200
     const hasMore = true
     const offset = 0
-    const filter: FilterableProductProps = {}
-    if (isDefined(input.product_ids)) {
-      filter.id = input.product_ids
+    const filters = {
+      id: input.product_ids || [],
     }
 
     while (hasMore) {
-      const [products, count] = await productModule.listAndCountProducts(
-        filter,
-        {
-          select: ["id", "title"],
+      const {
+        data: products,
+        metadata: { count },
+      } = await query.graph({
+        entity: "product",
+        fields: [
+          "id",
+          "title",
+          // @ts-ignore
+          "sanity_product.*",
+        ],
+        // @ts-ignore
+        filters,
+        pagination: {
           skip: offset,
           take: batchSize,
-          order: { id: "ASC" },
-        }
-      )
+          order: {
+            id: "ASC",
+          },
+        },
+      })
 
       // TODO sync products
     }
@@ -648,7 +723,23 @@ You define the `syncStep` using the `createStep` function, which accepts two par
 
 The step function accepts the step's input as a first parameter, and an object of options as a second. The object of options has a `container` property, which is an instance of the Medusa container that you can use to resolve resources.
 
-In the step, you resolve the [Product](../../../commerce-modules/product/page.mdx) and Sanity Module's main services. Then, you loop over the paginated list of products, filtering them by the IDs supplied in the step's input.
+In the step, you resolve from the Medusa container Sanity Module's service and [Query](!docs!/learn/advanced-development/module-links/query), which is a tool that allows you to retrieve data across modules and links.
+
+You use Query's `graph` method to retrieve products, filtering them by their IDs and applying pagination configurations. The `graph` method accepts a `fields` property in its object parameter, which indicates the product data model's fields and relations to retrieve.
+
+Notice that you pass `sanity_product.*` in the `fields` array. Medusa will retrieve the Sanity document of each product using Sanity Module's `list` method and attach it to the returned product. So, you don't have to retrieve the products and documents separately. Each product object in the returned array will look similar to this:
+
+```json title="Example Product Object"
+{
+  "id": "prod_123",
+  "title": "Shirt",
+  "sanity_product": {
+    "id": "prod_123",
+    "_type": "product",
+    // other Sanity fields...
+  }
+}
+```
 
 Next, you want to sync the retrieved products. So, replace the `TODO` with the following:
 
@@ -668,11 +759,14 @@ export const syncStep = createStep(
       // ...
       await promiseAll(
         products.map(async (prod) => {
-          const before = await sanityModule.retrieve(prod.id)
-          const after = await sanityModule.upsertSyncDocument("product", prod)
+          const after = await sanityModule.upsertSyncDocument(
+            "product", 
+            prod as ProductDTO
+          )
 
           upsertMap.push({
-            before,
+            // @ts-ignore
+            before: prod.sanity_product,
             after,
           })
 
@@ -692,7 +786,7 @@ export const syncStep = createStep(
 
 In the `while` loop, you loop over the array of products to sync them to Sanity. You use the `promiseAll` Medusa utility that loops over an array of promises and ensures that all transactions within these promises are rolled back in case an error occurs.
 
-Before syncing each product, you retrieve its document from Sanity. Then, you push the document before and after the update to the `upsertMap`. You'll learn about the use of this map soon.
+For each product, you upsert it into Sanity, then push its document before and after the update to the `upsertMap`. You'll learn more about its use later.
 
 The step returns an instance of `StepResponse`, which must be returned by any step. It accepts as a first parameter the data to return to the workflow that executed this step.
 
@@ -789,7 +883,7 @@ You'll execute and test this workflow in the next steps.
 
 ---
 
-## Step 6: Handle Product Changes in Medusa
+## Step 7: Handle Product Changes in Medusa
 
 You've defined the workflow to sync the products. Now, you want to execute it when a product is created or updated.
 
@@ -863,7 +957,7 @@ In the next step, you'll setup Sanity with Next.js, and you can then monitor the
 
 ---
 
-## Step 7: Setup Sanity with Next.js Starter Storefront
+## Step 8: Setup Sanity with Next.js Starter Storefront
 
 In this step, you'll install Sanity in the Next.js Starter and configure it. You'll then have a Sanity studio in your Next.js storefront, where you'll later view the product documents being synced from Medusa, and update their content that you'll display in the storefront on the product details page.
 
@@ -963,7 +1057,7 @@ Then, open `http://localhost:8000/studio` in your browser. The Sanity studio wil
 
 ---
 
-## Step 8: Add Product Schema Type in Sanity
+## Step 9: Add Product Schema Type in Sanity
 
 In this step, you'll define the `product` schema type in Sanity. You' can then view the documents of that schema in the studio and update their content.
 
@@ -1074,7 +1168,7 @@ If you click on any product, you can edit its existing field under "Specs" or ad
 
 ---
 
-## Step 9: Show Sanity Content in Next.js Starter Storefront
+## Step 10: Show Sanity Content in Next.js Starter Storefront
 
 Now that you're managing a product's content in Sanity, you want to show that content on the storefront. In this step, you'll customize the Next.js Starter storefront to show a product's content as defined in Sanity.
 
@@ -1198,7 +1292,7 @@ You can now manage the product's content in Sanity, add more fields, and customi
 
 ---
 
-## Step 10: Customize Admin to Manually Sync Data
+## Step 11: Customize Admin to Manually Sync Data
 
 There are cases where you need to trigger the syncing of products manually, such as when an error occurs or you have products from before creating this integration.
 
@@ -1259,11 +1353,13 @@ export const GET = async (req: MedusaRequest, res: MedusaResponse) => {
   )
   const sanityDocument = await sanityModule.retrieve(id)
 
-  const url = await sanityModule.getStudioLink(
-    sanityDocument._type,
-    sanityDocument._id,
-    { explicit_type: true }
-  )
+  const url = sanityDocument ? 
+    await sanityModule.getStudioLink(
+      sanityDocument._type,
+      sanityDocument._id,
+      { explicit_type: true }
+    )
+    : ""
 
   res.json({ sanity_document: sanityDocument, studio_url: url })
 }
@@ -1487,11 +1583,13 @@ const ProductWidget = ({ data }: DetailWidgetProps<AdminProduct>) => {
           >
             {showCodeBlock ? "Hide" : "Show"} Sanity Document
           </Button>
-          <a href={studio_url} target="_blank" rel="noreferrer">
-            <Button variant="transparent">
-              <ArrowUpRightOnBox /> Sanity Studio
-            </Button>
-          </a>
+          {studio_url && (
+            <a href={studio_url} target="_blank" rel="noreferrer">
+              <Button variant="transparent">
+                <ArrowUpRightOnBox /> Sanity Studio
+              </Button>
+            </a>
+          )}
         </div>
         {!isLoading && showCodeBlock && (
           <CodeBlock
@@ -1548,7 +1646,7 @@ You'll find a new "Sanity Status" section showing you whether the product is syn
 
 ---
 
-## Step 11: Add Track Syncs Page to Medusa Admin
+## Step 12: Add Track Syncs Page to Medusa Admin
 
 Earlier in this guide when introducing workflows, you learned that you can track the execution of a workflow. As a last step of this guide, you'll add a new page in the admin dashboard that shows the executions of the `sanitySyncProductsWorkflow` and their status. You'll also add the ability to sync all products to Sanity from that page.
 
