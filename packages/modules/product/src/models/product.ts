@@ -24,6 +24,7 @@ import {
 import ProductCategory from "./product-category"
 import ProductCollection from "./product-collection"
 import ProductImage from "./product-image"
+import ProductImageProduct from "./product-image-product"
 import ProductOption from "./product-option"
 import ProductTag from "./product-tag"
 import ProductType from "./product-type"
@@ -166,11 +167,11 @@ class Product {
   })
   tags = new Collection<ProductTag>(this)
 
-  @ManyToMany(() => ProductImage, "products", {
+  @ManyToMany({
     owner: true,
-    pivotTable: "product_images",
-    joinColumn: "product_id",
-    inverseJoinColumn: "image_id",
+    entity: () => ProductImage,
+    pivotEntity: () => ProductImageProduct,
+    mappedBy: (image) => image.products,
   })
   images = new Collection<ProductImage>(this)
 

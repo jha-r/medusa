@@ -1,6 +1,7 @@
 import {
   Context,
   DAL,
+  FindConfig,
   IEventBusModuleService,
   InternalModuleDeclaration,
   ModuleJoinerConfig,
@@ -8,10 +9,10 @@ import {
   ProductTypes,
 } from "@medusajs/framework/types"
 import {
-  Image as ProductImage,
   Product,
   ProductCategory,
   ProductCollection,
+  Image as ProductImage,
   ProductOption,
   ProductOptionValue,
   ProductTag,
@@ -38,6 +39,7 @@ import {
   removeUndefined,
   toHandle,
 } from "@medusajs/framework/utils"
+import ProductImageProduct from "../models/product-image-product"
 import {
   UpdateCategoryInput,
   UpdateCollectionInput,
@@ -58,6 +60,7 @@ type InjectedDependencies = {
   productCategoryService: ProductCategoryService
   productCollectionService: ModulesSdkTypes.IMedusaInternalService<any>
   productImageService: ModulesSdkTypes.IMedusaInternalService<any>
+  productImageProductService: ModulesSdkTypes.IMedusaInternalService<any>
   productTypeService: ModulesSdkTypes.IMedusaInternalService<any>
   productOptionService: ModulesSdkTypes.IMedusaInternalService<any>
   productOptionValueService: ModulesSdkTypes.IMedusaInternalService<any>
@@ -90,6 +93,9 @@ export default class ProductModuleService
     ProductVariant: {
       dto: ProductTypes.ProductVariantDTO
     }
+    ProductImageProduct: {
+      dto: ProductTypes.ProductImageProductDTO
+    }
   }>({
     Product,
     ProductCategory,
@@ -99,6 +105,7 @@ export default class ProductModuleService
     ProductTag,
     ProductType,
     ProductVariant,
+    ProductImageProduct,
   })
   implements ProductTypes.IProductModuleService
 {
@@ -109,6 +116,7 @@ export default class ProductModuleService
   protected readonly productTagService_: ModulesSdkTypes.IMedusaInternalService<ProductTag>
   protected readonly productCollectionService_: ModulesSdkTypes.IMedusaInternalService<ProductCollection>
   protected readonly productImageService_: ModulesSdkTypes.IMedusaInternalService<ProductImage>
+  protected readonly productImageProductService_: ModulesSdkTypes.IMedusaInternalService<ProductImageProduct>
   protected readonly productTypeService_: ModulesSdkTypes.IMedusaInternalService<ProductType>
   protected readonly productOptionService_: ModulesSdkTypes.IMedusaInternalService<ProductOption>
   protected readonly productOptionValueService_: ModulesSdkTypes.IMedusaInternalService<ProductOptionValue>
@@ -123,6 +131,7 @@ export default class ProductModuleService
       productCategoryService,
       productCollectionService,
       productImageService,
+      productImageProductService,
       productTypeService,
       productOptionService,
       productOptionValueService,
@@ -141,6 +150,7 @@ export default class ProductModuleService
     this.productCategoryService_ = productCategoryService
     this.productCollectionService_ = productCollectionService
     this.productImageService_ = productImageService
+    this.productImageProductService_ = productImageProductService
     this.productTypeService_ = productTypeService
     this.productOptionService_ = productOptionService
     this.productOptionValueService_ = productOptionValueService
@@ -149,6 +159,132 @@ export default class ProductModuleService
 
   __joinerConfig(): ModuleJoinerConfig {
     return joinerConfig
+  }
+
+  @InjectManager()
+  // @ts-ignore
+  async listProducts(
+    filters: ProductTypes.FilterableProductProps,
+    config: FindConfig<ProductTypes.ProductDTO> = {},
+    @MedusaContext() sharedContext: Context = {}
+  ): Promise<ProductTypes.ProductDTO[]> {
+    const products = await this.productService_.list(
+      filters,
+      config,
+      sharedContext
+    )
+
+    if (config.relations?.includes("images")) {
+      const productImageProducts = await this.productImageProductService_.list(
+        {
+          product_id: products.map((p) => p.id),
+        },
+        {
+          relations: ["image"],
+          order: {
+            rank: "asc",
+          },
+        },
+        sharedContext
+      )
+
+      const sortedProductImages = productImageProducts.reduce((acc, p) => {
+        acc[p.product_id] = [...(acc[p.product_id] || []), p.image]
+        return acc
+      }, {} as Record<string, ProductImage[]>)
+
+      products.forEach((p) => {
+        if (sortedProductImages[p.id]) {
+          p.images.set(sortedProductImages[p.id])
+        }
+      })
+    }
+
+    return await this.baseRepository_.serialize<ProductTypes.ProductDTO[]>(
+      products,
+      {
+        populate: true,
+      }
+    )
+  }
+
+  @InjectManager()
+  // @ts-ignore
+  async listAndCountProducts(
+    filters: ProductTypes.FilterableProductProps,
+    config: FindConfig<ProductTypes.ProductDTO> = {},
+    sharedContext: Context = {}
+  ): Promise<[ProductTypes.ProductDTO[], number]> {
+    const [products, count] = await this.productService_.listAndCount(
+      filters,
+      config,
+      sharedContext
+    )
+
+    if (config.relations?.includes("images")) {
+      await this.attachOrderedImages_(products, sharedContext)
+    }
+
+    return [
+      await this.baseRepository_.serialize<ProductTypes.ProductDTO[]>(products),
+      count,
+    ]
+  }
+
+  @InjectManager()
+  // @ts-ignore
+  async retrieveProduct(
+    id: string,
+    config: FindConfig<ProductTypes.ProductDTO> = {},
+    sharedContext: Context = {}
+  ): Promise<ProductTypes.ProductDTO> {
+    const product = await this.productService_.retrieve(
+      id,
+      config,
+      sharedContext
+    )
+
+    if (config.relations?.includes("images")) {
+      await this.attachOrderedImages_([product], sharedContext)
+    }
+
+    return await this.baseRepository_.serialize<ProductTypes.ProductDTO>(
+      product,
+      {
+        populate: true,
+      }
+    )
+  }
+
+  // @ts-ignore
+  @InjectManager()
+  protected async attachOrderedImages_(
+    products: Product[],
+    sharedContext: Context = {}
+  ): Promise<void> {
+    const productImageProducts = await this.productImageProductService_.list(
+      {
+        product_id: products.map((p) => p.id),
+      },
+      {
+        relations: ["image"],
+        order: {
+          rank: "asc",
+        },
+      },
+      sharedContext
+    )
+
+    const sortedProductImages = productImageProducts.reduce((acc, p) => {
+      acc[p.product_id] = [...(acc[p.product_id] || []), p.image]
+      return acc
+    }, {} as Record<string, ProductImage[]>)
+
+    products.forEach((p) => {
+      if (sortedProductImages[p.id]) {
+        p.images.set(sortedProductImages[p.id])
+      }
+    })
   }
 
   // @ts-ignore
@@ -1436,14 +1572,41 @@ export default class ProductModuleService
       })
     )
 
+    const productImages = normalizedInput.reduce((acc, curr, index) => {
+      if (curr.images?.length) {
+        acc[index] = curr.images
+        delete curr.images
+      }
+      return acc
+    }, {} as Record<number, ProductTypes.UpsertProductImageDTO[]>)
+
     const { entities: productData } =
       await this.productService_.upsertWithReplace(
         normalizedInput,
         {
-          relations: ["images", "tags", "categories"],
+          relations: ["tags", "categories"],
         },
         sharedContext
       )
+
+    try {
+      for (const [index, images] of Object.entries(productImages)) {
+        const { entities: createdImages } =
+          await this.productImageService_.upsertWithReplace(
+            images,
+            {},
+            sharedContext
+          )
+
+        await this.productImageProductService_.create(createdImages.map((image, i) => ({
+          product_id: productData[index].id,
+          image_id: image.id,
+          rank: i,
+        })), sharedContext)
+      }
+    } catch (error) {
+      throw error
+    }
 
     await promiseAll(
       // Note: It's safe to rely on the order here as `upsertWithReplace` preserves the order of the input
@@ -1502,14 +1665,83 @@ export default class ProductModuleService
       })
     )
 
+    const productImages = normalizedInput.reduce((acc, curr) => {
+      if (curr.images?.length) {
+        acc[curr.id] = curr.images
+        delete curr.images
+      }
+      return acc
+    }, {} as Record<string, ProductTypes.UpsertProductImageDTO[]>)
+
     const { entities: productData } =
       await this.productService_.upsertWithReplace(
         normalizedInput,
         {
-          relations: ["images", "tags", "categories"],
+          relations: ["tags", "categories"],
         },
         sharedContext
       )
+
+    try {
+      for (const [productId, images] of Object.entries(productImages)) {
+        const newImages = images.filter((img) => !img.id)
+        const existingImages = images.filter((img) => img.id)
+
+        const { entities: updatedImages } =
+          await this.productImageService_.upsertWithReplace(
+            existingImages,
+            {},
+            sharedContext
+          )
+        const createdImages = await this.productImageService_.create(
+          newImages,
+          sharedContext
+        )
+
+        const allImages = images.map((img, index) => {
+          if (img.id) {
+            const existingImage = updatedImages.find((i) => i.id === img.id)
+            if (!existingImage) {
+              throw new MedusaError(
+                MedusaError.Types.NOT_ALLOWED,
+                `Image with id ${img.id} not found`
+              )
+            }
+            return {
+              pair: { image_id: existingImage.id, product_id: productId },
+              rank: index,
+            }
+          }
+
+          const newImage = createdImages.shift()
+          if (!newImage) {
+            throw new MedusaError(
+              MedusaError.Types.UNEXPECTED_STATE,
+              `Mismatch between the number of created and updated images`
+            )
+          }
+
+          return {
+            pair: { image_id: newImage.id, product_id: productId },
+            rank: index,
+          }
+        })
+
+        await this.productImageProductService_.delete(
+          { product_id: productId },
+          sharedContext
+        )
+        await this.productImageProductService_.create(
+          allImages.map(({ pair, rank }) => ({
+            ...pair,
+            rank,
+          })),
+          sharedContext
+        )
+      }
+    } catch (error) {
+      throw error
+    }
 
     // There is more than 1-level depth of relations here, so we need to handle the options and variants manually
     await promiseAll(

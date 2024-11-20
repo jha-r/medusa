@@ -18,11 +18,11 @@ import {
   ProductType,
 } from "@models"
 
-import { UpdateProductInput } from "@types"
 import {
   MockEventBusService,
   moduleIntegrationTestRunner,
 } from "@medusajs/test-utils"
+import { UpdateProductInput } from "@types"
 import {
   buildProductAndRelationsData,
   createCollections,
@@ -1234,6 +1234,29 @@ moduleIntegrationTestRunner<IProductModuleService>({
           )
 
           expect(products).toEqual([])
+        })
+      })
+
+      describe("images", function () {
+        it("should upsert images and pivot records", async () => {
+          const images = [{ url: "image-1" }, { url: "image-2" }, { url: "image-3" }]
+
+          const [product] = await service.createProducts([
+            buildProductAndRelationsData({ images })
+          ])
+
+          expect(product.images).toHaveLength(3)
+          expect(product.images).toEqual([
+            expect.objectContaining({
+              url: "image-1",
+            }),
+            expect.objectContaining({
+              url: "image-2",
+            }),
+            expect.objectContaining({
+              url: "image-3",
+            }),
+          ])
         })
       })
     })

@@ -16,6 +16,7 @@ import {
   generateEntityId,
 } from "@medusajs/framework/utils"
 import Product from "./product"
+import ProductImageProduct from "./product-image-product"
 
 const imageUrlIndexName = "IDX_product_image_url"
 const imageUrlIndexStatement = createPsqlIndexStatementHelper({
@@ -58,7 +59,11 @@ class ProductImage {
   @Property({ columnType: "timestamptz", nullable: true })
   deleted_at?: Date
 
-  @ManyToMany(() => Product, (product) => product.images)
+  @ManyToMany({
+    entity: () => Product,
+    pivotEntity: () => ProductImageProduct,
+    mappedBy: (product) => product.images,
+  })
   products = new Collection<Product>(this)
 
   @OnInit()
