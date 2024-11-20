@@ -113,10 +113,12 @@ const useActivityItems = (order: AdminOrder): Activity[] => {
   const { t } = useTranslation()
 
   const { order_changes: orderChanges = [] } = useOrderChanges(order.id, {
-    change_type: ["edit", "claim", "exchange", "return"],
+    change_type: ["edit", "claim", "exchange", "return", "transfer"],
   })
 
-  const missingLineItemIds = getMissingLineItemIds(order, orderChanges)
+  const rmaChanges = orderChanges.filter((oc) => oc.change_type !== "transfer")
+
+  const missingLineItemIds = getMissingLineItemIds(order, rmaChanges)
   const { order_items: removedLineItems = [] } = useOrderLineItems(
     order.id,
 
@@ -125,7 +127,7 @@ const useActivityItems = (order: AdminOrder): Activity[] => {
       item_id: missingLineItemIds,
     },
     {
-      enabled: !!orderChanges.length,
+      enabled: !!rmaChanges.length,
     }
   )
 
@@ -370,14 +372,38 @@ const useActivityItems = (order: AdminOrder): Activity[] => {
           edit.status === "requested"
             ? edit.requested_at
             : edit.status === "confirmed"
-            ? edit.confirmed_at
-            : edit.status === "declined"
-            ? edit.declined_at
-            : edit.status === "canceled"
-            ? edit.canceled_at
-            : edit.created_at,
+              ? edit.confirmed_at
+              : edit.status === "declined"
+                ? edit.declined_at
+                : edit.status === "canceled"
+                  ? edit.canceled_at
+                  : edit.created_at,
         children: isConfirmed ? <OrderEditBody edit={edit} /> : null,
       })
+    }
+
+    for (const transfer of orderChanges.filter(
+      (oc) => oc.change_type === "transfer"
+    )) {
+      if (transfer.requested_at) {
+        items.push({
+          title: t(`orders.activity.events.transfer.requested`, {
+            transferId: transfer.id.slice(-7),
+          }),
+          timestamp: transfer.requested_at,
+          children: null, // TODO: add body
+        })
+      }
+
+      if (transfer.confirmed_at) {
+        items.push({
+          title: t(`orders.activity.events.transfer.confirmed`, {
+            transferId: transfer.id.slice(-7),
+          }),
+          timestamp: transfer.confirmed_at,
+          children: null, // TODO: add body
+        })
+      }
     }
 
     // for (const note of notes || []) {
