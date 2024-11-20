@@ -1,5 +1,5 @@
 ---
-"@medusajs/utils": feature
+"@medusajs/utils": patch
 ---
 
-feat: add support for making relationships searchable
+feat(utils): add support for making relationships searchable
