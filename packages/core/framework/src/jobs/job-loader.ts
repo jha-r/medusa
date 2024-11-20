@@ -5,6 +5,7 @@ import {
   isObject,
   MedusaError,
   promiseAll,
+  readFilesRecursive,
 } from "@medusajs/utils"
 import {
   createStep,
@@ -12,7 +13,7 @@ import {
   StepResponse,
 } from "@medusajs/workflows-sdk"
 import { Dirent } from "fs"
-import { access, readdir } from "fs/promises"
+import { access } from "fs/promises"
 import { join } from "path"
 import { logger } from "../logger"
 
@@ -139,10 +140,7 @@ export class JobLoader {
         return
       }
 
-      return await readdir(sourcePath, {
-        recursive: true,
-        withFileTypes: true,
-      }).then(async (entries) => {
+      return await readFilesRecursive(sourcePath).then(async (entries) => {
         const fileEntries = entries.filter(
           (entry: Dirent & { parentPath?: string }) => {
             return (
