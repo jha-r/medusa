@@ -9,6 +9,7 @@ import {
   StoreGetOrderParams,
   StoreGetOrdersParams,
   StoreAcceptOrderTransfer,
+  StoreRequestOrderTransfer,
 } from "./validators"
 
 export const storeOrderRoutesMiddlewares: MiddlewareRoute[] = [
@@ -27,6 +28,18 @@ export const storeOrderRoutesMiddlewares: MiddlewareRoute[] = [
     method: ["GET"],
     matcher: "/store/orders/:id",
     middlewares: [
+      validateAndTransformQuery(
+        StoreGetOrderParams,
+        QueryConfig.retrieveTransformQueryConfig
+      ),
+    ],
+  },
+  {
+    method: ["POST"],
+    matcher: "/store/orders/:id/transfer/request",
+    middlewares: [
+      authenticate("customer", ["session", "bearer"]),
+      validateAndTransformBody(StoreRequestOrderTransfer),
       validateAndTransformQuery(
         StoreGetOrderParams,
         QueryConfig.retrieveTransformQueryConfig

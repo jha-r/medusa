@@ -8,7 +8,6 @@ import {
   toMikroOrmEntities,
   toMikroORMEntity,
 } from "../helpers/create-mikro-orm-entity"
-import { InferTypeOf } from "@medusajs/types"
 
 describe("Entity builder", () => {
   beforeEach(() => {
@@ -1448,23 +1447,26 @@ describe("Entity builder", () => {
         },
       })
     })
+  })
 
-    test("define a property with default runtime value", () => {
+  describe("Entity builder | relationships", () => {
+    test("should mark a relationship as searchable", () => {
       const user = model.define("user", {
         id: model.number(),
-        username: model.text().default((schema) => {
-          const { email } = schema as InferTypeOf<typeof user>
-          return email.replace(/\@.*/, "")
-        }),
+        username: model.text(),
+        emails: model.hasMany(() => email).searchable(),
+      })
+
+      const email = model.define("email", {
+        id: model.number(),
         email: model.text(),
-        spend_limit: model.bigNumber().default(500.4),
       })
 
       const User = toMikroORMEntity(user)
       expectTypeOf(new User()).toMatchTypeOf<{
         id: number
         username: string
-        email: string
+        emails: { id: number; email: string }[]
         deleted_at: Date | null
       }>()
 
@@ -1495,7 +1497,6 @@ describe("Entity builder", () => {
         username: {
           reference: "scalar",
           type: "string",
-          default: expect.any(Function),
           columnType: "text",
           name: "username",
           fieldName: "username",
@@ -1503,37 +1504,14 @@ describe("Entity builder", () => {
           getter: false,
           setter: false,
         },
-        email: {
-          reference: "scalar",
-          type: "string",
-          columnType: "text",
-          name: "email",
-          fieldName: "email",
-          nullable: false,
-          getter: false,
-          setter: false,
-        },
-        spend_limit: {
-          columnType: "numeric",
-          default: 500.4,
-          getter: true,
-          name: "spend_limit",
-          fieldName: "spend_limit",
-          nullable: false,
-          reference: "scalar",
-          setter: true,
-          trackChanges: false,
-          type: "any",
-        },
-        raw_spend_limit: {
-          columnType: "jsonb",
-          getter: false,
-          name: "raw_spend_limit",
-          fieldName: "raw_spend_limit",
-          nullable: false,
-          reference: "scalar",
-          setter: false,
-          type: "any",
+        emails: {
+          cascade: undefined,
+          entity: "Email",
+          mappedBy: "user",
+          name: "emails",
+          orphanRemoval: true,
+          reference: "1:m",
+          searchable: true,
         },
         created_at: {
           reference: "scalar",

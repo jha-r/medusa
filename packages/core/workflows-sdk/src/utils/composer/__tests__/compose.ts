@@ -2522,4 +2522,78 @@ describe("Workflow composer", function () {
       "event-group-id"
     )
   })
+
+  it("should fail step and return response to compensate partial data", async () => {
+    const maxRetries = 3
+
+    const mockStep1Fn = jest.fn().mockImplementation(async (input, context) => {
+      const ok: number[] = []
+      const errors: number[] = []
+      const toInsert = [1, 2, 3, 4, 5, 6, 7, 8]
+
+      await promiseAll(
+        toInsert.map(async (i) => {
+          // fail on odd numbers
+          if (i % 2 === 0) {
+            ok.push(i)
+            return i
+          }
+
+          errors.push(i)
+          throw new Error("failed")
+        })
+      ).catch((e) => {})
+
+      if (errors.length > 0) {
+        return StepResponse.permanentFailure(
+          "Error inserting " + errors.join(", "),
+          ok
+        )
+      }
+
+      return new StepResponse(ok)
+    })
+
+    const mockStep1CompensateFn = jest
+      .fn()
+      .mockImplementation((input, context) => {
+        return input
+      })
+
+    const step1 = createStep(
+      { name: "step1", maxRetries },
+      mockStep1Fn,
+      mockStep1CompensateFn
+    )
+
+    const step2 = createStep("step2", () => {
+      throw new Error("failed")
+    })
+
+    const workflow = createWorkflow("workflow1", function (input) {
+      step1(input)
+      step2()
+    })
+
+    const workflowInput = { test: "payload1" }
+    const { errors } = await workflow().run({
+      input: workflowInput,
+      throwOnError: false,
+    })
+
+    expect(mockStep1Fn).toHaveBeenCalledTimes(1)
+    expect(mockStep1Fn.mock.calls[0]).toHaveLength(2)
+    expect(mockStep1Fn.mock.calls[0][0]).toEqual(workflowInput)
+
+    expect(mockStep1CompensateFn.mock.calls[0][0]).toEqual([2, 4, 6, 8])
+
+    expect(errors).toHaveLength(1)
+    expect(errors[0]).toEqual({
+      action: "step1",
+      handlerType: "invoke",
+      error: expect.objectContaining({
+        message: "Error inserting 1, 3, 5, 7",
+      }),
+    })
+  })
 })

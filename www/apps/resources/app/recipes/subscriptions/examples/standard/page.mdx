@@ -600,15 +600,15 @@ export const createSubscriptionWorkflowHighlights = [
 ```ts title="src/workflows/create-subscription/index.ts" highlights={createSubscriptionWorkflowHighlights} collapsibleLines="1-13" expandMoreLabel="Show Imports"
 import { 
   createWorkflow,
-  WorkflowResponse
+  WorkflowResponse,
 } from "@medusajs/framework/workflows-sdk"
 import { 
   createRemoteLinkStep,
   completeCartWorkflow,
-  useQueryGraphStep
+  useQueryGraphStep,
 } from "@medusajs/medusa/core-flows"
 import { 
-  SubscriptionInterval
+  SubscriptionInterval,
 } from "../../modules/subscription/types"
 import createSubscriptionStep from "./steps/create-subscription"
 
@@ -625,33 +625,33 @@ const createSubscriptionWorkflow = createWorkflow(
   (input: WorkflowInput) => {
     const { id } = completeCartWorkflow.runAsStep({
       input: {
-        id: input.cart_id
-      }
+        id: input.cart_id,
+      },
     })
 
     const { data: orders } = useQueryGraphStep({
       entity: "order",
       fields: ["*", "id", "customer_id"],
       filters: {
-        id
+        id,
       },
       options: {
-        throwIfKeyNotFound: true
-      }
+        throwIfKeyNotFound: true,
+      },
     })
 
     const { subscription, linkDefs } = createSubscriptionStep({
       cart_id: input.cart_id,
       order_id: orders[0].id,
       customer_id: orders[0].customer_id,
-      subscription_data: input.subscription_data
+      subscription_data: input.subscription_data,
     })
 
     createRemoteLinkStep(linkDefs)
 
     return new WorkflowResponse({
       subscription: subscription,
-      order: orders[0]
+      order: orders[0],
     })
   }
 )
@@ -1786,14 +1786,14 @@ import {
   useQueryGraphStep,
   createPaymentSessionsWorkflow,
   createRemoteLinkStep,
-  capturePaymentStep
+  capturePaymentStep,
 } from "@medusajs/medusa/core-flows"
 import { 
-  SubscriptionData
+  SubscriptionData,
 } from "../../modules/subscription/types"
 import { 
   authorizePaymentSessionStep,
-  createPaymentCollectionsStep
+  createPaymentCollectionsStep,
 } from "@medusajs/medusa/core-flows"
 import createSubscriptionOrderStep from "./steps/create-subscription-order"
 import updateSubscriptionStep from "./steps/update-subscription"
@@ -1819,21 +1819,21 @@ const createSubscriptionOrderWorkflow = createWorkflow(
         "cart.shipping_methods.tax_lines.*",
         "cart.shipping_methods.adjustments.*",
         "cart.payment_collection.*",
-        "cart.payment_collection.payment_sessions.*"
+        "cart.payment_collection.payment_sessions.*",
       ],
       filters: {
-        id: [input.subscription.id]
+        id: [input.subscription.id],
       },
       options: {
-        throwIfKeyNotFound: true
-      }
+        throwIfKeyNotFound: true,
+      },
     })
 
     const payment_collection = createPaymentCollectionsStep([{
       region_id: carts[0].region_id,
       currency_code: carts[0].currency_code,
       amount: carts[0].payment_collection.amount,
-      metadata: carts[0].payment_collection.metadata
+      metadata: carts[0].payment_collection.metadata,
     }])[0]
 
     const paymentSession = createPaymentSessionsWorkflow.runAsStep({
@@ -1841,34 +1841,34 @@ const createSubscriptionOrderWorkflow = createWorkflow(
         payment_collection_id: payment_collection.id,
         provider_id: carts[0].payment_collection.payment_sessions[0].provider_id,
         data: carts[0].payment_collection.payment_sessions[0].data,
-        context: carts[0].payment_collection.payment_sessions[0].context
-      }
+        context: carts[0].payment_collection.payment_sessions[0].context,
+      },
     })
 
     const payment = authorizePaymentSessionStep({
       id: paymentSession.id,
-      context: paymentSession.context
+      context: paymentSession.context,
     })
 
     const { order, linkDefs } = createSubscriptionOrderStep({
       subscription: input.subscription,
       cart: carts[0],
-      payment_collection
+      payment_collection,
     })
 
     createRemoteLinkStep(linkDefs)
 
     capturePaymentStep({
       payment_id: payment.id,
-      amount: payment.amount
+      amount: payment.amount,
     })
 
     updateSubscriptionStep({
-      subscription_id: input.subscription.id
+      subscription_id: input.subscription.id,
     })
 
     return new WorkflowResponse({
-      order
+      order,
     })
   }
 )

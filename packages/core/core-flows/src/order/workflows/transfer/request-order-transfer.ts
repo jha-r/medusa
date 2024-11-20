@@ -54,6 +54,9 @@ export const requestOrderTransferValidationStep = createStep(
 export const requestOrderTransferWorkflowId = "request-order-transfer-workflow"
 /**
  * This workflow requests an order transfer.
+ *
+ * Can be initiated by a store admin or the customer.
+ * If customer requested the transfer `input.logged_in_user === input.customer_id`.
  */
 export const requestOrderTransferWorkflow = createWorkflow(
   requestOrderTransferWorkflowId,

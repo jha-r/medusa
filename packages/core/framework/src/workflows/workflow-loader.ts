@@ -1,7 +1,8 @@
-import { dynamicImport, promiseAll } from "@medusajs/utils"
-import { logger } from "../logger"
-import { access, readdir } from "fs/promises"
+import { dynamicImport, promiseAll, readDirRecursive } from "@medusajs/utils"
+import { Dirent } from "fs"
+import { access } from "fs/promises"
 import { join } from "path"
+import { logger } from "../logger"
 
 export class WorkflowLoader {
   /**
@@ -43,11 +44,8 @@ export class WorkflowLoader {
         return
       }
 
-      return await readdir(sourcePath, {
-        recursive: true,
-        withFileTypes: true,
-      }).then(async (entries) => {
-        const fileEntries = entries.filter((entry) => {
+      return await readDirRecursive(sourcePath).then(async (entries) => {
+        const fileEntries = entries.filter((entry: Dirent) => {
           return (
             !entry.isDirectory() &&
             !this.#excludes.some((exclude) => exclude.test(entry.name))
@@ -57,7 +55,7 @@ export class WorkflowLoader {
         logger.debug(`Registering workflows from ${sourcePath}.`)
 
         return await promiseAll(
-          fileEntries.map(async (entry) => {
+          fileEntries.map(async (entry: Dirent) => {
             const fullPath = join(entry.path, entry.name)
             return await dynamicImport(fullPath)
           })

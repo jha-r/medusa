@@ -32,7 +32,8 @@
   }
 
   html {
-    -webkit-font-smoothing: antialiased;
+    @apply antialiased;
+    text-rendering: optimizeLegibility;
   }
 
   body {

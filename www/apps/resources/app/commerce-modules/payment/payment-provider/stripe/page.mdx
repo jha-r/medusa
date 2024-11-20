@@ -24,7 +24,7 @@ In this document, you’ll learn about the Stripe Module Provider and how to ins
     link: "https://support.stripe.com/questions/locate-api-keys-in-the-dashboard"
   },
   {
-    text: "For deployed Medusa applications, a Stripe webhook secret. When creating the Webhook, set the endpoint URL to {medusa_url}/hooks/payment/stripe, where {medusa_url} with the URL to your deployed Medusa application.",
+    text: "For deployed Medusa applications, a Stripe webhook secret. When creating the Webhook, set the endpoint URL to {medusa_url}/hooks/payment/stripe_stripe, where {medusa_url} with the URL to your deployed Medusa application.",
     link: "https://docs.stripe.com/webhooks#add-a-webhook-endpoint"
   }
 ]} />
@@ -211,6 +211,109 @@ const paymentSession =
     }
   )
 ```
+
+---
+
+## Stripe Webhook Endpoint URLs
+
+As mentioned in the prerequisites, when you set up a webhook in Stripe, you set the webhook endpoint URL to `{medusa_url}/hooks/payment/stripe_stripe`. This endpoint URL is for basic payments with Stripe.
+
+The Stripe Module Provider supports other payment types, and the webhook endpoint URL is different for each:
+
+<Table>
+  <Table.Header>
+    <Table.Row>
+      <Table.HeaderCell>Stripe Payment Type</Table.HeaderCell>
+      <Table.HeaderCell>Webhook Endpoint URL</Table.HeaderCell>
+    </Table.Row>
+  </Table.Header>
+  <Table.Body>
+    <Table.Row>
+      <Table.Cell>
+      
+      Basic Stripe Payment
+      
+      </Table.Cell>
+      <Table.Cell>
+      
+      `{medusa_url}/hooks/payment/stripe_stripe`
+      
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+      
+      Bancontact Payments
+      
+      </Table.Cell>
+      <Table.Cell>
+      
+      `{medusa_url}/hooks/payment/stripe-bancontact_stripe`
+      
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+      
+      BLIK Payments
+      
+      </Table.Cell>
+      <Table.Cell>
+      
+      `{medusa_url}/hooks/payment/stripe-blik_stripe`
+      
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+      
+      giropay Payments
+      
+      </Table.Cell>
+      <Table.Cell>
+      
+      `{medusa_url}/hooks/payment/stripe-giropay_stripe`
+      
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+      
+      iDEAL Payments
+      
+      </Table.Cell>
+      <Table.Cell>
+      
+      `{medusa_url}/hooks/payment/stripe-ideal_stripe`
+      
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+      
+      Przelewy24 Payments
+      
+      </Table.Cell>
+      <Table.Cell>
+      
+      `{medusa_url}/hooks/payment/stripe-przelewy24_stripe`
+      
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+      
+      PromptPay Payments
+      
+      </Table.Cell>
+      <Table.Cell>
+      
+      `{medusa_url}/hooks/payment/stripe-promptpay_stripe`
+      
+      </Table.Cell>
+    </Table.Row>
+  </Table.Body>
+</Table>
 
 ---
 

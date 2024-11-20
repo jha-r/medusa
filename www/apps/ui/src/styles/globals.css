@@ -4,7 +4,8 @@
 
 @layer base {
   html {
-    -webkit-font-smoothing: antialiased;
+    @apply antialiased;
+    text-rendering: optimizeLegibility;
   }
   .html {
     @apply text-medusa-fg-base;
