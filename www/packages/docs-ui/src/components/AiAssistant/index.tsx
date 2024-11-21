@@ -393,6 +393,7 @@ export const AiAssistant = () => {
               apply
             </>
           }
+          clickable={true}
         >
           <div
             className={clsx(

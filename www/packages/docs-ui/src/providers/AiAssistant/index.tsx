@@ -3,7 +3,7 @@
 import React, { createContext, useContext } from "react"
 import { useAnalytics } from "@/providers"
 import { AiAssistant } from "@/components"
-import ReCAPTCHA from "react-google-recaptcha"
+import { RecaptchaAction, useRecaptcha } from "../../hooks/use-recaptcha"
 
 export type AiAssistantFeedbackType = "upvote" | "downvote"
 
@@ -31,18 +31,13 @@ export const AiAssistantProvider = ({
   children,
 }: AiAssistantProviderProps) => {
   const { analytics } = useAnalytics()
-  const recaptchaRef = React.createRef<ReCAPTCHA>()
-
-  const getReCaptchaToken = async () => {
-    if (recaptchaRef?.current) {
-      const recaptchaToken = await recaptchaRef.current.executeAsync()
-      return recaptchaToken || ""
-    }
-    return ""
-  }
+  const { execute: getReCaptchaToken } = useRecaptcha({
+    siteKey: recaptchaSiteKey,
+  })
 
   const sendRequest = async (
     apiPath: string,
+    action: RecaptchaAction,
     method = "GET",
     headers?: HeadersInit,
     body?: BodyInit
@@ -50,7 +45,7 @@ export const AiAssistantProvider = ({
     return await fetch(`${apiUrl}${apiPath}`, {
       method,
       headers: {
-        "X-RECAPTCHA-TOKEN": await getReCaptchaToken(),
+        "X-RECAPTCHA-TOKEN": await getReCaptchaToken(action),
         "X-WEBSITE-ID": websiteId,
         ...headers,
       },
@@ -63,7 +58,8 @@ export const AiAssistantProvider = ({
     return await sendRequest(
       threadId
         ? `/query/v1/thread/${threadId}/stream?query=${questionParam}`
-        : `/query/v1/stream?query=${questionParam}`
+        : `/query/v1/stream?query=${questionParam}`,
+      RecaptchaAction.AskAi
     )
   }
 
@@ -73,6 +69,7 @@ export const AiAssistantProvider = ({
   ) => {
     return await sendRequest(
       `/query/v1/question-answer/${questionId}/feedback`,
+      RecaptchaAction.FeedbackSubmit,
       "POST",
       {
         "Content-Type": "application/json",
@@ -94,17 +91,6 @@ export const AiAssistantProvider = ({
     >
       {children}
       <AiAssistant />
-      <ReCAPTCHA
-        ref={recaptchaRef}
-        size="invisible"
-        sitekey={recaptchaSiteKey}
-        onErrored={() =>
-          console.error(
-            "ReCAPTCHA token not yet configured. Please reach out to the kapa team at founders@kapa.ai to complete the setup."
-          )
-        }
-        className="grecaptcha-badge"
-      />
     </AiAssistantContext.Provider>
   )
 }
