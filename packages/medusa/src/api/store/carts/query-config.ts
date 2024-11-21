@@ -47,6 +47,7 @@ export const defaultStoreCartFields = [
   "items.product.tags.id",
   "items.product.collection_id",
   "items.product.type_id",
+  "items.product_type_id",
   "items.product_title",
   "items.product_description",
   "items.product_subtitle",

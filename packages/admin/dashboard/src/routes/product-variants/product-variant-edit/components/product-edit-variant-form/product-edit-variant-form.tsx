@@ -44,8 +44,8 @@ const ProductEditVariantSchema = z.object({
 
 // TODO: Either pass option ID or make the backend handle options constraints differently to handle the lack of IDs
 export const ProductEditVariantForm = ({
-  product,
   variant,
+  product,
 }: ProductEditVariantFormProps) => {
   const { t } = useTranslation()
   const { handleSuccess } = useRouteModal()
@@ -63,7 +63,6 @@ export const ProductEditVariantForm = ({
       ean: variant.ean || "",
       upc: variant.upc || "",
       barcode: variant.barcode || "",
-      inventory_quantity: variant.inventory_quantity || "",
       manage_inventory: variant.manage_inventory || false,
       allow_backorder: variant.allow_backorder || false,
       weight: variant.weight || "",
@@ -79,7 +78,7 @@ export const ProductEditVariantForm = ({
   })
 
   const { mutateAsync, isPending } = useUpdateProductVariant(
-    product.id,
+    variant.product_id!,
     variant.id
   )
 

@@ -55,7 +55,7 @@ import { DetailWidgetProps, HttpTypes } from "@medusajs/framework/types"
 const ProductWidget = () => {
   const { data, isLoading } = useQuery({
     queryFn: () => sdk.admin.product.list(),
-    queryKey: ["products"]
+    queryKey: ["products"],
   })
   
   return (
@@ -95,17 +95,17 @@ import { sdk } from "../lib/config"
 import { DetailWidgetProps, HttpTypes } from "@medusajs/framework/types"
 
 const ProductWidget = ({ 
-  data: productData
+  data: productData,
 }: DetailWidgetProps<HttpTypes.AdminProduct>) => {
   const { mutateAsync } = useMutation({
     mutationFn: (payload: HttpTypes.AdminUpdateProduct) => 
       sdk.admin.product.update(productData.id, payload),
-    onSuccess: () => alert("updated product")
+    onSuccess: () => alert("updated product"),
   })
 
   const handleUpdate = () => {
     mutateAsync({
-      title: "New Product Title"
+      title: "New Product Title",
     })
   }
   
@@ -168,3 +168,11 @@ This adds a widget in a product's details page with a link to the Orders page. T
 Refer to [react-router-dom’s documentation](https://reactrouter.com/en/main) for other available components and hooks.
 
 </Note>
+
+---
+
+## Admin Translations
+
+The Medusa Admin dashboard can be displayed in languages other than English, which is the default. Other languages are added through community contributions.
+
+Learn how to add a new language translation for the Medusa Admin in [this guide](!resources!/contribution-guidelines/admin-translations).

@@ -1,6 +1,7 @@
 "use client"
 
-import React, { useRef, useState } from "react"
+import React, { useMemo, useRef, useState } from "react"
+// @ts-expect-error can't install the types package because it doesn't support React v19
 import { CSSTransition, SwitchTransition } from "react-transition-group"
 import { Solutions } from "./Solutions"
 import { ExtraData, useAnalytics } from "@/providers/Analytics"
@@ -15,6 +16,7 @@ import {
 } from "@/components"
 import { ChatBubbleLeftRight, ThumbDown, ThumbUp } from "@medusajs/icons"
 import Link from "next/link"
+import { useSiteConfig } from "../../providers"
 
 export type FeedbackProps = {
   event: string
@@ -38,7 +40,7 @@ export type FeedbackProps = {
 export const Feedback = ({
   event,
   pathName,
-  reportLink,
+  reportLink: initReportLink,
   question = "Was this page helpful?",
   positiveBtn = "It was helpful",
   negativeBtn = "It wasn't helpful",
@@ -53,6 +55,12 @@ export const Feedback = ({
   showLongForm = false,
   showDottedSeparator = true,
 }: FeedbackProps) => {
+  const {
+    config: { reportIssueLink },
+  } = useSiteConfig()
+  const reportLink = useMemo(() => {
+    return initReportLink || reportIssueLink
+  }, [initReportLink, reportIssueLink])
   const [showForm, setShowForm] = useState(false)
   const [submittedFeedback, setSubmittedFeedback] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -65,11 +73,11 @@ export const Feedback = ({
   const [medusaVersion, setMedusaVersion] = useState("")
   const [errorFix, setErrorFix] = useState("")
   const [contactInfo, setContactInfo] = useState("")
-  const nodeRef: React.RefObject<HTMLDivElement> = submittedFeedback
+  const nodeRef = submittedFeedback
     ? inlineMessageRef
     : showForm
-    ? inlineQuestionRef
-    : inlineFeedbackRef
+      ? inlineQuestionRef
+      : inlineFeedbackRef
   const { loaded, track } = useAnalytics()
 
   function handleFeedback(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
@@ -132,12 +140,12 @@ export const Feedback = ({
             showForm
               ? "show_form"
               : !submittedFeedback
-              ? "feedback"
-              : "submitted_feedback"
+                ? "feedback"
+                : "submitted_feedback"
           }
           nodeRef={nodeRef}
           timeout={300}
-          addEndListener={(done) => {
+          addEndListener={(done: () => void) => {
             nodeRef.current?.addEventListener("transitionend", done, false)
           }}
           classNames={{

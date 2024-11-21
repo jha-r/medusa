@@ -82,7 +82,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "plain_text",
-                    "text": "Triggering a release for preview environments failed"
+                    "text": "Triggering a release for preview environments failed for ${{ github.run_id }}"
                   }
                 }
               ]

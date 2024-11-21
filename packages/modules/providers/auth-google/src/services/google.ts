@@ -142,10 +142,10 @@ export class GoogleAuthService extends AbstractAuthModuleProvider {
       )
     }
 
-    // TODO: We should probably use something else than email here, like the `sub` field (which is more constant than the email)
-    const entity_id = payload.email
+    const entity_id = payload.sub
     const userMetadata = {
       name: payload.name,
+      email: payload.email,
       picture: payload.picture,
       given_name: payload.given_name,
       family_name: payload.family_name,

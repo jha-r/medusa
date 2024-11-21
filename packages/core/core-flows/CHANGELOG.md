@@ -1,5 +1,19 @@
 # @medusajs/core-flows
 
+## 2.0.4
+
+## 2.0.3
+
+### Patch Changes
+
+- [#9977](https://github.com/medusajs/medusa/pull/9977) [`1bae311a293096c9a8019b825a2fcd07e1918632`](https://github.com/medusajs/medusa/commit/1bae311a293096c9a8019b825a2fcd07e1918632) Thanks [@carlos-r-l-rodrigues](https://github.com/carlos-r-l-rodrigues)! - Keep customer when updating cart
+
+## 2.0.2
+
+### Patch Changes
+
+- [#9929](https://github.com/medusajs/medusa/pull/9929) [`c1c85ef952441eacfe8b6c2ffa9304ac4433053f`](https://github.com/medusajs/medusa/commit/c1c85ef952441eacfe8b6c2ffa9304ac4433053f) Thanks [@olivermrbl](https://github.com/olivermrbl)! - fix(core-flows,medusa): Include region_id in shipping option retrieval
+
 ## 2.0.1
 
 ## 2.0.0

@@ -215,9 +215,11 @@ class DistributedTransaction extends EventEmitter {
       this.modelId,
       this.transactionId
     )
-    await DistributedTransaction.keyValueStore.save(key, data, ttl, options)
 
-    return data
+    const rawData = JSON.parse(JSON.stringify(data))
+    await DistributedTransaction.keyValueStore.save(key, rawData, ttl, options)
+
+    return rawData
   }
 
   public static async loadTransaction(

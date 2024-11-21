@@ -17,12 +17,17 @@ import {
   TransactionStepStatus,
 } from "./types"
 
-import { MedusaError, promiseAll, TransactionStepState } from "@medusajs/utils"
+import {
+  isDefined,
+  isErrorLike,
+  MedusaError,
+  promiseAll,
+  serializeError,
+  TransactionStepState,
+} from "@medusajs/utils"
 import { EventEmitter } from "events"
 import {
-  isErrorLike,
   PermanentStepFailureError,
-  serializeError,
   SkipStepResponse,
   TransactionStepTimeoutError,
   TransactionTimeoutError,
@@ -760,8 +765,24 @@ export class TransactionOrchestrator extends EventEmitter {
 
         const setStepFailure = async (
           error: Error | any,
-          { endRetry }: { endRetry?: boolean } = {}
+          {
+            endRetry,
+            response,
+          }: {
+            endRetry?: boolean
+            response?: unknown
+          } = {}
         ) => {
+          if (isDefined(response) && step.saveResponse) {
+            transaction.addResponse(
+              step.definition.action!,
+              step.isCompensating()
+                ? TransactionHandlerType.COMPENSATE
+                : TransactionHandlerType.INVOKE,
+              response
+            )
+          }
+
           await TransactionOrchestrator.setStepFailure(
             transaction,
             step,
@@ -837,6 +858,8 @@ export class TransactionOrchestrator extends EventEmitter {
                 )
               })
               .catch(async (error) => {
+                const response = error?.getStepResponse?.()
+
                 if (this.hasExpired({ transaction, step }, Date.now())) {
                   await this.checkStepTimeout(transaction, step)
                   await this.checkTransactionTimeout(
@@ -848,11 +871,14 @@ export class TransactionOrchestrator extends EventEmitter {
                 if (
                   PermanentStepFailureError.isPermanentStepFailureError(error)
                 ) {
-                  await setStepFailure(error, { endRetry: true })
+                  await setStepFailure(error, {
+                    endRetry: true,
+                    response,
+                  })
                   return
                 }
 
-                await setStepFailure(error)
+                await setStepFailure(error, { response })
               })
           )
         } else {
@@ -913,14 +939,19 @@ export class TransactionOrchestrator extends EventEmitter {
                   )
                 })
                 .catch(async (error) => {
+                  const response = error?.getStepResponse?.()
+
                   if (
                     PermanentStepFailureError.isPermanentStepFailureError(error)
                   ) {
-                    await setStepFailure(error, { endRetry: true })
+                    await setStepFailure(error, {
+                      endRetry: true,
+                      response,
+                    })
                     return
                   }
 
-                  await setStepFailure(error)
+                  await setStepFailure(error, { response })
                 })
             })
           )

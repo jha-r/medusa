@@ -48,6 +48,7 @@ export interface JoinerServiceConfig {
   relationships?: JoinerRelationship[]
   extends?: {
     serviceName: string
+    entity?: string
     relationship: JoinerRelationship
   }[]
   /**

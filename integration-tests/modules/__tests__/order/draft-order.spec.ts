@@ -1,3 +1,4 @@
+import { medusaIntegrationTestRunner } from "@medusajs/test-utils"
 import {
   ICartModuleService,
   IFulfillmentModuleService,
@@ -10,7 +11,6 @@ import {
   ITaxModuleService,
 } from "@medusajs/types"
 import { ContainerRegistrationKeys, Modules } from "@medusajs/utils"
-import { medusaIntegrationTestRunner } from "@medusajs/test-utils"
 import {
   adminHeaders,
   createAdminUser,
@@ -244,6 +244,7 @@ medusaIntegrationTestRunner({
                   product_description: null,
                   product_subtitle: null,
                   product_type: null,
+                  product_type_id: null,
                   product_collection: null,
                   product_handle: "test-product",
                   variant_sku: null,

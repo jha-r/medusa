@@ -38,8 +38,8 @@ export function OrderAllocateItemsForm({ order }: OrderAllocateItemsFormProps) {
     () =>
       order.items.filter(
         (item) =>
-          item.variant.manage_inventory &&
-          item.variant.inventory.length &&
+          item.variant?.manage_inventory &&
+          item.variant?.inventory.length &&
           item.quantity - item.detail.fulfilled_quantity > 0
       ),
     [order.items]
@@ -48,8 +48,8 @@ export function OrderAllocateItemsForm({ order }: OrderAllocateItemsFormProps) {
   const filteredItems = useMemo(() => {
     return itemsToAllocate.filter(
       (i) =>
-        i.variant.title.toLowerCase().includes(filterTerm) ||
-        i.variant.product.title.toLowerCase().includes(filterTerm)
+        i.variant_title.toLowerCase().includes(filterTerm) ||
+        i.product_title.toLowerCase().includes(filterTerm)
     )
   }, [itemsToAllocate, filterTerm])
 
@@ -151,9 +151,9 @@ export function OrderAllocateItemsForm({ order }: OrderAllocateItemsFormProps) {
 
       const item = itemsToAllocate.find((i) => i.id === lineItem.id)
 
-      item.variant.inventory_items.forEach((ii, ind) => {
+      item.variant?.inventory_items.forEach((ii, ind) => {
         const num = value || 0
-        const inventory = item.variant.inventory[ind]
+        const inventory = item.variant?.inventory[ind]
 
         form.setValue(
           `quantity.${lineItem.id}-${inventory.id}`,
@@ -161,7 +161,7 @@ export function OrderAllocateItemsForm({ order }: OrderAllocateItemsFormProps) {
         )
 
         if (value) {
-          const location = inventory.location_levels.find(
+          const location = inventory?.location_levels.find(
             (l) => l.location_id === selectedLocationId
           )
           if (location) {
@@ -313,16 +313,16 @@ function defaultAllocations(items: OrderLineItemDTO) {
   const ret = {}
 
   items.forEach((item) => {
-    const hasInventoryKit = item.variant.inventory_items.length > 1
+    const hasInventoryKit = item.variant?.inventory_items.length > 1
 
     ret[
       hasInventoryKit
         ? `${item.id}-`
-        : `${item.id}-${item.variant.inventory[0].id}`
+        : `${item.id}-${item.variant?.inventory[0].id}`
     ] = ""
 
     if (hasInventoryKit) {
-      item.variant.inventory.forEach((i) => {
+      item.variant?.inventory.forEach((i) => {
         ret[`${item.id}-${i.id}`] = ""
       })
     }

@@ -26,7 +26,7 @@ const jsSdkOptions: FormattingOptionsType = {
   },
   "^js_sdk/store/Store/properties/": {
     frontmatterData: {
-      slug: "/references/js-sdk/admin/{{alias}}",
+      slug: "/references/js-sdk/store/{{alias}}",
       sidebar_label: "{{alias}}",
     },
     reflectionTitle: {
@@ -36,6 +36,11 @@ const jsSdkOptions: FormattingOptionsType = {
     },
     reflectionDescription:
       "This documentation provides a reference to the `sdk.store.{{alias}}` set of methods used to send requests to Medusa's Store API routes.",
+    sections: {
+      ...baseSectionsOptions,
+      member_declaration_title: false,
+      member_declaration_children: false,
+    },
   },
   "^js_sdk/admin/classes/.*Admin": {
     frontmatterData: {

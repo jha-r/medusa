@@ -9,7 +9,6 @@ export type MainNavContext = {
   navItems: NavigationItem[]
   activeItemIndex?: number
   activeItem?: NavigationItem
-  reportIssueLink: string
   editDate?: string
 }
 
@@ -17,14 +16,12 @@ const MainNavContext = createContext<MainNavContext | null>(null)
 
 export type MainNavProviderProps = {
   navItems: NavigationItem[]
-  reportIssueLink: string
   editDate?: string
   children?: React.ReactNode
 }
 
 export const MainNavProvider = ({
   navItems,
-  reportIssueLink,
   children,
   editDate,
 }: MainNavProviderProps) => {
@@ -90,7 +87,6 @@ export const MainNavProvider = ({
       value={{
         navItems,
         activeItemIndex,
-        reportIssueLink,
         editDate,
         activeItem,
       }}

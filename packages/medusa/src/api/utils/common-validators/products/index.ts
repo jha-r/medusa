@@ -13,6 +13,7 @@ export const StoreGetProductParamsDirectFields = z.object({
   handle: z.string().optional(),
   is_giftcard: booleanString().optional(),
   category_id: z.union([z.string(), z.array(z.string())]).optional(),
+  external_id: z.union([z.string(), z.array(z.string())]).optional(),
   collection_id: z.union([z.string(), z.array(z.string())]).optional(),
   tag_id: z.union([z.string(), z.array(z.string())]).optional(),
   type_id: z.union([z.string(), z.array(z.string())]).optional(),

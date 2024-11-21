@@ -5,6 +5,7 @@ import { Button } from "../../Button"
 import { ArrowUturnLeft, BarsThree, XMark } from "@medusajs/icons"
 import clsx from "clsx"
 import { MenuItem } from "types"
+// @ts-expect-error can't install the types package because it doesn't support React v19
 import { CSSTransition, SwitchTransition } from "react-transition-group"
 import { MainNavMobileMainMenu } from "./Main"
 import { MainNavMobileSubMenu } from "./SubMenu"

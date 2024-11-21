@@ -1,5 +1,38 @@
 # @medusajs/dashboard
 
+## 2.0.4
+
+### Patch Changes
+
+- [#10029](https://github.com/medusajs/medusa/pull/10029) [`904f0926f16737abe0a51a4fce8e5b0b8a377321`](https://github.com/medusajs/medusa/commit/904f0926f16737abe0a51a4fce8e5b0b8a377321) Thanks [@kasperkristensen](https://github.com/kasperkristensen)! - fix(dashboard): Fix query key for product details and load product variant data correctly
+
+- [#9770](https://github.com/medusajs/medusa/pull/9770) [`5c22c57cb8f549c9b16829ab313eb954339b1f6a`](https://github.com/medusajs/medusa/commit/5c22c57cb8f549c9b16829ab313eb954339b1f6a) Thanks [@nexthis](https://github.com/nexthis)! - feat(dashboard): Add Polish translation of admin dashboard
+
+- Updated dependencies []:
+  - @medusajs/admin-shared@2.0.4
+  - @medusajs/js-sdk@2.0.4
+  - @medusajs/icons@2.0.4
+
+## 2.0.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @medusajs/admin-shared@2.0.3
+  - @medusajs/js-sdk@2.0.3
+  - @medusajs/icons@2.0.3
+
+## 2.0.2
+
+### Patch Changes
+
+- [#9947](https://github.com/medusajs/medusa/pull/9947) [`b3cbc160eb94025402b5a0ef21653c207bbe8ccd`](https://github.com/medusajs/medusa/commit/b3cbc160eb94025402b5a0ef21653c207bbe8ccd) Thanks [@sradevski](https://github.com/sradevski)! - fix: Default to a relative path for backend URL in admin
+
+- Updated dependencies [[`30edc8fa40ff5ed6ecc8c55f555f9d975df497f5`](https://github.com/medusajs/medusa/commit/30edc8fa40ff5ed6ecc8c55f555f9d975df497f5)]:
+  - @medusajs/js-sdk@2.0.2
+  - @medusajs/admin-shared@2.0.2
+  - @medusajs/icons@2.0.2
+
 ## 2.0.1
 
 ### Patch Changes

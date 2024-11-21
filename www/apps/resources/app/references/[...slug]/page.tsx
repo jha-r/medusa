@@ -14,12 +14,13 @@ import { slugChanges } from "../../../generated/slug-changes.mjs"
 import { filesMap } from "../../../generated/files-map.mjs"
 
 type PageProps = {
-  params: {
+  params: Promise<{
     slug: string[]
-  }
+  }>
 }
 
-export default async function ReferencesPage({ params }: PageProps) {
+export default async function ReferencesPage(props: PageProps) {
+  const params = await props.params
   const { slug } = params
 
   // ensure that Vercel loads references files

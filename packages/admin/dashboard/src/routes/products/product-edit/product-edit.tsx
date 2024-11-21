@@ -23,8 +23,11 @@ export const ProductEdit = () => {
     <RouteDrawer>
       <RouteDrawer.Header>
         <RouteDrawer.Title asChild>
-          <Heading>{t("products.editProduct")}</Heading>
+          <Heading>{t("products.edit.header")}</Heading>
         </RouteDrawer.Title>
+        <RouteDrawer.Description className="sr-only">
+          {t("products.edit.description")}
+        </RouteDrawer.Description>
       </RouteDrawer.Header>
       {!isLoading && product && <EditProductForm product={product} />}
     </RouteDrawer>

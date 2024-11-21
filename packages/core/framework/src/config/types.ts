@@ -72,7 +72,7 @@ export type AdminOptions = {
    */
   outDir?: string
   /**
-   * The URL of your Medusa application. This is useful to set when you deploy the Medusa application.
+   * The URL of your Medusa application. Defaults to the browser origin. This is useful to set when running the admin on a separate domain.
    *
    * @example
    * ```ts title="medusa-config.ts"
@@ -274,7 +274,7 @@ export type ProjectConfigOptions = {
    * module.exports = defineConfig({
    *   projectConfig: {
    *     databaseDriverOptions: process.env.NODE_ENV !== "development" ?
-   *       { ssl: { rejectUnauthorized: false } } : {}
+   *       { connection: { ssl: { rejectUnauthorized: false } } } : {}
    *     // ...
    *   },
    *   // ...

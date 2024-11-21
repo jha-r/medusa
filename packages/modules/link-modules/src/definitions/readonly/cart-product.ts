@@ -7,6 +7,7 @@ export const CartProduct: ModuleJoinerConfig = {
   extends: [
     {
       serviceName: Modules.CART,
+      entity: "LineItem",
       relationship: {
         serviceName: Modules.PRODUCT,
         primaryKey: "id",
@@ -19,6 +20,7 @@ export const CartProduct: ModuleJoinerConfig = {
     },
     {
       serviceName: Modules.CART,
+      entity: "LineItem",
       relationship: {
         serviceName: Modules.PRODUCT,
         entity: "ProductVariant",

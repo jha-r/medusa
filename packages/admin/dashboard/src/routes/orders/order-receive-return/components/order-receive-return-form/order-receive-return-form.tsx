@@ -250,12 +250,12 @@ export function OrderReceiveReturnForm({
                         <Text className="txt-small" as="span" weight="plus">
                           {item.title}{" "}
                         </Text>
-                        {originalItem.variant.sku && (
-                          <span>({originalItem.variant.sku})</span>
+                        {originalItem.variant_sku && (
+                          <span>({originalItem.variant_sku})</span>
                         )}
                       </div>
                       <Text as="div" className="text-ui-fg-subtle txt-small">
-                        {originalItem.variant.product.title}
+                        {originalItem.product_title}
                       </Text>
                     </div>
                   </div>

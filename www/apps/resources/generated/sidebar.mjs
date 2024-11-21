@@ -7973,7 +7973,73 @@ export const generatedSidebar = [
     "type": "link",
     "path": "/integrations",
     "title": "Integrations",
-    "children": []
+    "isChildSidebar": true,
+    "children": [
+      {
+        "loaded": true,
+        "isPathHref": true,
+        "type": "category",
+        "title": "File",
+        "children": [
+          {
+            "loaded": true,
+            "isPathHref": true,
+            "type": "link",
+            "path": "/architectural-modules/file/s3",
+            "title": "AWS",
+            "children": []
+          }
+        ]
+      },
+      {
+        "loaded": true,
+        "isPathHref": true,
+        "type": "category",
+        "title": "Notification",
+        "children": [
+          {
+            "loaded": true,
+            "isPathHref": true,
+            "type": "link",
+            "path": "/architectural-modules/notification/sendgrid",
+            "title": "SendGrid",
+            "children": []
+          }
+        ]
+      },
+      {
+        "loaded": true,
+        "isPathHref": true,
+        "type": "category",
+        "title": "Payment",
+        "children": [
+          {
+            "loaded": true,
+            "isPathHref": true,
+            "type": "link",
+            "path": "/commerce-modules/payment/payment-provider/stripe",
+            "title": "Stripe",
+            "children": []
+          }
+        ]
+      },
+      {
+        "loaded": true,
+        "isPathHref": true,
+        "type": "category",
+        "title": "Guides",
+        "children": [
+          {
+            "loaded": true,
+            "isPathHref": true,
+            "type": "link",
+            "path": "/integrations/guides/sanity",
+            "title": "Sanity",
+            "children": []
+          }
+        ]
+      }
+    ]
   },
   {
     "loaded": true,
@@ -8616,7 +8682,7 @@ export const generatedSidebar = [
                 "loaded": true,
                 "isPathHref": true,
                 "type": "link",
-                "path": "/references/js-sdk/admin/cart",
+                "path": "/references/js-sdk/store/cart",
                 "title": "cart",
                 "children": []
               },
@@ -8624,7 +8690,7 @@ export const generatedSidebar = [
                 "loaded": true,
                 "isPathHref": true,
                 "type": "link",
-                "path": "/references/js-sdk/admin/category",
+                "path": "/references/js-sdk/store/category",
                 "title": "category",
                 "children": []
               },
@@ -8632,7 +8698,7 @@ export const generatedSidebar = [
                 "loaded": true,
                 "isPathHref": true,
                 "type": "link",
-                "path": "/references/js-sdk/admin/collection",
+                "path": "/references/js-sdk/store/collection",
                 "title": "collection",
                 "children": []
               },
@@ -8640,7 +8706,7 @@ export const generatedSidebar = [
                 "loaded": true,
                 "isPathHref": true,
                 "type": "link",
-                "path": "/references/js-sdk/admin/customer",
+                "path": "/references/js-sdk/store/customer",
                 "title": "customer",
                 "children": []
               },
@@ -8648,7 +8714,7 @@ export const generatedSidebar = [
                 "loaded": true,
                 "isPathHref": true,
                 "type": "link",
-                "path": "/references/js-sdk/admin/fulfillment",
+                "path": "/references/js-sdk/store/fulfillment",
                 "title": "fulfillment",
                 "children": []
               },
@@ -8656,7 +8722,7 @@ export const generatedSidebar = [
                 "loaded": true,
                 "isPathHref": true,
                 "type": "link",
-                "path": "/references/js-sdk/admin/order",
+                "path": "/references/js-sdk/store/order",
                 "title": "order",
                 "children": []
               },
@@ -8664,7 +8730,7 @@ export const generatedSidebar = [
                 "loaded": true,
                 "isPathHref": true,
                 "type": "link",
-                "path": "/references/js-sdk/admin/payment",
+                "path": "/references/js-sdk/store/payment",
                 "title": "payment",
                 "children": []
               },
@@ -8672,7 +8738,7 @@ export const generatedSidebar = [
                 "loaded": true,
                 "isPathHref": true,
                 "type": "link",
-                "path": "/references/js-sdk/admin/product",
+                "path": "/references/js-sdk/store/product",
                 "title": "product",
                 "children": []
               },
@@ -8680,7 +8746,7 @@ export const generatedSidebar = [
                 "loaded": true,
                 "isPathHref": true,
                 "type": "link",
-                "path": "/references/js-sdk/admin/region",
+                "path": "/references/js-sdk/store/region",
                 "title": "region",
                 "children": []
               }
@@ -9057,14 +9123,6 @@ export const generatedSidebar = [
         "loaded": true,
         "isPathHref": true,
         "type": "link",
-        "path": "/upgrade-guides",
-        "title": "Upgrade Guides",
-        "children": []
-      },
-      {
-        "loaded": true,
-        "isPathHref": true,
-        "type": "link",
         "path": "/deployment",
         "title": "Deployment Guides",
         "isChildSidebar": true,
@@ -9074,8 +9132,15 @@ export const generatedSidebar = [
             "isPathHref": true,
             "type": "category",
             "title": "Medusa Application",
-            "autogenerate_path": "/deployment/medusa-application",
             "children": [
+              {
+                "loaded": true,
+                "isPathHref": true,
+                "type": "link",
+                "path": "https://docs.medusajs.com/learn/deployment/general",
+                "title": "General",
+                "children": []
+              },
               {
                 "loaded": true,
                 "isPathHref": true,
@@ -10223,14 +10288,6 @@ export const generatedSidebar = [
                     "loaded": true,
                     "isPathHref": true,
                     "type": "link",
-                    "path": "/references/medusa-workflows/steps/getItemTaxLinesStep",
-                    "title": "getItemTaxLinesStep",
-                    "children": []
-                  },
-                  {
-                    "loaded": true,
-                    "isPathHref": true,
-                    "type": "link",
                     "path": "/references/medusa-workflows/steps/getLineItemActionsStep",
                     "title": "getLineItemActionsStep",
                     "children": []
@@ -10674,6 +10731,14 @@ export const generatedSidebar = [
                     "loaded": true,
                     "isPathHref": true,
                     "type": "link",
+                    "path": "/references/medusa-workflows/linkCustomerGroupsToCustomerWorkflow",
+                    "title": "linkCustomerGroupsToCustomerWorkflow",
+                    "children": []
+                  },
+                  {
+                    "loaded": true,
+                    "isPathHref": true,
+                    "type": "link",
                     "path": "/references/medusa-workflows/linkCustomersToCustomerGroupWorkflow",
                     "title": "linkCustomersToCustomerGroupWorkflow",
                     "children": []
@@ -10707,6 +10772,14 @@ export const generatedSidebar = [
                     "type": "link",
                     "path": "/references/medusa-workflows/steps/deleteCustomerGroupStep",
                     "title": "deleteCustomerGroupStep",
+                    "children": []
+                  },
+                  {
+                    "loaded": true,
+                    "isPathHref": true,
+                    "type": "link",
+                    "path": "/references/medusa-workflows/steps/linkCustomerGroupsToCustomerStep",
+                    "title": "linkCustomerGroupsToCustomerStep",
                     "children": []
                   },
                   {
@@ -12277,14 +12350,6 @@ export const generatedSidebar = [
                     "type": "link",
                     "path": "/references/medusa-workflows/steps/deleteReturnsStep",
                     "title": "deleteReturnsStep",
-                    "children": []
-                  },
-                  {
-                    "loaded": true,
-                    "isPathHref": true,
-                    "type": "link",
-                    "path": "/references/medusa-workflows/steps/getOrderItemTaxLinesStep",
-                    "title": "getOrderItemTaxLinesStep",
                     "children": []
                   },
                   {
@@ -14925,6 +14990,14 @@ export const generatedSidebar = [
             "type": "link",
             "path": "/contribution-guidelines/docs",
             "title": "Docs",
+            "children": []
+          },
+          {
+            "loaded": true,
+            "isPathHref": true,
+            "type": "link",
+            "path": "/contribution-guidelines/admin-translations",
+            "title": "Admin Translations",
             "children": []
           }
         ]

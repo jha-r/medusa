@@ -1742,6 +1742,53 @@ export const sidebar = sidebarAttachHrefCommonOptions([
     type: "link",
     path: "/integrations",
     title: "Integrations",
+    isChildSidebar: true,
+    children: [
+      {
+        type: "category",
+        title: "File",
+        children: [
+          {
+            type: "link",
+            path: "/architectural-modules/file/s3",
+            title: "AWS",
+          },
+        ],
+      },
+      {
+        type: "category",
+        title: "Notification",
+        children: [
+          {
+            type: "link",
+            path: "/architectural-modules/notification/sendgrid",
+            title: "SendGrid",
+          },
+        ],
+      },
+      {
+        type: "category",
+        title: "Payment",
+        children: [
+          {
+            type: "link",
+            path: "/commerce-modules/payment/payment-provider/stripe",
+            title: "Stripe",
+          },
+        ],
+      },
+      {
+        type: "category",
+        title: "Guides",
+        children: [
+          {
+            type: "link",
+            path: "/integrations/guides/sanity",
+            title: "Sanity",
+          },
+        ],
+      },
+    ],
   },
   {
     type: "link",
@@ -2093,11 +2140,6 @@ export const sidebar = sidebarAttachHrefCommonOptions([
       },
       {
         type: "link",
-        path: "/upgrade-guides",
-        title: "Upgrade Guides",
-      },
-      {
-        type: "link",
         path: "/deployment",
         title: "Deployment Guides",
         isChildSidebar: true,
@@ -2105,7 +2147,18 @@ export const sidebar = sidebarAttachHrefCommonOptions([
           {
             type: "category",
             title: "Medusa Application",
-            autogenerate_path: "/deployment/medusa-application",
+            children: [
+              {
+                type: "link",
+                path: "https://docs.medusajs.com/learn/deployment/general",
+                title: "General",
+              },
+              {
+                type: "link",
+                path: "/deployment/medusa-application/railway",
+                title: "Railway",
+              },
+            ],
           },
           {
             type: "category",
@@ -2387,10 +2440,11 @@ export const sidebar = sidebarAttachHrefCommonOptions([
             path: "/contribution-guidelines/docs",
             title: "Docs",
           },
-          // {
-          //   path: "/contribution-guidelines/admin-translations",
-          //   title: "Admin Translations",
-          // },
+          {
+            type: "link",
+            path: "/contribution-guidelines/admin-translations",
+            title: "Admin Translations",
+          },
         ],
       },
       {

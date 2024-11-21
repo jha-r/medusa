@@ -26,7 +26,7 @@ type MainNavProps = {
 }
 
 export const MainNav = ({ className, itemsClassName }: MainNavProps) => {
-  const { reportIssueLink, editDate } = useMainNav()
+  const { editDate } = useMainNav()
   const { setMobileSidebarOpen, isSidebarShown } = useSidebar()
   const { config } = useSiteConfig()
 
@@ -64,7 +64,7 @@ export const MainNav = ({ className, itemsClassName }: MainNavProps) => {
           <MainNavVersion />
           {editDate && <MainNavEditDate date={editDate} />}
           <LinkButton
-            href={reportIssueLink}
+            href={config.reportIssueLink || ""}
             variant="subtle"
             target="_blank"
             className="text-compact-small-plus"
