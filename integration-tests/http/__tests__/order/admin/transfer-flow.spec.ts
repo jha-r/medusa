@@ -141,6 +141,59 @@ medusaIntegrationTestRunner({
         expect(finalOrderResult.customer_id).toEqual(customer.id)
       })
 
+      it("should cancel an order transfer request from admin successfully", async () => {
+        await api.post(
+          `/admin/orders/${order.id}/transfer`,
+          {
+            customer_id: customer.id,
+          },
+          adminHeaders
+        )
+
+        await api.get(
+          `/admin/orders/${order.id}?fields=+customer_id,+email`,
+          adminHeaders
+        )
+
+        let orderPreviewResult = (
+          await api.get(`/admin/orders/${order.id}/preview`, adminHeaders)
+        ).data.order
+
+        expect(orderPreviewResult).toEqual(
+          expect.objectContaining({
+            customer_id: customer.id,
+            order_change: expect.objectContaining({
+              change_type: "transfer",
+              status: "requested",
+              requested_by: user.id,
+            }),
+          })
+        )
+
+        await api.post(
+          `/admin/orders/${order.id}/transfer/cancel`,
+          {},
+          adminHeaders
+        )
+
+        orderPreviewResult = (
+          await api.get(`/admin/orders/${order.id}/preview`, adminHeaders)
+        ).data.order
+
+        expect(orderPreviewResult).toEqual(
+          expect.objectContaining({
+            customer_id: customer.id,
+            order_change: null,
+          })
+        )
+
+        const orderChangesResult = (
+          await api.get(`/admin/orders/${order.id}/changes`, adminHeaders)
+        ).data.order_changes
+
+        expect(orderChangesResult.length).toEqual(0)
+      })
+
       it("should fail to request order transfer to a guest customer", async () => {
         const customer = (
           await api.post(

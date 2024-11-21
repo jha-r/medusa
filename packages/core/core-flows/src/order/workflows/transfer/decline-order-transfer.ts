@@ -56,7 +56,7 @@ export const declineTransferOrderRequestWorkflowId =
  * Only the original customer (who has the token) is allowed to decline the transfer.
  */
 export const declineOrderTransferRequestWorkflow = createWorkflow(
-  declineTransferOrderRequestValidationStep,
+  declineTransferOrderRequestWorkflowId,
   function (
     input: WorkflowData<OrderWorkflow.DeclineTransferOrderRequestWorkflowInput>
   ): WorkflowData<void> {

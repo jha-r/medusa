@@ -62,7 +62,7 @@ export const cancelTransferOrderRequestWorkflowId =
  * Customer that requested the transfer or a store admin are allowed to cancel the order transfer request.
  */
 export const cancelOrderTransferRequestWorkflow = createWorkflow(
-  cancelTransferOrderRequestValidationStep,
+  cancelTransferOrderRequestWorkflowId,
   function (
     input: WorkflowData<OrderWorkflow.CancelTransferOrderRequestWorkflowInput>
   ): WorkflowData<void> {
