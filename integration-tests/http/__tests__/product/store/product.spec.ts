@@ -495,6 +495,14 @@ medusaIntegrationTestRunner({
               prices: [{ amount: 3000, currency_code: "usd" }],
             },
           ],
+          images: [
+            {
+              url: "image-one",
+            },
+            {
+              url: "image-two",
+            },
+          ],
         })
         ;[product2, [variant2]] = await createProducts({
           title: "test product 2 uniquely",
@@ -587,6 +595,22 @@ medusaIntegrationTestRunner({
             id: product2.id,
           }),
         ])
+      })
+
+      it("should list all products with images ordered by rank", async () => {
+        const response = await api.get("/store/products", storeHeaders)
+
+        expect(response.data.products).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({
+              id: product.id,
+              images: expect.arrayContaining([
+                expect.objectContaining({ url: "image-one", rank: 0 }),
+                expect.objectContaining({ url: "image-two", rank: 1 }),
+              ]),
+            }),
+          ])
+        )
       })
 
       it("should list all products excluding variants", async () => {
@@ -1197,6 +1221,14 @@ medusaIntegrationTestRunner({
               ],
             },
           ],
+          images: [
+            {
+              url: "image-one",
+            },
+            {
+              url: "image-two",
+            }
+          ],
         })
 
         const defaultSalesChannel = await createSalesChannel(
@@ -1242,6 +1274,17 @@ medusaIntegrationTestRunner({
               }),
             ],
           })
+        )
+      })
+
+      it("should retrieve product with images ordered by rank", async () => {
+        const response = await api.get(`/store/products/${product.id}`, storeHeaders)
+
+        expect(response.data.product.images).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({ url: "image-one", rank: 0 }),
+            expect.objectContaining({ url: "image-two", rank: 1 }),
+          ])
         )
       })
 

@@ -12,6 +12,7 @@ import {
   ProductStatus,
 } from "@medusajs/framework/utils"
 import {
+  Image,
   Product,
   ProductCategory,
   ProductCollection,
@@ -1299,7 +1300,7 @@ moduleIntegrationTestRunner<IProductModuleService>({
           ])
         })
 
-        it("should retrieve images with correct rank", async () => {
+        it("should retrieve images in the correct order consistently", async () => {
           const images = Array.from({ length: 1000 }, (_, i) => ({
             url: `image-${i + 1}`,
           }))
@@ -1312,6 +1313,12 @@ moduleIntegrationTestRunner<IProductModuleService>({
             relations: ["images"],
           })
 
+          const retrievedProductAgain = await service.retrieveProduct(product.id, {
+            relations: ["images"],
+          })
+
+          expect(retrievedProduct.images).toEqual(retrievedProductAgain.images)
+          
           expect(retrievedProduct.images).toEqual(
             Array.from({ length: 1000 }, (_, i) =>
               expect.objectContaining({
@@ -1320,6 +1327,60 @@ moduleIntegrationTestRunner<IProductModuleService>({
               })
             )
           )
+
+          // Explicitly verify sequential order
+          retrievedProduct.images.forEach((img, idx) => {
+            if (idx > 0) {
+              expect(img.rank).toBeGreaterThan(retrievedProduct.images[idx - 1].rank)
+            }
+          })
+        })
+
+        it("should retrieve images ordered by rank", async () => {
+          const [product] = await service.createProducts([
+            buildProductAndRelationsData({}),
+          ])
+
+          const manager = MikroOrmWrapper.forkManager()
+
+          const images = [
+            manager.create(Image, {
+              product_id: product.id,
+              url: "image-one",
+              rank: 1,
+            }),
+            manager.create(Image, {
+              product_id: product.id,
+              url: "image-two",
+              rank: 0,
+            }),
+            manager.create(Image, {
+              product_id: product.id,
+              url: "image-three",
+              rank: 2,
+            }),
+          ]
+
+          await manager.persistAndFlush(images)
+
+          const retrievedProduct = await service.retrieveProduct(product.id, {
+            relations: ["images"],
+          })
+
+          expect(retrievedProduct.images).toEqual([
+            expect.objectContaining({
+              url: "image-two",
+              rank: 0,
+            }),
+            expect.objectContaining({
+              url: "image-one",
+              rank: 1,
+            }),
+            expect.objectContaining({
+              url: "image-three",
+              rank: 2,
+            }),
+          ])
         })
       })
     })

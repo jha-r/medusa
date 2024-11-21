@@ -1,12 +1,11 @@
 import {
   Context,
   DAL,
-  FindConfig,
   IEventBusModuleService,
   InternalModuleDeclaration,
   ModuleJoinerConfig,
   ModulesSdkTypes,
-  ProductTypes,
+  ProductTypes
 } from "@medusajs/framework/types"
 import {
   Product,
@@ -151,85 +150,6 @@ export default class ProductModuleService
 
   __joinerConfig(): ModuleJoinerConfig {
     return joinerConfig
-  }
-
-  @InjectManager()
-  // @ts-expect-error
-  async retrieveProduct(
-    productId: string,
-    config?: FindConfig<ProductTypes.ProductDTO>,
-    sharedContext?: Context
-  ): Promise<ProductTypes.ProductDTO> {
-    const product = await this.productService_.retrieve(
-      productId,
-      config,
-      sharedContext
-    )
-
-    if (config?.relations?.includes("images")) {
-      await this.attachSortedImagesToProducts([product], sharedContext)
-    }
-
-    return await this.baseRepository_.serialize<ProductTypes.ProductDTO>(
-      product
-    )
-  }
-
-  @InjectManager()
-  // @ts-ignore
-  async listProducts(
-    filters: ProductTypes.FilterableProductProps = {},
-    config: FindConfig<ProductTypes.ProductDTO> = {},
-    sharedContext?: Context
-  ): Promise<ProductTypes.ProductDTO[]> {
-    const products = await this.productService_.list(filters, config, sharedContext)
-
-    if (config?.relations?.includes("images")) {
-      await this.attachSortedImagesToProducts(products, sharedContext)
-    }
-
-    return await this.baseRepository_.serialize<ProductTypes.ProductDTO[]>(
-      products
-    )
-  }
-
-  @InjectManager()
-  // @ts-ignore
-  async listAndCountProducts(
-    filters: ProductTypes.FilterableProductProps = {},
-    config: FindConfig<ProductTypes.ProductDTO> = {},
-    sharedContext?: Context
-  ): Promise<[ProductTypes.ProductDTO[], number]> {
-    const [products, count] = await this.productService_.listAndCount(
-      filters,
-      config,
-      sharedContext
-    )
-
-    if (config?.relations?.includes("images")) {
-      await this.attachSortedImagesToProducts(products, sharedContext)
-    }
-
-    const serializedProducts = await this.baseRepository_.serialize<
-      ProductTypes.ProductDTO[]
-    >(products)
-
-    return [serializedProducts, count]
-  }
-
-  @InjectManager()
-  protected async attachSortedImagesToProducts(
-    products: Product[],
-    sharedContext?: Context
-  ) {
-    for (const product of products) {
-      const images = await this.productImageService_.list(
-        { product_id: [product.id] },
-        { order: { rank: "asc" } },
-        sharedContext
-      )
-      product.images.set(images)
-    }
   }
 
   // @ts-ignore
