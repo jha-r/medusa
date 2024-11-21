@@ -1,8 +1,24 @@
 import { Card, Prerequisites, Details } from "docs-ui"
 import { Github } from "@medusajs/icons"
 
+export const ogImage = "https://res.cloudinary.com/dza7lstvk/image/upload/v1732200494/Medusa%20Resources/opengraph-image_kstzrn.jpg"
+
 export const metadata = {
   title: `Integrate Medusa with Sanity`,
+  openGraph: {
+    images: [
+      {
+        url: ogImage,
+        width: 1600,
+        height: 900
+      }
+    ],
+  },
+  twitter: {
+    images: [
+      ogImage
+    ]
+  }
 }
 
 # {metadata.title}
