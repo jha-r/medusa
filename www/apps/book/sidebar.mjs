@@ -269,7 +269,7 @@ export const sidebar = numberSidebarItems(
             {
               type: "link",
               path: "/learn/advanced-development/modules/container",
-              title: "Module's Container",
+              title: "Module Container",
             },
             {
               type: "link",
