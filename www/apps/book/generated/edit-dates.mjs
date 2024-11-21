@@ -112,7 +112,7 @@ export const generatedEditDates = {
   "app/learn/architecture/overview/page.mdx": "2024-09-23T12:55:01.339Z",
   "app/learn/advanced-development/data-models/infer-type/page.mdx": "2024-09-30T08:43:53.123Z",
   "app/learn/advanced-development/custom-cli-scripts/seed-data/page.mdx": "2024-10-03T11:11:07.181Z",
-  "app/learn/basics/modules/page.mdx": "2024-10-16T08:49:39.997Z",
+  "app/learn/basics/modules/page.mdx": "2024-11-21T14:09:42.197Z",
   "app/learn/advanced-development/environment-variables/page.mdx": "2024-10-25T14:59:07.831Z",
   "app/learn/build/page.mdx": "2024-11-11T11:08:41.832Z",
   "app/learn/deployment/general/page.mdx": "2024-11-11T11:50:04.248Z",
