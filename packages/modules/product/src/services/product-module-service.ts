@@ -1435,7 +1435,7 @@ export default class ProductModuleService
         this.validateProductCreatePayload(normalized)
         return normalized
       })
-    )
+    ) 
 
     const { entities: productData } =
       await this.productService_.upsertWithReplace(

@@ -58,7 +58,7 @@ class ProductImage {
   @Property({ columnType: "timestamptz", nullable: true })
   deleted_at?: Date
 
-  @Property({ columnType: "integer", default: 0 })
+  @Property({ columnType: "integer" })
   rank: number
 
   @ManyToOne(() => Product, {
