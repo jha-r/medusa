@@ -392,6 +392,67 @@ medusaIntegrationTestRunner({
         // 4. Customer account is now associated with the order (email on the order is still as original, guest email)
         expect(finalOrder.customer_id).toEqual(customer.id)
       })
+
+      it("user should be able to cancel their own transfer request", async () => {
+        await api.post(
+          `/store/orders/${order.id}/transfer/request`,
+          {},
+          {
+            headers: {
+              authorization: `Bearer ${signInToken}`,
+              ...storeHeaders.headers,
+            },
+          }
+        )
+
+        let orderChanges = await orderModule.listOrderChanges(
+          { order_id: order.id },
+          { relations: ["actions"] }
+        )
+
+        expect(orderChanges.length).toEqual(1)
+        expect(orderChanges[0]).toEqual(
+          expect.objectContaining({
+            change_type: "transfer",
+            status: "requested",
+            requested_by: customer.id,
+            created_by: customer.id,
+            confirmed_by: null,
+            confirmed_at: null,
+            declined_by: null,
+            actions: expect.arrayContaining([
+              expect.objectContaining({
+                version: 2,
+                action: "TRANSFER_CUSTOMER",
+                reference: "customer",
+                reference_id: customer.id,
+                details: expect.objectContaining({
+                  token: expect.any(String),
+                  original_email: "tony@stark-industries.com",
+                }),
+              }),
+            ]),
+          })
+        )
+
+        await api.post(
+          `/store/orders/${order.id}/transfer/cancel`,
+          {},
+          {
+            headers: {
+              authorization: `Bearer ${signInToken}`,
+              ...storeHeaders.headers,
+            },
+          }
+        )
+
+        orderChanges = await orderModule.listOrderChanges(
+          { order_id: order.id },
+          { relations: ["actions"] }
+        )
+
+        expect(orderChanges.length).toEqual(0)
+      })
     })
   },
 })
