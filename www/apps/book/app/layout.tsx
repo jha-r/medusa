@@ -5,6 +5,9 @@ import { BareboneLayout } from "docs-ui"
 import { inter, robotoMono } from "./fonts"
 import clsx from "clsx"
 
+const ogImage =
+  "https://res.cloudinary.com/dza7lstvk/image/upload/v1732200992/Medusa%20Resources/opengraph-image_daq6nx.jpg"
+
 export const metadata: Metadata = {
   title: {
     template: `%s - ${config.titleSuffix}`,
@@ -14,6 +17,12 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
   ),
+  openGraph: {
+    images: [ogImage],
+  },
+  twitter: {
+    images: [ogImage],
+  },
 }
 
 export default function RootLayout({
