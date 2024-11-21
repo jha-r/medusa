@@ -5,6 +5,7 @@ import {
 import { MiddlewareRoute } from "@medusajs/framework/http"
 import * as QueryConfig from "./query-config"
 import {
+  AdminCancelOrderTransferRequest,
   AdminCompleteOrder,
   AdminGetOrdersOrderItemsParams,
   AdminGetOrdersOrderParams,
@@ -150,6 +151,17 @@ export const adminOrderRoutesMiddlewares: MiddlewareRoute[] = [
     matcher: "/admin/orders/:id/transfer",
     middlewares: [
       validateAndTransformBody(AdminTransferOrder),
+      validateAndTransformQuery(
+        AdminGetOrdersOrderParams,
+        QueryConfig.retrieveTransformQueryConfig
+      ),
+    ],
+  },
+  {
+    method: ["POST"],
+    matcher: "/admin/orders/:id/transfer/cancel",
+    middlewares: [
+      validateAndTransformBody(AdminCancelOrderTransferRequest),
       validateAndTransformQuery(
         AdminGetOrdersOrderParams,
         QueryConfig.retrieveTransformQueryConfig
