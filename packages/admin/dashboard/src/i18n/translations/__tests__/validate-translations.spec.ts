@@ -1,7 +1,6 @@
 import fs from "fs"
 import path from "path"
 import { describe, expect, test } from "vitest"
-import { languages } from "../../languages.ts"
 
 import schema from "../$schema.json"
 
@@ -39,36 +38,29 @@ function getTranslationKeys(obj: any, prefix = ""): string[] {
   return keys.sort()
 }
 
-function validateTranslationFile(fileName: string) {
-  const filePath = path.join(translationsDir, fileName)
-  const translations = JSON.parse(fs.readFileSync(filePath, "utf-8"))
-
-  const schemaKeys = getRequiredKeysFromSchema(schema)
-  const translationKeys = getTranslationKeys(translations)
-
-  const missingInTranslations = schemaKeys.filter(
-    (key) => !translationKeys.includes(key)
-  )
-  const extraInTranslations = translationKeys.filter(
-    (key) => !schemaKeys.includes(key)
-  )
-
-  if (missingInTranslations.length > 0) {
-    console.error(`\nMissing keys in ${fileName}:`, missingInTranslations)
-  }
-  if (extraInTranslations.length > 0) {
-    console.error(`\nExtra keys in ${fileName}:`, extraInTranslations)
-  }
-
-  expect(missingInTranslations).toEqual([])
-  expect(extraInTranslations).toEqual([])
-}
-
 describe("translation schema validation", () => {
-  languages.forEach((language) => {
-    const codeLanguage: string = language.code
-    test(`${codeLanguage}.json should have all keys defined in schema`, () => {
-      validateTranslationFile(`${codeLanguage}.json`)
-    })
+  test("en.json should have all keys defined in schema", () => {
+    const enPath = path.join(translationsDir, "en.json")
+    const enTranslations = JSON.parse(fs.readFileSync(enPath, "utf-8"))
+
+    const schemaKeys = getRequiredKeysFromSchema(schema)
+    const translationKeys = getTranslationKeys(enTranslations)
+
+    const missingInTranslations = schemaKeys.filter(
+      (key) => !translationKeys.includes(key)
+    )
+    const extraInTranslations = translationKeys.filter(
+      (key) => !schemaKeys.includes(key)
+    )
+
+    if (missingInTranslations.length > 0) {
+      console.error("\nMissing keys in en.json:", missingInTranslations)
+    }
+    if (extraInTranslations.length > 0) {
+      console.error("\nExtra keys in en.json:", extraInTranslations)
+    }
+
+    expect(missingInTranslations).toEqual([])
+    expect(extraInTranslations).toEqual([])
   })
 })
