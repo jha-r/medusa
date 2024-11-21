@@ -70,7 +70,7 @@ export const useRecaptcha = ({ siteKey }: UseRecaptchaProps) => {
   // The recaptcha execute function is not immediately
   // ready so we need to wait until we can call it.
   const [isExecuteReady, setIsExecuteReady] = useState(false)
-  const isBrowser = useIsBrowser()
+  const { isBrowser } = useIsBrowser()
 
   useEffect(() => {
     if (!isBrowser) {
