@@ -18,10 +18,24 @@ export const metadata: Metadata = {
     process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
   ),
   openGraph: {
-    images: [ogImage],
+    images: [
+      {
+        url: ogImage,
+        type: "image/jpeg",
+        height: "1260",
+        width: "2400",
+      },
+    ],
   },
   twitter: {
-    images: [ogImage],
+    images: [
+      {
+        url: ogImage,
+        type: "image/jpeg",
+        height: "1260",
+        width: "2400",
+      },
+    ],
   },
 }
 
