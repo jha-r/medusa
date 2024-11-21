@@ -1,5 +1,14 @@
 # @medusajs/js-sdk
 
+## 2.0.5
+
+### Patch Changes
+
+- [#10175](https://github.com/medusajs/medusa/pull/10175) [`6680f69588332e25e6be2115248dd72fe18334b7`](https://github.com/medusajs/medusa/commit/6680f69588332e25e6be2115248dd72fe18334b7) Thanks [@riqwan](https://github.com/riqwan)! - feat(js-sdk): add transferCart to sdk -> store -> cart
+
+- Updated dependencies [[`9dff05cddeeca40fab47760fa15e07ca087664ed`](https://github.com/medusajs/medusa/commit/9dff05cddeeca40fab47760fa15e07ca087664ed), [`3fee17747f059a331e9fbe40622205b968404faf`](https://github.com/medusajs/medusa/commit/3fee17747f059a331e9fbe40622205b968404faf)]:
+  - @medusajs/types@2.0.5
+
 ## 2.0.4
 
 ### Patch Changes
