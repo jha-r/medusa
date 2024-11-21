@@ -393,7 +393,7 @@ medusaIntegrationTestRunner({
         expect(finalOrder.customer_id).toEqual(customer.id)
       })
 
-      it("customer should be able to cancel their own transfer request", async () => {
+      it("should cancel a customer transfer request from as admin", async () => {
         await api.post(
           `/store/orders/${order.id}/transfer/request`,
           {},
@@ -449,7 +449,7 @@ medusaIntegrationTestRunner({
         expect(orderChanges.length).toEqual(0)
       })
 
-      it("admin should be able to cancel a transfer request from a customer", async () => {
+      it("customer should be able to cancel their own transfer request", async () => {
         await api.post(
           `/store/orders/${order.id}/transfer/request`,
           {},
