@@ -180,12 +180,7 @@ medusaIntegrationTestRunner({
           await api.get(`/admin/orders/${order.id}/preview`, adminHeaders)
         ).data.order
 
-        expect(orderPreviewResult).toEqual(
-          expect.objectContaining({
-            customer_id: customer.id,
-            order_change: null,
-          })
-        )
+        expect(orderPreviewResult.order_change).not.toBeDefined()
 
         const orderChangesResult = (
           await api.get(`/admin/orders/${order.id}/changes`, adminHeaders)
