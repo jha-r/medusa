@@ -442,10 +442,9 @@ medusaIntegrationTestRunner({
           adminHeaders
         )
 
-        orderChanges = await orderModule.listOrderChanges(
-          { order_id: order.id },
-          { relations: ["actions"] }
-        )
+        orderChanges = await orderModule.listOrderChanges({
+          order_id: order.id,
+        })
 
         expect(orderChanges.length).toEqual(0)
       })
@@ -509,6 +508,150 @@ medusaIntegrationTestRunner({
         )
 
         expect(orderChanges.length).toEqual(0)
+      })
+
+      it("original customer should be able to decline a transfer request", async () => {
+        await api.post(
+          `/store/orders/${order.id}/transfer/request`,
+          {},
+          {
+            headers: {
+              authorization: `Bearer ${signInToken}`,
+              ...storeHeaders.headers,
+            },
+          }
+        )
+
+        let orderChanges = await orderModule.listOrderChanges(
+          { order_id: order.id },
+          { relations: ["actions"] }
+        )
+
+        expect(orderChanges.length).toEqual(1)
+        expect(orderChanges[0]).toEqual(
+          expect.objectContaining({
+            change_type: "transfer",
+            status: "requested",
+            requested_by: customer.id,
+            created_by: customer.id,
+            confirmed_by: null,
+            confirmed_at: null,
+            declined_by: null,
+            actions: expect.arrayContaining([
+              expect.objectContaining({
+                version: 2,
+                action: "TRANSFER_CUSTOMER",
+                reference: "customer",
+                reference_id: customer.id,
+                details: expect.objectContaining({
+                  token: expect.any(String),
+                  original_email: "tony@stark-industries.com",
+                }),
+              }),
+            ]),
+          })
+        )
+
+        await api.post(
+          `/store/orders/${order.id}/transfer/decline`,
+          { token: orderChanges[0].actions[0].details.token },
+          {
+            headers: {
+              ...storeHeaders.headers,
+            },
+          }
+        )
+
+        orderChanges = await orderModule.listOrderChanges({
+          order_id: order.id,
+        })
+
+        expect(orderChanges.length).toEqual(1)
+        expect(orderChanges[0]).toEqual(
+          expect.objectContaining({
+            change_type: "transfer",
+            status: "declined",
+            requested_by: customer.id,
+            created_by: customer.id,
+            declined_at: expect.any(Date),
+          })
+        )
+      })
+
+      it("shound not decline a transfer request without proper token", async () => {
+        await api.post(
+          `/store/orders/${order.id}/transfer/request`,
+          {},
+          {
+            headers: {
+              authorization: `Bearer ${signInToken}`,
+              ...storeHeaders.headers,
+            },
+          }
+        )
+
+        let orderChanges = await orderModule.listOrderChanges(
+          { order_id: order.id },
+          { relations: ["actions"] }
+        )
+
+        expect(orderChanges.length).toEqual(1)
+        expect(orderChanges[0]).toEqual(
+          expect.objectContaining({
+            change_type: "transfer",
+            status: "requested",
+            requested_by: customer.id,
+            created_by: customer.id,
+            confirmed_by: null,
+            confirmed_at: null,
+            declined_by: null,
+            actions: expect.arrayContaining([
+              expect.objectContaining({
+                version: 2,
+                action: "TRANSFER_CUSTOMER",
+                reference: "customer",
+                reference_id: customer.id,
+                details: expect.objectContaining({
+                  token: expect.any(String),
+                  original_email: "tony@stark-industries.com",
+                }),
+              }),
+            ]),
+          })
+        )
+
+        const error = await api
+          .post(
+            `/store/orders/${order.id}/transfer/decline`,
+            { token: "fake-token" },
+            {
+              headers: {
+                ...storeHeaders.headers,
+              },
+            }
+          )
+          .catch((e) => e)
+
+        expect(error.response.status).toBe(400)
+        expect(error.response.data).toEqual(
+          expect.objectContaining({
+            type: "not_allowed",
+            message: "Invalid token.",
+          })
+        )
+
+        orderChanges = await orderModule.listOrderChanges({
+          order_id: order.id,
+        })
+
+        expect(orderChanges.length).toEqual(1)
+        expect(orderChanges[0]).toEqual(
+          expect.objectContaining({
+            change_type: "transfer",
+            status: "requested",
+            declined_at: null,
+          })
+        )
       })
     })
   },
