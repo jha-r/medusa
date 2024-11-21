@@ -3,7 +3,7 @@ export const generatedEditDates = {
   "app/learn/basics/workflows/page.mdx": "2024-09-30T08:43:53.132Z",
   "app/learn/deployment/page.mdx": "2024-11-11T11:03:59.725Z",
   "app/learn/page.mdx": "2024-09-03T07:09:09.034Z",
-  "app/learn/basics/commerce-modules/page.mdx": "2024-09-30T08:43:53.131Z",
+  "app/learn/basics/commerce-modules/page.mdx": "2024-11-21T16:24:19.136Z",
   "app/learn/advanced-development/workflows/retry-failed-steps/page.mdx": "2024-09-30T08:43:53.130Z",
   "app/learn/advanced-development/workflows/workflow-hooks/page.mdx": "2024-09-30T08:43:53.131Z",
   "app/learn/cheatsheet/page.mdx": "2024-07-11T13:53:40+03:00",
