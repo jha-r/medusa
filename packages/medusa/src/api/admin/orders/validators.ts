@@ -119,6 +119,7 @@ export type AdminOrderChangesType = z.infer<typeof AdminOrderChanges>
 export type AdminMarkOrderFulfillmentDeliveredType = z.infer<
   typeof AdminMarkOrderFulfillmentDelivered
 >
+
 export const AdminMarkOrderFulfillmentDelivered = z.object({})
 
 export type AdminTransferOrderType = z.infer<typeof AdminTransferOrder>
@@ -127,3 +128,8 @@ export const AdminTransferOrder = z.object({
   description: z.string().optional(),
   internal_note: z.string().optional(),
 })
+
+export type AdminCancelOrderTransferRequestType = z.infer<
+  typeof AdminCancelOrderTransferRequest
+>
+export const AdminCancelOrderTransferRequest = z.object({})
