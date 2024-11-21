@@ -393,7 +393,64 @@ medusaIntegrationTestRunner({
         expect(finalOrder.customer_id).toEqual(customer.id)
       })
 
-      it("user should be able to cancel their own transfer request", async () => {
+      it("customer should be able to cancel their own transfer request", async () => {
+        await api.post(
+          `/store/orders/${order.id}/transfer/request`,
+          {},
+          {
+            headers: {
+              authorization: `Bearer ${signInToken}`,
+              ...storeHeaders.headers,
+            },
+          }
+        )
+
+        let orderChanges = await orderModule.listOrderChanges(
+          { order_id: order.id },
+          { relations: ["actions"] }
+        )
+
+        expect(orderChanges.length).toEqual(1)
+        expect(orderChanges[0]).toEqual(
+          expect.objectContaining({
+            change_type: "transfer",
+            status: "requested",
+            requested_by: customer.id,
+            created_by: customer.id,
+            confirmed_by: null,
+            confirmed_at: null,
+            declined_by: null,
+            actions: expect.arrayContaining([
+              expect.objectContaining({
+                version: 2,
+                action: "TRANSFER_CUSTOMER",
+                reference: "customer",
+                reference_id: customer.id,
+                details: expect.objectContaining({
+                  token: expect.any(String),
+                  original_email: "tony@stark-industries.com",
+                }),
+              }),
+            ]),
+          })
+        )
+
+        // Admin cancels the transfer request
+        await api.post(
+          `/admin/orders/${order.id}/transfer/cancel`,
+          {},
+          adminHeaders
+        )
+
+        orderChanges = await orderModule.listOrderChanges(
+          { order_id: order.id },
+          { relations: ["actions"] }
+        )
+
+        expect(orderChanges.length).toEqual(0)
+      })
+
+      it("admin should be able to cancel a transfer request from a customer", async () => {
         await api.post(
           `/store/orders/${order.id}/transfer/request`,
           {},
