@@ -393,7 +393,7 @@ medusaIntegrationTestRunner({
         expect(finalOrder.customer_id).toEqual(customer.id)
       })
 
-      it("should cancel a customer transfer request from as admin", async () => {
+      it("should cancel a customer transfer request as an admin", async () => {
         await api.post(
           `/store/orders/${order.id}/transfer/request`,
           {},
