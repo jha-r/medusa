@@ -36,7 +36,7 @@ const addToCart = (variant_id: string) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "x-publishable-api-key": process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY,
+      "x-publishable-api-key": process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY || "temp",
     },
     body: JSON.stringify({
       variant_id,
@@ -93,7 +93,7 @@ const updateQuantity = (
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "x-publishable-api-key": process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY,
+      "x-publishable-api-key": process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY || "temp",
     },
     body: JSON.stringify({
       quantity,
@@ -143,7 +143,7 @@ const removeItem = (itemId: string) => {
   }`, {
     credentials: "include",
     headers: {
-      "x-publishable-api-key": process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY,
+      "x-publishable-api-key": process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY || "temp",
     },
     method: "DELETE",
   })

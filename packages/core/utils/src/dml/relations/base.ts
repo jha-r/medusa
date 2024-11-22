@@ -14,6 +14,7 @@ export const IsRelationship = Symbol.for("isRelationship")
 export abstract class BaseRelationship<T> implements RelationshipType<T> {
   [IsRelationship]: true = true
 
+  #searchable: boolean = false
   #referencedEntity: T
 
   /**
@@ -44,6 +45,26 @@ export abstract class BaseRelationship<T> implements RelationshipType<T> {
   }
 
   /**
+   * This method indicates that the relationship is searchable
+   *
+   * @example
+   * import { model } from "@medusajs/framework/utils"
+   *
+   * const Product = model.define("Product", {
+   *   variants: model.hasMany(() => ProductVariant).searchable(),
+   *   // ...
+   * })
+   *
+   * export default Product
+   *
+   * @customNamespace Property Configuration Methods
+   */
+  searchable() {
+    this.#searchable = true
+    return this
+  }
+
+  /**
    * Returns the parsed copy of the relationship
    */
   parse(relationshipName: string): RelationshipMetadata {
@@ -52,6 +73,7 @@ export abstract class BaseRelationship<T> implements RelationshipType<T> {
       nullable: false,
       mappedBy: this.options.mappedBy,
       options: this.options,
+      searchable: this.#searchable,
       entity: this.#referencedEntity,
       type: this.type,
     }

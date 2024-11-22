@@ -18,7 +18,14 @@ This is useful in many cases such as when a payment is being processed asynchron
 
 The Payment Module’s main service has a [getWebhookActionAndData method](/references/payment/getWebhookActionAndData) used to handle incoming webhook events from third-party payment services. The method delegates the handling to the associated payment provider, which returns the event's details.
 
-Medusa implements a webhook listener route at the `/hooks/payment/[provider]` API route, where `[provider]` is the ID of the provider (for example, `stripe`). Use that webhook listener in your third-party payment provider's configurations.
+Medusa implements a webhook listener route at the `/hooks/payment/[identifier]_[provider]` API route, where:
+
+- `[identifier]` is the `identifier` static property defined in the payment provider. For example, `stripe`.
+- `[provider]` is the ID of the provider. For example, `stripe`.
+
+For example, when integrating basic Stripe payments with the [Stripe Module Provider](../payment-provider/stripe/page.mdx), the webhook listener route is `/hooks/payment/stripe_stripe`. If you're integrating Stripe's Bancontact payments, the webhook listener route is `/hooks/payment/stripe-bancontact_stripe`.
+
+Use that webhook listener in your third-party payment provider's configurations.
 
 ![A diagram showcasing the steps of how the getWebhookActionAndData method words](https://res.cloudinary.com/dza7lstvk/image/upload/v1711567415/Medusa%20Resources/payment-webhook_seaocg.jpg)
 

@@ -3,6 +3,7 @@ import {
   DAL,
   FulfillmentTypes,
   IFulfillmentProvider,
+  Logger,
 } from "@medusajs/framework/types"
 import {
   MedusaError,
@@ -12,6 +13,7 @@ import {
 import { FulfillmentProvider } from "@models"
 
 type InjectedDependencies = {
+  logger?: Logger
   fulfillmentProviderRepository: DAL.RepositoryService
   [key: `fp_${string}`]: FulfillmentTypes.IFulfillmentProvider
 }
@@ -22,11 +24,15 @@ export default class FulfillmentProviderService extends ModulesSdkUtils.MedusaIn
   FulfillmentProvider
 ) {
   protected readonly fulfillmentProviderRepository_: DAL.RepositoryService
+  #logger: Logger
 
   constructor(container: InjectedDependencies) {
     super(container)
     this.fulfillmentProviderRepository_ =
       container.fulfillmentProviderRepository
+    this.#logger = container["logger"]
+      ? container.logger
+      : (console as unknown as Logger)
   }
 
   static getRegistrationIdentifier(
@@ -48,10 +54,12 @@ export default class FulfillmentProviderService extends ModulesSdkUtils.MedusaIn
     try {
       return this.__container__[`fp_${providerId}`]
     } catch (err) {
-      throw new MedusaError(
-        MedusaError.Types.NOT_FOUND,
-        `Could not find a fulfillment provider with id: ${providerId}`
-      )
+      const errMessage = `
+      Unable to retrieve the fulfillment provider with id: ${providerId}
+      Please make sure that the provider is registered in the container and it is configured correctly in your project configuration file.
+      `
+      this.#logger.error(errMessage)
+      throw new Error(errMessage)
     }
   }
 

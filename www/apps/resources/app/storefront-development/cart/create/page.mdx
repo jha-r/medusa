@@ -30,7 +30,7 @@ export const fetchHighlights = [
     method: "POST",
     credentials: "include",
     headers: {
-      "x-publishable-api-key": process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY,
+      "x-publishable-api-key": process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY || "temp",
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
@@ -81,7 +81,7 @@ export const highlights = [
         method: "POST",
         credentials: "include",
         headers: {
-          "x-publishable-api-key": process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY,
+          "x-publishable-api-key": process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY || "temp",
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
@@ -118,7 +118,3 @@ This is necessary, as only products matching the cart's sales channel(s) can be 
 ## Associate Customer with Cart
 
 When the cart is created for a logged-in customer, it's automatically associated with that customer.
-
-If the customer is a guest, then later logs in, you can set their ID on the cart by updating it.
-
-Refer to [this documentation](../update/page.mdx#update-carts-customer) to learn how to set the customer of a cart.

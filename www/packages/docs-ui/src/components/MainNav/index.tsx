@@ -13,7 +13,6 @@ import {
 } from "../.."
 import { MainNavEditDate } from "./EditDate"
 import { MainNavItems } from "./Items"
-import { MedusaIcon } from "../Icons/MedusaLogo"
 import { MainNavDesktopMenu } from "./DesktopMenu"
 import { SidebarLeftIcon } from "../Icons/SidebarLeft"
 import { MainNavMobileMenu } from "./MobileMenu"
@@ -26,7 +25,7 @@ type MainNavProps = {
 }
 
 export const MainNav = ({ className, itemsClassName }: MainNavProps) => {
-  const { reportIssueLink, editDate } = useMainNav()
+  const { editDate } = useMainNav()
   const { setMobileSidebarOpen, isSidebarShown } = useSidebar()
   const { config } = useSiteConfig()
 
@@ -52,8 +51,10 @@ export const MainNav = ({ className, itemsClassName }: MainNavProps) => {
           )}
           <Link href={`${config.baseUrl}`}>
             <BorderedIcon
-              IconComponent={MedusaIcon}
+              icon={config.logo}
               iconWrapperClassName="my-[14px]"
+              iconWidth={20}
+              iconHeight={20}
             />
           </Link>
         </div>
@@ -64,7 +65,7 @@ export const MainNav = ({ className, itemsClassName }: MainNavProps) => {
           <MainNavVersion />
           {editDate && <MainNavEditDate date={editDate} />}
           <LinkButton
-            href={reportIssueLink}
+            href={config.reportIssueLink || ""}
             variant="subtle"
             target="_blank"
             className="text-compact-small-plus"

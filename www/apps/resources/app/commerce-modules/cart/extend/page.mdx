@@ -513,8 +513,8 @@ export const updateCustomFromCartWorkflow = createWorkflow(
       entity: "cart",
       fields: ["custom.*"],
       filters: {
-        id: input.cart.id
-      }
+        id: input.cart.id,
+      },
     })
 
     // TODO create, update, or delete Custom record

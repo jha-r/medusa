@@ -6,7 +6,6 @@ import {
   DividedMarkdownCode
 } from "@/layouts/DividedMarkdown/Sections"
 import Section from "@/components/Section"
-import formatReportLink from "@/utils/format-report-link"
 
 import ClientLibraries from "./client-libraries.mdx"
 
@@ -28,7 +27,6 @@ All API Routes are prefixed with `/admin`. So, during development, the API Route
     area: "admin",
     section: "introduction"
   }}
-  reportLink={formatReportLink("admin", "Introduction")}
   pathName="/api/admin"
   question="Was this section helpful?"
   vertical={true}
@@ -305,7 +303,6 @@ fetch(`<BACKEND_URL>/admin/products`, {
     area: "admin",
     section: "authentication-cookie"
   }}
-  reportLink={formatReportLink("admin", "Authentication - Cookie Session ID")}
   pathName="/api/admin"
   question="Was this section helpful?"
   vertical={true}
@@ -355,7 +352,6 @@ x-no-compression: true
     area: "admin",
     section: "http-compression"
   }}
-  reportLink={formatReportLink("admin", "Authentication - Cookie Session ID")}
   pathName="/api/admin"
   question="Was this section helpful?"
   vertical={true}
@@ -687,7 +683,6 @@ curl -g "http://localhost:9000/admin/products?created_at[$lt]=2023-02-17&created
     area: "admin",
     section: "query-parameters"
   }}
-  reportLink={formatReportLink("admin", "Query Parameter Types")}
   pathName="/api/admin"
   question="Was this section helpful?"
   vertical={true}
@@ -814,7 +809,6 @@ This sorts the products by their `created_at` field in the descending order.
     area: "admin",
     section: "pagination"
   }}
-  reportLink={formatReportLink("admin", "Pagination")}
   pathName="/api/admin"
   question="Was this section helpful?"
   vertical={true}
@@ -846,7 +840,6 @@ Refer to [this guide](https://docs.medusajs.com/customization/extend-models/exte
     area: "admin",
     section: "workflows"
   }}
-  reportLink={formatReportLink("admin", "Workflows")}
   pathName="/api/admin"
   question="Was this section helpful?"
   vertical={true}

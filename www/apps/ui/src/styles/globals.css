@@ -4,7 +4,8 @@
 
 @layer base {
   html {
-    -webkit-font-smoothing: antialiased;
+    @apply antialiased;
+    text-rendering: optimizeLegibility;
   }
   .html {
     @apply text-medusa-fg-base;
@@ -39,4 +40,8 @@
   body[data-modal="opened"] {
     @apply !overflow-hidden text-ui-fg-base;
   }
+}
+
+.grecaptcha-badge {
+  visibility: hidden;
 }
