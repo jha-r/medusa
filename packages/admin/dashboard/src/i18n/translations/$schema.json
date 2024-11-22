@@ -3820,6 +3820,38 @@
           ],
           "additionalProperties": false
         },
+        "transfer": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "requestSuccess": {
+              "type": "string"
+            },
+            "currentOwner": {
+              "type": "string"
+            },
+            "newOwner": {
+              "type": "string"
+            },
+            "currentOwnerDescription": {
+              "type": "string"
+            },
+            "newOwnerDescription": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "title",
+            "requestSuccess",
+            "currentOwner",
+            "newOwner",
+            "currentOwnerDescription",
+            "newOwnerDescription"
+          ],
+          "additionalProperties": false
+        },
         "payment": {
           "type": "object",
           "properties": {
@@ -5058,6 +5090,12 @@
               ],
               "additionalProperties": false
             },
+            "from": {
+              "type": "string"
+            },
+            "to": {
+              "type": "string"
+            },
             "events": {
               "type": "object",
               "properties": {
@@ -5268,6 +5306,22 @@
                     "confirmed"
                   ],
                   "additionalProperties": false
+                },
+                "transfer": {
+                  "type": "object",
+                  "properties": {
+                    "requested": {
+                      "type": "string"
+                    },
+                    "confirmed": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "requested",
+                    "confirmed"
+                  ],
+                  "additionalProperties": false
                 }
               },
               "required": [
@@ -5280,7 +5334,8 @@
                 "note",
                 "claim",
                 "exchange",
-                "edit"
+                "edit",
+                "transfer"
               ],
               "additionalProperties": false
             }
@@ -5290,6 +5345,8 @@
             "showMoreActivities_one",
             "showMoreActivities_other",
             "comment",
+            "from",
+            "to",
             "events"
           ],
           "additionalProperties": false
@@ -5324,6 +5381,7 @@
         "onDateFromSalesChannel",
         "list",
         "summary",
+        "transfer",
         "payment",
         "edits",
         "returns",
