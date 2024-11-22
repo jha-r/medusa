@@ -1,5 +1,6 @@
 import { Context, LoadedModule, MedusaContainer } from "@medusajs/types"
 import {
+  createContainerLike,
   createMedusaContainer,
   isDefined,
   isString,
@@ -9,6 +10,7 @@ import {
   MedusaModuleType,
 } from "@medusajs/utils"
 import { asValue } from "awilix"
+import utils from "node:util"
 import {
   DistributedTransactionEvent,
   DistributedTransactionEvents,
@@ -43,13 +45,15 @@ export class LocalWorkflow {
     return this.container_
   }
 
-  set container(modulesLoaded: LoadedModule[] | MedusaContainer) {
+  set container(
+    modulesLoaded: LoadedModule[] | MedusaContainer | Record<string, unknown>
+  ) {
     this.resolveContainer(modulesLoaded)
   }
 
   constructor(
     workflowId: string,
-    modulesLoaded?: LoadedModule[] | MedusaContainer
+    modulesLoaded?: LoadedModule[] | MedusaContainer | Record<string, unknown>
   ) {
     const globalWorkflow = WorkflowManager.getWorkflow(workflowId)
     if (!globalWorkflow) {
@@ -72,11 +76,19 @@ export class LocalWorkflow {
     this.resolveContainer(modulesLoaded)
   }
 
-  private resolveContainer(modulesLoaded?: LoadedModule[] | MedusaContainer) {
+  private resolveContainer(
+    modulesLoaded?: LoadedModule[] | MedusaContainer | Record<string, unknown>
+  ) {
     let container
 
     if (!Array.isArray(modulesLoaded) && modulesLoaded) {
-      if (!("cradle" in modulesLoaded)) {
+      if (utils.types.isProxy(modulesLoaded)) {
+        /**
+         * In this scenario we are providing the cradle from within a resolved resource
+         * to a workflow. In this case, the container will only be a proxy from awilix.
+         */
+        container = modulesLoaded
+      } else if (!("cradle" in modulesLoaded)) {
         container = createMedusaContainer(modulesLoaded)
       } else {
         container = createMedusaContainer({}, modulesLoaded) // copy container
@@ -98,10 +110,19 @@ export class LocalWorkflow {
       return createMedusaContainer()
     }
 
+    /**
+     * In the eventuallity a container is provided from withing a resolved resource to a workflow,
+     * the container will only be a proxy from awilix.
+     */
+    const isProxyContainer = utils.types.isProxy(container)
+
     // eslint-disable-next-line
     const this_ = this
-    const originalResolver = container.resolve
-    container.resolve = function (keyName, opts) {
+    const originalResolver = isProxyContainer
+      ? (keyName: string) => container[keyName]
+      : container.resolve
+
+    const proxyResolver = function (keyName, opts) {
       const resolved = originalResolver(keyName, opts)
       if (resolved?.constructor?.__type !== MedusaModuleType) {
         return resolved
@@ -130,6 +151,16 @@ export class LocalWorkflow {
           }
         },
       })
+    }
+
+    if (isProxyContainer) {
+      return createContainerLike(
+        new Proxy(container, {
+          get: (_, keyName) => proxyResolver(keyName, null),
+        })
+      )
+    } else {
+      container.resolve = proxyResolver
     }
 
     return container

@@ -1,3 +1,5 @@
+import { createMedusaContainer } from "@medusajs/utils"
+import { asFunction, asValue } from "awilix"
 import { MockSchedulerStorage } from "../../__fixtures__/mock-scheduler-storage"
 import { TransactionState } from "../../transaction/types"
 import { LocalWorkflow } from "../../workflow/local-workflow"
@@ -230,5 +232,48 @@ describe("WorkflowManager", () => {
         next: { action: "bar" },
       },
     })
+  })
+
+  it("should accept a cradle from a resolved resource as the container and execute the workflow", async () => {
+    const handlers = new Map()
+    handlers.set("foo", {
+      invoke: async ({ container }) => {
+        const logger = container.resolve("logger")
+        return logger
+      },
+    })
+
+    WorkflowManager.register(
+      "workflow-using-cradle",
+      {
+        action: "foo",
+      },
+      handlers
+    )
+
+    class FakeService {
+      container: Record<string, unknown>
+
+      constructor(cradle: Record<string, unknown>) {
+        this.container = cradle
+      }
+
+      getFlow() {
+        const flow = new LocalWorkflow("workflow-using-cradle", this.container)
+        return flow
+      }
+    }
+
+    const fakeContainer = createMedusaContainer()
+    fakeContainer.register({
+      fakeService: asFunction((cradle) => new FakeService(cradle)),
+      logger: asValue(console),
+    })
+
+    const fakeService = fakeContainer.resolve<FakeService>("fakeService")
+    const flow = fakeService.getFlow()
+
+    const result = await flow.run("uniq-id")
+    expect(result.getContext().invoke.foo).toBe(console)
   })
 })
