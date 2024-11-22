@@ -12,6 +12,11 @@ const server = setupServer(
       test: "test",
     })
   }),
+  http.get(`${baseUrl}/some/path/test`, ({ request, params, cookies }) => {
+    return HttpResponse.json({
+      test: "test",
+    })
+  }),
   http.get(`${baseUrl}/throw`, ({ request, params, cookies }) => {
     return new HttpResponse(null, {
       status: 500,
@@ -190,11 +195,14 @@ describe("Client", () => {
         baseUrl: "https://someurl.com/some/path",
       })
 
-      server.use(
-        http.get("https://someurl.com/some/path/test", () => {
-          return HttpResponse.json({ test: "test" })
-        })
-      )
+      const resp = await pathClient.fetch<any>("test")
+      expect(resp).toEqual({ test: "test" })
+    })
+
+    it("should handle baseUrl with trailing slash path correctly", async () => {
+      const pathClient = new Client({
+        baseUrl: "https://someurl.com/some/path/",
+      })
 
       const resp = await pathClient.fetch<any>("test")
       expect(resp).toEqual({ test: "test" })
@@ -203,6 +211,15 @@ describe("Client", () => {
     it("should handle baseUrl with just origin", async () => {
       const originClient = new Client({
         baseUrl: "https://someurl.com",
+      })
+
+      const resp = await originClient.fetch<any>("test")
+      expect(resp).toEqual({ test: "test" })
+    })
+
+    it("should handle baseUrl with just origin and trailing slash", async () => {
+      const originClient = new Client({
+        baseUrl: "https://someurl.com/",
       })
 
       const resp = await originClient.fetch<any>("test")
