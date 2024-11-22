@@ -569,7 +569,10 @@ medusaIntegrationTestRunner({
         )
 
         orderChanges = (
-          await api.get(`/admin/orders/${order.id}/changes`, adminHeaders)
+          await api.get(
+            `/admin/orders/${order.id}/changes?fields=+declined_at`,
+            adminHeaders
+          )
         ).data.order_changes
 
         expect(orderChanges.length).toEqual(1)
@@ -579,7 +582,7 @@ medusaIntegrationTestRunner({
             status: "declined",
             requested_by: customer.id,
             created_by: customer.id,
-            declined_at: expect.any(Date),
+            declined_at: expect.any(String),
           })
         )
       })

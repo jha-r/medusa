@@ -12,7 +12,7 @@ import {
   AdminGetOrdersParams,
   AdminMarkOrderFulfillmentDelivered,
   AdminOrderCancelFulfillment,
-  AdminOrderChanges,
+  AdminOrderChangesParams,
   AdminOrderCreateFulfillment,
   AdminOrderCreateShipment,
   AdminTransferOrder,
@@ -54,7 +54,7 @@ export const adminOrderRoutesMiddlewares: MiddlewareRoute[] = [
     matcher: "/admin/orders/:id/changes",
     middlewares: [
       validateAndTransformQuery(
-        AdminOrderChanges,
+        AdminOrderChangesParams,
         QueryConfig.retrieveOrderChangesTransformQueryConfig
       ),
     ],
