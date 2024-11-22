@@ -12,7 +12,7 @@ type BaseFlowRunOptions = {
   throwOnError?: boolean
   logOnError?: boolean
   events?: DistributedTransactionEvents
-  container?: LoadedModule[] | MedusaContainer | Record<string, unknown>
+  container?: LoadedModule[] | MedusaContainer
 }
 
 export type FlowRunOptions<TData = unknown> = BaseFlowRunOptions & {
