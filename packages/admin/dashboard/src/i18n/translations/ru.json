@@ -922,6 +922,14 @@
       "discountSubtotal": "Промежуточная сумма скидки",
       "taxTotal": "Общая сумма налога"
     },
+    "transfer": {
+      "title": "Передача владения",
+      "requestSuccess": "Запрос на передачу заказа отправлен: {{email}}.",
+      "currentOwner": "Текущий владелец",
+      "newOwner": "Новый владелец",
+      "currentOwnerDescription": "Клиент, который в настоящее время связан с этим заказом.",
+      "newOwnerDescription": "Клиент, которому будет передан этот заказ."
+    },
     "payment": {
       "title": "Платежи",
       "isReadyToBeCaptured": "Платеж <0/> готов к захвату.",
@@ -1225,6 +1233,8 @@
         "addButtonText": "Добавить комментарий",
         "deleteButtonText": "Удалить комментарий"
       },
+      "from": "От",
+      "to": "Кому",
       "events": {
         "common": {
           "toReturn": "К возврату",
@@ -1277,6 +1287,10 @@
         "edit": {
           "requested": "Запрос на редактирование заказа #{{editId}}",
           "confirmed": "Редактирование заказа #{{editId}} подтверждено"
+        },
+        "transfer": {
+          "requested": "Запрос на передачу заказа #{{transferId}} отправлен",
+          "confirmed": "Передача заказа #{{transferId}} подтверждена"
         }
       }
     },
