@@ -192,7 +192,7 @@ describe("Client", () => {
 
     it("should handle baseUrl with path correctly", async () => {
       const pathClient = new Client({
-        baseUrl: "https://someurl.com/some/path",
+        baseUrl: `${baseUrl}/some/path`,
       })
 
       const resp = await pathClient.fetch<any>("test")
@@ -201,7 +201,7 @@ describe("Client", () => {
 
     it("should handle baseUrl with trailing slash path correctly", async () => {
       const pathClient = new Client({
-        baseUrl: "https://someurl.com/some/path/",
+        baseUrl: `${baseUrl}/some/path/`,
       })
 
       const resp = await pathClient.fetch<any>("test")
@@ -210,7 +210,7 @@ describe("Client", () => {
 
     it("should handle baseUrl with just origin", async () => {
       const originClient = new Client({
-        baseUrl: "https://someurl.com",
+        baseUrl,
       })
 
       const resp = await originClient.fetch<any>("test")
@@ -219,7 +219,7 @@ describe("Client", () => {
 
     it("should handle baseUrl with just origin and trailing slash", async () => {
       const originClient = new Client({
-        baseUrl: "https://someurl.com/",
+        baseUrl: `${baseUrl}/`,
       })
 
       const resp = await originClient.fetch<any>("test")
