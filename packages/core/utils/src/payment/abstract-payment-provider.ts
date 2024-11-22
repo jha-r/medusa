@@ -16,11 +16,11 @@ export abstract class AbstractPaymentProvider<TConfig = Record<string, unknown>>
   /**
    * This method validates the options of the provider set in `medusa-config.ts`.
    * Implementing this method is optional. It's useful if your provider requires custom validation.
-   * 
+   *
    * If the options aren't valid, throw an error.
-   * 
+   *
    * @param options - The provider's options.
-   * 
+   *
    * @example
    * class MyPaymentProviderService extends AbstractPaymentProvider<Options> {
    *   static validateOptions(options: Record<any, any>) {
@@ -92,7 +92,7 @@ export abstract class AbstractPaymentProvider<TConfig = Record<string, unknown>>
    * ```
    */
   protected constructor(
-    protected readonly container: MedusaContainer,
+    protected readonly container: Record<string, unknown>,
     protected readonly config: TConfig = {} as TConfig // eslint-disable-next-line @typescript-eslint/no-empty-function
   ) {}
 
@@ -110,7 +110,7 @@ export abstract class AbstractPaymentProvider<TConfig = Record<string, unknown>>
 
   /**
    * Each payment provider has a unique identifier defined in its class. The provider's ID
-   * will be stored as `pp_{identifier}_{id}`, where `{id}` is the provider's `id` 
+   * will be stored as `pp_{identifier}_{id}`, where `{id}` is the provider's `id`
    * property in the `medusa-config.ts`.
    *
    * @example
