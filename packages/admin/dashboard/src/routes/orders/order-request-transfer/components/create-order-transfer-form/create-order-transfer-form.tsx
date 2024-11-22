@@ -20,7 +20,7 @@ type CreateOrderTransferFormProps = {
 
 const CreateOrderTransferSchema = zod.object({
   customer_id: zod.string().min(1),
-  currentCustomerDetails: zod.string().min(1),
+  current_customer_details: zod.string().min(1),
 })
 
 export function CreateOrderTransferForm({
@@ -32,7 +32,7 @@ export function CreateOrderTransferForm({
   const form = useForm<zod.infer<typeof CreateOrderTransferSchema>>({
     defaultValues: {
       customer_id: "",
-      currentCustomerDetails: order.customer?.first_name
+      current_customer_details: order.customer?.first_name
         ? `${order.customer?.first_name} ${order.customer?.last_name} (${order.customer?.email}) `
         : order.customer?.email,
     },
@@ -75,7 +75,7 @@ export function CreateOrderTransferForm({
             <TransferHeader />
             <Form.Field
               control={form.control}
-              name="currentCustomerDetails"
+              name="current_customer_details"
               render={({ field }) => {
                 return (
                   <Form.Item>
