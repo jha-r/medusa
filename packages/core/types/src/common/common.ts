@@ -52,7 +52,7 @@ export interface SoftDeletableEntity extends BaseEntity {
 /**
  * Temporary type fixing to allow any level of orders until we get to properly clean all the types
  */
-type FindConfigOrder = { [Key: string]: "ASC" | "DESC" | FindConfigOrder }
+export type FindConfigOrder = { [Key: string]: "ASC" | "DESC" | FindConfigOrder }
 
 /**
  * @interface
