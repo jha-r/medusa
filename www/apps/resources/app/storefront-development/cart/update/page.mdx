@@ -65,7 +65,7 @@ fetch(`http://localhost:9000/store/carts/${cartId}/customer`, {
   headers: {
     "Content-Type": "application/json",
     
-  }
+  },
 })
 .then((res) => res.json())
 .then(({ cart }) => {
