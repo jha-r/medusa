@@ -9,6 +9,9 @@ export type Action = {
   icon: ReactNode
   label: string
   disabled?: boolean
+  /**
+   * Optional tooltip to display when a disabled action is hovered.
+   */
   disabledTooltip?: string | ReactNode
 } & (
   | {
