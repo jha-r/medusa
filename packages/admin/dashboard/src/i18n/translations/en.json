@@ -922,6 +922,14 @@
       "discountSubtotal": "Discount Subtotal",
       "taxTotal": "Tax Total"
     },
+    "transfer": {
+      "title": "Transfer ownership",
+      "requestSuccess": "Order transfer request sent to: {{email}}.",
+      "currentOwner": "Current owner",
+      "newOwner": "New owner",
+      "currentOwnerDescription": "The customer currently related to this order.",
+      "newOwnerDescription": "The customer to transfer this order to."
+    },
     "payment": {
       "title": "Payments",
       "isReadyToBeCaptured": "Payment <0/> is ready to be captured.",
@@ -1225,6 +1233,8 @@
         "addButtonText": "Add comment",
         "deleteButtonText": "Delete comment"
       },
+      "from": "From",
+      "to": "To",
       "events": {
         "common": {
           "toReturn": "To return",
@@ -1277,6 +1287,10 @@
         "edit": {
           "requested": "Order edit #{{editId}} requested",
           "confirmed": "Order edit #{{editId}} confirmed"
+        },
+        "transfer": {
+          "requested": "Order transfer #{{transferId}} requested",
+          "confirmed": "Order transfer #{{transferId}} confirmed"
         }
       }
     },
