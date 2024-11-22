@@ -1,18 +1,24 @@
 import { Table } from "docs-ui"
 
 export const metadata = {
-  title: `Medusa and Module Container Dependencies`,
+  title: `Medusa and Module Container Resources`,
 }
 
 # {metadata.title}
 
-This documentation page includes the list of dependencies registered in the container of the Medusa application and a module.
+This documentation page includes the list of resources registered in the container of the Medusa application and modules.
 
-## Medusa Container Dependencies
+## Medusa Container Resources
 
-The following list of dependencies are resources that can be resolved by all resources (such as API route or workflow) except of a module's.
+The following table has a list of all resources that you can resolve in your customizations outside a module (such as API routes or workflows).
 
 <Note>
+
+Learn more about the Medusa Container in [this documentation](!docs!/learn/basics/medusa-container).
+
+</Note>
+
+<Note title="Tip">
 
 Use the `ContainerRegistrationKeys` enum imported from `@medusajs/framework/utils` where specified.
 
@@ -135,9 +141,15 @@ Use the `ContainerRegistrationKeys` enum imported from `@medusajs/framework/util
 
 ---
 
-## Module Container Dependencies
+## Module Container Resources
 
-The following resources are resources that can be resolved by a module's services and loaders.
+The following table has a list of all resources that you can resolve in a module's services or loaders.
+
+<Note>
+
+Learn more about the Module Container in [this documentation](!docs!/learn/advanced-development/modules/container).
+
+</Note>
 
 <Note>
 
