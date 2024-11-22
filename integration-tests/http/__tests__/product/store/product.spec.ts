@@ -20,6 +20,7 @@ import { createAuthenticatedCustomer } from "../../../../modules/helpers/create-
 jest.setTimeout(30000)
 
 medusaIntegrationTestRunner({
+  debug: true,
   testSuite: ({ dbConnection, api, getContainer }) => {
     let store
     let appContainer

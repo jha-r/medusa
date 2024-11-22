@@ -210,16 +210,13 @@ export default class ProductModuleService
 
     return {
       ...config,
-      options: {
-        ...config?.options,
-        orderBy: {
-          ...config?.options?.orderBy,
-          ...(hasImagesRelation && {
-            images: {
-              rank: "asc",
-            },
-          }),
-        },
+      order: {
+        ...config?.order,
+        ...(hasImagesRelation ? {
+          images: {
+            rank: "ASC",
+          },
+        } : {}),
       },
     }
   }
