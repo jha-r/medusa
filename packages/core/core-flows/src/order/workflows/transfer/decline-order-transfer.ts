@@ -12,9 +12,10 @@ import {
   WorkflowData,
   createStep,
   createWorkflow,
+  transform,
 } from "@medusajs/framework/workflows-sdk"
 
-import { useRemoteQueryStep } from "../../../common"
+import { useQueryGraphStep } from "../../../common"
 import { declineOrderChangeStep } from "../../steps"
 import {
   throwIfIsCancelled,
@@ -42,7 +43,7 @@ export const declineTransferOrderRequestValidationStep = createStep(
       (a) => a.action === ChangeActionType.TRANSFER_CUSTOMER
     )?.details!.token
 
-    if (!input.token.length || token !== input.token) {
+    if (!input.token?.length || token !== input.token) {
       throw new MedusaError(MedusaError.Types.NOT_ALLOWED, "Invalid token.")
     }
   }
@@ -60,25 +61,32 @@ export const declineOrderTransferRequestWorkflow = createWorkflow(
   function (
     input: WorkflowData<OrderWorkflow.DeclineTransferOrderRequestWorkflowInput>
   ): WorkflowData<void> {
-    const order: OrderDTO = useRemoteQueryStep({
-      entry_point: "orders",
+    const orderQuery = useQueryGraphStep({
+      entity: "order",
       fields: ["id", "version", "declineed_at"],
-      variables: { id: input.order_id },
-      list: false,
-      throw_if_key_not_found: true,
+      filters: { id: input.order_id },
+      options: { throwIfKeyNotFound: true },
     }).config({ name: "order-query" })
 
-    const orderChange: OrderChangeDTO = useRemoteQueryStep({
-      entry_point: "order_change",
+    const order = transform(
+      { orderQuery },
+      ({ orderQuery }) => orderQuery.data[0]
+    )
+
+    const orderChangeQuery = useQueryGraphStep({
+      entity: "order_change",
       fields: ["id", "status", "version", "actions.*"],
-      variables: {
-        filters: {
-          order_id: input.order_id,
-          status: [OrderChangeStatus.PENDING, OrderChangeStatus.REQUESTED],
-        },
+      filters: {
+        order_id: input.order_id,
+        status: [OrderChangeStatus.PENDING, OrderChangeStatus.REQUESTED],
       },
-      list: false,
+      options: { throwIfKeyNotFound: true },
     }).config({ name: "order-change-query" })
+
+    const orderChange = transform(
+      { orderChangeQuery },
+      ({ orderChangeQuery }) => orderChangeQuery.data[0]
+    )
 
     declineTransferOrderRequestValidationStep({ order, orderChange, input })
 

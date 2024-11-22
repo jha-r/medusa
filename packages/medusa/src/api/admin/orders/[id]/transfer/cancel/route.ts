@@ -3,18 +3,15 @@ import {
   AuthenticatedMedusaRequest,
   MedusaResponse,
 } from "@medusajs/framework/http"
-import { HttpTypes } from "@medusajs/framework/types"
+import { AdminOrder, HttpTypes } from "@medusajs/framework/types"
 import { AdminCancelOrderTransferRequestType } from "../../../validators"
-import {
-  ContainerRegistrationKeys,
-  remoteQueryObjectFromString,
-} from "@medusajs/framework/utils"
+import { ContainerRegistrationKeys } from "@medusajs/framework/utils"
 
 export const POST = async (
   req: AuthenticatedMedusaRequest<AdminCancelOrderTransferRequestType>,
   res: MedusaResponse<HttpTypes.AdminOrderResponse>
 ) => {
-  const remoteQuery = req.scope.resolve(ContainerRegistrationKeys.REMOTE_QUERY)
+  const query = req.scope.resolve(ContainerRegistrationKeys.QUERY)
 
   const orderId = req.params.id
   const userId = req.auth_context.actor_id
@@ -26,12 +23,11 @@ export const POST = async (
     },
   })
 
-  const queryObject = remoteQueryObjectFromString({
-    entryPoint: "order",
-    variables: { id: orderId },
+  const result = await query.graph({
+    entity: "order",
+    filters: { id: orderId },
     fields: req.remoteQueryConfig.fields,
   })
 
-  const [order] = await remoteQuery(queryObject)
-  res.status(200).json({ order })
+  res.status(200).json({ order: result.data[0] as AdminOrder })
 }
