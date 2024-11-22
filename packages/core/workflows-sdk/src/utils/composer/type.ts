@@ -219,7 +219,7 @@ export type WorkflowTransactionContext = StepExecutionContext &
  */
 export type ReturnWorkflow<TData, TResult, THooks extends any[]> = {
   <TDataOverride = undefined, TResultOverride = undefined>(
-    container?: LoadedModule[] | MedusaContainer
+    container?: LoadedModule[] | MedusaContainer | Record<string, unknown>
   ): Omit<
     LocalWorkflow,
     "run" | "registerStepSuccess" | "registerStepFailure" | "cancel"
