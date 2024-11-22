@@ -286,12 +286,8 @@ medusaIntegrationTestRunner({
       let storeHeaders
       let signInToken
 
-      let orderModule
-
       beforeEach(async () => {
         const container = getContainer()
-
-        orderModule = await container.resolve(Modules.ORDER)
 
         const publishableKey = await generatePublishableKey(container)
         storeHeaders = generateStoreHeaders({ publishableKey })
@@ -349,10 +345,12 @@ medusaIntegrationTestRunner({
         expect(storeOrder.email).toEqual("tony@stark-industries.com")
         expect(storeOrder.customer_id).not.toEqual(customer.id)
 
-        const orderChanges = await orderModule.listOrderChanges(
-          { order_id: order.id },
-          { relations: ["actions"] }
-        )
+        const orderChanges = (
+          await api.get(
+            `/admin/orders/${order.id}/changes?fields=*actions`,
+            adminHeaders
+          )
+        ).data.order_changes
 
         expect(orderChanges.length).toEqual(1)
         expect(orderChanges[0]).toEqual(
@@ -405,10 +403,12 @@ medusaIntegrationTestRunner({
           }
         )
 
-        let orderChanges = await orderModule.listOrderChanges(
-          { order_id: order.id },
-          { relations: ["actions"] }
-        )
+        let orderChanges = (
+          await api.get(
+            `/admin/orders/${order.id}/changes?fields=*actions`,
+            adminHeaders
+          )
+        ).data.order_changes
 
         expect(orderChanges.length).toEqual(1)
         expect(orderChanges[0]).toEqual(
@@ -442,9 +442,9 @@ medusaIntegrationTestRunner({
           adminHeaders
         )
 
-        orderChanges = await orderModule.listOrderChanges({
-          order_id: order.id,
-        })
+        orderChanges = (
+          await api.get(`/admin/orders/${order.id}/changes`, adminHeaders)
+        ).data.order_changes
 
         expect(orderChanges.length).toEqual(0)
       })
@@ -461,10 +461,12 @@ medusaIntegrationTestRunner({
           }
         )
 
-        let orderChanges = await orderModule.listOrderChanges(
-          { order_id: order.id },
-          { relations: ["actions"] }
-        )
+        let orderChanges = (
+          await api.get(
+            `/admin/orders/${order.id}/changes?fields=*actions`,
+            adminHeaders
+          )
+        ).data.order_changes
 
         expect(orderChanges.length).toEqual(1)
         expect(orderChanges[0]).toEqual(
@@ -502,10 +504,12 @@ medusaIntegrationTestRunner({
           }
         )
 
-        orderChanges = await orderModule.listOrderChanges(
-          { order_id: order.id },
-          { relations: ["actions"] }
-        )
+        orderChanges = (
+          await api.get(
+            `/admin/orders/${order.id}/changes?fields=*actions`,
+            adminHeaders
+          )
+        ).data.order_changes
 
         expect(orderChanges.length).toEqual(0)
       })
@@ -522,10 +526,12 @@ medusaIntegrationTestRunner({
           }
         )
 
-        let orderChanges = await orderModule.listOrderChanges(
-          { order_id: order.id },
-          { relations: ["actions"] }
-        )
+        let orderChanges = (
+          await api.get(
+            `/admin/orders/${order.id}/changes?fields=*actions`,
+            adminHeaders
+          )
+        ).data.order_changes
 
         expect(orderChanges.length).toEqual(1)
         expect(orderChanges[0]).toEqual(
@@ -562,9 +568,9 @@ medusaIntegrationTestRunner({
           }
         )
 
-        orderChanges = await orderModule.listOrderChanges({
-          order_id: order.id,
-        })
+        orderChanges = (
+          await api.get(`/admin/orders/${order.id}/changes`, adminHeaders)
+        ).data.order_changes
 
         expect(orderChanges.length).toEqual(1)
         expect(orderChanges[0]).toEqual(
@@ -590,10 +596,12 @@ medusaIntegrationTestRunner({
           }
         )
 
-        let orderChanges = await orderModule.listOrderChanges(
-          { order_id: order.id },
-          { relations: ["actions"] }
-        )
+        let orderChanges = (
+          await api.get(
+            `/admin/orders/${order.id}/changes?fields=*actions`,
+            adminHeaders
+          )
+        ).data.order_changes
 
         expect(orderChanges.length).toEqual(1)
         expect(orderChanges[0]).toEqual(
@@ -640,9 +648,9 @@ medusaIntegrationTestRunner({
           })
         )
 
-        orderChanges = await orderModule.listOrderChanges({
-          order_id: order.id,
-        })
+        orderChanges = (
+          await api.get(`/admin/orders/${order.id}/changes`, adminHeaders)
+        ).data.order_changes
 
         expect(orderChanges.length).toEqual(1)
         expect(orderChanges[0]).toEqual(
