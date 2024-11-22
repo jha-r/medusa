@@ -11,6 +11,7 @@ export type CollapsibleProps = {
   onClose?: () => void
   unmountOnExit?: boolean
   childrenRef?: React.RefObject<HTMLElement | null>
+  useChild?: boolean
 }
 
 export type CollapsibleReturn = {
@@ -26,10 +27,15 @@ export const useCollapsible = ({
   onClose,
   unmountOnExit = true,
   childrenRef,
+  useChild = true,
 }: CollapsibleProps): CollapsibleReturn => {
   const [collapsed, setCollapsed] = useState(initialValue)
 
   const getNodeFromChildrenRef = () => {
+    if (!useChild) {
+      return childrenRef?.current
+    }
+
     return (
       (childrenRef?.current?.firstElementChild as HTMLElement) ||
       childrenRef?.current

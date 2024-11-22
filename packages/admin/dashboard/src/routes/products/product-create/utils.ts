@@ -53,8 +53,7 @@ export const normalizeVariants = (
   regionsCurrencyMap: Record<string, string>
 ) => {
   return variants.map((variant) => ({
-    title:
-      variant.custom_title || Object.values(variant.options || {}).join(" / "),
+    title: variant.title || Object.values(variant.options || {}).join(" / "),
     options: variant.options,
     sku: variant.sku || undefined,
     manage_inventory: !!variant.manage_inventory,

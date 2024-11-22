@@ -120,3 +120,10 @@ export type AdminMarkOrderFulfillmentDeliveredType = z.infer<
   typeof AdminMarkOrderFulfillmentDelivered
 >
 export const AdminMarkOrderFulfillmentDelivered = z.object({})
+
+export type AdminTransferOrderType = z.infer<typeof AdminTransferOrder>
+export const AdminTransferOrder = z.object({
+  customer_id: z.string(),
+  description: z.string().optional(),
+  internal_note: z.string().optional(),
+})

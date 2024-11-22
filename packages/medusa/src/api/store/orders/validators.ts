@@ -18,3 +18,18 @@ export const StoreGetOrdersParams = createFindParams({
   .merge(applyAndAndOrOperators(StoreGetOrdersParamsFields))
 
 export type StoreGetOrdersParamsType = z.infer<typeof StoreGetOrdersParams>
+
+export const StoreAcceptOrderTransfer = z.object({
+  token: z.string().min(1),
+})
+
+export type StoreAcceptOrderTransferType = z.infer<
+  typeof StoreAcceptOrderTransfer
+>
+
+export type StoreRequestOrderTransferType = z.infer<
+  typeof StoreRequestOrderTransfer
+>
+export const StoreRequestOrderTransfer = z.object({
+  description: z.string().optional(),
+})

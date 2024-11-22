@@ -16,7 +16,11 @@ import {
 import { useTranslation } from "react-i18next"
 
 import { AdminOrderLineItem } from "@medusajs/types"
-import { useOrderChanges, useOrderLineItems } from "../../../../../hooks/api"
+import {
+  useCustomer,
+  useOrderChanges,
+  useOrderLineItems,
+} from "../../../../../hooks/api"
 import { useCancelClaim, useClaims } from "../../../../../hooks/api/claims"
 import {
   useCancelExchange,
@@ -113,10 +117,12 @@ const useActivityItems = (order: AdminOrder): Activity[] => {
   const { t } = useTranslation()
 
   const { order_changes: orderChanges = [] } = useOrderChanges(order.id, {
-    change_type: ["edit", "claim", "exchange", "return"],
+    change_type: ["edit", "claim", "exchange", "return", "transfer"],
   })
 
-  const missingLineItemIds = getMissingLineItemIds(order, orderChanges)
+  const rmaChanges = orderChanges.filter((oc) => oc.change_type !== "transfer")
+
+  const missingLineItemIds = getMissingLineItemIds(order, rmaChanges)
   const { order_items: removedLineItems = [] } = useOrderLineItems(
     order.id,
 
@@ -125,7 +131,7 @@ const useActivityItems = (order: AdminOrder): Activity[] => {
       item_id: missingLineItemIds,
     },
     {
-      enabled: !!orderChanges.length,
+      enabled: !!rmaChanges.length,
     }
   )
 
@@ -370,16 +376,37 @@ const useActivityItems = (order: AdminOrder): Activity[] => {
           edit.status === "requested"
             ? edit.requested_at
             : edit.status === "confirmed"
-            ? edit.confirmed_at
-            : edit.status === "declined"
-            ? edit.declined_at
-            : edit.status === "canceled"
-            ? edit.canceled_at
-            : edit.created_at,
-        children: isConfirmed ? (
-          <OrderEditBody edit={edit} itemsMap={itemsMap} />
-        ) : null,
+              ? edit.confirmed_at
+              : edit.status === "declined"
+                ? edit.declined_at
+                : edit.status === "canceled"
+                  ? edit.canceled_at
+                  : edit.created_at,
+        children: isConfirmed ? <OrderEditBody edit={edit} /> : null,
       })
+    }
+
+    for (const transfer of orderChanges.filter(
+      (oc) => oc.change_type === "transfer"
+    )) {
+      if (transfer.requested_at) {
+        items.push({
+          title: t(`orders.activity.events.transfer.requested`, {
+            transferId: transfer.id.slice(-7),
+          }),
+          timestamp: transfer.requested_at,
+          children: <TransferOrderRequestBody transfer={transfer} />,
+        })
+      }
+
+      if (transfer.confirmed_at) {
+        items.push({
+          title: t(`orders.activity.events.transfer.confirmed`, {
+            transferId: transfer.id.slice(-7),
+          }),
+          timestamp: transfer.confirmed_at,
+        })
+      }
     }
 
     // for (const note of notes || []) {
@@ -839,18 +866,12 @@ const ExchangeBody = ({
   )
 }
 
-const OrderEditBody = ({
-  edit,
-  itemsMap,
-}: {
-  edit: AdminOrderChange
-  itemsMap: Map<string, AdminOrderLineItem>
-}) => {
+const OrderEditBody = ({ edit }: { edit: AdminOrderChange }) => {
   const { t } = useTranslation()
 
   const [itemsAdded, itemsRemoved] = useMemo(
-    () => countItemsChange(edit.actions, itemsMap),
-    [edit, itemsMap]
+    () => countItemsChange(edit.actions),
+    [edit]
   )
 
   return (
@@ -870,13 +891,40 @@ const OrderEditBody = ({
   )
 }
 
+const TransferOrderRequestBody = ({
+  transfer,
+}: {
+  transfer: AdminOrderChange
+}) => {
+  const { t } = useTranslation()
+
+  const action = transfer.actions[0]
+  const { customer } = useCustomer(action.reference_id)
+
+  /**
+   * TODO: change original_email to customer info when action details is changed
+   */
+
+  return (
+    <div>
+      <Text size="small" className="text-ui-fg-subtle">
+        {t("orders.activity.from")}: {action.details?.original_email}
+      </Text>
+
+      <Text size="small" className="text-ui-fg-subtle">
+        {t("orders.activity.to")}:{" "}
+        {customer?.first_name
+          ? `${customer?.first_name} ${customer?.last_name}`
+          : customer?.email}
+      </Text>
+    </div>
+  )
+}
+
 /**
  * Returns count of added and removed item quantity
  */
-function countItemsChange(
-  actions: AdminOrderChange["actions"],
-  itemsMap: Map<string, AdminOrderLineItem>
-) {
+function countItemsChange(actions: AdminOrderChange["actions"]) {
   let added = 0
   let removed = 0
 
@@ -885,20 +933,12 @@ function countItemsChange(
       added += action.details!.quantity as number
     }
     if (action.action === "ITEM_UPDATE") {
-      const newQuantity = action.details!.quantity as number
-      const originalQuantity: number | undefined = itemsMap.get(
-        action.details!.reference_id as string
-      )?.quantity
+      const quantityDiff = action.details!.quantity_diff as number
 
-      if (typeof originalQuantity === "number") {
-        const diff = Math.abs(newQuantity - originalQuantity)
-
-        if (newQuantity > originalQuantity) {
-          added += diff
-        }
-        if (newQuantity < originalQuantity) {
-          removed += diff
-        }
+      if (quantityDiff > 0) {
+        added += quantityDiff
+      } else {
+        removed += Math.abs(quantityDiff)
       }
     }
   })

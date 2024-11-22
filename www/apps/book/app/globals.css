@@ -5,7 +5,8 @@
 @layer base {
 
   html {
-    -webkit-font-smoothing: antialiased;
+    @apply antialiased;
+    text-rendering: optimizeLegibility;
   }
 
   body {
@@ -31,4 +32,8 @@
   body[data-modal="opened"] {
     @apply !overflow-hidden;
   }
+}
+
+.grecaptcha-badge {
+  visibility: hidden;
 }

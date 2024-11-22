@@ -1,4 +1,18 @@
-export class PermanentStepFailureError extends Error {
+class BaseStepErrror extends Error {
+  #stepResponse: unknown
+
+  constructor(name, message?: string, stepResponse?: unknown) {
+    super(message)
+    this.name = name
+    this.#stepResponse = stepResponse
+  }
+
+  getStepResponse(): unknown {
+    return this.#stepResponse
+  }
+}
+
+export class PermanentStepFailureError extends BaseStepErrror {
   static isPermanentStepFailureError(
     error: Error
   ): error is PermanentStepFailureError {
@@ -8,26 +22,24 @@ export class PermanentStepFailureError extends Error {
     )
   }
 
-  constructor(message?: string) {
-    super(message)
-    this.name = "PermanentStepFailure"
+  constructor(message?: string, stepResponse?: unknown) {
+    super("PermanentStepFailure", message, stepResponse)
   }
 }
 
-export class SkipStepResponse extends Error {
+export class SkipStepResponse extends BaseStepErrror {
   static isSkipStepResponse(error: Error): error is SkipStepResponse {
     return (
       error instanceof SkipStepResponse || error?.name === "SkipStepResponse"
     )
   }
 
-  constructor(message?: string) {
-    super(message)
-    this.name = "SkipStepResponse"
+  constructor(message?: string, stepResponse?: unknown) {
+    super("SkipStepResponse", message, stepResponse)
   }
 }
 
-export class TransactionStepTimeoutError extends Error {
+export class TransactionStepTimeoutError extends BaseStepErrror {
   static isTransactionStepTimeoutError(
     error: Error
   ): error is TransactionStepTimeoutError {
@@ -37,13 +49,12 @@ export class TransactionStepTimeoutError extends Error {
     )
   }
 
-  constructor(message?: string) {
-    super(message)
-    this.name = "TransactionStepTimeoutError"
+  constructor(message?: string, stepResponse?: unknown) {
+    super("TransactionStepTimeoutError", message, stepResponse)
   }
 }
 
-export class TransactionTimeoutError extends Error {
+export class TransactionTimeoutError extends BaseStepErrror {
   static isTransactionTimeoutError(
     error: Error
   ): error is TransactionTimeoutError {
@@ -53,8 +64,7 @@ export class TransactionTimeoutError extends Error {
     )
   }
 
-  constructor(message?: string) {
-    super(message)
-    this.name = "TransactionTimeoutError"
+  constructor(message?: string, stepResponse?: unknown) {
+    super("TransactionTimeoutError", message, stepResponse)
   }
 }

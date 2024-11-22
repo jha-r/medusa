@@ -72,7 +72,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
         method: "POST",
         credentials: "include",
         headers: {
-          "x-publishable-api-key": process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY,
+          "x-publishable-api-key": process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY || "temp",
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
@@ -89,7 +89,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
       fetch(`http://localhost:9000/store/carts/${cartId}`, {
         credentials: "include",
         headers: {
-          "x-publishable-api-key": process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY,
+          "x-publishable-api-key": process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY || "temp",
         },
       })
       .then((res) => res.json())

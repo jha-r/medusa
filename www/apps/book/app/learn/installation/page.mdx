@@ -10,6 +10,8 @@ In this documentation, you'll learn how to install and run a Medusa application.
 
 ## Create Medusa Application
 
+A Medusa application is made up of a headless Node.js server and an admin dashboard. You can optionally install a separate [Next.js storefront](../storefront-development/nextjs-starter/page.mdx) either while installing the Medusa application or at a later point.
+
 <Prerequisites items={[
   {
     text: "Node.js v20+",
@@ -35,19 +37,17 @@ When you run the command, you'll be asked for the project's name and whether you
 
 After answering the prompts, the command installs the Medusa application in a directory with your project name, and prepares a PostgreSQL database that the application connects to.
 
-<Note>
-
-Since the Medusa server is headless, the storefront is optional to install and you can install it later by following [this guide](../storefront-development/nextjs-starter/page.mdx). If you choose to install it with the Medusa application, the storefront is installed in a separate directory named `{project-name}-storefront`.
-
-</Note>
+If you chose to install the storefront with the Medusa application, the storefront is installed in a separate directory named `{project-name}-storefront`.
 
 ### Successful Installation Result
 
-Once the Medusa application installation finishes successfully, the Medusa application will run at `http://localhost:9000`.
+Once the installation finishes successfully, the Medusa application will run at `http://localhost:9000`.
 
 The Medusa Admin dashboard also runs at `http://localhost:9000/app`. The installation process opens the Medusa Admin dashboard in your default browser to create a user. You can later log in with that user.
 
 If you also installed the Next.js storefront, it'll be running at `http://localhost:8000`.
+
+You can stop the servers for the Medusa application and Next.js storefront by exiting the installation command. To run the server for the Medusa application again, refer to [this section](#run-medusa-application-in-development).
 
 ### Troubleshooting Installation Errors
 

@@ -4,11 +4,13 @@ import {
   kebabCase,
   Modules,
   promiseAll,
+  readDirRecursive,
   resolveExports,
 } from "@medusajs/utils"
-import { access, readdir } from "fs/promises"
+import { access } from "fs/promises"
 import { join, parse } from "path"
 
+import { Dirent } from "fs"
 import { configManager } from "../config"
 import { container } from "../container"
 import { logger } from "../logger"
@@ -137,10 +139,7 @@ export class SubscriberLoader {
   }
 
   private async createMap(dirPath: string) {
-    const promises = await readdir(dirPath, {
-      recursive: true,
-      withFileTypes: true,
-    }).then(async (entries) => {
+    const promises = await readDirRecursive(dirPath).then(async (entries) => {
       const fileEntries = entries.filter((entry) => {
         return (
           !entry.isDirectory() &&
@@ -150,7 +149,7 @@ export class SubscriberLoader {
 
       logger.debug(`Registering subscribers from ${dirPath}.`)
 
-      return fileEntries.flatMap(async (entry) => {
+      return fileEntries.flatMap(async (entry: Dirent) => {
         const fullPath = join(entry.path, entry.name)
         return await this.createDescriptor(fullPath)
       })

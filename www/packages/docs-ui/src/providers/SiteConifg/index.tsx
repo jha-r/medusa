@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useState } from "react"
 import { DocsConfig } from "types"
 import { globalConfig } from "../../global-config"
+import { GITHUB_ISSUES_LINK } from "../.."
 
 export type SiteConfigContextType = {
   config: DocsConfig
@@ -21,21 +22,26 @@ export const SiteConfigProvider = ({
   children,
 }: SiteConfigProviderProps) => {
   const [config, setConfig] = useState<DocsConfig>(
-    initConfig || {
-      baseUrl: "",
-      sidebar: {
-        default: [],
-        mobile: [],
+    Object.assign(
+      {
+        baseUrl: "",
+        sidebar: {
+          default: [],
+          mobile: [],
+        },
+        project: {
+          title: "",
+          key: "",
+        },
+        breadcrumbOptions: {
+          showCategories: true,
+        },
+        reportIssueLink: GITHUB_ISSUES_LINK,
+        logo: "",
       },
-      project: {
-        title: "",
-        key: "",
-      },
-      breadcrumbOptions: {
-        showCategories: true,
-      },
-      ...globalConfig,
-    }
+      globalConfig,
+      initConfig || {}
+    )
   )
 
   return (
