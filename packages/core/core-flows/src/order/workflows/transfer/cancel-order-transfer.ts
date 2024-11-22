@@ -38,7 +38,7 @@ export const cancelTransferOrderRequestValidationStep = createStep(
     throwIfIsCancelled(order, "Order")
     throwIfOrderChangeIsNotActive({ orderChange })
 
-    if (input.logged_in_user_id.startsWith("user_")) {
+    if (input.actor_type === "user") {
       return
     }
 

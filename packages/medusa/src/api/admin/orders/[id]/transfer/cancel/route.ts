@@ -20,6 +20,7 @@ export const POST = async (
     input: {
       order_id: orderId,
       logged_in_user_id: userId,
+      actor_type: req.auth_context.actor_type as "user",
     },
   })
 
