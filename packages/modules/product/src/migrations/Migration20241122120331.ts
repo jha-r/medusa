@@ -1,10 +1,9 @@
 import { Migration } from '@mikro-orm/migrations';
 
-export class Migration20241120140745 extends Migration {
+export class Migration20241122120331 extends Migration {
 
   async up(): Promise<void> {
-    this.addSql('alter table if exists "image" add column if not exists "rank" integer not null default 0;');
-    this.addSql('alter table if exists "image" add column if not exists "product_id" text null;');
+    this.addSql('alter table if exists "image" add column if not exists "rank" integer not null default 0, add column if not exists "product_id" text not null;');
     
     // Migrate existing relationships
     this.addSql(`
@@ -21,14 +20,13 @@ export class Migration20241120140745 extends Migration {
     `);
 
     this.addSql('alter table if exists "image" add constraint "image_product_id_foreign" foreign key ("product_id") references "product" ("id") on update cascade on delete cascade;');
-    
     this.addSql('drop table if exists "product_images" cascade;');
   }
 
   async down(): Promise<void> {
     this.addSql('create table if not exists "product_images" ("product_id" text not null, "image_id" text not null, constraint "product_images_pkey" primary key ("product_id", "image_id"));');
 
-    // Migrate relationships back
+    // Migrate relationships back to join table
     this.addSql(`
       insert into "product_images" (product_id, image_id)
       select product_id, id
@@ -43,4 +41,5 @@ export class Migration20241120140745 extends Migration {
     this.addSql('alter table if exists "image" drop column if exists "rank";');
     this.addSql('alter table if exists "image" drop column if exists "product_id";');
   }
+
 }

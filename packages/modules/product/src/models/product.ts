@@ -169,7 +169,6 @@ class Product {
 
   @OneToMany(() => ProductImage, (image) => image.product_id, {
     cascade: [Cascade.PERSIST, Cascade.REMOVE],
-    orderBy: { rank: "asc" },
   })
   images = new Collection<ProductImage>(this)
 

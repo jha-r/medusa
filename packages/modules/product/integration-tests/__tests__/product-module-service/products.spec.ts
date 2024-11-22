@@ -37,6 +37,7 @@ moduleIntegrationTestRunner<IProductModuleService>({
   injectedDependencies: {
     [Modules.EVENT_BUS]: new MockEventBusService(),
   },
+  debug: true,
   testSuite: ({ MikroOrmWrapper, service }) => {
     describe("ProductModuleService products", function () {
       let productCollectionOne: ProductCollection
@@ -1327,6 +1328,8 @@ moduleIntegrationTestRunner<IProductModuleService>({
               })
             )
           )
+
+          service.listAndCountProducts
 
           // Explicitly verify sequential order
           retrievedProduct.images.forEach((img, idx) => {

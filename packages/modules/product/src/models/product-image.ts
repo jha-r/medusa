@@ -63,29 +63,25 @@ class ProductImage {
 
   @ManyToOne(() => Product, {
     columnType: "text",
-    nullable: true,
     onDelete: "cascade",
     fieldName: "product_id",
     mapToPk: true,
   })
-  product_id: string | null
+  product_id: string
 
   @ManyToOne(() => Product, {
     persist: false,
-    nullable: true,
   })
-  product: Rel<Product> | null
+  product: Rel<Product>
 
   @OnInit()
   onInit() {
     this.id = generateEntityId(this.id, "img")
-    this.product_id ??= this.product?.id ?? null
   }
 
   @BeforeCreate()
   onCreate() {
     this.id = generateEntityId(this.id, "img")
-    this.product_id ??= this.product?.id ?? null
   }
 }
 
