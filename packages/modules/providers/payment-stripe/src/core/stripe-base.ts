@@ -4,7 +4,6 @@ import Stripe from "stripe"
 
 import {
   CreatePaymentProviderSession,
-  MedusaContainer,
   PaymentProviderError,
   PaymentProviderSessionResponse,
   ProviderWebhookPayload,
@@ -43,13 +42,13 @@ abstract class StripeBase extends AbstractPaymentProvider<StripeOptions> {
   }
 
   protected constructor(
-    container: Record<string, unknown>,
+    cradle: Record<string, unknown>,
     options: StripeOptions
   ) {
     // @ts-ignore
     super(...arguments)
 
-    this.container_ = container
+    this.container_ = cradle
     this.options_ = options
 
     this.stripe_ = new Stripe(options.apiKey)

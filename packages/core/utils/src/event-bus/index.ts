@@ -23,7 +23,7 @@ export abstract class AbstractEventBusModuleService
   }
 
   protected constructor(
-    container: MedusaContainer,
+    cradle: Record<string, unknown>,
     moduleOptions = {},
     moduleDeclaration: InternalModuleDeclaration
   ) {
