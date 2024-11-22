@@ -1,3 +1,4 @@
+import { trackFeatureFlag } from "@medusajs/telemetry"
 import {
   ContainerRegistrationKeys,
   dynamicImport,
@@ -7,15 +8,14 @@ import {
   isString,
   isTruthy,
   objectFromStringPath,
+  readDirRecursive,
 } from "@medusajs/utils"
-import { trackFeatureFlag } from "@medusajs/telemetry"
+import { asFunction } from "awilix"
 import { join, normalize } from "path"
+import { configManager } from "../config"
+import { container } from "../container"
 import { logger } from "../logger"
 import { FlagSettings } from "./types"
-import { container } from "../container"
-import { asFunction } from "awilix"
-import { configManager } from "../config"
-import { readdir } from "fs/promises"
 
 export const featureFlagRouter = new FlagRouter({})
 
@@ -95,36 +95,34 @@ export async function featureFlagsLoader(
 
   const flagDir = normalize(sourcePath)
 
-  await readdir(flagDir, { recursive: true, withFileTypes: true }).then(
-    async (files) => {
-      if (!files?.length) {
+  await readDirRecursive(flagDir).then(async (files) => {
+    if (!files?.length) {
+      return
+    }
+
+    files.map(async (file) => {
+      if (file.isDirectory()) {
+        return await featureFlagsLoader(join(flagDir, file.name))
+      }
+
+      if (
+        excludedExtensions.some((ext) => file.name.endsWith(ext)) ||
+        excludedFiles.includes(file.name)
+      ) {
         return
       }
 
-      files.map(async (file) => {
-        if (file.isDirectory()) {
-          return await featureFlagsLoader(join(flagDir, file.name))
-        }
+      const fileExports = await dynamicImport(join(flagDir, file.name))
+      const featureFlag = fileExports.default
 
-        if (
-          excludedExtensions.some((ext) => file.name.endsWith(ext)) ||
-          excludedFiles.includes(file.name)
-        ) {
-          return
-        }
-
-        const fileExports = await dynamicImport(join(flagDir, file.name))
-        const featureFlag = fileExports.default
-
-        if (!featureFlag) {
-          return
-        }
-
-        registerFlag(featureFlag, projectConfigFlags)
+      if (!featureFlag) {
         return
-      })
-    }
-  )
+      }
+
+      registerFlag(featureFlag, projectConfigFlags)
+      return
+    })
+  })
 
   return featureFlagRouter
 }

@@ -5,13 +5,15 @@ import {
   isObject,
   MedusaError,
   promiseAll,
+  readDirRecursive,
 } from "@medusajs/utils"
 import {
   createStep,
   createWorkflow,
   StepResponse,
 } from "@medusajs/workflows-sdk"
-import { access, readdir } from "fs/promises"
+import { Dirent } from "fs"
+import { access } from "fs/promises"
 import { join } from "path"
 import { logger } from "../logger"
 
@@ -138,11 +140,8 @@ export class JobLoader {
         return
       }
 
-      return await readdir(sourcePath, {
-        recursive: true,
-        withFileTypes: true,
-      }).then(async (entries) => {
-        const fileEntries = entries.filter((entry) => {
+      return await readDirRecursive(sourcePath).then(async (entries) => {
+        const fileEntries = entries.filter((entry: Dirent) => {
           return (
             !entry.isDirectory() &&
             !this.#excludes.some((exclude) => exclude.test(entry.name))
@@ -152,7 +151,7 @@ export class JobLoader {
         logger.debug(`Registering jobs from ${sourcePath}.`)
 
         return await promiseAll(
-          fileEntries.map(async (entry) => {
+          fileEntries.map(async (entry: Dirent) => {
             const fullPath = join(entry.path, entry.name)
 
             const module_ = await dynamicImport(fullPath)
