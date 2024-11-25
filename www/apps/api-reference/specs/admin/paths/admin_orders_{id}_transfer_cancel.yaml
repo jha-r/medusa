@@ -62,3 +62,8 @@ post:
     '500':
       $ref: ../components/responses/500_error.yaml
   x-workflow: cancelOrderTransferRequestWorkflow
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/AdminCancelOrderTransferRequest.yaml

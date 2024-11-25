@@ -57,6 +57,11 @@
  * security:
  *   - cookie_auth: []
  *   - jwt_token: []
+ * requestBody:
+ *   content:
+ *     application/json:
+ *       schema:
+ *         $ref: "#/components/schemas/StoreCancelOrderTransferRequest"
  * 
 */
 
