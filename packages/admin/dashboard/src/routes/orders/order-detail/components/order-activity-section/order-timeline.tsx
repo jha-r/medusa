@@ -408,6 +408,14 @@ const useActivityItems = (order: AdminOrder): Activity[] => {
           timestamp: transfer.confirmed_at,
         })
       }
+      if (transfer.declined_at) {
+        items.push({
+          title: t(`orders.activity.events.transfer.declined`, {
+            transferId: transfer.id.slice(-7),
+          }),
+          timestamp: transfer.declined_at,
+        })
+      }
     }
 
     // for (const note of notes || []) {

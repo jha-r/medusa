@@ -5319,11 +5319,15 @@
                     },
                     "confirmed": {
                       "type": "string"
+                    },
+                    "declined": {
+                      "type": "string"
                     }
                   },
                   "required": [
                     "requested",
-                    "confirmed"
+                    "confirmed",
+                    "declined"
                   ],
                   "additionalProperties": false
                 }
