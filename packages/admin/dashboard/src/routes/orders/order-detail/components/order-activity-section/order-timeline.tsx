@@ -903,6 +903,8 @@ const TransferOrderRequestBody = ({
   const action = transfer.actions[0]
   const { customer } = useCustomer(action.reference_id)
 
+  const isCompleted = !!transfer.confirmed_at
+
   const { mutateAsync: cancelTransfer } = useCancelOrderTransfer(
     transfer.order_id
   )
@@ -938,14 +940,16 @@ const TransferOrderRequestBody = ({
           ? `${customer?.first_name} ${customer?.last_name}`
           : customer?.email}
       </Text>
-      <Button
-        onClick={handleDelete}
-        className="text-ui-fg-subtle h-auto px-0 leading-none hover:bg-transparent"
-        variant="transparent"
-        size="small"
-      >
-        {t("actions.cancel")}
-      </Button>
+      {!isCompleted && (
+        <Button
+          onClick={handleDelete}
+          className="text-ui-fg-subtle h-auto px-0 leading-none hover:bg-transparent"
+          variant="transparent"
+          size="small"
+        >
+          {t("actions.cancel")}
+        </Button>
+      )}
     </div>
   )
 }
