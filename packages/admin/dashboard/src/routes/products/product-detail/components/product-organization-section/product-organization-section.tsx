@@ -1,6 +1,6 @@
 import { PencilSquare } from "@medusajs/icons"
 import { HttpTypes } from "@medusajs/types"
-import { Badge, Container, Heading } from "@medusajs/ui"
+import { Badge, Container, Heading, Tooltip } from "@medusajs/ui"
 import { useTranslation } from "react-i18next"
 import { Link } from "react-router-dom"
 import { ActionMenu } from "../../../../../components/common/action-menu"
@@ -41,9 +41,16 @@ export const ProductOrganizationSection = ({
         value={
           product.tags?.length
             ? product.tags.map((tag) => (
-                <Badge key={tag.id} className="w-fit" size="2xsmall" asChild>
-                  <Link to={`/products?tag_id=${tag.id}`}>{tag.value}</Link>
-                </Badge>
+                <Tooltip key={tag.id} content={tag.value}>
+                  <Badge
+                    key={tag.id}
+                    className="block w-fit truncate"
+                    size="2xsmall"
+                    asChild
+                  >
+                    <Link to={`/products?tag_id=${tag.id}`}>{tag.value}</Link>
+                  </Badge>
+                </Tooltip>
               ))
             : undefined
         }
@@ -52,11 +59,13 @@ export const ProductOrganizationSection = ({
         title={t("fields.type")}
         value={
           product.type ? (
-            <Badge size="2xsmall" className="w-fit" asChild>
-              <Link to={`/products?type_id=${product.type_id}`}>
-                {product.type.value}
-              </Link>
-            </Badge>
+            <Tooltip content={product.type.value}>
+              <Badge size="2xsmall" className="block w-fit truncate" asChild>
+                <Link to={`/products?type_id=${product.type_id}`}>
+                  {product.type.value}
+                </Link>
+              </Badge>
+            </Tooltip>
           ) : undefined
         }
       />
@@ -65,11 +74,13 @@ export const ProductOrganizationSection = ({
         title={t("fields.collection")}
         value={
           product.collection ? (
-            <Badge size="2xsmall" className="max-w-[182px]" asChild>
-              <Link to={`/collections/${product.collection.id}`}>
-                <span className="truncate">{product.collection.title}</span>
-              </Link>
-            </Badge>
+            <Tooltip content={product.collection.title}>
+              <Badge size="2xsmall" className="block w-fit truncate" asChild>
+                <Link to={`/collections/${product.collection.id}`}>
+                  <span className="truncate">{product.collection.title}</span>
+                </Link>
+              </Badge>
+            </Tooltip>
           ) : undefined
         }
       />
@@ -79,9 +90,15 @@ export const ProductOrganizationSection = ({
         value={
           product.categories?.length
             ? product.categories.map((pcat) => (
-                <Badge key={pcat.id} className="w-fit" size="2xsmall" asChild>
-                  <Link to={`/categories/${pcat.id}`}>{pcat.name}</Link>
-                </Badge>
+                <Tooltip key={pcat.id} content={pcat.name}>
+                  <Badge
+                    size="2xsmall"
+                    className="block w-fit truncate"
+                    asChild
+                  >
+                    <Link to={`/categories/${pcat.id}`}>{pcat.name}</Link>
+                  </Badge>
+                </Tooltip>
               ))
             : undefined
         }
