@@ -840,6 +840,60 @@ paths:
         '500':
           $ref: '#/components/responses/500_error'
       x-workflow: completeCartWorkflow
+  /store/carts/{id}/customer:
+    post:
+      operationId: PostCartsIdCustomer
+      summary: Add Customer to Cart
+      description: Add a Customer to a cart
+      x-authenticated: false
+      parameters:
+        - name: id
+          in: path
+          description: The cart's ID.
+          required: true
+          schema:
+            type: string
+        - name: fields
+          in: query
+          description: |-
+            Comma-separated fields that should be included in the returned data.
+             * if a field is prefixed with `+` it will be added to the default fields, using `-` will remove it from the default fields.
+             * without prefix it will replace the entire default fields.
+          required: false
+          schema:
+            type: string
+            title: fields
+            description: Comma-separated fields that should be included in the returned data. If a field is prefixed with `+` it will be added to the default fields, using `-` will remove it from the default fields. Without prefix it will replace the entire default fields.
+            externalDocs:
+              url: '#select-fields-and-relations'
+      x-codeSamples:
+        - lang: Shell
+          label: cURL
+          source: |-
+            curl -X POST '{backend_url}/store/carts/{id}/customer' \
+            -H 'x-publishable-api-key: {your_publishable_api_key}'
+      tags:
+        - Carts
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreCartResponse'
+        '400':
+          $ref: '#/components/responses/400_error'
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '404':
+          $ref: '#/components/responses/not_found_error'
+        '409':
+          $ref: '#/components/responses/invalid_state_error'
+        '422':
+          $ref: '#/components/responses/invalid_request_error'
+        '500':
+          $ref: '#/components/responses/500_error'
+      x-workflow: transferCartCustomerWorkflow
   /store/carts/{id}/line-items:
     post:
       operationId: PostCartsIdLineItems
@@ -3070,6 +3124,250 @@ paths:
           label: cURL
           source: |-
             curl '{backend_url}/store/orders/{id}' \
+            -H 'x-publishable-api-key: {your_publishable_api_key}'
+      tags:
+        - Orders
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreOrderResponse'
+        '400':
+          $ref: '#/components/responses/400_error'
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '404':
+          $ref: '#/components/responses/not_found_error'
+        '409':
+          $ref: '#/components/responses/invalid_state_error'
+        '422':
+          $ref: '#/components/responses/invalid_request_error'
+        '500':
+          $ref: '#/components/responses/500_error'
+      x-workflow: getOrderDetailWorkflow
+  /store/orders/{id}/transfer/accept:
+    post:
+      operationId: PostOrdersIdTransferAccept
+      summary: Add Accept to Order
+      description: Add a Accept to a order
+      x-authenticated: false
+      parameters:
+        - name: id
+          in: path
+          description: The order's ID.
+          required: true
+          schema:
+            type: string
+        - name: fields
+          in: query
+          description: |-
+            Comma-separated fields that should be included in the returned data.
+             * if a field is prefixed with `+` it will be added to the default fields, using `-` will remove it from the default fields.
+             * without prefix it will replace the entire default fields.
+          required: false
+          schema:
+            type: string
+            title: fields
+            description: Comma-separated fields that should be included in the returned data. If a field is prefixed with `+` it will be added to the default fields, using `-` will remove it from the default fields. Without prefix it will replace the entire default fields.
+            externalDocs:
+              url: '#select-fields-and-relations'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoreAcceptOrderTransfer'
+      x-codeSamples:
+        - lang: Shell
+          label: cURL
+          source: |-
+            curl -X POST '{backend_url}/store/orders/{id}/transfer/accept' \
+            -H 'x-publishable-api-key: {your_publishable_api_key}' \
+            -H 'Content-Type: application/json' \
+            --data-raw '{
+              "token": "{value}"
+            }'
+      tags:
+        - Orders
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreOrderResponse'
+        '400':
+          $ref: '#/components/responses/400_error'
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '404':
+          $ref: '#/components/responses/not_found_error'
+        '409':
+          $ref: '#/components/responses/invalid_state_error'
+        '422':
+          $ref: '#/components/responses/invalid_request_error'
+        '500':
+          $ref: '#/components/responses/500_error'
+      x-workflow: acceptOrderTransferWorkflow
+  /store/orders/{id}/transfer/cancel:
+    post:
+      operationId: PostOrdersIdTransferCancel
+      summary: Add Cancel to Order
+      description: Add a Cancel to a order
+      x-authenticated: false
+      parameters:
+        - name: id
+          in: path
+          description: The order's ID.
+          required: true
+          schema:
+            type: string
+        - name: fields
+          in: query
+          description: |-
+            Comma-separated fields that should be included in the returned data.
+             * if a field is prefixed with `+` it will be added to the default fields, using `-` will remove it from the default fields.
+             * without prefix it will replace the entire default fields.
+          required: false
+          schema:
+            type: string
+            title: fields
+            description: Comma-separated fields that should be included in the returned data. If a field is prefixed with `+` it will be added to the default fields, using `-` will remove it from the default fields. Without prefix it will replace the entire default fields.
+            externalDocs:
+              url: '#select-fields-and-relations'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoreCancelOrderTransferRequest'
+      x-codeSamples:
+        - lang: Shell
+          label: cURL
+          source: |-
+            curl -X POST '{backend_url}/store/orders/{id}/transfer/cancel' \
+            -H 'x-publishable-api-key: {your_publishable_api_key}'
+      tags:
+        - Orders
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreOrderResponse'
+        '400':
+          $ref: '#/components/responses/400_error'
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '404':
+          $ref: '#/components/responses/not_found_error'
+        '409':
+          $ref: '#/components/responses/invalid_state_error'
+        '422':
+          $ref: '#/components/responses/invalid_request_error'
+        '500':
+          $ref: '#/components/responses/500_error'
+      x-workflow: cancelOrderTransferRequestWorkflow
+  /store/orders/{id}/transfer/decline:
+    post:
+      operationId: PostOrdersIdTransferDecline
+      summary: Add Decline to Order
+      description: Add a Decline to a order
+      x-authenticated: false
+      parameters:
+        - name: id
+          in: path
+          description: The order's ID.
+          required: true
+          schema:
+            type: string
+        - name: fields
+          in: query
+          description: |-
+            Comma-separated fields that should be included in the returned data.
+             * if a field is prefixed with `+` it will be added to the default fields, using `-` will remove it from the default fields.
+             * without prefix it will replace the entire default fields.
+          required: false
+          schema:
+            type: string
+            title: fields
+            description: Comma-separated fields that should be included in the returned data. If a field is prefixed with `+` it will be added to the default fields, using `-` will remove it from the default fields. Without prefix it will replace the entire default fields.
+            externalDocs:
+              url: '#select-fields-and-relations'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoreDeclineOrderTransferRequest'
+      x-codeSamples:
+        - lang: Shell
+          label: cURL
+          source: |-
+            curl -X POST '{backend_url}/store/orders/{id}/transfer/decline' \
+            -H 'x-publishable-api-key: {your_publishable_api_key}' \
+            -H 'Content-Type: application/json' \
+            --data-raw '{
+              "token": "{value}"
+            }'
+      tags:
+        - Orders
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreOrderResponse'
+        '400':
+          $ref: '#/components/responses/400_error'
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '404':
+          $ref: '#/components/responses/not_found_error'
+        '409':
+          $ref: '#/components/responses/invalid_state_error'
+        '422':
+          $ref: '#/components/responses/invalid_request_error'
+        '500':
+          $ref: '#/components/responses/500_error'
+      x-workflow: declineOrderTransferRequestWorkflow
+  /store/orders/{id}/transfer/request:
+    post:
+      operationId: PostOrdersIdTransferRequest
+      summary: Add Request to Order
+      description: Add a Request to a order
+      x-authenticated: false
+      parameters:
+        - name: id
+          in: path
+          description: The order's ID.
+          required: true
+          schema:
+            type: string
+        - name: fields
+          in: query
+          description: |-
+            Comma-separated fields that should be included in the returned data.
+             * if a field is prefixed with `+` it will be added to the default fields, using `-` will remove it from the default fields.
+             * without prefix it will replace the entire default fields.
+          required: false
+          schema:
+            type: string
+            title: fields
+            description: Comma-separated fields that should be included in the returned data. If a field is prefixed with `+` it will be added to the default fields, using `-` will remove it from the default fields. Without prefix it will replace the entire default fields.
+            externalDocs:
+              url: '#select-fields-and-relations'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoreRequestOrderTransfer'
+      x-codeSamples:
+        - lang: Shell
+          label: cURL
+          source: |-
+            curl -X POST '{backend_url}/store/orders/{id}/transfer/request' \
             -H 'x-publishable-api-key: {your_publishable_api_key}'
       tags:
         - Orders
@@ -5613,7 +5911,7 @@ components:
           type: array
           description: The products to update.
           items:
-            $ref: '#/components/schemas/AdminUpdateProduct'
+            $ref: '#/components/schemas/AdminBatchUpdateProduct'
         delete:
           type: array
           description: The products to delete.
@@ -5729,6 +6027,164 @@ components:
               type: boolean
               title: deleted
               description: Whether the product variants were deleted.
+    AdminBatchUpdateProduct:
+      type: object
+      description: The product's details.
+      x-schemaName: AdminBatchUpdateProduct
+      properties:
+        title:
+          type: string
+          title: title
+          description: The product's title.
+        subtitle:
+          type: string
+          title: subtitle
+          description: The product's subtitle.
+        description:
+          type: string
+          title: description
+          description: The product's description.
+        is_giftcard:
+          type: boolean
+          title: is_giftcard
+          description: Whether the product is a gift card.
+        discountable:
+          type: boolean
+          title: discountable
+          description: Whether discounts can be applied on the product.
+        images:
+          type: array
+          description: The product's images.
+          items:
+            type: object
+            description: The image's details.
+            required:
+              - url
+            properties:
+              url:
+                type: string
+                title: url
+                description: The image's URL.
+        thumbnail:
+          type: string
+          title: thumbnail
+          description: The product's thumbnail URL.
+        handle:
+          type: string
+          title: handle
+          description: The product's unique handle.
+        status:
+          type: string
+          description: The product's status.
+          enum:
+            - draft
+            - proposed
+            - published
+            - rejected
+        type_id:
+          type: string
+          title: type_id
+          description: The ID of the product's type.
+        collection_id:
+          type: string
+          title: collection_id
+          description: The ID of the product's collection.
+        categories:
+          type: array
+          description: The product's categories.
+          items:
+            type: object
+            description: The product's category.
+            required:
+              - id
+            properties:
+              id:
+                type: string
+                title: id
+                description: The category's ID.
+        tags:
+          type: array
+          description: The product's tags.
+          items:
+            type: object
+            description: The product's tag.
+            required:
+              - id
+            properties:
+              id:
+                type: string
+                title: id
+                description: The tag's ID.
+        options:
+          type: array
+          description: The product's options.
+          items:
+            $ref: '#/components/schemas/AdminUpdateProductOption'
+        variants:
+          type: array
+          description: The product's variants. You can add new variants or update existing ones, passing their IDs in the object.
+          items:
+            oneOf:
+              - $ref: '#/components/schemas/AdminCreateProductVariant'
+              - $ref: '#/components/schemas/AdminUpdateProductVariant'
+        sales_channels:
+          type: array
+          description: The sales channels that the product is available in.
+          items:
+            type: object
+            description: The sales channel's details.
+            required:
+              - id
+            properties:
+              id:
+                type: string
+                title: id
+                description: The sales channel's ID.
+        weight:
+          type: number
+          title: weight
+          description: The product's weight.
+        length:
+          type: number
+          title: length
+          description: The product's length.
+        height:
+          type: number
+          title: height
+          description: The product's height.
+        width:
+          type: number
+          title: width
+          description: The product's width.
+        hs_code:
+          type: string
+          title: hs_code
+          description: The product's HS code.
+        mid_code:
+          type: string
+          title: mid_code
+          description: The product's MID code.
+        origin_country:
+          type: string
+          title: origin_country
+          description: The product's origin country.
+        material:
+          type: string
+          title: material
+          description: The product's material.
+        metadata:
+          type: object
+          description: The product's metadata, can hold custom key-value pairs.
+        external_id:
+          type: string
+          title: external_id
+          description: The ID of the product in an external or third-party system.
+        id:
+          type: string
+          title: id
+          description: The update's ID.
+      required:
+        - id
     AdminBatchUpdateProductVariant:
       type: object
       description: The properties to update of a product variant.
@@ -5918,6 +6374,10 @@ components:
       properties:
         campaign:
           $ref: '#/components/schemas/AdminCampaign'
+    AdminCancelOrderTransferRequest:
+      type: object
+      description: SUMMARY
+      x-schemaName: AdminCancelOrderTransferRequest
     AdminClaim:
       type: object
       description: The claim's details.
@@ -13015,9 +13475,14 @@ components:
         metadata:
           type: object
           description: The image's metadata, can hold custom key-value pairs.
+        rank:
+          type: number
+          title: rank
+          description: The image's rank.
       required:
         - id
         - url
+        - rank
     AdminProductOption:
       type: object
       description: The product option's details.
@@ -15386,6 +15851,25 @@ components:
       properties:
         tax_region:
           $ref: '#/components/schemas/AdminTaxRegion'
+    AdminTransferOrder:
+      type: object
+      description: SUMMARY
+      x-schemaName: AdminTransferOrder
+      required:
+        - customer_id
+      properties:
+        customer_id:
+          type: string
+          title: customer_id
+          description: The order's customer id.
+        description:
+          type: string
+          title: description
+          description: The order's description.
+        internal_note:
+          type: string
+          title: internal_note
+          description: The order's internal note.
     AdminUpdateApiKey:
       type: object
       description: The details to update in an API key.
@@ -16982,7 +17466,7 @@ components:
           description: The item's discount tax total.
     BaseCartShippingMethod:
       type: object
-      description: A cart's shipping method.
+      description: The tax line's shipping method.
       x-schemaName: BaseCartShippingMethod
       required:
         - id
@@ -17008,7 +17492,7 @@ components:
         cart_id:
           type: string
           title: cart_id
-          description: The ID of the cart this shipping method belongs to.
+          description: The shipping method's cart id.
         name:
           type: string
           title: name
@@ -17024,19 +17508,17 @@ components:
         is_tax_inclusive:
           type: boolean
           title: is_tax_inclusive
-          description: Whether the shipping method's amount is tax inclusive.
+          description: The shipping method's is tax inclusive.
         shipping_option_id:
           type: string
           title: shipping_option_id
-          description: The ID of the shipping option this method was created from.
+          description: The shipping method's shipping option id.
         data:
           type: object
-          description: The shipping method's data, useful for fulfillment handling by third-party services.
-          externalDocs:
-            url: https://docs.medusajs.com/v2/resources/commerce-modules/cart/concepts#data-property
+          description: The shipping method's data.
         metadata:
           type: object
-          description: The shipping method's metadata, can hold custom key-value pairs.
+          description: The shipping method's metadata.
         tax_lines:
           type: array
           description: The shipping method's tax lines.
@@ -17044,51 +17526,51 @@ components:
             $ref: '#/components/schemas/BaseShippingMethodTaxLine'
         adjustments:
           type: array
-          description: The shipping method's adjustments, such as applied promotions.
+          description: The shipping method's adjustments.
           items:
             $ref: '#/components/schemas/BaseShippingMethodAdjustment'
         created_at:
           type: string
           format: date-time
           title: created_at
-          description: The date the shipping method was created.
+          description: The shipping method's created at.
         updated_at:
           type: string
           format: date-time
           title: updated_at
-          description: The date the shipping method was updated.
+          description: The shipping method's updated at.
         original_total:
-          type: string
+          type: number
           title: original_total
-          description: The shipping method's total including taxes, excluding promotions.
+          description: The shipping method's original total.
         original_subtotal:
-          type: string
+          type: number
           title: original_subtotal
-          description: The shipping method's total excluding taxes, including promotions.
+          description: The shipping method's original subtotal.
         original_tax_total:
-          type: string
+          type: number
           title: original_tax_total
-          description: The total taxes applied on the shipping method's amount including promotions.
+          description: The shipping method's original tax total.
         total:
-          type: string
+          type: number
           title: total
-          description: The shipping method's total amount including taxes and promotions.
+          description: The shipping method's total.
         subtotal:
-          type: string
+          type: number
           title: subtotal
-          description: The shipping method's total amount excluding taxes, including promotions.
+          description: The shipping method's subtotal.
         tax_total:
-          type: string
+          type: number
           title: tax_total
-          description: The total taxes applied on the shipping method's amount including promotions.
+          description: The shipping method's tax total.
         discount_total:
-          type: string
+          type: number
           title: discount_total
-          description: The total amount discounted.
+          description: The shipping method's discount total.
         discount_tax_total:
-          type: string
-          title: discount_total
-          description: The taxes applied on the discounted amount.
+          type: number
+          title: discount_tax_total
+          description: The shipping method's discount tax total.
     BaseClaimItem:
       type: object
       description: The claim item's details.
@@ -17269,15 +17751,23 @@ components:
           description: Whether the provider is enabled.
     BaseLineItemAdjustment:
       type: object
-      description: The adjustment's details.
+      description: The adjustment's adjustments.
       x-schemaName: BaseLineItemAdjustment
+      required:
+        - item
+        - item_id
+        - id
+        - amount
+        - cart_id
+        - created_at
+        - updated_at
       properties:
         item:
           type: object
         item_id:
           type: string
           title: item_id
-          description: The ID of the item this adjustment applies on.
+          description: The adjustment's item id.
         id:
           type: string
           title: id
@@ -17293,7 +17783,7 @@ components:
         cart_id:
           type: string
           title: cart_id
-          description: The ID of the cart this adjustment belongs to.
+          description: The adjustment's cart id.
         description:
           type: string
           title: description
@@ -17301,48 +17791,50 @@ components:
         promotion_id:
           type: string
           title: promotion_id
-          description: The ID of the promotion applied by this adjustment.
+          description: The adjustment's promotion id.
         provider_id:
           type: string
           title: provider_id
-          description: The adjustment's provider ID.
+          description: The adjustment's provider id.
         created_at:
           type: string
           format: date-time
           title: created_at
-          description: The date the adjustment was created.
+          description: The adjustment's created at.
         updated_at:
           type: string
           format: date-time
           title: updated_at
-          description: The date the adjustment was updated.
+          description: The adjustment's updated at.
+    BaseLineItemTaxLine:
+      type: object
+      description: The tax line's tax lines.
+      x-schemaName: BaseLineItemTaxLine
       required:
         - item
         - item_id
+        - total
+        - subtotal
         - id
-        - amount
-        - cart_id
+        - code
+        - rate
         - created_at
         - updated_at
-    BaseLineItemTaxLine:
-      type: object
-      description: The tax line's details
-      x-schemaName: BaseLineItemTaxLine
       properties:
         item:
           $ref: '#/components/schemas/BaseCartLineItem'
         item_id:
           type: string
           title: item_id
-          description: The ID of the item the tax line applies on.
+          description: The tax line's item id.
         total:
           type: number
           title: total
-          description: The item's total, including taxes and promotions.
+          description: The tax line's total.
         subtotal:
           type: number
           title: subtotal
-          description: The item's subtotal excluding taxes, including promotions.
+          description: The tax line's subtotal.
         id:
           type: string
           title: id
@@ -17354,39 +17846,29 @@ components:
         tax_rate_id:
           type: string
           title: tax_rate_id
-          description: The ID of the associated tax rate.
+          description: The tax line's tax rate id.
         code:
           type: string
           title: code
-          description: The code the tax rate is identified by.
+          description: The tax line's code.
         rate:
           type: number
           title: rate
-          description: The rate to charge.
+          description: The tax line's rate.
         provider_id:
           type: string
           title: provider_id
-          description: The ID of the tax provider.
+          description: The tax line's provider id.
         created_at:
           type: string
           format: date-time
           title: created_at
-          description: The date the tax line was created.
+          description: The tax line's created at.
         updated_at:
           type: string
           format: date-time
           title: updated_at
-          description: The date the tax line was updated.
-      required:
-        - item
-        - item_id
-        - total
-        - subtotal
-        - id
-        - code
-        - rate
-        - created_at
-        - updated_at
+          description: The tax line's updated at.
     BaseOrder:
       type: object
       description: The order's details.
@@ -19093,9 +19575,14 @@ components:
         metadata:
           type: object
           description: The image's metadata, can hold custom key-value pairs.
+        rank:
+          type: number
+          title: rank
+          description: The image's rank.
       required:
         - id
         - url
+        - rank
     BaseProductOption:
       type: object
       description: The product option's details.
@@ -19438,52 +19925,8 @@ components:
           $ref: '#/components/schemas/RefundReason'
     BaseRegion:
       type: object
-      description: The region's details.
+      description: The cart's region.
       x-schemaName: BaseRegion
-      required:
-        - id
-        - name
-        - currency_code
-      properties:
-        id:
-          type: string
-          title: id
-          description: The region's ID.
-        name:
-          type: string
-          title: name
-          description: The region's name.
-        currency_code:
-          type: string
-          title: currency_code
-          description: The region's currency code.
-        automatic_taxes:
-          type: boolean
-          title: automatic_taxes
-          description: The region's automatic taxes.
-        countries:
-          type: array
-          description: The region's countries.
-          items:
-            $ref: '#/components/schemas/BaseRegionCountry'
-        payment_providers:
-          type: array
-          description: The region's payment providers.
-          items:
-            $ref: '#/components/schemas/AdminPaymentProvider'
-        metadata:
-          type: object
-          description: The region's metadata.
-        created_at:
-          type: string
-          format: date-time
-          title: created_at
-          description: The region's created at.
-        updated_at:
-          type: string
-          format: date-time
-          title: updated_at
-          description: The region's updated at.
     BaseRegionCountry:
       type: object
       description: The country's details.
@@ -19544,7 +19987,7 @@ components:
           example: In
     BaseShippingMethodAdjustment:
       type: object
-      description: The adjustment's details.
+      description: The adjustment's adjustments.
       x-schemaName: BaseShippingMethodAdjustment
       required:
         - shipping_method
@@ -19560,7 +20003,7 @@ components:
         shipping_method_id:
           type: string
           title: shipping_method_id
-          description: The ID of the shipping method the adjustment is applied on.
+          description: The adjustment's shipping method id.
         id:
           type: string
           title: id
@@ -19576,7 +20019,7 @@ components:
         cart_id:
           type: string
           title: cart_id
-          description: The ID of the associated cart.
+          description: The adjustment's cart id.
         description:
           type: string
           title: description
@@ -19584,24 +20027,24 @@ components:
         promotion_id:
           type: string
           title: promotion_id
-          description: The ID of the promotion applied by this adjustment.
+          description: The adjustment's promotion id.
         provider_id:
           type: string
           title: provider_id
-          description: The adjustment's provider ID.
+          description: The adjustment's provider id.
         created_at:
           type: string
           format: date-time
           title: created_at
-          description: The date the adjustment was created.
+          description: The adjustment's created at.
         updated_at:
           type: string
           format: date-time
           title: updated_at
-          description: The date the adjustment was updated.
+          description: The adjustment's updated at.
     BaseShippingMethodTaxLine:
       type: object
-      description: The tax line's details.
+      description: The tax line's tax lines.
       x-schemaName: BaseShippingMethodTaxLine
       required:
         - shipping_method
@@ -19619,15 +20062,15 @@ components:
         shipping_method_id:
           type: string
           title: shipping_method_id
-          description: The ID of this shipping method the tax line belongs to.
+          description: The tax line's shipping method id.
         total:
           type: number
           title: total
-          description: The method's total including taxes and promotions.
+          description: The tax line's total.
         subtotal:
           type: number
           title: subtotal
-          description: The method's total excluding taxes, including promotions.
+          description: The tax line's subtotal.
         id:
           type: string
           title: id
@@ -19639,29 +20082,29 @@ components:
         tax_rate_id:
           type: string
           title: tax_rate_id
-          description: The ID of the applied tax rate.
+          description: The tax line's tax rate id.
         code:
           type: string
           title: code
-          description: The code that the rate is identified by.
+          description: The tax line's code.
         rate:
           type: number
           title: rate
-          description: The rate to charge.
+          description: The tax line's rate.
         provider_id:
           type: string
           title: provider_id
-          description: The ID of the tax provider that calculated the taxes.
+          description: The tax line's provider id.
         created_at:
           type: string
           format: date-time
           title: created_at
-          description: The date the tax line was created.
+          description: The tax line's created at.
         updated_at:
           type: string
           format: date-time
           title: updated_at
-          description: The date the tax line was updated.
+          description: The tax line's updated at.
     CampaignResponse:
       type: object
       description: The campaign's details.
@@ -20920,8 +21363,19 @@ components:
           title: no_notification
           description: Whether to send the customer notifications when the exchange is updated.
         difference_due:
-          type: number
-          title: difference_due
+          oneOf:
+            - type: string
+              title: difference_due
+              description: The exchange's difference due.
+            - type: number
+              title: difference_due
+              description: The exchange's difference due.
+            - type: string
+              title: difference_due
+              description: The exchange's difference due.
+            - type: number
+              title: difference_due
+              description: The exchange's difference due.
           description: The amount to be exchanged or refunded. If the amount is negative, it must be refunded. If positive, additional payment is required from the customer.
         return:
           $ref: '#/components/schemas/Return'
@@ -21804,8 +22258,19 @@ components:
             - received
             - partially_received
         refund_amount:
-          type: number
-          title: refund_amount
+          oneOf:
+            - type: string
+              title: refund_amount
+              description: The return order's refund amount.
+            - type: number
+              title: refund_amount
+              description: The return order's refund amount.
+            - type: string
+              title: refund_amount
+              description: The return order's refund amount.
+            - type: number
+              title: refund_amount
+              description: The return order's refund amount.
           description: The amount refunded by this return.
         order_id:
           type: string
@@ -21903,6 +22368,17 @@ components:
           title: received_at
           description: The date the return was received.
           format: date-time
+    StoreAcceptOrderTransfer:
+      type: object
+      description: SUMMARY
+      x-schemaName: StoreAcceptOrderTransfer
+      required:
+        - token
+      properties:
+        token:
+          type: string
+          title: token
+          description: The order's token.
     StoreAddCartLineItem:
       type: object
       description: The details of the line item to add.
@@ -21922,6 +22398,10 @@ components:
         metadata:
           type: object
           description: The item's metadata, can hold custom key-value pairs.
+    StoreCancelOrderTransferRequest:
+      type: object
+      description: SUMMARY
+      x-schemaName: StoreCancelOrderTransferRequest
     StoreCart:
       type: object
       description: The cart's details.
@@ -23363,6 +23843,17 @@ components:
       properties:
         customer:
           $ref: '#/components/schemas/StoreCustomer'
+    StoreDeclineOrderTransferRequest:
+      type: object
+      description: SUMMARY
+      x-schemaName: StoreDeclineOrderTransferRequest
+      required:
+        - token
+      properties:
+        token:
+          type: string
+          title: token
+          description: The order's token.
     StoreInitializePaymentSession:
       type: object
       description: The payment session's details.
@@ -29942,6 +30433,7 @@ components:
       required:
         - id
         - url
+        - rank
       properties:
         id:
           type: string
@@ -29969,6 +30461,10 @@ components:
         metadata:
           type: object
           description: The image's metadata, can hold custom key-value pairs.
+        rank:
+          type: number
+          title: rank
+          description: The image's rank.
     StoreProductOption:
       type: object
       description: The product option's details.
@@ -30317,6 +30813,15 @@ components:
           type: string
           title: display_name
           description: The country's display name.
+    StoreRequestOrderTransfer:
+      type: object
+      description: SUMMARY
+      x-schemaName: StoreRequestOrderTransfer
+      properties:
+        description:
+          type: string
+          title: description
+          description: The order's description.
     StoreReturn:
       type: object
       description: The return's details.
