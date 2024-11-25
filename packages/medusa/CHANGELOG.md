@@ -1,5 +1,54 @@
 # Change Log
 
+## 2.0.6
+
+### Patch Changes
+
+- Updated dependencies [[`c28d0db1647a5c8edaf0ba0faba6426e8a740399`](https://github.com/medusajs/medusa/commit/c28d0db1647a5c8edaf0ba0faba6426e8a740399)]:
+  - @medusajs/product@2.0.6
+  - @medusajs/admin-bundler@2.0.6
+  - @medusajs/core-flows@2.0.6
+  - @medusajs/telemetry@2.0.6
+  - @medusajs/api-key@2.0.6
+  - @medusajs/auth@2.0.6
+  - @medusajs/cache-inmemory@2.0.6
+  - @medusajs/cache-redis@2.0.6
+  - @medusajs/cart@2.0.6
+  - @medusajs/currency@2.0.6
+  - @medusajs/customer@2.0.6
+  - @medusajs/event-bus-local@2.0.6
+  - @medusajs/event-bus-redis@2.0.6
+  - @medusajs/file@2.0.6
+  - @medusajs/fulfillment@2.0.6
+  - @medusajs/index@2.0.6
+  - @medusajs/inventory@2.0.6
+  - @medusajs/link-modules@2.0.6
+  - @medusajs/locking@2.0.6
+  - @medusajs/notification@2.0.6
+  - @medusajs/order@2.0.6
+  - @medusajs/payment@2.0.6
+  - @medusajs/pricing@2.0.6
+  - @medusajs/promotion@2.0.6
+  - @medusajs/auth-emailpass@2.0.6
+  - @medusajs/auth-github@2.0.6
+  - @medusajs/auth-google@2.0.6
+  - @medusajs/file-local@2.0.6
+  - @medusajs/file-s3@2.0.6
+  - @medusajs/fulfillment-manual@2.0.6
+  - @medusajs/locking-postgres@2.0.6
+  - @medusajs/locking-redis@2.0.6
+  - @medusajs/notification-local@2.0.6
+  - @medusajs/notification-sendgrid@2.0.6
+  - @medusajs/payment-stripe@2.0.6
+  - @medusajs/region@2.0.6
+  - @medusajs/sales-channel@2.0.6
+  - @medusajs/stock-location@2.0.6
+  - @medusajs/store@2.0.6
+  - @medusajs/tax@2.0.6
+  - @medusajs/user@2.0.6
+  - @medusajs/workflow-engine-inmemory@2.0.6
+  - @medusajs/workflow-engine-redis@2.0.6
+
 ## 2.0.5
 
 ### Patch Changes

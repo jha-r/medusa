@@ -1,5 +1,11 @@
 # @medusajs/product
 
+## 2.0.6
+
+### Patch Changes
+
+- [#10254](https://github.com/medusajs/medusa/pull/10254) [`c28d0db1647a5c8edaf0ba0faba6426e8a740399`](https://github.com/medusajs/medusa/commit/c28d0db1647a5c8edaf0ba0faba6426e8a740399) Thanks [@kasperkristensen](https://github.com/kasperkristensen)! - fix(product,dashboard): Avoid duplicating images
+
 ## 2.0.5
 
 ### Patch Changes
