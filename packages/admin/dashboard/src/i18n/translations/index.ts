@@ -20,6 +20,7 @@ export default {
   },
   ru: {
     translation: ru,
+  },
   tr: {
     translation: tr,
   },
