@@ -3,7 +3,7 @@ import { Migration } from '@mikro-orm/migrations';
 export class Migration20241122120331 extends Migration {
 
   async up(): Promise<void> {
-    this.addSql('alter table if exists "image" add column if not exists "rank" integer not null default 0, add column if not exists "product_id" text not null;');
+    this.addSql('alter table if exists "image" add column if not exists "rank" integer not null default 0, add column if not exists "product_id" text null;');
     
     // Migrate existing relationships
     this.addSql(`
@@ -19,6 +19,7 @@ export class Migration20241122120331 extends Migration {
       where pi.image_id = i.id;
     `);
 
+    this.addSql('alter table if exists "image" alter column "product_id" set not null;');
     this.addSql('alter table if exists "image" add constraint "image_product_id_foreign" foreign key ("product_id") references "product" ("id") on update cascade on delete cascade;');
     this.addSql('drop table if exists "product_images" cascade;');
   }
