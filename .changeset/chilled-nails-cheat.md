@@ -2,4 +2,4 @@
 "@medusajs/dashboard": patch
 ---
 
-feat(dashboard): Add Spanish i18n
+feat(dashboard): Add ptBR i18n
