@@ -154,7 +154,7 @@
  *   id:
  *     type: string
  *     title: id
- *     description: The update's ID.
+ *     description: The product's ID.
  * required:
  *   - id
  * 

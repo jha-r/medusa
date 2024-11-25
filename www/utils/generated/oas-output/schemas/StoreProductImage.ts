@@ -37,7 +37,7 @@
  *   rank:
  *     type: number
  *     title: rank
- *     description: The image's rank.
+ *     description: The image's rank among its sibling images
  * 
 */
 

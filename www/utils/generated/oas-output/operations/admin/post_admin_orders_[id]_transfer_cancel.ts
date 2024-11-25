@@ -1,8 +1,9 @@
 /**
  * @oas [post] /admin/orders/{id}/transfer/cancel
  * operationId: PostOrdersIdTransferCancel
- * summary: Add Cancel to Order
- * description: Add a Cancel to a order
+ * summary: Cancel Transfer Request
+ * x-sidebar-summary: Cancel Transfer
+ * description: Cancel a request to transfer an order to another customer.
  * x-authenticated: true
  * parameters:
  *   - name: id
@@ -15,8 +16,8 @@
  *     in: query
  *     description: |-
  *       Comma-separated fields that should be included in the returned data.
- *        * if a field is prefixed with `+` it will be added to the default fields, using `-` will remove it from the default fields.
- *        * without prefix it will replace the entire default fields.
+ *       if a field is prefixed with `+` it will be added to the default fields, using `-` will remove it from the default fields.
+ *       without prefix it will replace the entire default fields.
  *     required: false
  *     schema:
  *       type: string
@@ -29,11 +30,6 @@
  *   - api_token: []
  *   - cookie_auth: []
  *   - jwt_token: []
- * requestBody:
- *   content:
- *     application/json:
- *       schema:
- *         $ref: "#/components/schemas/AdminCancelOrderTransferRequest"
  * x-codeSamples:
  *   - lang: Shell
  *     label: cURL

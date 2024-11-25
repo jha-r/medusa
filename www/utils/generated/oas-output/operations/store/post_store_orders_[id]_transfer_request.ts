@@ -1,9 +1,11 @@
 /**
  * @oas [post] /store/orders/{id}/transfer/request
  * operationId: PostOrdersIdTransferRequest
- * summary: Add Request to Order
- * description: Add a Request to a order
- * x-authenticated: false
+ * summary: Request Order Transfer
+ * x-sidebar-summery: Request Transfer
+ * description: Request an order to be transfered to the logged-in customer's account. The transfer is confirmed using the [Accept Order
+ *   Transfer](https://docs.medusajs.com/api/store#orders_postordersidtransferaccept) API route.
+ * x-authenticated: true
  * parameters:
  *   - name: id
  *     in: path
@@ -15,8 +17,8 @@
  *     in: query
  *     description: |-
  *       Comma-separated fields that should be included in the returned data.
- *        * if a field is prefixed with `+` it will be added to the default fields, using `-` will remove it from the default fields.
- *        * without prefix it will replace the entire default fields.
+ *       if a field is prefixed with `+` it will be added to the default fields, using `-` will remove it from the default fields.
+ *       without prefix it will replace the entire default fields.
  *     required: false
  *     schema:
  *       type: string
@@ -58,6 +60,9 @@
  *   "500":
  *     $ref: "#/components/responses/500_error"
  * x-workflow: getOrderDetailWorkflow
+ * security:
+ *   - cookie_auth: []
+ *   - jwt_token: []
  * 
 */
 

@@ -1,9 +1,10 @@
 /**
  * @oas [post] /store/orders/{id}/transfer/cancel
  * operationId: PostOrdersIdTransferCancel
- * summary: Add Cancel to Order
- * description: Add a Cancel to a order
- * x-authenticated: false
+ * summary: Cancel Order Transfer
+ * x-sidebar-summary: Cancel Transfer
+ * description: Cancel an order transfer that the logged-in customer previously requested using the [Request Order Transfer](https://docs.medusajs.com/api/store#orders_postordersidtransferrequest) API route.
+ * x-authenticated: true
  * parameters:
  *   - name: id
  *     in: path
@@ -15,8 +16,8 @@
  *     in: query
  *     description: |-
  *       Comma-separated fields that should be included in the returned data.
- *        * if a field is prefixed with `+` it will be added to the default fields, using `-` will remove it from the default fields.
- *        * without prefix it will replace the entire default fields.
+ *       if a field is prefixed with `+` it will be added to the default fields, using `-` will remove it from the default fields.
+ *       without prefix it will replace the entire default fields.
  *     required: false
  *     schema:
  *       type: string
@@ -25,11 +26,6 @@
  *         fields. Without prefix it will replace the entire default fields.
  *       externalDocs:
  *         url: "#select-fields-and-relations"
- * requestBody:
- *   content:
- *     application/json:
- *       schema:
- *         $ref: "#/components/schemas/StoreCancelOrderTransferRequest"
  * x-codeSamples:
  *   - lang: Shell
  *     label: cURL
@@ -58,6 +54,9 @@
  *   "500":
  *     $ref: "#/components/responses/500_error"
  * x-workflow: cancelOrderTransferRequestWorkflow
+ * security:
+ *   - cookie_auth: []
+ *   - jwt_token: []
  * 
 */
 

@@ -1,8 +1,9 @@
 /**
  * @oas [post] /admin/orders/{id}/transfer
  * operationId: PostOrdersIdTransfer
- * summary: Add Transfer to Order
- * description: Add a Transfer to a order
+ * x-sidebar-summary: Request Transfer
+ * summary: Request Order Transfer
+ * description: Request an order to be transfered to another customer. The transfer is confirmed by sending a request to the [Accept Order Transfer](https://docs.medusajs.com/api/store#orders_postordersidtransferaccept) Store API route.
  * x-authenticated: true
  * parameters:
  *   - name: id
@@ -15,8 +16,8 @@
  *     in: query
  *     description: |-
  *       Comma-separated fields that should be included in the returned data.
- *        * if a field is prefixed with `+` it will be added to the default fields, using `-` will remove it from the default fields.
- *        * without prefix it will replace the entire default fields.
+ *       if a field is prefixed with `+` it will be added to the default fields, using `-` will remove it from the default fields.
+ *       without prefix it will replace the entire default fields.
  *     required: false
  *     schema:
  *       type: string
@@ -42,7 +43,7 @@
  *       -H 'Authorization: Bearer {access_token}' \
  *       -H 'Content-Type: application/json' \
  *       --data-raw '{
- *         "customer_id": "{value}"
+ *         "customer_id": "cus_123"
  *       }'
  * tags:
  *   - Orders

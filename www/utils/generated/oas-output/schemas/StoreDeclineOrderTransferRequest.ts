@@ -1,7 +1,7 @@
 /**
  * @schema StoreDeclineOrderTransferRequest
  * type: object
- * description: SUMMARY
+ * description: The details of declining the order transfer request.
  * x-schemaName: StoreDeclineOrderTransferRequest
  * required:
  *   - token
@@ -9,7 +9,7 @@
  *   token:
  *     type: string
  *     title: token
- *     description: The order's token.
+ *     description: The order transfer's token issued when the transfer was requested.
  * 
 */
 

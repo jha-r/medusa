@@ -1,8 +1,9 @@
 /**
  * @oas [post] /store/orders/{id}/transfer/decline
  * operationId: PostOrdersIdTransferDecline
- * summary: Add Decline to Order
- * description: Add a Decline to a order
+ * summary: Decline Order Transfer
+ * x-sidebar-summary: Decline Transfer
+ * description: Decline an order transfer previously requested, typically by the admin user using the [Request Order Transfer Admin API route](https://docs.medusajs.com/api/admin#orders_postordersidtransferrequest).
  * x-authenticated: false
  * parameters:
  *   - name: id
@@ -15,8 +16,8 @@
  *     in: query
  *     description: |-
  *       Comma-separated fields that should be included in the returned data.
- *        * if a field is prefixed with `+` it will be added to the default fields, using `-` will remove it from the default fields.
- *        * without prefix it will replace the entire default fields.
+ *       if a field is prefixed with `+` it will be added to the default fields, using `-` will remove it from the default fields.
+ *       without prefix it will replace the entire default fields.
  *     required: false
  *     schema:
  *       type: string

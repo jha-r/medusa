@@ -20620,8 +20620,9 @@ paths:
   /admin/orders/{id}/transfer:
     post:
       operationId: PostOrdersIdTransfer
-      summary: Add Transfer to Order
-      description: Add a Transfer to a order
+      x-sidebar-summary: Request Transfer
+      summary: Request Order Transfer
+      description: Request an order to be transfered to another customer. The transfer is confirmed by sending a request to the [Accept Order Transfer](https://docs.medusajs.com/api/store#orders_postordersidtransferaccept) Store API route.
       x-authenticated: true
       parameters:
         - name: id
@@ -20634,8 +20635,8 @@ paths:
           in: query
           description: |-
             Comma-separated fields that should be included in the returned data.
-             * if a field is prefixed with `+` it will be added to the default fields, using `-` will remove it from the default fields.
-             * without prefix it will replace the entire default fields.
+            if a field is prefixed with `+` it will be added to the default fields, using `-` will remove it from the default fields.
+            without prefix it will replace the entire default fields.
           required: false
           schema:
             type: string
@@ -20660,7 +20661,7 @@ paths:
             -H 'Authorization: Bearer {access_token}' \
             -H 'Content-Type: application/json' \
             --data-raw '{
-              "customer_id": "{value}"
+              "customer_id": "cus_123"
             }'
       tags:
         - Orders
@@ -20687,8 +20688,9 @@ paths:
   /admin/orders/{id}/transfer/cancel:
     post:
       operationId: PostOrdersIdTransferCancel
-      summary: Add Cancel to Order
-      description: Add a Cancel to a order
+      summary: Cancel Transfer Request
+      x-sidebar-summary: Cancel Transfer
+      description: Cancel a request to transfer an order to another customer.
       x-authenticated: true
       parameters:
         - name: id
@@ -20701,8 +20703,8 @@ paths:
           in: query
           description: |-
             Comma-separated fields that should be included in the returned data.
-             * if a field is prefixed with `+` it will be added to the default fields, using `-` will remove it from the default fields.
-             * without prefix it will replace the entire default fields.
+            if a field is prefixed with `+` it will be added to the default fields, using `-` will remove it from the default fields.
+            without prefix it will replace the entire default fields.
           required: false
           schema:
             type: string
@@ -20714,11 +20716,6 @@ paths:
         - api_token: []
         - cookie_auth: []
         - jwt_token: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AdminCancelOrderTransferRequest'
       x-codeSamples:
         - lang: Shell
           label: cURL
@@ -43934,7 +43931,7 @@ components:
         id:
           type: string
           title: id
-          description: The update's ID.
+          description: The product's ID.
       required:
         - id
     AdminBatchUpdateProductVariant:
@@ -44126,10 +44123,6 @@ components:
       properties:
         campaign:
           $ref: '#/components/schemas/AdminCampaign'
-    AdminCancelOrderTransferRequest:
-      type: object
-      description: SUMMARY
-      x-schemaName: AdminCancelOrderTransferRequest
     AdminClaim:
       type: object
       description: The claim's details.
@@ -51230,7 +51223,7 @@ components:
         rank:
           type: number
           title: rank
-          description: The image's rank.
+          description: The image's rank among sibling images.
       required:
         - id
         - url
@@ -53605,7 +53598,7 @@ components:
           $ref: '#/components/schemas/AdminTaxRegion'
     AdminTransferOrder:
       type: object
-      description: SUMMARY
+      description: The details of the request to transfer the order.
       x-schemaName: AdminTransferOrder
       required:
         - customer_id
@@ -53613,15 +53606,15 @@ components:
         customer_id:
           type: string
           title: customer_id
-          description: The order's customer id.
+          description: The ID of the customer to transfer the order to.
         description:
           type: string
           title: description
-          description: The order's description.
+          description: The description of the order transfer, which can be shown to the customer receiving the order transfer request.
         internal_note:
           type: string
           title: internal_note
-          description: The order's internal note.
+          description: An internal note viewable only by admin users.
     AdminUpdateApiKey:
       type: object
       description: The details to update in an API key.
@@ -54811,9 +54804,63 @@ components:
         calculated_price:
           type: object
           description: The calculated price's details.
+          properties:
+            id:
+              type: string
+              title: id
+              description: The ID of the price.
+            price_list_id:
+              type: string
+              title: price_list_id
+              description: The ID of the associated price list.
+            price_list_type:
+              type: string
+              title: price_list_type
+              description: The price list's type. For example, sale.
+            min_quantity:
+              type: number
+              title: min_quantity
+              description: The minimum quantity required in the cart for this price to apply.
+            max_quantity:
+              type: number
+              title: max_quantity
+              description: The maximum quantity allowed in the cart for this price to apply.
+          required:
+            - id
+            - price_list_id
+            - price_list_type
+            - min_quantity
+            - max_quantity
         original_price:
           type: object
           description: The original price's details.
+          properties:
+            id:
+              type: string
+              title: id
+              description: The ID of the price.
+            price_list_id:
+              type: string
+              title: price_list_id
+              description: The ID of the associated price list.
+            price_list_type:
+              type: string
+              title: price_list_type
+              description: The price list's type. For example, sale.
+            min_quantity:
+              type: number
+              title: min_quantity
+              description: The minimum quantity required in the cart for this price to apply.
+            max_quantity:
+              type: number
+              title: max_quantity
+              description: The maximum quantity allowed in the cart for this price to apply.
+          required:
+            - id
+            - price_list_id
+            - price_list_type
+            - min_quantity
+            - max_quantity
     BaseCapture:
       type: object
       description: The details of a captured payment.
@@ -55218,7 +55265,7 @@ components:
           description: The item's discount tax total.
     BaseCartShippingMethod:
       type: object
-      description: The tax line's shipping method.
+      description: A cart's shipping method.
       x-schemaName: BaseCartShippingMethod
       required:
         - id
@@ -55244,7 +55291,7 @@ components:
         cart_id:
           type: string
           title: cart_id
-          description: The shipping method's cart id.
+          description: The ID of the cart this shipping method belongs to.
         name:
           type: string
           title: name
@@ -55260,17 +55307,19 @@ components:
         is_tax_inclusive:
           type: boolean
           title: is_tax_inclusive
-          description: The shipping method's is tax inclusive.
+          description: Whether the shipping method's amount is tax inclusive.
         shipping_option_id:
           type: string
           title: shipping_option_id
-          description: The shipping method's shipping option id.
+          description: The ID of the shipping option this method was created from.
         data:
           type: object
-          description: The shipping method's data.
+          description: The shipping method's data, useful for fulfillment handling by third-party services.
+          externalDocs:
+            url: https://docs.medusajs.com/resources/commerce-modules/cart/concepts#data-property
         metadata:
           type: object
-          description: The shipping method's metadata.
+          description: The shipping method's metadata, can hold custom key-value pairs.
         tax_lines:
           type: array
           description: The shipping method's tax lines.
@@ -55278,51 +55327,51 @@ components:
             $ref: '#/components/schemas/BaseShippingMethodTaxLine'
         adjustments:
           type: array
-          description: The shipping method's adjustments.
+          description: The shipping method's adjustments, such as applied promotions.
           items:
             $ref: '#/components/schemas/BaseShippingMethodAdjustment'
         created_at:
           type: string
           format: date-time
           title: created_at
-          description: The shipping method's created at.
+          description: The date the shipping method was created.
         updated_at:
           type: string
           format: date-time
           title: updated_at
-          description: The shipping method's updated at.
+          description: The date the shipping method was updated.
         original_total:
           type: number
           title: original_total
-          description: The shipping method's original total.
+          description: The shipping method's total including taxes, excluding promotions.
         original_subtotal:
           type: number
           title: original_subtotal
-          description: The shipping method's original subtotal.
+          description: The shipping method's total excluding taxes, including promotions.
         original_tax_total:
           type: number
           title: original_tax_total
-          description: The shipping method's original tax total.
+          description: The total taxes applied on the shipping method's amount including promotions.
         total:
           type: number
           title: total
-          description: The shipping method's total.
+          description: The shipping method's total amount including taxes and promotions.
         subtotal:
           type: number
           title: subtotal
-          description: The shipping method's subtotal.
+          description: The shipping method's total amount excluding taxes, including promotions.
         tax_total:
           type: number
           title: tax_total
-          description: The shipping method's tax total.
+          description: The total taxes applied on the shipping method's amount including promotions.
         discount_total:
           type: number
           title: discount_total
-          description: The shipping method's discount total.
+          description: The total amount discounted.
         discount_tax_total:
           type: number
           title: discount_tax_total
-          description: The shipping method's discount tax total.
+          description: The taxes applied on the discounted amount.
     BaseClaimItem:
       type: object
       description: The claim item's details.
@@ -55503,7 +55552,7 @@ components:
           description: Whether the provider is enabled.
     BaseLineItemAdjustment:
       type: object
-      description: The adjustment's adjustments.
+      description: The adjustment's details.
       x-schemaName: BaseLineItemAdjustment
       required:
         - item
@@ -55519,7 +55568,7 @@ components:
         item_id:
           type: string
           title: item_id
-          description: The adjustment's item id.
+          description: The ID of the item this adjustment applies on.
         id:
           type: string
           title: id
@@ -55535,7 +55584,7 @@ components:
         cart_id:
           type: string
           title: cart_id
-          description: The adjustment's cart id.
+          description: The ID of the cart this adjustment belongs to.
         description:
           type: string
           title: description
@@ -55543,24 +55592,24 @@ components:
         promotion_id:
           type: string
           title: promotion_id
-          description: The adjustment's promotion id.
+          description: The ID of the promotion applied by this adjustment.
         provider_id:
           type: string
           title: provider_id
-          description: The adjustment's provider id.
+          description: The adjustment's provider ID.
         created_at:
           type: string
           format: date-time
           title: created_at
-          description: The adjustment's created at.
+          description: The date the adjustment was created.
         updated_at:
           type: string
           format: date-time
           title: updated_at
-          description: The adjustment's updated at.
+          description: The date the adjustment was updated.
     BaseLineItemTaxLine:
       type: object
-      description: The tax line's tax lines.
+      description: The tax line's details
       x-schemaName: BaseLineItemTaxLine
       required:
         - item
@@ -55578,15 +55627,15 @@ components:
         item_id:
           type: string
           title: item_id
-          description: The tax line's item id.
+          description: The ID of the item the tax line applies on.
         total:
           type: number
           title: total
-          description: The tax line's total.
+          description: The item's total, including taxes and promotions.
         subtotal:
           type: number
           title: subtotal
-          description: The tax line's subtotal.
+          description: The item's subtotal excluding taxes, including promotions.
         id:
           type: string
           title: id
@@ -55598,29 +55647,29 @@ components:
         tax_rate_id:
           type: string
           title: tax_rate_id
-          description: The tax line's tax rate id.
+          description: The ID of the associated tax rate.
         code:
           type: string
           title: code
-          description: The tax line's code.
+          description: The code the tax rate is identified by.
         rate:
           type: number
           title: rate
-          description: The tax line's rate.
+          description: The rate to charge.
         provider_id:
           type: string
           title: provider_id
-          description: The tax line's provider id.
+          description: The ID of the tax provider.
         created_at:
           type: string
           format: date-time
           title: created_at
-          description: The tax line's created at.
+          description: The date the tax line was created.
         updated_at:
           type: string
           format: date-time
           title: updated_at
-          description: The tax line's updated at.
+          description: The date the tax line was updated.
     BaseOrder:
       type: object
       description: The order's details.
@@ -57330,7 +57379,7 @@ components:
         rank:
           type: number
           title: rank
-          description: The image's rank.
+          description: The image's rank among its sibling images.
       required:
         - id
         - url
@@ -57677,8 +57726,52 @@ components:
           $ref: '#/components/schemas/RefundReason'
     BaseRegion:
       type: object
-      description: The cart's region.
+      description: The region's details.
       x-schemaName: BaseRegion
+      required:
+        - id
+        - name
+        - currency_code
+      properties:
+        id:
+          type: string
+          title: id
+          description: The region's ID.
+        name:
+          type: string
+          title: name
+          description: The region's name.
+        currency_code:
+          type: string
+          title: currency_code
+          description: The region's currency code.
+        automatic_taxes:
+          type: boolean
+          title: automatic_taxes
+          description: The region's automatic taxes.
+        countries:
+          type: array
+          description: The region's countries.
+          items:
+            $ref: '#/components/schemas/BaseRegionCountry'
+        payment_providers:
+          type: array
+          description: The region's payment providers.
+          items:
+            $ref: '#/components/schemas/AdminPaymentProvider'
+        metadata:
+          type: object
+          description: The region's metadata.
+        created_at:
+          type: string
+          format: date-time
+          title: created_at
+          description: The region's created at.
+        updated_at:
+          type: string
+          format: date-time
+          title: updated_at
+          description: The region's updated at.
     BaseRegionCountry:
       type: object
       description: The country's details.
@@ -57739,7 +57832,7 @@ components:
           example: In
     BaseShippingMethodAdjustment:
       type: object
-      description: The adjustment's adjustments.
+      description: The adjustment's details.
       x-schemaName: BaseShippingMethodAdjustment
       required:
         - shipping_method
@@ -57755,7 +57848,7 @@ components:
         shipping_method_id:
           type: string
           title: shipping_method_id
-          description: The adjustment's shipping method id.
+          description: The ID of the shipping method the adjustment is applied on.
         id:
           type: string
           title: id
@@ -57771,7 +57864,7 @@ components:
         cart_id:
           type: string
           title: cart_id
-          description: The adjustment's cart id.
+          description: The ID of the associated cart.
         description:
           type: string
           title: description
@@ -57779,24 +57872,24 @@ components:
         promotion_id:
           type: string
           title: promotion_id
-          description: The adjustment's promotion id.
+          description: The ID of the promotion applied by this adjustment.
         provider_id:
           type: string
           title: provider_id
-          description: The adjustment's provider id.
+          description: The adjustment's provider ID.
         created_at:
           type: string
           format: date-time
           title: created_at
-          description: The adjustment's created at.
+          description: The date the adjustment was created.
         updated_at:
           type: string
           format: date-time
           title: updated_at
-          description: The adjustment's updated at.
+          description: The date the adjustment was updated.
     BaseShippingMethodTaxLine:
       type: object
-      description: The tax line's tax lines.
+      description: The tax line's details.
       x-schemaName: BaseShippingMethodTaxLine
       required:
         - shipping_method
@@ -57814,15 +57907,15 @@ components:
         shipping_method_id:
           type: string
           title: shipping_method_id
-          description: The tax line's shipping method id.
+          description: The ID of this shipping method the tax line belongs to.
         total:
           type: number
           title: total
-          description: The tax line's total.
+          description: The method's total including taxes and promotions.
         subtotal:
           type: number
           title: subtotal
-          description: The tax line's subtotal.
+          description: The method's total excluding taxes, including promotions.
         id:
           type: string
           title: id
@@ -57834,29 +57927,29 @@ components:
         tax_rate_id:
           type: string
           title: tax_rate_id
-          description: The tax line's tax rate id.
+          description: The ID of the applied tax rate.
         code:
           type: string
           title: code
-          description: The tax line's code.
+          description: The code that the rate is identified by.
         rate:
           type: number
           title: rate
-          description: The tax line's rate.
+          description: The rate to charge.
         provider_id:
           type: string
           title: provider_id
-          description: The tax line's provider id.
+          description: The ID of the tax provider that calculated the taxes.
         created_at:
           type: string
           format: date-time
           title: created_at
-          description: The tax line's created at.
+          description: The date the tax line was created.
         updated_at:
           type: string
           format: date-time
           title: updated_at
-          description: The tax line's updated at.
+          description: The date the tax line was updated.
     CampaignResponse:
       type: object
       description: The campaign's details.
@@ -59115,19 +59208,8 @@ components:
           title: no_notification
           description: Whether to send the customer notifications when the exchange is updated.
         difference_due:
-          oneOf:
-            - type: string
-              title: difference_due
-              description: The exchange's difference due.
-            - type: number
-              title: difference_due
-              description: The exchange's difference due.
-            - type: string
-              title: difference_due
-              description: The exchange's difference due.
-            - type: number
-              title: difference_due
-              description: The exchange's difference due.
+          type: number
+          title: difference_due
           description: The amount to be exchanged or refunded. If the amount is negative, it must be refunded. If positive, additional payment is required from the customer.
         return:
           $ref: '#/components/schemas/Return'
@@ -60010,19 +60092,8 @@ components:
             - received
             - partially_received
         refund_amount:
-          oneOf:
-            - type: string
-              title: refund_amount
-              description: The return order's refund amount.
-            - type: number
-              title: refund_amount
-              description: The return order's refund amount.
-            - type: string
-              title: refund_amount
-              description: The return order's refund amount.
-            - type: number
-              title: refund_amount
-              description: The return order's refund amount.
+          type: number
+          title: refund_amount
           description: The amount refunded by this return.
         order_id:
           type: string
@@ -60122,7 +60193,7 @@ components:
           format: date-time
     StoreAcceptOrderTransfer:
       type: object
-      description: SUMMARY
+      description: The details of accepting the order transfer.
       x-schemaName: StoreAcceptOrderTransfer
       required:
         - token
@@ -60130,7 +60201,7 @@ components:
         token:
           type: string
           title: token
-          description: The order's token.
+          description: The order transfer's token issued when the transfer was requested.
     StoreAddCartLineItem:
       type: object
       description: The details of the line item to add.
@@ -60150,10 +60221,6 @@ components:
         metadata:
           type: object
           description: The item's metadata, can hold custom key-value pairs.
-    StoreCancelOrderTransferRequest:
-      type: object
-      description: SUMMARY
-      x-schemaName: StoreCancelOrderTransferRequest
     StoreCart:
       type: object
       description: The cart's details.
@@ -61597,7 +61664,7 @@ components:
           $ref: '#/components/schemas/StoreCustomer'
     StoreDeclineOrderTransferRequest:
       type: object
-      description: SUMMARY
+      description: The details of declining the order transfer request.
       x-schemaName: StoreDeclineOrderTransferRequest
       required:
         - token
@@ -61605,7 +61672,7 @@ components:
         token:
           type: string
           title: token
-          description: The order's token.
+          description: The order transfer's token issued when the transfer was requested.
     StoreInitializePaymentSession:
       type: object
       description: The payment session's details.
@@ -68216,7 +68283,7 @@ components:
         rank:
           type: number
           title: rank
-          description: The image's rank.
+          description: The image's rank among its sibling images
     StoreProductOption:
       type: object
       description: The product option's details.
@@ -68567,13 +68634,13 @@ components:
           description: The country's display name.
     StoreRequestOrderTransfer:
       type: object
-      description: SUMMARY
+      description: The details of requesting the order transfer.
       x-schemaName: StoreRequestOrderTransfer
       properties:
         description:
           type: string
           title: description
-          description: The order's description.
+          description: The transfer's description, which can be shown to the other customer receiving the request.
     StoreReturn:
       type: object
       description: The return's details.
