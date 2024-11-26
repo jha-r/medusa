@@ -174,6 +174,13 @@ export const RouteMap: RouteObject[] = [
                             "../../routes/product-variants/product-variant-manage-inventory-items"
                           ),
                       },
+                      {
+                        path: "metadata/edit",
+                        lazy: () =>
+                          import(
+                            "../../routes/product-variants/product-variant-metadata"
+                          ),
+                      },
                     ],
                   },
                 ],
