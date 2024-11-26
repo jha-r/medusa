@@ -753,12 +753,6 @@ medusaIntegrationTestRunner({
           storeHeaders
         )
 
-        console.log(
-          [product.id, product2.id, product3.id]
-            .sort((p1, p2) => p2.localeCompare(p1))
-            .map((id) => id)
-        )
-
         expect(response.status).toEqual(200)
         expect(response.data.products).toEqual(
           [product.id, product2.id, product3.id]
