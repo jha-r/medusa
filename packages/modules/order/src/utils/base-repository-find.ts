@@ -118,7 +118,7 @@ export function setFindMethods<T>(klass: Constructor<T>, entity: any) {
 
   klass.prototype.findAndCount = async function findAndCount(
     this: any,
-    findOptions: DAL.FindOptions<T> = { where: {} },
+    findOptions: DAL.FindOptions<T> = { where: {} } as DAL.FindOptions<T>,
     context: Context = {}
   ): Promise<[T[], number]> {
     const manager = this.getActiveManager(context)

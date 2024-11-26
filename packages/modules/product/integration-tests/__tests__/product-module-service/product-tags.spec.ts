@@ -5,6 +5,7 @@ import {
   Modules,
   ProductEvents,
   ProductStatus,
+  toMikroORMEntity,
 } from "@medusajs/framework/utils"
 import { Product, ProductTag } from "@models"
 import {
@@ -35,25 +36,27 @@ moduleIntegrationTestRunner<IProductModuleService>({
 
       beforeEach(async () => {
         const testManager = await MikroOrmWrapper.forkManager()
-        productOne = testManager.create(Product, {
+        productOne = testManager.create(toMikroORMEntity(Product), {
           id: "product-1",
           title: "product 1",
+          handle: "product-1",
           status: ProductStatus.PUBLISHED,
         })
 
-        productTwo = testManager.create(Product, {
+        productTwo = testManager.create(toMikroORMEntity(Product), {
           id: "product-2",
           title: "product 2",
+          handle: "product-2",
           status: ProductStatus.PUBLISHED,
         })
 
-        tagOne = testManager.create(ProductTag, {
+        tagOne = testManager.create(toMikroORMEntity(ProductTag), {
           id: "tag-1",
           value: "tag 1",
           products: [productOne],
         })
 
-        tagTwo = testManager.create(ProductTag, {
+        tagTwo = testManager.create(toMikroORMEntity(ProductTag), {
           id: "tag-2",
           value: "tag",
           products: [productTwo],

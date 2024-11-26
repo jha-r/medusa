@@ -120,9 +120,9 @@ class Entity3 {
   }
 }
 
-const Entity1Repository = mikroOrmBaseRepositoryFactory<Entity1>(Entity1)
-const Entity2Repository = mikroOrmBaseRepositoryFactory<Entity2>(Entity2)
-const Entity3Repository = mikroOrmBaseRepositoryFactory<Entity3>(Entity3)
+const Entity1Repository = mikroOrmBaseRepositoryFactory(Entity1)
+const Entity2Repository = mikroOrmBaseRepositoryFactory(Entity2)
+const Entity3Repository = mikroOrmBaseRepositoryFactory(Entity3)
 
 describe("mikroOrmRepository", () => {
   let orm!: MikroORM
