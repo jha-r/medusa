@@ -282,7 +282,7 @@ describe("joiner-config-builder", () => {
       })
     })
 
-    it.only("should return a full joiner configuration with custom aliases overriding defaults", () => {
+    it("should return a full joiner configuration with custom aliases overriding defaults", () => {
       const joinerConfig = defineJoinerConfig(Modules.FULFILLMENT, {
         models: [FulfillmentSet],
         alias: [

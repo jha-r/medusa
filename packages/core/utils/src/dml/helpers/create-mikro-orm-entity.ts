@@ -1,4 +1,5 @@
 import type {
+  Constructor,
   DMLSchema,
   EntityConstructor,
   IDmlEntity,
@@ -6,10 +7,11 @@ import type {
   PropertyType,
 } from "@medusajs/types"
 import { Entity, Filter } from "@mikro-orm/core"
-import { mikroOrmSoftDeletableFilterOptions } from "../../dal"
+
 import { DmlEntity } from "../entity"
-import { DuplicateIdPropertyError } from "../errors"
 import { IdProperty } from "../properties/id"
+import { DuplicateIdPropertyError } from "../errors"
+import { mikroOrmSoftDeletableFilterOptions } from "../../dal"
 import { applySearchable } from "./entity-builder/apply-searchable"
 import { defineProperty } from "./entity-builder/define-property"
 import { defineRelationship } from "./entity-builder/define-relationship"
@@ -21,7 +23,7 @@ import { applyEntityIndexes, applyIndexes } from "./mikro-orm/apply-indexes"
  * value is a function that can be used to convert DML entities
  * to Mikro ORM entities.
  */
-export function createMikrORMEntity() {
+function createMikrORMEntity() {
   /**
    * The following property is used to track many to many relationship
    * between two entities. It is needed because we have to mark one
@@ -35,20 +37,21 @@ export function createMikrORMEntity() {
    * - [user.teams]: true // the teams relationship on user is an owner
    * - [team.users] // cannot be an owner
    */
-  // TODO: if we use the util toMikroOrmEntities then a new builder will be used each time, lets think about this. Currently if means that with many to many we need to use the same builder
-  const MANY_TO_MANY_TRACKED_RELATIONS: Record<string, boolean> = {}
+  let MANY_TO_MANY_TRACKED_RELATIONS: Record<string, boolean> = {}
+  let ENTITIES: Record<string, Constructor<any>> = {}
 
   /**
    * A helper function to define a Mikro ORM entity from a
    * DML entity.
    */
-  return function createEntity<T extends DmlEntity<any, any>>(
-    entity: T
-  ): Infer<T> {
+  function createEntity<T extends DmlEntity<any, any>>(entity: T): Infer<T> {
     class MikroORMEntity {}
 
     const { schema, cascades, indexes: entityIndexes = [] } = entity.parse()
     const { modelName, tableName } = parseEntityName(entity)
+    if (ENTITIES[modelName]) {
+      return ENTITIES[modelName] as Infer<T>
+    }
 
     /**
      * Assigning name to the class constructor, so that it matches
@@ -80,11 +83,14 @@ export function createMikrORMEntity() {
           hasIdAlreadyDefined = true
         }
 
-        defineProperty(MikroORMEntity, name, property as PropertyType<any>)
+        defineProperty(MikroORMEntity, property as PropertyType<any>, {
+          propertyName: name,
+          tableName,
+        })
         applyIndexes(MikroORMEntity, tableName, field)
         applySearchable(MikroORMEntity, field)
       } else {
-        defineRelationship(MikroORMEntity, field, cascades, context)
+        defineRelationship(MikroORMEntity, entity, field, cascades, context)
         applySearchable(MikroORMEntity, field)
       }
     })
@@ -94,11 +100,30 @@ export function createMikrORMEntity() {
     /**
      * Converting class to a MikroORM entity
      */
-    return Entity({ tableName })(
+    const RegisteredEntity = Entity({ tableName })(
       Filter(mikroOrmSoftDeletableFilterOptions)(MikroORMEntity)
     ) as Infer<T>
+
+    ENTITIES[modelName] = RegisteredEntity
+    return RegisteredEntity
   }
+
+  /**
+   * Clear the internally tracked entities and relationships
+   */
+  createEntity.clear = function () {
+    MANY_TO_MANY_TRACKED_RELATIONS = {}
+    ENTITIES = {}
+  }
+  return createEntity
 }
+
+/**
+ * Helper function to convert DML entities to MikroORM entity. Use
+ * "toMikroORMEntity" if you are ensure the input is a DML entity
+ * or not.
+ */
+export const mikroORMEntityBuilder = createMikrORMEntity()
 
 /**
  * Takes a DML entity and returns a Mikro ORM entity otherwise
@@ -111,7 +136,7 @@ export const toMikroORMEntity = <T>(
   let mikroOrmEntity: T | EntityConstructor<any> = entity
 
   if (DmlEntity.isDmlEntity(entity)) {
-    mikroOrmEntity = createMikrORMEntity()(entity)
+    mikroOrmEntity = mikroORMEntityBuilder(entity)
   }
 
   return mikroOrmEntity as T extends IDmlEntity<any, any> ? Infer<T> : T
@@ -123,11 +148,9 @@ export const toMikroORMEntity = <T>(
  * @param entities
  */
 export const toMikroOrmEntities = function <T extends any[]>(entities: T) {
-  const entityBuilder = createMikrORMEntity()
-
   return entities.map((entity) => {
     if (DmlEntity.isDmlEntity(entity)) {
-      return entityBuilder(entity)
+      return mikroORMEntityBuilder(entity)
     }
 
     return entity
