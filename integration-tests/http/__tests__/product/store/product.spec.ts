@@ -753,6 +753,12 @@ medusaIntegrationTestRunner({
           storeHeaders
         )
 
+        console.log(
+          [product.id, product2.id, product3.id]
+            .sort((p1, p2) => p2.localeCompare(p1))
+            .map((id) => id)
+        )
+
         expect(response.status).toEqual(200)
         expect(response.data.products).toEqual(
           [product.id, product2.id, product3.id]
@@ -1436,7 +1442,7 @@ medusaIntegrationTestRunner({
             },
             {
               url: "image-two",
-            }
+            },
           ],
         })
 
@@ -1487,7 +1493,10 @@ medusaIntegrationTestRunner({
       })
 
       it("should retrieve product with images ordered by rank", async () => {
-        const response = await api.get(`/store/products/${product.id}`, storeHeaders)
+        const response = await api.get(
+          `/store/products/${product.id}`,
+          storeHeaders
+        )
 
         expect(response.data.product.images).toEqual(
           expect.arrayContaining([
