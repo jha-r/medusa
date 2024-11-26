@@ -1,5 +1,5 @@
 export const generatedEditDates = {
-  "app/learn/basics/scheduled-jobs/page.mdx": "2024-09-30T08:43:53.132Z",
+  "app/learn/basics/scheduled-jobs/page.mdx": "2024-11-26T11:50:10.302Z",
   "app/learn/basics/workflows/page.mdx": "2024-09-30T08:43:53.132Z",
   "app/learn/deployment/page.mdx": "2024-11-25T14:32:44.949Z",
   "app/learn/page.mdx": "2024-09-03T07:09:09.034Z",
