@@ -56,6 +56,14 @@ export type ManyToManyOptions = RelationshipOptions &
          * @ignore
          */
         pivotEntity?: never
+        /**
+         * The column name in the pivot table that for the current entity
+         */
+        joinColumn?: string
+        /**
+         * The column name in the pivot table for the opposite entity
+         */
+        inverseJoinColumn?: string
       }
     | {
         /**

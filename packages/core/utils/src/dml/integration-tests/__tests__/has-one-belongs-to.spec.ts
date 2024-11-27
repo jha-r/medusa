@@ -1,6 +1,9 @@
 import { MetadataStorage, MikroORM } from "@mikro-orm/core"
 import { model } from "../../entity-builder"
-import { toMikroOrmEntities } from "../../helpers/create-mikro-orm-entity"
+import {
+  mikroORMEntityBuilder,
+  toMikroOrmEntities,
+} from "../../helpers/create-mikro-orm-entity"
 import { createDatabase, dropDatabase } from "pg-god"
 import { CustomTsMigrationGenerator, mikroOrmSerializer } from "../../../dal"
 import { EntityConstructor } from "@medusajs/types"
@@ -24,6 +27,7 @@ describe("hasOne - belongTo", () => {
 
   beforeEach(async () => {
     MetadataStorage.clear()
+    mikroORMEntityBuilder.clear()
 
     const team = model.define("team", {
       id: model.id().primaryKey(),

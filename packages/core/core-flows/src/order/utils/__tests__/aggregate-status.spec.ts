@@ -103,6 +103,16 @@ describe("Aggregate Order Status", () => {
     expect(
       getLastPaymentStatus({
         payment_collections: [
+          { status: "authorized", captured_amount: 0, amount: 0 },
+          { status: "authorized", captured_amount: 12, amount: 12 },
+          { status: "canceled" },
+        ],
+      } as any)
+    ).toEqual("captured")
+
+    expect(
+      getLastPaymentStatus({
+        payment_collections: [
           { status: "authorized", captured_amount: 10, amount: 10 },
           { status: "authorized", captured_amount: 5, amount: 10 },
         ],
