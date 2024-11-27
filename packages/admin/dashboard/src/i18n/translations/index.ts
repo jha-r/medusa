@@ -6,6 +6,7 @@ import pl from "./pl.json"
 import ptBR from "./ptBR.json"
 import tr from "./tr.json"
 import th from "./th.json"
+import ur from "./ur.json"
 
 export default {
   de: {
@@ -32,4 +33,7 @@ export default {
   tr: {
     translation: tr,
   },
+  ur: {
+    translation: ur,
+  }
 }
