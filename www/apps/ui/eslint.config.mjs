@@ -24,6 +24,11 @@ export default [
       "**/.eslintrc.js",
       "**/dist",
       "src/examples",
+      "**/next.config.js",
+      "**/spec",
+      "**/node_modules",
+      "**/public",
+      "**/.eslintrc.js"
     ],
   },
   ...compat.extends(
@@ -32,11 +37,6 @@ export default [
     "plugin:react/jsx-runtime",
     "plugin:react-hooks/recommended",
     "plugin:@next/next/recommended",
-    "**/next.config.js",
-    "**/spec",
-    "**/node_modules",
-    "**/public",
-    "**/.eslintrc.js"
   ),
   {
     languageOptions: {
