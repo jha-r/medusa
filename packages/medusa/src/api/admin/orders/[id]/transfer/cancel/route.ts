@@ -4,11 +4,10 @@ import {
   MedusaResponse,
 } from "@medusajs/framework/http"
 import { AdminOrder, HttpTypes } from "@medusajs/framework/types"
-import { AdminCancelOrderTransferRequestType } from "../../../validators"
 import { ContainerRegistrationKeys } from "@medusajs/framework/utils"
 
 export const POST = async (
-  req: AuthenticatedMedusaRequest<AdminCancelOrderTransferRequestType>,
+  req: AuthenticatedMedusaRequest,
   res: MedusaResponse<HttpTypes.AdminOrderResponse>
 ) => {
   const query = req.scope.resolve(ContainerRegistrationKeys.QUERY)
