@@ -43,11 +43,11 @@ export class EmailPassAuthService extends AbstractAuthModuleProvider {
   }
 
   async update(
-    data: { password: string; entity_id: string },
+    data: { password: string; email: string },
     authIdentityService: AuthIdentityProviderService
   ) {
-    const { password, entity_id } = data ?? {}
-
+    const { password, email } = data ?? {}
+    const entity_id = email
     if (!entity_id) {
       return {
         success: false,
