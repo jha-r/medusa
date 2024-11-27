@@ -30,23 +30,30 @@ describe("readDirRecursive", () => {
 
     const result = await readDirRecursive("/root")
 
+    const paths = result.map((r) => r.path)
+
+    expect(paths).toEqual([
+      "/root",
+      "/root",
+      "/root/subdir",
+      "/root/subdir",
+      "/root/subdir/nested",
+    ])
+
     expect(result).toEqual([
-      { name: "file1.txt", isDirectory: expect.any(Function), path: "/root" },
-      { name: "subdir", isDirectory: expect.any(Function), path: "/root" },
+      { name: "file1.txt", isDirectory: expect.any(Function) },
+      { name: "subdir", isDirectory: expect.any(Function) },
       {
         name: "file2.txt",
         isDirectory: expect.any(Function),
-        path: "/root/subdir",
       },
       {
         name: "nested",
         isDirectory: expect.any(Function),
-        path: "/root/subdir",
       },
       {
         name: "file3.txt",
         isDirectory: expect.any(Function),
-        path: "/root/subdir/nested",
       },
     ])
 

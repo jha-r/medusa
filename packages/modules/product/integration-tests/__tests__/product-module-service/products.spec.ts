@@ -12,7 +12,7 @@ import {
   ProductStatus,
 } from "@medusajs/framework/utils"
 import {
-  Image,
+  ProductImage,
   Product,
   ProductCategory,
   ProductCollection,
@@ -1345,17 +1345,17 @@ moduleIntegrationTestRunner<IProductModuleService>({
           const manager = MikroOrmWrapper.forkManager()
 
           const images = [
-            manager.create(Image, {
+            manager.create(ProductImage, {
               product_id: product.id,
               url: "image-one",
               rank: 1,
             }),
-            manager.create(Image, {
+            manager.create(ProductImage, {
               product_id: product.id,
               url: "image-two",
               rank: 0,
             }),
-            manager.create(Image, {
+            manager.create(ProductImage, {
               product_id: product.id,
               url: "image-three",
               rank: 2,

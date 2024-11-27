@@ -1,5 +1,14 @@
 # @medusajs/utils
 
+## 2.0.7
+
+### Patch Changes
+
+- [#10318](https://github.com/medusajs/medusa/pull/10318) [`e9003c3124f284eae7e1457101bf10c1beccbac1`](https://github.com/medusajs/medusa/commit/e9003c3124f284eae7e1457101bf10c1beccbac1) Thanks [@carlos-r-l-rodrigues](https://github.com/carlos-r-l-rodrigues)! - fix(utils): set readonly property on recursive dir read
+
+- Updated dependencies []:
+  - @medusajs/types@2.0.7
+
 ## 2.0.6
 
 ### Patch Changes

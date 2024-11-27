@@ -19,7 +19,16 @@ const compat = new FlatCompat({
 export default [
   prettier,
   {
-    ignores: ["**/eslint-config-docs", "**/.eslintrc.js", "**/dist"],
+    ignores: [
+      "**/eslint-config-docs",
+      "**/.eslintrc.js",
+      "**/dist",
+      "**/next.config.js",
+      "**/spec",
+      "**/node_modules",
+      "**/public",
+      "**/.eslintrc.js",
+    ],
   },
   ...compat.extends(
     "eslint:recommended",
@@ -171,13 +180,6 @@ export default [
         rootDir: ".",
       },
     },
-    ignores: [
-      "**/next.config.js",
-      "**/spec",
-      "**/node_modules",
-      "**/public",
-      "**/.eslintrc.js",
-    ],
 
     rules: {
       "react/react-in-jsx-scope": "off",

@@ -5,7 +5,7 @@ import {
 } from "@medusajs/framework/utils"
 import { SqlEntityManager } from "@mikro-orm/postgresql"
 import {
-  Image,
+  ProductImage,
   Product,
   ProductCategory,
   ProductCollection,
@@ -133,7 +133,7 @@ export async function createImages(
   imagesData: string[]
 ) {
   const images: any[] = imagesData.map((img) => {
-    return manager.create(toMikroORMEntity(Image), { url: img })
+    return manager.create(toMikroORMEntity(ProductImage), { url: img })
   })
 
   await manager.persistAndFlush(images)

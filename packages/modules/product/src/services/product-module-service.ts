@@ -13,7 +13,7 @@ import {
   Product,
   ProductCategory,
   ProductCollection,
-  Image as ProductImage,
+  ProductImage,
   ProductOption,
   ProductOptionValue,
   ProductTag,
