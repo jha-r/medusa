@@ -893,10 +893,10 @@ import {
   LinkDefinition,
   InferTypeOf,
 } from "@medusajs/framework/types"
-import { Modules } from "@medusajs/framework/utils"
+import { Modules, promiseAll } from "@medusajs/framework/utils"
 import { 
-  createOrdersWorkflow,
   cancelOrderWorkflow,
+  createOrderWorkflow
 } from "@medusajs/medusa/core-flows"
 import MarketplaceModuleService from "../../../../modules/marketplace/service"
 import { MARKETPLACE_MODULE } from "../../../../modules/marketplace"
@@ -1009,12 +1009,12 @@ export const vendorOrder3Highlights = [
 
 ```ts title="src/workflows/marketplace/create-vendor-orders/steps/create-vendor-orders.ts" highlights={vendorOrder3Highlights}
 try {
-  await Promise.all(
+  await promiseAll(
     vendorIds.map(async (vendorId) => {
       const items = vendorsItems[vendorId]
-      const vendor = vendors.find((v) => v.id === vendorId)!
+      const vendor = vendors.find(v => v.id === vendorId)!
 
-      const { result: childOrder } = await createOrdersWorkflow(
+      const {result: childOrder} = await createOrderWorkflow(
         container
       )
       .run({
@@ -1027,30 +1027,27 @@ try {
       
       linkDefs.push({
         [MARKETPLACE_MODULE]: {
-          vendor_id: vendor.id,
+          vendor_id: vendor.id
         },
         [Modules.ORDER]: {
-          order_id: childOrder.id,
-        },
+          order_id: childOrder.id
+        }
       })
     })
   )
 } catch (e) {
-  await Promise.all(createdOrders.map((createdOrder) => {
-    return cancelOrderWorkflow(container).run({
-      input: {
-        order_id: createdOrder.id,
-      },
-      context,
-      container,
-    })
-  }))
-
-  throw e
+  return StepResponse.permanentFailure(
+    `An error occured while creating vendor orders: ${e}`,
+    {
+      created_orders: createdOrders
+    }
+  )
 }
 ```
 
 In this snippet, you create multiple child orders for each vendor and link the orders to the vendors.
+
+You use the `promiseAll` utility imported from `@medusajs/framework/utils` that loops over an array of promises and ensures that all transactions within these promises are rolled back in case an error occurs. You also wrap `promiseAll` in a try-catch block, and in the catch block you invoke and return `StepResponse.permanentFailure` which indicates that the step has failed but still invokes the compensation function that you'll implement in a bit. The first parameter of `permanentFailure` is the error message, and the second is the data to pass to the compensation function.
 
 If an error occurs, the created orders in the `createdOrders` array are canceled using Medusa's `cancelOrderWorkflow` from the `@medusajs/medusa/core-flows` package.
 
@@ -1165,7 +1162,7 @@ const createVendorOrdersWorkflow = createWorkflow(
   (input: WorkflowInput) => {
     const { data: carts } = useQueryGraphStep({
       entity: "cart",
-      fields: ["items.*"],
+      fields: ["id", "items.*"],
       filters: { id: input.cart_id },
       options: {
         throwIfKeyNotFound: true,
@@ -1179,7 +1176,7 @@ const createVendorOrdersWorkflow = createWorkflow(
     })
 
     const { vendorsItems } = groupVendorItemsStep({
-      cart: carts[0].id,
+      cart: carts[0]
     })
     
     const order = getOrderDetailWorkflow.runAsStep({

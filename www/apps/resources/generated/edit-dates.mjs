@@ -130,7 +130,7 @@ export const generatedEditDates = {
   "app/recipes/digital-products/page.mdx": "2024-10-03T13:07:44.147Z",
   "app/recipes/ecommerce/page.mdx": "2024-10-22T11:01:01.218Z",
   "app/recipes/integrate-ecommerce-stack/page.mdx": "2024-10-16T08:52:16.760Z",
-  "app/recipes/marketplace/examples/vendors/page.mdx": "2024-10-16T08:52:24.906Z",
+  "app/recipes/marketplace/examples/vendors/page.mdx": "2024-11-27T10:30:50.653Z",
   "app/recipes/marketplace/page.mdx": "2024-10-03T13:07:44.153Z",
   "app/recipes/multi-region-store/page.mdx": "2024-10-03T13:07:13.813Z",
   "app/recipes/omnichannel/page.mdx": "2024-10-03T13:07:14.384Z",
@@ -172,7 +172,7 @@ export const generatedEditDates = {
   "app/storefront-development/customers/retrieve/page.mdx": "2024-09-11T09:55:40.516Z",
   "app/storefront-development/customers/page.mdx": "2024-06-13T12:21:54+03:00",
   "app/storefront-development/products/categories/list/page.mdx": "2024-09-11T10:01:50.873Z",
-  "app/storefront-development/products/categories/nested-categories/page.mdx": "2024-09-11T10:02:28.405Z",
+  "app/storefront-development/products/categories/nested-categories/page.mdx": "2024-11-27T12:00:57.628Z",
   "app/storefront-development/products/categories/products/page.mdx": "2024-09-11T10:08:05.194Z",
   "app/storefront-development/products/categories/retrieve/page.mdx": "2024-09-11T10:04:38.752Z",
   "app/storefront-development/products/categories/page.mdx": "2024-06-11T19:55:56+02:00",
@@ -2194,7 +2194,7 @@ export const generatedEditDates = {
   "app/admin-components/layouts/single-column/page.mdx": "2024-10-07T11:16:06.435Z",
   "app/admin-components/layouts/two-column/page.mdx": "2024-10-07T11:16:10.092Z",
   "app/admin-components/components/forms/page.mdx": "2024-10-09T12:48:04.229Z",
-  "app/commerce-modules/auth/reset-password/page.mdx": "2024-09-25T09:36:26.592Z",
+  "app/commerce-modules/auth/reset-password/page.mdx": "2024-11-27T13:33:55.940Z",
   "app/storefront-development/customers/reset-password/page.mdx": "2024-09-25T10:21:46.647Z",
   "app/commerce-modules/api-key/links-to-other-modules/page.mdx": "2024-10-08T08:05:36.596Z",
   "app/commerce-modules/cart/extend/page.mdx": "2024-10-08T11:22:22.523Z",
@@ -3245,7 +3245,7 @@ export const generatedEditDates = {
   "references/types/HttpTypes/interfaces/types.HttpTypes.AdminBatchProductVariantRequest/page.mdx": "2024-11-25T17:49:26.851Z",
   "references/types/WorkflowTypes/ProductWorkflow/interfaces/types.WorkflowTypes.ProductWorkflow.ExportProductsDTO/page.mdx": "2024-11-12T09:36:24.232Z",
   "app/contribution-guidelines/admin-translations/page.mdx": "2024-11-14T08:54:15.369Z",
-  "app/integrations/guides/sanity/page.mdx": "2024-11-19T10:07:24.519Z",
+  "app/integrations/guides/sanity/page.mdx": "2024-11-27T10:10:12.100Z",
   "references/api_key/types/api_key.FindConfigOrder/page.mdx": "2024-11-25T17:49:28.715Z",
   "references/auth/types/auth.FindConfigOrder/page.mdx": "2024-11-25T17:49:28.887Z",
   "references/cart/types/cart.FindConfigOrder/page.mdx": "2024-11-25T17:49:29.455Z",
@@ -3441,5 +3441,6 @@ export const generatedEditDates = {
   "references/types/DAL/types/types.DAL.FilterQuery/page.mdx": "2024-11-27T16:33:39.147Z",
   "references/types/DmlTypes/types/types.DmlTypes.InferForeignKeys/page.mdx": "2024-11-27T16:33:39.170Z",
   "references/types/DmlTypes/types/types.DmlTypes.InferSchemaFields/page.mdx": "2024-11-27T16:33:39.173Z",
-  "references/types/interfaces/types.BaseRepositoryService/page.mdx": "2024-11-27T16:33:39.153Z"
+  "references/types/interfaces/types.BaseRepositoryService/page.mdx": "2024-11-27T16:33:39.153Z",
+  "app/events-reference/page.mdx": "2024-11-27T13:31:07.385Z"
 }
