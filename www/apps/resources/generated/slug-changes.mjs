@@ -6085,49 +6085,49 @@ export const slugChanges = [
     "filePath": "/www/apps/resources/references/product/interfaces/product.IProductModuleService/page.mdx"
   },
   {
-    "origSlug": "/references/product_models/classes/product_models.Image",
+    "origSlug": "/references/product_models/variables/product_models.Image",
     "newSlug": "/references/product/models/Image",
-    "filePath": "/www/apps/resources/references/product_models/classes/product_models.Image/page.mdx"
+    "filePath": "/www/apps/resources/references/product_models/variables/product_models.Image/page.mdx"
   },
   {
-    "origSlug": "/references/product_models/classes/product_models.Product",
+    "origSlug": "/references/product_models/variables/product_models.Product",
     "newSlug": "/references/product/models/Product",
-    "filePath": "/www/apps/resources/references/product_models/classes/product_models.Product/page.mdx"
+    "filePath": "/www/apps/resources/references/product_models/variables/product_models.Product/page.mdx"
   },
   {
-    "origSlug": "/references/product_models/classes/product_models.ProductCategory",
+    "origSlug": "/references/product_models/variables/product_models.ProductCategory",
     "newSlug": "/references/product/models/ProductCategory",
-    "filePath": "/www/apps/resources/references/product_models/classes/product_models.ProductCategory/page.mdx"
+    "filePath": "/www/apps/resources/references/product_models/variables/product_models.ProductCategory/page.mdx"
   },
   {
-    "origSlug": "/references/product_models/classes/product_models.ProductCollection",
+    "origSlug": "/references/product_models/variables/product_models.ProductCollection",
     "newSlug": "/references/product/models/ProductCollection",
-    "filePath": "/www/apps/resources/references/product_models/classes/product_models.ProductCollection/page.mdx"
+    "filePath": "/www/apps/resources/references/product_models/variables/product_models.ProductCollection/page.mdx"
   },
   {
-    "origSlug": "/references/product_models/classes/product_models.ProductOption",
+    "origSlug": "/references/product_models/variables/product_models.ProductOption",
     "newSlug": "/references/product/models/ProductOption",
-    "filePath": "/www/apps/resources/references/product_models/classes/product_models.ProductOption/page.mdx"
+    "filePath": "/www/apps/resources/references/product_models/variables/product_models.ProductOption/page.mdx"
   },
   {
-    "origSlug": "/references/product_models/classes/product_models.ProductOptionValue",
+    "origSlug": "/references/product_models/variables/product_models.ProductOptionValue",
     "newSlug": "/references/product/models/ProductOptionValue",
-    "filePath": "/www/apps/resources/references/product_models/classes/product_models.ProductOptionValue/page.mdx"
+    "filePath": "/www/apps/resources/references/product_models/variables/product_models.ProductOptionValue/page.mdx"
   },
   {
-    "origSlug": "/references/product_models/classes/product_models.ProductTag",
+    "origSlug": "/references/product_models/variables/product_models.ProductTag",
     "newSlug": "/references/product/models/ProductTag",
-    "filePath": "/www/apps/resources/references/product_models/classes/product_models.ProductTag/page.mdx"
+    "filePath": "/www/apps/resources/references/product_models/variables/product_models.ProductTag/page.mdx"
   },
   {
-    "origSlug": "/references/product_models/classes/product_models.ProductType",
+    "origSlug": "/references/product_models/variables/product_models.ProductType",
     "newSlug": "/references/product/models/ProductType",
-    "filePath": "/www/apps/resources/references/product_models/classes/product_models.ProductType/page.mdx"
+    "filePath": "/www/apps/resources/references/product_models/variables/product_models.ProductType/page.mdx"
   },
   {
-    "origSlug": "/references/product_models/classes/product_models.ProductVariant",
+    "origSlug": "/references/product_models/variables/product_models.ProductVariant",
     "newSlug": "/references/product/models/ProductVariant",
-    "filePath": "/www/apps/resources/references/product_models/classes/product_models.ProductVariant/page.mdx"
+    "filePath": "/www/apps/resources/references/product_models/variables/product_models.ProductVariant/page.mdx"
   },
   {
     "origSlug": "/references/promotion/IPromotionModuleService/methods/promotion.IPromotionModuleService.addPromotionBuyRules",
