@@ -1,33 +1,33 @@
 {
-	"id": 5259,
+	"id": 5309,
 	"name": "inventory-next-models",
 	"variant": "project",
 	"kind": 1,
 	"flags": {},
 	"children": [
 		{
-			"id": 5282,
+			"id": 5332,
 			"name": "InventoryItem",
 			"variant": "declaration",
 			"kind": 128,
 			"flags": {},
 			"children": [
 				{
-					"id": 5283,
+					"id": 5333,
 					"name": "constructor",
 					"variant": "declaration",
 					"kind": 512,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 5284,
+							"id": 5334,
 							"name": "new InventoryItem",
 							"variant": "signature",
 							"kind": 16384,
 							"flags": {},
 							"type": {
 								"type": "reference",
-								"target": 5282,
+								"target": 5332,
 								"name": "InventoryItem",
 								"package": "@medusajs/inventory"
 							}
@@ -35,7 +35,7 @@
 					]
 				},
 				{
-					"id": 5311,
+					"id": 5361,
 					"name": "[OptionalProps]",
 					"variant": "declaration",
 					"kind": 1024,
@@ -51,7 +51,7 @@
 					}
 				},
 				{
-					"id": 5285,
+					"id": 5335,
 					"name": "id",
 					"variant": "declaration",
 					"kind": 1024,
@@ -62,7 +62,7 @@
 					}
 				},
 				{
-					"id": 5286,
+					"id": 5336,
 					"name": "created_at",
 					"variant": "declaration",
 					"kind": 1024,
@@ -78,7 +78,7 @@
 					}
 				},
 				{
-					"id": 5287,
+					"id": 5337,
 					"name": "updated_at",
 					"variant": "declaration",
 					"kind": 1024,
@@ -94,7 +94,7 @@
 					}
 				},
 				{
-					"id": 5288,
+					"id": 5338,
 					"name": "deleted_at",
 					"variant": "declaration",
 					"kind": 1024,
@@ -120,7 +120,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 5289,
+					"id": 5339,
 					"name": "sku",
 					"variant": "declaration",
 					"kind": 1024,
@@ -141,7 +141,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 5290,
+					"id": 5340,
 					"name": "origin_country",
 					"variant": "declaration",
 					"kind": 1024,
@@ -162,7 +162,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 5291,
+					"id": 5341,
 					"name": "hs_code",
 					"variant": "declaration",
 					"kind": 1024,
@@ -183,7 +183,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 5292,
+					"id": 5342,
 					"name": "mid_code",
 					"variant": "declaration",
 					"kind": 1024,
@@ -204,7 +204,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 5293,
+					"id": 5343,
 					"name": "material",
 					"variant": "declaration",
 					"kind": 1024,
@@ -225,7 +225,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 5294,
+					"id": 5344,
 					"name": "weight",
 					"variant": "declaration",
 					"kind": 1024,
@@ -246,7 +246,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 5295,
+					"id": 5345,
 					"name": "length",
 					"variant": "declaration",
 					"kind": 1024,
@@ -267,7 +267,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 5296,
+					"id": 5346,
 					"name": "height",
 					"variant": "declaration",
 					"kind": 1024,
@@ -288,7 +288,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 5297,
+					"id": 5347,
 					"name": "width",
 					"variant": "declaration",
 					"kind": 1024,
@@ -309,7 +309,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 5298,
+					"id": 5348,
 					"name": "requires_shipping",
 					"variant": "declaration",
 					"kind": 1024,
@@ -321,7 +321,7 @@
 					"defaultValue": "true"
 				},
 				{
-					"id": 5299,
+					"id": 5349,
 					"name": "description",
 					"variant": "declaration",
 					"kind": 1024,
@@ -342,7 +342,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 5300,
+					"id": 5350,
 					"name": "title",
 					"variant": "declaration",
 					"kind": 1024,
@@ -363,7 +363,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 5301,
+					"id": 5351,
 					"name": "thumbnail",
 					"variant": "declaration",
 					"kind": 1024,
@@ -384,7 +384,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 5302,
+					"id": 5352,
 					"name": "metadata",
 					"variant": "declaration",
 					"kind": 1024,
@@ -420,7 +420,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 5303,
+					"id": 5353,
 					"name": "location_levels",
 					"variant": "declaration",
 					"kind": 1024,
@@ -434,7 +434,7 @@
 						"typeArguments": [
 							{
 								"type": "reference",
-								"target": 5312,
+								"target": 5362,
 								"name": "InventoryLevel",
 								"package": "@medusajs/inventory"
 							},
@@ -449,7 +449,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 5304,
+					"id": 5354,
 					"name": "reservation_items",
 					"variant": "declaration",
 					"kind": 1024,
@@ -463,7 +463,7 @@
 						"typeArguments": [
 							{
 								"type": "reference",
-								"target": 5260,
+								"target": 5310,
 								"name": "ReservationItem",
 								"package": "@medusajs/inventory"
 							},
@@ -478,7 +478,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 5305,
+					"id": 5355,
 					"name": "reserved_quantity",
 					"variant": "declaration",
 					"kind": 1024,
@@ -489,7 +489,7 @@
 					}
 				},
 				{
-					"id": 5306,
+					"id": 5356,
 					"name": "stocked_quantity",
 					"variant": "declaration",
 					"kind": 1024,
@@ -500,14 +500,14 @@
 					}
 				},
 				{
-					"id": 5307,
+					"id": 5357,
 					"name": "beforeCreate",
 					"variant": "declaration",
 					"kind": 2048,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 5308,
+							"id": 5358,
 							"name": "beforeCreate",
 							"variant": "signature",
 							"kind": 4096,
@@ -520,14 +520,14 @@
 					]
 				},
 				{
-					"id": 5309,
+					"id": 5359,
 					"name": "onInit",
 					"variant": "declaration",
 					"kind": 2048,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 5310,
+							"id": 5360,
 							"name": "onInit",
 							"variant": "signature",
 							"kind": 4096,
@@ -544,69 +544,69 @@
 				{
 					"title": "Constructors",
 					"children": [
-						5283
+						5333
 					]
 				},
 				{
 					"title": "Properties",
 					"children": [
-						5311,
-						5285,
-						5286,
-						5287,
-						5288,
-						5289,
-						5290,
-						5291,
-						5292,
-						5293,
-						5294,
-						5295,
-						5296,
-						5297,
-						5298,
-						5299,
-						5300,
-						5301,
-						5302,
-						5303,
-						5304,
-						5305,
-						5306
+						5361,
+						5335,
+						5336,
+						5337,
+						5338,
+						5339,
+						5340,
+						5341,
+						5342,
+						5343,
+						5344,
+						5345,
+						5346,
+						5347,
+						5348,
+						5349,
+						5350,
+						5351,
+						5352,
+						5353,
+						5354,
+						5355,
+						5356
 					]
 				},
 				{
 					"title": "Methods",
 					"children": [
-						5307,
-						5309
+						5357,
+						5359
 					]
 				}
 			]
 		},
 		{
-			"id": 5312,
+			"id": 5362,
 			"name": "InventoryLevel",
 			"variant": "declaration",
 			"kind": 128,
 			"flags": {},
 			"children": [
 				{
-					"id": 5313,
+					"id": 5363,
 					"name": "constructor",
 					"variant": "declaration",
 					"kind": 512,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 5314,
+							"id": 5364,
 							"name": "new InventoryLevel",
 							"variant": "signature",
 							"kind": 16384,
 							"flags": {},
 							"type": {
 								"type": "reference",
-								"target": 5312,
+								"target": 5362,
 								"name": "InventoryLevel",
 								"package": "@medusajs/inventory"
 							}
@@ -614,7 +614,7 @@
 					]
 				},
 				{
-					"id": 5315,
+					"id": 5365,
 					"name": "id",
 					"variant": "declaration",
 					"kind": 1024,
@@ -625,7 +625,7 @@
 					}
 				},
 				{
-					"id": 5316,
+					"id": 5366,
 					"name": "created_at",
 					"variant": "declaration",
 					"kind": 1024,
@@ -641,7 +641,7 @@
 					}
 				},
 				{
-					"id": 5317,
+					"id": 5367,
 					"name": "updated_at",
 					"variant": "declaration",
 					"kind": 1024,
@@ -657,7 +657,7 @@
 					}
 				},
 				{
-					"id": 5318,
+					"id": 5368,
 					"name": "deleted_at",
 					"variant": "declaration",
 					"kind": 1024,
@@ -683,7 +683,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 5319,
+					"id": 5369,
 					"name": "inventory_item_id",
 					"variant": "declaration",
 					"kind": 1024,
@@ -694,7 +694,7 @@
 					}
 				},
 				{
-					"id": 5320,
+					"id": 5370,
 					"name": "location_id",
 					"variant": "declaration",
 					"kind": 1024,
@@ -705,7 +705,7 @@
 					}
 				},
 				{
-					"id": 5321,
+					"id": 5371,
 					"name": "stocked_quantity",
 					"variant": "declaration",
 					"kind": 1024,
@@ -731,7 +731,7 @@
 					"defaultValue": "0"
 				},
 				{
-					"id": 5322,
+					"id": 5372,
 					"name": "raw_stocked_quantity",
 					"variant": "declaration",
 					"kind": 1024,
@@ -747,7 +747,7 @@
 					}
 				},
 				{
-					"id": 5323,
+					"id": 5373,
 					"name": "reserved_quantity",
 					"variant": "declaration",
 					"kind": 1024,
@@ -773,7 +773,7 @@
 					"defaultValue": "0"
 				},
 				{
-					"id": 5324,
+					"id": 5374,
 					"name": "raw_reserved_quantity",
 					"variant": "declaration",
 					"kind": 1024,
@@ -789,7 +789,7 @@
 					}
 				},
 				{
-					"id": 5325,
+					"id": 5375,
 					"name": "incoming_quantity",
 					"variant": "declaration",
 					"kind": 1024,
@@ -815,7 +815,7 @@
 					"defaultValue": "0"
 				},
 				{
-					"id": 5326,
+					"id": 5376,
 					"name": "raw_incoming_quantity",
 					"variant": "declaration",
 					"kind": 1024,
@@ -831,7 +831,7 @@
 					}
 				},
 				{
-					"id": 5327,
+					"id": 5377,
 					"name": "metadata",
 					"variant": "declaration",
 					"kind": 1024,
@@ -866,20 +866,20 @@
 					}
 				},
 				{
-					"id": 5328,
+					"id": 5378,
 					"name": "inventory_item",
 					"variant": "declaration",
 					"kind": 1024,
 					"flags": {},
 					"type": {
 						"type": "reference",
-						"target": 5282,
+						"target": 5332,
 						"name": "InventoryItem",
 						"package": "@medusajs/inventory"
 					}
 				},
 				{
-					"id": 5329,
+					"id": 5379,
 					"name": "available_quantity",
 					"variant": "declaration",
 					"kind": 1024,
@@ -909,14 +909,14 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 5330,
+					"id": 5380,
 					"name": "beforeCreate",
 					"variant": "declaration",
 					"kind": 2048,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 5331,
+							"id": 5381,
 							"name": "beforeCreate",
 							"variant": "signature",
 							"kind": 4096,
@@ -929,14 +929,14 @@
 					]
 				},
 				{
-					"id": 5332,
+					"id": 5382,
 					"name": "onInit",
 					"variant": "declaration",
 					"kind": 2048,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 5333,
+							"id": 5383,
 							"name": "onInit",
 							"variant": "signature",
 							"kind": 4096,
@@ -949,14 +949,14 @@
 					]
 				},
 				{
-					"id": 5334,
+					"id": 5384,
 					"name": "onLoad",
 					"variant": "declaration",
 					"kind": 2048,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 5335,
+							"id": 5385,
 							"name": "onLoad",
 							"variant": "signature",
 							"kind": 4096,
@@ -973,62 +973,62 @@
 				{
 					"title": "Constructors",
 					"children": [
-						5313
+						5363
 					]
 				},
 				{
 					"title": "Properties",
 					"children": [
-						5315,
-						5316,
-						5317,
-						5318,
-						5319,
-						5320,
-						5321,
-						5322,
-						5323,
-						5324,
-						5325,
-						5326,
-						5327,
-						5328,
-						5329
+						5365,
+						5366,
+						5367,
+						5368,
+						5369,
+						5370,
+						5371,
+						5372,
+						5373,
+						5374,
+						5375,
+						5376,
+						5377,
+						5378,
+						5379
 					]
 				},
 				{
 					"title": "Methods",
 					"children": [
-						5330,
-						5332,
-						5334
+						5380,
+						5382,
+						5384
 					]
 				}
 			]
 		},
 		{
-			"id": 5260,
+			"id": 5310,
 			"name": "ReservationItem",
 			"variant": "declaration",
 			"kind": 128,
 			"flags": {},
 			"children": [
 				{
-					"id": 5261,
+					"id": 5311,
 					"name": "constructor",
 					"variant": "declaration",
 					"kind": 512,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 5262,
+							"id": 5312,
 							"name": "new ReservationItem",
 							"variant": "signature",
 							"kind": 16384,
 							"flags": {},
 							"type": {
 								"type": "reference",
-								"target": 5260,
+								"target": 5310,
 								"name": "ReservationItem",
 								"package": "@medusajs/inventory"
 							}
@@ -1036,7 +1036,7 @@
 					]
 				},
 				{
-					"id": 5263,
+					"id": 5313,
 					"name": "id",
 					"variant": "declaration",
 					"kind": 1024,
@@ -1047,7 +1047,7 @@
 					}
 				},
 				{
-					"id": 5264,
+					"id": 5314,
 					"name": "created_at",
 					"variant": "declaration",
 					"kind": 1024,
@@ -1063,7 +1063,7 @@
 					}
 				},
 				{
-					"id": 5265,
+					"id": 5315,
 					"name": "updated_at",
 					"variant": "declaration",
 					"kind": 1024,
@@ -1079,7 +1079,7 @@
 					}
 				},
 				{
-					"id": 5266,
+					"id": 5316,
 					"name": "deleted_at",
 					"variant": "declaration",
 					"kind": 1024,
@@ -1105,7 +1105,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 5267,
+					"id": 5317,
 					"name": "line_item_id",
 					"variant": "declaration",
 					"kind": 1024,
@@ -1126,7 +1126,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 5268,
+					"id": 5318,
 					"name": "allow_backorder",
 					"variant": "declaration",
 					"kind": 1024,
@@ -1138,7 +1138,7 @@
 					"defaultValue": "false"
 				},
 				{
-					"id": 5269,
+					"id": 5319,
 					"name": "location_id",
 					"variant": "declaration",
 					"kind": 1024,
@@ -1149,7 +1149,7 @@
 					}
 				},
 				{
-					"id": 5270,
+					"id": 5320,
 					"name": "quantity",
 					"variant": "declaration",
 					"kind": 1024,
@@ -1174,7 +1174,7 @@
 					}
 				},
 				{
-					"id": 5271,
+					"id": 5321,
 					"name": "raw_quantity",
 					"variant": "declaration",
 					"kind": 1024,
@@ -1190,7 +1190,7 @@
 					}
 				},
 				{
-					"id": 5272,
+					"id": 5322,
 					"name": "external_id",
 					"variant": "declaration",
 					"kind": 1024,
@@ -1211,7 +1211,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 5273,
+					"id": 5323,
 					"name": "description",
 					"variant": "declaration",
 					"kind": 1024,
@@ -1232,7 +1232,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 5274,
+					"id": 5324,
 					"name": "created_by",
 					"variant": "declaration",
 					"kind": 1024,
@@ -1253,7 +1253,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 5275,
+					"id": 5325,
 					"name": "metadata",
 					"variant": "declaration",
 					"kind": 1024,
@@ -1289,7 +1289,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 5276,
+					"id": 5326,
 					"name": "inventory_item_id",
 					"variant": "declaration",
 					"kind": 1024,
@@ -1300,27 +1300,27 @@
 					}
 				},
 				{
-					"id": 5277,
+					"id": 5327,
 					"name": "inventory_item",
 					"variant": "declaration",
 					"kind": 1024,
 					"flags": {},
 					"type": {
 						"type": "reference",
-						"target": 5282,
+						"target": 5332,
 						"name": "InventoryItem",
 						"package": "@medusajs/inventory"
 					}
 				},
 				{
-					"id": 5278,
+					"id": 5328,
 					"name": "beforeCreate",
 					"variant": "declaration",
 					"kind": 2048,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 5279,
+							"id": 5329,
 							"name": "beforeCreate",
 							"variant": "signature",
 							"kind": 4096,
@@ -1333,14 +1333,14 @@
 					]
 				},
 				{
-					"id": 5280,
+					"id": 5330,
 					"name": "onInit",
 					"variant": "declaration",
 					"kind": 2048,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 5281,
+							"id": 5331,
 							"name": "onInit",
 							"variant": "signature",
 							"kind": 4096,
@@ -1357,34 +1357,34 @@
 				{
 					"title": "Constructors",
 					"children": [
-						5261
+						5311
 					]
 				},
 				{
 					"title": "Properties",
 					"children": [
-						5263,
-						5264,
-						5265,
-						5266,
-						5267,
-						5268,
-						5269,
-						5270,
-						5271,
-						5272,
-						5273,
-						5274,
-						5275,
-						5276,
-						5277
+						5313,
+						5314,
+						5315,
+						5316,
+						5317,
+						5318,
+						5319,
+						5320,
+						5321,
+						5322,
+						5323,
+						5324,
+						5325,
+						5326,
+						5327
 					]
 				},
 				{
 					"title": "Methods",
 					"children": [
-						5278,
-						5280
+						5328,
+						5330
 					]
 				}
 			]
@@ -1394,295 +1394,295 @@
 		{
 			"title": "Classes",
 			"children": [
-				5282,
-				5312,
-				5260
+				5332,
+				5362,
+				5310
 			]
 		}
 	],
 	"packageName": "@medusajs/inventory",
 	"symbolIdMap": {
-		"5259": {
+		"5309": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/index.ts",
 			"qualifiedName": ""
 		},
-		"5260": {
+		"5310": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/reservation-item.ts",
 			"qualifiedName": "ReservationItem"
 		},
-		"5263": {
+		"5313": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/reservation-item.ts",
 			"qualifiedName": "ReservationItem.id"
 		},
-		"5264": {
+		"5314": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/reservation-item.ts",
 			"qualifiedName": "ReservationItem.created_at"
 		},
-		"5265": {
+		"5315": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/reservation-item.ts",
 			"qualifiedName": "ReservationItem.updated_at"
 		},
-		"5266": {
+		"5316": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/reservation-item.ts",
 			"qualifiedName": "ReservationItem.deleted_at"
 		},
-		"5267": {
+		"5317": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/reservation-item.ts",
 			"qualifiedName": "ReservationItem.line_item_id"
 		},
-		"5268": {
+		"5318": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/reservation-item.ts",
 			"qualifiedName": "ReservationItem.allow_backorder"
 		},
-		"5269": {
+		"5319": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/reservation-item.ts",
 			"qualifiedName": "ReservationItem.location_id"
 		},
-		"5270": {
+		"5320": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/reservation-item.ts",
 			"qualifiedName": "ReservationItem.quantity"
 		},
-		"5271": {
+		"5321": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/reservation-item.ts",
 			"qualifiedName": "ReservationItem.raw_quantity"
 		},
-		"5272": {
+		"5322": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/reservation-item.ts",
 			"qualifiedName": "ReservationItem.external_id"
 		},
-		"5273": {
+		"5323": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/reservation-item.ts",
 			"qualifiedName": "ReservationItem.description"
 		},
-		"5274": {
+		"5324": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/reservation-item.ts",
 			"qualifiedName": "ReservationItem.created_by"
 		},
-		"5275": {
+		"5325": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/reservation-item.ts",
 			"qualifiedName": "ReservationItem.metadata"
 		},
-		"5276": {
+		"5326": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/reservation-item.ts",
 			"qualifiedName": "ReservationItem.inventory_item_id"
 		},
-		"5277": {
+		"5327": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/reservation-item.ts",
 			"qualifiedName": "ReservationItem.inventory_item"
 		},
-		"5278": {
+		"5328": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/reservation-item.ts",
 			"qualifiedName": "ReservationItem.beforeCreate"
 		},
-		"5279": {
+		"5329": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/reservation-item.ts",
 			"qualifiedName": "ReservationItem.beforeCreate"
 		},
-		"5280": {
+		"5330": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/reservation-item.ts",
 			"qualifiedName": "ReservationItem.onInit"
 		},
-		"5281": {
+		"5331": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/reservation-item.ts",
 			"qualifiedName": "ReservationItem.onInit"
 		},
-		"5282": {
+		"5332": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-item.ts",
 			"qualifiedName": "InventoryItem"
 		},
-		"5285": {
+		"5335": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-item.ts",
 			"qualifiedName": "InventoryItem.id"
 		},
-		"5286": {
+		"5336": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-item.ts",
 			"qualifiedName": "InventoryItem.created_at"
 		},
-		"5287": {
+		"5337": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-item.ts",
 			"qualifiedName": "InventoryItem.updated_at"
 		},
-		"5288": {
+		"5338": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-item.ts",
 			"qualifiedName": "InventoryItem.deleted_at"
 		},
-		"5289": {
+		"5339": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-item.ts",
 			"qualifiedName": "InventoryItem.sku"
 		},
-		"5290": {
+		"5340": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-item.ts",
 			"qualifiedName": "InventoryItem.origin_country"
 		},
-		"5291": {
+		"5341": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-item.ts",
 			"qualifiedName": "InventoryItem.hs_code"
 		},
-		"5292": {
+		"5342": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-item.ts",
 			"qualifiedName": "InventoryItem.mid_code"
 		},
-		"5293": {
+		"5343": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-item.ts",
 			"qualifiedName": "InventoryItem.material"
 		},
-		"5294": {
+		"5344": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-item.ts",
 			"qualifiedName": "InventoryItem.weight"
 		},
-		"5295": {
+		"5345": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-item.ts",
 			"qualifiedName": "InventoryItem.length"
 		},
-		"5296": {
+		"5346": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-item.ts",
 			"qualifiedName": "InventoryItem.height"
 		},
-		"5297": {
+		"5347": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-item.ts",
 			"qualifiedName": "InventoryItem.width"
 		},
-		"5298": {
+		"5348": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-item.ts",
 			"qualifiedName": "InventoryItem.requires_shipping"
 		},
-		"5299": {
+		"5349": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-item.ts",
 			"qualifiedName": "InventoryItem.description"
 		},
-		"5300": {
+		"5350": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-item.ts",
 			"qualifiedName": "InventoryItem.title"
 		},
-		"5301": {
+		"5351": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-item.ts",
 			"qualifiedName": "InventoryItem.thumbnail"
 		},
-		"5302": {
+		"5352": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-item.ts",
 			"qualifiedName": "InventoryItem.metadata"
 		},
-		"5303": {
+		"5353": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-item.ts",
 			"qualifiedName": "InventoryItem.location_levels"
 		},
-		"5304": {
+		"5354": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-item.ts",
 			"qualifiedName": "InventoryItem.reservation_items"
 		},
-		"5305": {
+		"5355": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-item.ts",
 			"qualifiedName": "InventoryItem.reserved_quantity"
 		},
-		"5306": {
+		"5356": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-item.ts",
 			"qualifiedName": "InventoryItem.stocked_quantity"
 		},
-		"5307": {
+		"5357": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-item.ts",
 			"qualifiedName": "InventoryItem.beforeCreate"
 		},
-		"5308": {
+		"5358": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-item.ts",
 			"qualifiedName": "InventoryItem.beforeCreate"
 		},
-		"5309": {
+		"5359": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-item.ts",
 			"qualifiedName": "InventoryItem.onInit"
 		},
-		"5310": {
+		"5360": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-item.ts",
 			"qualifiedName": "InventoryItem.onInit"
 		},
-		"5311": {
+		"5361": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-item.ts",
 			"qualifiedName": "InventoryItem.[OptionalProps]"
 		},
-		"5312": {
+		"5362": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-level.ts",
 			"qualifiedName": "InventoryLevel"
 		},
-		"5315": {
+		"5365": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-level.ts",
 			"qualifiedName": "InventoryLevel.id"
 		},
-		"5316": {
+		"5366": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-level.ts",
 			"qualifiedName": "InventoryLevel.created_at"
 		},
-		"5317": {
+		"5367": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-level.ts",
 			"qualifiedName": "InventoryLevel.updated_at"
 		},
-		"5318": {
+		"5368": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-level.ts",
 			"qualifiedName": "InventoryLevel.deleted_at"
 		},
-		"5319": {
+		"5369": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-level.ts",
 			"qualifiedName": "InventoryLevel.inventory_item_id"
 		},
-		"5320": {
+		"5370": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-level.ts",
 			"qualifiedName": "InventoryLevel.location_id"
 		},
-		"5321": {
+		"5371": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-level.ts",
 			"qualifiedName": "InventoryLevel.stocked_quantity"
 		},
-		"5322": {
+		"5372": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-level.ts",
 			"qualifiedName": "InventoryLevel.raw_stocked_quantity"
 		},
-		"5323": {
+		"5373": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-level.ts",
 			"qualifiedName": "InventoryLevel.reserved_quantity"
 		},
-		"5324": {
+		"5374": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-level.ts",
 			"qualifiedName": "InventoryLevel.raw_reserved_quantity"
 		},
-		"5325": {
+		"5375": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-level.ts",
 			"qualifiedName": "InventoryLevel.incoming_quantity"
 		},
-		"5326": {
+		"5376": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-level.ts",
 			"qualifiedName": "InventoryLevel.raw_incoming_quantity"
 		},
-		"5327": {
+		"5377": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-level.ts",
 			"qualifiedName": "InventoryLevel.metadata"
 		},
-		"5328": {
+		"5378": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-level.ts",
 			"qualifiedName": "InventoryLevel.inventory_item"
 		},
-		"5329": {
+		"5379": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-level.ts",
 			"qualifiedName": "InventoryLevel.available_quantity"
 		},
-		"5330": {
+		"5380": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-level.ts",
 			"qualifiedName": "InventoryLevel.beforeCreate"
 		},
-		"5331": {
+		"5381": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-level.ts",
 			"qualifiedName": "InventoryLevel.beforeCreate"
 		},
-		"5332": {
+		"5382": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-level.ts",
 			"qualifiedName": "InventoryLevel.onInit"
 		},
-		"5333": {
+		"5383": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-level.ts",
 			"qualifiedName": "InventoryLevel.onInit"
 		},
-		"5334": {
+		"5384": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-level.ts",
 			"qualifiedName": "InventoryLevel.onLoad"
 		},
-		"5335": {
+		"5385": {
 			"sourceFileName": "../../../../packages/modules/inventory/src/models/inventory-level.ts",
 			"qualifiedName": "InventoryLevel.onLoad"
 		}
@@ -1692,7 +1692,7 @@
 			"1": "../../../../packages/modules/inventory/src/models/index.ts"
 		},
 		"reflections": {
-			"1": 5259
+			"1": 5309
 		}
 	}
 }

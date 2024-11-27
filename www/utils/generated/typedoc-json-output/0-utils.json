@@ -1,19 +1,19 @@
 {
-	"id": 47626,
+	"id": 50087,
 	"name": "utils",
 	"variant": "project",
 	"kind": 1,
 	"flags": {},
 	"children": [
 		{
-			"id": 47629,
+			"id": 50090,
 			"name": "CoreFlowsUitls",
 			"variant": "declaration",
 			"kind": 4,
 			"flags": {},
 			"children": [
 				{
-					"id": 47630,
+					"id": 50091,
 					"name": "CartWorkflowEvents",
 					"variant": "declaration",
 					"kind": 32,
@@ -23,14 +23,14 @@
 					"type": {
 						"type": "reflection",
 						"declaration": {
-							"id": 47631,
+							"id": 50092,
 							"name": "__type",
 							"variant": "declaration",
 							"kind": 65536,
 							"flags": {},
 							"children": [
 								{
-									"id": 47632,
+									"id": 50093,
 									"name": "CREATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -42,7 +42,7 @@
 									"defaultValue": "\"cart.created\""
 								},
 								{
-									"id": 47633,
+									"id": 50094,
 									"name": "UPDATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -54,7 +54,7 @@
 									"defaultValue": "\"cart.updated\""
 								},
 								{
-									"id": 47634,
+									"id": 50095,
 									"name": "CUSTOMER_UPDATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -66,7 +66,7 @@
 									"defaultValue": "\"cart.customer_updated\""
 								},
 								{
-									"id": 47635,
+									"id": 50096,
 									"name": "REGION_UPDATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -82,10 +82,10 @@
 								{
 									"title": "Properties",
 									"children": [
-										47632,
-										47633,
-										47634,
-										47635
+										50093,
+										50094,
+										50095,
+										50096
 									]
 								}
 							]
@@ -94,7 +94,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 47636,
+					"id": 50097,
 					"name": "CustomerWorkflowEvents",
 					"variant": "declaration",
 					"kind": 32,
@@ -104,14 +104,14 @@
 					"type": {
 						"type": "reflection",
 						"declaration": {
-							"id": 47637,
+							"id": 50098,
 							"name": "__type",
 							"variant": "declaration",
 							"kind": 65536,
 							"flags": {},
 							"children": [
 								{
-									"id": 47638,
+									"id": 50099,
 									"name": "CREATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -123,7 +123,7 @@
 									"defaultValue": "\"customer.created\""
 								},
 								{
-									"id": 47639,
+									"id": 50100,
 									"name": "UPDATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -135,7 +135,7 @@
 									"defaultValue": "\"customer.updated\""
 								},
 								{
-									"id": 47640,
+									"id": 50101,
 									"name": "DELETED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -151,9 +151,9 @@
 								{
 									"title": "Properties",
 									"children": [
-										47638,
-										47639,
-										47640
+										50099,
+										50100,
+										50101
 									]
 								}
 							]
@@ -162,7 +162,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 47641,
+					"id": 50102,
 					"name": "OrderWorkflowEvents",
 					"variant": "declaration",
 					"kind": 32,
@@ -172,14 +172,14 @@
 					"type": {
 						"type": "reflection",
 						"declaration": {
-							"id": 47642,
+							"id": 50103,
 							"name": "__type",
 							"variant": "declaration",
 							"kind": 65536,
 							"flags": {},
 							"children": [
 								{
-									"id": 47643,
+									"id": 50104,
 									"name": "PLACED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -191,7 +191,7 @@
 									"defaultValue": "\"order.placed\""
 								},
 								{
-									"id": 47644,
+									"id": 50105,
 									"name": "CANCELED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -203,7 +203,7 @@
 									"defaultValue": "\"order.canceled\""
 								},
 								{
-									"id": 47645,
+									"id": 50106,
 									"name": "COMPLETED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -215,7 +215,7 @@
 									"defaultValue": "\"order.completed\""
 								},
 								{
-									"id": 47646,
+									"id": 50107,
 									"name": "ARCHIVED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -227,7 +227,7 @@
 									"defaultValue": "\"order.archived\""
 								},
 								{
-									"id": 47647,
+									"id": 50108,
 									"name": "FULFILLMENT_CREATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -239,7 +239,7 @@
 									"defaultValue": "\"order.fulfillment_created\""
 								},
 								{
-									"id": 47648,
+									"id": 50109,
 									"name": "FULFILLMENT_CANCELED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -251,7 +251,7 @@
 									"defaultValue": "\"order.fulfillment_canceled\""
 								},
 								{
-									"id": 47649,
+									"id": 50110,
 									"name": "RETURN_REQUESTED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -263,7 +263,7 @@
 									"defaultValue": "\"order.return_requested\""
 								},
 								{
-									"id": 47650,
+									"id": 50111,
 									"name": "RETURN_RECEIVED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -275,7 +275,7 @@
 									"defaultValue": "\"order.return_received\""
 								},
 								{
-									"id": 47651,
+									"id": 50112,
 									"name": "CLAIM_CREATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -287,7 +287,7 @@
 									"defaultValue": "\"order.claim_created\""
 								},
 								{
-									"id": 47652,
+									"id": 50113,
 									"name": "EXCHANGE_CREATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -299,7 +299,7 @@
 									"defaultValue": "\"order.exchange_created\""
 								},
 								{
-									"id": 47653,
+									"id": 50114,
 									"name": "TRANSFER_REQUESTED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -315,17 +315,17 @@
 								{
 									"title": "Properties",
 									"children": [
-										47643,
-										47644,
-										47645,
-										47646,
-										47647,
-										47648,
-										47649,
-										47650,
-										47651,
-										47652,
-										47653
+										50104,
+										50105,
+										50106,
+										50107,
+										50108,
+										50109,
+										50110,
+										50111,
+										50112,
+										50113,
+										50114
 									]
 								}
 							]
@@ -334,7 +334,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 47654,
+					"id": 50115,
 					"name": "UserWorkflowEvents",
 					"variant": "declaration",
 					"kind": 32,
@@ -344,14 +344,14 @@
 					"type": {
 						"type": "reflection",
 						"declaration": {
-							"id": 47655,
+							"id": 50116,
 							"name": "__type",
 							"variant": "declaration",
 							"kind": 65536,
 							"flags": {},
 							"children": [
 								{
-									"id": 47656,
+									"id": 50117,
 									"name": "CREATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -363,7 +363,7 @@
 									"defaultValue": "\"user.created\""
 								},
 								{
-									"id": 47657,
+									"id": 50118,
 									"name": "UPDATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -375,7 +375,7 @@
 									"defaultValue": "\"user.updated\""
 								},
 								{
-									"id": 47658,
+									"id": 50119,
 									"name": "DELETED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -391,9 +391,9 @@
 								{
 									"title": "Properties",
 									"children": [
-										47656,
-										47657,
-										47658
+										50117,
+										50118,
+										50119
 									]
 								}
 							]
@@ -402,7 +402,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 47659,
+					"id": 50120,
 					"name": "AuthWorkflowEvents",
 					"variant": "declaration",
 					"kind": 32,
@@ -412,14 +412,14 @@
 					"type": {
 						"type": "reflection",
 						"declaration": {
-							"id": 47660,
+							"id": 50121,
 							"name": "__type",
 							"variant": "declaration",
 							"kind": 65536,
 							"flags": {},
 							"children": [
 								{
-									"id": 47661,
+									"id": 50122,
 									"name": "PASSWORD_RESET",
 									"variant": "declaration",
 									"kind": 1024,
@@ -435,7 +435,7 @@
 								{
 									"title": "Properties",
 									"children": [
-										47661
+										50122
 									]
 								}
 							]
@@ -444,7 +444,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 47662,
+					"id": 50123,
 					"name": "SalesChannelWorkflowEvents",
 					"variant": "declaration",
 					"kind": 32,
@@ -454,14 +454,14 @@
 					"type": {
 						"type": "reflection",
 						"declaration": {
-							"id": 47663,
+							"id": 50124,
 							"name": "__type",
 							"variant": "declaration",
 							"kind": 65536,
 							"flags": {},
 							"children": [
 								{
-									"id": 47664,
+									"id": 50125,
 									"name": "CREATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -473,7 +473,7 @@
 									"defaultValue": "\"sales-channel.created\""
 								},
 								{
-									"id": 47665,
+									"id": 50126,
 									"name": "UPDATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -485,7 +485,7 @@
 									"defaultValue": "\"sales-channel.updated\""
 								},
 								{
-									"id": 47666,
+									"id": 50127,
 									"name": "DELETED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -501,9 +501,9 @@
 								{
 									"title": "Properties",
 									"children": [
-										47664,
-										47665,
-										47666
+										50125,
+										50126,
+										50127
 									]
 								}
 							]
@@ -512,7 +512,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 47667,
+					"id": 50128,
 					"name": "ProductCategoryWorkflowEvents",
 					"variant": "declaration",
 					"kind": 32,
@@ -522,14 +522,14 @@
 					"type": {
 						"type": "reflection",
 						"declaration": {
-							"id": 47668,
+							"id": 50129,
 							"name": "__type",
 							"variant": "declaration",
 							"kind": 65536,
 							"flags": {},
 							"children": [
 								{
-									"id": 47669,
+									"id": 50130,
 									"name": "CREATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -541,7 +541,7 @@
 									"defaultValue": "\"product-category.created\""
 								},
 								{
-									"id": 47670,
+									"id": 50131,
 									"name": "UPDATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -553,7 +553,7 @@
 									"defaultValue": "\"product-category.updated\""
 								},
 								{
-									"id": 47671,
+									"id": 50132,
 									"name": "DELETED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -569,9 +569,9 @@
 								{
 									"title": "Properties",
 									"children": [
-										47669,
-										47670,
-										47671
+										50130,
+										50131,
+										50132
 									]
 								}
 							]
@@ -580,7 +580,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 47672,
+					"id": 50133,
 					"name": "ProductCollectionWorkflowEvents",
 					"variant": "declaration",
 					"kind": 32,
@@ -590,14 +590,14 @@
 					"type": {
 						"type": "reflection",
 						"declaration": {
-							"id": 47673,
+							"id": 50134,
 							"name": "__type",
 							"variant": "declaration",
 							"kind": 65536,
 							"flags": {},
 							"children": [
 								{
-									"id": 47674,
+									"id": 50135,
 									"name": "CREATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -609,7 +609,7 @@
 									"defaultValue": "\"product-collection.created\""
 								},
 								{
-									"id": 47675,
+									"id": 50136,
 									"name": "UPDATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -621,7 +621,7 @@
 									"defaultValue": "\"product-collection.updated\""
 								},
 								{
-									"id": 47676,
+									"id": 50137,
 									"name": "DELETED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -637,9 +637,9 @@
 								{
 									"title": "Properties",
 									"children": [
-										47674,
-										47675,
-										47676
+										50135,
+										50136,
+										50137
 									]
 								}
 							]
@@ -648,7 +648,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 47677,
+					"id": 50138,
 					"name": "ProductVariantWorkflowEvents",
 					"variant": "declaration",
 					"kind": 32,
@@ -658,14 +658,14 @@
 					"type": {
 						"type": "reflection",
 						"declaration": {
-							"id": 47678,
+							"id": 50139,
 							"name": "__type",
 							"variant": "declaration",
 							"kind": 65536,
 							"flags": {},
 							"children": [
 								{
-									"id": 47679,
+									"id": 50140,
 									"name": "UPDATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -677,7 +677,7 @@
 									"defaultValue": "\"product-variant.updated\""
 								},
 								{
-									"id": 47680,
+									"id": 50141,
 									"name": "CREATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -689,7 +689,7 @@
 									"defaultValue": "\"product-variant.created\""
 								},
 								{
-									"id": 47681,
+									"id": 50142,
 									"name": "DELETED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -705,9 +705,9 @@
 								{
 									"title": "Properties",
 									"children": [
-										47679,
-										47680,
-										47681
+										50140,
+										50141,
+										50142
 									]
 								}
 							]
@@ -716,7 +716,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 47682,
+					"id": 50143,
 					"name": "ProductWorkflowEvents",
 					"variant": "declaration",
 					"kind": 32,
@@ -726,14 +726,14 @@
 					"type": {
 						"type": "reflection",
 						"declaration": {
-							"id": 47683,
+							"id": 50144,
 							"name": "__type",
 							"variant": "declaration",
 							"kind": 65536,
 							"flags": {},
 							"children": [
 								{
-									"id": 47684,
+									"id": 50145,
 									"name": "UPDATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -745,7 +745,7 @@
 									"defaultValue": "\"product.updated\""
 								},
 								{
-									"id": 47685,
+									"id": 50146,
 									"name": "CREATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -757,7 +757,7 @@
 									"defaultValue": "\"product.created\""
 								},
 								{
-									"id": 47686,
+									"id": 50147,
 									"name": "DELETED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -773,9 +773,9 @@
 								{
 									"title": "Properties",
 									"children": [
-										47684,
-										47685,
-										47686
+										50145,
+										50146,
+										50147
 									]
 								}
 							]
@@ -784,7 +784,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 47687,
+					"id": 50148,
 					"name": "ProductTypeWorkflowEvents",
 					"variant": "declaration",
 					"kind": 32,
@@ -794,14 +794,14 @@
 					"type": {
 						"type": "reflection",
 						"declaration": {
-							"id": 47688,
+							"id": 50149,
 							"name": "__type",
 							"variant": "declaration",
 							"kind": 65536,
 							"flags": {},
 							"children": [
 								{
-									"id": 47689,
+									"id": 50150,
 									"name": "UPDATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -813,7 +813,7 @@
 									"defaultValue": "\"product-type.updated\""
 								},
 								{
-									"id": 47690,
+									"id": 50151,
 									"name": "CREATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -825,7 +825,7 @@
 									"defaultValue": "\"product-type.created\""
 								},
 								{
-									"id": 47691,
+									"id": 50152,
 									"name": "DELETED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -841,9 +841,9 @@
 								{
 									"title": "Properties",
 									"children": [
-										47689,
-										47690,
-										47691
+										50150,
+										50151,
+										50152
 									]
 								}
 							]
@@ -852,7 +852,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 47692,
+					"id": 50153,
 					"name": "ProductTagWorkflowEvents",
 					"variant": "declaration",
 					"kind": 32,
@@ -862,14 +862,14 @@
 					"type": {
 						"type": "reflection",
 						"declaration": {
-							"id": 47693,
+							"id": 50154,
 							"name": "__type",
 							"variant": "declaration",
 							"kind": 65536,
 							"flags": {},
 							"children": [
 								{
-									"id": 47694,
+									"id": 50155,
 									"name": "UPDATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -881,7 +881,7 @@
 									"defaultValue": "\"product-tag.updated\""
 								},
 								{
-									"id": 47695,
+									"id": 50156,
 									"name": "CREATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -893,7 +893,7 @@
 									"defaultValue": "\"product-tag.created\""
 								},
 								{
-									"id": 47696,
+									"id": 50157,
 									"name": "DELETED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -909,9 +909,9 @@
 								{
 									"title": "Properties",
 									"children": [
-										47694,
-										47695,
-										47696
+										50155,
+										50156,
+										50157
 									]
 								}
 							]
@@ -920,7 +920,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 47697,
+					"id": 50158,
 					"name": "ProductOptionWorkflowEvents",
 					"variant": "declaration",
 					"kind": 32,
@@ -930,14 +930,14 @@
 					"type": {
 						"type": "reflection",
 						"declaration": {
-							"id": 47698,
+							"id": 50159,
 							"name": "__type",
 							"variant": "declaration",
 							"kind": 65536,
 							"flags": {},
 							"children": [
 								{
-									"id": 47699,
+									"id": 50160,
 									"name": "UPDATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -949,7 +949,7 @@
 									"defaultValue": "\"product-option.updated\""
 								},
 								{
-									"id": 47700,
+									"id": 50161,
 									"name": "CREATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -961,7 +961,7 @@
 									"defaultValue": "\"product-option.created\""
 								},
 								{
-									"id": 47701,
+									"id": 50162,
 									"name": "DELETED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -977,9 +977,9 @@
 								{
 									"title": "Properties",
 									"children": [
-										47699,
-										47700,
-										47701
+										50160,
+										50161,
+										50162
 									]
 								}
 							]
@@ -988,7 +988,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 47702,
+					"id": 50163,
 					"name": "InviteWorkflowEvents",
 					"variant": "declaration",
 					"kind": 32,
@@ -998,14 +998,14 @@
 					"type": {
 						"type": "reflection",
 						"declaration": {
-							"id": 47703,
+							"id": 50164,
 							"name": "__type",
 							"variant": "declaration",
 							"kind": 65536,
 							"flags": {},
 							"children": [
 								{
-									"id": 47704,
+									"id": 50165,
 									"name": "ACCEPTED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1017,7 +1017,7 @@
 									"defaultValue": "\"invite.accepted\""
 								},
 								{
-									"id": 47705,
+									"id": 50166,
 									"name": "CREATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1029,7 +1029,7 @@
 									"defaultValue": "\"invite.created\""
 								},
 								{
-									"id": 47706,
+									"id": 50167,
 									"name": "DELETED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1041,7 +1041,7 @@
 									"defaultValue": "\"invite.deleted\""
 								},
 								{
-									"id": 47707,
+									"id": 50168,
 									"name": "RESENT",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1057,10 +1057,10 @@
 								{
 									"title": "Properties",
 									"children": [
-										47704,
-										47705,
-										47706,
-										47707
+										50165,
+										50166,
+										50167,
+										50168
 									]
 								}
 							]
@@ -1069,7 +1069,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 47708,
+					"id": 50169,
 					"name": "RegionWorkflowEvents",
 					"variant": "declaration",
 					"kind": 32,
@@ -1079,14 +1079,14 @@
 					"type": {
 						"type": "reflection",
 						"declaration": {
-							"id": 47709,
+							"id": 50170,
 							"name": "__type",
 							"variant": "declaration",
 							"kind": 65536,
 							"flags": {},
 							"children": [
 								{
-									"id": 47710,
+									"id": 50171,
 									"name": "UPDATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1098,7 +1098,7 @@
 									"defaultValue": "\"region.updated\""
 								},
 								{
-									"id": 47711,
+									"id": 50172,
 									"name": "CREATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1110,7 +1110,7 @@
 									"defaultValue": "\"region.created\""
 								},
 								{
-									"id": 47712,
+									"id": 50173,
 									"name": "DELETED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1126,9 +1126,9 @@
 								{
 									"title": "Properties",
 									"children": [
-										47710,
-										47711,
-										47712
+										50171,
+										50172,
+										50173
 									]
 								}
 							]
@@ -1141,34 +1141,34 @@
 				{
 					"title": "Variables",
 					"children": [
-						47630,
-						47636,
-						47641,
-						47654,
-						47659,
-						47662,
-						47667,
-						47672,
-						47677,
-						47682,
-						47687,
-						47692,
-						47697,
-						47702,
-						47708
+						50091,
+						50097,
+						50102,
+						50115,
+						50120,
+						50123,
+						50128,
+						50133,
+						50138,
+						50143,
+						50148,
+						50153,
+						50158,
+						50163,
+						50169
 					]
 				}
 			]
 		},
 		{
-			"id": 47713,
+			"id": 50174,
 			"name": "FulfillmentUtils",
 			"variant": "declaration",
 			"kind": 4,
 			"flags": {},
 			"children": [
 				{
-					"id": 47722,
+					"id": 50183,
 					"name": "FulfillmentEvents",
 					"variant": "declaration",
 					"kind": 32,
@@ -1178,14 +1178,14 @@
 					"type": {
 						"type": "reflection",
 						"declaration": {
-							"id": 47723,
+							"id": 50184,
 							"name": "__type",
 							"variant": "declaration",
 							"kind": 65536,
 							"flags": {},
 							"children": [
 								{
-									"id": 47726,
+									"id": 50187,
 									"name": "FULFILLMENT_CREATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1196,7 +1196,7 @@
 									}
 								},
 								{
-									"id": 47727,
+									"id": 50188,
 									"name": "FULFILLMENT_SET_CREATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1207,7 +1207,7 @@
 									}
 								},
 								{
-									"id": 47728,
+									"id": 50189,
 									"name": "SERVICE_ZONE_CREATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1218,7 +1218,7 @@
 									}
 								},
 								{
-									"id": 47729,
+									"id": 50190,
 									"name": "GEO_ZONE_CREATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1229,7 +1229,7 @@
 									}
 								},
 								{
-									"id": 47730,
+									"id": 50191,
 									"name": "SHIPPING_OPTION_CREATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1240,7 +1240,7 @@
 									}
 								},
 								{
-									"id": 47731,
+									"id": 50192,
 									"name": "SHIPPING_OPTION_TYPE_CREATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1251,7 +1251,7 @@
 									}
 								},
 								{
-									"id": 47732,
+									"id": 50193,
 									"name": "SHIPPING_PROFILE_CREATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1262,7 +1262,7 @@
 									}
 								},
 								{
-									"id": 47733,
+									"id": 50194,
 									"name": "SHIPPING_OPTION_RULE_CREATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1273,7 +1273,7 @@
 									}
 								},
 								{
-									"id": 47734,
+									"id": 50195,
 									"name": "FULFILLMENT_ADDRESS_CREATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1284,7 +1284,7 @@
 									}
 								},
 								{
-									"id": 47735,
+									"id": 50196,
 									"name": "FULFILLMENT_ITEM_CREATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1295,7 +1295,7 @@
 									}
 								},
 								{
-									"id": 47736,
+									"id": 50197,
 									"name": "FULFILLMENT_LABEL_CREATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1306,7 +1306,7 @@
 									}
 								},
 								{
-									"id": 47737,
+									"id": 50198,
 									"name": "FULFILLMENT_UPDATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1317,7 +1317,7 @@
 									}
 								},
 								{
-									"id": 47738,
+									"id": 50199,
 									"name": "FULFILLMENT_SET_UPDATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1328,7 +1328,7 @@
 									}
 								},
 								{
-									"id": 47739,
+									"id": 50200,
 									"name": "SERVICE_ZONE_UPDATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1339,7 +1339,7 @@
 									}
 								},
 								{
-									"id": 47740,
+									"id": 50201,
 									"name": "GEO_ZONE_UPDATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1350,7 +1350,7 @@
 									}
 								},
 								{
-									"id": 47741,
+									"id": 50202,
 									"name": "SHIPPING_OPTION_UPDATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1361,7 +1361,7 @@
 									}
 								},
 								{
-									"id": 47742,
+									"id": 50203,
 									"name": "SHIPPING_OPTION_TYPE_UPDATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1372,7 +1372,7 @@
 									}
 								},
 								{
-									"id": 47743,
+									"id": 50204,
 									"name": "SHIPPING_PROFILE_UPDATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1383,7 +1383,7 @@
 									}
 								},
 								{
-									"id": 47744,
+									"id": 50205,
 									"name": "SHIPPING_OPTION_RULE_UPDATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1394,7 +1394,7 @@
 									}
 								},
 								{
-									"id": 47745,
+									"id": 50206,
 									"name": "FULFILLMENT_ADDRESS_UPDATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1405,7 +1405,7 @@
 									}
 								},
 								{
-									"id": 47746,
+									"id": 50207,
 									"name": "FULFILLMENT_ITEM_UPDATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1416,7 +1416,7 @@
 									}
 								},
 								{
-									"id": 47747,
+									"id": 50208,
 									"name": "FULFILLMENT_LABEL_UPDATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1427,7 +1427,7 @@
 									}
 								},
 								{
-									"id": 47748,
+									"id": 50209,
 									"name": "FULFILLMENT_DELETED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1438,7 +1438,7 @@
 									}
 								},
 								{
-									"id": 47749,
+									"id": 50210,
 									"name": "FULFILLMENT_SET_DELETED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1449,7 +1449,7 @@
 									}
 								},
 								{
-									"id": 47750,
+									"id": 50211,
 									"name": "SERVICE_ZONE_DELETED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1460,7 +1460,7 @@
 									}
 								},
 								{
-									"id": 47751,
+									"id": 50212,
 									"name": "GEO_ZONE_DELETED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1471,7 +1471,7 @@
 									}
 								},
 								{
-									"id": 47752,
+									"id": 50213,
 									"name": "SHIPPING_OPTION_DELETED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1482,7 +1482,7 @@
 									}
 								},
 								{
-									"id": 47753,
+									"id": 50214,
 									"name": "SHIPPING_OPTION_TYPE_DELETED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1493,7 +1493,7 @@
 									}
 								},
 								{
-									"id": 47754,
+									"id": 50215,
 									"name": "SHIPPING_PROFILE_DELETED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1504,7 +1504,7 @@
 									}
 								},
 								{
-									"id": 47755,
+									"id": 50216,
 									"name": "SHIPPING_OPTION_RULE_DELETED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1515,7 +1515,7 @@
 									}
 								},
 								{
-									"id": 47756,
+									"id": 50217,
 									"name": "FULFILLMENT_ADDRESS_DELETED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1526,7 +1526,7 @@
 									}
 								},
 								{
-									"id": 47757,
+									"id": 50218,
 									"name": "FULFILLMENT_ITEM_DELETED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1537,7 +1537,7 @@
 									}
 								},
 								{
-									"id": 47758,
+									"id": 50219,
 									"name": "FULFILLMENT_LABEL_DELETED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1548,7 +1548,7 @@
 									}
 								},
 								{
-									"id": 47759,
+									"id": 50220,
 									"name": "FULFILLMENT_RESTORED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1559,7 +1559,7 @@
 									}
 								},
 								{
-									"id": 47760,
+									"id": 50221,
 									"name": "FULFILLMENT_SET_RESTORED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1570,7 +1570,7 @@
 									}
 								},
 								{
-									"id": 47761,
+									"id": 50222,
 									"name": "SERVICE_ZONE_RESTORED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1581,7 +1581,7 @@
 									}
 								},
 								{
-									"id": 47762,
+									"id": 50223,
 									"name": "GEO_ZONE_RESTORED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1592,7 +1592,7 @@
 									}
 								},
 								{
-									"id": 47763,
+									"id": 50224,
 									"name": "SHIPPING_OPTION_RESTORED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1603,7 +1603,7 @@
 									}
 								},
 								{
-									"id": 47764,
+									"id": 50225,
 									"name": "SHIPPING_OPTION_TYPE_RESTORED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1614,7 +1614,7 @@
 									}
 								},
 								{
-									"id": 47765,
+									"id": 50226,
 									"name": "SHIPPING_PROFILE_RESTORED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1625,7 +1625,7 @@
 									}
 								},
 								{
-									"id": 47766,
+									"id": 50227,
 									"name": "SHIPPING_OPTION_RULE_RESTORED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1636,7 +1636,7 @@
 									}
 								},
 								{
-									"id": 47767,
+									"id": 50228,
 									"name": "FULFILLMENT_ADDRESS_RESTORED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1647,7 +1647,7 @@
 									}
 								},
 								{
-									"id": 47768,
+									"id": 50229,
 									"name": "FULFILLMENT_ITEM_RESTORED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1658,7 +1658,7 @@
 									}
 								},
 								{
-									"id": 47769,
+									"id": 50230,
 									"name": "FULFILLMENT_LABEL_RESTORED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1669,7 +1669,7 @@
 									}
 								},
 								{
-									"id": 47770,
+									"id": 50231,
 									"name": "FULFILLMENT_ATTACHED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1680,7 +1680,7 @@
 									}
 								},
 								{
-									"id": 47771,
+									"id": 50232,
 									"name": "FULFILLMENT_SET_ATTACHED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1691,7 +1691,7 @@
 									}
 								},
 								{
-									"id": 47772,
+									"id": 50233,
 									"name": "SERVICE_ZONE_ATTACHED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1702,7 +1702,7 @@
 									}
 								},
 								{
-									"id": 47773,
+									"id": 50234,
 									"name": "GEO_ZONE_ATTACHED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1713,7 +1713,7 @@
 									}
 								},
 								{
-									"id": 47774,
+									"id": 50235,
 									"name": "SHIPPING_OPTION_ATTACHED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1724,7 +1724,7 @@
 									}
 								},
 								{
-									"id": 47775,
+									"id": 50236,
 									"name": "SHIPPING_OPTION_TYPE_ATTACHED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1735,7 +1735,7 @@
 									}
 								},
 								{
-									"id": 47776,
+									"id": 50237,
 									"name": "SHIPPING_PROFILE_ATTACHED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1746,7 +1746,7 @@
 									}
 								},
 								{
-									"id": 47777,
+									"id": 50238,
 									"name": "SHIPPING_OPTION_RULE_ATTACHED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1757,7 +1757,7 @@
 									}
 								},
 								{
-									"id": 47778,
+									"id": 50239,
 									"name": "FULFILLMENT_ADDRESS_ATTACHED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1768,7 +1768,7 @@
 									}
 								},
 								{
-									"id": 47779,
+									"id": 50240,
 									"name": "FULFILLMENT_ITEM_ATTACHED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1779,7 +1779,7 @@
 									}
 								},
 								{
-									"id": 47780,
+									"id": 50241,
 									"name": "FULFILLMENT_LABEL_ATTACHED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1790,7 +1790,7 @@
 									}
 								},
 								{
-									"id": 47781,
+									"id": 50242,
 									"name": "FULFILLMENT_DETACHED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1801,7 +1801,7 @@
 									}
 								},
 								{
-									"id": 47782,
+									"id": 50243,
 									"name": "FULFILLMENT_SET_DETACHED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1812,7 +1812,7 @@
 									}
 								},
 								{
-									"id": 47783,
+									"id": 50244,
 									"name": "SERVICE_ZONE_DETACHED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1823,7 +1823,7 @@
 									}
 								},
 								{
-									"id": 47784,
+									"id": 50245,
 									"name": "GEO_ZONE_DETACHED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1834,7 +1834,7 @@
 									}
 								},
 								{
-									"id": 47785,
+									"id": 50246,
 									"name": "SHIPPING_OPTION_DETACHED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1845,7 +1845,7 @@
 									}
 								},
 								{
-									"id": 47786,
+									"id": 50247,
 									"name": "SHIPPING_OPTION_TYPE_DETACHED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1856,7 +1856,7 @@
 									}
 								},
 								{
-									"id": 47787,
+									"id": 50248,
 									"name": "SHIPPING_PROFILE_DETACHED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1867,7 +1867,7 @@
 									}
 								},
 								{
-									"id": 47788,
+									"id": 50249,
 									"name": "SHIPPING_OPTION_RULE_DETACHED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1878,7 +1878,7 @@
 									}
 								},
 								{
-									"id": 47789,
+									"id": 50250,
 									"name": "FULFILLMENT_ADDRESS_DETACHED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1889,7 +1889,7 @@
 									}
 								},
 								{
-									"id": 47790,
+									"id": 50251,
 									"name": "FULFILLMENT_ITEM_DETACHED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1900,7 +1900,7 @@
 									}
 								},
 								{
-									"id": 47791,
+									"id": 50252,
 									"name": "FULFILLMENT_LABEL_DETACHED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1911,7 +1911,7 @@
 									}
 								},
 								{
-									"id": 47724,
+									"id": 50185,
 									"name": "SHIPMENT_CREATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1923,7 +1923,7 @@
 									"defaultValue": "\"shipment.created\""
 								},
 								{
-									"id": 47725,
+									"id": 50186,
 									"name": "DELIVERY_CREATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -1939,74 +1939,74 @@
 								{
 									"title": "Properties",
 									"children": [
-										47726,
-										47727,
-										47728,
-										47729,
-										47730,
-										47731,
-										47732,
-										47733,
-										47734,
-										47735,
-										47736,
-										47737,
-										47738,
-										47739,
-										47740,
-										47741,
-										47742,
-										47743,
-										47744,
-										47745,
-										47746,
-										47747,
-										47748,
-										47749,
-										47750,
-										47751,
-										47752,
-										47753,
-										47754,
-										47755,
-										47756,
-										47757,
-										47758,
-										47759,
-										47760,
-										47761,
-										47762,
-										47763,
-										47764,
-										47765,
-										47766,
-										47767,
-										47768,
-										47769,
-										47770,
-										47771,
-										47772,
-										47773,
-										47774,
-										47775,
-										47776,
-										47777,
-										47778,
-										47779,
-										47780,
-										47781,
-										47782,
-										47783,
-										47784,
-										47785,
-										47786,
-										47787,
-										47788,
-										47789,
-										47790,
-										47791,
-										47724,
-										47725
+										50187,
+										50188,
+										50189,
+										50190,
+										50191,
+										50192,
+										50193,
+										50194,
+										50195,
+										50196,
+										50197,
+										50198,
+										50199,
+										50200,
+										50201,
+										50202,
+										50203,
+										50204,
+										50205,
+										50206,
+										50207,
+										50208,
+										50209,
+										50210,
+										50211,
+										50212,
+										50213,
+										50214,
+										50215,
+										50216,
+										50217,
+										50218,
+										50219,
+										50220,
+										50221,
+										50222,
+										50223,
+										50224,
+										50225,
+										50226,
+										50227,
+										50228,
+										50229,
+										50230,
+										50231,
+										50232,
+										50233,
+										50234,
+										50235,
+										50236,
+										50237,
+										50238,
+										50239,
+										50240,
+										50241,
+										50242,
+										50243,
+										50244,
+										50245,
+										50246,
+										50247,
+										50248,
+										50249,
+										50250,
+										50251,
+										50252,
+										50185,
+										50186
 									]
 								}
 							]
@@ -2015,14 +2015,14 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 47714,
+					"id": 50175,
 					"name": "GeoZoneType",
 					"variant": "declaration",
 					"kind": 8,
 					"flags": {},
 					"children": [
 						{
-							"id": 47715,
+							"id": 50176,
 							"name": "COUNTRY",
 							"variant": "declaration",
 							"kind": 16,
@@ -2033,7 +2033,7 @@
 							}
 						},
 						{
-							"id": 47716,
+							"id": 50177,
 							"name": "PROVINCE",
 							"variant": "declaration",
 							"kind": 16,
@@ -2044,7 +2044,7 @@
 							}
 						},
 						{
-							"id": 47717,
+							"id": 50178,
 							"name": "CITY",
 							"variant": "declaration",
 							"kind": 16,
@@ -2055,7 +2055,7 @@
 							}
 						},
 						{
-							"id": 47718,
+							"id": 50179,
 							"name": "ZIP",
 							"variant": "declaration",
 							"kind": 16,
@@ -2070,23 +2070,23 @@
 						{
 							"title": "Enumeration Members",
 							"children": [
-								47715,
-								47716,
-								47717,
-								47718
+								50176,
+								50177,
+								50178,
+								50179
 							]
 						}
 					]
 				},
 				{
-					"id": 47719,
+					"id": 50180,
 					"name": "ShippingOptionPriceType",
 					"variant": "declaration",
 					"kind": 8,
 					"flags": {},
 					"children": [
 						{
-							"id": 47720,
+							"id": 50181,
 							"name": "CALCULATED",
 							"variant": "declaration",
 							"kind": 16,
@@ -2097,7 +2097,7 @@
 							}
 						},
 						{
-							"id": 47721,
+							"id": 50182,
 							"name": "FLAT",
 							"variant": "declaration",
 							"kind": 16,
@@ -2112,8 +2112,8 @@
 						{
 							"title": "Enumeration Members",
 							"children": [
-								47720,
-								47721
+								50181,
+								50182
 							]
 						}
 					]
@@ -2123,27 +2123,27 @@
 				{
 					"title": "Enumerations",
 					"children": [
-						47714,
-						47719
+						50175,
+						50180
 					]
 				},
 				{
 					"title": "Variables",
 					"children": [
-						47722
+						50183
 					]
 				}
 			]
 		},
 		{
-			"id": 48040,
+			"id": 50501,
 			"name": "Argument",
 			"variant": "declaration",
 			"kind": 256,
 			"flags": {},
 			"children": [
 				{
-					"id": 48041,
+					"id": 50502,
 					"name": "name",
 					"variant": "declaration",
 					"kind": 1024,
@@ -2154,7 +2154,7 @@
 					}
 				},
 				{
-					"id": 48042,
+					"id": 50503,
 					"name": "value",
 					"variant": "declaration",
 					"kind": 1024,
@@ -2171,21 +2171,21 @@
 				{
 					"title": "Properties",
 					"children": [
-						48041,
-						48042
+						50502,
+						50503
 					]
 				}
 			]
 		},
 		{
-			"id": 48043,
+			"id": 50504,
 			"name": "Directive",
 			"variant": "declaration",
 			"kind": 256,
 			"flags": {},
 			"children": [
 				{
-					"id": 48044,
+					"id": 50505,
 					"name": "name",
 					"variant": "declaration",
 					"kind": 1024,
@@ -2196,7 +2196,7 @@
 					}
 				},
 				{
-					"id": 48045,
+					"id": 50506,
 					"name": "args",
 					"variant": "declaration",
 					"kind": 1024,
@@ -2207,7 +2207,7 @@
 						"type": "array",
 						"elementType": {
 							"type": "reference",
-							"target": 48040,
+							"target": 50501,
 							"name": "Argument",
 							"package": "@medusajs/utils"
 						}
@@ -2218,21 +2218,21 @@
 				{
 					"title": "Properties",
 					"children": [
-						48044,
-						48045
+						50505,
+						50506
 					]
 				}
 			]
 		},
 		{
-			"id": 48046,
+			"id": 50507,
 			"name": "Entity",
 			"variant": "declaration",
 			"kind": 256,
 			"flags": {},
 			"children": [
 				{
-					"id": 48047,
+					"id": 50508,
 					"name": "property",
 					"variant": "declaration",
 					"kind": 1024,
@@ -2243,7 +2243,7 @@
 					}
 				},
 				{
-					"id": 48048,
+					"id": 50509,
 					"name": "fields",
 					"variant": "declaration",
 					"kind": 1024,
@@ -2257,7 +2257,7 @@
 					}
 				},
 				{
-					"id": 48049,
+					"id": 50510,
 					"name": "args",
 					"variant": "declaration",
 					"kind": 1024,
@@ -2268,14 +2268,14 @@
 						"type": "array",
 						"elementType": {
 							"type": "reference",
-							"target": 48040,
+							"target": 50501,
 							"name": "Argument",
 							"package": "@medusajs/utils"
 						}
 					}
 				},
 				{
-					"id": 48050,
+					"id": 50511,
 					"name": "directives",
 					"variant": "declaration",
 					"kind": 1024,
@@ -2285,21 +2285,21 @@
 					"type": {
 						"type": "reflection",
 						"declaration": {
-							"id": 48051,
+							"id": 50512,
 							"name": "__type",
 							"variant": "declaration",
 							"kind": 65536,
 							"flags": {},
 							"indexSignatures": [
 								{
-									"id": 48052,
+									"id": 50513,
 									"name": "__index",
 									"variant": "signature",
 									"kind": 8192,
 									"flags": {},
 									"parameters": [
 										{
-											"id": 48053,
+											"id": 50514,
 											"name": "field",
 											"variant": "param",
 											"kind": 32768,
@@ -2314,7 +2314,7 @@
 										"type": "array",
 										"elementType": {
 											"type": "reference",
-											"target": 48043,
+											"target": 50504,
 											"name": "Directive",
 											"package": "@medusajs/utils"
 										}
@@ -2329,37 +2329,37 @@
 				{
 					"title": "Properties",
 					"children": [
-						48047,
-						48048,
-						48049,
-						48050
+						50508,
+						50509,
+						50510,
+						50511
 					]
 				}
 			]
 		},
 		{
-			"id": 47940,
+			"id": 50401,
 			"name": "GraphQLUtils",
 			"variant": "declaration",
 			"kind": 4,
 			"flags": {},
 			"children": [
 				{
-					"id": 47981,
+					"id": 50442,
 					"name": "cleanGraphQLSchema",
 					"variant": "declaration",
 					"kind": 64,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 47982,
+							"id": 50443,
 							"name": "cleanGraphQLSchema",
 							"variant": "signature",
 							"kind": 4096,
 							"flags": {},
 							"parameters": [
 								{
-									"id": 47983,
+									"id": 50444,
 									"name": "schema",
 									"variant": "param",
 									"kind": 32768,
@@ -2373,14 +2373,14 @@
 							"type": {
 								"type": "reflection",
 								"declaration": {
-									"id": 47984,
+									"id": 50445,
 									"name": "__type",
 									"variant": "declaration",
 									"kind": 65536,
 									"flags": {},
 									"children": [
 										{
-											"id": 47985,
+											"id": 50446,
 											"name": "schema",
 											"variant": "declaration",
 											"kind": 1024,
@@ -2391,7 +2391,7 @@
 											}
 										},
 										{
-											"id": 47986,
+											"id": 50447,
 											"name": "notFound",
 											"variant": "declaration",
 											"kind": 1024,
@@ -2436,8 +2436,8 @@
 										{
 											"title": "Properties",
 											"children": [
-												47985,
-												47986
+												50446,
+												50447
 											]
 										}
 									]
@@ -2447,14 +2447,14 @@
 					]
 				},
 				{
-					"id": 47978,
+					"id": 50439,
 					"name": "extractRelationsFromGQL",
 					"variant": "declaration",
 					"kind": 64,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 47979,
+							"id": 50440,
 							"name": "extractRelationsFromGQL",
 							"variant": "signature",
 							"kind": 4096,
@@ -2480,7 +2480,7 @@
 							},
 							"parameters": [
 								{
-									"id": 47980,
+									"id": 50441,
 									"name": "typeMap",
 									"variant": "param",
 									"kind": 32768,
@@ -2552,14 +2552,14 @@
 					]
 				},
 				{
-					"id": 47996,
+					"id": 50457,
 					"name": "gqlGetFieldsAndRelations",
 					"variant": "declaration",
 					"kind": 64,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 47997,
+							"id": 50458,
 							"name": "gqlGetFieldsAndRelations",
 							"variant": "signature",
 							"kind": 4096,
@@ -2574,7 +2574,7 @@
 							},
 							"parameters": [
 								{
-									"id": 47998,
+									"id": 50459,
 									"name": "schemaTypeMap",
 									"variant": "param",
 									"kind": 32768,
@@ -2582,21 +2582,21 @@
 									"type": {
 										"type": "reflection",
 										"declaration": {
-											"id": 47999,
+											"id": 50460,
 											"name": "__type",
 											"variant": "declaration",
 											"kind": 65536,
 											"flags": {},
 											"indexSignatures": [
 												{
-													"id": 48000,
+													"id": 50461,
 													"name": "__index",
 													"variant": "signature",
 													"kind": 8192,
 													"flags": {},
 													"parameters": [
 														{
-															"id": 48001,
+															"id": 50462,
 															"name": "key",
 															"variant": "param",
 															"kind": 32768,
@@ -2622,7 +2622,7 @@
 									}
 								},
 								{
-									"id": 48002,
+									"id": 50463,
 									"name": "typeName",
 									"variant": "param",
 									"kind": 32768,
@@ -2633,7 +2633,7 @@
 									}
 								},
 								{
-									"id": 48003,
+									"id": 50464,
 									"name": "relations",
 									"variant": "param",
 									"kind": 32768,
@@ -2659,7 +2659,7 @@
 					]
 				},
 				{
-					"id": 47941,
+					"id": 50402,
 					"name": "GraphQLParser",
 					"variant": "declaration",
 					"kind": 128,
@@ -2674,21 +2674,21 @@
 					},
 					"children": [
 						{
-							"id": 47942,
+							"id": 50403,
 							"name": "constructor",
 							"variant": "declaration",
 							"kind": 512,
 							"flags": {},
 							"signatures": [
 								{
-									"id": 47943,
+									"id": 50404,
 									"name": "new GraphQLParser",
 									"variant": "signature",
 									"kind": 16384,
 									"flags": {},
 									"parameters": [
 										{
-											"id": 47944,
+											"id": 50405,
 											"name": "input",
 											"variant": "param",
 											"kind": 32768,
@@ -2699,7 +2699,7 @@
 											}
 										},
 										{
-											"id": 47945,
+											"id": 50406,
 											"name": "variables",
 											"variant": "param",
 											"kind": 32768,
@@ -2728,7 +2728,7 @@
 									],
 									"type": {
 										"type": "reference",
-										"target": 47941,
+										"target": 50402,
 										"name": "GraphQLParser",
 										"package": "@medusajs/utils"
 									}
@@ -2736,7 +2736,7 @@
 							]
 						},
 						{
-							"id": 47968,
+							"id": 50429,
 							"name": "parseQuery",
 							"variant": "declaration",
 							"kind": 2048,
@@ -2745,7 +2745,7 @@
 							},
 							"signatures": [
 								{
-									"id": 47969,
+									"id": 50430,
 									"name": "parseQuery",
 									"variant": "signature",
 									"kind": 4096,
@@ -2767,26 +2767,26 @@
 						{
 							"title": "Constructors",
 							"children": [
-								47942
+								50403
 							]
 						},
 						{
 							"title": "Methods",
 							"children": [
-								47968
+								50429
 							]
 						}
 					]
 				},
 				{
-					"id": 47970,
+					"id": 50431,
 					"name": "graphqlSchemaToFields",
 					"variant": "declaration",
 					"kind": 64,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 47971,
+							"id": 50432,
 							"name": "graphqlSchemaToFields",
 							"variant": "signature",
 							"kind": 4096,
@@ -2812,7 +2812,7 @@
 							},
 							"parameters": [
 								{
-									"id": 47972,
+									"id": 50433,
 									"name": "schemaTypeMap",
 									"variant": "param",
 									"kind": 32768,
@@ -2820,21 +2820,21 @@
 									"type": {
 										"type": "reflection",
 										"declaration": {
-											"id": 47973,
+											"id": 50434,
 											"name": "__type",
 											"variant": "declaration",
 											"kind": 65536,
 											"flags": {},
 											"indexSignatures": [
 												{
-													"id": 47974,
+													"id": 50435,
 													"name": "__index",
 													"variant": "signature",
 													"kind": 8192,
 													"flags": {},
 													"parameters": [
 														{
-															"id": 47975,
+															"id": 50436,
 															"name": "key",
 															"variant": "param",
 															"kind": 32768,
@@ -2860,7 +2860,7 @@
 									}
 								},
 								{
-									"id": 47976,
+									"id": 50437,
 									"name": "typeName",
 									"variant": "param",
 									"kind": 32768,
@@ -2871,7 +2871,7 @@
 									}
 								},
 								{
-									"id": 47977,
+									"id": 50438,
 									"name": "relations",
 									"variant": "param",
 									"kind": 32768,
@@ -2897,21 +2897,21 @@
 					]
 				},
 				{
-					"id": 47987,
+					"id": 50448,
 					"name": "gqlSchemaToTypes",
 					"variant": "declaration",
 					"kind": 64,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 47988,
+							"id": 50449,
 							"name": "gqlSchemaToTypes",
 							"variant": "signature",
 							"kind": 4096,
 							"flags": {},
 							"parameters": [
 								{
-									"id": 47989,
+									"id": 50450,
 									"name": "__namedParameters",
 									"variant": "param",
 									"kind": 32768,
@@ -2919,14 +2919,14 @@
 									"type": {
 										"type": "reflection",
 										"declaration": {
-											"id": 47990,
+											"id": 50451,
 											"name": "__type",
 											"variant": "declaration",
 											"kind": 65536,
 											"flags": {},
 											"children": [
 												{
-													"id": 47991,
+													"id": 50452,
 													"name": "schema",
 													"variant": "declaration",
 													"kind": 1024,
@@ -2942,7 +2942,7 @@
 													}
 												},
 												{
-													"id": 47992,
+													"id": 50453,
 													"name": "outputDir",
 													"variant": "declaration",
 													"kind": 1024,
@@ -2953,7 +2953,7 @@
 													}
 												},
 												{
-													"id": 47993,
+													"id": 50454,
 													"name": "filename",
 													"variant": "declaration",
 													"kind": 1024,
@@ -2964,7 +2964,7 @@
 													}
 												},
 												{
-													"id": 47994,
+													"id": 50455,
 													"name": "joinerConfigs",
 													"variant": "declaration",
 													"kind": 1024,
@@ -2983,7 +2983,7 @@
 													}
 												},
 												{
-													"id": 47995,
+													"id": 50456,
 													"name": "interfaceName",
 													"variant": "declaration",
 													"kind": 1024,
@@ -2998,11 +2998,11 @@
 												{
 													"title": "Properties",
 													"children": [
-														47991,
-														47992,
-														47993,
-														47994,
-														47995
+														50452,
+														50453,
+														50454,
+														50455,
+														50456
 													]
 												}
 											]
@@ -3033,23 +3033,23 @@
 				{
 					"title": "Classes",
 					"children": [
-						47941
+						50402
 					]
 				},
 				{
 					"title": "Functions",
 					"children": [
-						47981,
-						47978,
-						47996,
-						47970,
-						47987
+						50442,
+						50439,
+						50457,
+						50431,
+						50448
 					]
 				}
 			]
 		},
 		{
-			"id": 47627,
+			"id": 50088,
 			"name": "MedusaModuleType",
 			"variant": "declaration",
 			"kind": 32,
@@ -3060,7 +3060,7 @@
 				"type": "query",
 				"queryType": {
 					"type": "reference",
-					"target": 47627,
+					"target": 50088,
 					"name": "MedusaModuleType",
 					"package": "@medusajs/utils"
 				}
@@ -3068,7 +3068,7 @@
 			"defaultValue": "..."
 		},
 		{
-			"id": 47628,
+			"id": 50089,
 			"name": "MedusaModuleProviderType",
 			"variant": "declaration",
 			"kind": 32,
@@ -3079,7 +3079,7 @@
 				"type": "query",
 				"queryType": {
 					"type": "reference",
-					"target": 47628,
+					"target": 50089,
 					"name": "MedusaModuleProviderType",
 					"package": "@medusajs/utils"
 				}
@@ -3087,14 +3087,14 @@
 			"defaultValue": "..."
 		},
 		{
-			"id": 47792,
+			"id": 50253,
 			"name": "InventoryUtils",
 			"variant": "declaration",
 			"kind": 4,
 			"flags": {},
 			"children": [
 				{
-					"id": 47793,
+					"id": 50254,
 					"name": "InventoryEvents",
 					"variant": "declaration",
 					"kind": 32,
@@ -3136,34 +3136,34 @@
 				{
 					"title": "Variables",
 					"children": [
-						47793
+						50254
 					]
 				}
 			]
 		},
 		{
-			"id": 47794,
+			"id": 50255,
 			"name": "LinkUtils",
 			"variant": "declaration",
 			"kind": 4,
 			"flags": {},
 			"children": [
 				{
-					"id": 47816,
+					"id": 50277,
 					"name": "composeLinkName",
 					"variant": "declaration",
 					"kind": 64,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 47817,
+							"id": 50278,
 							"name": "composeLinkName",
 							"variant": "signature",
 							"kind": 4096,
 							"flags": {},
 							"parameters": [
 								{
-									"id": 47818,
+									"id": 50279,
 									"name": "args",
 									"variant": "param",
 									"kind": 32768,
@@ -3187,21 +3187,21 @@
 					]
 				},
 				{
-					"id": 47819,
+					"id": 50280,
 					"name": "composeTableName",
 					"variant": "declaration",
 					"kind": 64,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 47820,
+							"id": 50281,
 							"name": "composeTableName",
 							"variant": "signature",
 							"kind": 4096,
 							"flags": {},
 							"parameters": [
 								{
-									"id": 47821,
+									"id": 50282,
 									"name": "args",
 									"variant": "param",
 									"kind": 32768,
@@ -3225,7 +3225,7 @@
 					]
 				},
 				{
-					"id": 47795,
+					"id": 50256,
 					"name": "LINKS",
 					"variant": "declaration",
 					"kind": 32,
@@ -3235,14 +3235,14 @@
 					"type": {
 						"type": "reflection",
 						"declaration": {
-							"id": 47796,
+							"id": 50257,
 							"name": "__type",
 							"variant": "declaration",
 							"kind": 65536,
 							"flags": {},
 							"children": [
 								{
-									"id": 47797,
+									"id": 50258,
 									"name": "ProductVariantInventoryItem",
 									"variant": "declaration",
 									"kind": 1024,
@@ -3254,7 +3254,7 @@
 									"defaultValue": "..."
 								},
 								{
-									"id": 47798,
+									"id": 50259,
 									"name": "ProductVariantPriceSet",
 									"variant": "declaration",
 									"kind": 1024,
@@ -3266,7 +3266,7 @@
 									"defaultValue": "..."
 								},
 								{
-									"id": 47799,
+									"id": 50260,
 									"name": "ShippingOptionPriceSet",
 									"variant": "declaration",
 									"kind": 1024,
@@ -3278,7 +3278,7 @@
 									"defaultValue": "..."
 								},
 								{
-									"id": 47800,
+									"id": 50261,
 									"name": "CartPaymentCollection",
 									"variant": "declaration",
 									"kind": 1024,
@@ -3290,7 +3290,7 @@
 									"defaultValue": "..."
 								},
 								{
-									"id": 47801,
+									"id": 50262,
 									"name": "RegionPaymentProvider",
 									"variant": "declaration",
 									"kind": 1024,
@@ -3302,7 +3302,7 @@
 									"defaultValue": "..."
 								},
 								{
-									"id": 47802,
+									"id": 50263,
 									"name": "CartPromotion",
 									"variant": "declaration",
 									"kind": 1024,
@@ -3314,7 +3314,7 @@
 									"defaultValue": "..."
 								},
 								{
-									"id": 47803,
+									"id": 50264,
 									"name": "SalesChannelLocation",
 									"variant": "declaration",
 									"kind": 1024,
@@ -3326,7 +3326,7 @@
 									"defaultValue": "..."
 								},
 								{
-									"id": 47804,
+									"id": 50265,
 									"name": "LocationFulfillmentProvider",
 									"variant": "declaration",
 									"kind": 1024,
@@ -3338,7 +3338,7 @@
 									"defaultValue": "..."
 								},
 								{
-									"id": 47805,
+									"id": 50266,
 									"name": "LocationFulfillmentSet",
 									"variant": "declaration",
 									"kind": 1024,
@@ -3350,7 +3350,7 @@
 									"defaultValue": "..."
 								},
 								{
-									"id": 47806,
+									"id": 50267,
 									"name": "OrderPromotion",
 									"variant": "declaration",
 									"kind": 1024,
@@ -3362,7 +3362,7 @@
 									"defaultValue": "..."
 								},
 								{
-									"id": 47807,
+									"id": 50268,
 									"name": "OrderCart",
 									"variant": "declaration",
 									"kind": 1024,
@@ -3374,7 +3374,7 @@
 									"defaultValue": "..."
 								},
 								{
-									"id": 47808,
+									"id": 50269,
 									"name": "OrderSalesChannel",
 									"variant": "declaration",
 									"kind": 1024,
@@ -3386,7 +3386,7 @@
 									"defaultValue": "..."
 								},
 								{
-									"id": 47809,
+									"id": 50270,
 									"name": "PublishableApiKeySalesChannel",
 									"variant": "declaration",
 									"kind": 1024,
@@ -3398,7 +3398,7 @@
 									"defaultValue": "..."
 								},
 								{
-									"id": 47810,
+									"id": 50271,
 									"name": "ProductSalesChannel",
 									"variant": "declaration",
 									"kind": 1024,
@@ -3410,7 +3410,7 @@
 									"defaultValue": "..."
 								},
 								{
-									"id": 47811,
+									"id": 50272,
 									"name": "OrderPaymentCollection",
 									"variant": "declaration",
 									"kind": 1024,
@@ -3422,7 +3422,7 @@
 									"defaultValue": "..."
 								},
 								{
-									"id": 47812,
+									"id": 50273,
 									"name": "OrderClaimPaymentCollection",
 									"variant": "declaration",
 									"kind": 1024,
@@ -3434,7 +3434,7 @@
 									"defaultValue": "..."
 								},
 								{
-									"id": 47813,
+									"id": 50274,
 									"name": "OrderExchangePaymentCollection",
 									"variant": "declaration",
 									"kind": 1024,
@@ -3446,7 +3446,7 @@
 									"defaultValue": "..."
 								},
 								{
-									"id": 47814,
+									"id": 50275,
 									"name": "OrderFulfillment",
 									"variant": "declaration",
 									"kind": 1024,
@@ -3458,7 +3458,7 @@
 									"defaultValue": "..."
 								},
 								{
-									"id": 47815,
+									"id": 50276,
 									"name": "ReturnFulfillment",
 									"variant": "declaration",
 									"kind": 1024,
@@ -3474,25 +3474,25 @@
 								{
 									"title": "Properties",
 									"children": [
-										47797,
-										47798,
-										47799,
-										47800,
-										47801,
-										47802,
-										47803,
-										47804,
-										47805,
-										47806,
-										47807,
-										47808,
-										47809,
-										47810,
-										47811,
-										47812,
-										47813,
-										47814,
-										47815
+										50258,
+										50259,
+										50260,
+										50261,
+										50262,
+										50263,
+										50264,
+										50265,
+										50266,
+										50267,
+										50268,
+										50269,
+										50270,
+										50271,
+										50272,
+										50273,
+										50274,
+										50275,
+										50276
 									]
 								}
 							]
@@ -3505,27 +3505,27 @@
 				{
 					"title": "Variables",
 					"children": [
-						47795
+						50256
 					]
 				},
 				{
 					"title": "Functions",
 					"children": [
-						47816,
-						47819
+						50277,
+						50280
 					]
 				}
 			]
 		},
 		{
-			"id": 48005,
+			"id": 50466,
 			"name": "NotificationStatus",
 			"variant": "declaration",
 			"kind": 8,
 			"flags": {},
 			"children": [
 				{
-					"id": 48006,
+					"id": 50467,
 					"name": "PENDING",
 					"variant": "declaration",
 					"kind": 16,
@@ -3536,7 +3536,7 @@
 					}
 				},
 				{
-					"id": 48007,
+					"id": 50468,
 					"name": "SUCCESS",
 					"variant": "declaration",
 					"kind": 16,
@@ -3547,7 +3547,7 @@
 					}
 				},
 				{
-					"id": 48008,
+					"id": 50469,
 					"name": "FAILURE",
 					"variant": "declaration",
 					"kind": 16,
@@ -3562,15 +3562,15 @@
 				{
 					"title": "Enumeration Members",
 					"children": [
-						48006,
-						48007,
-						48008
+						50467,
+						50468,
+						50469
 					]
 				}
 			]
 		},
 		{
-			"id": 48004,
+			"id": 50465,
 			"name": "NotificationEvents",
 			"variant": "declaration",
 			"kind": 32,
@@ -3600,21 +3600,21 @@
 			"defaultValue": "..."
 		},
 		{
-			"id": 47822,
+			"id": 50283,
 			"name": "OrderUtils",
 			"variant": "declaration",
 			"kind": 4,
 			"flags": {},
 			"children": [
 				{
-					"id": 47835,
+					"id": 50296,
 					"name": "ChangeActionType",
 					"variant": "declaration",
 					"kind": 8,
 					"flags": {},
 					"children": [
 						{
-							"id": 47836,
+							"id": 50297,
 							"name": "FULFILL_ITEM",
 							"variant": "declaration",
 							"kind": 16,
@@ -3625,7 +3625,7 @@
 							}
 						},
 						{
-							"id": 47837,
+							"id": 50298,
 							"name": "DELIVER_ITEM",
 							"variant": "declaration",
 							"kind": 16,
@@ -3636,7 +3636,7 @@
 							}
 						},
 						{
-							"id": 47838,
+							"id": 50299,
 							"name": "CANCEL_ITEM_FULFILLMENT",
 							"variant": "declaration",
 							"kind": 16,
@@ -3647,7 +3647,7 @@
 							}
 						},
 						{
-							"id": 47839,
+							"id": 50300,
 							"name": "ITEM_ADD",
 							"variant": "declaration",
 							"kind": 16,
@@ -3658,7 +3658,7 @@
 							}
 						},
 						{
-							"id": 47840,
+							"id": 50301,
 							"name": "ITEM_REMOVE",
 							"variant": "declaration",
 							"kind": 16,
@@ -3669,7 +3669,7 @@
 							}
 						},
 						{
-							"id": 47841,
+							"id": 50302,
 							"name": "ITEM_UPDATE",
 							"variant": "declaration",
 							"kind": 16,
@@ -3680,7 +3680,7 @@
 							}
 						},
 						{
-							"id": 47842,
+							"id": 50303,
 							"name": "RECEIVE_DAMAGED_RETURN_ITEM",
 							"variant": "declaration",
 							"kind": 16,
@@ -3691,7 +3691,7 @@
 							}
 						},
 						{
-							"id": 47843,
+							"id": 50304,
 							"name": "RECEIVE_RETURN_ITEM",
 							"variant": "declaration",
 							"kind": 16,
@@ -3702,7 +3702,7 @@
 							}
 						},
 						{
-							"id": 47844,
+							"id": 50305,
 							"name": "RETURN_ITEM",
 							"variant": "declaration",
 							"kind": 16,
@@ -3713,7 +3713,7 @@
 							}
 						},
 						{
-							"id": 47845,
+							"id": 50306,
 							"name": "CANCEL_RETURN_ITEM",
 							"variant": "declaration",
 							"kind": 16,
@@ -3724,7 +3724,7 @@
 							}
 						},
 						{
-							"id": 47846,
+							"id": 50307,
 							"name": "SHIPPING_ADD",
 							"variant": "declaration",
 							"kind": 16,
@@ -3735,7 +3735,7 @@
 							}
 						},
 						{
-							"id": 47847,
+							"id": 50308,
 							"name": "SHIPPING_REMOVE",
 							"variant": "declaration",
 							"kind": 16,
@@ -3746,7 +3746,7 @@
 							}
 						},
 						{
-							"id": 47848,
+							"id": 50309,
 							"name": "SHIP_ITEM",
 							"variant": "declaration",
 							"kind": 16,
@@ -3757,7 +3757,7 @@
 							}
 						},
 						{
-							"id": 47849,
+							"id": 50310,
 							"name": "WRITE_OFF_ITEM",
 							"variant": "declaration",
 							"kind": 16,
@@ -3768,7 +3768,7 @@
 							}
 						},
 						{
-							"id": 47850,
+							"id": 50311,
 							"name": "REINSTATE_ITEM",
 							"variant": "declaration",
 							"kind": 16,
@@ -3779,7 +3779,7 @@
 							}
 						},
 						{
-							"id": 47851,
+							"id": 50312,
 							"name": "TRANSFER_CUSTOMER",
 							"variant": "declaration",
 							"kind": 16,
@@ -3794,35 +3794,35 @@
 						{
 							"title": "Enumeration Members",
 							"children": [
-								47836,
-								47837,
-								47838,
-								47839,
-								47840,
-								47841,
-								47842,
-								47843,
-								47844,
-								47845,
-								47846,
-								47847,
-								47848,
-								47849,
-								47850,
-								47851
+								50297,
+								50298,
+								50299,
+								50300,
+								50301,
+								50302,
+								50303,
+								50304,
+								50305,
+								50306,
+								50307,
+								50308,
+								50309,
+								50310,
+								50311,
+								50312
 							]
 						}
 					]
 				},
 				{
-					"id": 47823,
+					"id": 50284,
 					"name": "OrderChangeStatus",
 					"variant": "declaration",
 					"kind": 8,
 					"flags": {},
 					"children": [
 						{
-							"id": 47824,
+							"id": 50285,
 							"name": "CONFIRMED",
 							"variant": "declaration",
 							"kind": 16,
@@ -3841,7 +3841,7 @@
 							}
 						},
 						{
-							"id": 47825,
+							"id": 50286,
 							"name": "DECLINED",
 							"variant": "declaration",
 							"kind": 16,
@@ -3860,7 +3860,7 @@
 							}
 						},
 						{
-							"id": 47826,
+							"id": 50287,
 							"name": "REQUESTED",
 							"variant": "declaration",
 							"kind": 16,
@@ -3879,7 +3879,7 @@
 							}
 						},
 						{
-							"id": 47827,
+							"id": 50288,
 							"name": "PENDING",
 							"variant": "declaration",
 							"kind": 16,
@@ -3898,7 +3898,7 @@
 							}
 						},
 						{
-							"id": 47828,
+							"id": 50289,
 							"name": "CANCELED",
 							"variant": "declaration",
 							"kind": 16,
@@ -3921,24 +3921,24 @@
 						{
 							"title": "Enumeration Members",
 							"children": [
-								47824,
-								47825,
-								47826,
-								47827,
-								47828
+								50285,
+								50286,
+								50287,
+								50288,
+								50289
 							]
 						}
 					]
 				},
 				{
-					"id": 47829,
+					"id": 50290,
 					"name": "OrderChangeType",
 					"variant": "declaration",
 					"kind": 8,
 					"flags": {},
 					"children": [
 						{
-							"id": 47830,
+							"id": 50291,
 							"name": "RETURN_REQUEST",
 							"variant": "declaration",
 							"kind": 16,
@@ -3949,7 +3949,7 @@
 							}
 						},
 						{
-							"id": 47831,
+							"id": 50292,
 							"name": "RETURN_RECEIVE",
 							"variant": "declaration",
 							"kind": 16,
@@ -3960,7 +3960,7 @@
 							}
 						},
 						{
-							"id": 47832,
+							"id": 50293,
 							"name": "EXCHANGE",
 							"variant": "declaration",
 							"kind": 16,
@@ -3971,7 +3971,7 @@
 							}
 						},
 						{
-							"id": 47833,
+							"id": 50294,
 							"name": "CLAIM",
 							"variant": "declaration",
 							"kind": 16,
@@ -3982,7 +3982,7 @@
 							}
 						},
 						{
-							"id": 47834,
+							"id": 50295,
 							"name": "EDIT",
 							"variant": "declaration",
 							"kind": 16,
@@ -3997,17 +3997,17 @@
 						{
 							"title": "Enumeration Members",
 							"children": [
-								47830,
-								47831,
-								47832,
-								47833,
-								47834
+								50291,
+								50292,
+								50293,
+								50294,
+								50295
 							]
 						}
 					]
 				},
 				{
-					"id": 47852,
+					"id": 50313,
 					"name": "OrderStatus",
 					"variant": "declaration",
 					"kind": 8,
@@ -4022,7 +4022,7 @@
 					},
 					"children": [
 						{
-							"id": 47853,
+							"id": 50314,
 							"name": "PENDING",
 							"variant": "declaration",
 							"kind": 16,
@@ -4041,7 +4041,7 @@
 							}
 						},
 						{
-							"id": 47854,
+							"id": 50315,
 							"name": "COMPLETED",
 							"variant": "declaration",
 							"kind": 16,
@@ -4060,7 +4060,7 @@
 							}
 						},
 						{
-							"id": 47855,
+							"id": 50316,
 							"name": "DRAFT",
 							"variant": "declaration",
 							"kind": 16,
@@ -4079,7 +4079,7 @@
 							}
 						},
 						{
-							"id": 47856,
+							"id": 50317,
 							"name": "ARCHIVED",
 							"variant": "declaration",
 							"kind": 16,
@@ -4098,7 +4098,7 @@
 							}
 						},
 						{
-							"id": 47857,
+							"id": 50318,
 							"name": "CANCELED",
 							"variant": "declaration",
 							"kind": 16,
@@ -4117,7 +4117,7 @@
 							}
 						},
 						{
-							"id": 47858,
+							"id": 50319,
 							"name": "REQUIRES_ACTION",
 							"variant": "declaration",
 							"kind": 16,
@@ -4140,18 +4140,18 @@
 						{
 							"title": "Enumeration Members",
 							"children": [
-								47853,
-								47854,
-								47855,
-								47856,
-								47857,
-								47858
+								50314,
+								50315,
+								50316,
+								50317,
+								50318,
+								50319
 							]
 						}
 					]
 				},
 				{
-					"id": 47859,
+					"id": 50320,
 					"name": "ReturnStatus",
 					"variant": "declaration",
 					"kind": 8,
@@ -4166,7 +4166,7 @@
 					},
 					"children": [
 						{
-							"id": 47860,
+							"id": 50321,
 							"name": "OPEN",
 							"variant": "declaration",
 							"kind": 16,
@@ -4185,7 +4185,7 @@
 							}
 						},
 						{
-							"id": 47861,
+							"id": 50322,
 							"name": "REQUESTED",
 							"variant": "declaration",
 							"kind": 16,
@@ -4204,7 +4204,7 @@
 							}
 						},
 						{
-							"id": 47862,
+							"id": 50323,
 							"name": "RECEIVED",
 							"variant": "declaration",
 							"kind": 16,
@@ -4223,7 +4223,7 @@
 							}
 						},
 						{
-							"id": 47863,
+							"id": 50324,
 							"name": "PARTIALLY_RECEIVED",
 							"variant": "declaration",
 							"kind": 16,
@@ -4242,7 +4242,7 @@
 							}
 						},
 						{
-							"id": 47864,
+							"id": 50325,
 							"name": "CANCELED",
 							"variant": "declaration",
 							"kind": 16,
@@ -4265,17 +4265,17 @@
 						{
 							"title": "Enumeration Members",
 							"children": [
-								47860,
-								47861,
-								47862,
-								47863,
-								47864
+								50321,
+								50322,
+								50323,
+								50324,
+								50325
 							]
 						}
 					]
 				},
 				{
-					"id": 47865,
+					"id": 50326,
 					"name": "ClaimType",
 					"variant": "declaration",
 					"kind": 8,
@@ -4290,7 +4290,7 @@
 					},
 					"children": [
 						{
-							"id": 47866,
+							"id": 50327,
 							"name": "REFUND",
 							"variant": "declaration",
 							"kind": 16,
@@ -4309,7 +4309,7 @@
 							}
 						},
 						{
-							"id": 47867,
+							"id": 50328,
 							"name": "REPLACE",
 							"variant": "declaration",
 							"kind": 16,
@@ -4332,14 +4332,14 @@
 						{
 							"title": "Enumeration Members",
 							"children": [
-								47866,
-								47867
+								50327,
+								50328
 							]
 						}
 					]
 				},
 				{
-					"id": 47868,
+					"id": 50329,
 					"name": "ClaimReason",
 					"variant": "declaration",
 					"kind": 8,
@@ -4354,7 +4354,7 @@
 					},
 					"children": [
 						{
-							"id": 47869,
+							"id": 50330,
 							"name": "MISSING_ITEM",
 							"variant": "declaration",
 							"kind": 16,
@@ -4365,7 +4365,7 @@
 							}
 						},
 						{
-							"id": 47870,
+							"id": 50331,
 							"name": "WRONG_ITEM",
 							"variant": "declaration",
 							"kind": 16,
@@ -4376,7 +4376,7 @@
 							}
 						},
 						{
-							"id": 47871,
+							"id": 50332,
 							"name": "PRODUCTION_FAILURE",
 							"variant": "declaration",
 							"kind": 16,
@@ -4387,7 +4387,7 @@
 							}
 						},
 						{
-							"id": 47872,
+							"id": 50333,
 							"name": "OTHER",
 							"variant": "declaration",
 							"kind": 16,
@@ -4402,10 +4402,10 @@
 						{
 							"title": "Enumeration Members",
 							"children": [
-								47869,
-								47870,
-								47871,
-								47872
+								50330,
+								50331,
+								50332,
+								50333
 							]
 						}
 					]
@@ -4415,19 +4415,19 @@
 				{
 					"title": "Enumerations",
 					"children": [
-						47835,
-						47823,
-						47829,
-						47852,
-						47859,
-						47865,
-						47868
+						50296,
+						50284,
+						50290,
+						50313,
+						50320,
+						50326,
+						50329
 					]
 				}
 			]
 		},
 		{
-			"id": 48009,
+			"id": 50470,
 			"name": "PaymentEvents",
 			"variant": "declaration",
 			"kind": 32,
@@ -4437,14 +4437,14 @@
 			"type": {
 				"type": "reflection",
 				"declaration": {
-					"id": 48010,
+					"id": 50471,
 					"name": "__type",
 					"variant": "declaration",
 					"kind": 65536,
 					"flags": {},
 					"children": [
 						{
-							"id": 48011,
+							"id": 50472,
 							"name": "CAPTURED",
 							"variant": "declaration",
 							"kind": 1024,
@@ -4456,7 +4456,7 @@
 							"defaultValue": "\"payment.captured\""
 						},
 						{
-							"id": 48012,
+							"id": 50473,
 							"name": "REFUNDED",
 							"variant": "declaration",
 							"kind": 1024,
@@ -4472,8 +4472,8 @@
 						{
 							"title": "Properties",
 							"children": [
-								48011,
-								48012
+								50472,
+								50473
 							]
 						}
 					]
@@ -4482,7 +4482,7 @@
 			"defaultValue": "..."
 		},
 		{
-			"id": 48013,
+			"id": 50474,
 			"name": "PaymentCollectionStatus",
 			"variant": "declaration",
 			"kind": 8,
@@ -4497,7 +4497,7 @@
 			},
 			"children": [
 				{
-					"id": 48014,
+					"id": 50475,
 					"name": "NOT_PAID",
 					"variant": "declaration",
 					"kind": 16,
@@ -4516,7 +4516,7 @@
 					}
 				},
 				{
-					"id": 48015,
+					"id": 50476,
 					"name": "AWAITING",
 					"variant": "declaration",
 					"kind": 16,
@@ -4535,7 +4535,7 @@
 					}
 				},
 				{
-					"id": 48016,
+					"id": 50477,
 					"name": "AUTHORIZED",
 					"variant": "declaration",
 					"kind": 16,
@@ -4554,7 +4554,7 @@
 					}
 				},
 				{
-					"id": 48017,
+					"id": 50478,
 					"name": "PARTIALLY_AUTHORIZED",
 					"variant": "declaration",
 					"kind": 16,
@@ -4573,7 +4573,7 @@
 					}
 				},
 				{
-					"id": 48018,
+					"id": 50479,
 					"name": "CANCELED",
 					"variant": "declaration",
 					"kind": 16,
@@ -4596,17 +4596,17 @@
 				{
 					"title": "Enumeration Members",
 					"children": [
-						48014,
-						48015,
-						48016,
-						48017,
-						48018
+						50475,
+						50476,
+						50477,
+						50478,
+						50479
 					]
 				}
 			]
 		},
 		{
-			"id": 48019,
+			"id": 50480,
 			"name": "PaymentSessionStatus",
 			"variant": "declaration",
 			"kind": 8,
@@ -4621,7 +4621,7 @@
 			},
 			"children": [
 				{
-					"id": 48020,
+					"id": 50481,
 					"name": "AUTHORIZED",
 					"variant": "declaration",
 					"kind": 16,
@@ -4640,7 +4640,7 @@
 					}
 				},
 				{
-					"id": 48021,
+					"id": 50482,
 					"name": "CAPTURED",
 					"variant": "declaration",
 					"kind": 16,
@@ -4659,7 +4659,7 @@
 					}
 				},
 				{
-					"id": 48022,
+					"id": 50483,
 					"name": "PENDING",
 					"variant": "declaration",
 					"kind": 16,
@@ -4678,7 +4678,7 @@
 					}
 				},
 				{
-					"id": 48023,
+					"id": 50484,
 					"name": "REQUIRES_MORE",
 					"variant": "declaration",
 					"kind": 16,
@@ -4697,7 +4697,7 @@
 					}
 				},
 				{
-					"id": 48024,
+					"id": 50485,
 					"name": "ERROR",
 					"variant": "declaration",
 					"kind": 16,
@@ -4716,7 +4716,7 @@
 					}
 				},
 				{
-					"id": 48025,
+					"id": 50486,
 					"name": "CANCELED",
 					"variant": "declaration",
 					"kind": 16,
@@ -4739,25 +4739,25 @@
 				{
 					"title": "Enumeration Members",
 					"children": [
-						48020,
-						48021,
-						48022,
-						48023,
-						48024,
-						48025
+						50481,
+						50482,
+						50483,
+						50484,
+						50485,
+						50486
 					]
 				}
 			]
 		},
 		{
-			"id": 48026,
+			"id": 50487,
 			"name": "PaymentWebhookEvents",
 			"variant": "declaration",
 			"kind": 8,
 			"flags": {},
 			"children": [
 				{
-					"id": 48027,
+					"id": 50488,
 					"name": "WebhookReceived",
 					"variant": "declaration",
 					"kind": 16,
@@ -4772,13 +4772,13 @@
 				{
 					"title": "Enumeration Members",
 					"children": [
-						48027
+						50488
 					]
 				}
 			]
 		},
 		{
-			"id": 48028,
+			"id": 50489,
 			"name": "PaymentActions",
 			"variant": "declaration",
 			"kind": 8,
@@ -4793,7 +4793,7 @@
 			},
 			"children": [
 				{
-					"id": 48029,
+					"id": 50490,
 					"name": "AUTHORIZED",
 					"variant": "declaration",
 					"kind": 16,
@@ -4812,7 +4812,7 @@
 					}
 				},
 				{
-					"id": 48030,
+					"id": 50491,
 					"name": "SUCCESSFUL",
 					"variant": "declaration",
 					"kind": 16,
@@ -4831,7 +4831,7 @@
 					}
 				},
 				{
-					"id": 48031,
+					"id": 50492,
 					"name": "FAILED",
 					"variant": "declaration",
 					"kind": 16,
@@ -4850,7 +4850,7 @@
 					}
 				},
 				{
-					"id": 48032,
+					"id": 50493,
 					"name": "NOT_SUPPORTED",
 					"variant": "declaration",
 					"kind": 16,
@@ -4873,16 +4873,16 @@
 				{
 					"title": "Enumeration Members",
 					"children": [
-						48029,
-						48030,
-						48031,
-						48032
+						50490,
+						50491,
+						50492,
+						50493
 					]
 				}
 			]
 		},
 		{
-			"id": 48039,
+			"id": 50500,
 			"name": "PricingEvents",
 			"variant": "declaration",
 			"kind": 32,
@@ -4928,14 +4928,14 @@
 			"defaultValue": "..."
 		},
 		{
-			"id": 48033,
+			"id": 50494,
 			"name": "PriceListStatus",
 			"variant": "declaration",
 			"kind": 8,
 			"flags": {},
 			"children": [
 				{
-					"id": 48034,
+					"id": 50495,
 					"name": "ACTIVE",
 					"variant": "declaration",
 					"kind": 16,
@@ -4946,7 +4946,7 @@
 					}
 				},
 				{
-					"id": 48035,
+					"id": 50496,
 					"name": "DRAFT",
 					"variant": "declaration",
 					"kind": 16,
@@ -4961,21 +4961,21 @@
 				{
 					"title": "Enumeration Members",
 					"children": [
-						48034,
-						48035
+						50495,
+						50496
 					]
 				}
 			]
 		},
 		{
-			"id": 48036,
+			"id": 50497,
 			"name": "PriceListType",
 			"variant": "declaration",
 			"kind": 8,
 			"flags": {},
 			"children": [
 				{
-					"id": 48037,
+					"id": 50498,
 					"name": "SALE",
 					"variant": "declaration",
 					"kind": 16,
@@ -4986,7 +4986,7 @@
 					}
 				},
 				{
-					"id": 48038,
+					"id": 50499,
 					"name": "OVERRIDE",
 					"variant": "declaration",
 					"kind": 16,
@@ -5001,21 +5001,21 @@
 				{
 					"title": "Enumeration Members",
 					"children": [
-						48037,
-						48038
+						50498,
+						50499
 					]
 				}
 			]
 		},
 		{
-			"id": 47873,
+			"id": 50334,
 			"name": "ProductUtils",
 			"variant": "declaration",
 			"kind": 4,
 			"flags": {},
 			"children": [
 				{
-					"id": 47879,
+					"id": 50340,
 					"name": "ProductEvents",
 					"variant": "declaration",
 					"kind": 32,
@@ -5069,14 +5069,14 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 47874,
+					"id": 50335,
 					"name": "ProductStatus",
 					"variant": "declaration",
 					"kind": 8,
 					"flags": {},
 					"children": [
 						{
-							"id": 47875,
+							"id": 50336,
 							"name": "DRAFT",
 							"variant": "declaration",
 							"kind": 16,
@@ -5087,7 +5087,7 @@
 							}
 						},
 						{
-							"id": 47876,
+							"id": 50337,
 							"name": "PROPOSED",
 							"variant": "declaration",
 							"kind": 16,
@@ -5098,7 +5098,7 @@
 							}
 						},
 						{
-							"id": 47877,
+							"id": 50338,
 							"name": "PUBLISHED",
 							"variant": "declaration",
 							"kind": 16,
@@ -5109,7 +5109,7 @@
 							}
 						},
 						{
-							"id": 47878,
+							"id": 50339,
 							"name": "REJECTED",
 							"variant": "declaration",
 							"kind": 16,
@@ -5124,10 +5124,10 @@
 						{
 							"title": "Enumeration Members",
 							"children": [
-								47875,
-								47876,
-								47877,
-								47878
+								50336,
+								50337,
+								50338,
+								50339
 							]
 						}
 					]
@@ -5137,33 +5137,33 @@
 				{
 					"title": "Enumerations",
 					"children": [
-						47874
+						50335
 					]
 				},
 				{
 					"title": "Variables",
 					"children": [
-						47879
+						50340
 					]
 				}
 			]
 		},
 		{
-			"id": 47880,
+			"id": 50341,
 			"name": "PromotionUtils",
 			"variant": "declaration",
 			"kind": 4,
 			"flags": {},
 			"children": [
 				{
-					"id": 47881,
+					"id": 50342,
 					"name": "PromotionType",
 					"variant": "declaration",
 					"kind": 8,
 					"flags": {},
 					"children": [
 						{
-							"id": 47882,
+							"id": 50343,
 							"name": "STANDARD",
 							"variant": "declaration",
 							"kind": 16,
@@ -5174,7 +5174,7 @@
 							}
 						},
 						{
-							"id": 47883,
+							"id": 50344,
 							"name": "BUYGET",
 							"variant": "declaration",
 							"kind": 16,
@@ -5189,21 +5189,21 @@
 						{
 							"title": "Enumeration Members",
 							"children": [
-								47882,
-								47883
+								50343,
+								50344
 							]
 						}
 					]
 				},
 				{
-					"id": 47884,
+					"id": 50345,
 					"name": "ApplicationMethodType",
 					"variant": "declaration",
 					"kind": 8,
 					"flags": {},
 					"children": [
 						{
-							"id": 47885,
+							"id": 50346,
 							"name": "FIXED",
 							"variant": "declaration",
 							"kind": 16,
@@ -5214,7 +5214,7 @@
 							}
 						},
 						{
-							"id": 47886,
+							"id": 50347,
 							"name": "PERCENTAGE",
 							"variant": "declaration",
 							"kind": 16,
@@ -5229,21 +5229,21 @@
 						{
 							"title": "Enumeration Members",
 							"children": [
-								47885,
-								47886
+								50346,
+								50347
 							]
 						}
 					]
 				},
 				{
-					"id": 47887,
+					"id": 50348,
 					"name": "ApplicationMethodTargetType",
 					"variant": "declaration",
 					"kind": 8,
 					"flags": {},
 					"children": [
 						{
-							"id": 47888,
+							"id": 50349,
 							"name": "ORDER",
 							"variant": "declaration",
 							"kind": 16,
@@ -5254,7 +5254,7 @@
 							}
 						},
 						{
-							"id": 47889,
+							"id": 50350,
 							"name": "SHIPPING_METHODS",
 							"variant": "declaration",
 							"kind": 16,
@@ -5265,7 +5265,7 @@
 							}
 						},
 						{
-							"id": 47890,
+							"id": 50351,
 							"name": "ITEMS",
 							"variant": "declaration",
 							"kind": 16,
@@ -5280,22 +5280,22 @@
 						{
 							"title": "Enumeration Members",
 							"children": [
-								47888,
-								47889,
-								47890
+								50349,
+								50350,
+								50351
 							]
 						}
 					]
 				},
 				{
-					"id": 47891,
+					"id": 50352,
 					"name": "ApplicationMethodAllocation",
 					"variant": "declaration",
 					"kind": 8,
 					"flags": {},
 					"children": [
 						{
-							"id": 47892,
+							"id": 50353,
 							"name": "EACH",
 							"variant": "declaration",
 							"kind": 16,
@@ -5306,7 +5306,7 @@
 							}
 						},
 						{
-							"id": 47893,
+							"id": 50354,
 							"name": "ACROSS",
 							"variant": "declaration",
 							"kind": 16,
@@ -5321,21 +5321,21 @@
 						{
 							"title": "Enumeration Members",
 							"children": [
-								47892,
-								47893
+								50353,
+								50354
 							]
 						}
 					]
 				},
 				{
-					"id": 47894,
+					"id": 50355,
 					"name": "PromotionRuleOperator",
 					"variant": "declaration",
 					"kind": 8,
 					"flags": {},
 					"children": [
 						{
-							"id": 47895,
+							"id": 50356,
 							"name": "GTE",
 							"variant": "declaration",
 							"kind": 16,
@@ -5346,7 +5346,7 @@
 							}
 						},
 						{
-							"id": 47896,
+							"id": 50357,
 							"name": "LTE",
 							"variant": "declaration",
 							"kind": 16,
@@ -5357,7 +5357,7 @@
 							}
 						},
 						{
-							"id": 47897,
+							"id": 50358,
 							"name": "GT",
 							"variant": "declaration",
 							"kind": 16,
@@ -5368,7 +5368,7 @@
 							}
 						},
 						{
-							"id": 47898,
+							"id": 50359,
 							"name": "LT",
 							"variant": "declaration",
 							"kind": 16,
@@ -5379,7 +5379,7 @@
 							}
 						},
 						{
-							"id": 47899,
+							"id": 50360,
 							"name": "EQ",
 							"variant": "declaration",
 							"kind": 16,
@@ -5390,7 +5390,7 @@
 							}
 						},
 						{
-							"id": 47900,
+							"id": 50361,
 							"name": "NE",
 							"variant": "declaration",
 							"kind": 16,
@@ -5401,7 +5401,7 @@
 							}
 						},
 						{
-							"id": 47901,
+							"id": 50362,
 							"name": "IN",
 							"variant": "declaration",
 							"kind": 16,
@@ -5416,26 +5416,26 @@
 						{
 							"title": "Enumeration Members",
 							"children": [
-								47895,
-								47896,
-								47897,
-								47898,
-								47899,
-								47900,
-								47901
+								50356,
+								50357,
+								50358,
+								50359,
+								50360,
+								50361,
+								50362
 							]
 						}
 					]
 				},
 				{
-					"id": 47902,
+					"id": 50363,
 					"name": "CampaignBudgetType",
 					"variant": "declaration",
 					"kind": 8,
 					"flags": {},
 					"children": [
 						{
-							"id": 47903,
+							"id": 50364,
 							"name": "SPEND",
 							"variant": "declaration",
 							"kind": 16,
@@ -5446,7 +5446,7 @@
 							}
 						},
 						{
-							"id": 47904,
+							"id": 50365,
 							"name": "USAGE",
 							"variant": "declaration",
 							"kind": 16,
@@ -5461,21 +5461,21 @@
 						{
 							"title": "Enumeration Members",
 							"children": [
-								47903,
-								47904
+								50364,
+								50365
 							]
 						}
 					]
 				},
 				{
-					"id": 47905,
+					"id": 50366,
 					"name": "ComputedActions",
 					"variant": "declaration",
 					"kind": 8,
 					"flags": {},
 					"children": [
 						{
-							"id": 47906,
+							"id": 50367,
 							"name": "ADD_ITEM_ADJUSTMENT",
 							"variant": "declaration",
 							"kind": 16,
@@ -5486,7 +5486,7 @@
 							}
 						},
 						{
-							"id": 47907,
+							"id": 50368,
 							"name": "ADD_SHIPPING_METHOD_ADJUSTMENT",
 							"variant": "declaration",
 							"kind": 16,
@@ -5497,7 +5497,7 @@
 							}
 						},
 						{
-							"id": 47908,
+							"id": 50369,
 							"name": "REMOVE_ITEM_ADJUSTMENT",
 							"variant": "declaration",
 							"kind": 16,
@@ -5508,7 +5508,7 @@
 							}
 						},
 						{
-							"id": 47909,
+							"id": 50370,
 							"name": "REMOVE_SHIPPING_METHOD_ADJUSTMENT",
 							"variant": "declaration",
 							"kind": 16,
@@ -5519,7 +5519,7 @@
 							}
 						},
 						{
-							"id": 47910,
+							"id": 50371,
 							"name": "CAMPAIGN_BUDGET_EXCEEDED",
 							"variant": "declaration",
 							"kind": 16,
@@ -5534,24 +5534,24 @@
 						{
 							"title": "Enumeration Members",
 							"children": [
-								47906,
-								47907,
-								47908,
-								47909,
-								47910
+								50367,
+								50368,
+								50369,
+								50370,
+								50371
 							]
 						}
 					]
 				},
 				{
-					"id": 47911,
+					"id": 50372,
 					"name": "PromotionActions",
 					"variant": "declaration",
 					"kind": 8,
 					"flags": {},
 					"children": [
 						{
-							"id": 47912,
+							"id": 50373,
 							"name": "ADD",
 							"variant": "declaration",
 							"kind": 16,
@@ -5562,7 +5562,7 @@
 							}
 						},
 						{
-							"id": 47913,
+							"id": 50374,
 							"name": "REMOVE",
 							"variant": "declaration",
 							"kind": 16,
@@ -5573,7 +5573,7 @@
 							}
 						},
 						{
-							"id": 47914,
+							"id": 50375,
 							"name": "REPLACE",
 							"variant": "declaration",
 							"kind": 16,
@@ -5588,22 +5588,22 @@
 						{
 							"title": "Enumeration Members",
 							"children": [
-								47912,
-								47913,
-								47914
+								50373,
+								50374,
+								50375
 							]
 						}
 					]
 				},
 				{
-					"id": 47915,
+					"id": 50376,
 					"name": "RuleType",
 					"variant": "declaration",
 					"kind": 8,
 					"flags": {},
 					"children": [
 						{
-							"id": 47916,
+							"id": 50377,
 							"name": "RULES",
 							"variant": "declaration",
 							"kind": 16,
@@ -5614,7 +5614,7 @@
 							}
 						},
 						{
-							"id": 47917,
+							"id": 50378,
 							"name": "TARGET_RULES",
 							"variant": "declaration",
 							"kind": 16,
@@ -5625,7 +5625,7 @@
 							}
 						},
 						{
-							"id": 47918,
+							"id": 50379,
 							"name": "BUY_RULES",
 							"variant": "declaration",
 							"kind": 16,
@@ -5640,9 +5640,9 @@
 						{
 							"title": "Enumeration Members",
 							"children": [
-								47916,
-								47917,
-								47918
+								50377,
+								50378,
+								50379
 							]
 						}
 					]
@@ -5652,35 +5652,35 @@
 				{
 					"title": "Enumerations",
 					"children": [
-						47881,
-						47884,
-						47887,
-						47891,
-						47894,
-						47902,
-						47905,
-						47911,
-						47915
+						50342,
+						50345,
+						50348,
+						50352,
+						50355,
+						50363,
+						50366,
+						50372,
+						50376
 					]
 				}
 			]
 		},
 		{
-			"id": 47919,
+			"id": 50380,
 			"name": "ShippingProfileUtils",
 			"variant": "declaration",
 			"kind": 4,
 			"flags": {},
 			"children": [
 				{
-					"id": 47920,
+					"id": 50381,
 					"name": "ShippingProfileType",
 					"variant": "declaration",
 					"kind": 8,
 					"flags": {},
 					"children": [
 						{
-							"id": 47921,
+							"id": 50382,
 							"name": "DEFAULT",
 							"variant": "declaration",
 							"kind": 16,
@@ -5691,7 +5691,7 @@
 							}
 						},
 						{
-							"id": 47922,
+							"id": 50383,
 							"name": "GIFT_CARD",
 							"variant": "declaration",
 							"kind": 16,
@@ -5702,7 +5702,7 @@
 							}
 						},
 						{
-							"id": 47923,
+							"id": 50384,
 							"name": "CUSTOM",
 							"variant": "declaration",
 							"kind": 16,
@@ -5717,9 +5717,9 @@
 						{
 							"title": "Enumeration Members",
 							"children": [
-								47921,
-								47922,
-								47923
+								50382,
+								50383,
+								50384
 							]
 						}
 					]
@@ -5729,20 +5729,20 @@
 				{
 					"title": "Enumerations",
 					"children": [
-						47920
+						50381
 					]
 				}
 			]
 		},
 		{
-			"id": 47924,
+			"id": 50385,
 			"name": "UserUtils",
 			"variant": "declaration",
 			"kind": 4,
 			"flags": {},
 			"children": [
 				{
-					"id": 47925,
+					"id": 50386,
 					"name": "UserEvents",
 					"variant": "declaration",
 					"kind": 32,
@@ -5752,14 +5752,14 @@
 					"type": {
 						"type": "reflection",
 						"declaration": {
-							"id": 47926,
+							"id": 50387,
 							"name": "__type",
 							"variant": "declaration",
 							"kind": 65536,
 							"flags": {},
 							"children": [
 								{
-									"id": 47928,
+									"id": 50389,
 									"name": "USER_CREATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -5770,7 +5770,7 @@
 									}
 								},
 								{
-									"id": 47929,
+									"id": 50390,
 									"name": "INVITE_CREATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -5781,7 +5781,7 @@
 									}
 								},
 								{
-									"id": 47930,
+									"id": 50391,
 									"name": "USER_UPDATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -5792,7 +5792,7 @@
 									}
 								},
 								{
-									"id": 47931,
+									"id": 50392,
 									"name": "INVITE_UPDATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -5803,7 +5803,7 @@
 									}
 								},
 								{
-									"id": 47932,
+									"id": 50393,
 									"name": "USER_DELETED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -5814,7 +5814,7 @@
 									}
 								},
 								{
-									"id": 47933,
+									"id": 50394,
 									"name": "INVITE_DELETED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -5825,7 +5825,7 @@
 									}
 								},
 								{
-									"id": 47934,
+									"id": 50395,
 									"name": "USER_RESTORED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -5836,7 +5836,7 @@
 									}
 								},
 								{
-									"id": 47935,
+									"id": 50396,
 									"name": "INVITE_RESTORED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -5847,7 +5847,7 @@
 									}
 								},
 								{
-									"id": 47936,
+									"id": 50397,
 									"name": "USER_ATTACHED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -5858,7 +5858,7 @@
 									}
 								},
 								{
-									"id": 47937,
+									"id": 50398,
 									"name": "INVITE_ATTACHED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -5869,7 +5869,7 @@
 									}
 								},
 								{
-									"id": 47938,
+									"id": 50399,
 									"name": "USER_DETACHED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -5880,7 +5880,7 @@
 									}
 								},
 								{
-									"id": 47939,
+									"id": 50400,
 									"name": "INVITE_DETACHED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -5891,7 +5891,7 @@
 									}
 								},
 								{
-									"id": 47927,
+									"id": 50388,
 									"name": "INVITE_TOKEN_GENERATED",
 									"variant": "declaration",
 									"kind": 1024,
@@ -5907,19 +5907,19 @@
 								{
 									"title": "Properties",
 									"children": [
-										47928,
-										47929,
-										47930,
-										47931,
-										47932,
-										47933,
-										47934,
-										47935,
-										47936,
-										47937,
-										47938,
-										47939,
-										47927
+										50389,
+										50390,
+										50391,
+										50392,
+										50393,
+										50394,
+										50395,
+										50396,
+										50397,
+										50398,
+										50399,
+										50400,
+										50388
 									]
 								}
 							]
@@ -5932,7 +5932,7 @@
 				{
 					"title": "Variables",
 					"children": [
-						47925
+						50386
 					]
 				}
 			]
@@ -5942,1660 +5942,1660 @@
 		{
 			"title": "Namespaces",
 			"children": [
-				47629,
-				47713,
-				47940,
-				47792,
-				47794,
-				47822,
-				47873,
-				47880,
-				47919,
-				47924
+				50090,
+				50174,
+				50401,
+				50253,
+				50255,
+				50283,
+				50334,
+				50341,
+				50380,
+				50385
 			]
 		},
 		{
 			"title": "Enumerations",
 			"children": [
-				48005,
-				48013,
-				48019,
-				48026,
-				48028,
-				48033,
-				48036
+				50466,
+				50474,
+				50480,
+				50487,
+				50489,
+				50494,
+				50497
 			]
 		},
 		{
 			"title": "Interfaces",
 			"children": [
-				48040,
-				48043,
-				48046
+				50501,
+				50504,
+				50507
 			]
 		},
 		{
 			"title": "Variables",
 			"children": [
-				47627,
-				47628,
-				48004,
-				48009,
-				48039
+				50088,
+				50089,
+				50465,
+				50470,
+				50500
 			]
 		}
 	],
 	"packageName": "@medusajs/utils",
 	"symbolIdMap": {
-		"47626": {
+		"50087": {
 			"sourceFileName": "../../../../packages/core/utils/src/index.ts",
 			"qualifiedName": ""
 		},
-		"47627": {
+		"50088": {
 			"sourceFileName": "../../../../packages/core/utils/src/index.ts",
 			"qualifiedName": "MedusaModuleType"
 		},
-		"47628": {
+		"50089": {
 			"sourceFileName": "../../../../packages/core/utils/src/index.ts",
 			"qualifiedName": "MedusaModuleProviderType"
 		},
-		"47629": {
+		"50090": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/index.ts",
 			"qualifiedName": ""
 		},
-		"47630": {
+		"50091": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "CartWorkflowEvents"
 		},
-		"47631": {
+		"50092": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object"
 		},
-		"47632": {
+		"50093": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.CREATED"
 		},
-		"47633": {
+		"50094": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.UPDATED"
 		},
-		"47634": {
+		"50095": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.CUSTOMER_UPDATED"
 		},
-		"47635": {
+		"50096": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.REGION_UPDATED"
 		},
-		"47636": {
+		"50097": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "CustomerWorkflowEvents"
 		},
-		"47637": {
+		"50098": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object"
 		},
-		"47638": {
+		"50099": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.CREATED"
 		},
-		"47639": {
+		"50100": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.UPDATED"
 		},
-		"47640": {
+		"50101": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.DELETED"
 		},
-		"47641": {
+		"50102": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "OrderWorkflowEvents"
 		},
-		"47642": {
+		"50103": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object"
 		},
-		"47643": {
+		"50104": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.PLACED"
 		},
-		"47644": {
+		"50105": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.CANCELED"
 		},
-		"47645": {
+		"50106": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.COMPLETED"
 		},
-		"47646": {
+		"50107": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.ARCHIVED"
 		},
-		"47647": {
+		"50108": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.FULFILLMENT_CREATED"
 		},
-		"47648": {
+		"50109": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.FULFILLMENT_CANCELED"
 		},
-		"47649": {
+		"50110": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.RETURN_REQUESTED"
 		},
-		"47650": {
+		"50111": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.RETURN_RECEIVED"
 		},
-		"47651": {
+		"50112": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.CLAIM_CREATED"
 		},
-		"47652": {
+		"50113": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.EXCHANGE_CREATED"
 		},
-		"47653": {
+		"50114": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.TRANSFER_REQUESTED"
 		},
-		"47654": {
+		"50115": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "UserWorkflowEvents"
 		},
-		"47655": {
+		"50116": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object"
 		},
-		"47656": {
+		"50117": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.CREATED"
 		},
-		"47657": {
+		"50118": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.UPDATED"
 		},
-		"47658": {
+		"50119": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.DELETED"
 		},
-		"47659": {
+		"50120": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "AuthWorkflowEvents"
 		},
-		"47660": {
+		"50121": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object"
 		},
-		"47661": {
+		"50122": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.PASSWORD_RESET"
 		},
-		"47662": {
+		"50123": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "SalesChannelWorkflowEvents"
 		},
-		"47663": {
+		"50124": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object"
 		},
-		"47664": {
+		"50125": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.CREATED"
 		},
-		"47665": {
+		"50126": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.UPDATED"
 		},
-		"47666": {
+		"50127": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.DELETED"
 		},
-		"47667": {
+		"50128": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "ProductCategoryWorkflowEvents"
 		},
-		"47668": {
+		"50129": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object"
 		},
-		"47669": {
+		"50130": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.CREATED"
 		},
-		"47670": {
+		"50131": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.UPDATED"
 		},
-		"47671": {
+		"50132": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.DELETED"
 		},
-		"47672": {
+		"50133": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "ProductCollectionWorkflowEvents"
 		},
-		"47673": {
+		"50134": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object"
 		},
-		"47674": {
+		"50135": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.CREATED"
 		},
-		"47675": {
+		"50136": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.UPDATED"
 		},
-		"47676": {
+		"50137": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.DELETED"
 		},
-		"47677": {
+		"50138": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "ProductVariantWorkflowEvents"
 		},
-		"47678": {
+		"50139": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object"
 		},
-		"47679": {
+		"50140": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.UPDATED"
 		},
-		"47680": {
+		"50141": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.CREATED"
 		},
-		"47681": {
+		"50142": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.DELETED"
 		},
-		"47682": {
+		"50143": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "ProductWorkflowEvents"
 		},
-		"47683": {
+		"50144": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object"
 		},
-		"47684": {
+		"50145": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.UPDATED"
 		},
-		"47685": {
+		"50146": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.CREATED"
 		},
-		"47686": {
+		"50147": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.DELETED"
 		},
-		"47687": {
+		"50148": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "ProductTypeWorkflowEvents"
 		},
-		"47688": {
+		"50149": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object"
 		},
-		"47689": {
+		"50150": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.UPDATED"
 		},
-		"47690": {
+		"50151": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.CREATED"
 		},
-		"47691": {
+		"50152": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.DELETED"
 		},
-		"47692": {
+		"50153": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "ProductTagWorkflowEvents"
 		},
-		"47693": {
+		"50154": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object"
 		},
-		"47694": {
+		"50155": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.UPDATED"
 		},
-		"47695": {
+		"50156": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.CREATED"
 		},
-		"47696": {
+		"50157": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.DELETED"
 		},
-		"47697": {
+		"50158": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "ProductOptionWorkflowEvents"
 		},
-		"47698": {
+		"50159": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object"
 		},
-		"47699": {
+		"50160": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.UPDATED"
 		},
-		"47700": {
+		"50161": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.CREATED"
 		},
-		"47701": {
+		"50162": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.DELETED"
 		},
-		"47702": {
+		"50163": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "InviteWorkflowEvents"
 		},
-		"47703": {
+		"50164": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object"
 		},
-		"47704": {
+		"50165": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.ACCEPTED"
 		},
-		"47705": {
+		"50166": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.CREATED"
 		},
-		"47706": {
+		"50167": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.DELETED"
 		},
-		"47707": {
+		"50168": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.RESENT"
 		},
-		"47708": {
+		"50169": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "RegionWorkflowEvents"
 		},
-		"47709": {
+		"50170": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object"
 		},
-		"47710": {
+		"50171": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.UPDATED"
 		},
-		"47711": {
+		"50172": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.CREATED"
 		},
-		"47712": {
+		"50173": {
 			"sourceFileName": "../../../../packages/core/utils/src/core-flows/events.ts",
 			"qualifiedName": "__object.DELETED"
 		},
-		"47713": {
+		"50174": {
 			"sourceFileName": "../../../../packages/core/utils/src/fulfillment/index.ts",
 			"qualifiedName": ""
 		},
-		"47714": {
+		"50175": {
 			"sourceFileName": "../../../../packages/core/utils/src/fulfillment/geo-zone.ts",
 			"qualifiedName": "GeoZoneType"
 		},
-		"47715": {
+		"50176": {
 			"sourceFileName": "../../../../packages/core/utils/src/fulfillment/geo-zone.ts",
 			"qualifiedName": "GeoZoneType.COUNTRY"
 		},
-		"47716": {
+		"50177": {
 			"sourceFileName": "../../../../packages/core/utils/src/fulfillment/geo-zone.ts",
 			"qualifiedName": "GeoZoneType.PROVINCE"
 		},
-		"47717": {
+		"50178": {
 			"sourceFileName": "../../../../packages/core/utils/src/fulfillment/geo-zone.ts",
 			"qualifiedName": "GeoZoneType.CITY"
 		},
-		"47718": {
+		"50179": {
 			"sourceFileName": "../../../../packages/core/utils/src/fulfillment/geo-zone.ts",
 			"qualifiedName": "GeoZoneType.ZIP"
 		},
-		"47719": {
+		"50180": {
 			"sourceFileName": "../../../../packages/core/utils/src/fulfillment/shipping-options.ts",
 			"qualifiedName": "ShippingOptionPriceType"
 		},
-		"47720": {
+		"50181": {
 			"sourceFileName": "../../../../packages/core/utils/src/fulfillment/shipping-options.ts",
 			"qualifiedName": "ShippingOptionPriceType.CALCULATED"
 		},
-		"47721": {
+		"50182": {
 			"sourceFileName": "../../../../packages/core/utils/src/fulfillment/shipping-options.ts",
 			"qualifiedName": "ShippingOptionPriceType.FLAT"
 		},
-		"47722": {
+		"50183": {
 			"sourceFileName": "../../../../packages/core/utils/src/fulfillment/events.ts",
 			"qualifiedName": "FulfillmentEvents"
 		},
-		"47723": {
+		"50184": {
 			"sourceFileName": "../../../../packages/core/utils/src/fulfillment/events.ts",
 			"qualifiedName": "__object"
 		},
-		"47724": {
+		"50185": {
 			"sourceFileName": "../../../../packages/core/utils/src/fulfillment/events.ts",
 			"qualifiedName": "__object.SHIPMENT_CREATED"
 		},
-		"47725": {
+		"50186": {
 			"sourceFileName": "../../../../packages/core/utils/src/fulfillment/events.ts",
 			"qualifiedName": "__object.DELIVERY_CREATED"
 		},
-		"47726": {
+		"50187": {
 			"sourceFileName": "",
 			"qualifiedName": "FULFILLMENT_CREATED"
 		},
-		"47727": {
+		"50188": {
 			"sourceFileName": "",
 			"qualifiedName": "FULFILLMENT_SET_CREATED"
 		},
-		"47728": {
+		"50189": {
 			"sourceFileName": "",
 			"qualifiedName": "SERVICE_ZONE_CREATED"
 		},
-		"47729": {
+		"50190": {
 			"sourceFileName": "",
 			"qualifiedName": "GEO_ZONE_CREATED"
 		},
-		"47730": {
+		"50191": {
 			"sourceFileName": "",
 			"qualifiedName": "SHIPPING_OPTION_CREATED"
 		},
-		"47731": {
+		"50192": {
 			"sourceFileName": "",
 			"qualifiedName": "SHIPPING_OPTION_TYPE_CREATED"
 		},
-		"47732": {
+		"50193": {
 			"sourceFileName": "",
 			"qualifiedName": "SHIPPING_PROFILE_CREATED"
 		},
-		"47733": {
+		"50194": {
 			"sourceFileName": "",
 			"qualifiedName": "SHIPPING_OPTION_RULE_CREATED"
 		},
-		"47734": {
+		"50195": {
 			"sourceFileName": "",
 			"qualifiedName": "FULFILLMENT_ADDRESS_CREATED"
 		},
-		"47735": {
+		"50196": {
 			"sourceFileName": "",
 			"qualifiedName": "FULFILLMENT_ITEM_CREATED"
 		},
-		"47736": {
+		"50197": {
 			"sourceFileName": "",
 			"qualifiedName": "FULFILLMENT_LABEL_CREATED"
 		},
-		"47737": {
+		"50198": {
 			"sourceFileName": "",
 			"qualifiedName": "FULFILLMENT_UPDATED"
 		},
-		"47738": {
+		"50199": {
 			"sourceFileName": "",
 			"qualifiedName": "FULFILLMENT_SET_UPDATED"
 		},
-		"47739": {
+		"50200": {
 			"sourceFileName": "",
 			"qualifiedName": "SERVICE_ZONE_UPDATED"
 		},
-		"47740": {
+		"50201": {
 			"sourceFileName": "",
 			"qualifiedName": "GEO_ZONE_UPDATED"
 		},
-		"47741": {
+		"50202": {
 			"sourceFileName": "",
 			"qualifiedName": "SHIPPING_OPTION_UPDATED"
 		},
-		"47742": {
+		"50203": {
 			"sourceFileName": "",
 			"qualifiedName": "SHIPPING_OPTION_TYPE_UPDATED"
 		},
-		"47743": {
+		"50204": {
 			"sourceFileName": "",
 			"qualifiedName": "SHIPPING_PROFILE_UPDATED"
 		},
-		"47744": {
+		"50205": {
 			"sourceFileName": "",
 			"qualifiedName": "SHIPPING_OPTION_RULE_UPDATED"
 		},
-		"47745": {
+		"50206": {
 			"sourceFileName": "",
 			"qualifiedName": "FULFILLMENT_ADDRESS_UPDATED"
 		},
-		"47746": {
+		"50207": {
 			"sourceFileName": "",
 			"qualifiedName": "FULFILLMENT_ITEM_UPDATED"
 		},
-		"47747": {
+		"50208": {
 			"sourceFileName": "",
 			"qualifiedName": "FULFILLMENT_LABEL_UPDATED"
 		},
-		"47748": {
+		"50209": {
 			"sourceFileName": "",
 			"qualifiedName": "FULFILLMENT_DELETED"
 		},
-		"47749": {
+		"50210": {
 			"sourceFileName": "",
 			"qualifiedName": "FULFILLMENT_SET_DELETED"
 		},
-		"47750": {
+		"50211": {
 			"sourceFileName": "",
 			"qualifiedName": "SERVICE_ZONE_DELETED"
 		},
-		"47751": {
+		"50212": {
 			"sourceFileName": "",
 			"qualifiedName": "GEO_ZONE_DELETED"
 		},
-		"47752": {
+		"50213": {
 			"sourceFileName": "",
 			"qualifiedName": "SHIPPING_OPTION_DELETED"
 		},
-		"47753": {
+		"50214": {
 			"sourceFileName": "",
 			"qualifiedName": "SHIPPING_OPTION_TYPE_DELETED"
 		},
-		"47754": {
+		"50215": {
 			"sourceFileName": "",
 			"qualifiedName": "SHIPPING_PROFILE_DELETED"
 		},
-		"47755": {
+		"50216": {
 			"sourceFileName": "",
 			"qualifiedName": "SHIPPING_OPTION_RULE_DELETED"
 		},
-		"47756": {
+		"50217": {
 			"sourceFileName": "",
 			"qualifiedName": "FULFILLMENT_ADDRESS_DELETED"
 		},
-		"47757": {
+		"50218": {
 			"sourceFileName": "",
 			"qualifiedName": "FULFILLMENT_ITEM_DELETED"
 		},
-		"47758": {
+		"50219": {
 			"sourceFileName": "",
 			"qualifiedName": "FULFILLMENT_LABEL_DELETED"
 		},
-		"47759": {
+		"50220": {
 			"sourceFileName": "",
 			"qualifiedName": "FULFILLMENT_RESTORED"
 		},
-		"47760": {
+		"50221": {
 			"sourceFileName": "",
 			"qualifiedName": "FULFILLMENT_SET_RESTORED"
 		},
-		"47761": {
+		"50222": {
 			"sourceFileName": "",
 			"qualifiedName": "SERVICE_ZONE_RESTORED"
 		},
-		"47762": {
+		"50223": {
 			"sourceFileName": "",
 			"qualifiedName": "GEO_ZONE_RESTORED"
 		},
-		"47763": {
+		"50224": {
 			"sourceFileName": "",
 			"qualifiedName": "SHIPPING_OPTION_RESTORED"
 		},
-		"47764": {
+		"50225": {
 			"sourceFileName": "",
 			"qualifiedName": "SHIPPING_OPTION_TYPE_RESTORED"
 		},
-		"47765": {
+		"50226": {
 			"sourceFileName": "",
 			"qualifiedName": "SHIPPING_PROFILE_RESTORED"
 		},
-		"47766": {
+		"50227": {
 			"sourceFileName": "",
 			"qualifiedName": "SHIPPING_OPTION_RULE_RESTORED"
 		},
-		"47767": {
+		"50228": {
 			"sourceFileName": "",
 			"qualifiedName": "FULFILLMENT_ADDRESS_RESTORED"
 		},
-		"47768": {
+		"50229": {
 			"sourceFileName": "",
 			"qualifiedName": "FULFILLMENT_ITEM_RESTORED"
 		},
-		"47769": {
+		"50230": {
 			"sourceFileName": "",
 			"qualifiedName": "FULFILLMENT_LABEL_RESTORED"
 		},
-		"47770": {
+		"50231": {
 			"sourceFileName": "",
 			"qualifiedName": "FULFILLMENT_ATTACHED"
 		},
-		"47771": {
+		"50232": {
 			"sourceFileName": "",
 			"qualifiedName": "FULFILLMENT_SET_ATTACHED"
 		},
-		"47772": {
+		"50233": {
 			"sourceFileName": "",
 			"qualifiedName": "SERVICE_ZONE_ATTACHED"
 		},
-		"47773": {
+		"50234": {
 			"sourceFileName": "",
 			"qualifiedName": "GEO_ZONE_ATTACHED"
 		},
-		"47774": {
+		"50235": {
 			"sourceFileName": "",
 			"qualifiedName": "SHIPPING_OPTION_ATTACHED"
 		},
-		"47775": {
+		"50236": {
 			"sourceFileName": "",
 			"qualifiedName": "SHIPPING_OPTION_TYPE_ATTACHED"
 		},
-		"47776": {
+		"50237": {
 			"sourceFileName": "",
 			"qualifiedName": "SHIPPING_PROFILE_ATTACHED"
 		},
-		"47777": {
+		"50238": {
 			"sourceFileName": "",
 			"qualifiedName": "SHIPPING_OPTION_RULE_ATTACHED"
 		},
-		"47778": {
+		"50239": {
 			"sourceFileName": "",
 			"qualifiedName": "FULFILLMENT_ADDRESS_ATTACHED"
 		},
-		"47779": {
+		"50240": {
 			"sourceFileName": "",
 			"qualifiedName": "FULFILLMENT_ITEM_ATTACHED"
 		},
-		"47780": {
+		"50241": {
 			"sourceFileName": "",
 			"qualifiedName": "FULFILLMENT_LABEL_ATTACHED"
 		},
-		"47781": {
+		"50242": {
 			"sourceFileName": "",
 			"qualifiedName": "FULFILLMENT_DETACHED"
 		},
-		"47782": {
+		"50243": {
 			"sourceFileName": "",
 			"qualifiedName": "FULFILLMENT_SET_DETACHED"
 		},
-		"47783": {
+		"50244": {
 			"sourceFileName": "",
 			"qualifiedName": "SERVICE_ZONE_DETACHED"
 		},
-		"47784": {
+		"50245": {
 			"sourceFileName": "",
 			"qualifiedName": "GEO_ZONE_DETACHED"
 		},
-		"47785": {
+		"50246": {
 			"sourceFileName": "",
 			"qualifiedName": "SHIPPING_OPTION_DETACHED"
 		},
-		"47786": {
+		"50247": {
 			"sourceFileName": "",
 			"qualifiedName": "SHIPPING_OPTION_TYPE_DETACHED"
 		},
-		"47787": {
+		"50248": {
 			"sourceFileName": "",
 			"qualifiedName": "SHIPPING_PROFILE_DETACHED"
 		},
-		"47788": {
+		"50249": {
 			"sourceFileName": "",
 			"qualifiedName": "SHIPPING_OPTION_RULE_DETACHED"
 		},
-		"47789": {
+		"50250": {
 			"sourceFileName": "",
 			"qualifiedName": "FULFILLMENT_ADDRESS_DETACHED"
 		},
-		"47790": {
+		"50251": {
 			"sourceFileName": "",
 			"qualifiedName": "FULFILLMENT_ITEM_DETACHED"
 		},
-		"47791": {
+		"50252": {
 			"sourceFileName": "",
 			"qualifiedName": "FULFILLMENT_LABEL_DETACHED"
 		},
-		"47792": {
+		"50253": {
 			"sourceFileName": "../../../../packages/core/utils/src/inventory/index.ts",
 			"qualifiedName": ""
 		},
-		"47793": {
+		"50254": {
 			"sourceFileName": "../../../../packages/core/utils/src/inventory/events.ts",
 			"qualifiedName": "InventoryEvents"
 		},
-		"47794": {
+		"50255": {
 			"sourceFileName": "../../../../packages/core/utils/src/link/index.ts",
 			"qualifiedName": ""
 		},
-		"47795": {
+		"50256": {
 			"sourceFileName": "../../../../packages/core/utils/src/link/links.ts",
 			"qualifiedName": "LINKS"
 		},
-		"47796": {
+		"50257": {
 			"sourceFileName": "../../../../packages/core/utils/src/link/links.ts",
 			"qualifiedName": "__object"
 		},
-		"47797": {
+		"50258": {
 			"sourceFileName": "../../../../packages/core/utils/src/link/links.ts",
 			"qualifiedName": "__object.ProductVariantInventoryItem"
 		},
-		"47798": {
+		"50259": {
 			"sourceFileName": "../../../../packages/core/utils/src/link/links.ts",
 			"qualifiedName": "__object.ProductVariantPriceSet"
 		},
-		"47799": {
+		"50260": {
 			"sourceFileName": "../../../../packages/core/utils/src/link/links.ts",
 			"qualifiedName": "__object.ShippingOptionPriceSet"
 		},
-		"47800": {
+		"50261": {
 			"sourceFileName": "../../../../packages/core/utils/src/link/links.ts",
 			"qualifiedName": "__object.CartPaymentCollection"
 		},
-		"47801": {
+		"50262": {
 			"sourceFileName": "../../../../packages/core/utils/src/link/links.ts",
 			"qualifiedName": "__object.RegionPaymentProvider"
 		},
-		"47802": {
+		"50263": {
 			"sourceFileName": "../../../../packages/core/utils/src/link/links.ts",
 			"qualifiedName": "__object.CartPromotion"
 		},
-		"47803": {
+		"50264": {
 			"sourceFileName": "../../../../packages/core/utils/src/link/links.ts",
 			"qualifiedName": "__object.SalesChannelLocation"
 		},
-		"47804": {
+		"50265": {
 			"sourceFileName": "../../../../packages/core/utils/src/link/links.ts",
 			"qualifiedName": "__object.LocationFulfillmentProvider"
 		},
-		"47805": {
+		"50266": {
 			"sourceFileName": "../../../../packages/core/utils/src/link/links.ts",
 			"qualifiedName": "__object.LocationFulfillmentSet"
 		},
-		"47806": {
+		"50267": {
 			"sourceFileName": "../../../../packages/core/utils/src/link/links.ts",
 			"qualifiedName": "__object.OrderPromotion"
 		},
-		"47807": {
+		"50268": {
 			"sourceFileName": "../../../../packages/core/utils/src/link/links.ts",
 			"qualifiedName": "__object.OrderCart"
 		},
-		"47808": {
+		"50269": {
 			"sourceFileName": "../../../../packages/core/utils/src/link/links.ts",
 			"qualifiedName": "__object.OrderSalesChannel"
 		},
-		"47809": {
+		"50270": {
 			"sourceFileName": "../../../../packages/core/utils/src/link/links.ts",
 			"qualifiedName": "__object.PublishableApiKeySalesChannel"
 		},
-		"47810": {
+		"50271": {
 			"sourceFileName": "../../../../packages/core/utils/src/link/links.ts",
 			"qualifiedName": "__object.ProductSalesChannel"
 		},
-		"47811": {
+		"50272": {
 			"sourceFileName": "../../../../packages/core/utils/src/link/links.ts",
 			"qualifiedName": "__object.OrderPaymentCollection"
 		},
-		"47812": {
+		"50273": {
 			"sourceFileName": "../../../../packages/core/utils/src/link/links.ts",
 			"qualifiedName": "__object.OrderClaimPaymentCollection"
 		},
-		"47813": {
+		"50274": {
 			"sourceFileName": "../../../../packages/core/utils/src/link/links.ts",
 			"qualifiedName": "__object.OrderExchangePaymentCollection"
 		},
-		"47814": {
+		"50275": {
 			"sourceFileName": "../../../../packages/core/utils/src/link/links.ts",
 			"qualifiedName": "__object.OrderFulfillment"
 		},
-		"47815": {
+		"50276": {
 			"sourceFileName": "../../../../packages/core/utils/src/link/links.ts",
 			"qualifiedName": "__object.ReturnFulfillment"
 		},
-		"47816": {
+		"50277": {
 			"sourceFileName": "../../../../packages/core/utils/src/link/compose-link-name.ts",
 			"qualifiedName": "composeLinkName"
 		},
-		"47817": {
+		"50278": {
 			"sourceFileName": "../../../../packages/core/utils/src/link/compose-link-name.ts",
 			"qualifiedName": "composeLinkName"
 		},
-		"47818": {
+		"50279": {
 			"sourceFileName": "../../../../packages/core/utils/src/link/compose-link-name.ts",
 			"qualifiedName": "args"
 		},
-		"47819": {
+		"50280": {
 			"sourceFileName": "../../../../packages/core/utils/src/link/compose-link-name.ts",
 			"qualifiedName": "composeTableName"
 		},
-		"47820": {
+		"50281": {
 			"sourceFileName": "../../../../packages/core/utils/src/link/compose-link-name.ts",
 			"qualifiedName": "composeTableName"
 		},
-		"47821": {
+		"50282": {
 			"sourceFileName": "../../../../packages/core/utils/src/link/compose-link-name.ts",
 			"qualifiedName": "args"
 		},
-		"47822": {
+		"50283": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/index.ts",
 			"qualifiedName": ""
 		},
-		"47823": {
+		"50284": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/order-change.ts",
 			"qualifiedName": "OrderChangeStatus"
 		},
-		"47824": {
+		"50285": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/order-change.ts",
 			"qualifiedName": "OrderChangeStatus.CONFIRMED"
 		},
-		"47825": {
+		"50286": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/order-change.ts",
 			"qualifiedName": "OrderChangeStatus.DECLINED"
 		},
-		"47826": {
+		"50287": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/order-change.ts",
 			"qualifiedName": "OrderChangeStatus.REQUESTED"
 		},
-		"47827": {
+		"50288": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/order-change.ts",
 			"qualifiedName": "OrderChangeStatus.PENDING"
 		},
-		"47828": {
+		"50289": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/order-change.ts",
 			"qualifiedName": "OrderChangeStatus.CANCELED"
 		},
-		"47829": {
+		"50290": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/order-change.ts",
 			"qualifiedName": "OrderChangeType"
 		},
-		"47830": {
+		"50291": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/order-change.ts",
 			"qualifiedName": "OrderChangeType.RETURN_REQUEST"
 		},
-		"47831": {
+		"50292": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/order-change.ts",
 			"qualifiedName": "OrderChangeType.RETURN_RECEIVE"
 		},
-		"47832": {
+		"50293": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/order-change.ts",
 			"qualifiedName": "OrderChangeType.EXCHANGE"
 		},
-		"47833": {
+		"50294": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/order-change.ts",
 			"qualifiedName": "OrderChangeType.CLAIM"
 		},
-		"47834": {
+		"50295": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/order-change.ts",
 			"qualifiedName": "OrderChangeType.EDIT"
 		},
-		"47835": {
+		"50296": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/order-change-action.ts",
 			"qualifiedName": "ChangeActionType"
 		},
-		"47836": {
+		"50297": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/order-change-action.ts",
 			"qualifiedName": "ChangeActionType.FULFILL_ITEM"
 		},
-		"47837": {
+		"50298": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/order-change-action.ts",
 			"qualifiedName": "ChangeActionType.DELIVER_ITEM"
 		},
-		"47838": {
+		"50299": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/order-change-action.ts",
 			"qualifiedName": "ChangeActionType.CANCEL_ITEM_FULFILLMENT"
 		},
-		"47839": {
+		"50300": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/order-change-action.ts",
 			"qualifiedName": "ChangeActionType.ITEM_ADD"
 		},
-		"47840": {
+		"50301": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/order-change-action.ts",
 			"qualifiedName": "ChangeActionType.ITEM_REMOVE"
 		},
-		"47841": {
+		"50302": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/order-change-action.ts",
 			"qualifiedName": "ChangeActionType.ITEM_UPDATE"
 		},
-		"47842": {
+		"50303": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/order-change-action.ts",
 			"qualifiedName": "ChangeActionType.RECEIVE_DAMAGED_RETURN_ITEM"
 		},
-		"47843": {
+		"50304": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/order-change-action.ts",
 			"qualifiedName": "ChangeActionType.RECEIVE_RETURN_ITEM"
 		},
-		"47844": {
+		"50305": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/order-change-action.ts",
 			"qualifiedName": "ChangeActionType.RETURN_ITEM"
 		},
-		"47845": {
+		"50306": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/order-change-action.ts",
 			"qualifiedName": "ChangeActionType.CANCEL_RETURN_ITEM"
 		},
-		"47846": {
+		"50307": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/order-change-action.ts",
 			"qualifiedName": "ChangeActionType.SHIPPING_ADD"
 		},
-		"47847": {
+		"50308": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/order-change-action.ts",
 			"qualifiedName": "ChangeActionType.SHIPPING_REMOVE"
 		},
-		"47848": {
+		"50309": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/order-change-action.ts",
 			"qualifiedName": "ChangeActionType.SHIP_ITEM"
 		},
-		"47849": {
+		"50310": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/order-change-action.ts",
 			"qualifiedName": "ChangeActionType.WRITE_OFF_ITEM"
 		},
-		"47850": {
+		"50311": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/order-change-action.ts",
 			"qualifiedName": "ChangeActionType.REINSTATE_ITEM"
 		},
-		"47851": {
+		"50312": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/order-change-action.ts",
 			"qualifiedName": "ChangeActionType.TRANSFER_CUSTOMER"
 		},
-		"47852": {
+		"50313": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/status.ts",
 			"qualifiedName": "OrderStatus"
 		},
-		"47853": {
+		"50314": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/status.ts",
 			"qualifiedName": "OrderStatus.PENDING"
 		},
-		"47854": {
+		"50315": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/status.ts",
 			"qualifiedName": "OrderStatus.COMPLETED"
 		},
-		"47855": {
+		"50316": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/status.ts",
 			"qualifiedName": "OrderStatus.DRAFT"
 		},
-		"47856": {
+		"50317": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/status.ts",
 			"qualifiedName": "OrderStatus.ARCHIVED"
 		},
-		"47857": {
+		"50318": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/status.ts",
 			"qualifiedName": "OrderStatus.CANCELED"
 		},
-		"47858": {
+		"50319": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/status.ts",
 			"qualifiedName": "OrderStatus.REQUIRES_ACTION"
 		},
-		"47859": {
+		"50320": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/status.ts",
 			"qualifiedName": "ReturnStatus"
 		},
-		"47860": {
+		"50321": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/status.ts",
 			"qualifiedName": "ReturnStatus.OPEN"
 		},
-		"47861": {
+		"50322": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/status.ts",
 			"qualifiedName": "ReturnStatus.REQUESTED"
 		},
-		"47862": {
+		"50323": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/status.ts",
 			"qualifiedName": "ReturnStatus.RECEIVED"
 		},
-		"47863": {
+		"50324": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/status.ts",
 			"qualifiedName": "ReturnStatus.PARTIALLY_RECEIVED"
 		},
-		"47864": {
+		"50325": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/status.ts",
 			"qualifiedName": "ReturnStatus.CANCELED"
 		},
-		"47865": {
+		"50326": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/status.ts",
 			"qualifiedName": "ClaimType"
 		},
-		"47866": {
+		"50327": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/status.ts",
 			"qualifiedName": "ClaimType.REFUND"
 		},
-		"47867": {
+		"50328": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/status.ts",
 			"qualifiedName": "ClaimType.REPLACE"
 		},
-		"47868": {
+		"50329": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/status.ts",
 			"qualifiedName": "ClaimReason"
 		},
-		"47869": {
+		"50330": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/status.ts",
 			"qualifiedName": "ClaimReason.MISSING_ITEM"
 		},
-		"47870": {
+		"50331": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/status.ts",
 			"qualifiedName": "ClaimReason.WRONG_ITEM"
 		},
-		"47871": {
+		"50332": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/status.ts",
 			"qualifiedName": "ClaimReason.PRODUCTION_FAILURE"
 		},
-		"47872": {
+		"50333": {
 			"sourceFileName": "../../../../packages/core/utils/src/order/status.ts",
 			"qualifiedName": "ClaimReason.OTHER"
 		},
-		"47873": {
+		"50334": {
 			"sourceFileName": "../../../../packages/core/utils/src/product/index.ts",
 			"qualifiedName": ""
 		},
-		"47874": {
+		"50335": {
 			"sourceFileName": "../../../../packages/core/utils/src/product/index.ts",
 			"qualifiedName": "ProductStatus"
 		},
-		"47875": {
+		"50336": {
 			"sourceFileName": "../../../../packages/core/utils/src/product/index.ts",
 			"qualifiedName": "ProductStatus.DRAFT"
 		},
-		"47876": {
+		"50337": {
 			"sourceFileName": "../../../../packages/core/utils/src/product/index.ts",
 			"qualifiedName": "ProductStatus.PROPOSED"
 		},
-		"47877": {
+		"50338": {
 			"sourceFileName": "../../../../packages/core/utils/src/product/index.ts",
 			"qualifiedName": "ProductStatus.PUBLISHED"
 		},
-		"47878": {
+		"50339": {
 			"sourceFileName": "../../../../packages/core/utils/src/product/index.ts",
 			"qualifiedName": "ProductStatus.REJECTED"
 		},
-		"47879": {
+		"50340": {
 			"sourceFileName": "../../../../packages/core/utils/src/product/events.ts",
 			"qualifiedName": "ProductEvents"
 		},
-		"47880": {
+		"50341": {
 			"sourceFileName": "../../../../packages/core/utils/src/promotion/index.ts",
 			"qualifiedName": ""
 		},
-		"47881": {
+		"50342": {
 			"sourceFileName": "../../../../packages/core/utils/src/promotion/index.ts",
 			"qualifiedName": "PromotionType"
 		},
-		"47882": {
+		"50343": {
 			"sourceFileName": "../../../../packages/core/utils/src/promotion/index.ts",
 			"qualifiedName": "PromotionType.STANDARD"
 		},
-		"47883": {
+		"50344": {
 			"sourceFileName": "../../../../packages/core/utils/src/promotion/index.ts",
 			"qualifiedName": "PromotionType.BUYGET"
 		},
-		"47884": {
+		"50345": {
 			"sourceFileName": "../../../../packages/core/utils/src/promotion/index.ts",
 			"qualifiedName": "ApplicationMethodType"
 		},
-		"47885": {
+		"50346": {
 			"sourceFileName": "../../../../packages/core/utils/src/promotion/index.ts",
 			"qualifiedName": "ApplicationMethodType.FIXED"
 		},
-		"47886": {
+		"50347": {
 			"sourceFileName": "../../../../packages/core/utils/src/promotion/index.ts",
 			"qualifiedName": "ApplicationMethodType.PERCENTAGE"
 		},
-		"47887": {
+		"50348": {
 			"sourceFileName": "../../../../packages/core/utils/src/promotion/index.ts",
 			"qualifiedName": "ApplicationMethodTargetType"
 		},
-		"47888": {
+		"50349": {
 			"sourceFileName": "../../../../packages/core/utils/src/promotion/index.ts",
 			"qualifiedName": "ApplicationMethodTargetType.ORDER"
 		},
-		"47889": {
+		"50350": {
 			"sourceFileName": "../../../../packages/core/utils/src/promotion/index.ts",
 			"qualifiedName": "ApplicationMethodTargetType.SHIPPING_METHODS"
 		},
-		"47890": {
+		"50351": {
 			"sourceFileName": "../../../../packages/core/utils/src/promotion/index.ts",
 			"qualifiedName": "ApplicationMethodTargetType.ITEMS"
 		},
-		"47891": {
+		"50352": {
 			"sourceFileName": "../../../../packages/core/utils/src/promotion/index.ts",
 			"qualifiedName": "ApplicationMethodAllocation"
 		},
-		"47892": {
+		"50353": {
 			"sourceFileName": "../../../../packages/core/utils/src/promotion/index.ts",
 			"qualifiedName": "ApplicationMethodAllocation.EACH"
 		},
-		"47893": {
+		"50354": {
 			"sourceFileName": "../../../../packages/core/utils/src/promotion/index.ts",
 			"qualifiedName": "ApplicationMethodAllocation.ACROSS"
 		},
-		"47894": {
+		"50355": {
 			"sourceFileName": "../../../../packages/core/utils/src/promotion/index.ts",
 			"qualifiedName": "PromotionRuleOperator"
 		},
-		"47895": {
+		"50356": {
 			"sourceFileName": "../../../../packages/core/utils/src/promotion/index.ts",
 			"qualifiedName": "PromotionRuleOperator.GTE"
 		},
-		"47896": {
+		"50357": {
 			"sourceFileName": "../../../../packages/core/utils/src/promotion/index.ts",
 			"qualifiedName": "PromotionRuleOperator.LTE"
 		},
-		"47897": {
+		"50358": {
 			"sourceFileName": "../../../../packages/core/utils/src/promotion/index.ts",
 			"qualifiedName": "PromotionRuleOperator.GT"
 		},
-		"47898": {
+		"50359": {
 			"sourceFileName": "../../../../packages/core/utils/src/promotion/index.ts",
 			"qualifiedName": "PromotionRuleOperator.LT"
 		},
-		"47899": {
+		"50360": {
 			"sourceFileName": "../../../../packages/core/utils/src/promotion/index.ts",
 			"qualifiedName": "PromotionRuleOperator.EQ"
 		},
-		"47900": {
+		"50361": {
 			"sourceFileName": "../../../../packages/core/utils/src/promotion/index.ts",
 			"qualifiedName": "PromotionRuleOperator.NE"
 		},
-		"47901": {
+		"50362": {
 			"sourceFileName": "../../../../packages/core/utils/src/promotion/index.ts",
 			"qualifiedName": "PromotionRuleOperator.IN"
 		},
-		"47902": {
+		"50363": {
 			"sourceFileName": "../../../../packages/core/utils/src/promotion/index.ts",
 			"qualifiedName": "CampaignBudgetType"
 		},
-		"47903": {
+		"50364": {
 			"sourceFileName": "../../../../packages/core/utils/src/promotion/index.ts",
 			"qualifiedName": "CampaignBudgetType.SPEND"
 		},
-		"47904": {
+		"50365": {
 			"sourceFileName": "../../../../packages/core/utils/src/promotion/index.ts",
 			"qualifiedName": "CampaignBudgetType.USAGE"
 		},
-		"47905": {
+		"50366": {
 			"sourceFileName": "../../../../packages/core/utils/src/promotion/index.ts",
 			"qualifiedName": "ComputedActions"
 		},
-		"47906": {
+		"50367": {
 			"sourceFileName": "../../../../packages/core/utils/src/promotion/index.ts",
 			"qualifiedName": "ComputedActions.ADD_ITEM_ADJUSTMENT"
 		},
-		"47907": {
+		"50368": {
 			"sourceFileName": "../../../../packages/core/utils/src/promotion/index.ts",
 			"qualifiedName": "ComputedActions.ADD_SHIPPING_METHOD_ADJUSTMENT"
 		},
-		"47908": {
+		"50369": {
 			"sourceFileName": "../../../../packages/core/utils/src/promotion/index.ts",
 			"qualifiedName": "ComputedActions.REMOVE_ITEM_ADJUSTMENT"
 		},
-		"47909": {
+		"50370": {
 			"sourceFileName": "../../../../packages/core/utils/src/promotion/index.ts",
 			"qualifiedName": "ComputedActions.REMOVE_SHIPPING_METHOD_ADJUSTMENT"
 		},
-		"47910": {
+		"50371": {
 			"sourceFileName": "../../../../packages/core/utils/src/promotion/index.ts",
 			"qualifiedName": "ComputedActions.CAMPAIGN_BUDGET_EXCEEDED"
 		},
-		"47911": {
+		"50372": {
 			"sourceFileName": "../../../../packages/core/utils/src/promotion/index.ts",
 			"qualifiedName": "PromotionActions"
 		},
-		"47912": {
+		"50373": {
 			"sourceFileName": "../../../../packages/core/utils/src/promotion/index.ts",
 			"qualifiedName": "PromotionActions.ADD"
 		},
-		"47913": {
+		"50374": {
 			"sourceFileName": "../../../../packages/core/utils/src/promotion/index.ts",
 			"qualifiedName": "PromotionActions.REMOVE"
 		},
-		"47914": {
+		"50375": {
 			"sourceFileName": "../../../../packages/core/utils/src/promotion/index.ts",
 			"qualifiedName": "PromotionActions.REPLACE"
 		},
-		"47915": {
+		"50376": {
 			"sourceFileName": "../../../../packages/core/utils/src/promotion/index.ts",
 			"qualifiedName": "RuleType"
 		},
-		"47916": {
+		"50377": {
 			"sourceFileName": "../../../../packages/core/utils/src/promotion/index.ts",
 			"qualifiedName": "RuleType.RULES"
 		},
-		"47917": {
+		"50378": {
 			"sourceFileName": "../../../../packages/core/utils/src/promotion/index.ts",
 			"qualifiedName": "RuleType.TARGET_RULES"
 		},
-		"47918": {
+		"50379": {
 			"sourceFileName": "../../../../packages/core/utils/src/promotion/index.ts",
 			"qualifiedName": "RuleType.BUY_RULES"
 		},
-		"47919": {
+		"50380": {
 			"sourceFileName": "../../../../packages/core/utils/src/shipping/index.ts",
 			"qualifiedName": ""
 		},
-		"47920": {
+		"50381": {
 			"sourceFileName": "../../../../packages/core/utils/src/shipping/index.ts",
 			"qualifiedName": "ShippingProfileType"
 		},
-		"47921": {
+		"50382": {
 			"sourceFileName": "../../../../packages/core/utils/src/shipping/index.ts",
 			"qualifiedName": "ShippingProfileType.DEFAULT"
 		},
-		"47922": {
+		"50383": {
 			"sourceFileName": "../../../../packages/core/utils/src/shipping/index.ts",
 			"qualifiedName": "ShippingProfileType.GIFT_CARD"
 		},
-		"47923": {
+		"50384": {
 			"sourceFileName": "../../../../packages/core/utils/src/shipping/index.ts",
 			"qualifiedName": "ShippingProfileType.CUSTOM"
 		},
-		"47924": {
+		"50385": {
 			"sourceFileName": "../../../../packages/core/utils/src/user/index.ts",
 			"qualifiedName": ""
 		},
-		"47925": {
+		"50386": {
 			"sourceFileName": "../../../../packages/core/utils/src/user/events.ts",
 			"qualifiedName": "UserEvents"
 		},
-		"47926": {
+		"50387": {
 			"sourceFileName": "../../../../packages/core/utils/src/user/events.ts",
 			"qualifiedName": "__object"
 		},
-		"47927": {
+		"50388": {
 			"sourceFileName": "../../../../packages/core/utils/src/user/events.ts",
 			"qualifiedName": "__object.INVITE_TOKEN_GENERATED"
 		},
-		"47928": {
+		"50389": {
 			"sourceFileName": "",
 			"qualifiedName": "USER_CREATED"
 		},
-		"47929": {
+		"50390": {
 			"sourceFileName": "",
 			"qualifiedName": "INVITE_CREATED"
 		},
-		"47930": {
+		"50391": {
 			"sourceFileName": "",
 			"qualifiedName": "USER_UPDATED"
 		},
-		"47931": {
+		"50392": {
 			"sourceFileName": "",
 			"qualifiedName": "INVITE_UPDATED"
 		},
-		"47932": {
+		"50393": {
 			"sourceFileName": "",
 			"qualifiedName": "USER_DELETED"
 		},
-		"47933": {
+		"50394": {
 			"sourceFileName": "",
 			"qualifiedName": "INVITE_DELETED"
 		},
-		"47934": {
+		"50395": {
 			"sourceFileName": "",
 			"qualifiedName": "USER_RESTORED"
 		},
-		"47935": {
+		"50396": {
 			"sourceFileName": "",
 			"qualifiedName": "INVITE_RESTORED"
 		},
-		"47936": {
+		"50397": {
 			"sourceFileName": "",
 			"qualifiedName": "USER_ATTACHED"
 		},
-		"47937": {
+		"50398": {
 			"sourceFileName": "",
 			"qualifiedName": "INVITE_ATTACHED"
 		},
-		"47938": {
+		"50399": {
 			"sourceFileName": "",
 			"qualifiedName": "USER_DETACHED"
 		},
-		"47939": {
+		"50400": {
 			"sourceFileName": "",
 			"qualifiedName": "INVITE_DETACHED"
 		},
-		"47940": {
+		"50401": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/index.ts",
 			"qualifiedName": ""
 		},
-		"47941": {
+		"50402": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/graphql-parser.ts",
 			"qualifiedName": "GraphQLParser"
 		},
-		"47942": {
+		"50403": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/graphql-parser.ts",
 			"qualifiedName": "GraphQLParser.__constructor"
 		},
-		"47943": {
+		"50404": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/graphql-parser.ts",
 			"qualifiedName": "GraphQLParser"
 		},
-		"47944": {
+		"50405": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/graphql-parser.ts",
 			"qualifiedName": "input"
 		},
-		"47945": {
+		"50406": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/graphql-parser.ts",
 			"qualifiedName": "variables"
 		},
-		"47968": {
+		"50429": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/graphql-parser.ts",
 			"qualifiedName": "GraphQLParser.parseQuery"
 		},
-		"47969": {
+		"50430": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/graphql-parser.ts",
 			"qualifiedName": "GraphQLParser.parseQuery"
 		},
-		"47970": {
+		"50431": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/graphql-to-fields.ts",
 			"qualifiedName": "graphqlSchemaToFields"
 		},
-		"47971": {
+		"50432": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/graphql-to-fields.ts",
 			"qualifiedName": "graphqlSchemaToFields"
 		},
-		"47972": {
+		"50433": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/graphql-to-fields.ts",
 			"qualifiedName": "schemaTypeMap"
 		},
-		"47973": {
+		"50434": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/graphql-to-fields.ts",
 			"qualifiedName": "__type"
 		},
-		"47974": {
+		"50435": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/graphql-to-fields.ts",
 			"qualifiedName": "__type.__index"
 		},
-		"47976": {
+		"50437": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/graphql-to-fields.ts",
 			"qualifiedName": "typeName"
 		},
-		"47977": {
+		"50438": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/graphql-to-fields.ts",
 			"qualifiedName": "relations"
 		},
-		"47978": {
+		"50439": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/extract-relations-from-graphql.ts",
 			"qualifiedName": "extractRelationsFromGQL"
 		},
-		"47979": {
+		"50440": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/extract-relations-from-graphql.ts",
 			"qualifiedName": "extractRelationsFromGQL"
 		},
-		"47980": {
+		"50441": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/extract-relations-from-graphql.ts",
 			"qualifiedName": "typeMap"
 		},
-		"47981": {
+		"50442": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/clean-graphql.ts",
 			"qualifiedName": "cleanGraphQLSchema"
 		},
-		"47982": {
+		"50443": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/clean-graphql.ts",
 			"qualifiedName": "cleanGraphQLSchema"
 		},
-		"47983": {
+		"50444": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/clean-graphql.ts",
 			"qualifiedName": "schema"
 		},
-		"47984": {
+		"50445": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/clean-graphql.ts",
 			"qualifiedName": "__type"
 		},
-		"47985": {
+		"50446": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/clean-graphql.ts",
 			"qualifiedName": "__type.schema"
 		},
-		"47986": {
+		"50447": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/clean-graphql.ts",
 			"qualifiedName": "__type.notFound"
 		},
-		"47987": {
+		"50448": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/graphql-to-ts-types.ts",
 			"qualifiedName": "gqlSchemaToTypes"
 		},
-		"47988": {
+		"50449": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/graphql-to-ts-types.ts",
 			"qualifiedName": "gqlSchemaToTypes"
 		},
-		"47989": {
+		"50450": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/graphql-to-ts-types.ts",
 			"qualifiedName": "__0"
 		},
-		"47990": {
+		"50451": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/graphql-to-ts-types.ts",
 			"qualifiedName": "__type"
 		},
-		"47991": {
+		"50452": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/graphql-to-ts-types.ts",
 			"qualifiedName": "__type.schema"
 		},
-		"47992": {
+		"50453": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/graphql-to-ts-types.ts",
 			"qualifiedName": "__type.outputDir"
 		},
-		"47993": {
+		"50454": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/graphql-to-ts-types.ts",
 			"qualifiedName": "__type.filename"
 		},
-		"47994": {
+		"50455": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/graphql-to-ts-types.ts",
 			"qualifiedName": "__type.joinerConfigs"
 		},
-		"47995": {
+		"50456": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/graphql-to-ts-types.ts",
 			"qualifiedName": "__type.interfaceName"
 		},
-		"47996": {
+		"50457": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/get-fields-and-relations.ts",
 			"qualifiedName": "gqlGetFieldsAndRelations"
 		},
-		"47997": {
+		"50458": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/get-fields-and-relations.ts",
 			"qualifiedName": "gqlGetFieldsAndRelations"
 		},
-		"47998": {
+		"50459": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/get-fields-and-relations.ts",
 			"qualifiedName": "schemaTypeMap"
 		},
-		"47999": {
+		"50460": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/get-fields-and-relations.ts",
 			"qualifiedName": "__type"
 		},
-		"48000": {
+		"50461": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/get-fields-and-relations.ts",
 			"qualifiedName": "__type.__index"
 		},
-		"48002": {
+		"50463": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/get-fields-and-relations.ts",
 			"qualifiedName": "typeName"
 		},
-		"48003": {
+		"50464": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/get-fields-and-relations.ts",
 			"qualifiedName": "relations"
 		},
-		"48004": {
+		"50465": {
 			"sourceFileName": "../../../../packages/core/utils/src/notification/events.ts",
 			"qualifiedName": "NotificationEvents"
 		},
-		"48005": {
+		"50466": {
 			"sourceFileName": "../../../../packages/core/utils/src/notification/common.ts",
 			"qualifiedName": "NotificationStatus"
 		},
-		"48006": {
+		"50467": {
 			"sourceFileName": "../../../../packages/core/utils/src/notification/common.ts",
 			"qualifiedName": "NotificationStatus.PENDING"
 		},
-		"48007": {
+		"50468": {
 			"sourceFileName": "../../../../packages/core/utils/src/notification/common.ts",
 			"qualifiedName": "NotificationStatus.SUCCESS"
 		},
-		"48008": {
+		"50469": {
 			"sourceFileName": "../../../../packages/core/utils/src/notification/common.ts",
 			"qualifiedName": "NotificationStatus.FAILURE"
 		},
-		"48009": {
+		"50470": {
 			"sourceFileName": "../../../../packages/core/utils/src/payment/events.ts",
 			"qualifiedName": "PaymentEvents"
 		},
-		"48010": {
+		"50471": {
 			"sourceFileName": "../../../../packages/core/utils/src/payment/events.ts",
 			"qualifiedName": "__object"
 		},
-		"48011": {
+		"50472": {
 			"sourceFileName": "../../../../packages/core/utils/src/payment/events.ts",
 			"qualifiedName": "__object.CAPTURED"
 		},
-		"48012": {
+		"50473": {
 			"sourceFileName": "../../../../packages/core/utils/src/payment/events.ts",
 			"qualifiedName": "__object.REFUNDED"
 		},
-		"48013": {
+		"50474": {
 			"sourceFileName": "../../../../packages/core/utils/src/payment/payment-collection.ts",
 			"qualifiedName": "PaymentCollectionStatus"
 		},
-		"48014": {
+		"50475": {
 			"sourceFileName": "../../../../packages/core/utils/src/payment/payment-collection.ts",
 			"qualifiedName": "PaymentCollectionStatus.NOT_PAID"
 		},
-		"48015": {
+		"50476": {
 			"sourceFileName": "../../../../packages/core/utils/src/payment/payment-collection.ts",
 			"qualifiedName": "PaymentCollectionStatus.AWAITING"
 		},
-		"48016": {
+		"50477": {
 			"sourceFileName": "../../../../packages/core/utils/src/payment/payment-collection.ts",
 			"qualifiedName": "PaymentCollectionStatus.AUTHORIZED"
 		},
-		"48017": {
+		"50478": {
 			"sourceFileName": "../../../../packages/core/utils/src/payment/payment-collection.ts",
 			"qualifiedName": "PaymentCollectionStatus.PARTIALLY_AUTHORIZED"
 		},
-		"48018": {
+		"50479": {
 			"sourceFileName": "../../../../packages/core/utils/src/payment/payment-collection.ts",
 			"qualifiedName": "PaymentCollectionStatus.CANCELED"
 		},
-		"48019": {
+		"50480": {
 			"sourceFileName": "../../../../packages/core/utils/src/payment/payment-session.ts",
 			"qualifiedName": "PaymentSessionStatus"
 		},
-		"48020": {
+		"50481": {
 			"sourceFileName": "../../../../packages/core/utils/src/payment/payment-session.ts",
 			"qualifiedName": "PaymentSessionStatus.AUTHORIZED"
 		},
-		"48021": {
+		"50482": {
 			"sourceFileName": "../../../../packages/core/utils/src/payment/payment-session.ts",
 			"qualifiedName": "PaymentSessionStatus.CAPTURED"
 		},
-		"48022": {
+		"50483": {
 			"sourceFileName": "../../../../packages/core/utils/src/payment/payment-session.ts",
 			"qualifiedName": "PaymentSessionStatus.PENDING"
 		},
-		"48023": {
+		"50484": {
 			"sourceFileName": "../../../../packages/core/utils/src/payment/payment-session.ts",
 			"qualifiedName": "PaymentSessionStatus.REQUIRES_MORE"
 		},
-		"48024": {
+		"50485": {
 			"sourceFileName": "../../../../packages/core/utils/src/payment/payment-session.ts",
 			"qualifiedName": "PaymentSessionStatus.ERROR"
 		},
-		"48025": {
+		"50486": {
 			"sourceFileName": "../../../../packages/core/utils/src/payment/payment-session.ts",
 			"qualifiedName": "PaymentSessionStatus.CANCELED"
 		},
-		"48026": {
+		"50487": {
 			"sourceFileName": "../../../../packages/core/utils/src/payment/webhook.ts",
 			"qualifiedName": "PaymentWebhookEvents"
 		},
-		"48027": {
+		"50488": {
 			"sourceFileName": "../../../../packages/core/utils/src/payment/webhook.ts",
 			"qualifiedName": "PaymentWebhookEvents.WebhookReceived"
 		},
-		"48028": {
+		"50489": {
 			"sourceFileName": "../../../../packages/core/utils/src/payment/webhook.ts",
 			"qualifiedName": "PaymentActions"
 		},
-		"48029": {
+		"50490": {
 			"sourceFileName": "../../../../packages/core/utils/src/payment/webhook.ts",
 			"qualifiedName": "PaymentActions.AUTHORIZED"
 		},
-		"48030": {
+		"50491": {
 			"sourceFileName": "../../../../packages/core/utils/src/payment/webhook.ts",
 			"qualifiedName": "PaymentActions.SUCCESSFUL"
 		},
-		"48031": {
+		"50492": {
 			"sourceFileName": "../../../../packages/core/utils/src/payment/webhook.ts",
 			"qualifiedName": "PaymentActions.FAILED"
 		},
-		"48032": {
+		"50493": {
 			"sourceFileName": "../../../../packages/core/utils/src/payment/webhook.ts",
 			"qualifiedName": "PaymentActions.NOT_SUPPORTED"
 		},
-		"48033": {
+		"50494": {
 			"sourceFileName": "../../../../packages/core/utils/src/pricing/price-list.ts",
 			"qualifiedName": "PriceListStatus"
 		},
-		"48034": {
+		"50495": {
 			"sourceFileName": "../../../../packages/core/utils/src/pricing/price-list.ts",
 			"qualifiedName": "PriceListStatus.ACTIVE"
 		},
-		"48035": {
+		"50496": {
 			"sourceFileName": "../../../../packages/core/utils/src/pricing/price-list.ts",
 			"qualifiedName": "PriceListStatus.DRAFT"
 		},
-		"48036": {
+		"50497": {
 			"sourceFileName": "../../../../packages/core/utils/src/pricing/price-list.ts",
 			"qualifiedName": "PriceListType"
 		},
-		"48037": {
+		"50498": {
 			"sourceFileName": "../../../../packages/core/utils/src/pricing/price-list.ts",
 			"qualifiedName": "PriceListType.SALE"
 		},
-		"48038": {
+		"50499": {
 			"sourceFileName": "../../../../packages/core/utils/src/pricing/price-list.ts",
 			"qualifiedName": "PriceListType.OVERRIDE"
 		},
-		"48039": {
+		"50500": {
 			"sourceFileName": "../../../../packages/core/utils/src/pricing/events.ts",
 			"qualifiedName": "PricingEvents"
 		},
-		"48040": {
+		"50501": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/graphql-parser.ts",
 			"qualifiedName": "Argument"
 		},
-		"48041": {
+		"50502": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/graphql-parser.ts",
 			"qualifiedName": "Argument.name"
 		},
-		"48042": {
+		"50503": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/graphql-parser.ts",
 			"qualifiedName": "Argument.value"
 		},
-		"48043": {
+		"50504": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/graphql-parser.ts",
 			"qualifiedName": "Directive"
 		},
-		"48044": {
+		"50505": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/graphql-parser.ts",
 			"qualifiedName": "Directive.name"
 		},
-		"48045": {
+		"50506": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/graphql-parser.ts",
 			"qualifiedName": "Directive.args"
 		},
-		"48046": {
+		"50507": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/graphql-parser.ts",
 			"qualifiedName": "Entity"
 		},
-		"48047": {
+		"50508": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/graphql-parser.ts",
 			"qualifiedName": "Entity.property"
 		},
-		"48048": {
+		"50509": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/graphql-parser.ts",
 			"qualifiedName": "Entity.fields"
 		},
-		"48049": {
+		"50510": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/graphql-parser.ts",
 			"qualifiedName": "Entity.args"
 		},
-		"48050": {
+		"50511": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/graphql-parser.ts",
 			"qualifiedName": "Entity.directives"
 		},
-		"48051": {
+		"50512": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/graphql-parser.ts",
 			"qualifiedName": "__type"
 		},
-		"48052": {
+		"50513": {
 			"sourceFileName": "../../../../packages/core/utils/src/graphql/graphql-parser.ts",
 			"qualifiedName": "__type.__index"
 		}
@@ -7615,17 +7615,17 @@
 			"11": "../../../../packages/core/utils/src/graphql/index.ts"
 		},
 		"reflections": {
-			"1": 47626,
-			"2": 47629,
-			"3": 47713,
-			"4": 47792,
-			"5": 47794,
-			"6": 47822,
-			"7": 47873,
-			"8": 47880,
-			"9": 47919,
-			"10": 47924,
-			"11": 47940
+			"1": 50087,
+			"2": 50090,
+			"3": 50174,
+			"4": 50253,
+			"5": 50255,
+			"6": 50283,
+			"7": 50334,
+			"8": 50341,
+			"9": 50380,
+			"10": 50385,
+			"11": 50401
 		}
 	}
 }
