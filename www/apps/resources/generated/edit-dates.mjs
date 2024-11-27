@@ -2201,7 +2201,7 @@ export const generatedEditDates = {
   "app/admin-components/layouts/single-column/page.mdx": "2024-10-07T11:16:06.435Z",
   "app/admin-components/layouts/two-column/page.mdx": "2024-10-07T11:16:10.092Z",
   "app/admin-components/components/forms/page.mdx": "2024-10-09T12:48:04.229Z",
-  "app/commerce-modules/auth/reset-password/page.mdx": "2024-09-25T09:36:26.592Z",
+  "app/commerce-modules/auth/reset-password/page.mdx": "2024-11-27T13:33:55.940Z",
   "app/storefront-development/customers/reset-password/page.mdx": "2024-09-25T10:21:46.647Z",
   "app/commerce-modules/api-key/links-to-other-modules/page.mdx": "2024-10-08T08:05:36.596Z",
   "app/commerce-modules/cart/extend/page.mdx": "2024-10-08T11:22:22.523Z",
@@ -3392,5 +3392,6 @@ export const generatedEditDates = {
   "references/types/types.InventoryTypes/page.mdx": "2024-11-25T17:49:27.667Z",
   "references/types/types.StockLocationTypes/page.mdx": "2024-11-25T17:49:28.127Z",
   "references/user/interfaces/user.IMessageAggregator/page.mdx": "2024-11-25T17:49:59.536Z",
-  "references/utils/utils.PromotionUtils/page.mdx": "2024-11-25T17:49:28.611Z"
+  "references/utils/utils.PromotionUtils/page.mdx": "2024-11-25T17:49:28.611Z",
+  "app/events-reference/page.mdx": "2024-11-27T13:31:07.385Z"
 }
