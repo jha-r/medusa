@@ -3,7 +3,8 @@
  * operationId: PostOrdersIdTransfer
  * x-sidebar-summary: Request Transfer
  * summary: Request Order Transfer
- * description: Request an order to be transfered to another customer. The transfer is confirmed by sending a request to the [Accept Order Transfer](https://docs.medusajs.com/api/store#orders_postordersidtransferaccept) Store API route.
+ * description: Request an order to be transfered to another customer. The transfer is confirmed by sending a request to the [Accept Order
+ *   Transfer](https://docs.medusajs.com/api/store#orders_postordersidtransferaccept) Store API route.
  * x-authenticated: true
  * parameters:
  *   - name: id
