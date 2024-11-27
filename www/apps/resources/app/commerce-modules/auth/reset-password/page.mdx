@@ -49,10 +49,10 @@ export default async function resetPasswordTokenHandler({
   event: { data: {
     entity_id: email,
     token,
-    actor_type,
+    actorType: actor_type,
   } },
   container,
-}: SubscriberArgs<{ entity_id: string, token: string, actor_type: string }>) {
+}: SubscriberArgs<{ entity_id: string, token: string, actorType: string }>) {
   const notificationModuleService = container.resolve(
     Modules.NOTIFICATION
   )
@@ -81,11 +81,11 @@ You subscribe to the `auth.password_reset` event. The event has a data payload o
 
 - `entity_id`: The identifier of the user. When using the `emailpass` provider, it's the user's email.
 - `token`: The token to reset the user's password.
-- `actor_type`: The user's actor type. For example, if the user is a customer, the `actor_type` is `customer`. If it's an admin user, the `actor_type` is `user`.
+- `actorType`: The user's actor type. For example, if the user is a customer, the `actorType` is `customer`. If it's an admin user, the `actorType` is `user`.
 
 In the subscriber, you:
 
-- Decide the frontend URL based on whether the user is a customer or admin user by checking the value of `actor_type`.
+- Decide the frontend URL based on whether the user is a customer or admin user by checking the value of `actorType`.
 - Resolve the Notification Module and use its `createNotifications` method to send the notification.
 - You pass to the `createNotifications` method an object having the following properties:
     - `to`: The identifier to send the notification to, which in this case is the email.
