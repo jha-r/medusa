@@ -1,7 +1,7 @@
 export { default as Product } from "./product"
 export { default as ProductCategory } from "./product-category"
 export { default as ProductCollection } from "./product-collection"
-export { default as Image } from "./product-image"
+export { default as ProductImage } from "./product-image"
 export { default as ProductOption } from "./product-option"
 export { default as ProductOptionValue } from "./product-option-value"
 export { default as ProductTag } from "./product-tag"
