@@ -628,6 +628,17 @@
           "nullable": false,
           "mappedType": "text"
         },
+        "operator": {
+          "name": "operator",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "default": "'eq'",
+          "enumItems": ["gte", "lte", "gt", "lt", "eq"],
+          "mappedType": "enum"
+        },
         "value": {
           "name": "value",
           "type": "text",
@@ -692,6 +703,13 @@
       "name": "price_rule",
       "schema": "public",
       "indexes": [
+        {
+          "columnNames": ["operator"],
+          "composite": false,
+          "keyName": "IDX_price_rule_operator",
+          "primary": false,
+          "unique": false
+        },
         {
           "keyName": "IDX_price_rule_price_id_attribute_unique",
           "columnNames": ["price_id"],
