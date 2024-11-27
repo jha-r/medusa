@@ -3273,11 +3273,6 @@ paths:
       security:
         - cookie_auth: []
         - jwt_token: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/StoreCancelOrderTransferRequest'
   /store/orders/{id}/transfer/decline:
     post:
       operationId: PostOrdersIdTransferDecline
@@ -6388,10 +6383,6 @@ components:
       properties:
         campaign:
           $ref: '#/components/schemas/AdminCampaign'
-    AdminCancelOrderTransferRequest:
-      type: object
-      description: SUMMARY
-      x-schemaName: AdminCancelOrderTransferRequest
     AdminClaim:
       type: object
       description: The claim's details.
@@ -17073,9 +17064,63 @@ components:
         calculated_price:
           type: object
           description: The calculated price's details.
+          properties:
+            id:
+              type: string
+              title: id
+              description: The ID of the price.
+            price_list_id:
+              type: string
+              title: price_list_id
+              description: The ID of the associated price list.
+            price_list_type:
+              type: string
+              title: price_list_type
+              description: The price list's type. For example, sale.
+            min_quantity:
+              type: number
+              title: min_quantity
+              description: The minimum quantity required in the cart for this price to apply.
+            max_quantity:
+              type: number
+              title: max_quantity
+              description: The maximum quantity allowed in the cart for this price to apply.
+          required:
+            - id
+            - price_list_id
+            - price_list_type
+            - min_quantity
+            - max_quantity
         original_price:
           type: object
           description: The original price's details.
+          properties:
+            id:
+              type: string
+              title: id
+              description: The ID of the price.
+            price_list_id:
+              type: string
+              title: price_list_id
+              description: The ID of the associated price list.
+            price_list_type:
+              type: string
+              title: price_list_type
+              description: The price list's type. For example, sale.
+            min_quantity:
+              type: number
+              title: min_quantity
+              description: The minimum quantity required in the cart for this price to apply.
+            max_quantity:
+              type: number
+              title: max_quantity
+              description: The maximum quantity allowed in the cart for this price to apply.
+          required:
+            - id
+            - price_list_id
+            - price_list_type
+            - min_quantity
+            - max_quantity
     BaseCapture:
       type: object
       description: The details of a captured payment.
@@ -21423,19 +21468,8 @@ components:
           title: no_notification
           description: Whether to send the customer notifications when the exchange is updated.
         difference_due:
-          oneOf:
-            - type: string
-              title: difference_due
-              description: The exchange's difference due.
-            - type: number
-              title: difference_due
-              description: The exchange's difference due.
-            - type: string
-              title: difference_due
-              description: The exchange's difference due.
-            - type: number
-              title: difference_due
-              description: The exchange's difference due.
+          type: number
+          title: difference_due
           description: The amount to be exchanged or refunded. If the amount is negative, it must be refunded. If positive, additional payment is required from the customer.
         return:
           $ref: '#/components/schemas/Return'
@@ -22318,19 +22352,8 @@ components:
             - received
             - partially_received
         refund_amount:
-          oneOf:
-            - type: string
-              title: refund_amount
-              description: The return order's refund amount.
-            - type: number
-              title: refund_amount
-              description: The return order's refund amount.
-            - type: string
-              title: refund_amount
-              description: The return order's refund amount.
-            - type: number
-              title: refund_amount
-              description: The return order's refund amount.
+          type: number
+          title: refund_amount
           description: The amount refunded by this return.
         order_id:
           type: string
@@ -22458,10 +22481,6 @@ components:
         metadata:
           type: object
           description: The item's metadata, can hold custom key-value pairs.
-    StoreCancelOrderTransferRequest:
-      type: object
-      description: SUMMARY
-      x-schemaName: StoreCancelOrderTransferRequest
     StoreCart:
       type: object
       description: The cart's details.

@@ -58,11 +58,5 @@
  *   "500":
  *     $ref: "#/components/responses/500_error"
  * x-workflow: cancelOrderTransferRequestWorkflow
- * requestBody:
- *   content:
- *     application/json:
- *       schema:
- *         $ref: "#/components/schemas/AdminCancelOrderTransferRequest"
- * 
 */
 
