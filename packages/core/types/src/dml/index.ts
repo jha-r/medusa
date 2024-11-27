@@ -56,6 +56,13 @@ export type RelationshipTypes =
   | "manyToMany"
 
 /**
+ * Return true if the relationship is nullable
+ */
+export type IsNullableRelation<T> = T extends () => IDmlEntity<any, any> | null
+  ? true
+  : false
+
+/**
  * The meta-data returned by the property parse method
  */
 export type PropertyMetadata = {
@@ -135,14 +142,12 @@ export interface EntityConstructor<Props> extends Function {
  * "belongsTo" relation meaning "hasOne" and "ManyToOne"
  */
 export type InferForeignKeys<Schema extends DMLSchema> = {
-  [K in keyof Schema as Schema[K] extends { type: infer Type }
-    ? Type extends RelationshipTypes
-      ? `${K & string}_id`
-      : never
-    : never]: Schema[K] extends { type: infer Type }
-    ? Type extends RelationshipTypes
-      ? string
-      : never
+  [K in keyof Schema as Schema[K] extends { type: "belongsTo" }
+    ? `${K & string}_id`
+    : never]: Schema[K] extends { type: "belongsTo" }
+    ? null extends Schema[K]["$dataType"]
+      ? string | null
+      : string
     : never
 }
 
@@ -182,19 +187,21 @@ export type InferManyToManyFields<Relation> = InferHasManyFields<Relation>
  * Inferring the types of the schema fields from the DML
  * entity
  */
-export type InferSchemaFields<Schema extends DMLSchema> = Prettify<{
-  [K in keyof Schema]: Schema[K] extends RelationshipType<any>
-    ? Schema[K]["type"] extends "belongsTo"
-      ? InferBelongsToFields<Schema[K]["$dataType"]>
-      : Schema[K]["type"] extends "hasOne"
-      ? InferHasOneFields<Schema[K]["$dataType"]>
-      : Schema[K]["type"] extends "hasMany"
-      ? InferHasManyFields<Schema[K]["$dataType"]>
-      : Schema[K]["type"] extends "manyToMany"
-      ? InferManyToManyFields<Schema[K]["$dataType"]>
-      : never
-    : Schema[K]["$dataType"]
-}>
+export type InferSchemaFields<Schema extends DMLSchema> = Prettify<
+  {
+    [K in keyof Schema]: Schema[K] extends RelationshipType<any>
+      ? Schema[K]["type"] extends "belongsTo"
+        ? InferBelongsToFields<Schema[K]["$dataType"]>
+        : Schema[K]["type"] extends "hasOne"
+        ? InferHasOneFields<Schema[K]["$dataType"]>
+        : Schema[K]["type"] extends "hasMany"
+        ? InferHasManyFields<Schema[K]["$dataType"]>
+        : Schema[K]["type"] extends "manyToMany"
+        ? InferManyToManyFields<Schema[K]["$dataType"]>
+        : never
+      : Schema[K]["$dataType"]
+  } & InferForeignKeys<Schema>
+>
 
 /**
  * Helper to infer the schema type of a DmlEntity

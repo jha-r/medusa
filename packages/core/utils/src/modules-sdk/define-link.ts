@@ -314,6 +314,7 @@ ${serviceBObj.module}: {
 
     const isModuleAPrimaryKeyValid =
       moduleAPrimaryKeys.includes(serviceAPrimaryKey)
+
     if (!isModuleAPrimaryKeyValid) {
       throw new Error(
         `Primary key ${serviceAPrimaryKey} is not defined on service ${serviceAObj.module}`

@@ -1786,6 +1786,11 @@ export const sidebar = sidebarAttachHrefCommonOptions([
             path: "/integrations/guides/sanity",
             title: "Sanity",
           },
+          {
+            type: "link",
+            path: "/integrations/guides/resend",
+            title: "Resend",
+          },
         ],
       },
     ],
@@ -2144,6 +2149,14 @@ export const sidebar = sidebarAttachHrefCommonOptions([
         title: "Deployment Guides",
         isChildSidebar: true,
         children: [
+          {
+            type: "link",
+            title: "Medusa Cloud",
+            path: "https://medusajs.com/contact",
+          },
+          {
+            type: "separator",
+          },
           {
             type: "category",
             title: "Medusa Application",

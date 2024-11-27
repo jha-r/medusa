@@ -1,3 +1,4 @@
+import { InferEntityType } from "../dml"
 import { Dictionary, FilterQuery, Order } from "./utils"
 
 export { FilterQuery, OperatorMap } from "./utils"
@@ -22,7 +23,7 @@ export interface BaseFilterable<T> {
 /**
  * The options to apply when retrieving an item.
  */
-export interface OptionsQuery<T, P extends string = never> {
+export interface OptionsQuery<T> {
   /**
    * Relations to populate in the retrieved items.
    */
@@ -54,7 +55,7 @@ export interface OptionsQuery<T, P extends string = never> {
   /**
    * Load strategy (e.g for mikro orm it accept select-in or joined)
    */
-  strategy?: 'select-in' | 'joined' | string & {}
+  strategy?: "select-in" | "joined" | (string & {})
 }
 
 /**
@@ -66,12 +67,13 @@ export type FindOptions<T = any> = {
   /**
    * The filters to apply on the items.
    */
-  where: FilterQuery<T> & BaseFilterable<FilterQuery<T>>
+  where: FilterQuery<InferEntityType<T>> &
+    BaseFilterable<FilterQuery<InferEntityType<T>>>
 
   /**
    * The options to apply when retrieving the items.
    */
-  options?: OptionsQuery<T, any>
+  options?: OptionsQuery<InferEntityType<T>>
 }
 
 /**

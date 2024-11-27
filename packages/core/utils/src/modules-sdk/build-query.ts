@@ -1,4 +1,4 @@
-import { DAL, FindConfig } from "@medusajs/types"
+import { DAL, FindConfig, InferRepositoryReturnType } from "@medusajs/types"
 import { deduplicate, isObject } from "../common"
 
 import { SoftDeletableFilterKey } from "../dal/mikro-orm/mikro-orm-soft-deletable-filter"
@@ -10,17 +10,19 @@ type FilterFlags = {
   withDeleted?: boolean
 }
 
-export function buildQuery<T = any, TDto = any>(
+export function buildQuery<const T = any>(
   filters: Record<string, any> = {},
-  config: FindConfig<TDto> & { primaryKeyFields?: string | string[] } = {}
+  config: FindConfig<InferRepositoryReturnType<T>> & {
+    primaryKeyFields?: string | string[]
+  } = {}
 ): Required<DAL.FindOptions<T>> {
-  const where: DAL.FilterQuery<T> = {}
+  const where = {} as DAL.FilterQuery<T>
   const filterFlags: FilterFlags = {}
   buildWhere(filters, where, filterFlags)
 
   delete config.primaryKeyFields
 
-  const findOptions: DAL.OptionsQuery<T, any> = {
+  const findOptions: DAL.FindOptions<T>["options"] = {
     populate: deduplicate(config.relations ?? []),
     fields: config.select as string[],
     limit: (Number.isSafeInteger(config.take) && config.take) || undefined,
@@ -28,7 +30,9 @@ export function buildQuery<T = any, TDto = any>(
   }
 
   if (config.order) {
-    findOptions.orderBy = config.order as DAL.OptionsQuery<T>["orderBy"]
+    findOptions.orderBy = config.order as Required<
+      DAL.FindOptions<T>
+    >["options"]["orderBy"]
   }
 
   if (config.withDeleted || filterFlags.withDeleted) {
@@ -50,7 +54,7 @@ export function buildQuery<T = any, TDto = any>(
     Object.assign(findOptions, config.options)
   }
 
-  return { where, options: findOptions }
+  return { where, options: findOptions } as Required<DAL.FindOptions<T>>
 }
 
 function buildWhere(

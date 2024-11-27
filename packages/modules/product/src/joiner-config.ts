@@ -9,7 +9,6 @@ import {
   ProductType,
   ProductVariant,
 } from "@models"
-import ProductImage from "./models/product-image"
 import { default as schema } from "./schema"
 
 export const joinerConfig = defineJoinerConfig(Modules.PRODUCT, {
@@ -20,7 +19,6 @@ export const joinerConfig = defineJoinerConfig(Modules.PRODUCT, {
     ProductOption,
     ProductOptionValue,
     ProductType,
-    ProductImage,
     ProductTag,
     ProductCollection,
     ProductCategory,

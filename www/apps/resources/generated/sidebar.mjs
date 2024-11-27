@@ -8036,6 +8036,14 @@ export const generatedSidebar = [
             "path": "/integrations/guides/sanity",
             "title": "Sanity",
             "children": []
+          },
+          {
+            "loaded": true,
+            "isPathHref": true,
+            "type": "link",
+            "path": "/integrations/guides/resend",
+            "title": "Resend",
+            "children": []
           }
         ]
       }
@@ -9127,6 +9135,17 @@ export const generatedSidebar = [
         "title": "Deployment Guides",
         "isChildSidebar": true,
         "children": [
+          {
+            "loaded": true,
+            "isPathHref": true,
+            "type": "link",
+            "title": "Medusa Cloud",
+            "path": "https://medusajs.com/contact",
+            "children": []
+          },
+          {
+            "type": "separator"
+          },
           {
             "loaded": true,
             "isPathHref": true,

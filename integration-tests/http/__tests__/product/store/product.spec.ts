@@ -1436,7 +1436,7 @@ medusaIntegrationTestRunner({
             },
             {
               url: "image-two",
-            }
+            },
           ],
         })
 
@@ -1487,7 +1487,10 @@ medusaIntegrationTestRunner({
       })
 
       it("should retrieve product with images ordered by rank", async () => {
-        const response = await api.get(`/store/products/${product.id}`, storeHeaders)
+        const response = await api.get(
+          `/store/products/${product.id}`,
+          storeHeaders
+        )
 
         expect(response.data.product.images).toEqual(
           expect.arrayContaining([
