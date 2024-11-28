@@ -4,7 +4,7 @@ import es from "./es.json"
 import pl from "./pl.json"
 import ptBR from "./ptBR.json"
 import tr from "./tr.json"
-import vi from "./tr.json"
+import vi from "./vi.json"
 
 export default {
   en: {
