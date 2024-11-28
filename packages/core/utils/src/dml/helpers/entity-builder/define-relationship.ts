@@ -237,7 +237,13 @@ export function defineBelongsToRelationship(
         return
       }
 
-      this[foreignKeyName] ??= this[relationship.name]?.id
+      if (
+        this[relationship.name] &&
+        "id" in this[relationship.name] &&
+        this[foreignKeyName] === undefined
+      ) {
+        this[foreignKeyName] = this[relationship.name]?.id
+      }
     }
 
     /**
