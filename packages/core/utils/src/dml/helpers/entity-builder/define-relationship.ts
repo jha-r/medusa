@@ -237,7 +237,7 @@ export function defineBelongsToRelationship(
         return
       }
 
-      this[foreignKeyName] ??= this[relationship.name]?.id ?? null
+      this[foreignKeyName] ??= this[relationship.name]?.id
     }
 
     /**
