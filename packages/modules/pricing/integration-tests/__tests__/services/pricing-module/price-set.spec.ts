@@ -899,7 +899,9 @@ moduleIntegrationTestRunner<IPricingModuleService>({
                 {
                   amount: 100,
                   currency_code: "USD",
-                  rules: { region_id: "123" },
+                  rules: {
+                    region_id: "123",
+                  },
                 },
               ],
             },
@@ -912,7 +914,10 @@ moduleIntegrationTestRunner<IPricingModuleService>({
                 {
                   amount: 200,
                   currency_code: "USD",
-                  rules: { region_id: "123" },
+                  rules: {
+                    region_id: "123",
+                    test: [{ value: 500, operator: "gte" }],
+                  },
                 },
               ],
             },
@@ -926,12 +931,21 @@ moduleIntegrationTestRunner<IPricingModuleService>({
             priceSet.prices?.sort((a: any, b: any) => a.amount - b.amount)
           ).toEqual([
             expect.objectContaining({
+              amount: 100,
+              currency_code: "USD",
+            }),
+            expect.objectContaining({
               amount: 200,
               currency_code: "USD",
               price_rules: [
                 expect.objectContaining({
                   attribute: "region_id",
                   value: "123",
+                }),
+                expect.objectContaining({
+                  attribute: "test",
+                  operator: "gte",
+                  value: "500",
                 }),
               ],
             }),

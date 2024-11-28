@@ -125,6 +125,11 @@ export class PricingRepository
             .where("pr.operator", "lte")
             .whereRaw("? <= pr.value::numeric", [value])
         })
+        .orWhere((operatorBuilder) => {
+          operatorBuilder
+            .where("pr.operator", "eq")
+            .whereRaw("? = pr.value::numeric", [value])
+        })
     }
 
     priceSubQueryKnex.orWhere((priceBuilder) => {
