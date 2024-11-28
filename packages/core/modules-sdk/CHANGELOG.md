@@ -1,5 +1,14 @@
 # @medusajs/modules-sdk
 
+## 2.0.7
+
+### Patch Changes
+
+- Updated dependencies [[`e9003c3124f284eae7e1457101bf10c1beccbac1`](https://github.com/medusajs/medusa/commit/e9003c3124f284eae7e1457101bf10c1beccbac1)]:
+  - @medusajs/utils@2.0.7
+  - @medusajs/orchestration@2.0.7
+  - @medusajs/types@2.0.7
+
 ## 2.0.6
 
 ### Patch Changes

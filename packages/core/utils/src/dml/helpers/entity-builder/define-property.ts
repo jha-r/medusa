@@ -16,6 +16,7 @@ import {
   Utils,
 } from "@mikro-orm/core"
 import { PrimaryKeyModifier } from "../../properties/primary-key"
+import { applyEntityIndexes } from "../mikro-orm/apply-indexes"
 
 /**
  * DML entity data types to PostgreSQL data types via
@@ -64,7 +65,8 @@ const PROPERTY_TYPES: {
 const SPECIAL_PROPERTIES: {
   [propertyName: string]: (
     MikroORMEntity: EntityConstructor<any>,
-    field: PropertyMetadata
+    field: PropertyMetadata,
+    tableName: string
   ) => void
 } = {
   created_at: (MikroORMEntity, field) => {
@@ -88,6 +90,21 @@ const SPECIAL_PROPERTIES: {
       onUpdate: () => new Date(),
     })(MikroORMEntity.prototype, field.fieldName)
   },
+  deleted_at: (MikroORMEntity, field, tableName) => {
+    Property({
+      columnType: "timestamptz",
+      type: "date",
+      nullable: true,
+      fieldName: field.fieldName,
+    })(MikroORMEntity.prototype, field.fieldName)
+
+    applyEntityIndexes(MikroORMEntity, tableName, [
+      {
+        on: ["deleted_at"],
+        where: "deleted_at IS NULL",
+      },
+    ])
+  },
 }
 
 /**
@@ -95,8 +112,8 @@ const SPECIAL_PROPERTIES: {
  */
 export function defineProperty(
   MikroORMEntity: EntityConstructor<any>,
-  propertyName: string,
-  property: PropertyType<any>
+  property: PropertyType<any>,
+  { tableName, propertyName }: { tableName: string; propertyName: string }
 ) {
   const field = property.parse(propertyName)
   /**
@@ -112,18 +129,18 @@ export function defineProperty(
   }
 
   if (SPECIAL_PROPERTIES[field.fieldName]) {
-    SPECIAL_PROPERTIES[field.fieldName](MikroORMEntity, field)
+    SPECIAL_PROPERTIES[field.fieldName](MikroORMEntity, field, tableName)
     return
   }
 
-  /**
-   * Defining an big number property
-   * A big number property always comes with a raw_{{ fieldName }} column
-   * where the config of the bigNumber is set.
-   * The `raw_` field is generated during DML schema generation as a json
-   * dataType.
-   */
   if (field.dataType.name === "bigNumber") {
+    /**
+     * Defining an big number property
+     * A big number property always comes with a raw_{{ fieldName }} column
+     * where the config of the bigNumber is set.
+     * The `raw_` field is generated during DML schema generation as a json
+     * dataType.
+     */
     MikroOrmBigNumberProperty({
       nullable: field.nullable,
       fieldName: field.fieldName,

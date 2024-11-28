@@ -1,19 +1,19 @@
 {
-	"id": 34458,
+	"id": 36890,
 	"name": "dml",
 	"variant": "project",
 	"kind": 1,
 	"flags": {},
 	"children": [
 		{
-			"id": 34459,
+			"id": 36891,
 			"name": "entity-builder",
 			"variant": "declaration",
 			"kind": 2,
 			"flags": {},
 			"children": [
 				{
-					"id": 34460,
+					"id": 36892,
 					"name": "DefineOptions",
 					"variant": "declaration",
 					"kind": 2097152,
@@ -28,14 +28,14 @@
 							{
 								"type": "reflection",
 								"declaration": {
-									"id": 34461,
+									"id": 36893,
 									"name": "__type",
 									"variant": "declaration",
 									"kind": 65536,
 									"flags": {},
 									"children": [
 										{
-											"id": 34462,
+											"id": 36894,
 											"name": "name",
 											"variant": "declaration",
 											"kind": 1024,
@@ -56,7 +56,7 @@
 											}
 										},
 										{
-											"id": 34463,
+											"id": 36895,
 											"name": "tableName",
 											"variant": "declaration",
 											"kind": 1024,
@@ -79,8 +79,8 @@
 										{
 											"title": "Properties",
 											"children": [
-												34462,
-												34463
+												36894,
+												36895
 											]
 										}
 									]
@@ -90,7 +90,7 @@
 					}
 				},
 				{
-					"id": 34464,
+					"id": 36896,
 					"name": "ManyToManyOptions",
 					"variant": "declaration",
 					"kind": 2097152,
@@ -113,14 +113,14 @@
 									{
 										"type": "reflection",
 										"declaration": {
-											"id": 34465,
+											"id": 36897,
 											"name": "__type",
 											"variant": "declaration",
 											"kind": 65536,
 											"flags": {},
 											"children": [
 												{
-													"id": 34466,
+													"id": 36898,
 													"name": "pivotTable",
 													"variant": "declaration",
 													"kind": 1024,
@@ -139,13 +139,57 @@
 														"type": "intrinsic",
 														"name": "string"
 													}
+												},
+												{
+													"id": 36900,
+													"name": "joinColumn",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isOptional": true
+													},
+													"comment": {
+														"summary": [
+															{
+																"kind": "text",
+																"text": "The column name in the pivot table that for the current entity"
+															}
+														]
+													},
+													"type": {
+														"type": "intrinsic",
+														"name": "string"
+													}
+												},
+												{
+													"id": 36901,
+													"name": "inverseJoinColumn",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isOptional": true
+													},
+													"comment": {
+														"summary": [
+															{
+																"kind": "text",
+																"text": "The column name in the pivot table for the opposite entity"
+															}
+														]
+													},
+													"type": {
+														"type": "intrinsic",
+														"name": "string"
+													}
 												}
 											],
 											"groups": [
 												{
 													"title": "Properties",
 													"children": [
-														34466
+														36898,
+														36900,
+														36901
 													]
 												}
 											]
@@ -154,14 +198,14 @@
 									{
 										"type": "reflection",
 										"declaration": {
-											"id": 34468,
+											"id": 36902,
 											"name": "__type",
 											"variant": "declaration",
 											"kind": 65536,
 											"flags": {},
 											"children": [
 												{
-													"id": 34470,
+													"id": 36904,
 													"name": "pivotEntity",
 													"variant": "declaration",
 													"kind": 1024,
@@ -179,21 +223,21 @@
 													"type": {
 														"type": "reflection",
 														"declaration": {
-															"id": 34471,
+															"id": 36905,
 															"name": "__type",
 															"variant": "declaration",
 															"kind": 65536,
 															"flags": {},
 															"signatures": [
 																{
-																	"id": 34472,
+																	"id": 36906,
 																	"name": "__type",
 																	"variant": "signature",
 																	"kind": 4096,
 																	"flags": {},
 																	"type": {
 																		"type": "reference",
-																		"target": 34530,
+																		"target": 36964,
 																		"typeArguments": [
 																			{
 																				"type": "intrinsic",
@@ -217,7 +261,7 @@
 												{
 													"title": "Properties",
 													"children": [
-														34470
+														36904
 													]
 												}
 											]
@@ -229,7 +273,7 @@
 					}
 				},
 				{
-					"id": 34473,
+					"id": 36907,
 					"name": "EntityBuilder",
 					"variant": "declaration",
 					"kind": 128,
@@ -244,21 +288,21 @@
 					},
 					"children": [
 						{
-							"id": 34474,
+							"id": 36908,
 							"name": "constructor",
 							"variant": "declaration",
 							"kind": 512,
 							"flags": {},
 							"signatures": [
 								{
-									"id": 34475,
+									"id": 36909,
 									"name": "new EntityBuilder",
 									"variant": "signature",
 									"kind": 16384,
 									"flags": {},
 									"type": {
 										"type": "reference",
-										"target": 34473,
+										"target": 36907,
 										"name": "EntityBuilder",
 										"package": "@medusajs/utils"
 									}
@@ -266,14 +310,14 @@
 							]
 						},
 						{
-							"id": 34479,
+							"id": 36913,
 							"name": "define",
 							"variant": "declaration",
 							"kind": 2048,
 							"flags": {},
 							"signatures": [
 								{
-									"id": 34480,
+									"id": 36914,
 									"name": "define",
 									"variant": "signature",
 									"kind": 4096,
@@ -299,7 +343,7 @@
 									},
 									"typeParameters": [
 										{
-											"id": 34481,
+											"id": 36915,
 											"name": "Schema",
 											"variant": "typeParam",
 											"kind": 131072,
@@ -323,7 +367,7 @@
 											}
 										},
 										{
-											"id": 34482,
+											"id": 36916,
 											"name": "TConfig",
 											"variant": "typeParam",
 											"kind": 131072,
@@ -343,7 +387,7 @@
 									],
 									"parameters": [
 										{
-											"id": 34483,
+											"id": 36917,
 											"name": "nameOrConfig",
 											"variant": "param",
 											"kind": 32768,
@@ -358,14 +402,14 @@
 											},
 											"type": {
 												"type": "reference",
-												"target": 34482,
+												"target": 36916,
 												"name": "TConfig",
 												"package": "@medusajs/utils",
 												"refersToTypeParameter": true
 											}
 										},
 										{
-											"id": 34484,
+											"id": 36918,
 											"name": "schema",
 											"variant": "param",
 											"kind": 32768,
@@ -380,7 +424,7 @@
 											},
 											"type": {
 												"type": "reference",
-												"target": 34481,
+												"target": 36915,
 												"name": "Schema",
 												"package": "@medusajs/utils",
 												"refersToTypeParameter": true
@@ -389,14 +433,14 @@
 									],
 									"type": {
 										"type": "reference",
-										"target": 34530,
+										"target": 36964,
 										"typeArguments": [
 											{
 												"type": "intersection",
 												"types": [
 													{
 														"type": "reference",
-														"target": 34481,
+														"target": 36915,
 														"name": "Schema",
 														"package": "@medusajs/utils",
 														"refersToTypeParameter": true
@@ -435,7 +479,7 @@
 															},
 															"objectType": {
 																"type": "reference",
-																"target": 34481,
+																"target": 36915,
 																"name": "Schema",
 																"package": "@medusajs/utils",
 																"refersToTypeParameter": true
@@ -478,7 +522,7 @@
 																},
 																"objectType": {
 																	"type": "reference",
-																	"target": 34481,
+																	"target": 36915,
 																	"name": "Schema",
 																	"package": "@medusajs/utils",
 																	"refersToTypeParameter": true
@@ -573,7 +617,7 @@
 																},
 																"objectType": {
 																	"type": "reference",
-																	"target": 34481,
+																	"target": 36915,
 																	"name": "Schema",
 																	"package": "@medusajs/utils",
 																	"refersToTypeParameter": true
@@ -664,7 +708,7 @@
 											},
 											{
 												"type": "reference",
-												"target": 34482,
+												"target": 36916,
 												"name": "TConfig",
 												"package": "@medusajs/utils",
 												"refersToTypeParameter": true
@@ -681,32 +725,32 @@
 						{
 							"title": "Constructors",
 							"children": [
-								34474
+								36908
 							]
 						},
 						{
 							"title": "Methods",
 							"children": [
-								34479,
-								34485,
-								34490,
-								34492,
-								34494,
-								34496,
-								34498,
-								34500,
-								34502,
-								34504,
-								34508,
-								34513,
-								34518,
-								34523
+								36913,
+								36919,
+								36924,
+								36926,
+								36928,
+								36930,
+								36932,
+								36934,
+								36936,
+								36938,
+								36942,
+								36947,
+								36952,
+								36957
 							]
 						}
 					]
 				},
 				{
-					"id": 34528,
+					"id": 36962,
 					"name": "model",
 					"variant": "declaration",
 					"kind": 32,
@@ -715,7 +759,7 @@
 					},
 					"type": {
 						"type": "reference",
-						"target": 34473,
+						"target": 36907,
 						"name": "EntityBuilder",
 						"package": "@medusajs/utils"
 					},
@@ -726,33 +770,33 @@
 				{
 					"title": "Classes",
 					"children": [
-						34473
+						36907
 					]
 				},
 				{
 					"title": "Type Aliases",
 					"children": [
-						34460,
-						34464
+						36892,
+						36896
 					]
 				},
 				{
 					"title": "Variables",
 					"children": [
-						34528
+						36962
 					]
 				}
 			]
 		},
 		{
-			"id": 34529,
+			"id": 36963,
 			"name": "entity",
 			"variant": "declaration",
 			"kind": 2,
 			"flags": {},
 			"children": [
 				{
-					"id": 34530,
+					"id": 36964,
 					"name": "DmlEntity",
 					"variant": "declaration",
 					"kind": 128,
@@ -767,7 +811,7 @@
 					},
 					"children": [
 						{
-							"id": 34559,
+							"id": 36993,
 							"name": "[IsDmlEntity]",
 							"variant": "declaration",
 							"kind": 1024,
@@ -779,7 +823,7 @@
 							"defaultValue": "true"
 						},
 						{
-							"id": 34540,
+							"id": 36974,
 							"name": "name",
 							"variant": "declaration",
 							"kind": 1024,
@@ -793,7 +837,7 @@
 								"typeArguments": [
 									{
 										"type": "reference",
-										"target": 34537,
+										"target": 36971,
 										"name": "TConfig",
 										"package": "@medusajs/utils",
 										"qualifiedName": "DmlEntity.TConfig",
@@ -810,14 +854,14 @@
 							}
 						},
 						{
-							"id": 34541,
+							"id": 36975,
 							"name": "schema",
 							"variant": "declaration",
 							"kind": 1024,
 							"flags": {},
 							"type": {
 								"type": "reference",
-								"target": 34536,
+								"target": 36970,
 								"name": "Schema",
 								"package": "@medusajs/utils",
 								"qualifiedName": "DmlEntity.Schema",
@@ -830,21 +874,21 @@
 							}
 						},
 						{
-							"id": 34534,
+							"id": 36968,
 							"name": "constructor",
 							"variant": "declaration",
 							"kind": 512,
 							"flags": {},
 							"signatures": [
 								{
-									"id": 34535,
+									"id": 36969,
 									"name": "new DmlEntity",
 									"variant": "signature",
 									"kind": 16384,
 									"flags": {},
 									"typeParameters": [
 										{
-											"id": 34536,
+											"id": 36970,
 											"name": "Schema",
 											"variant": "typeParam",
 											"kind": 131072,
@@ -860,7 +904,7 @@
 											}
 										},
 										{
-											"id": 34537,
+											"id": 36971,
 											"name": "TConfig",
 											"variant": "typeParam",
 											"kind": 131072,
@@ -880,14 +924,14 @@
 									],
 									"parameters": [
 										{
-											"id": 34538,
+											"id": 36972,
 											"name": "nameOrConfig",
 											"variant": "param",
 											"kind": 32768,
 											"flags": {},
 											"type": {
 												"type": "reference",
-												"target": 34537,
+												"target": 36971,
 												"name": "TConfig",
 												"package": "@medusajs/utils",
 												"qualifiedName": "DmlEntity.TConfig",
@@ -895,14 +939,14 @@
 											}
 										},
 										{
-											"id": 34539,
+											"id": 36973,
 											"name": "schema",
 											"variant": "param",
 											"kind": 32768,
 											"flags": {},
 											"type": {
 												"type": "reference",
-												"target": 34536,
+												"target": 36970,
 												"name": "Schema",
 												"package": "@medusajs/utils",
 												"qualifiedName": "DmlEntity.Schema",
@@ -912,11 +956,11 @@
 									],
 									"type": {
 										"type": "reference",
-										"target": 34530,
+										"target": 36964,
 										"typeArguments": [
 											{
 												"type": "reference",
-												"target": 34536,
+												"target": 36970,
 												"name": "Schema",
 												"package": "@medusajs/utils",
 												"qualifiedName": "DmlEntity.Schema",
@@ -924,7 +968,7 @@
 											},
 											{
 												"type": "reference",
-												"target": 34537,
+												"target": 36971,
 												"name": "TConfig",
 												"package": "@medusajs/utils",
 												"qualifiedName": "DmlEntity.TConfig",
@@ -938,7 +982,7 @@
 							]
 						},
 						{
-							"id": 34531,
+							"id": 36965,
 							"name": "isDmlEntity",
 							"variant": "declaration",
 							"kind": 2048,
@@ -947,7 +991,7 @@
 							},
 							"signatures": [
 								{
-									"id": 34532,
+									"id": 36966,
 									"name": "isDmlEntity",
 									"variant": "signature",
 									"kind": 4096,
@@ -962,7 +1006,7 @@
 									},
 									"parameters": [
 										{
-											"id": 34533,
+											"id": 36967,
 											"name": "entity",
 											"variant": "param",
 											"kind": 32768,
@@ -979,7 +1023,7 @@
 										"asserts": false,
 										"targetType": {
 											"type": "reference",
-											"target": 34530,
+											"target": 36964,
 											"typeArguments": [
 												{
 													"type": "intrinsic",
@@ -998,14 +1042,14 @@
 							]
 						},
 						{
-							"id": 34545,
+							"id": 36979,
 							"name": "parse",
 							"variant": "declaration",
 							"kind": 2048,
 							"flags": {},
 							"signatures": [
 								{
-									"id": 34546,
+									"id": 36980,
 									"name": "parse",
 									"variant": "signature",
 									"kind": 4096,
@@ -1021,14 +1065,14 @@
 									"type": {
 										"type": "reflection",
 										"declaration": {
-											"id": 34547,
+											"id": 36981,
 											"name": "__type",
 											"variant": "declaration",
 											"kind": 65536,
 											"flags": {},
 											"children": [
 												{
-													"id": 34548,
+													"id": 36982,
 													"name": "name",
 													"variant": "declaration",
 													"kind": 1024,
@@ -1042,7 +1086,7 @@
 														"typeArguments": [
 															{
 																"type": "reference",
-																"target": 34537,
+																"target": 36971,
 																"name": "TConfig",
 																"package": "@medusajs/utils",
 																"qualifiedName": "DmlEntity.TConfig",
@@ -1054,7 +1098,7 @@
 													}
 												},
 												{
-													"id": 34549,
+													"id": 36983,
 													"name": "tableName",
 													"variant": "declaration",
 													"kind": 1024,
@@ -1065,7 +1109,7 @@
 													}
 												},
 												{
-													"id": 34550,
+													"id": 36984,
 													"name": "schema",
 													"variant": "declaration",
 													"kind": 1024,
@@ -1081,7 +1125,7 @@
 													}
 												},
 												{
-													"id": 34551,
+													"id": 36985,
 													"name": "cascades",
 													"variant": "declaration",
 													"kind": 1024,
@@ -1106,7 +1150,7 @@
 													}
 												},
 												{
-													"id": 34552,
+													"id": 36986,
 													"name": "indexes",
 													"variant": "declaration",
 													"kind": 1024,
@@ -1122,7 +1166,7 @@
 															"typeArguments": [
 																{
 																	"type": "reference",
-																	"target": 34536,
+																	"target": 36970,
 																	"name": "Schema",
 																	"package": "@medusajs/utils",
 																	"qualifiedName": "DmlEntity.Schema",
@@ -1139,11 +1183,11 @@
 												{
 													"title": "Properties",
 													"children": [
-														34548,
-														34549,
-														34550,
-														34551,
-														34552
+														36982,
+														36983,
+														36984,
+														36985,
+														36986
 													]
 												}
 											]
@@ -1157,30 +1201,30 @@
 						{
 							"title": "Constructors",
 							"children": [
-								34534
+								36968
 							]
 						},
 						{
 							"title": "Properties",
 							"children": [
-								34559,
-								34540,
-								34541
+								36993,
+								36974,
+								36975
 							]
 						},
 						{
 							"title": "Methods",
 							"children": [
-								34531,
-								34545,
-								34553,
-								34556
+								36965,
+								36979,
+								36987,
+								36990
 							]
 						}
 					],
 					"typeParameters": [
 						{
-							"id": 34560,
+							"id": 36994,
 							"name": "Schema",
 							"variant": "typeParam",
 							"kind": 131072,
@@ -1196,7 +1240,7 @@
 							}
 						},
 						{
-							"id": 34561,
+							"id": 36995,
 							"name": "TConfig",
 							"variant": "typeParam",
 							"kind": 131072,
@@ -1224,7 +1268,7 @@
 							"typeArguments": [
 								{
 									"type": "reference",
-									"target": 34536,
+									"target": 36970,
 									"name": "Schema",
 									"package": "@medusajs/utils",
 									"qualifiedName": "DmlEntity.Schema",
@@ -1232,7 +1276,7 @@
 								},
 								{
 									"type": "reference",
-									"target": 34537,
+									"target": 36971,
 									"name": "TConfig",
 									"package": "@medusajs/utils",
 									"qualifiedName": "DmlEntity.TConfig",
@@ -1249,20 +1293,20 @@
 				{
 					"title": "Classes",
 					"children": [
-						34530
+						36964
 					]
 				}
 			]
 		},
 		{
-			"id": 34562,
+			"id": 36996,
 			"name": "properties/base",
 			"variant": "declaration",
 			"kind": 2,
 			"flags": {},
 			"children": [
 				{
-					"id": 34563,
+					"id": 36997,
 					"name": "BaseProperty",
 					"variant": "declaration",
 					"kind": 128,
@@ -1279,21 +1323,21 @@
 					},
 					"children": [
 						{
-							"id": 34564,
+							"id": 36998,
 							"name": "constructor",
 							"variant": "declaration",
 							"kind": 512,
 							"flags": {},
 							"signatures": [
 								{
-									"id": 34565,
+									"id": 36999,
 									"name": "new BaseProperty",
 									"variant": "signature",
 									"kind": 16384,
 									"flags": {},
 									"typeParameters": [
 										{
-											"id": 34566,
+											"id": 37000,
 											"name": "T",
 											"variant": "typeParam",
 											"kind": 131072,
@@ -1302,11 +1346,11 @@
 									],
 									"type": {
 										"type": "reference",
-										"target": 34563,
+										"target": 36997,
 										"typeArguments": [
 											{
 												"type": "reference",
-												"target": 34566,
+												"target": 37000,
 												"name": "T",
 												"package": "@medusajs/utils",
 												"qualifiedName": "BaseProperty.T",
@@ -1320,7 +1364,7 @@
 							]
 						},
 						{
-							"id": 34573,
+							"id": 37007,
 							"name": "dataType",
 							"variant": "declaration",
 							"kind": 1024,
@@ -1339,14 +1383,14 @@
 							"type": {
 								"type": "reflection",
 								"declaration": {
-									"id": 34574,
+									"id": 37008,
 									"name": "__type",
 									"variant": "declaration",
 									"kind": 65536,
 									"flags": {},
 									"children": [
 										{
-											"id": 34575,
+											"id": 37009,
 											"name": "name",
 											"variant": "declaration",
 											"kind": 1024,
@@ -1362,7 +1406,7 @@
 											}
 										},
 										{
-											"id": 34576,
+											"id": 37010,
 											"name": "options",
 											"variant": "declaration",
 											"kind": 1024,
@@ -1394,8 +1438,8 @@
 										{
 											"title": "Properties",
 											"children": [
-												34575,
-												34576
+												37009,
+												37010
 											]
 										}
 									]
@@ -1403,7 +1447,7 @@
 							}
 						},
 						{
-							"id": 34577,
+							"id": 37011,
 							"name": "$dataType",
 							"variant": "declaration",
 							"kind": 1024,
@@ -1418,7 +1462,7 @@
 							},
 							"type": {
 								"type": "reference",
-								"target": 34566,
+								"target": 37000,
 								"name": "T",
 								"package": "@medusajs/utils",
 								"qualifiedName": "BaseProperty.T",
@@ -1431,14 +1475,14 @@
 							}
 						},
 						{
-							"id": 34589,
+							"id": 37023,
 							"name": "parse",
 							"variant": "declaration",
 							"kind": 2048,
 							"flags": {},
 							"signatures": [
 								{
-									"id": 34590,
+									"id": 37024,
 									"name": "parse",
 									"variant": "signature",
 									"kind": 4096,
@@ -1453,7 +1497,7 @@
 									},
 									"parameters": [
 										{
-											"id": 34591,
+											"id": 37025,
 											"name": "fieldName",
 											"variant": "param",
 											"kind": 32768,
@@ -1491,30 +1535,30 @@
 						{
 							"title": "Constructors",
 							"children": [
-								34564
+								36998
 							]
 						},
 						{
 							"title": "Properties",
 							"children": [
-								34573,
-								34577
+								37007,
+								37011
 							]
 						},
 						{
 							"title": "Methods",
 							"children": [
-								34578,
-								34580,
-								34583,
-								34586,
-								34589
+								37012,
+								37014,
+								37017,
+								37020,
+								37023
 							]
 						}
 					],
 					"typeParameters": [
 						{
-							"id": 34592,
+							"id": 37026,
 							"name": "T",
 							"variant": "typeParam",
 							"kind": 131072,
@@ -1531,7 +1575,7 @@
 							"typeArguments": [
 								{
 									"type": "reference",
-									"target": 34566,
+									"target": 37000,
 									"name": "T",
 									"package": "@medusajs/utils",
 									"qualifiedName": "BaseProperty.T",
@@ -1548,27 +1592,27 @@
 				{
 					"title": "Classes",
 					"children": [
-						34563
+						36997
 					]
 				}
 			]
 		},
 		{
-			"id": 34593,
+			"id": 37027,
 			"name": "Property Types",
 			"variant": "declaration",
 			"kind": 4,
 			"flags": {},
 			"children": [
 				{
-					"id": 34485,
+					"id": 36919,
 					"name": "id",
 					"variant": "declaration",
 					"kind": 2048,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 34486,
+							"id": 36920,
 							"name": "id",
 							"variant": "signature",
 							"kind": 4096,
@@ -1594,7 +1638,7 @@
 							},
 							"parameters": [
 								{
-									"id": 34487,
+									"id": 36921,
 									"name": "options",
 									"variant": "param",
 									"kind": 32768,
@@ -1604,14 +1648,14 @@
 									"type": {
 										"type": "reflection",
 										"declaration": {
-											"id": 34488,
+											"id": 36922,
 											"name": "__type",
 											"variant": "declaration",
 											"kind": 65536,
 											"flags": {},
 											"children": [
 												{
-													"id": 34489,
+													"id": 36923,
 													"name": "prefix",
 													"variant": "declaration",
 													"kind": 1024,
@@ -1628,7 +1672,7 @@
 												{
 													"title": "Properties",
 													"children": [
-														34489
+														36923
 													]
 												}
 											]
@@ -1649,14 +1693,14 @@
 					]
 				},
 				{
-					"id": 34490,
+					"id": 36924,
 					"name": "text",
 					"variant": "declaration",
 					"kind": 2048,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 34491,
+							"id": 36925,
 							"name": "text",
 							"variant": "signature",
 							"kind": 4096,
@@ -1693,14 +1737,14 @@
 					]
 				},
 				{
-					"id": 34492,
+					"id": 36926,
 					"name": "boolean",
 					"variant": "declaration",
 					"kind": 2048,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 34493,
+							"id": 36927,
 							"name": "boolean",
 							"variant": "signature",
 							"kind": 4096,
@@ -1737,14 +1781,14 @@
 					]
 				},
 				{
-					"id": 34494,
+					"id": 36928,
 					"name": "number",
 					"variant": "declaration",
 					"kind": 2048,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 34495,
+							"id": 36929,
 							"name": "number",
 							"variant": "signature",
 							"kind": 4096,
@@ -1781,14 +1825,14 @@
 					]
 				},
 				{
-					"id": 34496,
+					"id": 36930,
 					"name": "bigNumber",
 					"variant": "declaration",
 					"kind": 2048,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 34497,
+							"id": 36931,
 							"name": "bigNumber",
 							"variant": "signature",
 							"kind": 4096,
@@ -1825,14 +1869,14 @@
 					]
 				},
 				{
-					"id": 34498,
+					"id": 36932,
 					"name": "array",
 					"variant": "declaration",
 					"kind": 2048,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 34499,
+							"id": 36933,
 							"name": "array",
 							"variant": "signature",
 							"kind": 4096,
@@ -1869,14 +1913,14 @@
 					]
 				},
 				{
-					"id": 34500,
+					"id": 36934,
 					"name": "dateTime",
 					"variant": "declaration",
 					"kind": 2048,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 34501,
+							"id": 36935,
 							"name": "dateTime",
 							"variant": "signature",
 							"kind": 4096,
@@ -1913,14 +1957,14 @@
 					]
 				},
 				{
-					"id": 34502,
+					"id": 36936,
 					"name": "json",
 					"variant": "declaration",
 					"kind": 2048,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 34503,
+							"id": 36937,
 							"name": "json",
 							"variant": "signature",
 							"kind": 4096,
@@ -1957,14 +2001,14 @@
 					]
 				},
 				{
-					"id": 34504,
+					"id": 36938,
 					"name": "enum",
 					"variant": "declaration",
 					"kind": 2048,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 34505,
+							"id": 36939,
 							"name": "enum",
 							"variant": "signature",
 							"kind": 4096,
@@ -1990,7 +2034,7 @@
 							},
 							"typeParameters": [
 								{
-									"id": 34506,
+									"id": 36940,
 									"name": "Values",
 									"variant": "typeParam",
 									"kind": 131072,
@@ -2038,7 +2082,7 @@
 							],
 							"parameters": [
 								{
-									"id": 34507,
+									"id": 36941,
 									"name": "values",
 									"variant": "param",
 									"kind": 32768,
@@ -2053,7 +2097,7 @@
 									},
 									"type": {
 										"type": "reference",
-										"target": 34506,
+										"target": 36940,
 										"name": "Values",
 										"package": "@medusajs/utils",
 										"refersToTypeParameter": true
@@ -2069,7 +2113,7 @@
 								"typeArguments": [
 									{
 										"type": "reference",
-										"target": 34506,
+										"target": 36940,
 										"name": "Values",
 										"package": "@medusajs/utils",
 										"refersToTypeParameter": true
@@ -2086,35 +2130,35 @@
 				{
 					"title": "Methods",
 					"children": [
-						34485,
-						34490,
-						34492,
-						34494,
-						34496,
-						34498,
-						34500,
-						34502,
-						34504
+						36919,
+						36924,
+						36926,
+						36928,
+						36930,
+						36932,
+						36934,
+						36936,
+						36938
 					]
 				}
 			]
 		},
 		{
-			"id": 34594,
+			"id": 37028,
 			"name": "Relationship Methods",
 			"variant": "declaration",
 			"kind": 4,
 			"flags": {},
 			"children": [
 				{
-					"id": 34508,
+					"id": 36942,
 					"name": "hasOne",
 					"variant": "declaration",
 					"kind": 2048,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 34509,
+							"id": 36943,
 							"name": "hasOne",
 							"variant": "signature",
 							"kind": 4096,
@@ -2129,7 +2173,7 @@
 										"kind": "inline-tag",
 										"tag": "@link",
 										"text": "belongsTo",
-										"target": 34513,
+										"target": 36947,
 										"tsLinkText": ""
 									},
 									{
@@ -2151,7 +2195,7 @@
 							},
 							"typeParameters": [
 								{
-									"id": 34510,
+									"id": 36944,
 									"name": "T",
 									"variant": "typeParam",
 									"kind": 131072,
@@ -2168,7 +2212,7 @@
 							],
 							"parameters": [
 								{
-									"id": 34511,
+									"id": 36945,
 									"name": "entityBuilder",
 									"variant": "param",
 									"kind": 32768,
@@ -2183,14 +2227,14 @@
 									},
 									"type": {
 										"type": "reference",
-										"target": 34510,
+										"target": 36944,
 										"name": "T",
 										"package": "@medusajs/utils",
 										"refersToTypeParameter": true
 									}
 								},
 								{
-									"id": 34512,
+									"id": 36946,
 									"name": "options",
 									"variant": "param",
 									"kind": 32768,
@@ -2225,7 +2269,7 @@
 								"typeArguments": [
 									{
 										"type": "reference",
-										"target": 34510,
+										"target": 36944,
 										"name": "T",
 										"package": "@medusajs/utils",
 										"refersToTypeParameter": true
@@ -2238,14 +2282,14 @@
 					]
 				},
 				{
-					"id": 34513,
+					"id": 36947,
 					"name": "belongsTo",
 					"variant": "declaration",
 					"kind": 2048,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 34514,
+							"id": 36948,
 							"name": "belongsTo",
 							"variant": "signature",
 							"kind": 4096,
@@ -2260,7 +2304,7 @@
 										"kind": "inline-tag",
 										"tag": "@link",
 										"text": "hasOne",
-										"target": 34508,
+										"target": 36942,
 										"tsLinkText": ""
 									},
 									{
@@ -2271,7 +2315,7 @@
 										"kind": "inline-tag",
 										"tag": "@link",
 										"text": "hasMany",
-										"target": 34518,
+										"target": 36952,
 										"tsLinkText": ""
 									},
 									{
@@ -2293,7 +2337,7 @@
 							},
 							"typeParameters": [
 								{
-									"id": 34515,
+									"id": 36949,
 									"name": "T",
 									"variant": "typeParam",
 									"kind": 131072,
@@ -2310,7 +2354,7 @@
 							],
 							"parameters": [
 								{
-									"id": 34516,
+									"id": 36950,
 									"name": "entityBuilder",
 									"variant": "param",
 									"kind": 32768,
@@ -2325,14 +2369,14 @@
 									},
 									"type": {
 										"type": "reference",
-										"target": 34515,
+										"target": 36949,
 										"name": "T",
 										"package": "@medusajs/utils",
 										"refersToTypeParameter": true
 									}
 								},
 								{
-									"id": 34517,
+									"id": 36951,
 									"name": "options",
 									"variant": "param",
 									"kind": 32768,
@@ -2367,7 +2411,7 @@
 								"typeArguments": [
 									{
 										"type": "reference",
-										"target": 34515,
+										"target": 36949,
 										"name": "T",
 										"package": "@medusajs/utils",
 										"refersToTypeParameter": true
@@ -2380,14 +2424,14 @@
 					]
 				},
 				{
-					"id": 34518,
+					"id": 36952,
 					"name": "hasMany",
 					"variant": "declaration",
 					"kind": 2048,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 34519,
+							"id": 36953,
 							"name": "hasMany",
 							"variant": "signature",
 							"kind": 4096,
@@ -2413,7 +2457,7 @@
 							},
 							"typeParameters": [
 								{
-									"id": 34520,
+									"id": 36954,
 									"name": "T",
 									"variant": "typeParam",
 									"kind": 131072,
@@ -2430,7 +2474,7 @@
 							],
 							"parameters": [
 								{
-									"id": 34521,
+									"id": 36955,
 									"name": "entityBuilder",
 									"variant": "param",
 									"kind": 32768,
@@ -2445,14 +2489,14 @@
 									},
 									"type": {
 										"type": "reference",
-										"target": 34520,
+										"target": 36954,
 										"name": "T",
 										"package": "@medusajs/utils",
 										"refersToTypeParameter": true
 									}
 								},
 								{
-									"id": 34522,
+									"id": 36956,
 									"name": "options",
 									"variant": "param",
 									"kind": 32768,
@@ -2487,7 +2531,7 @@
 								"typeArguments": [
 									{
 										"type": "reference",
-										"target": 34520,
+										"target": 36954,
 										"name": "T",
 										"package": "@medusajs/utils",
 										"refersToTypeParameter": true
@@ -2500,14 +2544,14 @@
 					]
 				},
 				{
-					"id": 34523,
+					"id": 36957,
 					"name": "manyToMany",
 					"variant": "declaration",
 					"kind": 2048,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 34524,
+							"id": 36958,
 							"name": "manyToMany",
 							"variant": "signature",
 							"kind": 4096,
@@ -2533,7 +2577,7 @@
 							},
 							"typeParameters": [
 								{
-									"id": 34525,
+									"id": 36959,
 									"name": "T",
 									"variant": "typeParam",
 									"kind": 131072,
@@ -2550,7 +2594,7 @@
 							],
 							"parameters": [
 								{
-									"id": 34526,
+									"id": 36960,
 									"name": "entityBuilder",
 									"variant": "param",
 									"kind": 32768,
@@ -2565,14 +2609,14 @@
 									},
 									"type": {
 										"type": "reference",
-										"target": 34525,
+										"target": 36959,
 										"name": "T",
 										"package": "@medusajs/utils",
 										"refersToTypeParameter": true
 									}
 								},
 								{
-									"id": 34527,
+									"id": 36961,
 									"name": "options",
 									"variant": "param",
 									"kind": 32768,
@@ -2589,7 +2633,7 @@
 									},
 									"type": {
 										"type": "reference",
-										"target": 34464,
+										"target": 36896,
 										"name": "ManyToManyOptions",
 										"package": "@medusajs/utils"
 									}
@@ -2604,7 +2648,7 @@
 								"typeArguments": [
 									{
 										"type": "reference",
-										"target": 34525,
+										"target": 36959,
 										"name": "T",
 										"package": "@medusajs/utils",
 										"refersToTypeParameter": true
@@ -2621,30 +2665,30 @@
 				{
 					"title": "Methods",
 					"children": [
-						34508,
-						34513,
-						34518,
-						34523
+						36942,
+						36947,
+						36952,
+						36957
 					]
 				}
 			]
 		},
 		{
-			"id": 34595,
+			"id": 37029,
 			"name": "Model Methods",
 			"variant": "declaration",
 			"kind": 4,
 			"flags": {},
 			"children": [
 				{
-					"id": 34553,
+					"id": 36987,
 					"name": "cascades",
 					"variant": "declaration",
 					"kind": 2048,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 34554,
+							"id": 36988,
 							"name": "cascades",
 							"variant": "signature",
 							"kind": 4096,
@@ -2670,7 +2714,7 @@
 							},
 							"parameters": [
 								{
-									"id": 34555,
+									"id": 36989,
 									"name": "options",
 									"variant": "param",
 									"kind": 32768,
@@ -2707,7 +2751,7 @@
 												"typeArguments": [
 													{
 														"type": "reference",
-														"target": 34536,
+														"target": 36970,
 														"name": "Schema",
 														"package": "@medusajs/utils",
 														"qualifiedName": "DmlEntity.Schema",
@@ -2738,11 +2782,11 @@
 							],
 							"type": {
 								"type": "reference",
-								"target": 34530,
+								"target": 36964,
 								"typeArguments": [
 									{
 										"type": "reference",
-										"target": 34536,
+										"target": 36970,
 										"name": "Schema",
 										"package": "@medusajs/utils",
 										"qualifiedName": "DmlEntity.Schema",
@@ -2750,7 +2794,7 @@
 									},
 									{
 										"type": "reference",
-										"target": 34537,
+										"target": 36971,
 										"name": "TConfig",
 										"package": "@medusajs/utils",
 										"qualifiedName": "DmlEntity.TConfig",
@@ -2764,14 +2808,14 @@
 					]
 				},
 				{
-					"id": 34556,
+					"id": 36990,
 					"name": "indexes",
 					"variant": "declaration",
 					"kind": 2048,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 34557,
+							"id": 36991,
 							"name": "indexes",
 							"variant": "signature",
 							"kind": 4096,
@@ -2845,7 +2889,7 @@
 							},
 							"parameters": [
 								{
-									"id": 34558,
+									"id": 36992,
 									"name": "indexes",
 									"variant": "param",
 									"kind": 32768,
@@ -2869,7 +2913,7 @@
 											"typeArguments": [
 												{
 													"type": "reference",
-													"target": 34536,
+													"target": 36970,
 													"name": "Schema",
 													"package": "@medusajs/utils",
 													"qualifiedName": "DmlEntity.Schema",
@@ -2891,7 +2935,7 @@
 															"typeArguments": [
 																{
 																	"type": "reference",
-																	"target": 34536,
+																	"target": 36970,
 																	"name": "Schema",
 																	"package": "@medusajs/utils",
 																	"qualifiedName": "DmlEntity.Schema",
@@ -2912,11 +2956,11 @@
 							],
 							"type": {
 								"type": "reference",
-								"target": 34530,
+								"target": 36964,
 								"typeArguments": [
 									{
 										"type": "reference",
-										"target": 34536,
+										"target": 36970,
 										"name": "Schema",
 										"package": "@medusajs/utils",
 										"qualifiedName": "DmlEntity.Schema",
@@ -2924,7 +2968,7 @@
 									},
 									{
 										"type": "reference",
-										"target": 34537,
+										"target": 36971,
 										"name": "TConfig",
 										"package": "@medusajs/utils",
 										"qualifiedName": "DmlEntity.TConfig",
@@ -2942,28 +2986,28 @@
 				{
 					"title": "Methods",
 					"children": [
-						34553,
-						34556
+						36987,
+						36990
 					]
 				}
 			]
 		},
 		{
-			"id": 34596,
+			"id": 37030,
 			"name": "Property Configuration Methods",
 			"variant": "declaration",
 			"kind": 4,
 			"flags": {},
 			"children": [
 				{
-					"id": 34578,
+					"id": 37012,
 					"name": "nullable",
 					"variant": "declaration",
 					"kind": 2048,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 34579,
+							"id": 37013,
 							"name": "nullable",
 							"variant": "signature",
 							"kind": 4096,
@@ -3004,7 +3048,7 @@
 								"typeArguments": [
 									{
 										"type": "reference",
-										"target": 34566,
+										"target": 37000,
 										"name": "T",
 										"package": "@medusajs/utils",
 										"qualifiedName": "BaseProperty.T",
@@ -3012,11 +3056,11 @@
 									},
 									{
 										"type": "reference",
-										"target": 34563,
+										"target": 36997,
 										"typeArguments": [
 											{
 												"type": "reference",
-												"target": 34566,
+												"target": 37000,
 												"name": "T",
 												"package": "@medusajs/utils",
 												"qualifiedName": "BaseProperty.T",
@@ -3034,14 +3078,14 @@
 					]
 				},
 				{
-					"id": 34580,
+					"id": 37014,
 					"name": "index",
 					"variant": "declaration",
 					"kind": 2048,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 34581,
+							"id": 37015,
 							"name": "index",
 							"variant": "signature",
 							"kind": 4096,
@@ -3067,7 +3111,7 @@
 							},
 							"parameters": [
 								{
-									"id": 34582,
+									"id": 37016,
 									"name": "name",
 									"variant": "param",
 									"kind": 32768,
@@ -3090,11 +3134,11 @@
 							],
 							"type": {
 								"type": "reference",
-								"target": 34563,
+								"target": 36997,
 								"typeArguments": [
 									{
 										"type": "reference",
-										"target": 34566,
+										"target": 37000,
 										"name": "T",
 										"package": "@medusajs/utils",
 										"qualifiedName": "BaseProperty.T",
@@ -3108,14 +3152,14 @@
 					]
 				},
 				{
-					"id": 34583,
+					"id": 37017,
 					"name": "unique",
 					"variant": "declaration",
 					"kind": 2048,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 34584,
+							"id": 37018,
 							"name": "unique",
 							"variant": "signature",
 							"kind": 4096,
@@ -3141,7 +3185,7 @@
 							},
 							"parameters": [
 								{
-									"id": 34585,
+									"id": 37019,
 									"name": "name",
 									"variant": "param",
 									"kind": 32768,
@@ -3164,11 +3208,11 @@
 							],
 							"type": {
 								"type": "reference",
-								"target": 34563,
+								"target": 36997,
 								"typeArguments": [
 									{
 										"type": "reference",
-										"target": 34566,
+										"target": 37000,
 										"name": "T",
 										"package": "@medusajs/utils",
 										"qualifiedName": "BaseProperty.T",
@@ -3182,14 +3226,14 @@
 					]
 				},
 				{
-					"id": 34586,
+					"id": 37020,
 					"name": "default",
 					"variant": "declaration",
 					"kind": 2048,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 34587,
+							"id": 37021,
 							"name": "default",
 							"variant": "signature",
 							"kind": 4096,
@@ -3215,7 +3259,7 @@
 							},
 							"parameters": [
 								{
-									"id": 34588,
+									"id": 37022,
 									"name": "value",
 									"variant": "param",
 									"kind": 32768,
@@ -3230,7 +3274,7 @@
 									},
 									"type": {
 										"type": "reference",
-										"target": 34566,
+										"target": 37000,
 										"name": "T",
 										"package": "@medusajs/utils",
 										"qualifiedName": "BaseProperty.T",
@@ -3240,11 +3284,11 @@
 							],
 							"type": {
 								"type": "reference",
-								"target": 34563,
+								"target": 36997,
 								"typeArguments": [
 									{
 										"type": "reference",
-										"target": 34566,
+										"target": 37000,
 										"name": "T",
 										"package": "@medusajs/utils",
 										"qualifiedName": "BaseProperty.T",
@@ -3262,10 +3306,10 @@
 				{
 					"title": "Methods",
 					"children": [
-						34578,
-						34580,
-						34583,
-						34586
+						37012,
+						37014,
+						37017,
+						37020
 					]
 				}
 			]
@@ -3275,484 +3319,492 @@
 		{
 			"title": "Modules",
 			"children": [
-				34459,
-				34529,
-				34562
+				36891,
+				36963,
+				36996
 			]
 		},
 		{
 			"title": "Namespaces",
 			"children": [
-				34593,
-				34594,
-				34595,
-				34596
+				37027,
+				37028,
+				37029,
+				37030
 			]
 		}
 	],
 	"packageName": "@medusajs/utils",
 	"symbolIdMap": {
-		"34459": {
+		"36891": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": ""
 		},
-		"34460": {
+		"36892": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "DefineOptions"
 		},
-		"34461": {
+		"36893": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "__type"
 		},
-		"34462": {
+		"36894": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "__type.name"
 		},
-		"34463": {
+		"36895": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "__type.tableName"
 		},
-		"34464": {
+		"36896": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "ManyToManyOptions"
 		},
-		"34465": {
+		"36897": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "__type"
 		},
-		"34466": {
+		"36898": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "__type.pivotTable"
 		},
-		"34468": {
+		"36900": {
+			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
+			"qualifiedName": "__type.joinColumn"
+		},
+		"36901": {
+			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
+			"qualifiedName": "__type.inverseJoinColumn"
+		},
+		"36902": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "__type"
 		},
-		"34470": {
+		"36904": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "__type.pivotEntity"
 		},
-		"34471": {
+		"36905": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "__type"
 		},
-		"34472": {
+		"36906": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "__type"
 		},
-		"34473": {
+		"36907": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "EntityBuilder"
 		},
-		"34479": {
+		"36913": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "EntityBuilder.define"
 		},
-		"34480": {
+		"36914": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "EntityBuilder.define"
 		},
-		"34481": {
+		"36915": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "Schema"
 		},
-		"34482": {
+		"36916": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "TConfig"
 		},
-		"34483": {
+		"36917": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "nameOrConfig"
 		},
-		"34484": {
+		"36918": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "schema"
 		},
-		"34485": {
+		"36919": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "EntityBuilder.id"
 		},
-		"34486": {
+		"36920": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "EntityBuilder.id"
 		},
-		"34487": {
+		"36921": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "options"
 		},
-		"34488": {
+		"36922": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "__type"
 		},
-		"34489": {
+		"36923": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "__type.prefix"
 		},
-		"34490": {
+		"36924": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "EntityBuilder.text"
 		},
-		"34491": {
+		"36925": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "EntityBuilder.text"
 		},
-		"34492": {
+		"36926": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "EntityBuilder.boolean"
 		},
-		"34493": {
+		"36927": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "EntityBuilder.boolean"
 		},
-		"34494": {
+		"36928": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "EntityBuilder.number"
 		},
-		"34495": {
+		"36929": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "EntityBuilder.number"
 		},
-		"34496": {
+		"36930": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "EntityBuilder.bigNumber"
 		},
-		"34497": {
+		"36931": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "EntityBuilder.bigNumber"
 		},
-		"34498": {
+		"36932": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "EntityBuilder.array"
 		},
-		"34499": {
+		"36933": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "EntityBuilder.array"
 		},
-		"34500": {
+		"36934": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "EntityBuilder.dateTime"
 		},
-		"34501": {
+		"36935": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "EntityBuilder.dateTime"
 		},
-		"34502": {
+		"36936": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "EntityBuilder.json"
 		},
-		"34503": {
+		"36937": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "EntityBuilder.json"
 		},
-		"34504": {
+		"36938": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "EntityBuilder.enum"
 		},
-		"34505": {
+		"36939": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "EntityBuilder.enum"
 		},
-		"34506": {
+		"36940": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "Values"
 		},
-		"34507": {
+		"36941": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "values"
 		},
-		"34508": {
+		"36942": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "EntityBuilder.hasOne"
 		},
-		"34509": {
+		"36943": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "EntityBuilder.hasOne"
 		},
-		"34510": {
+		"36944": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "T"
 		},
-		"34511": {
+		"36945": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "entityBuilder"
 		},
-		"34512": {
+		"36946": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "options"
 		},
-		"34513": {
+		"36947": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "EntityBuilder.belongsTo"
 		},
-		"34514": {
+		"36948": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "EntityBuilder.belongsTo"
 		},
-		"34515": {
+		"36949": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "T"
 		},
-		"34516": {
+		"36950": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "entityBuilder"
 		},
-		"34517": {
+		"36951": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "options"
 		},
-		"34518": {
+		"36952": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "EntityBuilder.hasMany"
 		},
-		"34519": {
+		"36953": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "EntityBuilder.hasMany"
 		},
-		"34520": {
+		"36954": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "T"
 		},
-		"34521": {
+		"36955": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "entityBuilder"
 		},
-		"34522": {
+		"36956": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "options"
 		},
-		"34523": {
+		"36957": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "EntityBuilder.manyToMany"
 		},
-		"34524": {
+		"36958": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "EntityBuilder.manyToMany"
 		},
-		"34525": {
+		"36959": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "T"
 		},
-		"34526": {
+		"36960": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "entityBuilder"
 		},
-		"34527": {
+		"36961": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "options"
 		},
-		"34528": {
+		"36962": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity-builder.ts",
 			"qualifiedName": "model"
 		},
-		"34529": {
+		"36963": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
 			"qualifiedName": ""
 		},
-		"34530": {
+		"36964": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
 			"qualifiedName": "DmlEntity"
 		},
-		"34531": {
+		"36965": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
 			"qualifiedName": "DmlEntity.isDmlEntity"
 		},
-		"34532": {
+		"36966": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
 			"qualifiedName": "DmlEntity.isDmlEntity"
 		},
-		"34533": {
+		"36967": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
 			"qualifiedName": "entity"
 		},
-		"34534": {
+		"36968": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
 			"qualifiedName": "DmlEntity.__constructor"
 		},
-		"34535": {
+		"36969": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
 			"qualifiedName": "DmlEntity"
 		},
-		"34536": {
+		"36970": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
 			"qualifiedName": "DmlEntity.Schema"
 		},
-		"34537": {
+		"36971": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
 			"qualifiedName": "DmlEntity.TConfig"
 		},
-		"34538": {
+		"36972": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
 			"qualifiedName": "nameOrConfig"
 		},
-		"34539": {
+		"36973": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
 			"qualifiedName": "schema"
 		},
-		"34540": {
+		"36974": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
 			"qualifiedName": "DmlEntity.name"
 		},
-		"34541": {
+		"36975": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
 			"qualifiedName": "DmlEntity.schema"
 		},
-		"34545": {
+		"36979": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
 			"qualifiedName": "DmlEntity.parse"
 		},
-		"34546": {
+		"36980": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
 			"qualifiedName": "DmlEntity.parse"
 		},
-		"34547": {
+		"36981": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
 			"qualifiedName": "__type"
 		},
-		"34548": {
+		"36982": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
 			"qualifiedName": "__type.name"
 		},
-		"34549": {
+		"36983": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
 			"qualifiedName": "__type.tableName"
 		},
-		"34550": {
+		"36984": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
 			"qualifiedName": "__type.schema"
 		},
-		"34551": {
+		"36985": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
 			"qualifiedName": "__type.cascades"
 		},
-		"34552": {
+		"36986": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
 			"qualifiedName": "__type.indexes"
 		},
-		"34553": {
+		"36987": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
 			"qualifiedName": "DmlEntity.cascades"
 		},
-		"34554": {
+		"36988": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
 			"qualifiedName": "DmlEntity.cascades"
 		},
-		"34555": {
+		"36989": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
 			"qualifiedName": "options"
 		},
-		"34556": {
+		"36990": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
 			"qualifiedName": "DmlEntity.indexes"
 		},
-		"34557": {
+		"36991": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
 			"qualifiedName": "DmlEntity.indexes"
 		},
-		"34558": {
+		"36992": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
 			"qualifiedName": "indexes"
 		},
-		"34559": {
+		"36993": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
 			"qualifiedName": "DmlEntity.[IsDmlEntity]"
 		},
-		"34560": {
+		"36994": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
 			"qualifiedName": "DmlEntity.Schema"
 		},
-		"34561": {
+		"36995": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
 			"qualifiedName": "DmlEntity.TConfig"
 		},
-		"34562": {
+		"36996": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/properties/base.ts",
 			"qualifiedName": ""
 		},
-		"34563": {
+		"36997": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/properties/base.ts",
 			"qualifiedName": "BaseProperty"
 		},
-		"34566": {
+		"37000": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/properties/base.ts",
 			"qualifiedName": "BaseProperty.T"
 		},
-		"34573": {
+		"37007": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/properties/base.ts",
 			"qualifiedName": "BaseProperty.dataType"
 		},
-		"34574": {
+		"37008": {
 			"sourceFileName": "../../../../packages/core/types/src/dml/index.ts",
 			"qualifiedName": "__type"
 		},
-		"34575": {
+		"37009": {
 			"sourceFileName": "../../../../packages/core/types/src/dml/index.ts",
 			"qualifiedName": "__type.name"
 		},
-		"34576": {
+		"37010": {
 			"sourceFileName": "../../../../packages/core/types/src/dml/index.ts",
 			"qualifiedName": "__type.options"
 		},
-		"34577": {
+		"37011": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/properties/base.ts",
 			"qualifiedName": "BaseProperty.$dataType"
 		},
-		"34578": {
+		"37012": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/properties/base.ts",
 			"qualifiedName": "BaseProperty.nullable"
 		},
-		"34579": {
+		"37013": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/properties/base.ts",
 			"qualifiedName": "BaseProperty.nullable"
 		},
-		"34580": {
+		"37014": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/properties/base.ts",
 			"qualifiedName": "BaseProperty.index"
 		},
-		"34581": {
+		"37015": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/properties/base.ts",
 			"qualifiedName": "BaseProperty.index"
 		},
-		"34582": {
+		"37016": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/properties/base.ts",
 			"qualifiedName": "name"
 		},
-		"34583": {
+		"37017": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/properties/base.ts",
 			"qualifiedName": "BaseProperty.unique"
 		},
-		"34584": {
+		"37018": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/properties/base.ts",
 			"qualifiedName": "BaseProperty.unique"
 		},
-		"34585": {
+		"37019": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/properties/base.ts",
 			"qualifiedName": "name"
 		},
-		"34586": {
+		"37020": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/properties/base.ts",
 			"qualifiedName": "BaseProperty.default"
 		},
-		"34587": {
+		"37021": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/properties/base.ts",
 			"qualifiedName": "BaseProperty.default"
 		},
-		"34588": {
+		"37022": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/properties/base.ts",
 			"qualifiedName": "value"
 		},
-		"34589": {
+		"37023": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/properties/base.ts",
 			"qualifiedName": "BaseProperty.parse"
 		},
-		"34590": {
+		"37024": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/properties/base.ts",
 			"qualifiedName": "BaseProperty.parse"
 		},
-		"34591": {
+		"37025": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/properties/base.ts",
 			"qualifiedName": "fieldName"
 		},
-		"34592": {
+		"37026": {
 			"sourceFileName": "../../../../packages/core/utils/src/dml/properties/base.ts",
 			"qualifiedName": "BaseProperty.T"
 		}
@@ -3764,9 +3816,9 @@
 			"3": "../../../../packages/core/utils/src/dml/properties/base.ts"
 		},
 		"reflections": {
-			"1": 34459,
-			"2": 34529,
-			"3": 34562
+			"1": 36891,
+			"2": 36963,
+			"3": 36996
 		}
 	}
 }

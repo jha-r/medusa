@@ -157,7 +157,9 @@ You should only use the methods in this reference when implementing complex cust
             slug: `/references/${moduleName}/models/{{alias}}`,
             sidebar_label: "{{alias}}",
           },
-          reflectionDescription: `This documentation provides a reference to the {{alias}} {{kind}}. This belongs to the ${titleModuleName} Module.`,
+          reflectionDescription: !isDmlModule
+            ? `This documentation provides a reference to the {{alias}} {{kind}}. This belongs to the ${titleModuleName} Module.`
+            : `This documentation provides a reference to the {{alias}} data model. It belongs to the ${titleModuleName} Module.`,
           reflectionTitle: {
             kind: false,
             typeParameters: false,

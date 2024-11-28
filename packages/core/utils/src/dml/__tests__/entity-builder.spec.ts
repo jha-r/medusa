@@ -4,14 +4,15 @@ import { DmlEntity } from "../entity"
 import { model } from "../entity-builder"
 import { DuplicateIdPropertyError } from "../errors"
 import {
-  createMikrORMEntity,
-  toMikroOrmEntities,
+  mikroORMEntityBuilder,
   toMikroORMEntity,
+  toMikroOrmEntities,
 } from "../helpers/create-mikro-orm-entity"
 
 describe("Entity builder", () => {
   beforeEach(() => {
     MetadataStorage.clear()
+    mikroORMEntityBuilder.clear()
   })
 
   const defaultColumnMetadata = {
@@ -992,12 +993,14 @@ describe("Entity builder", () => {
       })
 
       const User = toMikroORMEntity(user)
-      expectTypeOf(new User()).toMatchTypeOf<{
+      expectTypeOf(new User()).toEqualTypeOf<{
         id: number
         username: string
         email: string
         role: "moderator" | "admin" | "guest"
         deleted_at: Date | null
+        created_at: Date
+        updated_at: Date
       }>()
 
       const metaData = MetadataStorage.getMetadataFromDecorator(User)
@@ -1939,6 +1942,11 @@ describe("Entity builder", () => {
           expression:
             'CREATE UNIQUE INDEX IF NOT EXISTS "IDX_user_email_unique" ON "user" (email) WHERE deleted_at IS NULL',
         },
+        {
+          expression:
+            'CREATE INDEX IF NOT EXISTS "IDX_user_deleted_at" ON "user" (deleted_at) WHERE deleted_at IS NULL',
+          name: "IDX_user_deleted_at",
+        },
       ])
 
       expect(metaData.filters).toEqual({
@@ -2050,6 +2058,11 @@ describe("Entity builder", () => {
           expression:
             'CREATE UNIQUE INDEX IF NOT EXISTS "IDX_user_email_unique" ON "platform"."user" (email) WHERE deleted_at IS NULL',
         },
+        {
+          expression:
+            'CREATE INDEX IF NOT EXISTS "IDX_user_deleted_at" ON "platform"."user" (deleted_at) WHERE deleted_at IS NULL',
+          name: "IDX_user_deleted_at",
+        },
       ])
 
       expect(metaData.filters).toEqual({
@@ -2159,6 +2172,11 @@ describe("Entity builder", () => {
           name: "IDX_user_myEmail_unique",
           expression:
             'CREATE UNIQUE INDEX IF NOT EXISTS "IDX_user_myEmail_unique" ON "user" (myEmail) WHERE deleted_at IS NULL',
+        },
+        {
+          expression:
+            'CREATE INDEX IF NOT EXISTS "IDX_user_deleted_at" ON "user" (deleted_at) WHERE deleted_at IS NULL',
+          name: "IDX_user_deleted_at",
         },
       ])
 
@@ -2819,7 +2837,6 @@ describe("Entity builder", () => {
           reference: "scalar",
           setter: false,
           type: "string",
-          isForeignKey: true,
           persist: false,
         },
         created_at: {
@@ -2943,12 +2960,21 @@ describe("Entity builder", () => {
           nullable: false,
           onDelete: undefined,
           reference: "m:1",
-          isForeignKey: true,
         },
         ...defaultColumnMetadata,
       })
 
       expect(metaData.indexes).toEqual([
+        {
+          expression:
+            'CREATE INDEX IF NOT EXISTS "IDX_user_group_id" ON "user" (group_id) WHERE deleted_at IS NULL',
+          name: "IDX_user_group_id",
+        },
+        {
+          expression:
+            'CREATE INDEX IF NOT EXISTS "IDX_user_deleted_at" ON "user" (deleted_at) WHERE deleted_at IS NULL',
+          name: "IDX_user_deleted_at",
+        },
         {
           expression:
             'CREATE UNIQUE INDEX IF NOT EXISTS "IDX_user_email_account_unique" ON "user" (email, account) WHERE deleted_at IS NULL',
@@ -2968,11 +2994,6 @@ describe("Entity builder", () => {
           expression:
             'CREATE UNIQUE INDEX IF NOT EXISTS "IDX_unique-name" ON "user" (organization, account, group_id) WHERE deleted_at IS NULL',
           name: "IDX_unique-name",
-        },
-        {
-          expression:
-            'CREATE INDEX IF NOT EXISTS "IDX_user_group_id" ON "user" (group_id) WHERE deleted_at IS NULL',
-          name: "IDX_user_group_id",
         },
       ])
     })
@@ -3027,6 +3048,16 @@ describe("Entity builder", () => {
       expect(metaData.indexes).toEqual([
         {
           expression:
+            'CREATE INDEX IF NOT EXISTS "IDX_user_group_id" ON "user" (group_id) WHERE deleted_at IS NULL',
+          name: "IDX_user_group_id",
+        },
+        {
+          expression:
+            'CREATE INDEX IF NOT EXISTS "IDX_user_deleted_at" ON "user" (deleted_at) WHERE deleted_at IS NULL',
+          name: "IDX_user_deleted_at",
+        },
+        {
+          expression:
             'CREATE INDEX IF NOT EXISTS "IDX_user_organization_account" ON "user" (organization, account) WHERE email IS NOT NULL AND deleted_at IS NULL',
           name: "IDX_user_organization_account",
         },
@@ -3049,11 +3080,6 @@ describe("Entity builder", () => {
           expression:
             'CREATE INDEX IF NOT EXISTS "IDX_user_account_group_id" ON "user" (account, group_id) WHERE is_owner IS TRUE AND deleted_at IS NULL',
           name: "IDX_user_account_group_id",
-        },
-        {
-          expression:
-            'CREATE INDEX IF NOT EXISTS "IDX_user_group_id" ON "user" (group_id) WHERE deleted_at IS NULL',
-          name: "IDX_user_group_id",
         },
       ])
     })
@@ -3121,6 +3147,11 @@ describe("Entity builder", () => {
             'CREATE INDEX IF NOT EXISTS "IDX_user_group_id" ON "user" (group_id) WHERE deleted_at IS NULL',
           name: "IDX_user_group_id",
         },
+        {
+          expression:
+            'CREATE INDEX IF NOT EXISTS "IDX_user_deleted_at" ON "user" (deleted_at) WHERE deleted_at IS NULL',
+          name: "IDX_user_deleted_at",
+        },
       ])
 
       const Setting = toMikroORMEntity(setting)
@@ -3131,6 +3162,11 @@ describe("Entity builder", () => {
           expression:
             'CREATE INDEX IF NOT EXISTS "IDX_setting_user_id" ON "setting" (user_id) WHERE deleted_at IS NULL',
           name: "IDX_setting_user_id",
+        },
+        {
+          expression:
+            'CREATE INDEX IF NOT EXISTS "IDX_setting_deleted_at" ON "setting" (deleted_at) WHERE deleted_at IS NULL',
+          name: "IDX_setting_deleted_at",
         },
       ])
     })
@@ -3543,7 +3579,6 @@ describe("Entity builder", () => {
           nullable: false,
           onDelete: "cascade",
           reference: "m:1",
-          isForeignKey: true,
         },
         created_at: {
           reference: "scalar",
@@ -3616,6 +3651,11 @@ describe("Entity builder", () => {
         }
       }>()
 
+      const userInstance = new User()
+      expectTypeOf<
+        (typeof userInstance)["email"]["user_id"]
+      >().toEqualTypeOf<string>()
+
       expectTypeOf(new Email()).toMatchTypeOf<{
         email: string
         isVerified: boolean
@@ -3631,6 +3671,7 @@ describe("Entity builder", () => {
           }
         }
       }>()
+      expectTypeOf(new Email().user_id).toEqualTypeOf<string>()
 
       const metaData = MetadataStorage.getMetadataFromDecorator(User)
       expect(metaData.className).toEqual("User")
@@ -3740,7 +3781,6 @@ describe("Entity builder", () => {
           name: "user_id",
           getter: false,
           setter: false,
-          isForeignKey: true,
           persist: false,
         },
         created_at: {
@@ -3810,6 +3850,11 @@ describe("Entity builder", () => {
         }
       }>()
 
+      const userInstance = new User()
+      expectTypeOf<(typeof userInstance)["email"]["user_id"]>().toEqualTypeOf<
+        string | null
+      >()
+
       expectTypeOf(new Email()).toMatchTypeOf<{
         email: string
         isVerified: boolean
@@ -3822,6 +3867,7 @@ describe("Entity builder", () => {
           }
         } | null
       }>()
+      expectTypeOf(new Email().user_id).toEqualTypeOf<string | null>()
 
       const metaData = MetadataStorage.getMetadataFromDecorator(User)
       expect(metaData.className).toEqual("User")
@@ -3931,7 +3977,6 @@ describe("Entity builder", () => {
           name: "user_id",
           getter: false,
           setter: false,
-          isForeignKey: true,
           persist: false,
         },
         created_at: {
@@ -4121,7 +4166,6 @@ describe("Entity builder", () => {
           mapToPk: true,
           fieldName: "user_id",
           nullable: false,
-          isForeignKey: true,
         },
         created_at: {
           reference: "scalar",
@@ -4310,7 +4354,6 @@ describe("Entity builder", () => {
           mapToPk: true,
           fieldName: "user_id",
           nullable: true,
-          isForeignKey: true,
         },
         created_at: {
           reference: "scalar",
@@ -4566,7 +4609,6 @@ describe("Entity builder", () => {
           name: "user_id",
           getter: false,
           setter: false,
-          isForeignKey: true,
           persist: false,
         },
         created_at: {
@@ -4765,7 +4807,6 @@ describe("Entity builder", () => {
           name: "user_id",
           getter: false,
           setter: false,
-          isForeignKey: true,
           persist: false,
         },
         created_at: {
@@ -4872,7 +4913,6 @@ describe("Entity builder", () => {
           mapToPk: true,
           nullable: false,
           onDelete: undefined,
-          isForeignKey: true,
         },
         children: {
           cascade: undefined,
@@ -4983,7 +5023,6 @@ describe("Entity builder", () => {
           name: "parent_id",
           type: "string",
           columnType: "text",
-          isForeignKey: true,
           persist: false,
           reference: "scalar",
           getter: false,
@@ -5110,8 +5149,9 @@ describe("Entity builder", () => {
           reference: "m:n",
           name: "teams",
           entity: "Team",
+          owner: true,
           pivotTable: "team_users",
-          mappedBy: "users",
+          inversedBy: "users",
         },
         created_at: {
           reference: "scalar",
@@ -5177,7 +5217,9 @@ describe("Entity builder", () => {
         users: {
           reference: "m:n",
           name: "users",
+          mappedBy: "teams",
           entity: "User",
+          owner: false,
           pivotTable: "team_users",
         },
         created_at: {
@@ -5288,8 +5330,9 @@ describe("Entity builder", () => {
           reference: "m:n",
           name: "teams",
           entity: "Team",
+          owner: true,
           pivotTable: "team_users",
-          mappedBy: "users",
+          inversedBy: "users",
         },
         created_at: {
           reference: "scalar",
@@ -5356,6 +5399,8 @@ describe("Entity builder", () => {
           reference: "m:n",
           name: "users",
           entity: "User",
+          owner: false,
+          mappedBy: "teams",
           pivotTable: "team_users",
         },
         created_at: {
@@ -5500,6 +5545,188 @@ describe("Entity builder", () => {
           reference: "m:n",
           name: "teams",
           entity: "Team",
+          owner: true,
+          pivotTable: "team_users",
+          inversedBy: "users",
+        },
+        created_at: {
+          reference: "scalar",
+          type: "date",
+          columnType: "timestamptz",
+          name: "created_at",
+          fieldName: "created_at",
+          defaultRaw: "now()",
+          onCreate: expect.any(Function),
+          nullable: false,
+          getter: false,
+          setter: false,
+        },
+        updated_at: {
+          reference: "scalar",
+          type: "date",
+          columnType: "timestamptz",
+          name: "updated_at",
+          fieldName: "updated_at",
+          defaultRaw: "now()",
+          onCreate: expect.any(Function),
+          onUpdate: expect.any(Function),
+          nullable: false,
+          getter: false,
+          setter: false,
+        },
+        deleted_at: {
+          reference: "scalar",
+          type: "date",
+          columnType: "timestamptz",
+          name: "deleted_at",
+          fieldName: "deleted_at",
+          nullable: true,
+          getter: false,
+          setter: false,
+        },
+      })
+
+      const teamMetaData = MetadataStorage.getMetadataFromDecorator(Team)
+      expect(teamMetaData.className).toEqual("Team")
+      expect(teamMetaData.path).toEqual("Team")
+      expect(teamMetaData.properties).toEqual({
+        id: {
+          reference: "scalar",
+          type: "number",
+          columnType: "integer",
+          name: "id",
+          fieldName: "id",
+          nullable: false,
+          getter: false,
+          setter: false,
+        },
+        name: {
+          reference: "scalar",
+          type: "string",
+          columnType: "text",
+          name: "name",
+          fieldName: "name",
+          nullable: false,
+          getter: false,
+          setter: false,
+        },
+        users: {
+          reference: "m:n",
+          name: "users",
+          entity: "User",
+          owner: false,
+          pivotTable: "team_users",
+          mappedBy: "teams",
+        },
+        created_at: {
+          reference: "scalar",
+          type: "date",
+          columnType: "timestamptz",
+          name: "created_at",
+          fieldName: "created_at",
+          defaultRaw: "now()",
+          onCreate: expect.any(Function),
+          nullable: false,
+          getter: false,
+          setter: false,
+        },
+        updated_at: {
+          reference: "scalar",
+          type: "date",
+          columnType: "timestamptz",
+          name: "updated_at",
+          fieldName: "updated_at",
+          defaultRaw: "now()",
+          onCreate: expect.any(Function),
+          onUpdate: expect.any(Function),
+          nullable: false,
+          getter: false,
+          setter: false,
+        },
+        deleted_at: {
+          reference: "scalar",
+          type: "date",
+          columnType: "timestamptz",
+          name: "deleted_at",
+          fieldName: "deleted_at",
+          nullable: true,
+          getter: false,
+          setter: false,
+        },
+      })
+    })
+
+    test("define mappedBy on both sides and reverse order of registering entities", () => {
+      const team = model.define("team", {
+        id: model.number(),
+        name: model.text(),
+        users: model.manyToMany(() => user, { mappedBy: "teams" }),
+      })
+
+      const user = model.define("user", {
+        id: model.number(),
+        username: model.text(),
+        teams: model.manyToMany(() => team, { mappedBy: "users" }),
+      })
+
+      const Team = toMikroORMEntity(team)
+      const User = toMikroORMEntity(user)
+
+      expectTypeOf(new User()).toMatchTypeOf<{
+        id: number
+        username: string
+        teams: {
+          id: number
+          name: string
+          users: {
+            id: number
+            username: string
+          }[]
+        }[]
+      }>()
+
+      expectTypeOf(new Team()).toMatchTypeOf<{
+        id: number
+        name: string
+        users: {
+          id: number
+          username: string
+          teams: {
+            id: number
+            name: string
+          }[]
+        }[]
+      }>()
+
+      const metaData = MetadataStorage.getMetadataFromDecorator(User)
+      expect(metaData.className).toEqual("User")
+      expect(metaData.path).toEqual("User")
+      expect(metaData.properties).toEqual({
+        id: {
+          reference: "scalar",
+          type: "number",
+          columnType: "integer",
+          name: "id",
+          fieldName: "id",
+          nullable: false,
+          getter: false,
+          setter: false,
+        },
+        username: {
+          reference: "scalar",
+          type: "string",
+          columnType: "text",
+          name: "username",
+          fieldName: "username",
+          nullable: false,
+          getter: false,
+          setter: false,
+        },
+        teams: {
+          reference: "m:n",
+          name: "teams",
+          entity: "Team",
+          owner: false,
           pivotTable: "team_users",
           mappedBy: "users",
         },
@@ -5568,196 +5795,9 @@ describe("Entity builder", () => {
           reference: "m:n",
           name: "users",
           entity: "User",
+          owner: true,
           pivotTable: "team_users",
-          /**
-           * The other side should be inversed in order for Mikro ORM
-           * to work. Both sides cannot have mappedBy.
-           */
           inversedBy: "teams",
-        },
-        created_at: {
-          reference: "scalar",
-          type: "date",
-          columnType: "timestamptz",
-          name: "created_at",
-          fieldName: "created_at",
-          defaultRaw: "now()",
-          onCreate: expect.any(Function),
-          nullable: false,
-          getter: false,
-          setter: false,
-        },
-        updated_at: {
-          reference: "scalar",
-          type: "date",
-          columnType: "timestamptz",
-          name: "updated_at",
-          fieldName: "updated_at",
-          defaultRaw: "now()",
-          onCreate: expect.any(Function),
-          onUpdate: expect.any(Function),
-          nullable: false,
-          getter: false,
-          setter: false,
-        },
-        deleted_at: {
-          reference: "scalar",
-          type: "date",
-          columnType: "timestamptz",
-          name: "deleted_at",
-          fieldName: "deleted_at",
-          nullable: true,
-          getter: false,
-          setter: false,
-        },
-      })
-    })
-
-    test("define mappedBy on both sides and reverse order of registering entities", () => {
-      const team = model.define("team", {
-        id: model.number(),
-        name: model.text(),
-        users: model.manyToMany(() => user, { mappedBy: "teams" }),
-      })
-
-      const user = model.define("user", {
-        id: model.number(),
-        username: model.text(),
-        teams: model.manyToMany(() => team, { mappedBy: "users" }),
-      })
-
-      const entityBuilder = createMikrORMEntity()
-      const Team = entityBuilder(team)
-      const User = entityBuilder(user)
-
-      expectTypeOf(new User()).toMatchTypeOf<{
-        id: number
-        username: string
-        teams: {
-          id: number
-          name: string
-          users: {
-            id: number
-            username: string
-          }[]
-        }[]
-      }>()
-
-      expectTypeOf(new Team()).toMatchTypeOf<{
-        id: number
-        name: string
-        users: {
-          id: number
-          username: string
-          teams: {
-            id: number
-            name: string
-          }[]
-        }[]
-      }>()
-
-      const metaData = MetadataStorage.getMetadataFromDecorator(User)
-      expect(metaData.className).toEqual("User")
-      expect(metaData.path).toEqual("User")
-      expect(metaData.properties).toEqual({
-        id: {
-          reference: "scalar",
-          type: "number",
-          columnType: "integer",
-          name: "id",
-          fieldName: "id",
-          nullable: false,
-          getter: false,
-          setter: false,
-        },
-        username: {
-          reference: "scalar",
-          type: "string",
-          columnType: "text",
-          name: "username",
-          fieldName: "username",
-          nullable: false,
-          getter: false,
-          setter: false,
-        },
-        teams: {
-          reference: "m:n",
-          name: "teams",
-          entity: "Team",
-          pivotTable: "team_users",
-          /**
-           * The other side should be inversed in order for Mikro ORM
-           * to work. Both sides cannot have mappedBy.
-           */
-          inversedBy: "users",
-        },
-        created_at: {
-          reference: "scalar",
-          type: "date",
-          columnType: "timestamptz",
-          name: "created_at",
-          fieldName: "created_at",
-          defaultRaw: "now()",
-          onCreate: expect.any(Function),
-          nullable: false,
-          getter: false,
-          setter: false,
-        },
-        updated_at: {
-          reference: "scalar",
-          type: "date",
-          columnType: "timestamptz",
-          name: "updated_at",
-          fieldName: "updated_at",
-          defaultRaw: "now()",
-          onCreate: expect.any(Function),
-          onUpdate: expect.any(Function),
-          nullable: false,
-          getter: false,
-          setter: false,
-        },
-        deleted_at: {
-          reference: "scalar",
-          type: "date",
-          columnType: "timestamptz",
-          name: "deleted_at",
-          fieldName: "deleted_at",
-          nullable: true,
-          getter: false,
-          setter: false,
-        },
-      })
-
-      const teamMetaData = MetadataStorage.getMetadataFromDecorator(Team)
-      expect(teamMetaData.className).toEqual("Team")
-      expect(teamMetaData.path).toEqual("Team")
-      expect(teamMetaData.properties).toEqual({
-        id: {
-          reference: "scalar",
-          type: "number",
-          columnType: "integer",
-          name: "id",
-          fieldName: "id",
-          nullable: false,
-          getter: false,
-          setter: false,
-        },
-        name: {
-          reference: "scalar",
-          type: "string",
-          columnType: "text",
-          name: "name",
-          fieldName: "name",
-          nullable: false,
-          getter: false,
-          setter: false,
-        },
-        users: {
-          reference: "m:n",
-          name: "users",
-          entity: "User",
-          pivotTable: "team_users",
-          mappedBy: "teams",
         },
         created_at: {
           reference: "scalar",
@@ -5816,9 +5856,8 @@ describe("Entity builder", () => {
         teams: model.manyToMany(() => team, { mappedBy: "users" }),
       })
 
-      const entityBuilder = createMikrORMEntity()
-      const Team = entityBuilder(team)
-      const User = entityBuilder(user)
+      const Team = toMikroORMEntity(team)
+      const User = toMikroORMEntity(user)
 
       expectTypeOf(new User()).toMatchTypeOf<{
         id: number
@@ -5886,19 +5925,17 @@ describe("Entity builder", () => {
           reference: "m:n",
           name: "teams",
           entity: "Team",
+          owner: false,
           pivotTable: "team_users",
-          /**
-           * The other side should be inversed in order for Mikro ORM
-           * to work. Both sides cannot have mappedBy.
-           */
-          inversedBy: "users",
+          mappedBy: "users",
         },
         activeTeams: {
           reference: "m:n",
           name: "activeTeams",
           entity: "Team",
+          owner: false,
           pivotTable: "team_users",
-          inversedBy: "activeTeamsUsers",
+          mappedBy: "activeTeamsUsers",
         },
         created_at: {
           reference: "scalar",
@@ -5965,15 +6002,17 @@ describe("Entity builder", () => {
           reference: "m:n",
           name: "users",
           entity: "User",
+          owner: true,
           pivotTable: "team_users",
-          mappedBy: "teams",
+          inversedBy: "teams",
         },
         activeTeamsUsers: {
           reference: "m:n",
           name: "activeTeamsUsers",
           entity: "User",
+          owner: true,
           pivotTable: "team_users",
-          mappedBy: "activeTeams",
+          inversedBy: "activeTeams",
         },
         created_at: {
           reference: "scalar",
@@ -6086,8 +6125,9 @@ describe("Entity builder", () => {
           reference: "m:n",
           name: "teams",
           entity: "Team",
+          owner: true,
           pivotTable: "platform.team_users",
-          mappedBy: "users",
+          inversedBy: "users",
         },
         created_at: {
           reference: "scalar",
@@ -6155,7 +6195,166 @@ describe("Entity builder", () => {
           reference: "m:n",
           name: "users",
           entity: "User",
+          owner: false,
+          mappedBy: "teams",
           pivotTable: "platform.team_users",
+        },
+        created_at: {
+          reference: "scalar",
+          type: "date",
+          columnType: "timestamptz",
+          name: "created_at",
+          fieldName: "created_at",
+          defaultRaw: "now()",
+          onCreate: expect.any(Function),
+          nullable: false,
+          getter: false,
+          setter: false,
+        },
+        updated_at: {
+          reference: "scalar",
+          type: "date",
+          columnType: "timestamptz",
+          name: "updated_at",
+          fieldName: "updated_at",
+          defaultRaw: "now()",
+          onCreate: expect.any(Function),
+          onUpdate: expect.any(Function),
+          nullable: false,
+          getter: false,
+          setter: false,
+        },
+        deleted_at: {
+          reference: "scalar",
+          type: "date",
+          columnType: "timestamptz",
+          name: "deleted_at",
+          fieldName: "deleted_at",
+          nullable: true,
+          getter: false,
+          setter: false,
+        },
+      })
+    })
+
+    test("should compute the pivot table name correctly", () => {
+      const team = model.define("teamSquad", {
+        id: model.number(),
+        name: model.text(),
+        users: model.manyToMany(() => user),
+      })
+
+      const user = model.define("RandomUser", {
+        id: model.number(),
+        username: model.text(),
+        teams: model.manyToMany(() => team, {
+          mappedBy: "users",
+        }),
+      })
+
+      const User = toMikroORMEntity(user)
+      const Team = toMikroORMEntity(team)
+
+      const metaData = MetadataStorage.getMetadataFromDecorator(User)
+      expect(metaData.className).toEqual("RandomUser")
+      expect(metaData.path).toEqual("RandomUser")
+      expect(metaData.properties).toEqual({
+        id: {
+          reference: "scalar",
+          type: "number",
+          columnType: "integer",
+          name: "id",
+          fieldName: "id",
+          nullable: false,
+          getter: false,
+          setter: false,
+        },
+        username: {
+          reference: "scalar",
+          type: "string",
+          columnType: "text",
+          name: "username",
+          fieldName: "username",
+          nullable: false,
+          getter: false,
+          setter: false,
+        },
+        teams: {
+          reference: "m:n",
+          name: "teams",
+          entity: "TeamSquad",
+          owner: true,
+          pivotTable: "random_user_team_squads",
+          inversedBy: "users",
+        },
+        created_at: {
+          reference: "scalar",
+          type: "date",
+          columnType: "timestamptz",
+          name: "created_at",
+          fieldName: "created_at",
+          defaultRaw: "now()",
+          onCreate: expect.any(Function),
+          nullable: false,
+          getter: false,
+          setter: false,
+        },
+        updated_at: {
+          reference: "scalar",
+          type: "date",
+          columnType: "timestamptz",
+          name: "updated_at",
+          fieldName: "updated_at",
+          defaultRaw: "now()",
+          onCreate: expect.any(Function),
+          onUpdate: expect.any(Function),
+          nullable: false,
+          getter: false,
+          setter: false,
+        },
+        deleted_at: {
+          reference: "scalar",
+          type: "date",
+          columnType: "timestamptz",
+          name: "deleted_at",
+          fieldName: "deleted_at",
+          nullable: true,
+          getter: false,
+          setter: false,
+        },
+      })
+
+      const teamMetaData = MetadataStorage.getMetadataFromDecorator(Team)
+      expect(teamMetaData.className).toEqual("TeamSquad")
+      expect(teamMetaData.path).toEqual("TeamSquad")
+      expect(teamMetaData.properties).toEqual({
+        id: {
+          reference: "scalar",
+          type: "number",
+          columnType: "integer",
+          name: "id",
+          fieldName: "id",
+          nullable: false,
+          getter: false,
+          setter: false,
+        },
+        name: {
+          reference: "scalar",
+          type: "string",
+          columnType: "text",
+          name: "name",
+          fieldName: "name",
+          nullable: false,
+          getter: false,
+          setter: false,
+        },
+        users: {
+          reference: "m:n",
+          name: "users",
+          entity: "RandomUser",
+          owner: false,
+          mappedBy: "teams",
+          pivotTable: "random_user_team_squads",
         },
         created_at: {
           reference: "scalar",
@@ -6199,9 +6398,7 @@ describe("Entity builder", () => {
       const team = model.define("team", {
         id: model.number(),
         name: model.text(),
-        users: model.manyToMany(() => user, {
-          pivotTable: "users_teams",
-        }),
+        users: model.manyToMany(() => user),
       })
 
       const user = model.define("user", {
@@ -6270,8 +6467,9 @@ describe("Entity builder", () => {
           reference: "m:n",
           name: "teams",
           entity: "Team",
+          owner: true,
           pivotTable: "users_teams",
-          mappedBy: "users",
+          inversedBy: "users",
         },
         created_at: {
           reference: "scalar",
@@ -6337,7 +6535,9 @@ describe("Entity builder", () => {
         users: {
           reference: "m:n",
           name: "users",
+          owner: false,
           entity: "User",
+          mappedBy: "teams",
           pivotTable: "users_teams",
         },
         created_at: {
@@ -6454,7 +6654,6 @@ describe("Entity builder", () => {
           mapToPk: true,
           fieldName: "user_id",
           nullable: false,
-          isForeignKey: true,
         },
         user: {
           reference: "scalar",
@@ -6473,7 +6672,6 @@ describe("Entity builder", () => {
           mapToPk: true,
           fieldName: "team_id",
           nullable: false,
-          isForeignKey: true,
         },
         team: {
           reference: "scalar",
@@ -6549,8 +6747,9 @@ describe("Entity builder", () => {
           reference: "m:n",
           name: "teams",
           entity: "Team",
+          owner: true,
           pivotEntity: "TeamUsers",
-          mappedBy: "users",
+          inversedBy: "users",
         },
         created_at: {
           reference: "scalar",
@@ -6617,6 +6816,8 @@ describe("Entity builder", () => {
           reference: "m:n",
           name: "users",
           entity: "User",
+          owner: false,
+          mappedBy: "teams",
           pivotEntity: "TeamUsers",
         },
         created_at: {

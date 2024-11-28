@@ -4,7 +4,10 @@ import {
   MikroORM,
 } from "@mikro-orm/core"
 import { model } from "../../entity-builder"
-import { toMikroOrmEntities } from "../../helpers/create-mikro-orm-entity"
+import {
+  mikroORMEntityBuilder,
+  toMikroOrmEntities,
+} from "../../helpers/create-mikro-orm-entity"
 import { createDatabase, dropDatabase } from "pg-god"
 import { CustomTsMigrationGenerator, mikroOrmSerializer } from "../../../dal"
 import { EntityConstructor } from "@medusajs/types"
@@ -28,6 +31,7 @@ describe("EntityBuilder | enum", () => {
 
   beforeEach(async () => {
     MetadataStorage.clear()
+    mikroORMEntityBuilder.clear()
 
     const user = model.define("user", {
       id: model.id().primaryKey(),
