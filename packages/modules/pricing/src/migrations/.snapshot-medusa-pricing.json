@@ -628,6 +628,17 @@
           "nullable": false,
           "mappedType": "text"
         },
+        "operator": {
+          "name": "operator",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "default": "'eq'",
+          "enumItems": ["gte", "lte", "gt", "lt", "eq"],
+          "mappedType": "enum"
+        },
         "value": {
           "name": "value",
           "type": "text",
@@ -693,12 +704,19 @@
       "schema": "public",
       "indexes": [
         {
-          "keyName": "IDX_price_rule_price_id_attribute_unique",
+          "columnNames": ["operator"],
+          "composite": false,
+          "keyName": "IDX_price_rule_operator",
+          "primary": false,
+          "unique": false
+        },
+        {
+          "keyName": "IDX_price_rule_price_id_attribute_operator_unique",
           "columnNames": ["price_id"],
           "composite": false,
           "primary": false,
           "unique": false,
-          "expression": "CREATE UNIQUE INDEX IF NOT EXISTS \"IDX_price_rule_price_id_attribute_unique\" ON \"price_rule\" (price_id, attribute) WHERE deleted_at IS NULL"
+          "expression": "CREATE UNIQUE INDEX IF NOT EXISTS \"IDX_price_rule_price_id_attribute_operator_unique\" ON \"price_rule\" (price_id, attribute, operator) WHERE deleted_at IS NULL"
         },
         {
           "keyName": "IDX_price_rule_deleted_at",

@@ -1,13 +1,16 @@
-import { DAL } from "@medusajs/framework/types"
+import { DAL, PricingRuleOperatorValues } from "@medusajs/framework/types"
 import {
   createPsqlIndexStatementHelper,
   DALUtils,
   generateEntityId,
+  PricingRuleOperator,
 } from "@medusajs/framework/utils"
 import {
   BeforeCreate,
   Entity,
+  Enum,
   Filter,
+  Index,
   ManyToOne,
   OnInit,
   OptionalProps,
@@ -28,7 +31,7 @@ const PriceRuleDeletedAtIndex = createPsqlIndexStatementHelper({
 
 const PriceRulePriceIdIndex = createPsqlIndexStatementHelper({
   tableName: tableName,
-  columns: ["price_id", "attribute"],
+  columns: ["price_id", "attribute", "operator"],
   where: "deleted_at IS NULL",
   unique: true,
 })
@@ -43,6 +46,10 @@ export default class PriceRule {
 
   @Property({ columnType: "text" })
   attribute: string
+
+  @Index({ name: "IDX_price_rule_operator" })
+  @Enum({ items: () => PricingRuleOperator, default: PricingRuleOperator.EQ })
+  operator: PricingRuleOperatorValues = PricingRuleOperator.EQ
 
   @Property({ columnType: "text" })
   value: string

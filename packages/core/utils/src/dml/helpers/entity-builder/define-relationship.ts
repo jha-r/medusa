@@ -237,7 +237,30 @@ export function defineBelongsToRelationship(
         return
       }
 
-      this[foreignKeyName] ??= this[relationship.name]?.id ?? null
+      /**
+       * Do not override the existing foreign key value if
+       * exists
+       */
+      if (this[foreignKeyName] !== undefined) {
+        return
+      }
+
+      /**
+       * Set the foreign key when the relationship is initialized
+       * as null
+       */
+      if (this[relationship.name] === null) {
+        this[foreignKeyName] = null
+        return
+      }
+
+      /**
+       * Set the foreign key when the relationship is initialized
+       * and as the id
+       */
+      if (this[relationship.name] && "id" in this[relationship.name]) {
+        this[foreignKeyName] = this[relationship.name].id
+      }
     }
 
     /**

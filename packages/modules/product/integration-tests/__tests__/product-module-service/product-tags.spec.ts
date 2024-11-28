@@ -121,8 +121,33 @@ moduleIntegrationTestRunner<IProductModuleService>({
               value: tagOne.value,
               products: [
                 {
+                  id: productOne.id,
+                },
+              ],
+            },
+          ])
+        })
+
+        it("should set foreign key to null when relation is select and is null", async () => {
+          const tags = await service.listProductTags(
+            {
+              id: tagOne.id,
+            },
+            {
+              select: ["value", "products.id"],
+              relations: ["products.collection"],
+              take: 1,
+            }
+          )
+
+          expect(tags).toEqual([
+            {
+              id: tagOne.id,
+              value: tagOne.value,
+              products: [
+                {
+                  collection: null,
                   collection_id: null,
-                  type_id: null,
                   id: productOne.id,
                 },
               ],
@@ -199,8 +224,6 @@ moduleIntegrationTestRunner<IProductModuleService>({
               value: tagOne.value,
               products: [
                 {
-                  collection_id: null,
-                  type_id: null,
                   id: productOne.id,
                 },
               ],
