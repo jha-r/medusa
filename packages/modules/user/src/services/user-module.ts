@@ -27,8 +27,7 @@ type InjectedDependencies = {
   inviteService: ModulesSdkTypes.IMedusaInternalService<any>
 }
 
-// 1 day
-const DEFAULT_VALID_INVITE_DURATION = 60 * 60 * 24 * 1000
+const DEFAULT_VALID_INVITE_DURATION_SECONDS = 60 * 60 * 24
 export default class UserModuleService
   extends MedusaService<{
     User: {
@@ -60,7 +59,7 @@ export default class UserModuleService
       jwtSecret: moduleDeclaration["jwt_secret"],
       expiresIn:
         parseInt(moduleDeclaration["valid_duration"]) ||
-        DEFAULT_VALID_INVITE_DURATION,
+        DEFAULT_VALID_INVITE_DURATION_SECONDS,
     }
 
     if (!this.config.jwtSecret) {
@@ -153,7 +152,7 @@ export default class UserModuleService
       return {
         id: invite.id,
         expires_at: new Date().setMilliseconds(
-          new Date().getMilliseconds() + this.config.expiresIn
+          new Date().getMilliseconds() + this.config.expiresIn * 1000
         ),
         token: this.generateToken({ id: invite.id, email: invite.email }),
       }
@@ -325,7 +324,7 @@ export default class UserModuleService
       return {
         id: invite.id,
         expires_at: new Date().setMilliseconds(
-          new Date().getMilliseconds() + this.config.expiresIn
+          new Date().getMilliseconds() + this.config.expiresIn * 1000
         ),
         token: this.generateToken({ id: invite.id, email: invite.email }),
       }
