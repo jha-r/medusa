@@ -381,7 +381,7 @@ export default class UserModuleService
     const jwtSecret: string = this.moduleDeclaration["jwt_secret"]
     return jwt.sign(data, jwtSecret, {
       jwtid: crypto.randomUUID(),
-      expiresIn: this.config.expiresIn,
+      expiresIn: String(this.config.expiresIn),
     })
   }
 }
