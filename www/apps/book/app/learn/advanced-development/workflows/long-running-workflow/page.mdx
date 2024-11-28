@@ -74,6 +74,12 @@ The second step has in its configuration object `async` set to `true` and it doe
 
 So, when you execute the `hello-world` workflow, it continues its execution in the background once it reaches the second step.
 
+<Note>
+
+A workflow is also considered long-running if one of its steps has their `retryInterval` option set as explained in [this chapter](../retry-failed-steps/page.mdx).
+
+</Note>
+
 ---
 
 ## Change Step Status
