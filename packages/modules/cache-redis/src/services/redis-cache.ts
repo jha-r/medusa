@@ -77,6 +77,12 @@ class RedisCacheService implements ICacheService {
    */
   async invalidate(key: string): Promise<void> {
     const pattern = this.getCacheKey(key)
+
+    if (!pattern.includes("*")) {
+      await this.redis.del(pattern)
+      return
+    }
+
     let cursor = "0"
     do {
       const result = await this.redis.scan(

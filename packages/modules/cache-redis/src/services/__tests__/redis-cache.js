@@ -26,4 +26,20 @@ describe("RedisCacheService", () => {
     await cacheService.get("test-key")
     expect(redisClientMock.get).toBeCalled()
   })
+
+  it("Invalidates single key", async () => {
+    const mock = { ...redisClientMock, del: jest.fn() }
+    cacheService = new RedisCacheService(
+      {
+        cacheRedisConnection: mock,
+      },
+      {}
+    )
+
+    await cacheService.set("test-key-1", "value")
+
+    await cacheService.invalidate("test-key-1")
+
+    expect(mock.del).toHaveBeenCalledTimes(1)
+  })
 })
