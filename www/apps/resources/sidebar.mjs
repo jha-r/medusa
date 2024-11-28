@@ -2159,7 +2159,7 @@ export const sidebar = sidebarAttachHrefCommonOptions([
           },
           {
             type: "category",
-            title: "Medusa Application",
+            title: "Self-Hosting",
             children: [
               {
                 type: "link",
@@ -2172,11 +2172,6 @@ export const sidebar = sidebarAttachHrefCommonOptions([
                 title: "Railway",
               },
             ],
-          },
-          {
-            type: "category",
-            title: "Medusa Admin",
-            autogenerate_path: "/deployment/admin",
           },
           {
             type: "category",
