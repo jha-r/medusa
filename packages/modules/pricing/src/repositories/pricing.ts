@@ -78,7 +78,6 @@ export class PricingRepository
         has_price_list: knex.raw(
           "case when price.price_list_id IS NULL then False else True end"
         ),
-        pr_count: knex.raw("count(pr.attribute)"),
       })
       .leftJoin("price_rule as pr", "pr.price_id", "price.id")
       .leftJoin("price_list as pl", function () {
