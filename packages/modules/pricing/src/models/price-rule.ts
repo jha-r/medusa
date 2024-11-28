@@ -31,7 +31,7 @@ const PriceRuleDeletedAtIndex = createPsqlIndexStatementHelper({
 
 const PriceRulePriceIdIndex = createPsqlIndexStatementHelper({
   tableName: tableName,
-  columns: ["price_id", "attribute"],
+  columns: ["price_id", "attribute", "operator"],
   where: "deleted_at IS NULL",
   unique: true,
 })

@@ -711,12 +711,12 @@
           "unique": false
         },
         {
-          "keyName": "IDX_price_rule_price_id_attribute_unique",
+          "keyName": "IDX_price_rule_price_id_attribute_operator_unique",
           "columnNames": ["price_id"],
           "composite": false,
           "primary": false,
           "unique": false,
-          "expression": "CREATE UNIQUE INDEX IF NOT EXISTS \"IDX_price_rule_price_id_attribute_unique\" ON \"price_rule\" (price_id, attribute) WHERE deleted_at IS NULL"
+          "expression": "CREATE UNIQUE INDEX IF NOT EXISTS \"IDX_price_rule_price_id_attribute_operator_unique\" ON \"price_rule\" (price_id, attribute, operator) WHERE deleted_at IS NULL"
         },
         {
           "keyName": "IDX_price_rule_deleted_at",
