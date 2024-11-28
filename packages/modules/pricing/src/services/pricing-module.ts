@@ -15,6 +15,7 @@ import {
   PricingContext,
   PricingFilters,
   PricingRepositoryService,
+  PricingRuleOperatorValues,
   PricingTypes,
   UpsertPricePreferenceDTO,
   UpsertPriceSetDTO,
@@ -33,6 +34,7 @@ import {
   MedusaError,
   ModulesSdkUtils,
   PriceListType,
+  PricingRuleOperator,
   promiseAll,
   removeNullish,
   simpleHash,
@@ -596,20 +598,48 @@ export default class PricingModuleService
 
     data?.forEach((price) => {
       const cleanRules = price.rules ? removeNullish(price.rules) : {}
-      const ruleEntries = Object.entries(cleanRules)
-      const rules = ruleEntries.map(([attribute, value]) => {
-        return {
-          attribute,
-          value,
-        }
-      })
+      const ruleOperators: PricingRuleOperatorValues[] =
+        Object.values(PricingRuleOperator)
+
+      const rules = Object.entries(cleanRules)
+        .map(([attribute, value]) => {
+          if (Array.isArray(value)) {
+            return value.map((customRule) => {
+              if (!ruleOperators.includes(customRule.operator)) {
+                throw new MedusaError(
+                  MedusaError.Types.INVALID_DATA,
+                  `operator should be one of ${ruleOperators.join(", ")}`
+                )
+              }
+
+              if (typeof customRule.value !== "number") {
+                throw new MedusaError(
+                  MedusaError.Types.INVALID_DATA,
+                  `value should be a number`
+                )
+              }
+
+              return {
+                attribute,
+                operator: customRule.operator,
+                value: customRule.value,
+              }
+            })
+          }
+
+          return {
+            attribute,
+            value,
+          }
+        })
+        .flat(1)
 
       const hasRulesInput = isPresent(price.rules)
       const entry = {
         ...price,
         price_list_id: priceListId,
         price_rules: hasRulesInput ? rules : undefined,
-        rules_count: hasRulesInput ? ruleEntries.length : undefined,
+        rules_count: hasRulesInput ? rules.length : undefined,
       } as ServiceTypes.UpsertPriceDTO
       delete (entry as CreatePricesDTO).rules
 
