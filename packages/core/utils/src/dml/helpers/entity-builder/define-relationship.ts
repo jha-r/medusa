@@ -259,7 +259,7 @@ export function defineBelongsToRelationship(
        * and as the id
        */
       if (this[relationship.name] && "id" in this[relationship.name]) {
-        this[foreignKeyName] = this[relationship.name]?.id
+        this[foreignKeyName] = this[relationship.name].id
       }
     }
 
