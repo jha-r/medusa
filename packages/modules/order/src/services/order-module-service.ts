@@ -3079,10 +3079,12 @@ export default class OrderModuleService<
     }
 
     await this.orderService_.update(
-      {
-        id: orderIds,
-        status: OrderStatus.ARCHIVED,
-      },
+      orderIds.map((id) => {
+        return {
+          id,
+          status: OrderStatus.ARCHIVED,
+        }
+      }),
       sharedContext
     )
 
