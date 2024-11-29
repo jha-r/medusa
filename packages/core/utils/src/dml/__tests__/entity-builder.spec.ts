@@ -6857,5 +6857,28 @@ describe("Entity builder", () => {
         },
       })
     })
+
+    test("throw error when both sides of relationship defines the pivot table", () => {
+      const team = model.define("team", {
+        id: model.number(),
+        name: model.text(),
+        users: model.manyToMany(() => user, {
+          pivotTable: "user_teams",
+        }),
+      })
+
+      const user = model.define("user", {
+        id: model.number(),
+        username: model.text(),
+        teams: model.manyToMany(() => team, {
+          pivotTable: "team_users",
+          mappedBy: "users",
+        }),
+      })
+
+      expect(() => toMikroORMEntity(user)).toThrow(
+        `Invalid relationship reference for "User.teams". Define "pivotTable", "joinColumn", or "inverseJoinColumn" on only one side of the relationship`
+      )
+    })
   })
 })

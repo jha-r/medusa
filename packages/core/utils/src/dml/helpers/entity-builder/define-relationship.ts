@@ -451,6 +451,7 @@ export function defineManyToManyRelationship(
   const tableName = parseEntityName(entity).tableNameWithoutSchema
   const relatedTableName = parseEntityName(relatedEntity).tableNameWithoutSchema
   const sortedTableNames = [tableName, relatedTableName].sort()
+  const otherSideRelationOptions = otherSideRelationship.parse("").options
 
   if (!pivotEntityName) {
     /**
@@ -477,11 +478,32 @@ export function defineManyToManyRelationship(
 
   let isOwner: boolean | undefined = undefined
 
+  const configuresRelationship = !!(
+    joinColumn ||
+    inverseJoinColumn ||
+    relationship.options.pivotTable
+  )
+  const relatedOneConfiguresRelationship = !!(
+    otherSideRelationOptions.pivotTable ||
+    otherSideRelationOptions.joinColumn ||
+    otherSideRelationOptions.inverseJoinColumn
+  )
+
+  /**
+   * Both sides are configuring the properties that must be on one
+   * side only
+   */
+  if (configuresRelationship && relatedOneConfiguresRelationship) {
+    throw new Error(
+      `Invalid relationship reference for "${MikroORMEntity.name}.${relationship.name}". Define "pivotTable", "joinColumn", or "inverseJoinColumn" on only one side of the relationship`
+    )
+  }
+
   /**
    * If any of the following properties are provided, we consider
    * the current side to be the owner
    */
-  if (joinColumn || inverseJoinColumn || relationship.options.pivotTable) {
+  if (configuresRelationship) {
     isOwner = true
   }
 
@@ -489,13 +511,7 @@ export function defineManyToManyRelationship(
    * If any of the properties are provided on the other side,
    * then we do not expect the current side to be the owner
    */
-  const otherSideRelationOptions = otherSideRelationship.parse("").options
-  if (
-    isOwner === undefined &&
-    (otherSideRelationOptions.pivotTable ||
-      otherSideRelationOptions.joinColumn ||
-      otherSideRelationOptions.inverseJoinColumn)
-  ) {
+  if (isOwner === undefined && relatedOneConfiguresRelationship) {
     isOwner = false
   }
 
