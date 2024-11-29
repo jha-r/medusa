@@ -486,12 +486,16 @@ export function defineManyToManyRelationship(
   }
 
   /**
-   * If any of the properties are provided on the other side, then
-   * we do not expect the current side to be the owner
+   * If the other side has been tracked and any of the properties
+   * are provided on the other side, then we do not expect the
+   * current side to be the owner
    */
   const otherSideRelationOptions = otherSideRelationship.parse("").options
   if (
     isOwner === undefined &&
+    MANY_TO_MANY_TRACKED_RELATIONS[
+      `${relatedModelName}.${otherSideRelationshipProperty}`
+    ] &&
     (otherSideRelationOptions.pivotTable ||
       otherSideRelationOptions.joinColumn ||
       otherSideRelationOptions.inverseJoinColumn)
@@ -505,21 +509,6 @@ export function defineManyToManyRelationship(
    * applied to pivot table name as well.
    */
   isOwner ??= sortedTableNames[0] === tableName
-
-  // const isOwner =
-  //   !!joinColumn ||
-  //   !!inverseJoinColumn ||
-  //   !!relationship.options.pivotTable ||
-  //   /**
-  //    * We can't infer it from the current entity so lets
-  //    * look at the otherside configuration as well to make a choice
-  //    */
-  //   (!otherSideRelationOptions.pivotTable &&
-  //     !otherSideRelationOptions.joinColumn &&
-  //     !otherSideRelationOptions.inverseJoinColumn &&
-  //     !MANY_TO_MANY_TRACKED_RELATIONS[
-  //       `${relatedModelName}.${otherSideRelationshipProperty}`
-  //     ])
 
   const mappedByProp = isOwner ? "inversedBy" : "mappedBy"
   const mappedByPropValue =
