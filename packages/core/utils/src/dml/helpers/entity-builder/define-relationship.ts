@@ -486,16 +486,12 @@ export function defineManyToManyRelationship(
   }
 
   /**
-   * If the other side has been tracked and any of the properties
-   * are provided on the other side, then we do not expect the
-   * current side to be the owner
+   * If any of the properties are provided on the other side,
+   * then we do not expect the current side to be the owner
    */
   const otherSideRelationOptions = otherSideRelationship.parse("").options
   if (
     isOwner === undefined &&
-    MANY_TO_MANY_TRACKED_RELATIONS[
-      `${relatedModelName}.${otherSideRelationshipProperty}`
-    ] &&
     (otherSideRelationOptions.pivotTable ||
       otherSideRelationOptions.joinColumn ||
       otherSideRelationOptions.inverseJoinColumn)
