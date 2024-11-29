@@ -1,6 +1,7 @@
 import de from "./de.json"
 import en from "./en.json"
 import es from "./es.json"
+import fa from "./fa.json"
 import fr from "./fr.json"
 import pl from "./pl.json"
 import ptBR from "./ptBR.json"
@@ -16,6 +17,9 @@ export default {
   },
   es: {
     translation: es,
+  },
+  fa: {
+    translation: fa,
   },
   fr: {
     translation: fr,
