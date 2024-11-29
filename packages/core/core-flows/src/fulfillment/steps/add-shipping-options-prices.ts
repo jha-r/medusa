@@ -1,19 +1,23 @@
 import {
   CreatePriceSetDTO,
+  CreatePriceSetPriceRules,
   IPricingModuleService,
   IRegionModuleService,
+  PriceRule,
 } from "@medusajs/framework/types"
-import { Modules } from "@medusajs/framework/utils"
-import { StepResponse, createStep } from "@medusajs/framework/workflows-sdk"
+import { isString, Modules } from "@medusajs/framework/utils"
+import { createStep, StepResponse } from "@medusajs/framework/workflows-sdk"
 
 export interface ShippingOptionsPriceCurrencyCode {
   currency_code: string
   amount: number
+  rules?: PriceRule[]
 }
 
 interface ShippingOptionsPriceRegionId {
   region_id: string
   amount: number
+  rules?: PriceRule[]
 }
 
 export type CreateShippingOptionsPriceSetsStepInput = {
@@ -21,15 +25,36 @@ export type CreateShippingOptionsPriceSetsStepInput = {
   prices: (ShippingOptionsPriceCurrencyCode | ShippingOptionsPriceRegionId)[]
 }[]
 
-function buildPriceSet(
+export function buildPriceSet(
   prices: CreateShippingOptionsPriceSetsStepInput[0]["prices"],
   regionToCurrencyMap: Map<string, string>
 ): CreatePriceSetDTO {
   const shippingOptionPrices = prices.map((price) => {
+    const { rules = [] } = price
+    const additionalRules: CreatePriceSetPriceRules = {}
+
+    for (const rule of rules) {
+      let existingPriceRules = additionalRules[rule.attribute]
+
+      if (isString(existingPriceRules)) {
+        continue
+      }
+
+      existingPriceRules ||= []
+
+      existingPriceRules.push({
+        operator: rule.operator,
+        value: rule.value,
+      })
+
+      additionalRules[rule.attribute] = existingPriceRules
+    }
+
     if ("currency_code" in price) {
       return {
         currency_code: price.currency_code,
         amount: price.amount,
+        rules: additionalRules,
       }
     }
 
@@ -38,6 +63,7 @@ function buildPriceSet(
       amount: price.amount,
       rules: {
         region_id: price.region_id,
+        ...additionalRules,
       },
     }
   })
