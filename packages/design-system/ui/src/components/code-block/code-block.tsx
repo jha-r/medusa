@@ -117,9 +117,7 @@ const HeaderComponent = ({
       const prevTabRef =
         activeTabIndex > 0 ? tabRefs.current[activeTabIndex - 1] : null
 
-      // Set the width of the tab indicator to the width of the active tab.
       tabIndicatorRef.current.style.width = `${activeTabRef.offsetWidth}px`
-      // Set the left position of the tab indicator to the left position of the active tab.
       tabIndicatorRef.current.style.left = prevTabRef
         ? `${
             tabRefs.current
