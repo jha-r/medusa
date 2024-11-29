@@ -103,7 +103,7 @@ export const sidebar = numberSidebarItems(
             },
             {
               type: "link",
-              title: "Create Brand Workflow",
+              title: "Brand Workflow",
               path: "/learn/customization/custom-features/workflow",
             },
             {

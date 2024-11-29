@@ -5,6 +5,7 @@ import { SqlEntityManager } from "@mikro-orm/postgresql"
 import { defaultPriceRuleData } from "./data"
 
 export * from "./data"
+export * from "./operators"
 
 export async function createPriceRules(
   manager: SqlEntityManager,

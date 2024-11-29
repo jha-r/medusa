@@ -9150,7 +9150,7 @@ export const generatedSidebar = [
             "loaded": true,
             "isPathHref": true,
             "type": "category",
-            "title": "Medusa Application",
+            "title": "Self-Hosting",
             "children": [
               {
                 "loaded": true,
@@ -9166,23 +9166,6 @@ export const generatedSidebar = [
                 "type": "link",
                 "path": "/deployment/medusa-application/railway",
                 "title": "Railway",
-                "children": []
-              }
-            ]
-          },
-          {
-            "loaded": true,
-            "isPathHref": true,
-            "type": "category",
-            "title": "Medusa Admin",
-            "autogenerate_path": "/deployment/admin",
-            "children": [
-              {
-                "loaded": true,
-                "isPathHref": true,
-                "type": "link",
-                "path": "/deployment/admin/vercel",
-                "title": "Vercel",
                 "children": []
               }
             ]

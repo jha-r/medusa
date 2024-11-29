@@ -64,9 +64,7 @@ The first line indicates the first time the step was executed, and the next two 
 
 ## Step Retry Intervals
 
-By default, a step is retried immediately after it fails.
-
-To specify a wait time before a step is retried, pass a `retryInterval` property to the step's configuration object. Its value is a number of seconds to wait before retrying the step.
+By default, a step is retried immediately after it fails. To specify a wait time before a step is retried, pass a `retryInterval` property to the step's configuration object. Its value is a number of seconds to wait before retrying the step.
 
 For example:
 
@@ -82,3 +80,9 @@ const step1 = createStep(
   }
 )
 ```
+
+### Interval Changes Workflow to Long-Running
+
+By setting `retryInterval` on a step, a workflow becomes a [long-running workflow](../long-running-workflow/page.mdx) that runs asynchronously in the background. So, you won't receive its result or errors immediately when you execute the workflow.
+
+Instead, you must subscribe to the workflow's execution using the Workflow Engine Module Service. Learn more about it in [this chapter](../long-running-workflow/page.mdx#access-long-running-workflow-status-and-result).

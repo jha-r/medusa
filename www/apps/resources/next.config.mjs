@@ -104,6 +104,11 @@ const nextConfig = {
         destination: "/commerce-modules/promotion/links-to-other-modules",
         permanent: true,
       },
+      {
+        source: "/deployment/admin/vercel",
+        destination: "/deployment",
+        permanent: true,
+      },
     ]
   },
   // Redirects shouldn't be necessary anymore since we have remark / rehype
