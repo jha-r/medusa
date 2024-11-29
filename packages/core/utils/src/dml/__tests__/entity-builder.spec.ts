@@ -755,10 +755,10 @@ describe("Entity builder", () => {
 
       const userInstance = new User()
 
-      expect(userInstance.username).toEqual(null)
+      expect(userInstance.username).toEqual(undefined)
 
       expect(userInstance.spend_limit).toEqual(undefined)
-      expect(userInstance.raw_spend_limit).toEqual(null)
+      expect(userInstance.raw_spend_limit).toEqual(undefined)
 
       userInstance.username = "john"
       expect(userInstance.username).toEqual("john")
@@ -1121,7 +1121,7 @@ describe("Entity builder", () => {
       const metaData = MetadataStorage.getMetadataFromDecorator(User)
 
       const userInstance = new User()
-      expect(userInstance.role).toEqual(null)
+      expect(userInstance.role).toEqual(undefined)
 
       userInstance.role = "admin"
       expect(userInstance.role).toEqual("admin")
@@ -1578,7 +1578,10 @@ describe("Entity builder", () => {
       expect(metaData.path).toEqual("User")
 
       expect(metaData.hooks).toEqual({
-        beforeCreate: ["generateId"],
+        beforeCreate: [
+          "generateId",
+          "deleted_at_setDefaultValueOnBeforeCreate",
+        ],
         onInit: ["generateId"],
       })
 
@@ -1685,7 +1688,10 @@ describe("Entity builder", () => {
       expect(metaData.path).toEqual("User")
 
       expect(metaData.hooks).toEqual({
-        beforeCreate: ["generateId"],
+        beforeCreate: [
+          "generateId",
+          "deleted_at_setDefaultValueOnBeforeCreate",
+        ],
         onInit: ["generateId"],
       })
 
@@ -1793,7 +1799,10 @@ describe("Entity builder", () => {
       expect(metaData.path).toEqual("User")
 
       expect(metaData.hooks).toEqual({
-        beforeCreate: ["generateId"],
+        beforeCreate: [
+          "generateId",
+          "deleted_at_setDefaultValueOnBeforeCreate",
+        ],
         onInit: ["generateId"],
       })
 
