@@ -1,11 +1,11 @@
   import * as React from "react"
   import { cleanup, render, screen } from "@testing-library/react"
 
-  import BellAlertDone from "../bell-alert-done"
+  import CaretMaximizeDiagonal from "../caret-maximize-diagonal"
 
-  describe("BellAlertDone", () => {
+  describe("CaretMaximizeDiagonal", () => {
     it("should render the icon without errors", async () => {
-      render(<BellAlertDone data-testid="icon" />)
+      render(<CaretMaximizeDiagonal data-testid="icon" />)
 
 
       const svgElement = screen.getByTestId("icon")

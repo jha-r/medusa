@@ -1,6 +1,6 @@
 import * as React from "react"
 import type { IconProps } from "../types"
-const HandTruck = React.forwardRef<SVGSVGElement, IconProps>(
+const ScrollText = React.forwardRef<SVGSVGElement, IconProps>(
   ({ color = "currentColor", ...props }, ref) => {
     return (
       <svg
@@ -16,18 +16,18 @@ const HandTruck = React.forwardRef<SVGSVGElement, IconProps>(
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth={1.5}
-          d="M10.192 2.927 6.465 3.99a.86.86 0 0 0-.591 1.064l.944 3.312a.86.86 0 0 0 1.065.592l3.726-1.063a.86.86 0 0 0 .592-1.064l-.945-3.312a.86.86 0 0 0-1.064-.592M8.328 3.459l.473 1.656M6.876 11.708l7.298-2.081M4.933 10.357 2.77 2.744a.86.86 0 0 0-.828-.626h-.9"
+          d="M12.611 13.5c.736 0 1.333-.597 1.333-1.333v-.89c0-.245-.199-.444-.444-.444H6.833c-.245 0-.444.2-.444.445v.889a1.334 1.334 0 0 1-2.667 0V2.833a1.334 1.334 0 0 0-2.666 0v1.778c0 .49.398.889.888.889h1.778M12.611 13.5H5.056"
         />
         <path
           stroke={color}
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth={1.5}
-          d="M5.347 13.313a1.507 1.507 0 1 0 0-3.014 1.507 1.507 0 0 0 0 3.014"
+          d="M2.389 1.5h8.444c.736 0 1.334.597 1.334 1.333v5.778M6.167 4.611h3.555M6.167 7.278h3.555"
         />
       </svg>
     )
   }
 )
-HandTruck.displayName = "HandTruck"
-export default HandTruck
+ScrollText.displayName = "ScrollText"
+export default ScrollText

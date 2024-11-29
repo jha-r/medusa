@@ -1,11 +1,11 @@
   import * as React from "react"
   import { cleanup, render, screen } from "@testing-library/react"
 
-  import BellAlertDone from "../bell-alert-done"
+  import Webshipper from "../webshipper"
 
-  describe("BellAlertDone", () => {
+  describe("Webshipper", () => {
     it("should render the icon without errors", async () => {
-      render(<BellAlertDone data-testid="icon" />)
+      render(<Webshipper data-testid="icon" />)
 
 
       const svgElement = screen.getByTestId("icon")

@@ -1,6 +1,6 @@
 import * as React from "react"
 import type { IconProps } from "../types"
-const HandTruck = React.forwardRef<SVGSVGElement, IconProps>(
+const Target = React.forwardRef<SVGSVGElement, IconProps>(
   ({ color = "currentColor", ...props }, ref) => {
     return (
       <svg
@@ -16,18 +16,25 @@ const HandTruck = React.forwardRef<SVGSVGElement, IconProps>(
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth={1.5}
-          d="M10.192 2.927 6.465 3.99a.86.86 0 0 0-.591 1.064l.944 3.312a.86.86 0 0 0 1.065.592l3.726-1.063a.86.86 0 0 0 .592-1.064l-.945-3.312a.86.86 0 0 0-1.064-.592M8.328 3.459l.473 1.656M6.876 11.708l7.298-2.081M4.933 10.357 2.77 2.744a.86.86 0 0 0-.828-.626h-.9"
+          d="m7.5 7.5 2.708-2.708M10.208 4.791V2.916L12.292.833v1.875h1.875l-2.084 2.083z"
         />
         <path
           stroke={color}
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth={1.5}
-          d="M5.347 13.313a1.507 1.507 0 1 0 0-3.014 1.507 1.507 0 0 0 0 3.014"
+          d="M8.633 1.568a6 6 0 0 0-1.133-.11A6.042 6.042 0 1 0 13.542 7.5c0-.388-.04-.766-.11-1.134"
+        />
+        <path
+          stroke={color}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={1.5}
+          d="M8.04 4.012a3.5 3.5 0 0 0-.54-.054A3.542 3.542 0 1 0 11.042 7.5c0-.185-.028-.364-.054-.541"
         />
       </svg>
     )
   }
 )
-HandTruck.displayName = "HandTruck"
-export default HandTruck
+Target.displayName = "Target"
+export default Target

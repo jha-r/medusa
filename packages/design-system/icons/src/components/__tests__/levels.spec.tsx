@@ -1,11 +1,11 @@
   import * as React from "react"
   import { cleanup, render, screen } from "@testing-library/react"
 
-  import BellAlertDone from "../bell-alert-done"
+  import Levels from "../levels"
 
-  describe("BellAlertDone", () => {
+  describe("Levels", () => {
     it("should render the icon without errors", async () => {
-      render(<BellAlertDone data-testid="icon" />)
+      render(<Levels data-testid="icon" />)
 
 
       const svgElement = screen.getByTestId("icon")
