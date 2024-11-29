@@ -5158,9 +5158,9 @@ describe("Entity builder", () => {
           reference: "m:n",
           name: "teams",
           entity: "Team",
-          owner: true,
+          owner: false,
           pivotTable: "team_users",
-          inversedBy: "users",
+          mappedBy: "users",
         },
         created_at: {
           reference: "scalar",
@@ -5226,9 +5226,9 @@ describe("Entity builder", () => {
         users: {
           reference: "m:n",
           name: "users",
-          mappedBy: "teams",
+          inversedBy: "teams",
           entity: "User",
-          owner: false,
+          owner: true,
           pivotTable: "team_users",
         },
         created_at: {
@@ -5339,9 +5339,9 @@ describe("Entity builder", () => {
           reference: "m:n",
           name: "teams",
           entity: "Team",
-          owner: true,
+          owner: false,
           pivotTable: "team_users",
-          inversedBy: "users",
+          mappedBy: "users",
         },
         created_at: {
           reference: "scalar",
@@ -5408,8 +5408,8 @@ describe("Entity builder", () => {
           reference: "m:n",
           name: "users",
           entity: "User",
-          owner: false,
-          mappedBy: "teams",
+          owner: true,
+          inversedBy: "teams",
           pivotTable: "team_users",
         },
         created_at: {
@@ -5554,9 +5554,9 @@ describe("Entity builder", () => {
           reference: "m:n",
           name: "teams",
           entity: "Team",
-          owner: true,
+          owner: false,
           pivotTable: "team_users",
-          inversedBy: "users",
+          mappedBy: "users",
         },
         created_at: {
           reference: "scalar",
@@ -5623,9 +5623,9 @@ describe("Entity builder", () => {
           reference: "m:n",
           name: "users",
           entity: "User",
-          owner: false,
+          owner: true,
           pivotTable: "team_users",
-          mappedBy: "teams",
+          inversedBy: "teams",
         },
         created_at: {
           reference: "scalar",
@@ -6134,9 +6134,9 @@ describe("Entity builder", () => {
           reference: "m:n",
           name: "teams",
           entity: "Team",
-          owner: true,
+          owner: false,
           pivotTable: "platform.team_users",
-          inversedBy: "users",
+          mappedBy: "users",
         },
         created_at: {
           reference: "scalar",
@@ -6204,8 +6204,8 @@ describe("Entity builder", () => {
           reference: "m:n",
           name: "users",
           entity: "User",
-          owner: false,
-          mappedBy: "teams",
+          owner: true,
+          inversedBy: "teams",
           pivotTable: "platform.team_users",
         },
         created_at: {
@@ -6728,10 +6728,10 @@ describe("Entity builder", () => {
         },
       })
 
-      const metaData = MetadataStorage.getMetadataFromDecorator(User)
-      expect(metaData.className).toEqual("User")
-      expect(metaData.path).toEqual("User")
-      expect(metaData.properties).toEqual({
+      const teamMetaData = MetadataStorage.getMetadataFromDecorator(Team)
+      expect(teamMetaData.className).toEqual("Team")
+      expect(teamMetaData.path).toEqual("Team")
+      expect(teamMetaData.properties).toEqual({
         id: {
           reference: "scalar",
           type: "number",
@@ -6742,23 +6742,23 @@ describe("Entity builder", () => {
           getter: false,
           setter: false,
         },
-        username: {
+        name: {
           reference: "scalar",
           type: "string",
           columnType: "text",
-          name: "username",
-          fieldName: "username",
+          name: "name",
+          fieldName: "name",
           nullable: false,
           getter: false,
           setter: false,
         },
-        teams: {
+        users: {
           reference: "m:n",
-          name: "teams",
-          entity: "Team",
+          name: "users",
+          entity: "User",
           owner: true,
+          inversedBy: "teams",
           pivotEntity: "TeamUsers",
-          inversedBy: "users",
         },
         created_at: {
           reference: "scalar",
@@ -6797,10 +6797,10 @@ describe("Entity builder", () => {
         },
       })
 
-      const teamMetaData = MetadataStorage.getMetadataFromDecorator(Team)
-      expect(teamMetaData.className).toEqual("Team")
-      expect(teamMetaData.path).toEqual("Team")
-      expect(teamMetaData.properties).toEqual({
+      const metaData = MetadataStorage.getMetadataFromDecorator(User)
+      expect(metaData.className).toEqual("User")
+      expect(metaData.path).toEqual("User")
+      expect(metaData.properties).toEqual({
         id: {
           reference: "scalar",
           type: "number",
@@ -6811,23 +6811,23 @@ describe("Entity builder", () => {
           getter: false,
           setter: false,
         },
-        name: {
+        username: {
           reference: "scalar",
           type: "string",
           columnType: "text",
-          name: "name",
-          fieldName: "name",
+          name: "username",
+          fieldName: "username",
           nullable: false,
           getter: false,
           setter: false,
         },
-        users: {
+        teams: {
           reference: "m:n",
-          name: "users",
-          entity: "User",
+          name: "teams",
+          entity: "Team",
           owner: false,
-          mappedBy: "teams",
           pivotEntity: "TeamUsers",
+          mappedBy: "users",
         },
         created_at: {
           reference: "scalar",
@@ -6865,6 +6865,29 @@ describe("Entity builder", () => {
           setter: false,
         },
       })
+    })
+
+    test("throw error when both sides of relationship defines the pivot table", () => {
+      const team = model.define("team", {
+        id: model.number(),
+        name: model.text(),
+        users: model.manyToMany(() => user, {
+          pivotTable: "user_teams",
+        }),
+      })
+
+      const user = model.define("user", {
+        id: model.number(),
+        username: model.text(),
+        teams: model.manyToMany(() => team, {
+          pivotTable: "team_users",
+          mappedBy: "users",
+        }),
+      })
+
+      expect(() => toMikroORMEntity(user)).toThrow(
+        `Invalid relationship reference for "User.teams". Define "pivotTable", "joinColumn", or "inverseJoinColumn" on only one side of the relationship`
+      )
     })
   })
 })
