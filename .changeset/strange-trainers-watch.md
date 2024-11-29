@@ -3,4 +3,4 @@
 "@medusajs/icons": patch
 ---
 
-chore(icons,ui-preset): Sync with latest changes from Figma
+feat(ui,icons,ui-preset): Sync with latest changes from Figma, and fix Code components
