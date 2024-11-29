@@ -89,7 +89,10 @@ const Copy = React.forwardRef<HTMLButtonElement, CopyProps>(
           ref={ref}
           aria-label="Copy code snippet"
           type="button"
-          className={clx("text-ui-code-icon h-fit w-fit", className)}
+          className={clx(
+            "text-ui-contrast-fg-secondary h-fit w-fit",
+            className
+          )}
           onClick={copyToClipboard}
           {...props}
         >
