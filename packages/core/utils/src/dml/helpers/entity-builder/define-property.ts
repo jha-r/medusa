@@ -122,12 +122,12 @@ export function defineProperty(
   if (isDefined(field.defaultValue) || field.nullable) {
     const defaultValueSetterHookName = `${field.fieldName}_setDefaultValueOnBeforeCreate`
     MikroORMEntity.prototype[defaultValueSetterHookName] = function () {
-      if (isDefined(field.defaultValue)) {
+      if (isDefined(field.defaultValue) && this[propertyName] === undefined) {
         this[propertyName] = field.defaultValue
         return
       }
 
-      if (field.nullable) {
+      if (field.nullable && this[propertyName] === undefined) {
         this[propertyName] = null
         return
       }
