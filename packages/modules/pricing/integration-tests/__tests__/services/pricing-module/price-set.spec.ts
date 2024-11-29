@@ -619,6 +619,119 @@ moduleIntegrationTestRunner<IPricingModuleService>({
           )
         })
 
+        it("should create price set with prices including rule operators", async () => {
+          const [priceSet] = await service.createPriceSets([
+            {
+              prices: [
+                {
+                  amount: 100,
+                  currency_code: "USD",
+                  rules: {
+                    region_id: "1",
+                    custom_rule: [
+                      {
+                        operator: "gt",
+                        value: 500,
+                      },
+                      {
+                        operator: "lt",
+                        value: 1000,
+                      },
+                    ],
+                  },
+                },
+                {
+                  amount: 150,
+                  currency_code: "USD",
+                },
+              ],
+            },
+          ])
+
+          expect(priceSet.prices).toHaveLength(2)
+          expect(priceSet).toEqual(
+            expect.objectContaining({
+              prices: expect.arrayContaining([
+                expect.objectContaining({
+                  amount: 100,
+                  currency_code: "USD",
+                  price_rules: expect.arrayContaining([
+                    expect.objectContaining({
+                      attribute: "region_id",
+                      operator: "eq",
+                      value: "1",
+                    }),
+                    expect.objectContaining({
+                      attribute: "custom_rule",
+                      operator: "gt",
+                      value: "500",
+                    }),
+                    expect.objectContaining({
+                      attribute: "custom_rule",
+                      operator: "lt",
+                      value: "1000",
+                    }),
+                  ]),
+                }),
+                expect.objectContaining({
+                  amount: 150,
+                  currency_code: "USD",
+                }),
+              ]),
+            })
+          )
+        })
+
+        it("should throw error when creating price with invalid rules", async () => {
+          let error = await service
+            .createPriceSets([
+              {
+                prices: [
+                  {
+                    amount: 100,
+                    currency_code: "USD",
+                    rules: {
+                      custom_rule: [
+                        {
+                          operator: "unknown" as any,
+                          value: 500,
+                        },
+                      ],
+                    },
+                  },
+                ],
+              },
+            ])
+            .catch((e) => e)
+
+          expect(error.message).toBe(
+            "operator should be one of gte, lte, gt, lt, eq"
+          )
+
+          error = await service
+            .createPriceSets([
+              {
+                prices: [
+                  {
+                    amount: 100,
+                    currency_code: "USD",
+                    rules: {
+                      custom_rule: [
+                        {
+                          operator: "gt",
+                          value: "string" as any,
+                        },
+                      ],
+                    },
+                  },
+                ],
+              },
+            ])
+            .catch((e) => e)
+
+          expect(error.message).toBe("value should be a number")
+        })
+
         it("should create a priceSet successfully", async () => {
           await service.createPriceSets([
             {
@@ -786,7 +899,9 @@ moduleIntegrationTestRunner<IPricingModuleService>({
                 {
                   amount: 100,
                   currency_code: "USD",
-                  rules: { region_id: "123" },
+                  rules: {
+                    region_id: "123",
+                  },
                 },
               ],
             },
@@ -799,7 +914,10 @@ moduleIntegrationTestRunner<IPricingModuleService>({
                 {
                   amount: 200,
                   currency_code: "USD",
-                  rules: { region_id: "123" },
+                  rules: {
+                    region_id: "123",
+                    test: [{ value: 500, operator: "gte" }],
+                  },
                 },
               ],
             },
@@ -813,12 +931,21 @@ moduleIntegrationTestRunner<IPricingModuleService>({
             priceSet.prices?.sort((a: any, b: any) => a.amount - b.amount)
           ).toEqual([
             expect.objectContaining({
+              amount: 100,
+              currency_code: "USD",
+            }),
+            expect.objectContaining({
               amount: 200,
               currency_code: "USD",
               price_rules: [
                 expect.objectContaining({
                   attribute: "region_id",
                   value: "123",
+                }),
+                expect.objectContaining({
+                  attribute: "test",
+                  operator: "gte",
+                  value: "500",
                 }),
               ],
             }),
