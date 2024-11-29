@@ -15,7 +15,12 @@ type PostgresConnection = {
 }
 
 export default async (connect: PostgresConnection) => {
-  const client = new Client(connect)
+  const client = new Client({
+      connectionString: connect,
+      ssl: {
+        rejectUnauthorized: false, // Required for RDS self-signed SSL certificates
+      },
+    })
 
   await client.connect()
 
