@@ -31,6 +31,7 @@ export async function addOrUpdateLineItem({
     .withTransaction(manager)
     .generate(data.variant_id, cart.region_id, data.quantity, {
       customer_id: data.customer_id || cart.customer_id,
+      cart,
       metadata: data.metadata,
     })
 
