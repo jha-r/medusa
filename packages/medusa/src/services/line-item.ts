@@ -293,6 +293,7 @@ class LineItemService extends TransactionBaseService {
           variantsPricing = await this.pricingService_
             .withTransaction(transactionManager)
             .getProductVariantsPricing(variantsToCalculatePricingFor, {
+              cart_id: context?.cart?.cart_id,
               region_id: regionId,
               customer_id: context?.customer_id,
               include_discount_prices: true,

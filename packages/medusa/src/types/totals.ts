@@ -10,6 +10,7 @@ import {
 } from "../models"
 
 export type CalculationContextData = {
+  cart_id?: string;
   discounts: Discount[]
   items: LineItem[]
   customer: Customer

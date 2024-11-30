@@ -955,6 +955,7 @@ class CartService extends TransactionBaseService {
                   },
                 ],
                 {
+                  cart_id: cart.id,
                   region_id: cart.region_id,
                   customer_id: cart.customer_id,
                   include_discount_prices: true,
