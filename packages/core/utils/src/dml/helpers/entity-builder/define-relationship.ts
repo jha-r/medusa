@@ -15,13 +15,13 @@ import {
   Property,
   rel,
 } from "@mikro-orm/core"
-import { camelToSnakeCase, pluralize } from "../../../common"
 import { DmlEntity } from "../../entity"
-import { HasMany } from "../../relations/has-many"
 import { HasOne } from "../../relations/has-one"
-import { ManyToMany as DmlManyToMany } from "../../relations/many-to-many"
-import { applyEntityIndexes } from "../mikro-orm/apply-indexes"
+import { HasMany } from "../../relations/has-many"
 import { parseEntityName } from "./parse-entity-name"
+import { camelToSnakeCase, pluralize } from "../../../common"
+import { applyEntityIndexes } from "../mikro-orm/apply-indexes"
+import { ManyToMany as DmlManyToMany } from "../../relations/many-to-many"
 
 type Context = {
   MANY_TO_MANY_TRACKED_RELATIONS: Record<string, boolean>
@@ -375,12 +375,10 @@ export function defineManyToManyRelationship(
   >,
   {
     relatedModelName,
-    relatedTableName,
     pgSchema,
   }: {
     relatedModelName: string
     pgSchema: string | undefined
-    relatedTableName: string
   },
   { MANY_TO_MANY_TRACKED_RELATIONS }: Context
 ) {
@@ -450,11 +448,12 @@ export function defineManyToManyRelationship(
     pivotEntityName = parseEntityName(pivotEntity).modelName
   }
 
-  if (!pivotEntityName) {
-    const { tableName } = parseEntityName(entity)
-    let tableNameWithoutSchema: string
-    let relatedTableNameWithoutSchema: string
+  const tableName = parseEntityName(entity).tableNameWithoutSchema
+  const relatedTableName = parseEntityName(relatedEntity).tableNameWithoutSchema
+  const sortedTableNames = [tableName, relatedTableName].sort()
+  const otherSideRelationOptions = otherSideRelationship.parse("").options
 
+  if (!pivotEntityName) {
     /**
      * Pivot table name is created as follows (when not explicitly provided)
      *
@@ -464,25 +463,10 @@ export function defineManyToManyRelationship(
      * - And finally pluralizing the second entity name.
      */
 
-    let [schema, ...tableTokens] = tableName.split(".")
-    if (!tableTokens.length) {
-      tableNameWithoutSchema = schema
-    } else {
-      tableNameWithoutSchema = tableTokens.join(".")
-    }
-
-    const [relatedSchema, ...relatedTableTokens] = relatedTableName.split(".")
-    if (!relatedTableTokens.length) {
-      relatedTableNameWithoutSchema = relatedSchema
-    } else {
-      relatedTableNameWithoutSchema = relatedTableTokens.join(".")
-    }
-
     pivotTableName =
       relationship.options.pivotTable ??
       otherSideRelationship.parse("").options.pivotTable ??
-      [tableNameWithoutSchema, relatedTableNameWithoutSchema]
-        .sort()
+      sortedTableNames
         .map((token, index) => {
           if (index === 1) {
             return pluralize(token)
@@ -492,22 +476,51 @@ export function defineManyToManyRelationship(
         .join("_")
   }
 
-  const otherSideRelationOptions = otherSideRelationship.parse("").options
+  let isOwner: boolean | undefined = undefined
 
-  const isOwner =
-    !!joinColumn ||
-    !!inverseJoinColumn ||
-    !!relationship.options.pivotTable ||
-    /**
-     * We can't infer it from the current entity so lets
-     * look at the otherside configuration as well to make a choice
-     */
-    (!otherSideRelationOptions.pivotTable &&
-      !otherSideRelationOptions.joinColumn &&
-      !otherSideRelationOptions.inverseJoinColumn &&
-      !MANY_TO_MANY_TRACKED_RELATIONS[
-        `${relatedModelName}.${otherSideRelationshipProperty}`
-      ])
+  const configuresRelationship = !!(
+    joinColumn ||
+    inverseJoinColumn ||
+    relationship.options.pivotTable
+  )
+  const relatedOneConfiguresRelationship = !!(
+    otherSideRelationOptions.pivotTable ||
+    otherSideRelationOptions.joinColumn ||
+    otherSideRelationOptions.inverseJoinColumn
+  )
+
+  /**
+   * Both sides are configuring the properties that must be on one
+   * side only
+   */
+  if (configuresRelationship && relatedOneConfiguresRelationship) {
+    throw new Error(
+      `Invalid relationship reference for "${MikroORMEntity.name}.${relationship.name}". Define "pivotTable", "joinColumn", or "inverseJoinColumn" on only one side of the relationship`
+    )
+  }
+
+  /**
+   * If any of the following properties are provided, we consider
+   * the current side to be the owner
+   */
+  if (configuresRelationship) {
+    isOwner = true
+  }
+
+  /**
+   * If any of the properties are provided on the other side,
+   * then we do not expect the current side to be the owner
+   */
+  if (isOwner === undefined && relatedOneConfiguresRelationship) {
+    isOwner = false
+  }
+
+  /**
+   * Finally, we consider the current side as owner, if it is
+   * the first one in alphabetical order. The same logic is
+   * applied to pivot table name as well.
+   */
+  isOwner ??= sortedTableNames[0] === tableName
 
   const mappedByProp = isOwner ? "inversedBy" : "mappedBy"
   const mappedByPropValue =

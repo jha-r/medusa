@@ -1,5 +1,5 @@
-import { RuleOperator } from "@medusajs/utils"
 import { medusaIntegrationTestRunner } from "@medusajs/test-utils"
+import { RuleOperator } from "@medusajs/utils"
 import {
   adminHeaders,
   createAdminUser,
@@ -110,9 +110,7 @@ medusaIntegrationTestRunner({
             prices: [{ currency_code: "usd", amount: 1000 }],
           }
 
-          const {
-            data: { shipping_option: shippingOption },
-          } = await api.post(
+          await api.post(
             `/admin/shipping-options`,
             shippingOptionPayload,
             adminHeaders
@@ -147,7 +145,25 @@ medusaIntegrationTestRunner({
               description: "Test description",
               code: "test-code",
             },
-            prices: [{ currency_code: "usd", amount: 1000 }],
+            prices: [
+              { currency_code: "usd", amount: 1000 },
+              {
+                currency_code: "usd",
+                amount: 500,
+                rules: [
+                  {
+                    attribute: "cart_total",
+                    operator: "gte",
+                    value: 100,
+                  },
+                  {
+                    attribute: "cart_total",
+                    operator: "lte",
+                    value: 200,
+                  },
+                ],
+              },
+            ],
           }
 
           const {
@@ -167,7 +183,7 @@ medusaIntegrationTestRunner({
             id: expect.any(String),
             name: "Test shipping option",
             price_type: "flat",
-            prices: [
+            prices: expect.arrayContaining([
               {
                 id: expect.any(String),
                 amount: 1000,
@@ -185,8 +201,39 @@ medusaIntegrationTestRunner({
                 created_at: expect.any(String),
                 updated_at: expect.any(String),
                 deleted_at: null,
+                price_rules: [],
               },
-            ],
+              {
+                id: expect.any(String),
+                amount: 500,
+                currency_code: "usd",
+                max_quantity: null,
+                min_quantity: null,
+                price_list: null,
+                price_set_id: expect.any(String),
+                raw_amount: {
+                  precision: 20,
+                  value: "500",
+                },
+                rules_count: 2,
+                price_rules: expect.arrayContaining([
+                  expect.objectContaining({
+                    attribute: "cart_total",
+                    operator: "gte",
+                    value: "100",
+                  }),
+                  expect.objectContaining({
+                    attribute: "cart_total",
+                    operator: "lte",
+                    value: "200",
+                  }),
+                ]),
+                title: null,
+                created_at: expect.any(String),
+                updated_at: expect.any(String),
+                deleted_at: null,
+              },
+            ]),
             provider_id: "manual_test-provider",
             provider: {
               id: "manual_test-provider",
@@ -275,6 +322,17 @@ medusaIntegrationTestRunner({
                 region_id: region.id,
                 amount: 1000,
               },
+              {
+                region_id: region.id,
+                amount: 500,
+                rules: [
+                  {
+                    attribute: "cart_total",
+                    operator: "gt",
+                    value: 200,
+                  },
+                ],
+              },
             ],
             rules: [shippingOptionRule],
           }
@@ -313,6 +371,24 @@ medusaIntegrationTestRunner({
                   currency_code: "eur",
                   amount: 1000,
                 }),
+                expect.objectContaining({
+                  id: expect.any(String),
+                  currency_code: "eur",
+                  amount: 500,
+                  rules_count: 2,
+                  price_rules: expect.arrayContaining([
+                    expect.objectContaining({
+                      attribute: "cart_total",
+                      operator: "gt",
+                      value: "200",
+                    }),
+                    expect.objectContaining({
+                      attribute: "region_id",
+                      operator: "eq",
+                      value: region.id,
+                    }),
+                  ]),
+                }),
               ]),
               rules: expect.arrayContaining([
                 expect.objectContaining({
@@ -324,6 +400,120 @@ medusaIntegrationTestRunner({
               ]),
             })
           )
+        })
+
+        it("should throw error when creating a price rule with a non white listed attribute", async () => {
+          const shippingOptionPayload = {
+            name: "Test shipping option",
+            service_zone_id: fulfillmentSet.service_zones[0].id,
+            shipping_profile_id: shippingProfile.id,
+            provider_id: "manual_test-provider",
+            price_type: "flat",
+            type: {
+              label: "Test type",
+              description: "Test description",
+              code: "test-code",
+            },
+            prices: [
+              {
+                currency_code: "usd",
+                amount: 500,
+                rules: [
+                  {
+                    attribute: "not_whitelisted",
+                    operator: "gte",
+                    value: 100,
+                  },
+                ],
+              },
+            ],
+          }
+
+          const error = await api
+            .post(
+              `/admin/shipping-options`,
+              shippingOptionPayload,
+              adminHeaders
+            )
+            .catch((e) => e)
+
+          expect(error.response.status).toEqual(400)
+        })
+
+        it("should throw error when creating a price rule with a non white listed operator", async () => {
+          const shippingOptionPayload = {
+            name: "Test shipping option",
+            service_zone_id: fulfillmentSet.service_zones[0].id,
+            shipping_profile_id: shippingProfile.id,
+            provider_id: "manual_test-provider",
+            price_type: "flat",
+            type: {
+              label: "Test type",
+              description: "Test description",
+              code: "test-code",
+            },
+            prices: [
+              {
+                currency_code: "usd",
+                amount: 500,
+                rules: [
+                  {
+                    attribute: "cart_total",
+                    operator: "not_whitelisted",
+                    value: 100,
+                  },
+                ],
+              },
+            ],
+          }
+
+          const error = await api
+            .post(
+              `/admin/shipping-options`,
+              shippingOptionPayload,
+              adminHeaders
+            )
+            .catch((e) => e)
+
+          expect(error.response.status).toEqual(400)
+        })
+
+        it("should throw error when creating a price rule with a string value", async () => {
+          const shippingOptionPayload = {
+            name: "Test shipping option",
+            service_zone_id: fulfillmentSet.service_zones[0].id,
+            shipping_profile_id: shippingProfile.id,
+            provider_id: "manual_test-provider",
+            price_type: "flat",
+            type: {
+              label: "Test type",
+              description: "Test description",
+              code: "test-code",
+            },
+            prices: [
+              {
+                currency_code: "usd",
+                amount: 500,
+                rules: [
+                  {
+                    attribute: "cart_total",
+                    operator: "gt",
+                    value: "string",
+                  },
+                ],
+              },
+            ],
+          }
+
+          const error = await api
+            .post(
+              `/admin/shipping-options`,
+              shippingOptionPayload,
+              adminHeaders
+            )
+            .catch((e) => e)
+
+          expect(error.response.status).toEqual(400)
         })
 
         it("should throw error when provider does not exist on a location", async () => {
@@ -431,6 +621,17 @@ medusaIntegrationTestRunner({
                 id: eurPrice.id,
                 amount: 10000,
               },
+              {
+                currency_code: "dkk",
+                amount: 5,
+                rules: [
+                  {
+                    attribute: "cart_total",
+                    operator: "gt",
+                    value: 200,
+                  },
+                ],
+              },
             ],
             rules: [
               {
@@ -463,7 +664,7 @@ medusaIntegrationTestRunner({
           )
 
           expect(updateResponse.status).toEqual(200)
-          expect(updateResponse.data.shipping_option.prices).toHaveLength(2)
+          expect(updateResponse.data.shipping_option.prices).toHaveLength(3)
           expect(updateResponse.data.shipping_option.rules).toHaveLength(3)
           expect(updateResponse.data.shipping_option).toEqual(
             expect.objectContaining({
@@ -493,6 +694,19 @@ medusaIntegrationTestRunner({
                   currency_code: "eur",
                   rules_count: 1,
                   amount: 10000,
+                }),
+                expect.objectContaining({
+                  id: expect.any(String),
+                  currency_code: "dkk",
+                  rules_count: 1,
+                  amount: 5,
+                  price_rules: [
+                    expect.objectContaining({
+                      attribute: "cart_total",
+                      operator: "gt",
+                      value: "200",
+                    }),
+                  ],
                 }),
               ]),
               rules: expect.arrayContaining([

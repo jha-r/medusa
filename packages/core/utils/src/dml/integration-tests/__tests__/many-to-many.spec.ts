@@ -217,13 +217,13 @@ describe("manyToMany - manyToMany", () => {
     ;[User, Team] = toMikroOrmEntities([user, team])
 
     const teamMetaData = MetadataStorage.getMetadataFromDecorator(Team)
-    expect((teamMetaData.properties as any).users.mappedBy).toBe("squads")
-    expect((teamMetaData.properties as any).users.owner).toBe(false)
+    expect((teamMetaData.properties as any).users.inversedBy).toBe("squads")
+    expect((teamMetaData.properties as any).users.owner).toBe(true)
 
     const userMetaData = MetadataStorage.getMetadataFromDecorator(User)
-    expect((userMetaData.properties as any).squads.mappedBy).not.toBeDefined()
-    expect((userMetaData.properties as any).squads.inversedBy).toBe("users")
-    expect((userMetaData.properties as any).squads.owner).toBe(true)
+    expect((userMetaData.properties as any).squads.inversedBy).not.toBeDefined()
+    expect((userMetaData.properties as any).squads.mappedBy).toBe("users")
+    expect((userMetaData.properties as any).squads.owner).toBe(false)
   })
 
   it(`should load the dml's correclty when both side of the relation are specifying the mappedBy options without pivot table`, () => {
@@ -248,14 +248,14 @@ describe("manyToMany - manyToMany", () => {
     let [User, Team] = toMikroOrmEntities([user, team])
 
     const teamMetaData = MetadataStorage.getMetadataFromDecorator(Team)
-    expect((teamMetaData.properties as any).users.mappedBy).toBe("squads")
-    expect((teamMetaData.properties as any).users.owner).toBe(false)
+    expect((teamMetaData.properties as any).users.inversedBy).toBe("squads")
+    expect((teamMetaData.properties as any).users.owner).toBe(true)
     expect((teamMetaData.properties as any).users.pivotTable).toBe("team_users")
 
     const userMetaData = MetadataStorage.getMetadataFromDecorator(User)
-    expect((userMetaData.properties as any).squads.mappedBy).not.toBeDefined()
-    expect((userMetaData.properties as any).squads.inversedBy).toBe("users")
-    expect((userMetaData.properties as any).squads.owner).toBe(true)
+    expect((userMetaData.properties as any).squads.inversedBy).not.toBeDefined()
+    expect((userMetaData.properties as any).squads.mappedBy).toBe("users")
+    expect((userMetaData.properties as any).squads.owner).toBe(false)
     expect((userMetaData.properties as any).squads.pivotTable).toBe(
       "team_users"
     )
