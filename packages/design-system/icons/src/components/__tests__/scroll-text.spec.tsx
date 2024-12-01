@@ -1,11 +1,11 @@
   import * as React from "react"
   import { cleanup, render, screen } from "@testing-library/react"
 
-  import BellAlertDone from "../bell-alert-done"
+  import ScrollText from "../scroll-text"
 
-  describe("BellAlertDone", () => {
+  describe("ScrollText", () => {
     it("should render the icon without errors", async () => {
-      render(<BellAlertDone data-testid="icon" />)
+      render(<ScrollText data-testid="icon" />)
 
 
       const svgElement = screen.getByTestId("icon")

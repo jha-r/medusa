@@ -1,6 +1,6 @@
 import * as React from "react"
 import type { IconProps } from "../types"
-const BarsThree = React.forwardRef<SVGSVGElement, IconProps>(
+const MediaPlay = React.forwardRef<SVGSVGElement, IconProps>(
   ({ color = "currentColor", ...props }, ref) => {
     return (
       <svg
@@ -16,11 +16,11 @@ const BarsThree = React.forwardRef<SVGSVGElement, IconProps>(
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth={1.5}
-          d="M1.5 7.5h12M1.5 2.833h12M1.5 12.167h12"
+          d="M4.162 2.058 12.6 6.73a.877.877 0 0 1 0 1.54l-8.438 4.672c-.594.33-1.329-.096-1.329-.77V2.828c0-.674.734-1.1 1.33-.77"
         />
       </svg>
     )
   }
 )
-BarsThree.displayName = "BarsThree"
-export default BarsThree
+MediaPlay.displayName = "MediaPlay"
+export default MediaPlay
