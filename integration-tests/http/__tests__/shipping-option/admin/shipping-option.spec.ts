@@ -211,6 +211,7 @@ medusaIntegrationTestRunner({
                 max_quantity: null,
                 min_quantity: null,
                 price_list: null,
+                price_list_id: null,
                 price_set_id: expect.any(String),
                 raw_amount: {
                   precision: 20,
