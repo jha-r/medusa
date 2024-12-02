@@ -191,6 +191,17 @@ medusaIntegrationTestRunner({
                   amount: 1100,
                 },
                 {
+                  region_id: region.id,
+                  amount: 0,
+                  rules: [
+                    {
+                      operator: "gt",
+                      attribute: "total",
+                      value: 2000,
+                    },
+                  ],
+                },
+                {
                   region_id: regionTwo.id,
                   amount: 500,
                 },
@@ -265,6 +276,83 @@ medusaIntegrationTestRunner({
               is_tax_inclusive: true,
             })
           )
+        })
+
+        it("should return prices based on cart total", async () => {
+          cart = (
+            await api.post(
+              `/store/carts`,
+              {
+                region_id: region.id,
+                sales_channel_id: salesChannel.id,
+                currency_code: "usd",
+                email: "test@admin.com",
+                items: [
+                  {
+                    variant_id: product.variants[0].id,
+                    // Adding a quantity of 100 to emulate total being greater than 2000
+                    quantity: 100,
+                  },
+                ],
+              },
+              storeHeaders
+            )
+          ).data.cart
+
+          const resp = await api.get(
+            `/store/shipping-options?cart_id=${cart.id}`,
+            storeHeaders
+          )
+
+          const shippingOptions = resp.data.shipping_options
+
+          expect(shippingOptions).toHaveLength(1)
+          expect(shippingOptions[0]).toEqual(
+            expect.objectContaining({
+              id: shippingOption.id,
+              name: "Test shipping option",
+              // Free shipping due to cart total being greater than 2000
+              amount: 0,
+              price_type: "flat",
+            })
+          )
+        })
+
+        it("should throw when required fields of a cart are not present", async () => {
+          cart = (
+            await api.post(
+              `/store/carts`,
+              {
+                region_id: region.id,
+                currency_code: "usd",
+                sales_channel_id: null,
+                email: "test@admin.com",
+                items: [],
+              },
+              storeHeaders
+            )
+          ).data.cart
+
+          const { response } = await api
+            .get(`/store/shipping-options?cart_id=${cart.id}`, storeHeaders)
+            .catch((e) => e)
+
+          expect(response.data).toEqual({
+            type: "invalid_data",
+            message:
+              "Field(s) are required to have value to continue - sales_channel_id",
+          })
+        })
+
+        it("should throw error when cart_id is not passed as a parameter", async () => {
+          const { response } = await api
+            .get(`/store/shipping-options`, storeHeaders)
+            .catch((e) => e)
+
+          expect(response.data).toEqual({
+            type: "invalid_data",
+            message: "Invalid request: Field 'cart_id' is required",
+          })
         })
       })
     })

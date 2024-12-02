@@ -292,7 +292,7 @@ describe("manyToMany - manyToMany", () => {
 
     expect(error).toBeDefined()
     expect(error?.message).toEqual(
-      'Invalid relationship reference for "user.squads". Make sure to set the mappedBy property on one side or the other or both.'
+      'Invalid relationship reference for "User.squads". Make sure to set the mappedBy property on one side or the other or both.'
     )
   })
 

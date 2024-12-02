@@ -1,11 +1,13 @@
 import { z } from "zod"
-import { createFindParams } from "../../utils/validators"
 import { applyAndAndOrOperators } from "../../utils/common-validators"
+import { createFindParams } from "../../utils/validators"
 
-export const StoreGetShippingOptionsFields = z.object({
-  cart_id: z.string(),
-  is_return: z.boolean().optional(),
-})
+export const StoreGetShippingOptionsFields = z
+  .object({
+    cart_id: z.string(),
+    is_return: z.boolean().optional(),
+  })
+  .strict()
 
 export type StoreGetShippingOptionsType = z.infer<
   typeof StoreGetShippingOptions
