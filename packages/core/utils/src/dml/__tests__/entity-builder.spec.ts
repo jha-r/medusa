@@ -6890,4 +6890,104 @@ describe("Entity builder", () => {
       )
     })
   })
+
+  describe("Entity builder | checks", () => {
+    test("should define checks for an entity", () => {
+      const group = model
+        .define("group", {
+          id: model.number(),
+          name: model.text(),
+        })
+        .checks([
+          (columns) => {
+            expectTypeOf(columns).toEqualTypeOf<{
+              id: string
+              name: string
+              created_at: string
+              updated_at: string
+              deleted_at: string
+            }>()
+            return `${columns.id} > 1`
+          },
+        ])
+
+      const Group = toMikroORMEntity(group)
+      const metaData = MetadataStorage.getMetadataFromDecorator(Group)
+
+      expect(metaData.checks).toHaveLength(1)
+      expect(metaData.checks[0].expression.toString()).toMatchInlineSnapshot(`
+        "(columns)=>{
+                            (0, _expecttype.expectTypeOf)(columns).toEqualTypeOf();
+                            return \`\${columns.id} > 1\`;
+                        }"
+      `)
+    })
+
+    test("should define checks as an object", () => {
+      const group = model
+        .define("group", {
+          id: model.number(),
+          name: model.text(),
+        })
+        .checks([
+          {
+            name: "my_custom_check",
+            expression: (columns) => {
+              expectTypeOf(columns).toEqualTypeOf<{
+                id: string
+                name: string
+                created_at: string
+                updated_at: string
+                deleted_at: string
+              }>()
+              return `${columns.id} > 1`
+            },
+          },
+        ])
+
+      const Group = toMikroORMEntity(group)
+      const metaData = MetadataStorage.getMetadataFromDecorator(Group)
+
+      expect(metaData.checks).toHaveLength(1)
+      expect(metaData.checks[0].name).toEqual("my_custom_check")
+      expect(metaData.checks[0].expression.toString()).toMatchInlineSnapshot(`
+        "(columns)=>{
+                                (0, _expecttype.expectTypeOf)(columns).toEqualTypeOf();
+                                return \`\${columns.id} > 1\`;
+                            }"
+      `)
+    })
+
+    test("should infer foreign keys inside the checks callback", () => {
+      const group = model
+        .define("group", {
+          id: model.number(),
+          name: model.text(),
+          parent_group: model.belongsTo(() => group, {
+            mappedBy: "groups",
+          }),
+          groups: model.hasMany(() => group, {
+            mappedBy: "parent_group",
+          }),
+        })
+        .checks([
+          (columns) => {
+            expectTypeOf(columns).toEqualTypeOf<{
+              id: string
+              name: string
+              parent_group_id: string
+              created_at: string
+              updated_at: string
+              deleted_at: string
+            }>()
+            return `${columns.id} > 1`
+          },
+        ])
+
+      const Group = toMikroORMEntity(group)
+      const metaData = MetadataStorage.getMetadataFromDecorator(Group)
+
+      expect(metaData.checks).toHaveLength(1)
+    })
+  })
 })

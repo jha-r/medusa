@@ -1,12 +1,13 @@
 import {
-  DMLSchema,
-  EntityCascades,
-  EntityIndex,
-  ExtractEntityRelations,
   IDmlEntity,
-  IDmlEntityConfig,
-  InferDmlEntityNameFromConfig,
+  DMLSchema,
+  EntityIndex,
+  CheckConstraint,
+  EntityCascades,
   QueryCondition,
+  IDmlEntityConfig,
+  ExtractEntityRelations,
+  InferDmlEntityNameFromConfig,
 } from "@medusajs/types"
 import { isObject, isString, toCamelCase, upperCaseFirst } from "../common"
 import { transformIndexWhere } from "./helpers/entity-builder/build-indexes"
@@ -72,6 +73,7 @@ export class DmlEntity<
   readonly #tableName: string
   #cascades: EntityCascades<string[]> = {}
   #indexes: EntityIndex<Schema>[] = []
+  #checks: CheckConstraint<Schema>[] = []
 
   constructor(nameOrConfig: TConfig, schema: Schema) {
     const { name, tableName } = extractNameAndTableName(nameOrConfig)
@@ -100,6 +102,7 @@ export class DmlEntity<
     schema: DMLSchema
     cascades: EntityCascades<string[]>
     indexes: EntityIndex<Schema>[]
+    checks: CheckConstraint<Schema>[]
   } {
     return {
       name: this.name,
@@ -107,6 +110,7 @@ export class DmlEntity<
       schema: this.schema,
       cascades: this.#cascades,
       indexes: this.#indexes,
+      checks: this.#checks,
     }
   }
 
@@ -236,6 +240,13 @@ export class DmlEntity<
     }
 
     this.#indexes = indexes as EntityIndex<Schema>[]
+    return this
+  }
+
+  /**
+   */
+  checks(checks: CheckConstraint<Schema>[]) {
+    this.#checks = checks
     return this
   }
 }
