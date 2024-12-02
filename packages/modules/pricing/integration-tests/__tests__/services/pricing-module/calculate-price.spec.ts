@@ -1870,7 +1870,7 @@ moduleIntegrationTestRunner<IPricingModuleService>({
                 currency_code: "usd",
                 rules: {
                   region_id: "de",
-                  cart_total: withOperator("between", 300, 400),
+                  total: withOperator("between", 300, 400),
                 },
               },
               {
@@ -1878,7 +1878,7 @@ moduleIntegrationTestRunner<IPricingModuleService>({
                 currency_code: "usd",
                 rules: {
                   region_id: "de",
-                  cart_total: withOperator("betweenEquals", 400, 500),
+                  total: withOperator("betweenEquals", 400, 500),
                 },
               },
               {
@@ -1886,7 +1886,7 @@ moduleIntegrationTestRunner<IPricingModuleService>({
                 currency_code: "usd",
                 rules: {
                   region_id: "de",
-                  cart_total: withOperator("excludingMin", 500, 600),
+                  total: withOperator("excludingMin", 500, 600),
                 },
               },
               {
@@ -1894,7 +1894,7 @@ moduleIntegrationTestRunner<IPricingModuleService>({
                 currency_code: "usd",
                 rules: {
                   region_id: "de",
-                  cart_total: withOperator("excludingMax", 600, 700),
+                  total: withOperator("excludingMax", 600, 700),
                 },
               },
             ],
@@ -1906,7 +1906,7 @@ moduleIntegrationTestRunner<IPricingModuleService>({
               context: {
                 currency_code: "usd",
                 region_id: "de",
-                cart_total: 350,
+                total: 350,
               },
             }
           )
@@ -1951,7 +1951,7 @@ moduleIntegrationTestRunner<IPricingModuleService>({
               context: {
                 currency_code: "usd",
                 region_id: "de",
-                cart_total: 300,
+                total: 300,
               },
             }
           )
@@ -1964,7 +1964,7 @@ moduleIntegrationTestRunner<IPricingModuleService>({
               context: {
                 currency_code: "usd",
                 region_id: "de",
-                cart_total: 400,
+                total: 400,
               },
             }
           )
@@ -1979,7 +1979,7 @@ moduleIntegrationTestRunner<IPricingModuleService>({
               context: {
                 currency_code: "usd",
                 region_id: "de",
-                cart_total: 500,
+                total: 500,
               },
             }
           )
@@ -1994,7 +1994,7 @@ moduleIntegrationTestRunner<IPricingModuleService>({
               context: {
                 currency_code: "usd",
                 region_id: "de",
-                cart_total: 501,
+                total: 501,
               },
             }
           )
@@ -2009,7 +2009,7 @@ moduleIntegrationTestRunner<IPricingModuleService>({
               context: {
                 currency_code: "usd",
                 region_id: "de",
-                cart_total: 601,
+                total: 601,
               },
             }
           )
@@ -2024,7 +2024,7 @@ moduleIntegrationTestRunner<IPricingModuleService>({
               context: {
                 currency_code: "usd",
                 region_id: "de",
-                cart_total: 900,
+                total: 900,
               },
             }
           )

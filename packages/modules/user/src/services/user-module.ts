@@ -1,6 +1,7 @@
 import {
   Context,
   DAL,
+  InferEntityType,
   InternalModuleDeclaration,
   ModulesSdkTypes,
   UserTypes,
@@ -9,6 +10,7 @@ import {
   arrayDifference,
   CommonEvents,
   EmitEvents,
+  generateEntityId,
   InjectManager,
   InjectTransactionManager,
   MedusaContext,
@@ -41,8 +43,12 @@ export default class UserModuleService
 {
   protected baseRepository_: DAL.RepositoryService
 
-  protected readonly userService_: ModulesSdkTypes.IMedusaInternalService<User>
-  protected readonly inviteService_: ModulesSdkTypes.IMedusaInternalService<Invite>
+  protected readonly userService_: ModulesSdkTypes.IMedusaInternalService<
+    InferEntityType<typeof User>
+  >
+  protected readonly inviteService_: ModulesSdkTypes.IMedusaInternalService<
+    InferEntityType<typeof Invite>
+  >
   protected readonly config: { jwtSecret: string; expiresIn: number }
 
   constructor(
@@ -151,9 +157,7 @@ export default class UserModuleService
     const updates = invites.map((invite) => {
       return {
         id: invite.id,
-        expires_at: new Date().setMilliseconds(
-          new Date().getMilliseconds() + this.config.expiresIn * 1000
-        ),
+        expires_at: new Date(Date.now() + this.config.expiresIn * 1000),
         token: this.generateToken({ id: invite.id, email: invite.email }),
       }
     })
@@ -296,7 +300,7 @@ export default class UserModuleService
   private async createInvites_(
     data: UserTypes.CreateInviteDTO[],
     @MedusaContext() sharedContext: Context = {}
-  ): Promise<Invite[]> {
+  ): Promise<InferEntityType<typeof Invite>[]> {
     const alreadyExistingUsers = await this.listUsers({
       email: data.map((d) => d.email),
     })
@@ -311,26 +315,16 @@ export default class UserModuleService
     }
 
     const toCreate = data.map((invite) => {
+      const id = generateEntityId((invite as { id?: string }).id, "invite")
       return {
         ...invite,
-        expires_at: new Date(),
-        token: "placeholder",
+        id,
+        expires_at: new Date(Date.now() + this.config.expiresIn * 1000),
+        token: this.generateToken({ id, email: invite.email }),
       }
     })
 
-    const created = await this.inviteService_.create(toCreate, sharedContext)
-
-    const updates = created.map((invite) => {
-      return {
-        id: invite.id,
-        expires_at: new Date().setMilliseconds(
-          new Date().getMilliseconds() + this.config.expiresIn * 1000
-        ),
-        token: this.generateToken({ id: invite.id, email: invite.email }),
-      }
-    })
-
-    return await this.inviteService_.update(updates, sharedContext)
+    return await this.inviteService_.create(toCreate, sharedContext)
   }
 
   // @ts-ignore
