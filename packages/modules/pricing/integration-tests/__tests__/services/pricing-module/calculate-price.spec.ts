@@ -40,7 +40,7 @@ const createPriceLists = async (
   rules: object = defaultRules,
   prices = defaultPriceListPrices
 ) => {
-  return service.createPriceLists([
+  return await service.createPriceLists([
     {
       title: "Test Price List",
       description: "test description",

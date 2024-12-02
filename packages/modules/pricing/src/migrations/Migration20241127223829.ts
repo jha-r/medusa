@@ -1,6 +1,6 @@
 import { Migration } from "@mikro-orm/migrations"
 
-export class Migration20241129094116 extends Migration {
+export class Migration20241127223829 extends Migration {
   async up(): Promise<void> {
     this.addSql(
       'drop index if exists "IDX_price_rule_price_id_attribute_unique";'
