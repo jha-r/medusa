@@ -106,8 +106,6 @@ moduleIntegrationTestRunner<IProductModuleService>({
               product_id: productOne.id,
               product: {
                 id: productOne.id,
-                type_id: null,
-                collection_id: null,
               },
             },
           ])
@@ -183,8 +181,6 @@ moduleIntegrationTestRunner<IProductModuleService>({
               product_id: productOne.id,
               product: {
                 id: productOne.id,
-                type_id: null,
-                collection_id: null,
               },
             },
           ])
@@ -215,8 +211,6 @@ moduleIntegrationTestRunner<IProductModuleService>({
                 id: "product-1",
                 handle: "product-1",
                 title: "product 1",
-                type_id: null,
-                collection_id: null,
               },
               product_id: "product-1",
             })

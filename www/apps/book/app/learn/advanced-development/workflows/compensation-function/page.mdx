@@ -196,3 +196,81 @@ const step1 = createStep(
 In this example, you use the `container` property in the second object parameter of the compensation function to resolve the logger.
 
 You then use the logger to log a message.
+
+---
+
+## Handle Errors in Loops
+
+<Note>
+
+This feature is only available after [Medusa v2.0.5](https://github.com/medusajs/medusa/releases/tag/v2.0.5).
+
+</Note>
+
+Consider you have a module that integrates a third-party ERP system, and you're creating a workflow that deletes items in that ERP. You may have the following step:
+
+```ts
+// other imports...
+import { promiseAll } from "@medusajs/framework/utils"
+
+type StepInput = {
+  ids: string[]
+}
+
+const step1 = createStep(
+  "step-1",
+  async ({ ids }: StepInput, { container }) => {
+    const erpModuleService = container.resolve(
+      ERP_MODULE
+    )
+    const prevData: unknown[] = []
+
+    await promiseAll(
+      ids.map(async (id) => {
+        const data = await erpModuleService.retrieve(id)
+
+        await erpModuleService.delete(id)
+
+        prevData.push(id)
+      })
+    )
+
+    return new StepResponse(ids, prevData)
+  },
+)
+```
+
+In the step, you loop over the IDs to retrieve the item's data, store them in a `prevData` variable, then delete them using the ERP Module's service. You then pass the `prevData` variable to the compensation function.
+
+However, if an error occurs in the loop, the `prevData` variable won't be passed to the compensation function as the execution never reached the return statement.
+
+To handle errors in the loop so that the compensation function receives the last version of `prevData` before the error occurred, you wrap the loop in a try-catch block. Then, in the catch block, you invoke and return the `StepResponse.permanentFailure` function:
+
+export const highlights = [
+  ["1", "try", "Wrap in a try-catch block."],
+  ["12", "permanentFailure", "Fail the step and the workflow."],
+  ["14", "prevData", "Data to pass to the compensation function."]
+]
+
+```ts highlights={highlights}
+try {
+  await promiseAll(
+    ids.map(async (id) => {
+      const data = await erpModuleService.retrieve(id)
+
+      await erpModuleService.delete(id)
+
+      prevData.push(id)
+    })
+  )
+} catch (e) {
+  return StepResponse.permanentFailure(
+    `An error occurred: ${e}`,
+    prevData
+  )
+}
+```
+
+The `StepResponse.permanentFailure` fails the step and its workflow, triggering current and previous steps' compensation functions. The `permanentFailure` function accepts as a first parameter the error message, which is saved in the workflow's error details, and as a second parameter the data to pass to the compensation function.
+
+So, if an error occurs during the loop, the compensation function will still receive the `prevData` variable to undo the changes made before the step failed.

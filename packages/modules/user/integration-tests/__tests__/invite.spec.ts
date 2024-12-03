@@ -1,27 +1,23 @@
-import { IUserModuleService } from "@medusajs/framework/types/dist/user"
+import { IUserModuleService } from "@medusajs/framework/types"
 import { Modules, UserEvents } from "@medusajs/framework/utils"
 import {
   MockEventBusService,
   moduleIntegrationTestRunner,
 } from "@medusajs/test-utils"
+import jwt, { JwtPayload } from "jsonwebtoken"
 
 jest.setTimeout(30000)
-
-const today = new Date()
-const expireDate = new Date(today.setDate(today.getDate() + 10))
 
 const defaultInviteData = [
   {
     id: "1",
     email: "user_1@test.com",
     token: "test",
-    expires_at: expireDate,
   },
   {
     id: "2",
     email: "user_2@test.com",
     token: "test",
-    expires_at: expireDate,
   },
 ]
 
@@ -110,6 +106,11 @@ moduleIntegrationTestRunner<IUserModuleService>({
             expect.objectContaining({
               id,
             })
+          )
+
+          const tokenContent = jwt.decode(invite.token) as JwtPayload
+          expect(tokenContent.exp).toBeLessThanOrEqual(
+            Date.now() / 1000 + 60 * 60 * 24
           )
         })
 
