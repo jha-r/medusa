@@ -790,6 +790,11 @@
         "quantityOutOfRange": "Minimum quantity is 1 and maximum quantity is {{max}}"
       }
     },
+    "adjustInventory": {
+      "errors": {
+        "stockedQuantity": "Stocked quantity cannot be updated to less than the reserved quantity of {{quantity}}."
+      }
+    },
     "toast": {
       "updateLocations": "Locations updated successfully.",
       "updateLevel": "Inventory level updated successfully.",
