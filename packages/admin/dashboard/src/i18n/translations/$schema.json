@@ -3267,6 +3267,27 @@
           ],
           "additionalProperties": false
         },
+        "adjustInventory": {
+          "type": "object",
+          "properties": {
+            "errors": {
+              "type": "object",
+              "properties": {
+                "stockedQuantity": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "stockedQuantity"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "errors"
+          ],
+          "additionalProperties": false
+        },
         "toast": {
           "type": "object",
           "properties": {
@@ -3300,6 +3321,7 @@
         "editItemDetails",
         "create",
         "reservation",
+        "adjustInventory",
         "toast"
       ],
       "additionalProperties": false
