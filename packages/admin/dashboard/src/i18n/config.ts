@@ -2,8 +2,6 @@ import { InitOptions } from "i18next"
 
 import translations from "./translations"
 
-console.log(Object.keys(translations))
-
 export const defaultI18nOptions: InitOptions = {
   debug: process.env.NODE_ENV === "development",
   detection: {
