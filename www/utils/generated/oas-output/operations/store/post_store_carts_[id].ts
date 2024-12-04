@@ -23,6 +23,19 @@
  *         fields. without prefix it will replace the entire default fields.
  *       externalDocs:
  *         url: "#select-fields-and-relations"
+ * requestBody:
+ *   content:
+ *     application/json:
+ *       schema:
+ *         allOf:
+ *           - $ref: "#/components/schemas/UpdateCartData"
+ *           - type: object
+ *             description: The properties to update in the cart item.
+ *             properties:
+ *               additional_data:
+ *                 type: object
+ *                 description: Pass additional custom data to the API route. This data is passed to the underlying workflow under the `additional_data` parameter.
+ *         description: The properties to update in the cart item.
  * x-codeSamples:
  *   - lang: Shell
  *     label: cURL

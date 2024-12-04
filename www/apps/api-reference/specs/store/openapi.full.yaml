@@ -691,6 +691,19 @@ paths:
             description: Comma-separated fields that should be included in the returned data. if a field is prefixed with `+` it will be added to the default fields, using `-` will remove it from the default fields. without prefix it will replace the entire default fields.
             externalDocs:
               url: '#select-fields-and-relations'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/UpdateCartData'
+                - type: object
+                  description: The properties to update in the cart item.
+                  properties:
+                    additional_data:
+                      type: object
+                      description: Pass additional custom data to the API route. This data is passed to the underlying workflow under the `additional_data` parameter.
+              description: The properties to update in the cart item.
       x-codeSamples:
         - lang: Shell
           label: cURL
@@ -912,6 +925,11 @@ paths:
             description: Comma-separated fields that should be included in the returned data. if a field is prefixed with `+` it will be added to the default fields, using `-` will remove it from the default fields. without prefix it will replace the entire default fields.
             externalDocs:
               url: '#select-fields-and-relations'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoreAddCartLineItem'
       x-codeSamples:
         - lang: Shell
           label: cURL
@@ -979,6 +997,11 @@ paths:
             description: Comma-separated fields that should be included in the returned data. if a field is prefixed with `+` it will be added to the default fields, using `-` will remove it from the default fields. without prefix it will replace the entire default fields.
             externalDocs:
               url: '#select-fields-and-relations'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoreUpdateCartLineItem'
       x-codeSamples:
         - lang: Shell
           label: cURL
@@ -1123,6 +1146,22 @@ paths:
             description: Comma-separated fields that should be included in the returned data. if a field is prefixed with `+` it will be added to the default fields, using `-` will remove it from the default fields. without prefix it will replace the entire default fields.
             externalDocs:
               url: '#select-fields-and-relations'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: The promotion's details.
+              required:
+                - promo_codes
+              properties:
+                promo_codes:
+                  type: array
+                  description: Promotion codes to add to the cart.
+                  items:
+                    type: string
+                    title: promo_codes
+                    description: A promotion code.
       x-codeSamples:
         - lang: Shell
           label: cURL
@@ -1240,6 +1279,25 @@ paths:
             description: Comma-separated fields that should be included in the returned data. if a field is prefixed with `+` it will be added to the default fields, using `-` will remove it from the default fields. without prefix it will replace the entire default fields.
             externalDocs:
               url: '#select-fields-and-relations'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: The shipping method's details.
+              required:
+                - option_id
+              properties:
+                option_id:
+                  type: string
+                  title: option_id
+                  description: The ID of the shipping option this method is created from.
+                data:
+                  type: object
+                  description: Any additional data relevant for the third-party fulfillment provider to process the shipment.
+                  externalDocs:
+                    url: https://docs.medusajs.com/v2/resources/storefront-development/checkout/shipping#data-request-body-parameter
+                    description: Learn more about the data parameter.
       x-codeSamples:
         - lang: Shell
           label: cURL
@@ -2044,6 +2102,48 @@ paths:
             type: string
             title: order
             description: The field to sort the data by. By default, the sort order is ascending. To change the order to descending, prefix the field name with `-`.
+        - name: q
+          in: query
+          description: Search term to filter the currency's searchable properties.
+          required: false
+          schema:
+            type: string
+            title: q
+            description: Search term to filter the currency's searchable properties.
+        - name: code
+          in: query
+          required: false
+          schema:
+            oneOf:
+              - type: string
+                title: code
+                description: Filter by a currency code.
+              - type: array
+                description: Filter by currency codes.
+                items:
+                  type: string
+                  title: code
+                  description: A currency code.
+        - name: $and
+          in: query
+          description: Join query parameters with an AND condition. Each object's content is the same type as the expected query parameters.
+          required: false
+          schema:
+            type: array
+            description: Join query parameters with an AND condition. Each object's content is the same type as the expected query parameters.
+            items:
+              type: object
+            title: $and
+        - name: $or
+          in: query
+          description: Join query parameters with an OR condition. Each object's content is the same type as the expected query parameters.
+          required: false
+          schema:
+            type: array
+            description: Join query parameters with an OR condition. Each object's content is the same type as the expected query parameters.
+            items:
+              type: object
+            title: $or
       x-codeSamples:
         - lang: Shell
           label: cURL
@@ -5155,6 +5255,76 @@ paths:
             type: string
             title: order
             description: The field to sort the data by. By default, the sort order is ascending. To change the order to descending, prefix the field name with `-`.
+        - name: q
+          in: query
+          description: Search term to filter the region's searchable properties.
+          required: false
+          schema:
+            type: string
+            title: q
+            description: Search term to filter the region's searchable properties.
+        - name: id
+          in: query
+          required: false
+          schema:
+            oneOf:
+              - type: string
+                title: id
+                description: Filter by a region's ID.
+              - type: array
+                description: Filter by region IDs.
+                items:
+                  type: string
+                  title: id
+                  description: A region's ID.
+        - name: name
+          in: query
+          required: false
+          schema:
+            oneOf:
+              - type: string
+                title: name
+                description: Filter by a region name.
+              - type: array
+                description: Filter by region names.
+                items:
+                  type: string
+                  title: name
+                  description: A region's name.
+        - name: currency_code
+          in: query
+          required: false
+          schema:
+            oneOf:
+              - type: string
+                title: currency_code
+                description: Filter by a currency code to retrieve regions that use that code.
+              - type: array
+                description: Filter by currency codes to retrieve regions that use one of these codes.
+                items:
+                  type: string
+                  title: currency_code
+                  description: A currency code.
+        - name: $and
+          in: query
+          description: Join query parameters with an AND condition. Each object's content is the same type as the expected query parameters.
+          required: false
+          schema:
+            type: array
+            description: Join query parameters with an AND condition. Each object's content is the same type as the expected query parameters.
+            items:
+              type: object
+            title: $and
+        - name: $or
+          in: query
+          description: Join query parameters with an OR condition. Each object's content is the same type as the expected query parameters.
+          required: false
+          schema:
+            type: array
+            description: Join query parameters with an OR condition. Each object's content is the same type as the expected query parameters.
+            items:
+              type: object
+            title: $or
       x-codeSamples:
         - lang: Shell
           label: cURL
@@ -5271,6 +5441,11 @@ paths:
       summary: Create Return
       description: Create a return for an order's items. The admin receives the return and process it from their side.
       x-authenticated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoreCreateReturn'
       x-codeSamples:
         - lang: Shell
           label: cURL
@@ -5481,6 +5656,44 @@ paths:
         description: 'Storefront guide: How to implement shipping during checkout.'
       x-authenticated: false
       parameters:
+        - name: fields
+          in: query
+          description: Comma-separated fields that should be included in the returned data. if a field is prefixed with `+` it will be added to the default fields, using `-` will remove it from the default fields. without prefix it will replace the entire default fields.
+          required: false
+          schema:
+            type: string
+            title: fields
+            description: Comma-separated fields that should be included in the returned data. if a field is prefixed with `+` it will be added to the default fields, using `-` will remove it from the default fields. without prefix it will replace the entire default fields.
+            externalDocs:
+              url: '#select-fields-and-relations'
+        - name: offset
+          in: query
+          description: The number of items to skip when retrieving a list.
+          required: false
+          schema:
+            type: number
+            title: offset
+            description: The number of items to skip when retrieving a list.
+            externalDocs:
+              url: '#pagination'
+        - name: limit
+          in: query
+          description: Limit the number of items returned in the list.
+          required: false
+          schema:
+            type: number
+            title: limit
+            description: Limit the number of items returned in the list.
+            externalDocs:
+              url: '#pagination'
+        - name: order
+          in: query
+          description: The field to sort the data by. By default, the sort order is ascending. To change the order to descending, prefix the field name with `-`.
+          required: false
+          schema:
+            type: string
+            title: order
+            description: The field to sort the data by. By default, the sort order is ascending. To change the order to descending, prefix the field name with `-`.
         - name: cart_id
           in: query
           description: The ID of the cart to retrieve its shipping options.
@@ -15703,7 +15916,7 @@ components:
           description: The customer group's metadata, can hold custom key-value pairs.
     AdminUpdateOrder:
       type: object
-      description: SUMMARY
+      description: The details to update in the order.
       x-schemaName: AdminUpdateOrder
       properties:
         email:
@@ -15718,46 +15931,47 @@ components:
             first_name:
               type: string
               title: first_name
-              description: The shipping address's first name.
+              description: The address's first name.
             last_name:
               type: string
               title: last_name
-              description: The shipping address's last name.
+              description: The address's last name.
             phone:
               type: string
               title: phone
-              description: The shipping address's phone.
+              description: The address's phone.
             company:
               type: string
               title: company
-              description: The shipping address's company.
+              description: The address's company.
             address_1:
               type: string
               title: address_1
-              description: The shipping address's address 1.
+              description: The address's first line.
             address_2:
               type: string
               title: address_2
-              description: The shipping address's address 2.
+              description: The address's second line.
             city:
               type: string
               title: city
-              description: The shipping address's city.
+              description: The address's city.
             country_code:
               type: string
               title: country_code
-              description: The shipping address's country code.
+              description: The address's country code.
+              example: us
             province:
               type: string
               title: province
-              description: The shipping address's province.
+              description: The address's province.
             postal_code:
               type: string
               title: postal_code
-              description: The shipping address's postal code.
+              description: The address's postal code.
             metadata:
               type: object
-              description: The shipping address's metadata.
+              description: The address's metadata, can hold custom key-value pairs.
         billing_address:
           type: object
           description: The order's billing address.
@@ -15765,46 +15979,47 @@ components:
             first_name:
               type: string
               title: first_name
-              description: The billing address's first name.
+              description: The address's first name.
             last_name:
               type: string
               title: last_name
-              description: The billing address's last name.
+              description: The address's last name.
             phone:
               type: string
               title: phone
-              description: The billing address's phone.
+              description: The address's phone.
             company:
               type: string
               title: company
-              description: The billing address's company.
+              description: The address's company.
             address_1:
               type: string
               title: address_1
-              description: The billing address's address 1.
+              description: The address's first line.
             address_2:
               type: string
               title: address_2
-              description: The billing address's address 2.
+              description: The address's second line.
             city:
               type: string
               title: city
-              description: The billing address's city.
+              description: The address's city.
             country_code:
               type: string
               title: country_code
-              description: The billing address's country code.
+              description: The address's country code.
+              example: us
             province:
               type: string
               title: province
-              description: The billing address's province.
+              description: The address's province.
             postal_code:
               type: string
               title: postal_code
-              description: The billing address's postal code.
+              description: The address's postal code.
             metadata:
               type: object
-              description: The billing address's metadata.
+              description: The address's metadata, can hold custom key-value pairs.
     AdminUpdatePriceList:
       type: object
       description: the details to update in a price list.
@@ -21305,19 +21520,8 @@ components:
           title: no_notification
           description: Whether to send the customer notifications when the exchange is updated.
         difference_due:
-          oneOf:
-            - type: string
-              title: difference_due
-              description: The exchange's difference due.
-            - type: number
-              title: difference_due
-              description: The exchange's difference due.
-            - type: string
-              title: difference_due
-              description: The exchange's difference due.
-            - type: number
-              title: difference_due
-              description: The exchange's difference due.
+          type: number
+          title: difference_due
           description: The amount to be exchanged or refunded. If the amount is negative, it must be refunded. If positive, additional payment is required from the customer.
         return:
           $ref: '#/components/schemas/Return'
@@ -22200,19 +22404,8 @@ components:
             - received
             - partially_received
         refund_amount:
-          oneOf:
-            - type: string
-              title: refund_amount
-              description: The return order's refund amount.
-            - type: number
-              title: refund_amount
-              description: The return order's refund amount.
-            - type: string
-              title: refund_amount
-              description: The return order's refund amount.
-            - type: number
-              title: refund_amount
-              description: The return order's refund amount.
+          type: number
+          title: refund_amount
           description: The amount refunded by this return.
         order_id:
           type: string
@@ -22321,6 +22514,25 @@ components:
           type: string
           title: token
           description: The order transfer's token issued when the transfer was requested.
+    StoreAddCartLineItem:
+      type: object
+      description: The details of the line item to add.
+      x-schemaName: StoreAddCartLineItem
+      required:
+        - variant_id
+        - quantity
+      properties:
+        variant_id:
+          type: string
+          title: variant_id
+          description: The ID of the product variant to add to the cart.
+        quantity:
+          type: number
+          title: quantity
+          description: The item's quantity.
+        metadata:
+          type: object
+          description: The item's metadata, can hold custom key-value pairs.
     StoreCart:
       type: object
       description: The cart's details.
@@ -23387,6 +23599,38 @@ components:
           type: string
           title: cart_id
           description: The ID of the cart this payment collection is for.
+    StoreCreateReturn:
+      type: object
+      description: The details of the return to create.
+      x-schemaName: StoreCreateReturn
+      required:
+        - order_id
+        - items
+        - return_shipping
+      properties:
+        order_id:
+          type: string
+          title: order_id
+          description: The ID of the order this return is created for.
+        items:
+          type: array
+          description: The return's items.
+          items:
+            $ref: '#/components/schemas/StoreCreateReturnItem'
+        return_shipping:
+          $ref: '#/components/schemas/StoreCreateReturnShipping'
+        note:
+          type: string
+          title: note
+          description: A note with more details about the return.
+        receive_now:
+          type: boolean
+          title: receive_now
+          description: Whether to mark the return as received.
+        location_id:
+          type: string
+          title: location_id
+          description: The ID of the location that items are returned to.
     StoreCreateReturnItem:
       type: object
       description: The details of the line item to create.
@@ -31007,6 +31251,20 @@ components:
           format: date-time
           title: deleted_at
           description: The date the type was deleted.
+    StoreUpdateCartLineItem:
+      type: object
+      description: The details to update in the line item.
+      x-schemaName: StoreUpdateCartLineItem
+      required:
+        - quantity
+      properties:
+        quantity:
+          type: number
+          title: quantity
+          description: The item's quantity.
+        metadata:
+          type: object
+          description: The item's metadata, can hold custom key-value pairs.
     StoreUpdateCustomer:
       type: object
       description: The details to update in the customer.
@@ -31090,6 +31348,52 @@ components:
         metadata:
           type: object
           description: The address's metadata, can hold custom key-value pairs.
+    UpdateCartData:
+      type: object
+      description: The details to update in a cart.
+      x-schemaName: UpdateCartData
+      properties:
+        region_id:
+          type: string
+          title: region_id
+          description: The ID of the associated region. This can affect the prices and currency code of the cart.
+        customer_id:
+          type: string
+          title: customer_id
+          description: The ID of the customer that the cart belongs to.
+        sales_channel_id:
+          type: string
+          title: sales_channel_id
+          description: The ID of the associated sales channel. Only products available in this channel can be added to the cart.
+        email:
+          type: string
+          title: email
+          description: The email of the customer that the cart belongs to.
+          format: email
+        currency_code:
+          type: string
+          title: currency_code
+          description: The cart's currency code.
+          example: usd
+        shipping_address_id:
+          type: string
+          title: shipping_address_id
+          description: The ID of the cart's shipping address.
+        billing_address_id:
+          type: string
+          title: billing_address_id
+          description: The ID of the cart's billing address.
+        billing_address:
+          oneOf:
+            - $ref: '#/components/schemas/CreateAddress'
+            - $ref: '#/components/schemas/UpdateAddress'
+        shipping_address:
+          oneOf:
+            - $ref: '#/components/schemas/CreateAddress'
+            - $ref: '#/components/schemas/UpdateAddress'
+        metadata:
+          type: object
+          description: The cart's metadata, ca hold custom key-value pairs.
     WorkflowExecutionContext:
       type: object
       description: The workflow execution's context.

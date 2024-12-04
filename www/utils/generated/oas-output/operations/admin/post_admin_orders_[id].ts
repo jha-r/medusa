@@ -1,8 +1,8 @@
 /**
  * @oas [post] /admin/orders/{id}
  * operationId: PostOrdersId
- * summary: Update a Order
- * description: Update a order's details.
+ * summary: Update Order
+ * description: Update an order's details.
  * x-authenticated: true
  * parameters:
  *   - name: id
@@ -15,8 +15,8 @@
  *     in: query
  *     description: |-
  *       Comma-separated fields that should be included in the returned data.
- *        * if a field is prefixed with `+` it will be added to the default fields, using `-` will remove it from the default fields.
- *        * without prefix it will replace the entire default fields.
+ *       if a field is prefixed with `+` it will be added to the default fields, using `-` will remove it from the default fields.
+ *       without prefix it will replace the entire default fields.
  *     required: false
  *     schema:
  *       type: string

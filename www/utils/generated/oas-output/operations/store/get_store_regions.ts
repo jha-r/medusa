@@ -48,6 +48,76 @@
  *       type: string
  *       title: order
  *       description: The field to sort the data by. By default, the sort order is ascending. To change the order to descending, prefix the field name with `-`.
+ *   - name: q
+ *     in: query
+ *     description: Search term to filter the region's searchable properties.
+ *     required: false
+ *     schema:
+ *       type: string
+ *       title: q
+ *       description: Search term to filter the region's searchable properties.
+ *   - name: id
+ *     in: query
+ *     required: false
+ *     schema:
+ *       oneOf:
+ *         - type: string
+ *           title: id
+ *           description: Filter by a region's ID.
+ *         - type: array
+ *           description: Filter by region IDs.
+ *           items:
+ *             type: string
+ *             title: id
+ *             description: A region's ID.
+ *   - name: name
+ *     in: query
+ *     required: false
+ *     schema:
+ *       oneOf:
+ *         - type: string
+ *           title: name
+ *           description: Filter by a region name.
+ *         - type: array
+ *           description: Filter by region names.
+ *           items:
+ *             type: string
+ *             title: name
+ *             description: A region's name.
+ *   - name: currency_code
+ *     in: query
+ *     required: false
+ *     schema:
+ *       oneOf:
+ *         - type: string
+ *           title: currency_code
+ *           description: Filter by a currency code to retrieve regions that use that code.
+ *         - type: array
+ *           description: Filter by currency codes to retrieve regions that use one of these codes.
+ *           items:
+ *             type: string
+ *             title: currency_code
+ *             description: A currency code.
+ *   - name: $and
+ *     in: query
+ *     description: Join query parameters with an AND condition. Each object's content is the same type as the expected query parameters.
+ *     required: false
+ *     schema:
+ *       type: array
+ *       description: Join query parameters with an AND condition. Each object's content is the same type as the expected query parameters.
+ *       items:
+ *         type: object
+ *       title: $and
+ *   - name: $or
+ *     in: query
+ *     description: Join query parameters with an OR condition. Each object's content is the same type as the expected query parameters.
+ *     required: false
+ *     schema:
+ *       type: array
+ *       description: Join query parameters with an OR condition. Each object's content is the same type as the expected query parameters.
+ *       items:
+ *         type: object
+ *       title: $or
  * x-codeSamples:
  *   - lang: Shell
  *     label: cURL
