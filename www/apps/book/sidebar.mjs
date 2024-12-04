@@ -108,7 +108,7 @@ export const sidebar = numberSidebarItems(
             },
             {
               type: "link",
-              title: "Create Brand API Route",
+              title: "Brand API Route",
               path: "/learn/customization/custom-features/api-route",
             },
           ],
