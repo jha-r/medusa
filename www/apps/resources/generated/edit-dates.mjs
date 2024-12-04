@@ -3245,7 +3245,7 @@ export const generatedEditDates = {
   "references/types/HttpTypes/interfaces/types.HttpTypes.AdminBatchProductVariantRequest/page.mdx": "2024-11-25T17:49:26.851Z",
   "references/types/WorkflowTypes/ProductWorkflow/interfaces/types.WorkflowTypes.ProductWorkflow.ExportProductsDTO/page.mdx": "2024-11-12T09:36:24.232Z",
   "app/contribution-guidelines/admin-translations/page.mdx": "2024-11-14T08:54:15.369Z",
-  "app/integrations/guides/sanity/page.mdx": "2024-11-27T10:10:12.100Z",
+  "app/integrations/guides/sanity/page.mdx": "2024-12-03T14:14:11.347Z",
   "references/api_key/types/api_key.FindConfigOrder/page.mdx": "2024-11-25T17:49:28.715Z",
   "references/auth/types/auth.FindConfigOrder/page.mdx": "2024-11-25T17:49:28.887Z",
   "references/cart/types/cart.FindConfigOrder/page.mdx": "2024-11-25T17:49:29.455Z",
