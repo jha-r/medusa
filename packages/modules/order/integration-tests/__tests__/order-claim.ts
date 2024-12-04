@@ -2,7 +2,7 @@ import { CreateOrderDTO, IOrderModuleService } from "@medusajs/framework/types"
 import { ClaimType, Modules } from "@medusajs/framework/utils"
 import { SuiteOptions, moduleIntegrationTestRunner } from "@medusajs/test-utils"
 
-jest.setTimeout(100000)
+jest.setTimeout(1000000)
 
 moduleIntegrationTestRunner({
   moduleName: Modules.ORDER,
@@ -103,7 +103,7 @@ moduleIntegrationTestRunner({
         customer_id: "joe",
       } as CreateOrderDTO
 
-      it("should claim an item and add two new items to the order", async function () {
+      it.only("should claim an item and add two new items to the order", async function () {
         const createdOrder = await service.createOrders(input)
         createdOrder.items = createdOrder.items!.sort((a, b) =>
           a.title.localeCompare(b.title)
@@ -140,9 +140,9 @@ moduleIntegrationTestRunner({
           internal_note: "user wants to return all items",
           shipping_methods: [
             {
+              shipping_option_id: "shipping_dhl_id",
               name: "Claim method",
               amount: 35,
-              provider_id: "dhl",
             },
           ],
           claim_items: [

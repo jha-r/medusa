@@ -2835,6 +2835,7 @@ describe("Entity builder", () => {
           name: "user",
           nullable: false,
           onDelete: "cascade",
+          cascade: ["persist", "soft-remove"],
           owner: true,
           reference: "1:1",
         },
@@ -3846,7 +3847,7 @@ describe("Entity builder", () => {
       const User = toMikroORMEntity(user)
       const Email = toMikroORMEntity(email)
 
-      expectTypeOf(new User()).toMatchTypeOf<{
+      expectTypeOf(new User()).toEqualTypeOf<{
         id: number
         username: string
         email: {
@@ -3855,9 +3856,20 @@ describe("Entity builder", () => {
           user: {
             id: number
             username: string
-          } | null
+            email: any
+            created_at: Date
+            updated_at: Date
+            deleted_at: Date | null
+          }
+          created_at: Date
+          updated_at: Date
+          deleted_at: Date | null
+          user_id: string | null
         }
-      }>()
+        created_at: Date
+        updated_at: Date
+        deleted_at: Date | null
+      }>({} as any)
 
       const userInstance = new User()
       expectTypeOf<(typeof userInstance)["email"]["user_id"]>().toEqualTypeOf<
@@ -3873,6 +3885,11 @@ describe("Entity builder", () => {
           email: {
             email: string
             isVerified: boolean
+            user: any
+            created_at: Date
+            updated_at: Date
+            deleted_at: Date | null
+            user_id: string | null
           }
         } | null
       }>()
@@ -4402,7 +4419,8 @@ describe("Entity builder", () => {
       })
     })
 
-    test("throw error when other side relationship is missing", () => {
+    // We now allow the other side to not exists, maybe remove that test?
+    test.skip("throw error when other side relationship is missing", () => {
       const email = model.define("email", {
         email: model.text(),
         isVerified: model.boolean(),

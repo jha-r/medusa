@@ -3,16 +3,11 @@ import {
   IDmlEntityConfig,
   RelationshipOptions,
 } from "@medusajs/types"
-import { DmlEntity } from "./entity"
-import {
-  createBigNumberProperties,
-  DMLSchemaWithBigNumber,
-} from "./helpers/entity-builder/create-big-number-properties"
-import {
-  createDefaultProperties,
-  DMLSchemaDefaults,
-} from "./helpers/entity-builder/create-default-properties"
+import { DmlEntity, DMLEntitySchemaBuilder } from "./entity"
+import { createBigNumberProperties } from "./helpers/entity-builder/create-big-number-properties"
+import { createDefaultProperties } from "./helpers/entity-builder/create-default-properties"
 import { ArrayProperty } from "./properties/array"
+import { AutoIncrementProperty } from "./properties/autoincrement"
 import { BigNumberProperty } from "./properties/big-number"
 import { BooleanProperty } from "./properties/boolean"
 import { DateTimeProperty } from "./properties/date-time"
@@ -120,20 +115,14 @@ export class EntityBuilder {
   define<Schema extends DMLSchema, const TConfig extends IDmlEntityConfig>(
     nameOrConfig: TConfig,
     schema: Schema
-  ): DmlEntity<
-    Schema & DMLSchemaWithBigNumber<Schema> & DMLSchemaDefaults,
-    TConfig
-  > {
+  ): DmlEntity<DMLEntitySchemaBuilder<Schema>, TConfig> {
     this.#disallowImplicitProperties(schema)
 
-    return new DmlEntity<Schema, TConfig>(nameOrConfig, {
+    return new DmlEntity(nameOrConfig, {
       ...schema,
       ...createBigNumberProperties(schema),
       ...createDefaultProperties(),
-    }) as unknown as DmlEntity<
-      Schema & DMLSchemaWithBigNumber<Schema> & DMLSchemaDefaults,
-      TConfig
-    >
+    } as any) as DmlEntity<DMLEntitySchemaBuilder<Schema>, TConfig>
   }
 
   /**
@@ -237,6 +226,26 @@ export class EntityBuilder {
    */
   bigNumber() {
     return new BigNumberProperty()
+  }
+
+  /**
+   * This method defines an autoincrement property.
+   *
+   * @example
+   * import { model } from "@medusajs/framework/utils"
+   *
+   * const MyCustom = model.define("my_custom", {
+   *   serial_id: model.autoincrement(),
+   *   // ...
+   * })
+   *
+   * export default MyCustom
+   *
+   * @customNamespace Property
+   */
+
+  autoincrement() {
+    return new AutoIncrementProperty()
   }
 
   /**

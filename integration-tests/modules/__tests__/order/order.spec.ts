@@ -356,6 +356,7 @@ medusaIntegrationTestRunner({
             metadata: null,
             created_at: expect.any(String),
             updated_at: expect.any(String),
+            deleted_at: null,
           },
           billing_address: {
             id: expect.any(String),
@@ -373,6 +374,7 @@ medusaIntegrationTestRunner({
             metadata: null,
             created_at: expect.any(String),
             updated_at: expect.any(String),
+            deleted_at: null,
           },
           shipping_methods: [
             expect.objectContaining({

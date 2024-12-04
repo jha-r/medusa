@@ -10,7 +10,13 @@ export type DMLSchema = Record<
   PropertyType<any> | RelationshipType<any>
 >
 
-export type IDmlEntityConfig = string | { name?: string; tableName: string }
+export type IDmlEntityConfig =
+  | string
+  | {
+      name?: string
+      tableName: string
+      disableSoftDeleteFilter?: boolean
+    }
 
 export type InferDmlEntityNameFromConfig<TConfig extends IDmlEntityConfig> =
   TConfig extends string
@@ -41,6 +47,7 @@ export type KnownDataTypes =
   | "enum"
   | "number"
   | "bigNumber"
+  | "serial"
   | "dateTime"
   | "array"
   | "json"

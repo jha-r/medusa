@@ -5,6 +5,14 @@ import {
   RelationshipTypes,
 } from "@medusajs/types"
 
+// type Cleanup<T, Exclusion extends string[] = []> = {
+//   [K in keyof T as K extends Exclusion[number]
+//     ? never
+//     : K]: T[K] extends RelationshipType<infer RelationResolver>
+//     ? RelationResolver extends () => infer Relation ? RelationshipCleanup<Relation, [K & string, ...Exclusion]>
+//     : T[K]
+// }
+
 export const IsRelationship = Symbol.for("isRelationship")
 
 /**
@@ -71,11 +79,13 @@ export abstract class BaseRelationship<T> implements RelationshipType<T> {
     return {
       name: relationshipName,
       nullable: false,
-      mappedBy: this.options.mappedBy,
       options: this.options,
       searchable: this.#searchable,
       entity: this.#referencedEntity,
       type: this.type,
+      ...("mappedBy" in this.options
+        ? { mappedBy: this.options.mappedBy }
+        : {}),
     }
   }
 }

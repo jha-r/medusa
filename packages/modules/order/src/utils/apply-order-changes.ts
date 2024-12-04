@@ -1,4 +1,7 @@
-import { OrderChangeActionDTO } from "@medusajs/framework/types"
+import {
+  InferEntityType,
+  OrderChangeActionDTO,
+} from "@medusajs/framework/types"
 import {
   ChangeActionType,
   MathBN,
@@ -22,8 +25,9 @@ export function applyChangesToOrder(
     addActionReferenceToObject?: boolean
   }
 ) {
-  const itemsToUpsert: OrderItem[] = []
-  const shippingMethodsToUpsert: OrderShippingMethod[] = []
+  const itemsToUpsert: InferEntityType<typeof OrderItem>[] = []
+  const shippingMethodsToUpsert: InferEntityType<typeof OrderShippingMethod>[] =
+    []
   const summariesToUpsert: any[] = []
   const orderToUpdate: any[] = []
 
@@ -86,7 +90,7 @@ export function applyChangesToOrder(
         return_dismissed_quantity: orderItem.return_dismissed_quantity ?? 0,
         written_off_quantity: orderItem.written_off_quantity ?? 0,
         metadata: orderItem.metadata,
-      } as OrderItem)
+      } as any)
     }
 
     const orderSummary = order.summary as any

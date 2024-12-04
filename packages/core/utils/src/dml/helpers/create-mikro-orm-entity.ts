@@ -6,15 +6,15 @@ import type {
   Infer,
   PropertyType,
 } from "@medusajs/types"
-import { Entity, Filter } from "@mikro-orm/core"
-
-import { DmlEntity } from "../entity"
-import { IdProperty } from "../properties/id"
-import { DuplicateIdPropertyError } from "../errors"
-import { applyChecks } from "./mikro-orm/apply-checks"
+import { BeforeCreate, Entity, Filter } from "@mikro-orm/core"
+import { camelToSnakeCase } from "../../common"
 import { mikroOrmSoftDeletableFilterOptions } from "../../dal"
-import { defineProperty } from "./entity-builder/define-property"
+import { DmlEntity } from "../entity"
+import { DuplicateIdPropertyError } from "../errors"
+import { IdProperty } from "../properties/id"
 import { applySearchable } from "./entity-builder/apply-searchable"
+import { applyChecks } from "./mikro-orm/apply-checks"
+import { defineProperty } from "./entity-builder/define-property"
 import { parseEntityName } from "./entity-builder/parse-entity-name"
 import { defineRelationship } from "./entity-builder/define-relationship"
 import { applyEntityIndexes, applyIndexes } from "./mikro-orm/apply-indexes"
@@ -48,8 +48,17 @@ function createMikrORMEntity() {
   function createEntity<T extends DmlEntity<any, any>>(entity: T): Infer<T> {
     class MikroORMEntity {}
 
-    const { schema, cascades, indexes: entityIndexes, checks } = entity.parse()
+    const {
+      schema,
+      cascades,
+      indexes: entityIndexes = [],
+      params,
+      hooks = {},
+      checks,
+    } = entity.parse()
+
     const { modelName, tableName } = parseEntityName(entity)
+
     if (ENTITIES[modelName]) {
       return ENTITIES[modelName] as Infer<T>
     }
@@ -100,11 +109,31 @@ function createMikrORMEntity() {
     applyChecks(MikroORMEntity, checks)
 
     /**
+     * @experimental
+     * TODO: Write RFC about this, for now it is unstable and should be moved
+     * to `applyHooks`
+     */
+    for (const [hookName, hook] of Object.entries(hooks)) {
+      if (hookName === "creating") {
+        const hookMethodName = "beforeCreate_" + camelToSnakeCase(modelName)
+        const hookWrapper = function (this: MikroORMEntity) {
+          return hook(this as any)
+        }
+
+        MikroORMEntity.prototype[hookMethodName] = hookWrapper
+        BeforeCreate()(MikroORMEntity.prototype, hookMethodName)
+      }
+    }
+
+    /**
      * Converting class to a MikroORM entity
      */
-    const RegisteredEntity = Entity({ tableName })(
-      Filter(mikroOrmSoftDeletableFilterOptions)(MikroORMEntity)
-    ) as Infer<T>
+
+    const RegisteredEntity = (params.disableSoftDeleteFilter
+      ? Entity({ tableName })(MikroORMEntity)
+      : Entity({ tableName })(
+          Filter(mikroOrmSoftDeletableFilterOptions)(MikroORMEntity)
+        )) as unknown as Infer<T>
 
     ENTITIES[modelName] = RegisteredEntity
     return RegisteredEntity

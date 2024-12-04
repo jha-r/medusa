@@ -15,13 +15,13 @@ import {
   Property,
   rel,
 } from "@mikro-orm/core"
-import { DmlEntity } from "../../entity"
-import { HasOne } from "../../relations/has-one"
-import { HasMany } from "../../relations/has-many"
-import { parseEntityName } from "./parse-entity-name"
 import { camelToSnakeCase, pluralize } from "../../../common"
-import { applyEntityIndexes } from "../mikro-orm/apply-indexes"
+import { DmlEntity } from "../../entity"
+import { HasMany } from "../../relations/has-many"
+import { HasOne } from "../../relations/has-one"
 import { ManyToMany as DmlManyToMany } from "../../relations/many-to-many"
+import { applyEntityIndexes } from "../mikro-orm/apply-indexes"
+import { parseEntityName } from "./parse-entity-name"
 
 type Context = {
   MANY_TO_MANY_TRACKED_RELATIONS: Record<string, boolean>
@@ -140,14 +140,49 @@ export function defineHasOneRelationship(
 ) {
   const shouldRemoveRelated = !!cascades.delete?.includes(relationship.name)
 
-  OneToOne({
-    entity: relatedModelName,
-    nullable: relationship.nullable,
-    mappedBy: relationship.mappedBy || camelToSnakeCase(MikroORMEntity.name),
-    cascade: shouldRemoveRelated
-      ? (["persist", "soft-remove"] as any)
-      : undefined,
-  })(MikroORMEntity.prototype, relationship.name)
+  let mappedBy: string | undefined
+
+  if ("mappedBy" in relationship) {
+    mappedBy = relationship.mappedBy
+  } else {
+    mappedBy = camelToSnakeCase(MikroORMEntity.name)
+  }
+
+  if (relationship.options.foreignKey) {
+    const foreignKeyName = camelToSnakeCase(`${relationship.name}Id`)
+
+    const props = {
+      entity: relatedModelName,
+      nullable: true,
+      ...(mappedBy ? { mappedBy } : {}),
+      ...(relationship.options.extra ?? {}),
+    } as any
+
+    if (shouldRemoveRelated) {
+      props.cascade = ["persist", "soft-remove"] as any
+    }
+
+    OneToOne(props)(MikroORMEntity.prototype, relationship.name)
+
+    Property({
+      type: "string",
+      columnType: "text",
+      nullable: !!relationship.nullable,
+      persist: true,
+    })(MikroORMEntity.prototype, foreignKeyName)
+  } else {
+    const props = {
+      entity: relatedModelName,
+      ...(mappedBy ? { mappedBy } : {}),
+      ...(relationship.options.extra ?? {}),
+    } as any
+
+    if (shouldRemoveRelated) {
+      props.cascade = ["persist", "soft-remove"] as any
+    }
+
+    OneToOne(props)(MikroORMEntity.prototype, relationship.name)
+  }
 }
 
 /**
@@ -208,11 +243,11 @@ export function defineBelongsToRelationship(
   /**
    * Ensure the mapped by is defined as relationship on the other side
    */
-  if (!otherSideRelation) {
-    throw new Error(
-      `Missing property "${mappedBy}" on "${relatedModelName}" entity. Make sure to define it as a relationship`
-    )
-  }
+  // if (!otherSideRelation) {
+  //   throw new Error(
+  //     `Missing property "${mappedBy}" on "${relatedModelName}" entity. Make sure to define it as a relationship`
+  //   )
+  // }
 
   function applyForeignKeyAssignationHooks(foreignKeyName: string) {
     const hookName = `assignRelationFromForeignKeyValue${foreignKeyName}`
@@ -233,7 +268,6 @@ export function defineBelongsToRelationship(
           relationMeta.class,
           this[foreignKeyName]
         )
-        this[relationship.name] ??= this[relationship.name]?.id
         return
       }
 
@@ -274,6 +308,7 @@ export function defineBelongsToRelationship(
    * Otherside is a has many. Hence we should defined a ManyToOne
    */
   if (
+    !otherSideRelation ||
     HasMany.isHasMany(otherSideRelation) ||
     DmlManyToMany.isManyToMany(otherSideRelation)
   ) {
@@ -320,14 +355,6 @@ export function defineBelongsToRelationship(
   if (HasOne.isHasOne(otherSideRelation)) {
     const foreignKeyName = camelToSnakeCase(`${relationship.name}Id`)
 
-    OneToOne({
-      entity: relatedModelName,
-      nullable: relationship.nullable,
-      mappedBy: mappedBy,
-      owner: true,
-      onDelete: shouldCascade ? "cascade" : undefined,
-    })(MikroORMEntity.prototype, relationship.name)
-
     Object.defineProperty(MikroORMEntity.prototype, foreignKeyName, {
       value: null,
       configurable: true,
@@ -336,11 +363,22 @@ export function defineBelongsToRelationship(
     })
 
     Property({
-      type: "string",
       columnType: "text",
+      type: "string",
       nullable: relationship.nullable,
       persist: false,
     })(MikroORMEntity.prototype, foreignKeyName)
+
+    const oneToOneOptions: Parameters<typeof OneToOne>[0] = {
+      entity: relatedModelName,
+      nullable: relationship.nullable,
+      mappedBy: mappedBy,
+      fieldName: foreignKeyName,
+      owner: true,
+      onDelete: shouldCascade ? "cascade" : undefined,
+    }
+
+    OneToOne(oneToOneOptions)(MikroORMEntity.prototype, relationship.name)
 
     const { tableName } = parseEntityName(entity)
     applyEntityIndexes(MikroORMEntity, tableName, [

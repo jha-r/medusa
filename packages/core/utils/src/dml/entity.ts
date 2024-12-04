@@ -8,22 +8,38 @@ import {
   IDmlEntityConfig,
   ExtractEntityRelations,
   InferDmlEntityNameFromConfig,
+  InferSchemaFields,
 } from "@medusajs/types"
 import { isObject, isString, toCamelCase, upperCaseFirst } from "../common"
 import { transformIndexWhere } from "./helpers/entity-builder/build-indexes"
+import { DMLSchemaWithBigNumber } from "./helpers/entity-builder/create-big-number-properties"
+import { DMLSchemaDefaults } from "./helpers/entity-builder/create-default-properties"
 import { BelongsTo } from "./relations/belongs-to"
 
 const IsDmlEntity = Symbol.for("isDmlEntity")
 
-function extractNameAndTableName<const Config extends IDmlEntityConfig>(
+/**
+ * @experimental
+ * need to be moved after RFV
+ */
+type Hooks<Schema extends DMLSchema, TConfig extends IDmlEntityConfig> = {
+  creating?: (entity: InferSchemaFields<Schema>) => void
+}
+
+export type DMLEntitySchemaBuilder<Schema extends DMLSchema> =
+  DMLSchemaWithBigNumber<Schema> & DMLSchemaDefaults & Schema
+
+function extractEntityConfig<const Config extends IDmlEntityConfig>(
   nameOrConfig: Config
 ) {
   const result = {
     name: "",
     tableName: "",
+    disableSoftDeleteFilter: false,
   } as {
     name: InferDmlEntityNameFromConfig<Config>
     tableName: string
+    disableSoftDeleteFilter: boolean
   }
 
   if (isString(nameOrConfig)) {
@@ -51,6 +67,8 @@ function extractNameAndTableName<const Config extends IDmlEntityConfig>(
       toCamelCase(name)
     ) as InferDmlEntityNameFromConfig<Config>
     result.tableName = nameOrConfig.tableName
+    result.disableSoftDeleteFilter =
+      nameOrConfig.disableSoftDeleteFilter ?? false
   }
 
   return result
@@ -61,7 +79,7 @@ function extractNameAndTableName<const Config extends IDmlEntityConfig>(
  * name, its schema and relationships.
  */
 export class DmlEntity<
-  Schema extends DMLSchema,
+  const Schema extends DMLSchema,
   const TConfig extends IDmlEntityConfig
 > implements IDmlEntity<Schema, TConfig>
 {
@@ -71,15 +89,28 @@ export class DmlEntity<
   schema: Schema
 
   readonly #tableName: string
+  readonly #params: Record<string, unknown>
+
   #cascades: EntityCascades<string[]> = {}
   #indexes: EntityIndex<Schema>[] = []
   #checks: CheckConstraint<Schema>[] = []
 
+  /**
+   * @experimental
+   * TODO: Write RFC about this, for now it is unstable and mainly
+   * for test purposes
+   */
+  #hooks: Hooks<Schema, TConfig> = {}
+
   constructor(nameOrConfig: TConfig, schema: Schema) {
-    const { name, tableName } = extractNameAndTableName(nameOrConfig)
+    const { name, tableName, disableSoftDeleteFilter } =
+      extractEntityConfig(nameOrConfig)
     this.schema = schema
     this.name = name
     this.#tableName = tableName
+    this.#params = {
+      disableSoftDeleteFilter,
+    }
   }
 
   /**
@@ -102,6 +133,8 @@ export class DmlEntity<
     schema: DMLSchema
     cascades: EntityCascades<string[]>
     indexes: EntityIndex<Schema>[]
+    params: Record<string, unknown>
+    hooks: Hooks<Schema, TConfig>
     checks: CheckConstraint<Schema>[]
   } {
     return {
@@ -110,6 +143,8 @@ export class DmlEntity<
       schema: this.schema,
       cascades: this.#cascades,
       indexes: this.#indexes,
+      params: this.#params,
+      hooks: this.#hooks,
       checks: this.#checks,
     }
   }
@@ -244,7 +279,17 @@ export class DmlEntity<
   }
 
   /**
+   * @experimental
+   * TODO: Write RFC about this, for now it is unstable and mainly
+   * for test purposes
+   * @param hooks
+   * @returns
    */
+  hooks(hooks: Hooks<Schema, TConfig>): this {
+    this.#hooks = hooks
+    return this
+  }
+
   checks(checks: CheckConstraint<Schema>[]) {
     this.#checks = checks
     return this
