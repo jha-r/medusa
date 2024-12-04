@@ -1315,6 +1315,11 @@
           "requested": "Order transfer #{{transferId}} requested",
           "confirmed": "Order transfer #{{transferId}} confirmed",
           "declined": "Order transfer #{{transferId}} declined"
+        },
+        "update_order": {
+          "shipping_address": "Shipping address edited",
+          "billing_address": "Billing address edited",
+          "email": "Email edited"
         }
       }
     },
@@ -2612,7 +2617,9 @@
     "available": "Available",
     "inStock": "In stock",
     "added": "Added",
-    "removed": "Removed"
+    "removed": "Removed",
+    "from": "From",
+    "to": "To"
   },
   "fields": {
     "amount": "Amount",
@@ -2644,6 +2651,7 @@
     "discountable": "Discountable",
     "handle": "Handle",
     "subtitle": "Subtitle",
+    "by": "By",
     "item": "Item",
     "qty": "qty.",
     "limit": "Limit",
