@@ -555,7 +555,7 @@ const Cost = ({
 const CostBreakdown = ({
   order,
 }: {
-  order: AdminOrder & { region: AdminRegion }
+  order: AdminOrder & { region?: AdminRegion | null }
 }) => {
   const { t } = useTranslation()
   const [isTaxOpen, setIsTaxOpen] = useState(false)
