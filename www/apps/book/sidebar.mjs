@@ -120,7 +120,7 @@ export const sidebar = numberSidebarItems(
           children: [
             {
               type: "link",
-              title: "Define Link",
+              title: "Link Brands and Products",
               path: "/learn/customization/extend-features/define-link",
             },
             {

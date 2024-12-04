@@ -1,18 +1,24 @@
 import { Prerequisites } from "docs-ui"
 
 export const metadata = {
-  title: `${pageNumber} Define Link Between a Brand and a Product`,
+  title: `${pageNumber} Guide: Define Module Link Between Brand and Product`,
 }
 
 # {metadata.title}
 
-<Note title="Example Chapter">
+In this chapter, you'll learn how to define a module link between a brand defined in the [custom Brand Module](../../custom-features/module/page.mdx), and a product defined in the [Product Module](!resources!/commerce-modules/product) that's available in your Medusa application out-of-the-box.
 
-This chapter covers how to define a link between the `Brand` and `Product`data models as a step of the ["Extend Models" chapter](../page.mdx).
+Modules are [isolated](../../../advanced-development/modules/isolation/page.mdx) from other resources, ensuring that they're integrated into the Medusa application without side effects. However, you may need to associate data models of different modules, or you're trying to extend data models from commerce modules with custom properties. To do that, you define module links.
+
+A module link forms an association between two data models of different modules while maintaining module isolation. You can then manage and query linked records of the data models using Medusa's Modules SDK.
+
+In this chapter, you'll define a module link between the `Brand` data model of the Brand Module, and the `Product` data model of the Product Module. In later chapters, you'll manage and retrieve linked product and brand records.
+
+<Note>
+
+Learn more about module links in [this chapters](../../../advanced-development/module-links/page.mdx).
 
 </Note>
-
-## 1. Define the Link Between Product and Brand
 
 <Prerequisites
   items={[
@@ -23,9 +29,13 @@ This chapter covers how to define a link between the `Brand` and `Product`data m
   ]}
 />
 
-Links are defined in a TypeScript or JavaScript file under the `src/links` directory. The file defines and exports the link using the `defineLink` function imported from `@medusajs/framework/utils`.
+## 1. Define Link
 
-So, create the file `src/links/product-brand.ts` with the following content:
+Links are defined in a TypeScript or JavaScript file under the `src/links` directory. The file defines and exports the link using `defineLink` from the Modules SDK.
+
+So, to define a link between the `Product` and `Brand` models, create the file `src/links/product-brand.ts` with the following content:
+
+![The directory structure of the Medusa application after adding the link.](https://res.cloudinary.com/dza7lstvk/image/upload/v1733329897/Medusa%20Book/brands-link-dir-overview_t1rhlp.jpg)
 
 export const highlights = [
   ["7", "linkable", "Special `linkable` property that holds the linkable data models of `ProductModule`."],
@@ -46,39 +56,37 @@ export default defineLink(
 )
 ```
 
-The `defineLink` function accepts two parameters, each specifying the link configurations of each data model.
+You import each module's definition object from the `index.ts` file of the module's directory. Each module object has a special `linkable` property that holds the data models' link configurations.
 
-Modules have a special `linkable` property that holds the data models' link configurations.
+The `defineLink` function accepts two parameters of the same type, which is either:
 
-`defineLink` accepts for each parameter either:
-
-- The data model's link configuration;
+- The data model's link configuration, which you access from the Module's `linkable` property;
 - Or an object that has two properties:
-    - `linkable`: the link configuration of the data model.
-    - `isList`: Whether many records of the data model can be linked to the other model.
+    - `linkable`: the data model's link configuration, which you access from the Module's `linkable` property.
+    - `isList`: A boolean indicating whether many records of the data model can be linked to the other model.
 
-So, in the above code snippet, you define a link between the `Product` and `Brand` data models. Since `isList` is enabled on the product's side, a brand can be associated with multiple products.
+So, in the above code snippet, you define a link between the `Product` and `Brand` data models. Since a brand can be associated with multiple products, you enable `isList` in the `Product` model's object.
 
 ---
 
 ## 2. Sync the Link to the Database
 
-To reflect your link in the database, run the `db:sync-links` command:
+A module link is represented in the database as a table that stores the IDs of linked records. So, after defining the link, run the following command to create the module link's table in the database:
 
 ```bash
-npx medusa db:sync-links
+npx medusa db:migrate
 ```
 
-This creates a table for the link in the database. The table stores the IDs of linked brand and product records.
+This command reflects migrations on the database and syncs module links, which creates a table for the `product-brand` link.
 
 <Note title="Tip">
 
-You can also use the `db:migrate` command, which both runs the migrations and syncs the links.
+You can also run the `npx medusa db:sync-links` to just sync module links without running migrations.
 
 </Note>
 
 ---
 
-## Next: Link Brand and Product Records
+## Next Steps: Extend Create Product Flow
 
-In the next chapter, you'll learn how to associate brand and product records by creating a link between them.
+In the next chapter, you'll extend Medusa's workflow and API route that create a product to allow associating a brand with a product. You'll also learn how to link brand and product records.
