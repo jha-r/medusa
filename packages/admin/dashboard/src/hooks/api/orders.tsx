@@ -67,6 +67,10 @@ export const useUpdateOrder = (
         queryKey: ordersQueryKeys.detail(id),
       })
 
+      queryClient.invalidateQueries({
+        queryKey: ordersQueryKeys.changes(id),
+      })
+
       // TODO: enable when needed
       // queryClient.invalidateQueries({
       //   queryKey: ordersQueryKeys.lists(),
