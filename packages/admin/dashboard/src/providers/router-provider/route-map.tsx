@@ -1095,6 +1095,15 @@ export const RouteMap: RouteObject[] = [
                         },
                       }
                     },
+                    children: [
+                      {
+                        path: "metadata/edit",
+                        lazy: () =>
+                          import(
+                            "../../routes/shipping-profiles/shipping-profile-metadata"
+                          ),
+                      },
+                    ],
                   },
                 ],
               },
