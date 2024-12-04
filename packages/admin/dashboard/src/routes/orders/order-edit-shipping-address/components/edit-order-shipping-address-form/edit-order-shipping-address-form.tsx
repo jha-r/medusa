@@ -204,7 +204,6 @@ export function EditOrderShippingAddressForm({
               type="submit"
               variant="primary"
               size="small"
-              disabled={!!Object.keys(form.formState.errors || {}).length}
             >
               {t("actions.save")}
             </Button>

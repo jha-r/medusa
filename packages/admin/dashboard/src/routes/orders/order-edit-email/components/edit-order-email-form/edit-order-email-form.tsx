@@ -84,7 +84,6 @@ export function EditOrderEmailForm({ order }: EditOrderEmailFormProps) {
               type="submit"
               variant="primary"
               size="small"
-              disabled={!!Object.keys(form.formState.errors || {}).length}
             >
               {t("actions.save")}
             </Button>

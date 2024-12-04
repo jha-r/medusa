@@ -11,12 +11,12 @@ export const OrderEditBillingAddress = () => {
   const { t } = useTranslation()
   const params = useParams()
 
-  const { order, isPending, isError } = useOrder(params.id!, {
+  const { order, isPending, isError, error } = useOrder(params.id!, {
     fields: DEFAULT_FIELDS,
   })
 
   if (!isPending && isError) {
-    throw new Error("Order not found")
+    throw error
   }
 
   return (
