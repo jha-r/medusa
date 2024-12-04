@@ -115,28 +115,28 @@ export const sidebar = numberSidebarItems(
         },
         {
           type: "link",
-          title: "Extend Models",
-          path: "/learn/customization/extend-models",
+          title: "Extend Features",
+          path: "/learn/customization/extend-features",
           children: [
             {
               type: "link",
               title: "Define Link",
-              path: "/learn/customization/extend-models/define-link",
+              path: "/learn/customization/extend-features/define-link",
             },
             {
               type: "link",
               title: "Create Links Between Records",
-              path: "/learn/customization/extend-models/create-links",
+              path: "/learn/customization/extend-features/create-links",
             },
             {
               type: "link",
               title: "Extend Route",
-              path: "/learn/customization/extend-models/extend-create-product",
+              path: "/learn/customization/extend-features/extend-create-product",
             },
             {
               type: "link",
               title: "Query Linked Records",
-              path: "/learn/customization/extend-models/query-linked-records",
+              path: "/learn/customization/extend-features/query-linked-records",
             },
           ],
         },
