@@ -117,5 +117,6 @@ export const generatedEditDates = {
   "app/learn/build/page.mdx": "2024-11-11T11:08:41.832Z",
   "app/learn/deployment/general/page.mdx": "2024-11-25T14:33:50.439Z",
   "app/learn/advanced-development/workflows/multiple-step-usage/page.mdx": "2024-11-12T11:11:49.191Z",
-  "app/learn/installation/page.mdx": "2024-11-28T14:18:21.905Z"
+  "app/learn/installation/page.mdx": "2024-11-28T14:18:21.905Z",
+  "app/learn/advanced-development/data-models/check-constraints/page.mdx": "2024-12-04T10:39:01.764Z"
 }

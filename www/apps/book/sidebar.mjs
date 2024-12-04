@@ -372,6 +372,11 @@ export const sidebar = numberSidebarItems(
             },
             {
               type: "link",
+              path: "/learn/advanced-development/data-models/check-constraints",
+              title: "Check Constraints",
+            },
+            {
+              type: "link",
               path: "/learn/advanced-development/data-models/searchable-property",
               title: "Searchable Property",
             },
