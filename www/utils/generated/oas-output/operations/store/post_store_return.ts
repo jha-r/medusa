@@ -4,11 +4,6 @@
  * summary: Create Return
  * description: Create a return for an order's items. The admin receives the return and process it from their side.
  * x-authenticated: false
- * requestBody:
- *   content:
- *     application/json:
- *       schema:
- *         $ref: "#/components/schemas/StoreCreateReturn"
  * x-codeSamples:
  *   - lang: Shell
  *     label: cURL

@@ -51,24 +51,6 @@
  *       type: string
  *       title: order
  *       description: The field to sort the data by. By default, the sort order is ascending. To change the order to descending, prefix the field name with `-`.
- *   - name: $and
- *     in: query
- *     required: false
- *     schema:
- *       type: array
- *       description: Join query parameters with an AND condition. Each object's content is the same type as the expected query parameters.
- *       items:
- *         type: object
- *       title: $and
- *   - name: $or
- *     in: query
- *     required: false
- *     schema:
- *       type: array
- *       description: Join query parameters with an OR condition. Each object's content is the same type as the expected query parameters.
- *       items:
- *         type: object
- *       title: $or
  * security:
  *   - api_token: []
  *   - cookie_auth: []

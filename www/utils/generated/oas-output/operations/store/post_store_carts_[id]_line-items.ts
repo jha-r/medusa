@@ -27,11 +27,6 @@
  *         fields. without prefix it will replace the entire default fields.
  *       externalDocs:
  *         url: "#select-fields-and-relations"
- * requestBody:
- *   content:
- *     application/json:
- *       schema:
- *         $ref: "#/components/schemas/StoreAddCartLineItem"
  * x-codeSamples:
  *   - lang: Shell
  *     label: cURL
