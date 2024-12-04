@@ -19,8 +19,8 @@ For example, consider you're creating an API route that retrieves products based
 export const highlights = [
   ["8", "resolve", "A method that resolves resources from the container."],
   [
-    "9",
-    "ContainerRegistrationKeys.QUERY",
+    "8",
+    `"query"`,
     "Query's registration key in the container.",
   ],
 ]
@@ -33,9 +33,7 @@ export async function GET(
   req: MedusaRequest,
   res: MedusaResponse
 ) {
-  const query = req.scope.resolve(
-    ContainerRegistrationKeys.QUERY
-  )
+  const query = req.scope.resolve("query")
 
   const { data: products } = await query.graph({
     entity: "product",
@@ -52,8 +50,6 @@ export async function GET(
 ```
 
 The API route accepts as a first parameter a request object that has a `scope` property, which is the Medusa container. It has a `resolve` method that resolves a resource from the container by the key it's registered with.
-
-To resolve Query, you use the `ContainerRegistrationKeys` enum imported from `@medusajs/framework/utils`, which has the registration keys for all framework tools and resources.
 
 <Note>
 
@@ -148,7 +144,7 @@ export const config = {
 
 ### Workflow Step
 
-A [step in a workflow](../workflows/page.mdx), which is a special function where you build reliable business logic, accepts in its second parameter a `container` property, whose value is the Medusa container. Use its `resolve` method to resolve a resource by its registration key:
+A [step in a workflow](../workflows/page.mdx), which is a special function where you build durable execution logic across multiple modules, accepts in its second parameter a `container` property, whose value is the Medusa container. Use its `resolve` method to resolve a resource by its registration key:
 
 export const workflowStepsHighlight = [
   ["7", "container", "Receive the Medusa container as a parameter"],

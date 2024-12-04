@@ -13,6 +13,7 @@ import {
   updatePaymentCollectionStepId,
   updateTaxLinesWorkflow,
 } from "@medusajs/core-flows"
+import { medusaIntegrationTestRunner } from "@medusajs/test-utils"
 import {
   ICartModuleService,
   ICustomerModuleService,
@@ -30,7 +31,6 @@ import {
   Modules,
   RuleOperator,
 } from "@medusajs/utils"
-import { medusaIntegrationTestRunner } from "@medusajs/test-utils"
 import {
   adminHeaders,
   createAdminUser,
@@ -1835,6 +1835,15 @@ medusaIntegrationTestRunner({
       })
 
       describe("listShippingOptionsForCartWorkflow", () => {
+        let region
+
+        beforeEach(async () => {
+          region = await regionModuleService.createRegions({
+            name: "US",
+            currency_code: "usd",
+          })
+        })
+
         it("should list shipping options for cart", async () => {
           const salesChannel = await scModuleService.createSalesChannels({
             name: "Webshop",
@@ -1846,6 +1855,7 @@ medusaIntegrationTestRunner({
 
           let cart = await cartModuleService.createCarts({
             currency_code: "usd",
+            region_id: region.id,
             sales_channel_id: salesChannel.id,
             shipping_address: {
               city: "CPH",
@@ -1935,13 +1945,6 @@ medusaIntegrationTestRunner({
           ).run({
             input: {
               cart_id: cart.id,
-              sales_channel_id: salesChannel.id,
-              currency_code: "usd",
-              shipping_address: {
-                city: cart.shipping_address?.city,
-                province: cart.shipping_address?.province,
-                country_code: cart.shipping_address?.country_code,
-              },
             },
           })
 
@@ -1965,6 +1968,7 @@ medusaIntegrationTestRunner({
 
           let cart = await cartModuleService.createCarts({
             currency_code: "usd",
+            region_id: region.id,
             sales_channel_id: salesChannel.id,
             shipping_address: {
               city: "CPH",
@@ -2044,16 +2048,7 @@ medusaIntegrationTestRunner({
           const { result } = await listShippingOptionsForCartWorkflow(
             appContainer
           ).run({
-            input: {
-              cart_id: cart.id,
-              sales_channel_id: salesChannel.id,
-              currency_code: "usd",
-              shipping_address: {
-                city: cart.shipping_address?.city,
-                province: cart.shipping_address?.province,
-                country_code: cart.shipping_address?.country_code,
-              },
-            },
+            input: { cart_id: cart.id },
           })
 
           expect(result).toEqual([])
@@ -2070,6 +2065,7 @@ medusaIntegrationTestRunner({
 
           let cart = await cartModuleService.createCarts({
             currency_code: "usd",
+            region_id: region.id,
             sales_channel_id: salesChannel.id,
             shipping_address: {
               city: "CPH",
@@ -2140,16 +2136,7 @@ medusaIntegrationTestRunner({
           const { errors } = await listShippingOptionsForCartWorkflow(
             appContainer
           ).run({
-            input: {
-              cart_id: cart.id,
-              sales_channel_id: salesChannel.id,
-              currency_code: "usd",
-              shipping_address: {
-                city: cart.shipping_address?.city,
-                province: cart.shipping_address?.province,
-                country_code: cart.shipping_address?.country_code,
-              },
-            },
+            input: { cart_id: cart.id },
             throwOnError: false,
           })
 

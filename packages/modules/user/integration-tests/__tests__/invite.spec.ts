@@ -8,22 +8,16 @@ import jwt, { JwtPayload } from "jsonwebtoken"
 
 jest.setTimeout(30000)
 
-const expireDate = new Date().setMilliseconds(
-  new Date().getMilliseconds() + 60 * 60 * 24
-)
-
 const defaultInviteData = [
   {
     id: "1",
     email: "user_1@test.com",
     token: "test",
-    expires_at: expireDate,
   },
   {
     id: "2",
     email: "user_2@test.com",
     token: "test",
-    expires_at: expireDate,
   },
 ]
 

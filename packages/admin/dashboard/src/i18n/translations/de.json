@@ -24,7 +24,7 @@
     "error": "Fehler",
     "select": "Wählen",
     "selected": "Ausgewählt",
-    "enabled": "Ermöglicht",
+    "enabled": "Aktiviert",
     "disabled": "Deaktiviert",
     "expired": "Abgelaufen",
     "active": "Aktiv",
@@ -34,7 +34,7 @@
     "added": "Hinzugefügt",
     "removed": "ENTFERNT",
     "admin": "Admin",
-    "store": "Speichern",
+    "store": "Shop",
     "details": "Einzelheiten",
     "items_one": "{{count}} Artikel",
     "items_other": "{{count}} Artikel",
@@ -106,7 +106,7 @@
     "delete": "Löschen",
     "remove": "Entfernen",
     "revoke": "Widerrufen",
-    "cancel": "Stornieren",
+    "cancel": "Abbrechen",
     "forceConfirm": "Bestätigung erzwingen",
     "continueEdit": "Bearbeiten Sie weiter",
     "enable": "Aktivieren",
@@ -205,7 +205,7 @@
       },
       "settings": {
         "goToSettings": "Einstellungen",
-        "goToStore": "Speichern",
+        "goToStore": "Shop",
         "goToUsers": "Benutzer",
         "goToRegions": "Regionen",
         "goToTaxRegions": "Steuerregionen",
@@ -223,7 +223,7 @@
       "user": {
         "documentation": "Dokumentation",
         "changelog": "Änderungsprotokoll",
-        "shortcuts": "Verknüpfungen",
+        "shortcuts": "Tastenkürzel",
         "profileSettings": "Profileinstellungen",
         "theme": {
           "label": "Thema",
@@ -249,7 +249,7 @@
         "extensions": "Erweiterungen"
       },
       "main": {
-        "store": "Speichern",
+        "store": "Shop",
         "storeSettings": "Einstellungen speichern"
       },
       "settings": {
@@ -515,7 +515,7 @@
         "label": "Untertitel"
       },
       "handle": {
-        "label": "Handhaben",
+        "label": "Handle",
         "tooltip": "Der Handle wird verwendet, um auf das Produkt in Ihrer Storefront zu verweisen. Wenn nicht angegeben, wird das Handle aus dem Produkttitel generiert."
       },
       "description": {
@@ -856,10 +856,10 @@
     },
     "fields": {
       "guest": "Gast",
-      "registered": "Eingetragen",
+      "registered": "Registriert",
       "groups": "Gruppen"
     },
-    "registered": "Eingetragen",
+    "registered": "Registriert",
     "guest": "Gast",
     "hasAccount": "Hat Konto"
   },
@@ -952,7 +952,7 @@
         "partiallyRefunded": "Teilweise erstattet",
         "partiallyCaptured": "Teilweise erfasst",
         "refunded": "Erstattet",
-        "canceled": "Abgesagt",
+        "canceled": "Abgebrochen",
         "requiresAction": "Erfordert Maßnahmen"
       },
       "capturePayment": "Die Zahlung von {{amount}} wird erfasst.",
@@ -962,8 +962,8 @@
       "createRefund": "Rückerstattung erstellen",
       "refundPaymentSuccess": "Rückerstattung des Betrags {{amount}} erfolgreich",
       "createRefundWrongQuantity": "Die Menge sollte eine Zahl zwischen 1 und {{number}} sein.",
-      "refundAmount": "Rückerstattung von {{ Betrag }}",
-      "paymentLink": "Zahlungslink für {{ Betrag }} kopieren",
+      "refundAmount": "Rückerstattung von {{amount}}",
+      "paymentLink": "Zahlungslink für {{amount}} kopieren",
       "selectPaymentToRefund": "Wählen Sie die Zahlung zur Rückerstattung aus"
     },
     "edits": {
@@ -1170,37 +1170,37 @@
       "awaitingFulfillmentBadge": "Warten auf Erfüllung",
       "requiresShipping": "Erfordert Versand",
       "number": "Erfüllung #{{number}}",
-      "itemsToFulfill": "Zu erfüllende Gegenstände",
-      "create": "Schaffen Sie Erfüllung",
+      "itemsToFulfill": "Zu versendende Produkte",
+      "create": "Erfüllung erstellen",
       "available": "Verfügbar",
       "inStock": "Auf Lager",
       "markAsShipped": "Als versendet markieren",
       "markAsDelivered": "Als geliefert markieren",
-      "itemsToFulfillDesc": "Wählen Sie die zu erfüllenden Artikel und Mengen aus",
+      "itemsToFulfillDesc": "Wählen Sie die zu versendenden Artikel und Mengen aus",
       "locationDescription": "Wählen Sie den Standort aus, von dem aus Sie Artikel versenden möchten.",
-      "sendNotificationHint": "Benachrichtigen Sie Kunden über die erstellte Erfüllung.",
+      "sendNotificationHint": "Benachrichtigen Sie Kunden über die erstellte Lieferung.",
       "methodDescription": "Wählen Sie eine andere Versandart als die vom Kunden ausgewählte",
       "error": {
         "wrongQuantity": "Es steht nur ein Artikel zur Erfüllung zur Verfügung",
         "wrongQuantity_other": "Die Menge sollte eine Zahl zwischen 1 und {{number}} sein.",
-        "noItems": "Keine zu erfüllenden Punkte."
+        "noItems": "Keine zu versendenden Produkte."
       },
       "status": {
-        "notFulfilled": "Nicht erfüllt",
-        "partiallyFulfilled": "Teilweise erfüllt",
-        "fulfilled": "Erfüllt",
+        "notFulfilled": "Ausstehend",
+        "partiallyFulfilled": "Teilweise versandbereit",
+        "fulfilled": "Versandbereit",
         "partiallyShipped": "Teilweise versandt",
         "shipped": "Ausgeliefert",
         "delivered": "Geliefert",
         "partiallyDelivered": "Teilweise geliefert",
         "partiallyReturned": "Teilweise zurückgegeben",
         "returned": "Zurückgegeben",
-        "canceled": "Abgesagt",
+        "canceled": "Storniert",
         "requiresAction": "Erfordert Maßnahmen"
       },
       "toast": {
         "created": "Erfüllung erfolgreich erstellt",
-        "canceled": "Die Erfüllung wurde erfolgreich abgebrochen",
+        "canceled": "Die Erfüllung wurde abgebrochen",
         "fulfillmentShipped": "Eine bereits versandte Erfüllung kann nicht storniert werden",
         "fulfillmentDelivered": "Die Erfüllung wurde als erfolgreich geliefert markiert"
       },
@@ -2487,8 +2487,8 @@
     "transactionIdLabel": "Transaktions-ID",
     "workflowIdLabel": "Workflow-ID",
     "progressLabel": "Fortschritt",
-    "stepsCompletedLabel_one": "{{abgeschlossen}} von {{count}} Schritt",
-    "stepsCompletedLabel_other": "{{abgeschlossen}} von {{count}} Schritten",
+    "stepsCompletedLabel_one": "{{completed}} von {{count}} Schritt",
+    "stepsCompletedLabel_other": "{{completed}} von {{count}} Schritten",
     "list": {
       "noRecordsMessage": "Es wurden noch keine Workflows ausgeführt."
     },
@@ -2585,7 +2585,7 @@
     "scheduled": "Geplant",
     "expired": "Abgelaufen",
     "active": "Aktiv",
-    "enabled": "Ermöglicht",
+    "enabled": "Aktiviert",
     "disabled": "Deaktiviert"
   },
   "labels": {
@@ -2624,7 +2624,7 @@
     "category": "Kategorie",
     "collection": "Sammlung",
     "discountable": "Rabattierbar",
-    "handle": "Handhaben",
+    "handle": "Handle",
     "subtitle": "Untertitel",
     "item": "Artikel",
     "qty": "Menge.",
@@ -2708,8 +2708,8 @@
     "createdAt": "Erstellt",
     "updatedAt": "Aktualisiert",
     "revokedAt": "Widerrufen am",
-    "true": "WAHR",
-    "false": "FALSCH",
+    "true": "Ja",
+    "false": "Nein",
     "giftCard": "Geschenkkarte",
     "tag": "Etikett",
     "dateIssued": "Ausstellungsdatum",
@@ -2737,7 +2737,7 @@
     "location": "Standort",
     "quantity": "Menge",
     "variant": "Variante",
-    "id": "AUSWEIS",
+    "id": "ID",
     "parent": "Elternteil",
     "minSubtotal": "Min. Zwischensumme",
     "maxSubtotal": "Max. Zwischensumme",

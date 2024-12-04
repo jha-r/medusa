@@ -8,7 +8,7 @@ In this chapter, you’ll learn what API Routes are and how to create them.
 
 ## What is an API Route?
 
-An API Route is a REST API endpoint. It exposes commerce features to external applications, such as storefronts, the admin dashboard, or third-party systems.
+An API Route is an endpoint. It exposes commerce features to external applications, such as storefronts, the admin dashboard, or third-party systems.
 
 The Medusa core application provides a set of admin and store API routes out-of-the-box. You can also create custom API routes to expose your custom functionalities.
 
@@ -17,6 +17,8 @@ The Medusa core application provides a set of admin and store API routes out-of-
 ## How to Create an API Route?
 
 An API Route is created in a TypeScript or JavaScript file under the `src/api` directory of your Medusa application. The file’s name must be `route.ts` or `route.js`. 
+
+![Example of API route in the application's directory structure](https://res.cloudinary.com/dza7lstvk/image/upload/v1732808645/Medusa%20Book/route-dir-overview_dqgzmk.jpg)
 
 Each file exports API Route handler functions for at least one HTTP method (`GET`, `POST`, `DELETE`, etc…).
 

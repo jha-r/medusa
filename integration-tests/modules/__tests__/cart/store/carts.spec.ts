@@ -876,7 +876,14 @@ medusaIntegrationTestRunner({
                   is_tax_inclusive: false,
                   quantity: 1,
                   title: "Test item",
-                  tax_lines: [],
+                  tax_lines: [
+                    expect.objectContaining({
+                      code: "CADEFAULT",
+                      description: "CA Default Rate",
+                      provider_id: "system",
+                      rate: 5,
+                    }),
+                  ],
                   adjustments: [
                     expect.objectContaining({
                       id: expect.not.stringContaining(lineItemAdjustment.id),

@@ -254,11 +254,14 @@ moduleIntegrationTestRunner<IPricingModuleService>({
               ends_at: "10/20/2030",
             },
           ])
-          expect(priceList).toEqual(
-            expect.objectContaining({
-              starts_at: new Date("10/10/2010").toISOString(),
-              ends_at: new Date("10/20/2030").toISOString(),
-            })
+
+          expect(priceList).toHaveProperty("starts_at")
+          expect(priceList).toHaveProperty("ends_at")
+          expect(priceList.starts_at?.toString()).toEqual(
+            new Date("10/10/2010").toISOString()
+          )
+          expect(priceList.ends_at?.toString()).toEqual(
+            new Date("10/20/2030").toISOString()
           )
         })
 
@@ -378,11 +381,14 @@ moduleIntegrationTestRunner<IPricingModuleService>({
               ends_at: "10/20/2030",
             },
           ])
-          expect(priceList).toEqual(
-            expect.objectContaining({
-              starts_at: new Date("10/10/2010").toISOString(),
-              ends_at: new Date("10/20/2030").toISOString(),
-            })
+
+          expect(priceList).toHaveProperty("starts_at")
+          expect(priceList).toHaveProperty("ends_at")
+          expect(priceList.starts_at?.toString()).toEqual(
+            new Date("10/10/2010").toString()
+          )
+          expect(priceList.ends_at?.toString()).toEqual(
+            new Date("10/20/2030").toString()
           )
         })
 
@@ -562,7 +568,6 @@ moduleIntegrationTestRunner<IPricingModuleService>({
                   currency_code: "EUR",
                 }),
                 expect.objectContaining({
-                  rules_count: 0,
                   price_rules: [],
                   amount: 600,
                   currency_code: "EUR",
