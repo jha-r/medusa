@@ -901,6 +901,10 @@ export const RouteMap: RouteObject[] = [
                     lazy: () =>
                       import("../../routes/regions/region-add-countries"),
                   },
+                  {
+                    path: "metadata/edit",
+                    lazy: () => import("../../routes/regions/region-metadata"),
+                  },
                 ],
               },
             ],
