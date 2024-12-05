@@ -125,7 +125,7 @@ export const sidebar = numberSidebarItems(
             },
             {
               type: "link",
-              title: "Extend Create Product",
+              title: "Extend Core Flow",
               path: "/learn/customization/extend-features/extend-create-product",
             },
             {
