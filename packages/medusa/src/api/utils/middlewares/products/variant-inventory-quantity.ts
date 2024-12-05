@@ -15,7 +15,7 @@ export const wrapVariantsWithTotalInventoryQuantity = async (
     return
   }
 
-  const query = req.scope.resolve("query")
+  const query = req.scope.resolve(ContainerRegistrationKeys.QUERY)
   const availability = await getTotalVariantAvailability(query, {
     variant_ids: variantIds,
   })
