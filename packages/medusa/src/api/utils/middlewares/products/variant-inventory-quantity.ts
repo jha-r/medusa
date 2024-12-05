@@ -56,7 +56,7 @@ export const wrapVariantsWithInventoryQuantityForSalesChannel = async (
     return
   }
 
-  const query = req.scope.resolve("query")
+  const query = req.scope.resolve(ContainerRegistrationKeys.QUERY)
   const availability = await getVariantAvailability(query, {
     variant_ids: variantIds,
     sales_channel_id: channelToUse,
