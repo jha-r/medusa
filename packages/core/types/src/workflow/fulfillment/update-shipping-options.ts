@@ -1,5 +1,6 @@
-import { ShippingOptionPriceType } from "../../fulfillment"
 import { RuleOperatorType } from "../../common"
+import { ShippingOptionPriceType } from "../../fulfillment"
+import { PriceRule } from "../../pricing"
 
 export interface UpdateShippingOptionsWorkflowInput {
   id: string
@@ -19,11 +20,13 @@ export interface UpdateShippingOptionsWorkflowInput {
         id?: string
         currency_code?: string
         amount?: number
+        rules?: PriceRule[]
       }
     | {
         id?: string
         region_id?: string
         amount?: number
+        rules?: PriceRule[]
       }
   )[]
   rules?: {

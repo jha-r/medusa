@@ -2,10 +2,11 @@ import de from "./de.json"
 import en from "./en.json"
 import es from "./es.json"
 import fr from "./fr.json"
+import it from "./it.json"
 import pl from "./pl.json"
 import ptBR from "./ptBR.json"
-import tr from "./tr.json"
 import th from "./th.json"
+import tr from "./tr.json"
 import vi from "./vi.json"
 
 export default {
@@ -20,6 +21,9 @@ export default {
   },
   fr: {
     translation: fr,
+  },
+  it: {
+    translation: it,
   },
   pl: {
     translation: pl,

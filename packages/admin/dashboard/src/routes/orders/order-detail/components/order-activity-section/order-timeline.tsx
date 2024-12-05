@@ -32,6 +32,9 @@ import { useDate } from "../../../../../hooks/use-date"
 import { getStylizedAmount } from "../../../../../lib/money-amount-helpers"
 import { getPaymentsFromOrder } from "../order-payment-section"
 import ActivityItems from "./activity-items"
+import { By, UserLink } from "../../../../../components/common/user-link"
+import ChangeDetailsTooltip from "./change-details-tooltip"
+import { getFormattedAddress } from "../../../../../lib/addresses"
 
 type OrderTimelineProps = {
   order: AdminOrder
@@ -41,6 +44,11 @@ type OrderTimelineProps = {
  * Arbitrary high limit to ensure all notes are fetched
  */
 const NOTE_LIMIT = 9999
+
+/**
+ * Order Changes that are not related to RMA flows
+ */
+const NON_RMA_CHANGE_TYPES = ["transfer", "update_order"]
 
 export const OrderTimeline = ({ order }: OrderTimelineProps) => {
   const items = useActivityItems(order)
@@ -118,10 +126,19 @@ const useActivityItems = (order: AdminOrder): Activity[] => {
   const { t } = useTranslation()
 
   const { order_changes: orderChanges = [] } = useOrderChanges(order.id, {
-    change_type: ["edit", "claim", "exchange", "return", "transfer"],
+    change_type: [
+      "edit",
+      "claim",
+      "exchange",
+      "return",
+      "transfer",
+      "update_order",
+    ],
   })
 
-  const rmaChanges = orderChanges.filter((oc) => oc.change_type !== "transfer")
+  const rmaChanges = orderChanges.filter(
+    (oc) => !NON_RMA_CHANGE_TYPES.includes(oc.change_type)
+  )
 
   const missingLineItemIds = getMissingLineItemIds(order, rmaChanges)
   const { order_items: removedLineItems = [] } = useOrderLineItems(
@@ -414,6 +431,74 @@ const useActivityItems = (order: AdminOrder): Activity[] => {
             transferId: transfer.id.slice(-7),
           }),
           timestamp: transfer.declined_at,
+        })
+      }
+    }
+
+    for (const update of orderChanges.filter(
+      (oc) => oc.change_type === "update_order"
+    )) {
+      const updateType = update.actions[0]?.details?.type
+
+      if (updateType === "shipping_address") {
+        items.push({
+          title: (
+            <ChangeDetailsTooltip
+              title={t(`orders.activity.events.update_order.shipping_address`)}
+              previous={getFormattedAddress({
+                address: update.actions[0].details.old,
+              }).join(", ")}
+              next={getFormattedAddress({
+                address: update.actions[0].details.new,
+              }).join(", ")}
+            />
+          ),
+          timestamp: update.created_at,
+          children: (
+            <div className="mt-2 flex text-sm gap-x-2 text-ui-fg-subtle">
+              {t("fields.by")} <By id={update.created_by} />
+            </div>
+          ),
+        })
+      }
+
+      if (updateType === "billing_address") {
+        items.push({
+          title: (
+            <ChangeDetailsTooltip
+              title={t(`orders.activity.events.update_order.billing_address`)}
+              previous={getFormattedAddress({
+                address: update.actions[0].details.old,
+              }).join(", ")}
+              next={getFormattedAddress({
+                address: update.actions[0].details.new,
+              }).join(", ")}
+            />
+          ),
+          timestamp: update.created_at,
+          children: (
+            <div className="mt-2 flex text-sm gap-x-2 text-ui-fg-subtle">
+              {t("fields.by")} <By id={update.created_by} />
+            </div>
+          ),
+        })
+      }
+
+      if (updateType === "email") {
+        items.push({
+          title: (
+            <ChangeDetailsTooltip
+              title={t(`orders.activity.events.update_order.email`)}
+              previous={update.actions[0].details.old}
+              next={update.actions[0].details.new}
+            />
+          ),
+          timestamp: update.created_at,
+          children: (
+            <div className="mt-2 flex text-sm gap-x-2 text-ui-fg-subtle">
+              {t("fields.by")} <By id={update.created_by} />
+            </div>
+          ),
         })
       }
     }

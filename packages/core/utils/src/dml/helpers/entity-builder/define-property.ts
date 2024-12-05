@@ -119,13 +119,20 @@ export function defineProperty(
   /**
    * Here we initialize nullable properties with a null value
    */
-  if (field.nullable) {
-    Object.defineProperty(MikroORMEntity.prototype, field.fieldName, {
-      value: null,
-      configurable: true,
-      enumerable: true,
-      writable: true,
-    })
+  if (isDefined(field.defaultValue) || field.nullable) {
+    const defaultValueSetterHookName = `${field.fieldName}_setDefaultValueOnBeforeCreate`
+    MikroORMEntity.prototype[defaultValueSetterHookName] = function () {
+      if (isDefined(field.defaultValue) && this[propertyName] === undefined) {
+        this[propertyName] = field.defaultValue
+        return
+      }
+
+      if (field.nullable && this[propertyName] === undefined) {
+        this[propertyName] = null
+        return
+      }
+    }
+    BeforeCreate()(MikroORMEntity.prototype, defaultValueSetterHookName)
   }
 
   if (SPECIAL_PROPERTIES[field.fieldName]) {

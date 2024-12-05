@@ -8,11 +8,11 @@ In this chapter, you’ll learn about Medusa's event system, and how to handle e
 
 ## Handle Core Commerce Flows with Events
 
-When building commerce digital applications, you'll often need to perform an action after a commerce operation is performed. For example, sending an order confirmation email when the customer places an order.
+When building commerce digital applications, you'll often need to perform an action after a commerce operation is performed. For example, sending an order confirmation email when the customer places an order, or syncing data that's updated in Medusa to a third-party system.
 
-In other commerce platforms, it can be tricky to implement this when the commerce operation is performed in the platform's core. You resort to hacky workarounds or extend core services to perform your custom action, which becomes difficult to maintain in the long run and as your application grows.
+Medusa emits events when core commerce features are performed, and you can listen to and handle these events in asynchronous functions. You can think of Medusa's events like you'd think about webhooks in other commerce platforms, but instead of having to setup separate applications to handle webhooks, your efforts only go into writing the logic right in your Medusa codebase.
 
-Medusa's event system removes this complexity by emitting events when core commerce features are performed. Your efforts only go into handling these events in subscribers, which are functions executed asynchronously when an event is emitted.
+You listen to an event in a subscriber, which is an asynchronous function that's executed when its associated event is emitted.
 
 ![A diagram showcasing an example of how an event is emitted when an order is placed.](https://res.cloudinary.com/dza7lstvk/image/upload/v1732277948/Medusa%20Book/order-placed-event-example_e4e4kw.jpg)
 
@@ -36,18 +36,17 @@ You create a subscriber in a TypeScript or JavaScript file under the `src/subscr
 
 For example, create the file `src/subscribers/order-placed.ts` with the following content:
 
+![Example of subscriber file in the application's directory structure](https://res.cloudinary.com/dza7lstvk/image/upload/v1732866244/Medusa%20Book/subscriber-dir-overview_pusyeu.jpg)
+
 ```ts title="src/subscribers/product-created.ts"
 import { SubscriberArgs, type SubscriberConfig } from "@medusajs/framework"
-import { ContainerRegistrationKeys } from "@medusajs/framework/utils"
 import { sendOrderConfirmationWorkflow } from "../workflows/send-order-confirmation"
 
 export default async function orderPlacedHandler({
   event: { data },
   container,
 }: SubscriberArgs<{ id: string }>) {
-  const logger = container.resolve(
-    ContainerRegistrationKeys.LOGGER
-  )
+  const logger = container.resolve("logger")
 
   logger.info("Sending confirmation email...")
 
