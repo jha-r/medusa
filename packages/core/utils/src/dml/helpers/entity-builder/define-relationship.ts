@@ -11,17 +11,18 @@ import {
   ManyToOne,
   OneToMany,
   OneToOne,
+  OneToOneOptions,
   OnInit,
   Property,
   rel,
 } from "@mikro-orm/core"
-import { DmlEntity } from "../../entity"
-import { HasOne } from "../../relations/has-one"
-import { HasMany } from "../../relations/has-many"
-import { parseEntityName } from "./parse-entity-name"
 import { camelToSnakeCase, pluralize } from "../../../common"
-import { applyEntityIndexes } from "../mikro-orm/apply-indexes"
+import { DmlEntity } from "../../entity"
+import { HasMany } from "../../relations/has-many"
+import { HasOne } from "../../relations/has-one"
 import { ManyToMany as DmlManyToMany } from "../../relations/many-to-many"
+import { applyEntityIndexes } from "../mikro-orm/apply-indexes"
+import { parseEntityName } from "./parse-entity-name"
 import { HasOneWithForeignKey } from "../../relations/has-one-fk"
 
 type Context = {
@@ -140,12 +141,10 @@ export function defineHasOneRelationship(
   cascades: EntityCascades<string[]>
 ) {
   const shouldRemoveRelated = !!cascades.delete?.includes(relationship.name)
-  let mappedBy: string | undefined
 
+  let mappedBy: string | undefined = camelToSnakeCase(MikroORMEntity.name)
   if ("mappedBy" in relationship) {
     mappedBy = relationship.mappedBy
-  } else {
-    mappedBy = camelToSnakeCase(MikroORMEntity.name)
   }
 
   OneToOne({
@@ -155,7 +154,7 @@ export function defineHasOneRelationship(
     cascade: shouldRemoveRelated
       ? (["persist", "soft-remove"] as any)
       : undefined,
-  } as any)(MikroORMEntity.prototype, relationship.name)
+  } as OneToOneOptions<any, any>)(MikroORMEntity.prototype, relationship.name)
 }
 
 /**
@@ -170,12 +169,10 @@ export function defineHasOneWithFKRelationship(
 ) {
   const foreignKeyName = camelToSnakeCase(`${relationship.name}Id`)
   const shouldRemoveRelated = !!cascades.delete?.includes(relationship.name)
-  let mappedBy: string | undefined
 
+  let mappedBy: string | undefined = camelToSnakeCase(MikroORMEntity.name)
   if ("mappedBy" in relationship) {
     mappedBy = relationship.mappedBy
-  } else {
-    mappedBy = camelToSnakeCase(MikroORMEntity.name)
   }
 
   OneToOne({
@@ -185,7 +182,7 @@ export function defineHasOneWithFKRelationship(
     cascade: shouldRemoveRelated
       ? (["persist", "soft-remove"] as any)
       : undefined,
-  } as any)(MikroORMEntity.prototype, relationship.name)
+  } as OneToOneOptions<any, any>)(MikroORMEntity.prototype, relationship.name)
 
   Property({
     type: "string",
