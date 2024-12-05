@@ -125,12 +125,7 @@ export const sidebar = numberSidebarItems(
             },
             {
               type: "link",
-              title: "Create Links Between Records",
-              path: "/learn/customization/extend-features/create-links",
-            },
-            {
-              type: "link",
-              title: "Extend Route",
+              title: "Extend Core Flow",
               path: "/learn/customization/extend-features/extend-create-product",
             },
             {
