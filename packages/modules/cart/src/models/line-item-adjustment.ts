@@ -29,5 +29,6 @@ const LineItemAdjustment = model
       where: "deleted_at IS NULL",
     },
   ])
+  .checks([(columns) => `${columns.amount} >= 0`])
 
 export default LineItemAdjustment

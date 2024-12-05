@@ -943,7 +943,13 @@
           "unique": true
         }
       ],
-      "checks": [],
+      "checks": [
+        {
+          "name": "cart_line_item_adjustment_check",
+          "expression": "amount >= 0",
+          "definition": "check ((amount >= 0))"
+        }
+      ],
       "foreignKeys": {
         "cart_line_item_adjustment_item_id_foreign": {
           "constraintName": "cart_line_item_adjustment_item_id_foreign",
@@ -1006,6 +1012,15 @@
           "primary": false,
           "nullable": true,
           "mappedType": "text"
+        },
+        "metadata": {
+          "name": "metadata",
+          "type": "jsonb",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "mappedType": "json"
         },
         "tax_rate_id": {
           "name": "tax_rate_id",
