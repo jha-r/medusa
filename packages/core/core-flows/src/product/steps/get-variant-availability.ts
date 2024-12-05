@@ -1,5 +1,8 @@
 import { createStep, StepResponse } from "@medusajs/framework/workflows-sdk"
-import { getVariantAvailability } from "@medusajs/framework/utils"
+import {
+  ContainerRegistrationKeys,
+  getVariantAvailability,
+} from "@medusajs/framework/utils"
 
 export type GetVariantAvailabilityStepInput = {
   variant_ids: string[]

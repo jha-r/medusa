@@ -1,4 +1,5 @@
 import {
+  ContainerRegistrationKeys,
   getTotalVariantAvailability,
   getVariantAvailability,
   MedusaError,
