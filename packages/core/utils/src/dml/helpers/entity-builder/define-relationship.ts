@@ -152,9 +152,7 @@ export function defineHasOneRelationship(
     entity: relatedModelName,
     nullable: relationship.nullable,
     ...(mappedBy ? { mappedBy } : {}),
-    cascade: shouldRemoveRelated
-      ? (["persist", "soft-remove"] as any)
-      : undefined,
+    onDelete: shouldRemoveRelated ? "cascade" : undefined,
   } as OneToOneOptions<any, any>
 
   if (shouldRemoveRelated) {
