@@ -11,7 +11,7 @@ import {
   PricingFilters,
   PricingRepositoryService,
 } from "@medusajs/framework/types"
-import { SqlEntityManager } from "@mikro-orm/postgresql"
+import { Knex, SqlEntityManager } from "@mikro-orm/postgresql"
 
 export class PricingRepository
   extends MikroOrmBase
@@ -58,7 +58,7 @@ export class PricingRepository
       return []
     }
 
-    // Gets all the price set money amounts where rules match for each of the contexts
+    // Gets all the prices where rules match for each of the contexts
     // that the price set is configured for
     const priceSubQueryKnex = knex({
       price: "price",
@@ -90,7 +90,7 @@ export class PricingRepository
       .groupBy("price.id", "pl.id")
       .having(
         knex.raw(
-          "count(DISTINCT pr.attribute) = price.rules_count AND price.price_list_id IS NULL"
+          "count(pr.attribute) = price.rules_count AND price.price_list_id IS NULL"
         )
       )
       .orHaving(
@@ -99,17 +99,57 @@ export class PricingRepository
         )
       )
 
-    priceSubQueryKnex.orWhere((q) => {
-      const nullPLq = q.whereNull("price.price_list_id")
-      nullPLq.andWhere((q) => {
-        for (const [key, value] of Object.entries(context)) {
-          q.orWhere({
-            "pr.attribute": key,
-            "pr.value": value,
-          })
-        }
-        q.orWhere("price.rules_count", "=", 0)
-      })
+    const buildOperatorQueries = (
+      operatorGroupBuilder: Knex.QueryBuilder,
+      value
+    ) => {
+      operatorGroupBuilder
+        .where((operatorBuilder) => {
+          operatorBuilder
+            .where("pr.operator", "gte")
+            .whereRaw("? >= pr.value::numeric", [value])
+        })
+        .orWhere((operatorBuilder) => {
+          operatorBuilder
+            .where("pr.operator", "gt")
+            .whereRaw("? > pr.value::numeric", [value])
+        })
+        .orWhere((operatorBuilder) => {
+          operatorBuilder
+            .where("pr.operator", "lt")
+            .whereRaw("? < pr.value::numeric", [value])
+        })
+        .orWhere((operatorBuilder) => {
+          operatorBuilder
+            .where("pr.operator", "lte")
+            .whereRaw("? <= pr.value::numeric", [value])
+        })
+        .orWhere((operatorBuilder) => {
+          operatorBuilder
+            .where("pr.operator", "eq")
+            .whereRaw("? = pr.value::numeric", [value])
+        })
+    }
+
+    priceSubQueryKnex.orWhere((priceBuilder) => {
+      priceBuilder
+        .whereNull("price.price_list_id")
+        .andWhere((withoutPriceListBuilder) => {
+          for (const [key, value] of Object.entries(context)) {
+            withoutPriceListBuilder.orWhere((orBuilder) => {
+              orBuilder.where("pr.attribute", key)
+
+              if (typeof value === "number") {
+                orBuilder.where((operatorGroupBuilder) => {
+                  buildOperatorQueries(operatorGroupBuilder, value)
+                })
+              } else {
+                orBuilder.where({ "pr.value": value })
+              }
+            })
+          }
+          withoutPriceListBuilder.orWhere("price.rules_count", "=", 0)
+        })
     })
 
     priceSubQueryKnex.orWhere((q) => {
@@ -132,9 +172,7 @@ export class PricingRepository
         .andWhere(function () {
           this.andWhere(function () {
             for (const [key, value] of Object.entries(context)) {
-              this.orWhere({
-                "plr.attribute": key,
-              })
+              this.orWhere({ "plr.attribute": key })
               this.where(
                 "plr.value",
                 "@>",
@@ -146,14 +184,20 @@ export class PricingRepository
           })
 
           this.andWhere(function () {
-            this.andWhere(function () {
+            this.andWhere((contextBuilder) => {
               for (const [key, value] of Object.entries(context)) {
-                this.orWhere({
-                  "pr.attribute": key,
-                  "pr.value": value,
+                contextBuilder.orWhere((orBuilder) => {
+                  orBuilder.where("pr.attribute", key)
+
+                  if (typeof value === "number") {
+                    buildOperatorQueries(orBuilder, value)
+                  } else {
+                    orBuilder.where({ "pr.value": value })
+                  }
                 })
               }
-              this.andWhere("price.rules_count", ">", 0)
+
+              contextBuilder.andWhere("price.rules_count", ">", 0)
             })
             this.orWhere("price.rules_count", "=", 0)
           })

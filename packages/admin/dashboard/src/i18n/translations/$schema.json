@@ -2968,6 +2968,27 @@
           ],
           "additionalProperties": false
         },
+        "adjustInventory": {
+          "type": "object",
+          "properties": {
+            "errors": {
+              "type": "object",
+              "properties": {
+                "stockedQuantity": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "stockedQuantity"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "errors"
+          ],
+          "additionalProperties": false
+        },
         "toast": {
           "type": "object",
           "properties": {
@@ -2997,6 +3018,7 @@
         "editItemDetails",
         "create",
         "reservation",
+        "adjustInventory",
         "toast"
       ],
       "additionalProperties": false
@@ -3754,6 +3776,65 @@
             "panel",
             "toast",
             "validation"
+          ],
+          "additionalProperties": false
+        },
+        "edit": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "requestSuccess": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "title",
+                "requestSuccess"
+              ],
+              "additionalProperties": false
+            },
+            "shippingAddress": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "requestSuccess": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "title",
+                "requestSuccess"
+              ],
+              "additionalProperties": false
+            },
+            "billingAddress": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "requestSuccess": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "title",
+                "requestSuccess"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "email",
+            "shippingAddress",
+            "billingAddress"
           ],
           "additionalProperties": false
         },
@@ -4892,6 +4973,26 @@
                   },
                   "required": ["requested", "confirmed", "declined"],
                   "additionalProperties": false
+                },
+                "update_order": {
+                  "type": "object",
+                  "properties": {
+                    "shipping_address": {
+                      "type": "string"
+                    },
+                    "billing_address": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "shipping_address",
+                    "billing_address",
+                    "email"
+                  ],
+                  "additionalProperties": false
                 }
               },
               "required": [
@@ -4905,7 +5006,8 @@
                 "claim",
                 "exchange",
                 "edit",
-                "transfer"
+                "transfer",
+                "update_order"
               ],
               "additionalProperties": false
             }
@@ -4950,6 +5052,7 @@
         "transfer",
         "payment",
         "edits",
+        "edit",
         "returns",
         "claims",
         "exchanges",
@@ -9673,6 +9776,12 @@
         },
         "removed": {
           "type": "string"
+        },
+        "from": {
+          "type": "string"
+        },
+        "to": {
+          "type": "string"
         }
       },
       "required": [
@@ -9681,7 +9790,9 @@
         "available",
         "inStock",
         "added",
-        "removed"
+        "removed",
+        "from",
+        "to"
       ],
       "additionalProperties": false
     },
@@ -9773,6 +9884,9 @@
           "type": "string"
         },
         "subtitle": {
+          "type": "string"
+        },
+        "by": {
           "type": "string"
         },
         "item": {
@@ -10184,6 +10298,7 @@
         "discountable",
         "handle",
         "subtitle",
+        "by",
         "item",
         "qty",
         "limit",

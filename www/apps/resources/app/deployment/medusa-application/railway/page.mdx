@@ -16,9 +16,8 @@ In this document, you’ll learn how to deploy your Medusa application to [Railw
 
 1. PostgreSQL database.
 2. Redis database.
-3. Medusa application in server mode.
+3. Medusa application in server mode, with the Medusa Admin.
 4. Medusa application in worker mode.
-5. (Optional) Medusa Admin.
 
 <Note>
 
@@ -56,18 +55,7 @@ Later, you’ll set different values of the `MEDUSA_WORKER_MODE` environment var
 
 ### Configure Medusa Admin
 
-There are two cases where you may disable the Medusa Admin in your deployed Medusa application:
-
-1. If you choose to host it separately.
-2. In the Medusa application running in worker mode, as it doesn’t need to run the admin.
-
-<Note>
-
-To host the admin with the Medusa application, the hosting provider and plan should offer at least 2GB of RAM.
-
-</Note>
-
-Add the following configuration in `medusa-config.ts`:
+You need to disable the Medusa Admin in the worker Medusa application, while keeping it enabled in the server Medusa application. So, add the following configuration in `medusa-config.ts`:
 
 ```ts title="medusa-config.ts"
 module.exports = defineConfig({
@@ -225,7 +213,6 @@ JWT_SECRET=supersecret  # TODO GENERATE SECURE SECRET
 STORE_CORS= # STOREFRONT URL
 ADMIN_CORS= # ADMIN URL
 AUTH_CORS= # STOREFRONT AND ADMIN URLS, SEPARATED BY COMMAS
-# change to false if you're hosting the admin with the application
 DISABLE_MEDUSA_ADMIN=true
 MEDUSA_WORKER_MODE=server
 PORT=9000
@@ -237,9 +224,9 @@ Where:
 
 - The value of `COOKIE_SECRET` and `JWT_SECRET` must be a randomly generated secret.
 - `STORE_CORS`'s value is the URL of your storefront. If you don’t have it yet, you can skip adding it for now.
-- `ADMIN_CORS`'s value is the URL of the admin dashboard. If you don’t have it yet, or you’re deploying the admin with the Medusa application, you can skip adding it for now.
+- `ADMIN_CORS`'s value is the URL of the admin dashboard, which is the same as the server Medusa application. You can add it later if you don't currently have it.
 - `AUTH_CORS`'s value is the URLs of any application authenticating users, customers, or other actor types, such as the storefront and admin URLs. The URLs are separated by commas. If you don’t have the URLs yet, you can set its value later.
-- Change `DISABLE_MEDUSA_ADMIN` to `false` if you’re hosting the admin with the Medusa application.
+- Set `DISABLE_MEDUSA_ADMIN`'s value to `false` so that the admin is built with the server application.
 - `REDIS_URL`'s value is automatically generated using Railway’s template syntax. You add the `?family=0` to the connection string to support both IPv6 and IPv4 connections.
 
 Feel free to add any other relevant environment variables. Once you’re done, click the Update Variables button.
@@ -272,11 +259,9 @@ You can either generate a random domain name or set a custom one. To do that:
    1. Choose the `9000` port.
 5. Save the changes.
 
-### Additional Configuration if Deploying with Admin
+### Set Backend URL in Admin Configuration
 
-If you’re deploying the Medusa application in server mode with the admin, you have to make some changes now that you’ve obtained the application’s URL.
-
-First, add the following configuration to `medusa-config.ts`:
+After you’ve obtained the Medusa application’s URL, add the following configuration to `medusa-config.ts`:
 
 ```ts title="medusa-config.ts"
 module.exports = defineConfig({
@@ -345,7 +330,7 @@ REDIS_URL=${{Redis.REDIS_URL}}?family=0
 Where:
 
 - The value of `COOKIE_SECRET` and `JWT_SECRET` must be a randomly generated secret.
-- Keep `DISABLE_MEDUSA_ADMIN`'s value set to `true`, even if you’re hosting the admin with the Medusa application.
+- Set `DISABLE_MEDUSA_ADMIN`'s value to `true` so that the admin isn't built with the worker application.
 - `REDIS_URL`'s value is automatically generated using Railway’s template syntax. You add the `?family=0` to the connection string to support both IPv6 and IPv4 connections.
 
 Feel free to add any other relevant environment variables. Once you’re done, click the Update Variables button.
@@ -373,9 +358,7 @@ To deploy the changes of the Medusa application in working mode, click on the De
 
 To test out the deployed application, go to `<APP_URL>/health`, where `<APP_URL>` is the URL of the Medusa application in server mode. If the deployment was successful, you’ll see the `OK` response.
 
-### Open Deployed Medusa Admin
-
-If you deployed the Medusa Admin with the application, it’ll be available at `<APP_URL>/app`.
+The Medusa Admin is also available at `<APP_URL>/app`.
 
 ---
 

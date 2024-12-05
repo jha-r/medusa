@@ -10,7 +10,7 @@ In this chapter, you’ll learn about loaders and how to use them.
 
 ## What is a Loader?
 
-When building a commerce application, you'll often need to execute an action the first time the application starts. For example, if you're integrating a non-supported database such as MongoDB, you want to establish the connection when the application starts and re-use it in your customizations.
+When building a commerce application, you'll often need to execute an action the first time the application starts. For example, if your application needs to connect to databases other than Medusa's PostgreSQL database, you might need to establish a connection on application startup.
 
 In Medusa, you can execute an action when the application starts using a loader. A loader is a function exported by a [module](../modules/page.mdx), which is a package of business logic for a single domain. When the Medusa application starts, it executes all loaders exported by configured modules.
 
@@ -32,6 +32,8 @@ You create a loader function in a TypeScript or JavaScript file under a module's
 
 For example, consider you have a `hello` module, you can create a loader at `src/modules/hello/loaders/hello-world.ts` with the following content:
 
+![Example of loader file in the application's directory structure](https://res.cloudinary.com/dza7lstvk/image/upload/v1732865671/Medusa%20Book/loader-dir-overview_eg6vtu.jpg)
+
 <Note title="Tip">
 
 Learn how to create a module in [this chapter](../modules/page.mdx).
@@ -42,14 +44,11 @@ Learn how to create a module in [this chapter](../modules/page.mdx).
 import {
   LoaderOptions,
 } from "@medusajs/framework/types"
-import { 
-  ContainerRegistrationKeys,
-} from "@medusajs/framework/utils"
 
 export default async function helloWorldLoader({
   container,
 }: LoaderOptions) {
-  const logger = container.resolve(ContainerRegistrationKeys.LOGGER)
+  const logger = container.resolve("logger")
 
   logger.info("[helloWorldLoader]: Hello, World!")
 }
@@ -123,17 +122,16 @@ Consider your have a MongoDB module that allows you to perform operations on a M
 To connect to the database, you create the following loader in your module:
 
 export const loaderHighlights = [
-  ["6", "ModuleOptions", "Define a type for expected options."],
-  ["14", "ModuleOptions", "Pass the option type as a type argument to `LoaderOptions`."],
-  ["24", "clientDb", "Create a client instance that connects to the specified database."],
-  ["30", "register", "Register custom resource in the container."],
-  ["31", `"mongoClient"`, "The resource's key in the container."],
-  ["32", "asValue(clientDb)", "The resource to register."]
+  ["5", "ModuleOptions", "Define a type for expected options."],
+  ["13", "ModuleOptions", "Pass the option type as a type argument to `LoaderOptions`."],
+  ["23", "clientDb", "Create a client instance that connects to the specified database."],
+  ["29", "register", "Register custom resource in the container."],
+  ["30", `"mongoClient"`, "The resource's key in the container."],
+  ["31", "asValue(clientDb)", "The resource to register."]
 ]
 
 ```ts title="src/modules/mongo/loaders/connection.ts" highlights={loaderHighlights}
 import { LoaderOptions } from "@medusajs/framework/types"
-import { ContainerRegistrationKeys } from "@medusajs/framework/utils"
 import { asValue } from "awilix"
 import { MongoClient } from "mongodb"
 
@@ -152,7 +150,7 @@ export default async function mongoConnectionLoader({
   if (!options.db_name) {
     throw new Error(`[MONGO MDOULE]: db_name option is required.`)
   }
-  const logger = container.resolve(ContainerRegistrationKeys.LOGGER)
+  const logger = container.resolve("logger")
   
   try {
     const clientDb = (

@@ -302,7 +302,7 @@ export const sidebar = sidebarAttachHrefCommonOptions([
                   {
                     type: "category",
                     title: "Data Models",
-                    autogenerate_path: "/references/auth_models/classes",
+                    autogenerate_path: "/references/auth_models/variables",
                   },
                 ],
               },
@@ -988,7 +988,7 @@ export const sidebar = sidebarAttachHrefCommonOptions([
                     type: "category",
                     title: "Data Models",
                     hasTitleStyling: true,
-                    autogenerate_path: "/references/pricing_models/classes",
+                    autogenerate_path: "/references/pricing_models/variables",
                   },
                 ],
               },
@@ -1566,7 +1566,7 @@ export const sidebar = sidebarAttachHrefCommonOptions([
                     type: "category",
                     title: "Data Models",
                     hasTitleStyling: true,
-                    autogenerate_path: "/references/user_models/classes",
+                    autogenerate_path: "/references/user_models/variables",
                   },
                 ],
               },
@@ -2159,7 +2159,7 @@ export const sidebar = sidebarAttachHrefCommonOptions([
           },
           {
             type: "category",
-            title: "Medusa Application",
+            title: "Self-Hosting",
             children: [
               {
                 type: "link",
@@ -2172,11 +2172,6 @@ export const sidebar = sidebarAttachHrefCommonOptions([
                 title: "Railway",
               },
             ],
-          },
-          {
-            type: "category",
-            title: "Medusa Admin",
-            autogenerate_path: "/deployment/admin",
           },
           {
             type: "category",
