@@ -13,7 +13,7 @@ export const getVariantAvailabilityId = "get-variant-availability"
 export const getVariantAvailabilityStep = createStep(
   getVariantAvailabilityId,
   async (data: GetVariantAvailabilityStepInput, { container }) => {
-    const query = container.resolve("query")
+    const query = container.resolve(ContainerRegistrationKeys.QUERY)
     const availability = await getVariantAvailability(query, data)
     return new StepResponse(availability)
   }
