@@ -5,7 +5,7 @@ import { keepPreviousData } from "@tanstack/react-query"
 import { useTranslation } from "react-i18next"
 
 import { ActionMenu } from "../../../../../components/common/action-menu"
-import { DataTable } from "../../../../../components/table/data-table"
+import { _DataTable } from "../../../../../components/table/data-table"
 import { useProductVariants } from "../../../../../hooks/api/products"
 import { useDataTable } from "../../../../../hooks/use-data-table"
 import { useProductVariantTableColumns } from "./use-variant-table-columns"
@@ -79,7 +79,7 @@ export const ProductVariantSection = ({
           ]}
         />
       </div>
-      <DataTable
+      <_DataTable
         table={table}
         columns={columns}
         filters={filters}

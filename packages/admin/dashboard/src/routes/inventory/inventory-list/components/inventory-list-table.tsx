@@ -3,7 +3,7 @@ import { Button, Container, Heading, Text } from "@medusajs/ui"
 
 import { useTranslation } from "react-i18next"
 import { Link } from "react-router-dom"
-import { DataTable } from "../../../../components/table/data-table"
+import { _DataTable } from "../../../../components/table/data-table"
 import { useInventoryItems } from "../../../../hooks/api/inventory"
 import { useDataTable } from "../../../../hooks/use-data-table"
 import { useInventoryTableColumns } from "./use-inventory-table-columns"
@@ -58,7 +58,7 @@ export const InventoryListTable = () => {
           <Link to="create">{t("actions.create")}</Link>
         </Button>
       </div>
-      <DataTable
+      <_DataTable
         table={table}
         columns={columns}
         pageSize={PAGE_SIZE}

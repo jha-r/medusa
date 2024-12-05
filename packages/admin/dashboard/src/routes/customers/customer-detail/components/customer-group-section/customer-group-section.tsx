@@ -16,9 +16,9 @@ import { keepPreviousData } from "@tanstack/react-query"
 import { useTranslation } from "react-i18next"
 import { Link } from "react-router-dom"
 import { ActionMenu } from "../../../../../components/common/action-menu/index.ts"
-import { DataTable } from "../../../../../components/table/data-table/index.ts"
+import { _DataTable } from "../../../../../components/table/data-table/index.ts"
+import { useBatchCustomerCustomerGroups } from "../../../../../hooks/api"
 import {
-  customerGroupsQueryKeys,
   useCustomerGroups,
   useRemoveCustomersFromGroup,
 } from "../../../../../hooks/api/customer-groups.tsx"
@@ -26,9 +26,6 @@ import { useCustomerGroupTableColumns } from "../../../../../hooks/table/columns
 import { useCustomerGroupTableFilters } from "../../../../../hooks/table/filters/use-customer-group-table-filters.tsx"
 import { useCustomerGroupTableQuery } from "../../../../../hooks/table/query/use-customer-group-table-query.tsx"
 import { useDataTable } from "../../../../../hooks/use-data-table.tsx"
-import { sdk } from "../../../../../lib/client/index.ts"
-import { queryClient } from "../../../../../lib/query-client.ts"
-import { useBatchCustomerCustomerGroups } from "../../../../../hooks/api"
 
 type CustomerGroupSectionProps = {
   customer: HttpTypes.AdminCustomer
@@ -129,7 +126,7 @@ export const CustomerGroupSection = ({
           </Button>
         </Link>
       </div>
-      <DataTable
+      <_DataTable
         table={table}
         columns={columns}
         pageSize={PAGE_SIZE}

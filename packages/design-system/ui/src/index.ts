@@ -1,3 +1,4 @@
+// Components
 export { Alert } from "./components/alert"
 export { Avatar } from "./components/avatar"
 export { Badge } from "./components/badge"
@@ -29,6 +30,7 @@ export { ProgressTabs } from "./components/progress-tabs"
 export { Prompt } from "./components/prompt"
 export { RadioGroup } from "./components/radio-group"
 export { Select } from "./components/select"
+export { Skeleton } from "./components/skeleton"
 export { StatusBadge } from "./components/status-badge"
 export { Switch } from "./components/switch"
 export { Table } from "./components/table"
@@ -38,6 +40,9 @@ export { Textarea } from "./components/textarea"
 export { Toast } from "./components/toast"
 export { Toaster } from "./components/toaster"
 export { Tooltip, TooltipProvider } from "./components/tooltip"
+
+// Blocks
+export * from "./blocks/data-table"
 
 // Hooks
 export { usePrompt } from "./hooks/use-prompt"

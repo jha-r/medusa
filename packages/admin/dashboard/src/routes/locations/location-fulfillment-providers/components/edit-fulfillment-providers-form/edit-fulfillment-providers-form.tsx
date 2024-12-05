@@ -12,7 +12,7 @@ import {
   RouteFocusModal,
   useRouteModal,
 } from "../../../../../components/modals"
-import { DataTable } from "../../../../../components/table/data-table"
+import { _DataTable } from "../../../../../components/table/data-table"
 import { useFulfillmentProviders } from "../../../../../hooks/api/fulfillment-providers"
 import { useUpdateStockLocationFulfillmentProviders } from "../../../../../hooks/api/stock-locations"
 import { useFulfillmentProviderTableColumns } from "../../../../../hooks/table/columns/use-fulfillment-provider-table-columns"
@@ -123,7 +123,7 @@ export const LocationEditFulfillmentProvidersForm = ({
     <RouteFocusModal.Form form={form}>
       <div className="flex h-full flex-col overflow-hidden">
         <RouteFocusModal.Body>
-          <DataTable
+          <_DataTable
             table={table}
             columns={columns}
             pageSize={PAGE_SIZE}

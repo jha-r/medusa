@@ -30,13 +30,17 @@ export type ActionGroup = {
 
 type ActionMenuProps = {
   groups: ActionGroup[]
+  variant?: "transparent" | "primary"
 }
 
-export const ActionMenu = ({ groups }: ActionMenuProps) => {
+export const ActionMenu = ({
+  groups,
+  variant = "transparent",
+}: ActionMenuProps) => {
   return (
     <DropdownMenu>
       <DropdownMenu.Trigger asChild>
-        <IconButton size="small" variant="transparent">
+        <IconButton size="small" variant={variant}>
           <EllipsisHorizontal />
         </IconButton>
       </DropdownMenu.Trigger>
