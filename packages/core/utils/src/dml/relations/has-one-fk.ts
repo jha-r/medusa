@@ -13,6 +13,7 @@ import { RelationNullableModifier } from "./nullable"
  */
 export class HasOneWithForeignKey<T> extends BaseRelationship<T> {
   type = "hasOneWithFK" as const
+  declare $foreignKey: true
 
   static isHasOneWithForeignKey<T>(
     relationship: any

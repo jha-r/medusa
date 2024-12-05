@@ -143,9 +143,9 @@ export interface EntityConstructor<Props> extends Function {
  * "belongsTo" relation meaning "hasOne" and "ManyToOne"
  */
 export type InferForeignKeys<Schema extends DMLSchema> = {
-  [K in keyof Schema as Schema[K] extends { type: "belongsTo" | "hasOneWithFK" }
+  [K in keyof Schema as Schema[K] extends { $foreignKey: true }
     ? `${K & string}_id`
-    : never]: Schema[K] extends { type: "belongsTo" | "hasOneWithFK" }
+    : never]: Schema[K] extends { $foreignKey: true }
     ? null extends Schema[K]["$dataType"]
       ? string | null
       : string

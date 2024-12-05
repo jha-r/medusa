@@ -3,7 +3,6 @@ import { RelationNullableModifier } from "./nullable"
 
 export class BelongsTo<T> extends BaseRelationship<T> {
   type = "belongsTo" as const
-
   declare $foreignKey: true
 
   static isBelongsTo<T>(relationship: any): relationship is BelongsTo<T> {
