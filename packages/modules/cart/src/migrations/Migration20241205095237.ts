@@ -97,13 +97,6 @@ export class Migration20241205095237 extends Migration {
     )
 
     this.addSql(
-      'alter table if exists "cart" drop constraint if exists "cart_shipping_address_id_unique";'
-    )
-    this.addSql(
-      'alter table if exists "cart" drop constraint if exists "cart_billing_address_id_unique";'
-    )
-
-    this.addSql(
       'alter table if exists "cart_line_item" alter column "is_tax_inclusive" drop default;'
     )
     this.addSql(
