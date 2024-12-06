@@ -65,6 +65,7 @@ class OasKindGenerator extends FunctionKindGenerator {
     "MedusaRequest",
     "RequestWithContext",
     "AuthenticatedMedusaRequest",
+    "MedusaStoreRequest",
   ]
   // as it's not always possible to detect authenticated request
   // use this to override the default detection logic.
