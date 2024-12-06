@@ -7,6 +7,7 @@ import pl from "./pl.json"
 import ptBR from "./ptBR.json"
 import th from "./th.json"
 import tr from "./tr.json"
+import vi from "./vi.json"
 
 export default {
   de: {
@@ -35,5 +36,8 @@ export default {
   },
   tr: {
     translation: tr,
+  },
+  vi: {
+    translation: vi,
   },
 }
