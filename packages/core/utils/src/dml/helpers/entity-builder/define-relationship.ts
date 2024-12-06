@@ -7,6 +7,7 @@ import {
 } from "@medusajs/types"
 import {
   BeforeCreate,
+  Cascade,
   ManyToMany,
   ManyToOne,
   OneToMany,
@@ -147,14 +148,18 @@ export function defineHasOneRelationship(
     mappedBy = relationship.mappedBy
   }
 
-  OneToOne({
+  const oneToOneOptions = {
     entity: relatedModelName,
     nullable: relationship.nullable,
     ...(mappedBy ? { mappedBy } : {}),
-    cascade: shouldRemoveRelated
-      ? (["persist", "soft-remove"] as any)
-      : undefined,
-  } as OneToOneOptions<any, any>)(MikroORMEntity.prototype, relationship.name)
+    onDelete: shouldRemoveRelated ? "cascade" : undefined,
+  } as OneToOneOptions<any, any>
+
+  if (shouldRemoveRelated) {
+    oneToOneOptions.cascade = ["persist", "soft-remove"] as any
+  }
+
+  OneToOne(oneToOneOptions)(MikroORMEntity.prototype, relationship.name)
 }
 
 /**
@@ -368,14 +373,6 @@ export function defineBelongsToRelationship(
   ) {
     const foreignKeyName = camelToSnakeCase(`${relationship.name}Id`)
 
-    OneToOne({
-      entity: relatedModelName,
-      nullable: relationship.nullable,
-      mappedBy: mappedBy,
-      owner: true,
-      onDelete: shouldCascade ? "cascade" : undefined,
-    })(MikroORMEntity.prototype, relationship.name)
-
     Object.defineProperty(MikroORMEntity.prototype, foreignKeyName, {
       value: null,
       configurable: true,
@@ -384,11 +381,26 @@ export function defineBelongsToRelationship(
     })
 
     Property({
-      type: "string",
       columnType: "text",
+      type: "string",
       nullable: relationship.nullable,
       persist: false,
     })(MikroORMEntity.prototype, foreignKeyName)
+
+    const oneToOneOptions: Parameters<typeof OneToOne>[0] = {
+      entity: relatedModelName,
+      nullable: relationship.nullable,
+      mappedBy: mappedBy,
+      fieldName: foreignKeyName,
+      owner: true,
+      onDelete: shouldCascade ? "cascade" : undefined,
+    }
+
+    if (shouldCascade) {
+      oneToOneOptions.cascade = [Cascade.PERSIST, "soft-remove"] as any
+    }
+
+    OneToOne(oneToOneOptions)(MikroORMEntity.prototype, relationship.name)
 
     const { tableName } = parseEntityName(entity)
     applyEntityIndexes(MikroORMEntity, tableName, [
