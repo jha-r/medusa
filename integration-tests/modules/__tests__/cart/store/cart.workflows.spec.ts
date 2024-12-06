@@ -1982,6 +1982,8 @@ medusaIntegrationTestRunner({
             throwOnError: false,
           })
 
+          console.log("result -- ", result)
+
           expect(errors).toEqual([
             expect.objectContaining({
               message: `Shipping options with IDs ${shippingOption.id} do not have a price`,

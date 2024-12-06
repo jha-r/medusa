@@ -84,7 +84,7 @@ export function isContextValid(
 
     return operatorsPredicate[operator](
       `${contextValue}`,
-      value as string & string[]
+      `${value}` as string & string[]
     )
   }
 

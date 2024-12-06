@@ -132,6 +132,7 @@ export const listShippingOptionsForCartWorkflow = createWorkflow(
 
           filters: {
             fulfillment_set_id: fulfillmentSetIds,
+
             address: {
               country_code: cart.shipping_address?.country_code,
               province_code: cart.shipping_address?.province,

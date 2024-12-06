@@ -1,6 +1,5 @@
 import {
   ICartModuleService,
-  UpdateLineItemWithSelectorDTO,
   UpdateShippingMethodDTO,
 } from "@medusajs/framework/types"
 import {
@@ -8,7 +7,6 @@ import {
   getSelectsAndRelationsFromObjectArray,
 } from "@medusajs/framework/utils"
 import { StepResponse, createStep } from "@medusajs/framework/workflows-sdk"
-
 
 export const updateShippingMethodsStepId = "update-shipping-methods-step"
 /**
