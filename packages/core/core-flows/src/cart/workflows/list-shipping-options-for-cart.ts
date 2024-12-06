@@ -70,9 +70,13 @@ export const listShippingOptionsForCartWorkflow = createWorkflow(
       }
     )
 
-    const customerGroupIds = when({ cart }, ({ cart }) => {
-      return !!cart.id
-    }).then(() => {
+    const customerGroupIds = when(
+      "get-customer-group",
+      { cart },
+      ({ cart }) => {
+        return !!cart.id
+      }
+    ).then(() => {
       const customerQuery = useQueryGraphStep({
         entity: "customer",
         filters: { id: cart.customer_id },
