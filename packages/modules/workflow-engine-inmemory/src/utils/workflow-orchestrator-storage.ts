@@ -48,6 +48,8 @@ export class InMemoryDistributedTransactionStorage
   }
 
   private async saveToDb(data: TransactionCheckpoint) {
+    const foo = await this.workflowExecutionService_.list()
+    console.log(foo)
     await this.workflowExecutionService_.upsert([
       {
         workflow_id: data.flow.modelId,
