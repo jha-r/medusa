@@ -79,10 +79,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ariakit/core@npm:0.4.14":
+  version: 0.4.14
+  resolution: "@ariakit/core@npm:0.4.14"
+  checksum: 7faf79069d25b9a869143fc8d25f87ce02be3fbc87183055a5cb93abf6a7989281155493cf1fe18b5d8144f6fab5a60063699d6d53b7e3d3de253e8afd0c33c2
+  languageName: node
+  linkType: hard
+
 "@ariakit/core@npm:0.4.6":
   version: 0.4.6
   resolution: "@ariakit/core@npm:0.4.6"
   checksum: ca95be5acfd55ad99fa2eaddfdcf2dd178622ac64634bec80709dc4c722f8f15ac6d321831c72ab034001fe00964f7a2531e519916f29cf885d8cf3ffdbb6776
+  languageName: node
+  linkType: hard
+
+"@ariakit/react-core@npm:0.4.15":
+  version: 0.4.15
+  resolution: "@ariakit/react-core@npm:0.4.15"
+  dependencies:
+    "@ariakit/core": 0.4.14
+    "@floating-ui/dom": ^1.0.0
+    use-sync-external-store: ^1.2.0
+  peerDependencies:
+    react: ^17.0.0 || ^18.0.0 || ^19.0.0
+    react-dom: ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 8da567eadee423b38b54ea4c58ec19a84e329da141bf0277906a8a69b428ea6326e31e28a7f0fc67c4c8b1c420500137b6bee04e8c12253f2b7b290fb2173439
   languageName: node
   linkType: hard
 
@@ -109,6 +130,18 @@ __metadata:
     react: ^17.0.0 || ^18.0.0
     react-dom: ^17.0.0 || ^18.0.0
   checksum: 647d540c81d116de690e80544152471be59ced91ca1a31e81dbafea162397e3ce16844401eac708c06e8ad834ca6779eb373fc4634e28d6ecdb7e0f2fce4a061
+  languageName: node
+  linkType: hard
+
+"@ariakit/react@npm:^0.4.15":
+  version: 0.4.15
+  resolution: "@ariakit/react@npm:0.4.15"
+  dependencies:
+    "@ariakit/react-core": 0.4.15
+  peerDependencies:
+    react: ^17.0.0 || ^18.0.0 || ^19.0.0
+    react-dom: ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: e89ccb1e56df17cf372b6f6df3217f2e2258bad920ac21044303948f59de4a61ae42142162d12c05b65e4ff63f08a450fa7429aafbb74a9817a65f36607ff980
   languageName: node
   linkType: hard
 
@@ -6654,6 +6687,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@medusajs/ui@workspace:packages/design-system/ui"
   dependencies:
+    "@ariakit/react": ^0.4.15
     "@medusajs/icons": ^2.0.1
     "@medusajs/ui-preset": ^2.0.1
     "@radix-ui/react-accordion": 1.2.0
