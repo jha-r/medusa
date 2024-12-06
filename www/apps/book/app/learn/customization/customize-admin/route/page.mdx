@@ -43,7 +43,7 @@ export const GET = async (
   
   const { 
     data: brands, 
-    metadata: { count, take, skip }
+    metadata: { count, take, skip },
   } = await query.graph({
     entity: "brand",
     ...req.remoteQueryConfig,
@@ -53,7 +53,7 @@ export const GET = async (
     brands,
     count,
     limit: take,
-    offset: skip
+    offset: skip,
   })
 }
 ```
@@ -397,8 +397,8 @@ const { data } = useQuery<BrandsResponse>({
   queryFn: () => sdk.client.fetch(`/admin/brands`, {
     query: {
       limit,
-      offset
-    }
+      offset,
+    },
   }),
   queryKey: [["brands", limit, offset]],
 })
@@ -431,12 +431,12 @@ Then, replace the `{/* TODO show brands */}` in the return statement with the fo
   columns={[
     {
       key: "id",
-      label: "#"
+      label: "#",
     },
     {
       key: "name",
-      label: "Name"
-    }
+      label: "Name",
+    },
   ]}
   data={data?.brands || []}
   pageSize={data?.limit || limit}
