@@ -790,6 +790,11 @@
         "quantityOutOfRange": "最小数量は1、最大数量は{{max}}です"
       }
     },
+    "adjustInventory": {
+      "errors": {
+        "stockedQuantity": "在庫数量を予約数量{{quantity}}より少ない数に更新することはできません。"
+      }
+    },
     "toast": {
       "updateLocations": "拠点が正常に更新されました。",
       "updateLevel": "在庫レベルが正常に更新されました。",
@@ -995,6 +1000,20 @@
       },
       "validation": {
         "quantityLowerThanFulfillment": "数量を出荷済みの数量以下に設定することはできません"
+      }
+    },
+    "edit": {
+      "email": {
+        "title": "Eメールを編集",
+        "requestSuccess": "注文のEメールが「{{email}}」に更新されました。"
+      },
+      "shippingAddress": {
+        "title": "配送先住所を編集",
+        "requestSuccess": "注文の配送先住所が更新されました。"
+      },
+      "billingAddress": {
+        "title": "請求先住所を編集",
+        "requestSuccess": "注文の請求先住所が更新されました。"
       }
     },
     "returns": {
@@ -1296,6 +1315,11 @@
           "requested": "注文移転#{{transferId}}がリクエストされました",
           "confirmed": "注文移転#{{transferId}}が確認されました",
           "declined": "注文移転#{{transferId}}が拒否されました"
+        },
+        "update_order": {
+          "shipping_address": "配送先住所が更新されました",
+          "billing_address": "請求先住所が更新されました",
+          "email": "Eメールが更新されました"
         }
       }
     },
@@ -2310,6 +2334,9 @@
       "update": "販売チャネルが正常に更新されました",
       "delete": "販売チャネルが正常に削除されました"
     },
+    "tooltip": {
+      "cannotDeleteDefault": "デフォルトの販売チャネルは削除できません"
+    },
     "products": {
       "list": {
         "noRecordsMessage": "この販売チャネルには商品がありません。"
@@ -2593,7 +2620,9 @@
     "available": "利用可能",
     "inStock": "在庫あり",
     "added": "追加済み",
-    "removed": "削除済み"
+    "removed": "削除済み",
+    "from": "から",
+    "to": "へ"
   },
   "fields": {
     "amount": "金額",
@@ -2625,6 +2654,7 @@
     "discountable": "割引可能",
     "handle": "ハンドル",
     "subtitle": "サブタイトル",
+    "by": "作成者",
     "item": "アイテム",
     "qty": "数量",
     "limit": "制限",
