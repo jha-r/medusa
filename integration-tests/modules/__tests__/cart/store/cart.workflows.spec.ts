@@ -38,6 +38,7 @@ import {
   generateStoreHeaders,
 } from "../../../../helpers/create-admin-user"
 import { seedStorefrontDefaults } from "../../../../helpers/seed-storefront-defaults"
+import { createAuthenticatedCustomer } from "../../../helpers/create-authenticated-customer"
 
 jest.setTimeout(200000)
 
@@ -59,9 +60,9 @@ medusaIntegrationTestRunner({
       let inventoryModule: IInventoryService
       let fulfillmentModule: IFulfillmentModuleService
       let remoteLink, remoteQuery, storeHeaders
-
       let salesChannel
       let defaultRegion
+      let customer, storeHeadersWithCustomer
 
       beforeAll(async () => {
         appContainer = getContainer()
@@ -72,9 +73,9 @@ medusaIntegrationTestRunner({
         productModule = appContainer.resolve(Modules.PRODUCT)
         pricingModule = appContainer.resolve(Modules.PRICING)
         paymentModule = appContainer.resolve(Modules.PAYMENT)
+        fulfillmentModule = appContainer.resolve(Modules.FULFILLMENT)
         inventoryModule = appContainer.resolve(Modules.INVENTORY)
         stockLocationModule = appContainer.resolve(Modules.STOCK_LOCATION)
-        fulfillmentModule = appContainer.resolve(Modules.FULFILLMENT)
         remoteLink = appContainer.resolve(ContainerRegistrationKeys.REMOTE_LINK)
         remoteQuery = appContainer.resolve(
           ContainerRegistrationKeys.REMOTE_QUERY
@@ -85,6 +86,20 @@ medusaIntegrationTestRunner({
         const publishableKey = await generatePublishableKey(appContainer)
         storeHeaders = generateStoreHeaders({ publishableKey })
         await createAdminUser(dbConnection, adminHeaders, appContainer)
+
+        const result = await createAuthenticatedCustomer(api, storeHeaders, {
+          first_name: "tony",
+          last_name: "stark",
+          email: "tony@test-industries.com",
+        })
+
+        customer = result.customer
+        storeHeadersWithCustomer = {
+          headers: {
+            ...storeHeaders.headers,
+            authorization: `Bearer ${result.jwt}`,
+          },
+        }
 
         const { region } = await seedStorefrontDefaults(appContainer, "dkk")
 
@@ -1923,72 +1938,6 @@ medusaIntegrationTestRunner({
           })
 
           expect(result).toEqual([])
-        })
-
-        it("should throw when shipping options are missing prices", async () => {
-          const cart = (
-            await api.post(
-              `/store/carts`,
-              {
-                currency_code: "usd",
-                region_id: region.id,
-                sales_channel_id: salesChannel.id,
-              },
-              storeHeaders
-            )
-          ).data.cart
-
-          const shippingOption = (
-            await api.post(
-              `/admin/shipping-options`,
-              {
-                name: "Test shipping option",
-                service_zone_id: fulfillmentSet.service_zones[0].id,
-                shipping_profile_id: shippingProfile.id,
-                provider_id: "manual_test-provider",
-                price_type: "flat",
-                type: {
-                  label: "Test type",
-                  description: "Test description",
-                  code: "test-code",
-                },
-                prices: [
-                  {
-                    amount: 3000,
-                    currency_code: "inr",
-                  },
-                ],
-                rules: [
-                  {
-                    operator: RuleOperator.EQ,
-                    attribute: "is_return",
-                    value: "false",
-                  },
-                  {
-                    operator: RuleOperator.EQ,
-                    attribute: "enabled_in_store",
-                    value: "true",
-                  },
-                ],
-              },
-              adminHeaders
-            )
-          ).data.shipping_option
-
-          const { errors } = await listShippingOptionsForCartWorkflow(
-            appContainer
-          ).run({
-            input: { cart_id: cart.id },
-            throwOnError: false,
-          })
-
-          console.log("result -- ", result)
-
-          expect(errors).toEqual([
-            expect.objectContaining({
-              message: `Shipping options with IDs ${shippingOption.id} do not have a price`,
-            }),
-          ])
         })
       })
 

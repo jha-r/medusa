@@ -52,32 +52,42 @@ export const refreshCartShippingMethodsWorkflow = createWorkflow(
           option_ids: shippingOptionIds,
           cart_id: cart.id,
           is_return: false,
-          options: { shouldValidatePrices: false },
         },
       })
 
+      // Creates an object on which shipping methods to remove or update depending
+      // on the validity of the shipping options for the cart
       const shippingMethodsData = transform(
         { cart, shippingOptions },
         ({ cart, shippingOptions }) => {
           const { shipping_methods: shippingMethods = [] } = cart
-          const invalidShippingMethodIds = shippingMethods
-            .filter(
-              (shippingMethod) =>
-                !isPresent(
-                  shippingOptions.find(
-                    (shippingOption) =>
-                      shippingOption.id === shippingMethod.shipping_option_id &&
-                      isDefined(
-                        shippingOption.calculated_price?.calculated_amount
-                      )
-                  )
-                )
-            )
-            .map((shippingMethod) => shippingMethod.id)
 
           const validShippingMethods = shippingMethods.filter(
-            (shippingMethod) =>
-              !invalidShippingMethodIds.includes(shippingMethod.id)
+            (shippingMethod) => {
+              // Fetch  the available shipping options for the cart context and find the one associated
+              // with the current shipping method
+              const shippingOption = shippingOptions.find(
+                (shippingOption) =>
+                  shippingOption.id === shippingMethod.shipping_option_id
+              )
+
+              const shippingOptionPrice =
+                shippingOption?.calculated_price?.calculated_amount
+
+              // The shipping method is only valid if both the shipping option and the price is found
+              // for the context of the cart. The invalid options will lead to a deleted shipping method
+              if (isPresent(shippingOption) && isDefined(shippingOptionPrice)) {
+                return true
+              }
+
+              return false
+            }
+          )
+
+          const shippingMethodIds = shippingMethods.map((sm) => sm.id)
+          const validShippingMethodIds = validShippingMethods.map((sm) => sm.id)
+          const invalidShippingMethodIds = shippingMethodIds.filter(
+            (id) => !validShippingMethodIds.includes(id)
           )
 
           const shippingMethodsToUpdate = validShippingMethods.map(
@@ -98,7 +108,7 @@ export const refreshCartShippingMethodsWorkflow = createWorkflow(
           )
 
           return {
-            invalidShippingMethodIds,
+            shippingMethodsToRemove: invalidShippingMethodIds,
             shippingMethodsToUpdate,
           }
         }
@@ -106,7 +116,7 @@ export const refreshCartShippingMethodsWorkflow = createWorkflow(
 
       parallelize(
         removeShippingMethodFromCartStep({
-          shipping_method_ids: shippingMethodsData.invalidShippingMethodIds,
+          shipping_method_ids: shippingMethodsData.shippingMethodsToRemove,
         }),
         updateShippingMethodsStep(shippingMethodsData.shippingMethodsToUpdate)
       )

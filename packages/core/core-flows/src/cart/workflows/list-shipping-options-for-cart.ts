@@ -1,13 +1,7 @@
-import {
-  deepFlatMap,
-  isDefined,
-  isPresent,
-  MedusaError,
-} from "@medusajs/framework/utils"
+import { deepFlatMap } from "@medusajs/framework/utils"
 import {
   createWorkflow,
   transform,
-  when,
   WorkflowData,
   WorkflowResponse,
 } from "@medusajs/framework/workflows-sdk"
@@ -27,9 +21,6 @@ export const listShippingOptionsForCartWorkflow = createWorkflow(
       option_ids?: string[]
       is_return?: boolean
       enabled_in_store?: boolean
-      options?: {
-        shouldValidatePrices?: boolean
-      }
     }>
   ) => {
     const cartQuery = useQueryGraphStep({
@@ -39,6 +30,7 @@ export const listShippingOptionsForCartWorkflow = createWorkflow(
         "id",
         "sales_channel_id",
         "currency_code",
+        "customer.groups.id",
         "region_id",
         "shipping_address.city",
         "shipping_address.country_code",
@@ -87,65 +79,29 @@ export const listShippingOptionsForCartWorkflow = createWorkflow(
       }
     )
 
-    const customerGroupIds = when({ cart }, ({ cart }) => {
-      return !!cart.customer_group_id
-    }).then(() => {
-      const customerQuery = useQueryGraphStep({
-        entity: "customer",
-        filters: { id: cart.customer_id },
-        fields: ["groups.id"],
-      }).config({ name: "get-customer" })
-
-      return transform({ customerQuery }, ({ customerQuery }) => {
-        const customer = customerQuery.data[0]
-
-        if (!isPresent(customer)) {
-          return []
-        }
-
-        const { groups = [] } = customer
-
-        return groups.map((group) => group.id)
-      })
-    })
-
-    const pricingContext = transform(
-      { cart, customerGroupIds },
-      ({ cart, customerGroupIds }) => {
-        return {
-          ...cart,
-          customer_group_id: customerGroupIds,
-        }
-      }
-    )
-
     const queryVariables = transform(
-      { input, fulfillmentSetIds, cart, pricingContext },
-      ({ input, fulfillmentSetIds, cart, pricingContext }) => {
-        const test = {
-          id: input.option_ids,
+      { input, fulfillmentSetIds, cart },
+      ({ input, fulfillmentSetIds, cart }) => ({
+        id: input.option_ids,
 
-          context: {
-            is_return: input.is_return ?? false,
-            enabled_in_store: input.enabled_in_store ?? true,
+        context: {
+          is_return: input.is_return ?? false,
+          enabled_in_store: input.enabled_in_store ?? true,
+        },
+
+        filters: {
+          fulfillment_set_id: fulfillmentSetIds,
+
+          address: {
+            country_code: cart.shipping_address?.country_code,
+            province_code: cart.shipping_address?.province,
+            city: cart.shipping_address?.city,
+            postal_expression: cart.shipping_address?.postal_code,
           },
+        },
 
-          filters: {
-            fulfillment_set_id: fulfillmentSetIds,
-
-            address: {
-              country_code: cart.shipping_address?.country_code,
-              province_code: cart.shipping_address?.province,
-              city: cart.shipping_address?.city,
-              postal_expression: cart.shipping_address?.postal_code,
-            },
-          },
-
-          calculated_price: { context: pricingContext },
-        }
-
-        return test
-      }
+        calculated_price: { context: cart },
+      })
     )
 
     const shippingOptions = useRemoteQueryStep({
@@ -177,43 +133,17 @@ export const listShippingOptionsForCartWorkflow = createWorkflow(
     }).config({ name: "shipping-options-query" })
 
     const updatedShippingOptions = transform(
-      { shippingOptions, input },
-      ({ shippingOptions, input }) => {
-        const optionsMissingPrices: string[] = []
-
-        const options = shippingOptions.map((shippingOption) => {
-          const { calculated_price, ...options } = shippingOption
-
-          if (
-            shippingOption?.id &&
-            !isDefined(calculated_price?.calculated_amount)
-          ) {
-            optionsMissingPrices.push(options.id)
-          }
+      { shippingOptions },
+      ({ shippingOptions }) =>
+        shippingOptions.map((shippingOption) => {
+          const price = shippingOption.calculated_price
 
           return {
             ...shippingOption,
-            amount: calculated_price?.calculated_amount,
-            is_tax_inclusive:
-              !!calculated_price?.is_calculated_price_tax_inclusive,
+            amount: price?.calculated_amount,
+            is_tax_inclusive: !!price?.is_calculated_price_tax_inclusive,
           }
         })
-
-        const shouldValidatePrices = input.options?.shouldValidatePrices ?? true
-
-        if (optionsMissingPrices.length && shouldValidatePrices) {
-          const ids = optionsMissingPrices.join(", ")
-
-          throw new MedusaError(
-            MedusaError.Types.INVALID_DATA,
-            `Shipping options with IDs ${ids} do not have a price`
-          )
-        }
-
-        return options.filter((option) =>
-          isDefined(option?.calculated_price?.calculated_amount)
-        )
-      }
     )
 
     return new WorkflowResponse(updatedShippingOptions)

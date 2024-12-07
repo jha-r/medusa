@@ -14,6 +14,7 @@ import {
 } from "../steps"
 import { validateCartStep } from "../steps/validate-cart"
 import { validateAndReturnShippingMethodsDataStep } from "../steps/validate-shipping-methods-data"
+import { validateCartShippingOptionsPriceStep } from "../steps/validate-shipping-options-price"
 import { cartFieldsForRefreshSteps } from "../utils/fields"
 import { listShippingOptionsForCartWorkflow } from "./list-shipping-options-for-cart"
 import { updateCartPromotionsWorkflow } from "./update-cart-promotions"
@@ -62,6 +63,8 @@ export const addShippingMethodToCartWorkflow = createWorkflow(
         is_return: false,
       },
     })
+
+    validateCartShippingOptionsPriceStep({ shippingOptions })
 
     const validateShippingMethodsDataInput = transform(
       { input, shippingOptions },
