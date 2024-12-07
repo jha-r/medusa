@@ -9,11 +9,27 @@ import {
   crossProjectLinksPlugin,
 } from "remark-rehype-plugins"
 import { sidebar } from "./sidebar.mjs"
+import path from "path"
 
 const withMDX = mdx({
   extension: /\.mdx?$/,
   options: {
     rehypePlugins: [
+      [
+        brokenLinkCheckerPlugin,
+        {
+          crossProjects: {
+            resources: {
+              projectPath: path.resolve("..", "resources"),
+              hasGeneratedSlugs: true,
+            },
+            ui: {
+              projectPath: path.resolve("..", "ui"),
+              contentPath: "src/content/docs",
+            },
+          },
+        },
+      ],
       [
         crossProjectLinksPlugin,
         {
@@ -37,7 +53,6 @@ const withMDX = mdx({
             process.env.VERCEL_ENV === "production",
         },
       ],
-      [brokenLinkCheckerPlugin],
       [localLinksRehypePlugin],
       [
         rehypeMdxCodeProps,
@@ -160,18 +175,29 @@ const nextConfig = {
       {
         source: "/recipes/:path*",
         destination: "/resources/recipes",
-        permanent: true
+        permanent: true,
       },
       {
         source: "/plugins/:path*",
         destination: "/v1/plugins/:path*",
-        permanent: true
+        permanent: true,
       },
       {
         source: "/medusa-react/:path*",
         destination: "/v1/medusa-react/:path*",
-        permanent: true
-      }
+        permanent: true,
+      },
+      {
+        source: "/learn/customization/extend-models/:path*",
+        destination: "/learn/customization/extend-features/:path*",
+        permanent: true,
+      },
+      {
+        source: "/learn/customization/extend-features/create-links",
+        destination:
+          "/learn/customization/extend-features/extend-create-product",
+        permanent: true,
+      },
     ]
   },
 }
