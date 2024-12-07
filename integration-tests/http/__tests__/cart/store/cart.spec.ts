@@ -1344,6 +1344,52 @@ medusaIntegrationTestRunner({
             })
           )
         })
+
+        it("should remove promotion adjustments when promotion is deleted", async () => {
+          let cartBeforeRemovingPromotion = (
+            await api.get(`/store/carts/${cart.id}`, storeHeaders)
+          ).data.cart
+
+          expect(cartBeforeRemovingPromotion).toEqual(
+            expect.objectContaining({
+              id: cart.id,
+              items: expect.arrayContaining([
+                expect.objectContaining({
+                  adjustments: [
+                    {
+                      id: expect.any(String),
+                      code: "PROMOTION_APPLIED",
+                      promotion_id: promotion.id,
+                      amount: 100,
+                    },
+                  ],
+                }),
+              ]),
+            })
+          )
+
+          await api.delete(`/admin/promotions/${promotion.id}`, adminHeaders)
+
+          let response = await api.post(
+            `/store/carts/${cart.id}`,
+            {
+              email: "test@test.com",
+            },
+            storeHeaders
+          )
+
+          expect(response.status).toEqual(200)
+          expect(response.data.cart).toEqual(
+            expect.objectContaining({
+              id: cart.id,
+              items: expect.arrayContaining([
+                expect.objectContaining({
+                  adjustments: [],
+                }),
+              ]),
+            })
+          )
+        })
       })
 
       describe("POST /store/carts/:id/customer", () => {

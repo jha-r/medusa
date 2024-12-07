@@ -106,13 +106,16 @@ export const refreshCartItemsWorkflow = createWorkflow(
       input: { cart_id: cart.id },
     })
 
-    const cartPromoCodes = transform({ cart, input }, ({ cart, input }) => {
-      if (isDefined(input.promo_codes)) {
-        return input.promo_codes
-      } else {
-        return cart.promotions.map((p) => p.code)
+    const cartPromoCodes = transform(
+      { refetchedCart, input },
+      ({ refetchedCart, input }) => {
+        if (isDefined(input.promo_codes)) {
+          return input.promo_codes
+        } else {
+          return refetchedCart.promotions.map((p) => p?.code).filter(Boolean)
+        }
       }
-    })
+    )
 
     updateCartPromotionsWorkflow.runAsStep({
       input: {
