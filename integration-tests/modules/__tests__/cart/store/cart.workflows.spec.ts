@@ -1883,41 +1883,13 @@ medusaIntegrationTestRunner({
             name: "Webshop",
           })
 
-          const location = await stockLocationModule.createStockLocations({
-            name: "Europe",
-          })
-
           let cart = await cartModuleService.createCarts({
             currency_code: "usd",
             region_id: region.id,
             sales_channel_id: salesChannel.id,
             shipping_address: {
-              city: "CPH",
-              province: "Sjaelland",
-              country_code: "dk",
+              country_code: "us",
             },
-          })
-
-          const shippingProfile =
-            await fulfillmentModule.createShippingProfiles({
-              name: "Test",
-              type: "default",
-            })
-
-          const fulfillmentSet = await fulfillmentModule.createFulfillmentSets({
-            name: "Test",
-            type: "test-type",
-            service_zones: [
-              {
-                name: "Test",
-                geo_zones: [
-                  {
-                    type: "country",
-                    country_code: "dk",
-                  },
-                ],
-              },
-            ],
           })
 
           const shippingOption = await fulfillmentModule.createShippingOptions([
@@ -1978,12 +1950,12 @@ medusaIntegrationTestRunner({
                 sales_channel_id: salesChannel.id,
               },
               [Modules.STOCK_LOCATION]: {
-                stock_location_id: location.id,
+                stock_location_id: stockLocation.id,
               },
             },
             {
               [Modules.STOCK_LOCATION]: {
-                stock_location_id: location.id,
+                stock_location_id: stockLocation.id,
               },
               [Modules.FULFILLMENT]: {
                 fulfillment_set_id: fulfillmentSet.id,
@@ -2039,7 +2011,7 @@ medusaIntegrationTestRunner({
 
           await api.post(
             `/store/carts/${cart.id}`,
-            { sales_channel_id: newSalesChannel.id },
+            { sales_channel_id: salesChannel.id },
             storeHeaders
           )
 
