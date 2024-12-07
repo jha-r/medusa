@@ -181,7 +181,7 @@ medusaIntegrationTestRunner({
                   rules: [
                     {
                       operator: "gt",
-                      attribute: "total",
+                      attribute: "item_total",
                       value: 2000,
                     },
                   ],
