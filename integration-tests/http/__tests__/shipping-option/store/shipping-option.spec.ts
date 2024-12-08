@@ -232,6 +232,7 @@ medusaIntegrationTestRunner({
               id: shippingOption.id,
               name: "Test shipping option",
               price_type: "flat",
+              amount: 1100,
               calculated_price: expect.objectContaining({
                 calculated_amount: 1100,
               }),
@@ -258,6 +259,8 @@ medusaIntegrationTestRunner({
             expect.objectContaining({
               id: shippingOption.id,
               name: "Test shipping option",
+              amount: 500,
+              is_tax_inclusive: true,
               calculated_price: expect.objectContaining({
                 calculated_amount: 500,
                 is_calculated_price_tax_inclusive: true,
@@ -301,6 +304,7 @@ medusaIntegrationTestRunner({
               id: shippingOption.id,
               name: "Test shipping option",
               // Free shipping due to cart total being greater than 2000
+              amount: 0,
               calculated_price: expect.objectContaining({
                 calculated_amount: 0,
               }),

@@ -30,7 +30,6 @@ export const listShippingOptionsForCartWorkflow = createWorkflow(
         "id",
         "sales_channel_id",
         "currency_code",
-        "customer.groups.id",
         "region_id",
         "shipping_address.city",
         "shipping_address.country_code",
@@ -132,7 +131,7 @@ export const listShippingOptionsForCartWorkflow = createWorkflow(
       variables: queryVariables,
     }).config({ name: "shipping-options-query" })
 
-    const updatedShippingOptions = transform(
+    const shippingOptionsWithPrice = transform(
       { shippingOptions },
       ({ shippingOptions }) =>
         shippingOptions.map((shippingOption) => {
@@ -146,6 +145,6 @@ export const listShippingOptionsForCartWorkflow = createWorkflow(
         })
     )
 
-    return new WorkflowResponse(updatedShippingOptions)
+    return new WorkflowResponse(shippingOptionsWithPrice)
   }
 )
