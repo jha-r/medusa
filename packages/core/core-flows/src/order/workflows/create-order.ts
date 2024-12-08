@@ -12,6 +12,7 @@ import {
 import { findOneOrAnyRegionStep } from "../../cart/steps/find-one-or-any-region"
 import { findOrCreateCustomerStep } from "../../cart/steps/find-or-create-customer"
 import { findSalesChannelStep } from "../../cart/steps/find-sales-channel"
+import { validateLineItemPricesStep } from "../../cart/steps/validate-line-item-prices"
 import { validateVariantPricesStep } from "../../cart/steps/validate-variant-prices"
 import {
   PrepareLineItemDataInput,
@@ -130,7 +131,6 @@ export const createOrderWorkflow = createWorkflow(
             context: pricingContext,
           },
         },
-        throw_if_key_not_found: true,
       })
     })
 
@@ -150,6 +150,8 @@ export const createOrderWorkflow = createWorkflow(
     )
 
     const lineItems = transform({ input, variants }, prepareLineItems)
+
+    validateLineItemPricesStep({ items: lineItems })
 
     const orderToCreate = transform({ lineItems, orderInput }, (data) => {
       return {

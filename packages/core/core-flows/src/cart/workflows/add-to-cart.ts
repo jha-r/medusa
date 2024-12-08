@@ -17,6 +17,7 @@ import {
   updateLineItemsStep,
 } from "../steps"
 import { validateCartStep } from "../steps/validate-cart"
+import { validateLineItemPricesStep } from "../steps/validate-line-item-prices"
 import { validateVariantPricesStep } from "../steps/validate-variant-prices"
 import {
   cartFieldsForRefreshSteps,
@@ -65,7 +66,6 @@ export const addToCartWorkflow = createWorkflow(
             context: pricingContext,
           },
         },
-        throw_if_key_not_found: true,
       })
     })
 
@@ -97,6 +97,8 @@ export const addToCartWorkflow = createWorkflow(
 
       return items
     })
+
+    validateLineItemPricesStep({ items: lineItems })
 
     const { itemsToCreate = [], itemsToUpdate = [] } = getLineItemActionsStep({
       id: input.cart.id,

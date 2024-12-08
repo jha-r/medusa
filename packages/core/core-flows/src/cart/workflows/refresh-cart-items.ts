@@ -67,7 +67,6 @@ export const refreshCartItemsWorkflow = createWorkflow(
             context: pricingContext,
           },
         },
-        throw_if_key_not_found: true,
       }).config({ name: "fetch-variants" })
     })
 

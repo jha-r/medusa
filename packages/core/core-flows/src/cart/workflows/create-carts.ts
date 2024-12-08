@@ -24,6 +24,7 @@ import {
   findOrCreateCustomerStep,
   findSalesChannelStep,
 } from "../steps"
+import { validateLineItemPricesStep } from "../steps/validate-line-item-prices"
 import { validateVariantPricesStep } from "../steps/validate-variant-prices"
 import { productVariantsFields } from "../utils/fields"
 import {
@@ -87,7 +88,6 @@ export const createCartWorkflow = createWorkflow(
             context: pricingContext,
           },
         },
-        throw_if_key_not_found: true,
       })
     })
 
@@ -160,6 +160,8 @@ export const createCartWorkflow = createWorkflow(
 
       return items
     })
+
+    validateLineItemPricesStep({ items: lineItems })
 
     const cartToCreate = transform({ lineItems, cartInput }, (data) => {
       return {

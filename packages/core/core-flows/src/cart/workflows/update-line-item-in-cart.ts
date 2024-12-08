@@ -1,12 +1,12 @@
 import { UpdateLineItemInCartWorkflowInputDTO } from "@medusajs/framework/types"
-import { CartWorkflowEvents, isDefined } from "@medusajs/framework/utils"
+import { CartWorkflowEvents, isDefined, MedusaError } from "@medusajs/framework/utils"
 import {
-  WorkflowData,
-  WorkflowResponse,
   createWorkflow,
   parallelize,
   transform,
   when,
+  WorkflowData,
+  WorkflowResponse,
 } from "@medusajs/framework/workflows-sdk"
 import { emitEventStep } from "../../common/steps/emit-event"
 import { useRemoteQueryStep } from "../../common/steps/use-remote-query"
@@ -59,7 +59,6 @@ export const updateLineItemInCartWorkflow = createWorkflow(
             context: pricingContext,
           },
         },
-        throw_if_key_not_found: true,
       }).config({ name: "fetch-variants" })
     })
 
@@ -96,6 +95,13 @@ export const updateLineItemInCartWorkflow = createWorkflow(
         updateData.unit_price = variant.calculated_price.calculated_amount
         updateData.is_tax_inclusive =
           !!variant.calculated_price.is_calculated_price_tax_inclusive
+      }
+
+      if (!isDefined(updateData.unit_price)) {
+        throw new MedusaError(
+          MedusaError.Types.INVALID_DATA,
+          `Line item ${item.title} has no unit price`
+        )
       }
 
       return {

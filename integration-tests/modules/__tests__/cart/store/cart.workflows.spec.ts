@@ -1301,35 +1301,6 @@ medusaIntegrationTestRunner({
             },
           ])
         })
-
-        it("should throw if variant does not exist", async () => {
-          const cart = await cartModuleService.createCarts({
-            currency_code: "usd",
-          })
-
-          const { errors } = await addToCartWorkflow(appContainer).run({
-            input: {
-              items: [
-                {
-                  variant_id: "prva_foo",
-                  quantity: 1,
-                },
-              ],
-              cart,
-            },
-            throwOnError: false,
-          })
-
-          expect(errors).toEqual([
-            {
-              action: "use-remote-query",
-              handlerType: "invoke",
-              error: expect.objectContaining({
-                message: `ProductVariant id not found: prva_foo`,
-              }),
-            },
-          ])
-        })
       })
 
       describe("updateLineItemInCartWorkflow", () => {
@@ -1422,9 +1393,7 @@ medusaIntegrationTestRunner({
 
           const item = cart.items?.[0]!
 
-          const { errors } = await updateLineItemInCartWorkflow(
-            appContainer
-          ).run({
+          await updateLineItemInCartWorkflow(appContainer).run({
             input: {
               cart,
               item,
@@ -1471,6 +1440,7 @@ medusaIntegrationTestRunner({
                 is_discountable: false,
                 is_tax_inclusive: false,
                 is_custom_price: true,
+                variant_id: "some_random_id",
                 unit_price: 3000,
                 metadata: {
                   foo: "bar",
@@ -1549,7 +1519,68 @@ medusaIntegrationTestRunner({
                   unit_price: 3000,
                   updated_at: expect.any(Date),
                   variant_barcode: null,
-                  variant_id: null,
+                  variant_id: "some_random_id",
+                  variant_option_values: null,
+                  variant_sku: null,
+                  variant_title: null,
+                },
+              ],
+            })
+          )
+
+          await updateLineItemInCartWorkflow(appContainer).run({
+            input: {
+              cart,
+              item: cart.items?.[0]!,
+              update: {
+                quantity: 4,
+              },
+            },
+          })
+
+          cart = await cartModuleService.retrieveCart(cart.id, {
+            relations: ["items"],
+          })
+
+          expect(cart).toEqual(
+            expect.objectContaining({
+              id: cart.id,
+              currency_code: "usd",
+              items: [
+                {
+                  cart_id: expect.any(String),
+                  compare_at_unit_price: null,
+                  created_at: expect.any(Date),
+                  deleted_at: null,
+                  id: expect.any(String),
+                  is_discountable: false,
+                  is_tax_inclusive: false,
+                  is_custom_price: true,
+                  metadata: {
+                    foo: "bar",
+                  },
+                  product_collection: null,
+                  product_description: null,
+                  product_handle: null,
+                  product_id: null,
+                  product_subtitle: null,
+                  product_title: null,
+                  product_type: null,
+                  product_type_id: null,
+                  quantity: 4,
+                  raw_compare_at_unit_price: null,
+                  raw_unit_price: {
+                    precision: 20,
+                    value: "3000",
+                  },
+                  requires_shipping: true,
+                  subtitle: "Test subtitle",
+                  thumbnail: "some-url",
+                  title: "Some other title",
+                  unit_price: 3000,
+                  updated_at: expect.any(Date),
+                  variant_barcode: null,
+                  variant_id: "some_random_id",
                   variant_option_values: null,
                   variant_sku: null,
                   variant_title: null,
