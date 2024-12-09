@@ -1,3 +1,4 @@
+import { FetchError } from "@medusajs/js-sdk"
 import { HttpTypes } from "@medusajs/types"
 import {
   QueryKey,
@@ -6,7 +7,6 @@ import {
   useMutation,
   useQuery,
 } from "@tanstack/react-query"
-import { FetchError } from "@medusajs/js-sdk"
 
 import { sdk } from "../../lib/client"
 import { queryClient } from "../../lib/query-client"
@@ -23,7 +23,7 @@ export const inventoryItemLevelsQueryKeys = queryKeysFactory(
 )
 
 export const useInventoryItems = (
-  query?: Record<string, any>,
+  query?: HttpTypes.AdminInventoryItemParams,
   options?: Omit<
     UseQueryOptions<
       HttpTypes.AdminInventoryItemListResponse,

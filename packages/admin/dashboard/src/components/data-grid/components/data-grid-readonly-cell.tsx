@@ -4,11 +4,9 @@ import { useDataGridCellError } from "../hooks"
 import { DataGridCellProps } from "../types"
 import { DataGridRowErrorIndicator } from "./data-grid-row-error-indicator"
 
-type DataGridReadonlyCellProps<TData, TValue = any> = DataGridCellProps<
-  TData,
-  TValue
-> &
-  PropsWithChildren
+type DataGridReadonlyCellProps<TData, TValue = any> = PropsWithChildren<
+  DataGridCellProps<TData, TValue>
+>
 
 export const DataGridReadonlyCell = <TData, TValue = any>({
   context,

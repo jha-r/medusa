@@ -1,4 +1,4 @@
-import { PencilSquare, Plus } from "@medusajs/icons"
+import { Buildings, PencilSquare, Plus } from "@medusajs/icons"
 import { HttpTypes } from "@medusajs/types"
 import { Container, Heading } from "@medusajs/ui"
 import { keepPreviousData } from "@tanstack/react-query"
@@ -73,6 +73,11 @@ export const ProductVariantSection = ({
                   label: t("products.editPrices"),
                   to: `prices`,
                   icon: <PencilSquare />,
+                },
+                {
+                  label: "Edit inventory items",
+                  to: `inventory`,
+                  icon: <Buildings />,
                 },
               ],
             },
