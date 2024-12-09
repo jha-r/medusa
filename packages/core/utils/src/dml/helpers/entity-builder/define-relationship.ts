@@ -329,20 +329,36 @@ export function defineBelongsToRelationship(
   ) {
     const foreignKeyName = camelToSnakeCase(`${relationship.name}Id`)
 
-    ManyToOne({
-      entity: relatedModelName,
-      columnType: "text",
-      mapToPk: true,
-      fieldName: foreignKeyName,
-      nullable: relationship.nullable,
-      onDelete: shouldCascade ? "cascade" : undefined,
-    })(MikroORMEntity.prototype, foreignKeyName)
+    if (DmlManyToMany.isManyToMany(otherSideRelation)) {
+      Property({
+        type: relatedModelName,
+        columnType: "text",
+        fieldName: foreignKeyName,
+        nullable: relationship.nullable,
+      })(MikroORMEntity.prototype, foreignKeyName)
 
-    ManyToOne({
-      entity: relatedModelName,
-      persist: false,
-      nullable: relationship.nullable,
-    })(MikroORMEntity.prototype, relationship.name)
+      ManyToOne({
+        entity: relatedModelName,
+        nullable: relationship.nullable,
+        persist: false,
+      })(MikroORMEntity.prototype, relationship.name)
+    } else {
+      ManyToOne({
+        entity: relatedModelName,
+        columnType: "text",
+        mapToPk: true,
+        fieldName: foreignKeyName,
+        nullable: relationship.nullable,
+        onDelete: shouldCascade ? "cascade" : undefined,
+      })(MikroORMEntity.prototype, foreignKeyName)
+
+      ManyToOne({
+        entity: relatedModelName,
+        fieldName: foreignKeyName,
+        persist: false,
+        nullable: relationship.nullable,
+      })(MikroORMEntity.prototype, relationship.name)
+    }
 
     const { tableName } = parseEntityName(entity)
     applyEntityIndexes(MikroORMEntity, tableName, [
