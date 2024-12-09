@@ -1034,7 +1034,7 @@ medusaIntegrationTestRunner({
               id: item.id,
               unit_price: 3000,
               quantity: 2,
-              title: "Test item",
+              title: "Test variant",
             })
           )
         })
