@@ -78,6 +78,14 @@ export type ManyToManyOptions = RelationshipOptions &
          * database for this relationship.
          */
         pivotEntity?: () => DmlEntity<any, any>
+        /**
+         * The column name in the pivot table that for the current entity
+         */
+        joinColumn?: string | string[]
+        /**
+         * The column name in the pivot table for the opposite entity
+         */
+        inverseJoinColumn?: string | string[]
       }
   )
 

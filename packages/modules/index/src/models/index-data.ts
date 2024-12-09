@@ -6,11 +6,14 @@ const IndexData = model
     id: model.text().primaryKey(),
     name: model.text().primaryKey(),
     data: model.json().default({}),
-    parents: model.manyToMany(() => IndexRelation, {
-      mappedBy: "parent",
-      pivotTable: "index_relation",
+    parents: model.manyToMany(() => IndexData, {
+      mappedBy: "children",
+      pivotEntity: () => IndexRelation,
       joinColumn: ["child_id", "child_name"],
       inverseJoinColumn: ["parent_id", "parent_name"],
+    }),
+    children: model.manyToMany(() => IndexData, {
+      mappedBy: "parents",
     }),
   })
   .indexes([

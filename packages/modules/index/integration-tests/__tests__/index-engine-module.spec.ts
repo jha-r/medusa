@@ -757,7 +757,6 @@ describe("IndexModuleService", function () {
         }
       )!
 
-      console.log(linkPriceSetIndexRelationEntry)
       expect(linkPriceSetIndexRelationEntry.parent).toEqual(linkIndexEntry)
       expect(linkPriceSetIndexRelationEntry.child).toEqual(priceSetIndexEntry)
 
