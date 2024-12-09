@@ -616,6 +616,15 @@ export function defineManyToManyRelationship(
   const mappedByPropValue =
     mappedBy ?? inversedBy ?? otherSideRelationshipProperty
 
+  const joinColumnProp = Array.isArray(relationship.options.joinColumn)
+    ? "joinColumns"
+    : "joinColumn"
+  const inverseJoinColumnProp = Array.isArray(
+    relationship.options.inverseJoinColumn
+  )
+    ? "inverseJoinColumns"
+    : "inverseJoinColumn"
+
   const manytoManyOptions = {
     owner: isOwner,
     entity: relatedModelName,
@@ -628,18 +637,8 @@ export function defineManyToManyRelationship(
       : {}),
     ...(pivotEntityName ? { pivotEntity: pivotEntityName } : {}),
     ...({ [mappedByProp]: mappedByPropValue } as any),
-  }
-
-  if (joinColumn) {
-    manytoManyOptions.joinColumn = joinColumn
-  } else if (joinColumns) {
-    manytoManyOptions.joinColumns = joinColumns
-  }
-
-  if (inverseJoinColumn) {
-    manytoManyOptions.inverseJoinColumn = inverseJoinColumn
-  } else if (inverseJoinColumns) {
-    manytoManyOptions.inverseJoinColumns = inverseJoinColumns
+    [joinColumnProp]: joinColumn ?? joinColumns,
+    [inverseJoinColumnProp]: inverseJoinColumn ?? inverseJoinColumns,
   }
 
   ManyToMany(manytoManyOptions)(MikroORMEntity.prototype, relationship.name)
