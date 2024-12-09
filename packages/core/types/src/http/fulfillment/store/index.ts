@@ -75,7 +75,13 @@ export interface StoreCartShippingOption {
    */
   amount: number
 
+  /**
+   * All the prices for this shipping option
+   */
   prices: StorePrice[]
 
+  /**
+   * Calculated price for the shipping option
+   */
   calculated_price: StoreCalculatedPrice
 }
