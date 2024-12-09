@@ -1,13 +1,13 @@
 "use client"
-import { Highlight, Prism, themes } from "prism-react-renderer";
-import * as React from "react";
-(typeof global !== "undefined" ? global : window).Prism = Prism
+import { Highlight, Prism, themes } from "prism-react-renderer"
+import * as React from "react"
+;(typeof global !== "undefined" ? global : window).Prism = Prism
 
 // @ts-ignore
 import("prismjs/components/prism-json")
 
-import { Copy } from "@/components/copy";
-import { clx } from "@/utils/clx";
+import { Copy } from "@/components/copy"
+import { clx } from "@/utils/clx"
 
 export type CodeSnippet = {
   /**
@@ -360,4 +360,4 @@ Body.displayName = "CodeBlock.Body"
 
 const CodeBlock = Object.assign(Root, { Body, Header, Meta })
 
-export { CodeBlock };
+export { CodeBlock }
