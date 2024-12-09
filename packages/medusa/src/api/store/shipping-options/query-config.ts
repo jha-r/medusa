@@ -4,8 +4,12 @@ export const defaultStoreShippingOptionsFields = [
   "price_type",
   "service_zone_id",
   "shipping_profile_id",
-  "fulfillment_provider_id",
-  "shipping_option_type_id",
+  "provider_id",
+  "*type",
+  "*provider",
+  "*rules",
+  "*rules",
+  "*calculated_price",
 ]
 
 export const listTransformQueryConfig = {
