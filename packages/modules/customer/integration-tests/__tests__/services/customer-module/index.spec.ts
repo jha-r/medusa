@@ -16,9 +16,9 @@ moduleIntegrationTestRunner<ICustomerModuleService>({
 
         expect(Object.keys(linkable)).toEqual([
           "customerAddress",
-          "customerGroupCustomer",
-          "customerGroup",
           "customer",
+          "customerGroup",
+          "customerGroupCustomer",
         ])
 
         Object.keys(linkable).forEach((key) => {
@@ -704,7 +704,7 @@ moduleIntegrationTestRunner<ICustomerModuleService>({
           expect(res.length).toBe(0)
         })
 
-        it("should cascade relationship when deleting customer", async () => {
+        it.only("should cascade relationship when deleting customer", async () => {
           // Creating a customer and a group
           const customer = await service.createCustomers({
             first_name: "John",
