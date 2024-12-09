@@ -16,4 +16,20 @@ export class Migration20241209173313 extends Migration {
       ADD COLUMN IF NOT EXISTS "deleted_at" timestamptz NULL;
     `)
   }
+
+  async down(): Promise<void> {
+    this.addSql(`
+      ALTER TABLE "index_data"
+      DROP COLUMN IF EXISTS "created_at",
+      DROP COLUMN IF EXISTS "updated_at",
+      DROP COLUMN IF EXISTS "deleted_at";
+    `)
+
+    this.addSql(`
+      ALTER TABLE "index_relation"
+      DROP COLUMN IF EXISTS "created_at",
+      DROP COLUMN IF EXISTS "updated_at",
+      DROP COLUMN IF EXISTS "deleted_at";
+    `)
+  }
 }
