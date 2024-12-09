@@ -287,7 +287,7 @@ class ResendNotificationProviderService extends AbstractNotificationProviderServ
 }
 ```
 
-In the `validateOptions` method, you throw an error if the `api_key` or `from` options aren't passed to the module. To throw errors, you use Medusa's `MedusaError` utility imported from `@medusajs/framework/utils`. This ensures errors follow Medusa's conventions and are displayed similar to Medusa's errors.
+In the `validateOptions` method, you throw an error if the `api_key` or `from` options aren't passed to the module. To throw errors, you use `MedusaError` from the Modules SDK. This ensures errors follow Medusa's conventions and are displayed similar to Medusa's errors.
 
 #### Implement Template Methods
 
@@ -449,7 +449,7 @@ export default ModuleProvider(Modules.NOTIFICATION, {
 })
 ```
 
-You export the module provider's definition using the `ModuleProvider` utility function. It accepts as a first parameter the name of the module that this provider belongs to, which is the Notification Module. It also accepts as a second parameter an object having a `service` property indicating the provider's service.
+You export the module provider's definition using `ModuleProvider` from the Modules SDK. It accepts as a first parameter the name of the module that this provider belongs to, which is the Notification Module. It also accepts as a second parameter an object having a `service` property indicating the provider's service.
 
 ### Add Module to Configurations
 
@@ -737,7 +737,7 @@ export const sendOrderConfirmationWorkflow = createWorkflow(
 )
 ```
 
-You create a workflow using the `createWorkflow` function imported from `@medusajs/framework/workflows-sdk`. It accepts the workflow's unique name as a first parameter.
+You create a workflow using `createWorkflow` from the Workflows SDK. It accepts the workflow's unique name as a first parameter.
 
 It accepts as a second parameter a constructor function, which is the workflow's implementation. The workflow has the following steps:
 

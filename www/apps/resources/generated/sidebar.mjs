@@ -9486,7 +9486,8 @@ export const generatedSidebar = [
         "isPathHref": true,
         "type": "link",
         "path": "/references/workflows",
-        "title": "Workflow API",
+        "title": "Workflows SDK",
+        "childSidebarTitle": "Workflows SDK Reference",
         "isChildSidebar": true,
         "children": [
           {
@@ -9553,8 +9554,8 @@ export const generatedSidebar = [
         "isPathHref": true,
         "type": "link",
         "path": "/references/data-model",
-        "title": "Data Model API",
-        "childSidebarTitle": "Data Model API Reference",
+        "title": "Data Model Language",
+        "childSidebarTitle": "Data Model Language Reference",
         "isChildSidebar": true,
         "children": [
           {
@@ -9937,7 +9938,7 @@ export const generatedSidebar = [
         "loaded": true,
         "isPathHref": true,
         "type": "link",
-        "title": "Medusa Workflows Reference",
+        "title": "Core Workflows Reference",
         "path": "/medusa-workflows-reference",
         "isChildSidebar": true,
         "custom_autogenerate": "core-flows",
@@ -15075,7 +15076,7 @@ export const generatedSidebar = [
         "loaded": true,
         "isPathHref": true,
         "type": "link",
-        "title": "Testing Tools Reference",
+        "title": "Testing Framework Reference",
         "path": "/test-tools-reference",
         "isChildSidebar": true,
         "children": [
