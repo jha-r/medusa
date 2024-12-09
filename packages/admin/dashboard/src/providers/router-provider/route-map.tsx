@@ -174,6 +174,13 @@ export const RouteMap: RouteObject[] = [
                             "../../routes/product-variants/product-variant-manage-inventory-items"
                           ),
                       },
+                      {
+                        path: "metadata/edit",
+                        lazy: () =>
+                          import(
+                            "../../routes/product-variants/product-variant-metadata"
+                          ),
+                      },
                     ],
                   },
                 ],
@@ -321,6 +328,20 @@ export const RouteMap: RouteObject[] = [
                     path: "transfer",
                     lazy: () =>
                       import("../../routes/orders/order-request-transfer"),
+                  },
+                  {
+                    path: "email",
+                    lazy: () => import("../../routes/orders/order-edit-email"),
+                  },
+                  {
+                    path: "shipping-address",
+                    lazy: () =>
+                      import("../../routes/orders/order-edit-shipping-address"),
+                  },
+                  {
+                    path: "billing-address",
+                    lazy: () =>
+                      import("../../routes/orders/order-edit-billing-address"),
                   },
                 ],
               },
@@ -595,6 +616,11 @@ export const RouteMap: RouteObject[] = [
                       import(
                         "../../routes/customers/customers-add-customer-group"
                       ),
+                  },
+                  {
+                    path: ":order_id/transfer",
+                    lazy: () =>
+                      import("../../routes/orders/order-request-transfer"),
                   },
                   {
                     path: "metadata/edit",
@@ -875,6 +901,10 @@ export const RouteMap: RouteObject[] = [
                     lazy: () =>
                       import("../../routes/regions/region-add-countries"),
                   },
+                  {
+                    path: "metadata/edit",
+                    lazy: () => import("../../routes/regions/region-metadata"),
+                  },
                 ],
               },
             ],
@@ -1069,6 +1099,15 @@ export const RouteMap: RouteObject[] = [
                         },
                       }
                     },
+                    children: [
+                      {
+                        path: "metadata/edit",
+                        lazy: () =>
+                          import(
+                            "../../routes/shipping-profiles/shipping-profile-metadata"
+                          ),
+                      },
+                    ],
                   },
                 ],
               },

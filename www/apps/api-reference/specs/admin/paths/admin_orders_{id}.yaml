@@ -111,7 +111,7 @@ get:
   x-workflow: getOrderDetailWorkflow
 post:
   operationId: PostOrdersId
-  summary: Update an Order
+  summary: Update Order
   description: Update an order's details.
   x-authenticated: true
   parameters:
@@ -124,18 +124,20 @@ post:
     - name: fields
       in: query
       description: >-
-        Comma-separated fields that should be included in the returned data. if
-        a field is prefixed with `+` it will be added to the default fields,
-        using `-` will remove it from the default fields. without prefix it will
-        replace the entire default fields.
+        Comma-separated fields that should be included in the returned data.
+
+        if a field is prefixed with `+` it will be added to the default fields,
+        using `-` will remove it from the default fields.
+
+        without prefix it will replace the entire default fields.
       required: false
       schema:
         type: string
         title: fields
         description: >-
           Comma-separated fields that should be included in the returned data.
-          if a field is prefixed with `+` it will be added to the default
-          fields, using `-` will remove it from the default fields. without
+          If a field is prefixed with `+` it will be added to the default
+          fields, using `-` will remove it from the default fields. Without
           prefix it will replace the entire default fields.
         externalDocs:
           url: '#select-fields-and-relations'
@@ -143,6 +145,11 @@ post:
     - api_token: []
     - cookie_auth: []
     - jwt_token: []
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/AdminUpdateOrder.yaml
   x-codeSamples:
     - lang: Shell
       label: cURL
@@ -169,3 +176,4 @@ post:
       $ref: ../components/responses/invalid_request_error.yaml
     '500':
       $ref: ../components/responses/500_error.yaml
+  x-workflow: updateOrderWorkflow

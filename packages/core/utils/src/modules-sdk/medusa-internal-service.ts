@@ -2,9 +2,9 @@ import {
   BaseFilterable,
   Context,
   FilterQuery,
+  FilterQuery as InternalFilterQuery,
   FindConfig,
   InferEntityType,
-  FilterQuery as InternalFilterQuery,
   ModulesSdkTypes,
   PerformedActions,
   UpsertWithReplaceConfig,
@@ -62,7 +62,7 @@ export function MedusaInternalService<
     }
 
     static applyFreeTextSearchFilter(
-      filters: FilterQuery,
+      filters: FilterQuery & { q?: string },
       config: FindConfig<any>
     ): void {
       if (isDefined(filters?.q)) {

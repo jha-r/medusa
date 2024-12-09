@@ -21,7 +21,11 @@ export const getLastPaymentStatus = (order: OrderDetailDTO) => {
   }
 
   for (const paymentCollection of order.payment_collections) {
-    if (MathBN.gt(paymentCollection.captured_amount ?? 0, 0)) {
+    if (
+      MathBN.gt(paymentCollection.captured_amount ?? 0, 0) ||
+      (isDefined(paymentCollection.amount) &&
+        MathBN.eq(paymentCollection.amount, 0))
+    ) {
       paymentStatus[PaymentStatus.CAPTURED] += MathBN.eq(
         paymentCollection.captured_amount as number,
         paymentCollection.amount

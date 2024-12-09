@@ -9,7 +9,9 @@ export async function readDirRecursive(dir: string): Promise<Dirent[]> {
 
     for (const entry of entries) {
       const fullPath = join(dir, entry.name)
-      entry.path = dir
+      Object.defineProperty(entry, "path", {
+        value: dir,
+      })
       allEntries.push(entry)
 
       if (entry.isDirectory()) {

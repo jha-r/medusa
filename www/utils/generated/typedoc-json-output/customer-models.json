@@ -1,5 +1,5 @@
 {
-	"id": 2785,
+	"id": 2909,
 	"name": "customer-models",
 	"variant": "project",
 	"kind": 1,
@@ -18,28 +18,28 @@
 	},
 	"children": [
 		{
-			"id": 2786,
+			"id": 2910,
 			"name": "CustomerAddress",
 			"variant": "declaration",
 			"kind": 128,
 			"flags": {},
 			"children": [
 				{
-					"id": 2787,
+					"id": 2911,
 					"name": "constructor",
 					"variant": "declaration",
 					"kind": 512,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 2788,
+							"id": 2912,
 							"name": "new CustomerAddress",
 							"variant": "signature",
 							"kind": 16384,
 							"flags": {},
 							"type": {
 								"type": "reference",
-								"target": 2786,
+								"target": 2910,
 								"name": "CustomerAddress",
 								"package": "@medusajs/customer",
 								"qualifiedName": "default"
@@ -48,7 +48,7 @@
 					]
 				},
 				{
-					"id": 2812,
+					"id": 2936,
 					"name": "[OptionalProps]",
 					"variant": "declaration",
 					"kind": 1024,
@@ -64,7 +64,7 @@
 					}
 				},
 				{
-					"id": 2789,
+					"id": 2913,
 					"name": "id",
 					"variant": "declaration",
 					"kind": 1024,
@@ -75,7 +75,7 @@
 					}
 				},
 				{
-					"id": 2790,
+					"id": 2914,
 					"name": "address_name",
 					"variant": "declaration",
 					"kind": 1024,
@@ -96,7 +96,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 2791,
+					"id": 2915,
 					"name": "is_default_shipping",
 					"variant": "declaration",
 					"kind": 1024,
@@ -108,7 +108,7 @@
 					"defaultValue": "false"
 				},
 				{
-					"id": 2792,
+					"id": 2916,
 					"name": "is_default_billing",
 					"variant": "declaration",
 					"kind": 1024,
@@ -120,7 +120,7 @@
 					"defaultValue": "false"
 				},
 				{
-					"id": 2793,
+					"id": 2917,
 					"name": "customer_id",
 					"variant": "declaration",
 					"kind": 1024,
@@ -131,21 +131,21 @@
 					}
 				},
 				{
-					"id": 2794,
+					"id": 2918,
 					"name": "customer",
 					"variant": "declaration",
 					"kind": 1024,
 					"flags": {},
 					"type": {
 						"type": "reference",
-						"target": 2813,
+						"target": 2937,
 						"name": "Customer",
 						"package": "@medusajs/customer",
 						"qualifiedName": "default"
 					}
 				},
 				{
-					"id": 2795,
+					"id": 2919,
 					"name": "company",
 					"variant": "declaration",
 					"kind": 1024,
@@ -166,7 +166,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 2796,
+					"id": 2920,
 					"name": "first_name",
 					"variant": "declaration",
 					"kind": 1024,
@@ -187,7 +187,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 2797,
+					"id": 2921,
 					"name": "last_name",
 					"variant": "declaration",
 					"kind": 1024,
@@ -208,7 +208,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 2798,
+					"id": 2922,
 					"name": "address_1",
 					"variant": "declaration",
 					"kind": 1024,
@@ -229,7 +229,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 2799,
+					"id": 2923,
 					"name": "address_2",
 					"variant": "declaration",
 					"kind": 1024,
@@ -250,7 +250,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 2800,
+					"id": 2924,
 					"name": "city",
 					"variant": "declaration",
 					"kind": 1024,
@@ -271,7 +271,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 2801,
+					"id": 2925,
 					"name": "country_code",
 					"variant": "declaration",
 					"kind": 1024,
@@ -292,7 +292,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 2802,
+					"id": 2926,
 					"name": "province",
 					"variant": "declaration",
 					"kind": 1024,
@@ -313,7 +313,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 2803,
+					"id": 2927,
 					"name": "postal_code",
 					"variant": "declaration",
 					"kind": 1024,
@@ -334,7 +334,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 2804,
+					"id": 2928,
 					"name": "phone",
 					"variant": "declaration",
 					"kind": 1024,
@@ -355,7 +355,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 2805,
+					"id": 2929,
 					"name": "metadata",
 					"variant": "declaration",
 					"kind": 1024,
@@ -391,7 +391,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 2806,
+					"id": 2930,
 					"name": "created_at",
 					"variant": "declaration",
 					"kind": 1024,
@@ -407,7 +407,7 @@
 					}
 				},
 				{
-					"id": 2807,
+					"id": 2931,
 					"name": "updated_at",
 					"variant": "declaration",
 					"kind": 1024,
@@ -423,14 +423,14 @@
 					}
 				},
 				{
-					"id": 2808,
+					"id": 2932,
 					"name": "onCreate",
 					"variant": "declaration",
 					"kind": 2048,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 2809,
+							"id": 2933,
 							"name": "onCreate",
 							"variant": "signature",
 							"kind": 4096,
@@ -443,14 +443,14 @@
 					]
 				},
 				{
-					"id": 2810,
+					"id": 2934,
 					"name": "onInit",
 					"variant": "declaration",
 					"kind": 2048,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 2811,
+							"id": 2935,
 							"name": "onInit",
 							"variant": "signature",
 							"kind": 4096,
@@ -467,66 +467,66 @@
 				{
 					"title": "Constructors",
 					"children": [
-						2787
+						2911
 					]
 				},
 				{
 					"title": "Properties",
 					"children": [
-						2812,
-						2789,
-						2790,
-						2791,
-						2792,
-						2793,
-						2794,
-						2795,
-						2796,
-						2797,
-						2798,
-						2799,
-						2800,
-						2801,
-						2802,
-						2803,
-						2804,
-						2805,
-						2806,
-						2807
+						2936,
+						2913,
+						2914,
+						2915,
+						2916,
+						2917,
+						2918,
+						2919,
+						2920,
+						2921,
+						2922,
+						2923,
+						2924,
+						2925,
+						2926,
+						2927,
+						2928,
+						2929,
+						2930,
+						2931
 					]
 				},
 				{
 					"title": "Methods",
 					"children": [
-						2808,
-						2810
+						2932,
+						2934
 					]
 				}
 			]
 		},
 		{
-			"id": 2851,
+			"id": 2975,
 			"name": "CustomerGroupCustomer",
 			"variant": "declaration",
 			"kind": 128,
 			"flags": {},
 			"children": [
 				{
-					"id": 2852,
+					"id": 2976,
 					"name": "constructor",
 					"variant": "declaration",
 					"kind": 512,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 2853,
+							"id": 2977,
 							"name": "new CustomerGroupCustomer",
 							"variant": "signature",
 							"kind": 16384,
 							"flags": {},
 							"type": {
 								"type": "reference",
-								"target": 2851,
+								"target": 2975,
 								"name": "CustomerGroupCustomer",
 								"package": "@medusajs/customer",
 								"qualifiedName": "default"
@@ -535,7 +535,7 @@
 					]
 				},
 				{
-					"id": 2867,
+					"id": 2991,
 					"name": "[OptionalProps]",
 					"variant": "declaration",
 					"kind": 1024,
@@ -551,7 +551,7 @@
 					}
 				},
 				{
-					"id": 2854,
+					"id": 2978,
 					"name": "id",
 					"variant": "declaration",
 					"kind": 1024,
@@ -562,7 +562,7 @@
 					}
 				},
 				{
-					"id": 2855,
+					"id": 2979,
 					"name": "customer_id",
 					"variant": "declaration",
 					"kind": 1024,
@@ -573,7 +573,7 @@
 					}
 				},
 				{
-					"id": 2856,
+					"id": 2980,
 					"name": "customer_group_id",
 					"variant": "declaration",
 					"kind": 1024,
@@ -584,35 +584,35 @@
 					}
 				},
 				{
-					"id": 2857,
+					"id": 2981,
 					"name": "customer",
 					"variant": "declaration",
 					"kind": 1024,
 					"flags": {},
 					"type": {
 						"type": "reference",
-						"target": 2813,
+						"target": 2937,
 						"name": "Customer",
 						"package": "@medusajs/customer",
 						"qualifiedName": "default"
 					}
 				},
 				{
-					"id": 2858,
+					"id": 2982,
 					"name": "customer_group",
 					"variant": "declaration",
 					"kind": 1024,
 					"flags": {},
 					"type": {
 						"type": "reference",
-						"target": 2835,
+						"target": 2959,
 						"name": "CustomerGroup",
 						"package": "@medusajs/customer",
 						"qualifiedName": "default"
 					}
 				},
 				{
-					"id": 2859,
+					"id": 2983,
 					"name": "metadata",
 					"variant": "declaration",
 					"kind": 1024,
@@ -648,7 +648,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 2860,
+					"id": 2984,
 					"name": "created_at",
 					"variant": "declaration",
 					"kind": 1024,
@@ -664,7 +664,7 @@
 					}
 				},
 				{
-					"id": 2861,
+					"id": 2985,
 					"name": "updated_at",
 					"variant": "declaration",
 					"kind": 1024,
@@ -680,7 +680,7 @@
 					}
 				},
 				{
-					"id": 2862,
+					"id": 2986,
 					"name": "created_by",
 					"variant": "declaration",
 					"kind": 1024,
@@ -701,14 +701,14 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 2863,
+					"id": 2987,
 					"name": "onCreate",
 					"variant": "declaration",
 					"kind": 2048,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 2864,
+							"id": 2988,
 							"name": "onCreate",
 							"variant": "signature",
 							"kind": 4096,
@@ -721,14 +721,14 @@
 					]
 				},
 				{
-					"id": 2865,
+					"id": 2989,
 					"name": "onInit",
 					"variant": "declaration",
 					"kind": 2048,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 2866,
+							"id": 2990,
 							"name": "onInit",
 							"variant": "signature",
 							"kind": 4096,
@@ -745,56 +745,56 @@
 				{
 					"title": "Constructors",
 					"children": [
-						2852
+						2976
 					]
 				},
 				{
 					"title": "Properties",
 					"children": [
-						2867,
-						2854,
-						2855,
-						2856,
-						2857,
-						2858,
-						2859,
-						2860,
-						2861,
-						2862
+						2991,
+						2978,
+						2979,
+						2980,
+						2981,
+						2982,
+						2983,
+						2984,
+						2985,
+						2986
 					]
 				},
 				{
 					"title": "Methods",
 					"children": [
-						2863,
-						2865
+						2987,
+						2989
 					]
 				}
 			]
 		},
 		{
-			"id": 2835,
+			"id": 2959,
 			"name": "CustomerGroup",
 			"variant": "declaration",
 			"kind": 128,
 			"flags": {},
 			"children": [
 				{
-					"id": 2836,
+					"id": 2960,
 					"name": "constructor",
 					"variant": "declaration",
 					"kind": 512,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 2837,
+							"id": 2961,
 							"name": "new CustomerGroup",
 							"variant": "signature",
 							"kind": 16384,
 							"flags": {},
 							"type": {
 								"type": "reference",
-								"target": 2835,
+								"target": 2959,
 								"name": "CustomerGroup",
 								"package": "@medusajs/customer",
 								"qualifiedName": "default"
@@ -803,7 +803,7 @@
 					]
 				},
 				{
-					"id": 2850,
+					"id": 2974,
 					"name": "[OptionalProps]",
 					"variant": "declaration",
 					"kind": 1024,
@@ -819,7 +819,7 @@
 					}
 				},
 				{
-					"id": 2838,
+					"id": 2962,
 					"name": "id",
 					"variant": "declaration",
 					"kind": 1024,
@@ -830,7 +830,7 @@
 					}
 				},
 				{
-					"id": 2839,
+					"id": 2963,
 					"name": "name",
 					"variant": "declaration",
 					"kind": 1024,
@@ -841,7 +841,7 @@
 					}
 				},
 				{
-					"id": 2840,
+					"id": 2964,
 					"name": "customers",
 					"variant": "declaration",
 					"kind": 1024,
@@ -855,7 +855,7 @@
 						"typeArguments": [
 							{
 								"type": "reference",
-								"target": 2813,
+								"target": 2937,
 								"name": "Customer",
 								"package": "@medusajs/customer",
 								"qualifiedName": "default"
@@ -871,7 +871,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 2841,
+					"id": 2965,
 					"name": "metadata",
 					"variant": "declaration",
 					"kind": 1024,
@@ -907,7 +907,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 2842,
+					"id": 2966,
 					"name": "created_by",
 					"variant": "declaration",
 					"kind": 1024,
@@ -928,7 +928,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 2843,
+					"id": 2967,
 					"name": "created_at",
 					"variant": "declaration",
 					"kind": 1024,
@@ -944,7 +944,7 @@
 					}
 				},
 				{
-					"id": 2844,
+					"id": 2968,
 					"name": "updated_at",
 					"variant": "declaration",
 					"kind": 1024,
@@ -960,7 +960,7 @@
 					}
 				},
 				{
-					"id": 2845,
+					"id": 2969,
 					"name": "deleted_at",
 					"variant": "declaration",
 					"kind": 1024,
@@ -986,14 +986,14 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 2846,
+					"id": 2970,
 					"name": "onCreate",
 					"variant": "declaration",
 					"kind": 2048,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 2847,
+							"id": 2971,
 							"name": "onCreate",
 							"variant": "signature",
 							"kind": 4096,
@@ -1006,14 +1006,14 @@
 					]
 				},
 				{
-					"id": 2848,
+					"id": 2972,
 					"name": "onInit",
 					"variant": "declaration",
 					"kind": 2048,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 2849,
+							"id": 2973,
 							"name": "onInit",
 							"variant": "signature",
 							"kind": 4096,
@@ -1030,55 +1030,55 @@
 				{
 					"title": "Constructors",
 					"children": [
-						2836
+						2960
 					]
 				},
 				{
 					"title": "Properties",
 					"children": [
-						2850,
-						2838,
-						2839,
-						2840,
-						2841,
-						2842,
-						2843,
-						2844,
-						2845
+						2974,
+						2962,
+						2963,
+						2964,
+						2965,
+						2966,
+						2967,
+						2968,
+						2969
 					]
 				},
 				{
 					"title": "Methods",
 					"children": [
-						2846,
-						2848
+						2970,
+						2972
 					]
 				}
 			]
 		},
 		{
-			"id": 2813,
+			"id": 2937,
 			"name": "Customer",
 			"variant": "declaration",
 			"kind": 128,
 			"flags": {},
 			"children": [
 				{
-					"id": 2814,
+					"id": 2938,
 					"name": "constructor",
 					"variant": "declaration",
 					"kind": 512,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 2815,
+							"id": 2939,
 							"name": "new Customer",
 							"variant": "signature",
 							"kind": 16384,
 							"flags": {},
 							"type": {
 								"type": "reference",
-								"target": 2813,
+								"target": 2937,
 								"name": "Customer",
 								"package": "@medusajs/customer",
 								"qualifiedName": "default"
@@ -1087,7 +1087,7 @@
 					]
 				},
 				{
-					"id": 2834,
+					"id": 2958,
 					"name": "[OptionalProps]",
 					"variant": "declaration",
 					"kind": 1024,
@@ -1105,7 +1105,7 @@
 					}
 				},
 				{
-					"id": 2816,
+					"id": 2940,
 					"name": "id",
 					"variant": "declaration",
 					"kind": 1024,
@@ -1116,7 +1116,7 @@
 					}
 				},
 				{
-					"id": 2817,
+					"id": 2941,
 					"name": "company_name",
 					"variant": "declaration",
 					"kind": 1024,
@@ -1137,7 +1137,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 2818,
+					"id": 2942,
 					"name": "first_name",
 					"variant": "declaration",
 					"kind": 1024,
@@ -1158,7 +1158,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 2819,
+					"id": 2943,
 					"name": "last_name",
 					"variant": "declaration",
 					"kind": 1024,
@@ -1179,7 +1179,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 2820,
+					"id": 2944,
 					"name": "email",
 					"variant": "declaration",
 					"kind": 1024,
@@ -1200,7 +1200,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 2821,
+					"id": 2945,
 					"name": "phone",
 					"variant": "declaration",
 					"kind": 1024,
@@ -1221,7 +1221,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 2822,
+					"id": 2946,
 					"name": "has_account",
 					"variant": "declaration",
 					"kind": 1024,
@@ -1233,7 +1233,7 @@
 					"defaultValue": "false"
 				},
 				{
-					"id": 2823,
+					"id": 2947,
 					"name": "metadata",
 					"variant": "declaration",
 					"kind": 1024,
@@ -1269,7 +1269,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 2824,
+					"id": 2948,
 					"name": "groups",
 					"variant": "declaration",
 					"kind": 1024,
@@ -1283,7 +1283,7 @@
 						"typeArguments": [
 							{
 								"type": "reference",
-								"target": 2835,
+								"target": 2959,
 								"name": "CustomerGroup",
 								"package": "@medusajs/customer",
 								"qualifiedName": "default"
@@ -1299,7 +1299,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 2825,
+					"id": 2949,
 					"name": "addresses",
 					"variant": "declaration",
 					"kind": 1024,
@@ -1313,7 +1313,7 @@
 						"typeArguments": [
 							{
 								"type": "reference",
-								"target": 2786,
+								"target": 2910,
 								"name": "CustomerAddress",
 								"package": "@medusajs/customer",
 								"qualifiedName": "default"
@@ -1329,7 +1329,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 2826,
+					"id": 2950,
 					"name": "created_at",
 					"variant": "declaration",
 					"kind": 1024,
@@ -1345,7 +1345,7 @@
 					}
 				},
 				{
-					"id": 2827,
+					"id": 2951,
 					"name": "updated_at",
 					"variant": "declaration",
 					"kind": 1024,
@@ -1361,7 +1361,7 @@
 					}
 				},
 				{
-					"id": 2828,
+					"id": 2952,
 					"name": "deleted_at",
 					"variant": "declaration",
 					"kind": 1024,
@@ -1387,7 +1387,7 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 2829,
+					"id": 2953,
 					"name": "created_by",
 					"variant": "declaration",
 					"kind": 1024,
@@ -1408,14 +1408,14 @@
 					"defaultValue": "null"
 				},
 				{
-					"id": 2830,
+					"id": 2954,
 					"name": "onCreate",
 					"variant": "declaration",
 					"kind": 2048,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 2831,
+							"id": 2955,
 							"name": "onCreate",
 							"variant": "signature",
 							"kind": 4096,
@@ -1428,14 +1428,14 @@
 					]
 				},
 				{
-					"id": 2832,
+					"id": 2956,
 					"name": "onInit",
 					"variant": "declaration",
 					"kind": 2048,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 2833,
+							"id": 2957,
 							"name": "onInit",
 							"variant": "signature",
 							"kind": 4096,
@@ -1452,34 +1452,34 @@
 				{
 					"title": "Constructors",
 					"children": [
-						2814
+						2938
 					]
 				},
 				{
 					"title": "Properties",
 					"children": [
-						2834,
-						2816,
-						2817,
-						2818,
-						2819,
-						2820,
-						2821,
-						2822,
-						2823,
-						2824,
-						2825,
-						2826,
-						2827,
-						2828,
-						2829
+						2958,
+						2940,
+						2941,
+						2942,
+						2943,
+						2944,
+						2945,
+						2946,
+						2947,
+						2948,
+						2949,
+						2950,
+						2951,
+						2952,
+						2953
 					]
 				},
 				{
 					"title": "Methods",
 					"children": [
-						2830,
-						2832
+						2954,
+						2956
 					]
 				}
 			]
@@ -1489,312 +1489,312 @@
 		{
 			"title": "Classes",
 			"children": [
-				2786,
-				2851,
-				2835,
-				2813
+				2910,
+				2975,
+				2959,
+				2937
 			]
 		}
 	],
 	"packageName": "@medusajs/customer",
 	"symbolIdMap": {
-		"2785": {
+		"2909": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/index.ts",
 			"qualifiedName": ""
 		},
-		"2786": {
+		"2910": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/address.ts",
 			"qualifiedName": "default"
 		},
-		"2789": {
+		"2913": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/address.ts",
 			"qualifiedName": "default.id"
 		},
-		"2790": {
+		"2914": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/address.ts",
 			"qualifiedName": "default.address_name"
 		},
-		"2791": {
+		"2915": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/address.ts",
 			"qualifiedName": "default.is_default_shipping"
 		},
-		"2792": {
+		"2916": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/address.ts",
 			"qualifiedName": "default.is_default_billing"
 		},
-		"2793": {
+		"2917": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/address.ts",
 			"qualifiedName": "default.customer_id"
 		},
-		"2794": {
+		"2918": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/address.ts",
 			"qualifiedName": "default.customer"
 		},
-		"2795": {
+		"2919": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/address.ts",
 			"qualifiedName": "default.company"
 		},
-		"2796": {
+		"2920": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/address.ts",
 			"qualifiedName": "default.first_name"
 		},
-		"2797": {
+		"2921": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/address.ts",
 			"qualifiedName": "default.last_name"
 		},
-		"2798": {
+		"2922": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/address.ts",
 			"qualifiedName": "default.address_1"
 		},
-		"2799": {
+		"2923": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/address.ts",
 			"qualifiedName": "default.address_2"
 		},
-		"2800": {
+		"2924": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/address.ts",
 			"qualifiedName": "default.city"
 		},
-		"2801": {
+		"2925": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/address.ts",
 			"qualifiedName": "default.country_code"
 		},
-		"2802": {
+		"2926": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/address.ts",
 			"qualifiedName": "default.province"
 		},
-		"2803": {
+		"2927": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/address.ts",
 			"qualifiedName": "default.postal_code"
 		},
-		"2804": {
+		"2928": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/address.ts",
 			"qualifiedName": "default.phone"
 		},
-		"2805": {
+		"2929": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/address.ts",
 			"qualifiedName": "default.metadata"
 		},
-		"2806": {
+		"2930": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/address.ts",
 			"qualifiedName": "default.created_at"
 		},
-		"2807": {
+		"2931": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/address.ts",
 			"qualifiedName": "default.updated_at"
 		},
-		"2808": {
+		"2932": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/address.ts",
 			"qualifiedName": "default.onCreate"
 		},
-		"2809": {
+		"2933": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/address.ts",
 			"qualifiedName": "default.onCreate"
 		},
-		"2810": {
+		"2934": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/address.ts",
 			"qualifiedName": "default.onInit"
 		},
-		"2811": {
+		"2935": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/address.ts",
 			"qualifiedName": "default.onInit"
 		},
-		"2812": {
+		"2936": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/address.ts",
 			"qualifiedName": "default.[OptionalProps]"
 		},
-		"2813": {
+		"2937": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer.ts",
 			"qualifiedName": "default"
 		},
-		"2816": {
+		"2940": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer.ts",
 			"qualifiedName": "default.id"
 		},
-		"2817": {
+		"2941": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer.ts",
 			"qualifiedName": "default.company_name"
 		},
-		"2818": {
+		"2942": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer.ts",
 			"qualifiedName": "default.first_name"
 		},
-		"2819": {
+		"2943": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer.ts",
 			"qualifiedName": "default.last_name"
 		},
-		"2820": {
+		"2944": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer.ts",
 			"qualifiedName": "default.email"
 		},
-		"2821": {
+		"2945": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer.ts",
 			"qualifiedName": "default.phone"
 		},
-		"2822": {
+		"2946": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer.ts",
 			"qualifiedName": "default.has_account"
 		},
-		"2823": {
+		"2947": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer.ts",
 			"qualifiedName": "default.metadata"
 		},
-		"2824": {
+		"2948": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer.ts",
 			"qualifiedName": "default.groups"
 		},
-		"2825": {
+		"2949": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer.ts",
 			"qualifiedName": "default.addresses"
 		},
-		"2826": {
+		"2950": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer.ts",
 			"qualifiedName": "default.created_at"
 		},
-		"2827": {
+		"2951": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer.ts",
 			"qualifiedName": "default.updated_at"
 		},
-		"2828": {
+		"2952": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer.ts",
 			"qualifiedName": "default.deleted_at"
 		},
-		"2829": {
+		"2953": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer.ts",
 			"qualifiedName": "default.created_by"
 		},
-		"2830": {
+		"2954": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer.ts",
 			"qualifiedName": "default.onCreate"
 		},
-		"2831": {
+		"2955": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer.ts",
 			"qualifiedName": "default.onCreate"
 		},
-		"2832": {
+		"2956": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer.ts",
 			"qualifiedName": "default.onInit"
 		},
-		"2833": {
+		"2957": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer.ts",
 			"qualifiedName": "default.onInit"
 		},
-		"2834": {
+		"2958": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer.ts",
 			"qualifiedName": "default.[OptionalProps]"
 		},
-		"2835": {
+		"2959": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer-group.ts",
 			"qualifiedName": "default"
 		},
-		"2838": {
+		"2962": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer-group.ts",
 			"qualifiedName": "default.id"
 		},
-		"2839": {
+		"2963": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer-group.ts",
 			"qualifiedName": "default.name"
 		},
-		"2840": {
+		"2964": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer-group.ts",
 			"qualifiedName": "default.customers"
 		},
-		"2841": {
+		"2965": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer-group.ts",
 			"qualifiedName": "default.metadata"
 		},
-		"2842": {
+		"2966": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer-group.ts",
 			"qualifiedName": "default.created_by"
 		},
-		"2843": {
+		"2967": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer-group.ts",
 			"qualifiedName": "default.created_at"
 		},
-		"2844": {
+		"2968": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer-group.ts",
 			"qualifiedName": "default.updated_at"
 		},
-		"2845": {
+		"2969": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer-group.ts",
 			"qualifiedName": "default.deleted_at"
 		},
-		"2846": {
+		"2970": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer-group.ts",
 			"qualifiedName": "default.onCreate"
 		},
-		"2847": {
+		"2971": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer-group.ts",
 			"qualifiedName": "default.onCreate"
 		},
-		"2848": {
+		"2972": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer-group.ts",
 			"qualifiedName": "default.onInit"
 		},
-		"2849": {
+		"2973": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer-group.ts",
 			"qualifiedName": "default.onInit"
 		},
-		"2850": {
+		"2974": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer-group.ts",
 			"qualifiedName": "default.[OptionalProps]"
 		},
-		"2851": {
+		"2975": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer-group-customer.ts",
 			"qualifiedName": "default"
 		},
-		"2854": {
+		"2978": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer-group-customer.ts",
 			"qualifiedName": "default.id"
 		},
-		"2855": {
+		"2979": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer-group-customer.ts",
 			"qualifiedName": "default.customer_id"
 		},
-		"2856": {
+		"2980": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer-group-customer.ts",
 			"qualifiedName": "default.customer_group_id"
 		},
-		"2857": {
+		"2981": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer-group-customer.ts",
 			"qualifiedName": "default.customer"
 		},
-		"2858": {
+		"2982": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer-group-customer.ts",
 			"qualifiedName": "default.customer_group"
 		},
-		"2859": {
+		"2983": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer-group-customer.ts",
 			"qualifiedName": "default.metadata"
 		},
-		"2860": {
+		"2984": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer-group-customer.ts",
 			"qualifiedName": "default.created_at"
 		},
-		"2861": {
+		"2985": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer-group-customer.ts",
 			"qualifiedName": "default.updated_at"
 		},
-		"2862": {
+		"2986": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer-group-customer.ts",
 			"qualifiedName": "default.created_by"
 		},
-		"2863": {
+		"2987": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer-group-customer.ts",
 			"qualifiedName": "default.onCreate"
 		},
-		"2864": {
+		"2988": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer-group-customer.ts",
 			"qualifiedName": "default.onCreate"
 		},
-		"2865": {
+		"2989": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer-group-customer.ts",
 			"qualifiedName": "default.onInit"
 		},
-		"2866": {
+		"2990": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer-group-customer.ts",
 			"qualifiedName": "default.onInit"
 		},
-		"2867": {
+		"2991": {
 			"sourceFileName": "../../../../packages/modules/customer/src/models/customer-group-customer.ts",
 			"qualifiedName": "default.[OptionalProps]"
 		}
@@ -1804,7 +1804,7 @@
 			"1": "../../../../packages/modules/customer/src/models/index.ts"
 		},
 		"reflections": {
-			"1": 2785
+			"1": 2909
 		}
 	}
 }

@@ -1,5 +1,43 @@
 # @medusajs/dashboard
 
+## 2.1.0
+
+### Patch Changes
+
+- [#10416](https://github.com/medusajs/medusa/pull/10416) [`18583ed56725b1faa8b19f7e46e8bc0a59dec33c`](https://github.com/medusajs/medusa/commit/18583ed56725b1faa8b19f7e46e8bc0a59dec33c) Thanks [@kasperkristensen](https://github.com/kasperkristensen)! - fix(dashboard): Fix broken number input in adjust inventory form
+
+- [#10412](https://github.com/medusajs/medusa/pull/10412) [`e8f4f7ea2ba33a747a61a13537e073c82a56d29e`](https://github.com/medusajs/medusa/commit/e8f4f7ea2ba33a747a61a13537e073c82a56d29e) Thanks [@kasperkristensen](https://github.com/kasperkristensen)! - fix(dashboard): Add default value to inventory item combobox
+
+- [#10422](https://github.com/medusajs/medusa/pull/10422) [`a5c8cc992ce9f1dbed6b30048f99fa5bae4af05a`](https://github.com/medusajs/medusa/commit/a5c8cc992ce9f1dbed6b30048f99fa5bae4af05a) Thanks [@kasperkristensen](https://github.com/kasperkristensen)! - fix(dashboard): Prevent language ptBR from breaking dashboard
+
+- [#10431](https://github.com/medusajs/medusa/pull/10431) [`3d5ca155e303548853ba5ca9e6b3d37ce477823f`](https://github.com/medusajs/medusa/commit/3d5ca155e303548853ba5ca9e6b3d37ce477823f) Thanks [@kasperkristensen](https://github.com/kasperkristensen)! - fix(dashboard): Prevent order details page from crashing on no region
+
+- [#10430](https://github.com/medusajs/medusa/pull/10430) [`c6f955f0b51a795b4f6a1aeaa1de36205d2d32e5`](https://github.com/medusajs/medusa/commit/c6f955f0b51a795b4f6a1aeaa1de36205d2d32e5) Thanks [@kasperkristensen](https://github.com/kasperkristensen)! - fix(dashboard): Add Shipping Profile metadata route
+
+- Updated dependencies [[`94f6265dfc074969f2f141a19f2fc33a6ab96af1`](https://github.com/medusajs/medusa/commit/94f6265dfc074969f2f141a19f2fc33a6ab96af1)]:
+  - @medusajs/icons@2.1.0
+  - @medusajs/admin-shared@2.1.0
+  - @medusajs/js-sdk@2.1.0
+
+## 2.0.7
+
+### Patch Changes
+
+- [#10188](https://github.com/medusajs/medusa/pull/10188) [`ade1545207a4f45c138a785688c625fae797b694`](https://github.com/medusajs/medusa/commit/ade1545207a4f45c138a785688c625fae797b694) Thanks [@DanSilva41](https://github.com/DanSilva41)! - feat(dashboard): Add ptBR i18n
+
+- [#10312](https://github.com/medusajs/medusa/pull/10312) [`2edc2fe19b6afae41e3b6945b7abfbd8e3fa6e5c`](https://github.com/medusajs/medusa/commit/2edc2fe19b6afae41e3b6945b7abfbd8e3fa6e5c) Thanks [@kasperkristensen](https://github.com/kasperkristensen)! - fix(dashboard): Prevent product metadata form from throwing an error
+
+- [#10261](https://github.com/medusajs/medusa/pull/10261) [`da536aba244e46a81b2237f782be71c8d2d54802`](https://github.com/medusajs/medusa/commit/da536aba244e46a81b2237f782be71c8d2d54802) Thanks [@kasperkristensen](https://github.com/kasperkristensen)! - fix(dashboard): Truncate long product organization tags
+
+- [#10234](https://github.com/medusajs/medusa/pull/10234) [`3ab056e572c2391bc66e58fb515d033f5024da1e`](https://github.com/medusajs/medusa/commit/3ab056e572c2391bc66e58fb515d033f5024da1e) Thanks [@kasperkristensen](https://github.com/kasperkristensen)! - feat(dashboard): Allow setting a tooltip for disabled action items
+
+- [#10285](https://github.com/medusajs/medusa/pull/10285) [`344a6c9ea05a1d59a3a7de5282ae7ecda141d6ae`](https://github.com/medusajs/medusa/commit/344a6c9ea05a1d59a3a7de5282ae7ecda141d6ae) Thanks [@kasperkristensen](https://github.com/kasperkristensen)! - fix(dashboard): Add Metadata form to Variant page
+
+- Updated dependencies []:
+  - @medusajs/admin-shared@2.0.7
+  - @medusajs/js-sdk@2.0.7
+  - @medusajs/icons@2.0.7
+
 ## 2.0.6
 
 ### Patch Changes

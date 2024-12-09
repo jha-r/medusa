@@ -3,7 +3,6 @@ import {
   EntityIndex,
   PropertyMetadata,
 } from "@medusajs/types"
-import { MetadataStorage } from "@mikro-orm/core"
 import { createPsqlIndexStatementHelper } from "../../../common"
 import { validateIndexFields } from "../mikro-orm/build-indexes"
 
@@ -38,8 +37,7 @@ export function applyEntityIndexes(
   tableName: string,
   entityIndexes: EntityIndex[] = []
 ) {
-  const foreignKeyIndexes = applyForeignKeyIndexes(MikroORMEntity)
-  const indexes = [...entityIndexes, ...foreignKeyIndexes]
+  const indexes = [...entityIndexes]
 
   indexes.forEach((index) => {
     validateIndexFields(MikroORMEntity, index)
@@ -54,30 +52,4 @@ export function applyEntityIndexes(
 
     entityIndexStatement.MikroORMIndex()(MikroORMEntity)
   })
-}
-
-/*
-  When a "oneToMany" relationship is found on the MikroORM entity, we create an index by default
-  on the foreign key property.
-*/
-function applyForeignKeyIndexes(MikroORMEntity: EntityConstructor<any>) {
-  const foreignKeyIndexes: EntityIndex[] = []
-
-  for (const foreignKey of getEntityForeignKeys(MikroORMEntity)) {
-    foreignKeyIndexes.push({
-      on: [foreignKey],
-      where: "deleted_at IS NULL",
-    })
-  }
-
-  return foreignKeyIndexes
-}
-
-function getEntityForeignKeys(MikroORMEntity: EntityConstructor<any>) {
-  const properties =
-    MetadataStorage.getMetadataFromDecorator(MikroORMEntity).properties
-
-  return Object.keys(properties).filter(
-    (propertyName) => properties[propertyName].isForeignKey
-  )
 }

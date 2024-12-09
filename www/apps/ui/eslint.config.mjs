@@ -24,6 +24,11 @@ export default [
       "**/.eslintrc.js",
       "**/dist",
       "src/examples",
+      "**/next.config.js",
+      "**/spec",
+      "**/node_modules",
+      "**/public",
+      "**/.eslintrc.js"
     ],
   },
   ...compat.extends(
@@ -31,7 +36,7 @@ export default [
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
     "plugin:react-hooks/recommended",
-    "plugin:@next/next/recommended"
+    "plugin:@next/next/recommended",
   ),
   {
     languageOptions: {
@@ -176,13 +181,6 @@ export default [
         rootDir: ".",
       },
     },
-    ignores: [
-      "**/next.config.js",
-      "**/spec",
-      "**/node_modules",
-      "**/public",
-      "**/.eslintrc.js",
-    ],
 
     rules: {
       "react/react-in-jsx-scope": "off",

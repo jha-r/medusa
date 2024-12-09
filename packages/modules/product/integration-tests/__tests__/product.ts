@@ -7,12 +7,17 @@ import {
   createProductVariants,
 } from "../__fixtures__/product"
 
-import { IProductModuleService, ProductDTO } from "@medusajs/framework/types"
+import {
+  InferEntityType,
+  IProductModuleService,
+  ProductDTO,
+} from "@medusajs/framework/types"
 import {
   Module,
   Modules,
   ProductStatus,
   kebabCase,
+  toMikroORMEntity,
 } from "@medusajs/framework/utils"
 import { moduleIntegrationTestRunner } from "@medusajs/test-utils"
 import { SqlEntityManager } from "@mikro-orm/postgresql"
@@ -27,7 +32,7 @@ import {
   variantsData,
 } from "../__fixtures__/product/data"
 
-jest.setTimeout(30000)
+jest.setTimeout(300000)
 
 type Service = IProductModuleService & {
   productService_: ProductService
@@ -50,17 +55,19 @@ moduleIntegrationTestRunner<Service>({
         service: ProductModuleService,
       }).linkable
 
-      expect(Object.keys(linkable)).toEqual([
-        "product",
-        "productVariant",
-        "productOption",
-        "productOptionValue",
-        "productType",
-        "productImage",
-        "productTag",
-        "productCollection",
-        "productCategory",
-      ])
+      expect(Object.keys(linkable)).toHaveLength(8)
+      expect(Object.keys(linkable)).toEqual(
+        expect.arrayContaining([
+          "product",
+          "productVariant",
+          "productOption",
+          "productOptionValue",
+          "productType",
+          "productTag",
+          "productCollection",
+          "productCategory",
+        ])
+      )
 
       Object.keys(linkable).forEach((key) => {
         delete linkable[key].toJSON
@@ -119,15 +126,6 @@ moduleIntegrationTestRunner<Service>({
             field: "productType",
           },
         },
-        productImage: {
-          id: {
-            linkable: "product_image_id",
-            entity: "ProductImage",
-            primaryKey: "id",
-            serviceName: "product",
-            field: "productImage",
-          },
-        },
         productTag: {
           id: {
             linkable: "product_tag_id",
@@ -160,16 +158,17 @@ moduleIntegrationTestRunner<Service>({
 
     describe("Product Service", () => {
       let testManager: SqlEntityManager
-      let products!: Product[]
-      let productOne: Product
-      let categories!: ProductCategory[]
+      let products!: InferEntityType<typeof Product>[]
+      let productOne: InferEntityType<typeof Product>
+      let categories!: InferEntityType<typeof ProductCategory>[]
 
       describe("retrieve", () => {
         beforeEach(async () => {
           testManager = await MikroOrmWrapper.forkManager()
-          productOne = testManager.create(Product, {
+          productOne = testManager.create(toMikroORMEntity(Product), {
             id: "product-1",
             title: "product 1",
+            handle: "product-1",
             status: ProductStatus.PUBLISHED,
           })
 
@@ -243,9 +242,10 @@ moduleIntegrationTestRunner<Service>({
         beforeEach(async () => {
           testManager = await MikroOrmWrapper.forkManager()
 
-          productOne = testManager.create(Product, {
+          productOne = testManager.create(toMikroORMEntity(Product), {
             id: "product-1",
             title: "product 1",
+            handle: "product-1",
             status: ProductStatus.PUBLISHED,
           })
 
@@ -435,23 +435,23 @@ moduleIntegrationTestRunner<Service>({
         })
 
         describe("relation: categories", () => {
-          let workingProduct: Product
-          let workingCategory: ProductCategory
+          let workingProduct: InferEntityType<typeof Product>
+          let workingCategory: InferEntityType<typeof ProductCategory>
 
           beforeEach(async () => {
             testManager = await MikroOrmWrapper.forkManager()
 
             products = await createProductAndTags(testManager, productsData)
-            workingProduct = products.find((p) => p.id === "test-1") as Product
+            workingProduct = products.find((p) => p.id === "test-1")!
             categories = []
             for (const entry of categoriesData) {
               categories.push((await categoryService.create([entry]))[0])
             }
 
             workingCategory = (await testManager.findOne(
-              ProductCategory,
+              toMikroORMEntity(ProductCategory),
               "category-1"
-            )) as ProductCategory
+            ))!
 
             workingProduct = await assignCategoriesToProduct(
               testManager,
@@ -477,9 +477,7 @@ moduleIntegrationTestRunner<Service>({
               }
             )
 
-            const product = products.find(
-              (p) => p.id === workingProduct.id
-            ) as unknown as Product
+            const product = products.find((p) => p.id === workingProduct.id)!
 
             expect(product).toEqual(
               expect.objectContaining({
@@ -494,21 +492,18 @@ moduleIntegrationTestRunner<Service>({
                 name: "category 0",
                 handle: "category-0",
                 mpath: "category-0",
-                parent_category_id: null,
               },
               {
                 id: "category-1",
                 name: "category 1",
                 handle: "category-1",
                 mpath: "category-0.category-1",
-                parent_category_id: null,
               },
               {
                 id: "category-1-a",
                 name: "category 1 a",
                 handle: "category-1-a",
                 mpath: "category-0.category-1.category-1-a",
-                parent_category_id: null,
               },
             ])
           })
@@ -534,32 +529,34 @@ moduleIntegrationTestRunner<Service>({
         })
 
         describe("relation: collections", () => {
-          let workingProduct: Product
-          let workingProductTwo: Product
-          let workingCollection: ProductCollection
-          let workingCollectionTwo: ProductCollection
+          let workingProduct: InferEntityType<typeof Product>
+          let workingProductTwo: InferEntityType<typeof Product>
+          let workingCollection: InferEntityType<typeof ProductCollection>
+          let workingCollectionTwo: InferEntityType<typeof ProductCollection>
           const collectionData = [
             {
               id: "test-1",
               title: "col 1",
+              handle: "col-1",
             },
             {
               id: "test-2",
               title: "col 2",
+              handle: "col-2",
             },
           ]
 
           beforeEach(async () => {
             testManager = await MikroOrmWrapper.forkManager()
             await createCollections(testManager, collectionData)
-            workingCollection = (await testManager.findOne(
-              ProductCollection,
+            workingCollection = await testManager.findOne(
+              toMikroORMEntity(ProductCollection),
               "test-1"
-            )) as ProductCollection
+            )
             workingCollectionTwo = (await testManager.findOne(
-              ProductCollection,
+              toMikroORMEntity(ProductCollection),
               "test-2"
-            )) as ProductCollection
+            ))!
 
             products = await createProductAndTags(testManager, [
               {
@@ -575,10 +572,8 @@ moduleIntegrationTestRunner<Service>({
               },
             ])
 
-            workingProduct = products.find((p) => p.id === "test-1") as Product
-            workingProductTwo = products.find(
-              (p) => p.id === "test-2"
-            ) as Product
+            workingProduct = products.find((p) => p.id === "test-1")!
+            workingProductTwo = products.find((p) => p.id === "test-2")!
           })
 
           it("should filter by collection relation and scope fields", async () => {
@@ -588,7 +583,12 @@ moduleIntegrationTestRunner<Service>({
                 collection_id: workingCollection.id,
               },
               {
-                select: ["title", "collection.title"],
+                select: [
+                  "title",
+                  "handle",
+                  "collection.title",
+                  "collection.handle",
+                ],
                 relations: ["collection"],
               }
             )
@@ -602,7 +602,6 @@ moduleIntegrationTestRunner<Service>({
                 title: workingProduct.title,
                 handle: "product-1",
                 collection_id: workingCollection.id,
-                type_id: null,
                 collection: {
                   handle: "col-1",
                   id: workingCollection.id,
@@ -618,7 +617,12 @@ moduleIntegrationTestRunner<Service>({
                 collection_id: [workingCollection.id, workingCollectionTwo.id],
               },
               {
-                select: ["title", "collection.title"],
+                select: [
+                  "title",
+                  "handle",
+                  "collection.title",
+                  "collection.handle",
+                ],
                 relations: ["collection"],
               }
             )
@@ -631,7 +635,6 @@ moduleIntegrationTestRunner<Service>({
                 id: workingProduct.id,
                 title: workingProduct.title,
                 handle: "product-1",
-                type_id: null,
                 collection_id: workingCollection.id,
                 collection: {
                   handle: "col-1",
@@ -643,7 +646,6 @@ moduleIntegrationTestRunner<Service>({
                 id: workingProductTwo.id,
                 title: workingProductTwo.title,
                 handle: "product",
-                type_id: null,
                 collection_id: workingCollectionTwo.id,
                 collection: {
                   handle: "col-2",

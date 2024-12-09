@@ -1,5 +1,25 @@
 # @medusajs/utils
 
+## 2.1.0
+
+### Patch Changes
+
+- [#10360](https://github.com/medusajs/medusa/pull/10360) [`194361b95a0ed2c182e0a3c107fde9b4b6a7bcf7`](https://github.com/medusajs/medusa/commit/194361b95a0ed2c182e0a3c107fde9b4b6a7bcf7) Thanks [@thetutlage](https://github.com/thetutlage)! - fix: do not rely on model loading order to find an implicit owner
+
+- [#10391](https://github.com/medusajs/medusa/pull/10391) [`3e98364bd1631f96846cd3199bf7497702cf5923`](https://github.com/medusajs/medusa/commit/3e98364bd1631f96846cd3199bf7497702cf5923) Thanks [@thetutlage](https://github.com/thetutlage)! - feature: add support for check constraints in DML
+
+- Updated dependencies [[`3e98364bd1631f96846cd3199bf7497702cf5923`](https://github.com/medusajs/medusa/commit/3e98364bd1631f96846cd3199bf7497702cf5923), [`324b4ab438662f44de495ffe4d9137677a032a00`](https://github.com/medusajs/medusa/commit/324b4ab438662f44de495ffe4d9137677a032a00)]:
+  - @medusajs/types@2.1.0
+
+## 2.0.7
+
+### Patch Changes
+
+- [#10318](https://github.com/medusajs/medusa/pull/10318) [`e9003c3124f284eae7e1457101bf10c1beccbac1`](https://github.com/medusajs/medusa/commit/e9003c3124f284eae7e1457101bf10c1beccbac1) Thanks [@carlos-r-l-rodrigues](https://github.com/carlos-r-l-rodrigues)! - fix(utils): set readonly property on recursive dir read
+
+- Updated dependencies []:
+  - @medusajs/types@2.0.7
+
 ## 2.0.6
 
 ### Patch Changes
