@@ -118,7 +118,7 @@ const OuterComponent = ({
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (isAnchor && (e.metaKey || e.ctrlKey) && e.key === "b") {
+      if (isAnchor && (e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "b") {
         e.preventDefault()
         buttonRef.current?.click()
       }

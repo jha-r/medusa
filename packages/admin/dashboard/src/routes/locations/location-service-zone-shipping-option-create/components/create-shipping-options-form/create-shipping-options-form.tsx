@@ -13,6 +13,7 @@ import { KeyboundForm } from "../../../../../components/utilities/keybound-form"
 import { useCreateShippingOptions } from "../../../../../hooks/api/shipping-options"
 import { castNumber } from "../../../../../lib/cast-number"
 import { ShippingOptionPriceType } from "../../../common/constants"
+import { buildShippingOptionPriceRules } from "../../../common/utils/price-rule-helpers"
 import { CreateShippingOptionDetailsForm } from "./create-shipping-option-details-form"
 import { CreateShippingOptionsPricesForm } from "./create-shipping-options-prices-form"
 import {
@@ -62,30 +63,6 @@ export function CreateShippingOptionsForm({
 
   const { mutateAsync, isPending: isLoading } = useCreateShippingOptions()
 
-  const createPriceRule = (
-    attribute: string,
-    operator: string,
-    value: string | number
-  ) => ({
-    attribute,
-    operator,
-    value: castNumber(value),
-  })
-
-  const buildRules = (rule: {
-    gte?: string | number | null
-    lte?: string | number | null
-  }) => {
-    const conditions = [
-      { value: rule.gte, operator: "gte" },
-      { value: rule.lte, operator: "lte" },
-    ]
-
-    return conditions
-      .filter(({ value }) => value)
-      .map(({ operator, value }) => createPriceRule("total", operator, value!))
-  }
-
   const handleSubmit = form.handleSubmit(async (data) => {
     const currencyPrices = Object.entries(data.currency_prices)
       .map(([code, value]) => {
@@ -120,7 +97,7 @@ export function CreateShippingOptionsForm({
         value?.map((rule) => ({
           region_id: region_id,
           amount: castNumber(rule.amount),
-          rules: buildRules(rule),
+          rules: buildShippingOptionPriceRules(rule),
         })) || []
 
       return prices?.filter(Boolean)
@@ -133,7 +110,7 @@ export function CreateShippingOptionsForm({
         value?.map((rule) => ({
           currency_code,
           amount: castNumber(rule.amount),
-          rules: buildRules(rule),
+          rules: buildShippingOptionPriceRules(rule),
         })) || []
 
       return prices?.filter(Boolean)

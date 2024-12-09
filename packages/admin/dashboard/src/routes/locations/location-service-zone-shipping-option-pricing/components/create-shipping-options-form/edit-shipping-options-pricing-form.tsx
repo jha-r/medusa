@@ -22,13 +22,18 @@ import { useStore } from "../../../../../hooks/api/store"
 import { castNumber } from "../../../../../lib/cast-number"
 import { ConditionalPriceForm } from "../../../common/components/conditional-price-form"
 import { ShippingOptionPriceProvider } from "../../../common/components/shipping-option-price-provider"
-import { CONDITIONAL_PRICES_STACKED_MODAL_ID } from "../../../common/constants"
+import {
+  CONDITIONAL_PRICES_STACKED_MODAL_ID,
+  ITEM_TOTAL_ATTRIBUTE,
+  REGION_ID_ATTRIBUTE,
+} from "../../../common/constants"
 import { useShippingOptionPriceColumns } from "../../../common/hooks/use-shipping-option-price-columns"
 import {
   UpdateConditionalPrice,
   UpdateConditionalPriceSchema,
 } from "../../../common/schema"
 import { ConditionalPriceInfo } from "../../../common/types"
+import { buildShippingOptionPriceRules } from "../../../common/utils/price-rule-helpers"
 
 type PriceRecord = {
   id?: string
@@ -124,30 +129,6 @@ export function EditShippingOptionsPricingForm({
     [currencies, regions]
   )
 
-  const createPriceRule = (
-    attribute: string,
-    operator: string,
-    value: string | number
-  ) => ({
-    attribute,
-    operator,
-    value: castNumber(value),
-  })
-
-  const buildRules = (rule: UpdateConditionalPrice) => {
-    const conditions = [
-      { value: rule.gte, operator: "gte" },
-      { value: rule.lte, operator: "lte" },
-      { value: rule.gt, operator: "gt" },
-      { value: rule.lt, operator: "lt" },
-      { value: rule.eq, operator: "eq" },
-    ]
-
-    return conditions
-      .filter(({ value }) => value)
-      .map(({ operator, value }) => createPriceRule("total", operator, value!))
-  }
-
   const handleSubmit = form.handleSubmit(async (data) => {
     const currencyPrices = Object.entries(data.currency_prices)
       .map(([code, value]) => {
@@ -182,7 +163,7 @@ export function EditShippingOptionsPricingForm({
         id: rule.id,
         currency_code,
         amount: castNumber(rule.amount),
-        rules: buildRules(rule),
+        rules: buildShippingOptionPriceRules(rule),
       }))
     )
 
@@ -212,7 +193,7 @@ export function EditShippingOptionsPricingForm({
         id: rule.id,
         region_id,
         amount: castNumber(rule.amount),
-        rules: buildRules(rule),
+        rules: buildShippingOptionPriceRules(rule),
       }))
     )
 
@@ -317,8 +298,9 @@ const findRuleValue = (
   const fallbackValue = ["eq", "gt", "lt"].includes(operator) ? undefined : null
 
   return (
-    rules?.find((r) => r.attribute === "total" && r.operator === operator)
-      ?.value || fallbackValue
+    rules?.find(
+      (r) => r.attribute === ITEM_TOTAL_ATTRIBUTE && r.operator === operator
+    )?.value || fallbackValue
   )
 }
 
@@ -363,7 +345,7 @@ const getDefaultValues = (prices: HttpTypes.AdminShippingOptionPrice[]) => {
       return
     }
 
-    if (hasAttributes(price, ["total"], ["region_id"])) {
+    if (hasAttributes(price, [ITEM_TOTAL_ATTRIBUTE], [REGION_ID_ATTRIBUTE])) {
       const code = price.currency_code!
       if (!conditional_currency_prices[code]) {
         conditional_currency_prices[code] = []
@@ -372,13 +354,13 @@ const getDefaultValues = (prices: HttpTypes.AdminShippingOptionPrice[]) => {
       return
     }
 
-    if (hasAttributes(price, ["region_id"], ["total"])) {
+    if (hasAttributes(price, [REGION_ID_ATTRIBUTE], [ITEM_TOTAL_ATTRIBUTE])) {
       const regionId = price.price_rules[0].value
       region_prices[regionId] = price.amount
       return
     }
 
-    if (hasAttributes(price, ["region_id", "total"])) {
+    if (hasAttributes(price, [REGION_ID_ATTRIBUTE, ITEM_TOTAL_ATTRIBUTE])) {
       const regionId = price.price_rules[0].value
       if (!conditional_region_prices[regionId]) {
         conditional_region_prices[regionId] = []
