@@ -67,24 +67,28 @@ const SearchProvider = ({ children }: SearchProviderProps) => {
           },
         ],
       }}
-      commands={[
-        aiAssistant && {
-          name: "ai-assistant",
-          icon: <AiAssistantCommandIcon />,
-          component: (
-            <AiAssistantProvider
-              apiUrl={aiAssistant.apiUrl}
-              websiteId={aiAssistant.websiteId}
-              recaptchaSiteKey={aiAssistant.recaptchaSiteKey}
-            />
-          ),
-          title: "AI Assistant",
-          badge: {
-            variant: "purple",
-            children: "Beta",
-          },
-        },
-      ]}
+      commands={
+        aiAssistant
+          ? [
+              {
+                name: "ai-assistant",
+                icon: <AiAssistantCommandIcon />,
+                component: (
+                  <AiAssistantProvider
+                    apiUrl={aiAssistant.apiUrl}
+                    websiteId={aiAssistant.websiteId}
+                    recaptchaSiteKey={aiAssistant.recaptchaSiteKey}
+                  />
+                ),
+                title: "AI Assistant",
+                badge: {
+                  variant: "purple",
+                  children: "Beta",
+                },
+              },
+            ]
+          : []
+      }
       initialDefaultFilters={defaultFilters}
       modalClassName="z-[500]"
     >
