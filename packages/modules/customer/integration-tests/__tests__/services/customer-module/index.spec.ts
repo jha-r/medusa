@@ -704,7 +704,7 @@ moduleIntegrationTestRunner<ICustomerModuleService>({
           expect(res.length).toBe(0)
         })
 
-        it.only("should cascade relationship when deleting customer", async () => {
+        it("should cascade relationship when deleting customer", async () => {
           // Creating a customer and a group
           const customer = await service.createCustomers({
             first_name: "John",

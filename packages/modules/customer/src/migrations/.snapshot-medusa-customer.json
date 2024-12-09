@@ -619,6 +619,7 @@
             "id"
           ],
           "referencedTableName": "public.customer",
+          "deleteRule": "cascade",
           "updateRule": "cascade"
         },
         "customer_group_customer_customer_group_id_foreign": {
@@ -631,6 +632,7 @@
             "id"
           ],
           "referencedTableName": "public.customer_group",
+          "deleteRule": "cascade",
           "updateRule": "cascade"
         }
       }

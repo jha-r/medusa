@@ -20,6 +20,9 @@ const CustomerGroup = model
       where: "deleted_at IS NULL",
     },
   ])
+  .cascades({
+    detach: ["customers"],
+  })
 
 export default CustomerGroup
 

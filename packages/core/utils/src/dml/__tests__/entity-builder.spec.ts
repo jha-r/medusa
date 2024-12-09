@@ -6240,6 +6240,70 @@ describe("Entity builder", () => {
       })
     })
 
+    test.only("should define onDelete cascade on pivot entity when applying detach cascade", () => {
+      const teamUser = model.define("teamUser", {
+        id: model.number(),
+        user: model.belongsTo(() => user, { mappedBy: "teams" }),
+        team: model.belongsTo(() => team, { mappedBy: "users" }),
+      })
+      const user = model
+        .define("user", {
+          id: model.number(),
+          username: model.text(),
+          teams: model.manyToMany(() => team, {
+            pivotEntity: () => teamUser,
+          }),
+        })
+        .cascades({
+          detach: ["teams"],
+        })
+
+      const team = model
+        .define("team", {
+          id: model.number(),
+          name: model.text(),
+          users: model.manyToMany(() => user, {
+            pivotEntity: () => teamUser,
+          }),
+        })
+        .cascades({
+          detach: ["users"],
+        })
+
+      type CascadeDetach = Parameters<(typeof team)["cascades"]>[0]["detach"]
+
+      expectTypeOf<CascadeDetach>().toEqualTypeOf<"users"[] | undefined>()
+
+      const [, , TeamUserEntity] = toMikroOrmEntities([user, team, teamUser])
+
+      const teamUserMetadata =
+        MetadataStorage.getMetadataFromDecorator(TeamUserEntity)
+      expect(teamUserMetadata.properties).toEqual(
+        expect.objectContaining({
+          team_id: expect.objectContaining({
+            name: "team_id",
+            reference: "m:1",
+            entity: "Team",
+            columnType: "text",
+            mapToPk: true,
+            fieldName: "team_id",
+            nullable: false,
+            onDelete: "cascade",
+          }),
+          user_id: expect.objectContaining({
+            name: "user_id",
+            reference: "m:1",
+            entity: "User",
+            columnType: "text",
+            mapToPk: true,
+            fieldName: "user_id",
+            nullable: false,
+            onDelete: "cascade",
+          }),
+        })
+      )
+    })
+
     test("throw error when unable to locate relationship via mappedBy", () => {
       const team = model.define("team", {
         id: model.number(),

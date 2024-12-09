@@ -24,6 +24,7 @@ const Customer = model
   })
   .cascades({
     delete: ["addresses"],
+    detach: ["groups"],
   })
   .indexes([
     {
