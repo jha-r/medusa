@@ -7,13 +7,27 @@ import {
   workflowDiagramLinkFixerPlugin,
 } from "remark-rehype-plugins"
 import mdxPluginOptions from "./mdx-options.mjs"
+import path from "node:path"
 
 const withMDX = mdx({
   extension: /\.mdx?$/,
   options: {
     rehypePlugins: [
+      [
+        brokenLinkCheckerPlugin,
+        {
+          crossProjects: {
+            docs: {
+              projectPath: path.resolve("..", "book"),
+            },
+            ui: {
+              projectPath: path.resolve("..", "ui"),
+              contentPath: "src/content/docs",
+            },
+          },
+        },
+      ],
       ...mdxPluginOptions.options.rehypePlugins,
-      [brokenLinkCheckerPlugin],
       [localLinksRehypePlugin],
       [typeListLinkFixerPlugin],
       [
@@ -102,6 +116,11 @@ const nextConfig = {
       {
         source: "/commerce-modules/promotion/relations-to-other-modules",
         destination: "/commerce-modules/promotion/links-to-other-modules",
+        permanent: true,
+      },
+      {
+        source: "/deployment/admin/vercel",
+        destination: "/deployment",
         permanent: true,
       },
     ]

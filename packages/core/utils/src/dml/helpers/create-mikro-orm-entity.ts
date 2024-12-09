@@ -11,11 +11,12 @@ import { Entity, Filter } from "@mikro-orm/core"
 import { DmlEntity } from "../entity"
 import { IdProperty } from "../properties/id"
 import { DuplicateIdPropertyError } from "../errors"
+import { applyChecks } from "./mikro-orm/apply-checks"
 import { mikroOrmSoftDeletableFilterOptions } from "../../dal"
-import { applySearchable } from "./entity-builder/apply-searchable"
 import { defineProperty } from "./entity-builder/define-property"
-import { defineRelationship } from "./entity-builder/define-relationship"
+import { applySearchable } from "./entity-builder/apply-searchable"
 import { parseEntityName } from "./entity-builder/parse-entity-name"
+import { defineRelationship } from "./entity-builder/define-relationship"
 import { applyEntityIndexes, applyIndexes } from "./mikro-orm/apply-indexes"
 
 /**
@@ -47,7 +48,7 @@ function createMikrORMEntity() {
   function createEntity<T extends DmlEntity<any, any>>(entity: T): Infer<T> {
     class MikroORMEntity {}
 
-    const { schema, cascades, indexes: entityIndexes = [] } = entity.parse()
+    const { schema, cascades, indexes: entityIndexes, checks } = entity.parse()
     const { modelName, tableName } = parseEntityName(entity)
     if (ENTITIES[modelName]) {
       return ENTITIES[modelName] as Infer<T>
@@ -96,6 +97,7 @@ function createMikrORMEntity() {
     })
 
     applyEntityIndexes(MikroORMEntity, tableName, entityIndexes)
+    applyChecks(MikroORMEntity, checks)
 
     /**
      * Converting class to a MikroORM entity

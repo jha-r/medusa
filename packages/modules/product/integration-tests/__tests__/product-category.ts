@@ -43,7 +43,6 @@ moduleIntegrationTestRunner<Service>({
           expect(productCategoryResults).toEqual([
             expect.objectContaining({
               id: "category-0",
-              parent_category_id: null,
             }),
             expect.objectContaining({
               id: "category-1",
@@ -130,7 +129,6 @@ moduleIntegrationTestRunner<Service>({
               id: "category-0",
               handle: "category-0",
               mpath: "category-0",
-              parent_category_id: null,
               category_children: [
                 expect.objectContaining({
                   id: "category-1",
@@ -263,9 +261,9 @@ moduleIntegrationTestRunner<Service>({
                       parent_category_id: "electronics",
                       parent_category: expect.objectContaining({
                         id: "electronics",
-                        parent_category_id: null,
                         handle: "electronics",
                         mpath: "electronics",
+                        parent_category_id: null,
                         parent_category: null,
                       }),
                     }),
@@ -564,7 +562,6 @@ moduleIntegrationTestRunner<Service>({
               id: "category-0",
               handle: "category-0",
               mpath: "category-0",
-              parent_category_id: null,
               category_children: [
                 expect.objectContaining({
                   id: "category-1",
@@ -721,6 +718,7 @@ moduleIntegrationTestRunner<Service>({
           expect(productCategoryResults[0]).toEqual([
             expect.objectContaining({
               id: "category-0",
+              parent_category_id: null,
               parent_category: null,
             }),
             expect.objectContaining({
@@ -813,7 +811,6 @@ moduleIntegrationTestRunner<Service>({
               id: "category-0",
               handle: "category-0",
               mpath: "category-0",
-              parent_category_id: null,
               category_children: [
                 expect.objectContaining({
                   id: "category-1",
@@ -874,7 +871,6 @@ moduleIntegrationTestRunner<Service>({
               id: "category-0",
               handle: "category-0",
               mpath: "category-0",
-              parent_category_id: null,
               category_children: [
                 expect.objectContaining({
                   id: "category-1",

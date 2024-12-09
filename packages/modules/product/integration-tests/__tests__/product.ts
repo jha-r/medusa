@@ -492,21 +492,18 @@ moduleIntegrationTestRunner<Service>({
                 name: "category 0",
                 handle: "category-0",
                 mpath: "category-0",
-                parent_category_id: null,
               },
               {
                 id: "category-1",
                 name: "category 1",
                 handle: "category-1",
                 mpath: "category-0.category-1",
-                parent_category_id: null,
               },
               {
                 id: "category-1-a",
                 name: "category 1 a",
                 handle: "category-1-a",
                 mpath: "category-0.category-1.category-1-a",
-                parent_category_id: null,
               },
             ])
           })
@@ -605,7 +602,6 @@ moduleIntegrationTestRunner<Service>({
                 title: workingProduct.title,
                 handle: "product-1",
                 collection_id: workingCollection.id,
-                type_id: null,
                 collection: {
                   handle: "col-1",
                   id: workingCollection.id,
@@ -639,7 +635,6 @@ moduleIntegrationTestRunner<Service>({
                 id: workingProduct.id,
                 title: workingProduct.title,
                 handle: "product-1",
-                type_id: null,
                 collection_id: workingCollection.id,
                 collection: {
                   handle: "col-1",
@@ -651,7 +646,6 @@ moduleIntegrationTestRunner<Service>({
                 id: workingProductTwo.id,
                 title: workingProductTwo.title,
                 handle: "product",
-                type_id: null,
                 collection_id: workingCollectionTwo.id,
                 collection: {
                   handle: "col-2",
