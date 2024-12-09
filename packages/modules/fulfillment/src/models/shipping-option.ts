@@ -23,16 +23,16 @@ import {
   Property,
   Rel,
 } from "@mikro-orm/core"
-import Fulfillment from "./fulfillment"
-import FulfillmentProvider from "./fulfillment-provider"
-import ServiceZone from "./service-zone"
+import { Fulfillment } from "./fulfillment"
+import { FulfillmentProvider } from "./fulfillment-provider"
+import { ServiceZone } from "./service-zone"
 import ShippingOptionRule from "./shipping-option-rule"
 import ShippingOptionType from "./shipping-option-type"
 import ShippingProfile from "./shipping-profile"
 
 type ShippingOptionOptionalProps = DAL.SoftDeletableModelDateColumns
 
-const DeletedAtIndex = createPsqlIndexStatementHelper({
+export const DeletedAtIndex = createPsqlIndexStatementHelper({
   tableName: "shipping_option",
   columns: "deleted_at",
   where: "deleted_at IS NOT NULL",
@@ -64,7 +64,7 @@ const ShippingOptionTypeIdIndex = createPsqlIndexStatementHelper({
 
 @Entity()
 @Filter(DALUtils.mikroOrmSoftDeletableFilterOptions)
-export default class ShippingOption {
+export class ShippingOption {
   [OptionalProps]?: ShippingOptionOptionalProps
 
   @PrimaryKey({ columnType: "text" })

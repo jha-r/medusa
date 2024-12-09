@@ -2,6 +2,7 @@ import {
   createPsqlIndexStatementHelper,
   DALUtils,
   generateEntityId,
+  model,
 } from "@medusajs/framework/utils"
 
 import { DAL } from "@medusajs/framework/types"
@@ -16,7 +17,17 @@ import {
   Property,
   Rel,
 } from "@mikro-orm/core"
-import ShippingOption from "./shipping-option"
+import { ShippingOption } from "./shipping-option"
+
+export const ShippingOptionType = model.define("shipping_option_type", {
+  id: model.id({ prefix: "sotype" }).primaryKey(),
+  label: model.text(),
+  description: model.text().nullable(),
+  code: model.text(),
+  shipping_option: model.belongsTo(() => ShippingOption, {
+    mappedBy: "type",
+  }),
+})
 
 type ShippingOptionTypeOptionalProps = DAL.SoftDeletableModelDateColumns
 

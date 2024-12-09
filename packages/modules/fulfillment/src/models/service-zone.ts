@@ -1,126 +1,30 @@
-import {
-  createPsqlIndexStatementHelper,
-  DALUtils,
-  generateEntityId,
-} from "@medusajs/framework/utils"
+import { model } from "@medusajs/framework/utils"
 
-import { DAL } from "@medusajs/framework/types"
-import {
-  BeforeCreate,
-  Cascade,
-  Collection,
-  Entity,
-  Filter,
-  Index,
-  ManyToOne,
-  OneToMany,
-  OnInit,
-  OptionalProps,
-  PrimaryKey,
-  Property,
-  Rel,
-} from "@mikro-orm/core"
-import FulfillmentSet from "./fulfillment-set"
-import GeoZone from "./geo-zone"
-import ShippingOption from "./shipping-option"
+import { FulfillmentSet } from "./fulfillment-set"
+import { GeoZone } from "./geo-zone"
+import { ShippingOption } from "./shipping-option"
 
-type ServiceZoneOptionalProps = DAL.SoftDeletableModelDateColumns
-
-const deletedAtIndexName = "IDX_service_zone_deleted_at"
-const deletedAtIndexStatement = createPsqlIndexStatementHelper({
-  name: deletedAtIndexName,
-  tableName: "service_zone",
-  columns: "deleted_at",
-  where: "deleted_at IS NOT NULL",
-}).expression
-
-const NameIndex = createPsqlIndexStatementHelper({
-  tableName: "service_zone",
-  columns: "name",
-  unique: true,
-  where: "deleted_at IS NULL",
-})
-
-const FulfillmentSetIdIndex = createPsqlIndexStatementHelper({
-  tableName: "service_zone",
-  columns: "fulfillment_set_id",
-  where: "deleted_at IS NULL",
-})
-
-@Entity()
-@Filter(DALUtils.mikroOrmSoftDeletableFilterOptions)
-export default class ServiceZone {
-  [OptionalProps]?: ServiceZoneOptionalProps
-
-  @PrimaryKey({ columnType: "text" })
-  id: string
-
-  @Property({ columnType: "text" })
-  @NameIndex.MikroORMIndex()
-  name: string
-
-  @Property({ columnType: "jsonb", nullable: true })
-  metadata: Record<string, unknown> | null = null
-
-  @ManyToOne(() => FulfillmentSet, {
-    type: "text",
-    mapToPk: true,
-    fieldName: "fulfillment_set_id",
-    onDelete: "cascade",
+export const ServiceZone = model
+  .define("serivce_zone", {
+    id: model.id({ prefix: "serzo" }).primaryKey(),
+    name: model.text(),
+    fulfillment_set: model.belongsTo(() => FulfillmentSet, {
+      mappedBy: "service_zones",
+    }),
+    geo_zones: model.hasMany(() => GeoZone, {
+      mappedBy: "service_zone",
+    }),
+    shipping_options: model.hasMany(() => ShippingOption, {
+      mappedBy: "service_zone",
+    }),
+    metadata: model.json().nullable(),
   })
-  @FulfillmentSetIdIndex.MikroORMIndex()
-  fulfillment_set_id: string
-
-  @ManyToOne(() => FulfillmentSet, { persist: false })
-  fulfillment_set: Rel<FulfillmentSet>
-
-  @OneToMany(() => GeoZone, "service_zone", {
-    cascade: [Cascade.PERSIST, "soft-remove"] as any,
-    orphanRemoval: true,
-  })
-  geo_zones = new Collection<Rel<GeoZone>>(this)
-
-  @OneToMany(
-    () => ShippingOption,
-    (shippingOption) => shippingOption.service_zone,
+  .indexes([
     {
-      cascade: [Cascade.PERSIST, "soft-remove"] as any,
-      orphanRemoval: true,
-    }
-  )
-  shipping_options = new Collection<Rel<ShippingOption>>(this)
-
-  @Property({
-    onCreate: () => new Date(),
-    columnType: "timestamptz",
-    defaultRaw: "now()",
+      on: ["name"],
+      where: "deleted_at IS NULL",
+    },
+  ])
+  .cascades({
+    delete: ["geo_zones", "shipping_options"],
   })
-  created_at: Date
-
-  @Property({
-    onCreate: () => new Date(),
-    onUpdate: () => new Date(),
-    columnType: "timestamptz",
-    defaultRaw: "now()",
-  })
-  updated_at: Date
-
-  @Index({
-    name: deletedAtIndexName,
-    expression: deletedAtIndexStatement,
-  })
-  @Property({ columnType: "timestamptz", nullable: true })
-  deleted_at: Date | null = null
-
-  @BeforeCreate()
-  onCreate() {
-    this.id = generateEntityId(this.id, "serzo")
-    this.fulfillment_set_id ??= this.fulfillment_set?.id
-  }
-
-  @OnInit()
-  onInit() {
-    this.id = generateEntityId(this.id, "serzo")
-    this.fulfillment_set_id ??= this.fulfillment_set?.id
-  }
-}
