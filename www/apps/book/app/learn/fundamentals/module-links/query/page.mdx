@@ -298,9 +298,9 @@ Using this middleware allows you to have default configurations for retrieved fi
 The first step is to use the `validateAndTransformQuery` middleware on the `GET` route. You add the middleware in `src/api/middlewares.ts`:
 
 ```ts title="src/api/middlewares.ts"
-import { defineMiddlewares } from "@medusajs/medusa"
 import { 
   validateAndTransformQuery,
+  defineMiddlewares
 } from "@medusajs/framework/http"
 import { createFindParams } from "@medusajs/medusa/api/utils/validators"
 

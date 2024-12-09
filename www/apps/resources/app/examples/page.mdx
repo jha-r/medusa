@@ -244,11 +244,11 @@ A middleware is a function executed when a request is sent to an API Route.
 Create the file `src/api/middlewares.ts` with the following content:
 
 ```ts title="src/api/middlewares.ts"
-import { defineMiddlewares } from "@medusajs/medusa"
 import type { 
   MedusaNextFunction, 
   MedusaRequest, 
   MedusaResponse, 
+  defineMiddlewares,
 } from "@medusajs/framework/http"
 
 export default defineMiddlewares({
@@ -296,11 +296,11 @@ export const middlewareMethodHighlights = [
 ]
 
 ```ts title="src/api/middlewares.ts" highlights={middlewareMethodHighlights}
-import { defineMiddlewares } from "@medusajs/medusa"
 import type { 
   MedusaNextFunction, 
   MedusaRequest, 
   MedusaResponse, 
+  defineMiddlewares,
 } from "@medusajs/framework/http"
 
 export default defineMiddlewares({
@@ -331,9 +331,11 @@ export const PostStoreCustomSchema = z.object({
 
 2. Add a validation middleware to the custom route in `src/api/middlewares.ts`:
 
-```ts title="src/api/middlewares.ts" highlights={[["11", "validateAndTransformBody"]]}
-import { defineMiddlewares } from "@medusajs/medusa"
-import { validateAndTransformBody } from "@medusajs/framework/utils"
+```ts title="src/api/middlewares.ts" highlights={[["13", "validateAndTransformBody"]]}
+import { 
+  validateAndTransformBody,
+  defineMiddlewares
+} from "@medusajs/framework/http"
 import { PostStoreCustomSchema } from "./custom/validators"
 
 export default defineMiddlewares({
@@ -385,7 +387,7 @@ Find this example in details in [this documentation](!docs!/learn/customization/
 1. Create the file `src/api/middlewares.ts` with the following content:
 
 ```ts title="src/api/middlewares.ts" highlights={[["10", "brand_id", "Replace with your custom field."]]}
-import { defineMiddlewares } from "@medusajs/medusa"
+import { defineMiddlewares } from "@medusajs/framework/http"
 import { z } from "zod"
 
 export default defineMiddlewares({
@@ -444,7 +446,7 @@ Add the following middleware in `src/api/middlewares.ts`:
 import { 
   defineMiddlewares,
   authenticate,
-} from "@medusajs/medusa"
+} from "@medusajs/framework/http"
 
 export default defineMiddlewares({
   routes: [
@@ -473,7 +475,7 @@ Add the following middleware in `src/api/middlewares.ts`:
 import { 
   defineMiddlewares,
   authenticate,
-} from "@medusajs/medusa"
+} from "@medusajs/framework/http"
 
 export default defineMiddlewares({
   routes: [
@@ -623,11 +625,11 @@ By default, Medusa configures CORS for all routes starting with `/admin`, `/stor
 To configure CORS for routes under other prefixes, create the file `src/api/middlewares.ts` with the following content:
 
 ```ts title="src/api/middlewares.ts"
-import { defineMiddlewares } from "@medusajs/medusa"
 import type { 
   MedusaNextFunction, 
   MedusaRequest, 
   MedusaResponse, 
+  defineMiddlewares
 } from "@medusajs/framework/http"
 import { ConfigModule } from "@medusajs/framework/types"
 import { parseCorsOrigins } from "@medusajs/framework/utils"
@@ -3444,7 +3446,7 @@ export async function POST(
 import { 
   defineMiddlewares,
   authenticate,
-} from "@medusajs/medusa"
+} from "@medusajs/framework/http"
 
 export default defineMiddlewares({
   routes: [

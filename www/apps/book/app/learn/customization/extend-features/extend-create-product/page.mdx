@@ -176,7 +176,7 @@ You configure the properties accepted in `additional_data` in the `src/api/middl
 ![Directory structure after adding the middelwares file](https://res.cloudinary.com/dza7lstvk/image/upload/v1733386868/Medusa%20Book/brands-middleware-dir-overview_uczos1.jpg)
 
 ```ts title="src/api/middlewares.ts"
-import { defineMiddlewares } from "@medusajs/medusa"
+import { defineMiddlewares } from "@medusajs/framework/http"
 import { z } from "zod"
 
 export default defineMiddlewares({

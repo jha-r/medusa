@@ -134,7 +134,7 @@ To pass the `custom_name` in the `additional_data` parameter, you must add a val
 Create the file `src/api/middlewares.ts` with the following content:
 
 ```ts title="src/api/middlewares.ts"
-import { defineMiddlewares } from "@medusajs/medusa"
+import { defineMiddlewares } from "@medusajs/framework/http"
 import { z } from "zod"
 
 export default defineMiddlewares({
@@ -408,7 +408,7 @@ The `updatePromotionsWorkflow` is executed by the [Update Promotion API route](!
 To allow passing `custom_name` in the `additional_data` parameter of the update promotion route, add in `src/api/middlewares.ts` a new route middleware configuration object:
 
 ```ts title="src/api/middlewares.ts"
-import { defineMiddlewares } from "@medusajs/medusa"
+import { defineMiddlewares } from "@medusajs/framework/http"
 import { z } from "zod"
 
 export default defineMiddlewares({

@@ -468,7 +468,7 @@ Next, create the file `src/api/middlewares.ts` with the following content:
 import { 
   defineMiddlewares,
   authenticate,
-} from "@medusajs/medusa"
+} from "@medusajs/framework/http"
 
 export default defineMiddlewares({
   routes: [
@@ -723,10 +723,8 @@ Finally, in `src/api/middlewares.ts`, apply a middleware on the create products 
 import { 
   defineMiddlewares,
   authenticate,
-} from "@medusajs/medusa"
-import { 
   validateAndTransformBody,
-} from "@medusajs/framework/utils"
+} from "@medusajs/framework/http"
 import { 
   AdminCreateProduct,
 } from "@medusajs/medusa/api/admin/products/validators"

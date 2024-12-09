@@ -967,7 +967,7 @@ Create the file `src/api/middlewares.ts` with the following content:
 import { 
   authenticate, 
   defineMiddlewares,
-} from "@medusajs/medusa"
+} from "@medusajs/framework/http"
 
 export default defineMiddlewares({
   routes: [
@@ -2646,7 +2646,7 @@ Then, create the file `src/api/deliveries/[id]/middlewares.ts` with the followin
 import { 
   authenticate, 
   defineMiddlewares, 
-} from "@medusajs/medusa"
+} from "@medusajs/framework/http"
 import { isDeliveryRestaurant } from "../../utils/is-delivery-restaurant"
 
 export default defineMiddlewares({
