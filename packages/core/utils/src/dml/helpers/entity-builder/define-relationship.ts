@@ -17,13 +17,13 @@ import {
   Property,
   rel,
 } from "@mikro-orm/core"
-import { camelToSnakeCase, pluralize } from "../../../common"
 import { DmlEntity } from "../../entity"
-import { HasMany } from "../../relations/has-many"
 import { HasOne } from "../../relations/has-one"
-import { ManyToMany as DmlManyToMany } from "../../relations/many-to-many"
-import { applyEntityIndexes } from "../mikro-orm/apply-indexes"
+import { HasMany } from "../../relations/has-many"
 import { parseEntityName } from "./parse-entity-name"
+import { camelToSnakeCase, pluralize } from "../../../common"
+import { applyEntityIndexes } from "../mikro-orm/apply-indexes"
+import { ManyToMany as DmlManyToMany } from "../../relations/many-to-many"
 import { HasOneWithForeignKey } from "../../relations/has-one-fk"
 
 type Context = {
@@ -396,9 +396,9 @@ export function defineBelongsToRelationship(
       onDelete: shouldCascade ? "cascade" : undefined,
     }
 
-    if (shouldCascade) {
-      oneToOneOptions.cascade = [Cascade.PERSIST, "soft-remove"] as any
-    }
+    // if (shouldCascade) {
+    //   oneToOneOptions.cascade = [Cascade.PERSIST, "soft-remove"] as any
+    // }
 
     OneToOne(oneToOneOptions)(MikroORMEntity.prototype, relationship.name)
 
