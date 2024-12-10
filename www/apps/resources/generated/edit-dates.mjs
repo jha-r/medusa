@@ -5659,5 +5659,6 @@ export const generatedEditDates = {
   "references/workflows/classes/workflows.WorkflowResponse/page.mdx": "2024-12-09T13:22:04.820Z",
   "references/workflows/interfaces/workflows.ApplyStepOptions/page.mdx": "2024-12-09T13:22:04.808Z",
   "references/workflows/types/workflows.WorkflowData/page.mdx": "2024-12-09T13:22:04.836Z",
-  "app/integrations/guides/resend/page.mdx": "2024-12-09T16:19:17.798Z"
+  "app/integrations/guides/resend/page.mdx": "2024-12-09T16:19:17.798Z",
+  "app/recipes/commerce-automation/restock-notification/page.mdx": "2024-12-10T14:15:39.178Z"
 }
