@@ -7987,6 +7987,46 @@ export const generatedSidebar = [
         "loaded": true,
         "isPathHref": true,
         "type": "category",
+        "title": "Auth",
+        "children": [
+          {
+            "loaded": true,
+            "isPathHref": true,
+            "type": "link",
+            "path": "/commerce-modules/auth/auth-providers/google",
+            "title": "Google",
+            "children": []
+          },
+          {
+            "loaded": true,
+            "isPathHref": true,
+            "type": "link",
+            "path": "/commerce-modules/auth/auth-providers/github",
+            "title": "GitHub",
+            "children": []
+          }
+        ]
+      },
+      {
+        "loaded": true,
+        "isPathHref": true,
+        "type": "category",
+        "title": "CMS",
+        "children": [
+          {
+            "loaded": true,
+            "isPathHref": true,
+            "type": "link",
+            "path": "/integrations/guides/sanity",
+            "title": "Sanity",
+            "children": []
+          }
+        ]
+      },
+      {
+        "loaded": true,
+        "isPathHref": true,
+        "type": "category",
         "title": "File",
         "children": [
           {
@@ -8012,6 +8052,14 @@ export const generatedSidebar = [
             "path": "/architectural-modules/notification/sendgrid",
             "title": "SendGrid",
             "children": []
+          },
+          {
+            "loaded": true,
+            "isPathHref": true,
+            "type": "link",
+            "path": "/integrations/guides/resend",
+            "title": "Resend",
+            "children": []
           }
         ]
       },
@@ -8027,30 +8075,6 @@ export const generatedSidebar = [
             "type": "link",
             "path": "/commerce-modules/payment/payment-provider/stripe",
             "title": "Stripe",
-            "children": []
-          }
-        ]
-      },
-      {
-        "loaded": true,
-        "isPathHref": true,
-        "type": "category",
-        "title": "Guides",
-        "children": [
-          {
-            "loaded": true,
-            "isPathHref": true,
-            "type": "link",
-            "path": "/integrations/guides/sanity",
-            "title": "Sanity",
-            "children": []
-          },
-          {
-            "loaded": true,
-            "isPathHref": true,
-            "type": "link",
-            "path": "/integrations/guides/resend",
-            "title": "Resend",
             "children": []
           }
         ]
