@@ -552,6 +552,190 @@ medusaIntegrationTestRunner({
             "Providers (does-not-exist) are not enabled for the service location"
           )
         })
+
+        it.only("should update prices accurate once created", async () => {
+          const createShippingOptionPayload = {
+            name: "Test shipping option",
+            service_zone_id: fulfillmentSet.service_zones[0].id,
+            shipping_profile_id: shippingProfile.id,
+            provider_id: "manual_test-provider",
+            price_type: "flat",
+            type: {
+              label: "Test type",
+              description: "Test description",
+              code: "test-code",
+            },
+            prices: [
+              {
+                region_id: region.id,
+                amount: 1000,
+              },
+              {
+                region_id: region.id,
+                amount: 500,
+                rules: [
+                  {
+                    attribute: "item_total",
+                    operator: "gt",
+                    value: 200,
+                  },
+                  {
+                    attribute: "item_total",
+                    operator: "lt",
+                    value: 500,
+                  },
+                ],
+              },
+            ],
+          }
+
+          const createdShippingOption = (
+            await api.post(
+              `/admin/shipping-options`,
+              createShippingOptionPayload,
+              adminHeaders
+            )
+          ).data.shipping_option
+
+          expect(createdShippingOption).toEqual(
+            expect.objectContaining({
+              id: expect.any(String),
+              prices: expect.arrayContaining([
+                expect.objectContaining({
+                  id: expect.any(String),
+                  currency_code: "eur",
+                  amount: 1000,
+                }),
+                expect.objectContaining({
+                  id: expect.any(String),
+                  currency_code: "eur",
+                  amount: 500,
+                  rules_count: 3,
+                  price_rules: expect.arrayContaining([
+                    expect.objectContaining({
+                      attribute: "item_total",
+                      operator: "gt",
+                      value: "200",
+                    }),
+                    expect.objectContaining({
+                      attribute: "item_total",
+                      operator: "lt",
+                      value: "500",
+                    }),
+                    expect.objectContaining({
+                      attribute: "region_id",
+                      operator: "eq",
+                      value: region.id,
+                    }),
+                  ]),
+                }),
+              ]),
+            })
+          )
+
+          const updateShippingOptionPayload = {
+            prices: [
+              {
+                region_id: region.id,
+                amount: 1000,
+              },
+              {
+                region_id: region.id,
+                amount: 500,
+                rules: [
+                  {
+                    attribute: "item_total",
+                    operator: "gt",
+                    value: 200,
+                  },
+                  {
+                    attribute: "item_total",
+                    operator: "lt",
+                    value: 500,
+                  },
+                ],
+              },
+              {
+                region_id: region.id,
+                amount: 0,
+                rules: [
+                  {
+                    attribute: "item_total",
+                    operator: "gt",
+                    value: 600,
+                  },
+                ],
+              },
+            ],
+          }
+
+          const updatedShippingOption = (
+            await api.post(
+              `/admin/shipping-options/${createdShippingOption.id}`,
+              updateShippingOptionPayload,
+              adminHeaders
+            )
+          ).data.shipping_option
+
+          console.log(
+            "updatedShippingOption -- ",
+            JSON.stringify(updatedShippingOption, null, 4)
+          )
+
+          expect(updatedShippingOption).toEqual(
+            expect.objectContaining({
+              id: expect.any(String),
+              prices: expect.arrayContaining([
+                expect.objectContaining({
+                  id: expect.any(String),
+                  currency_code: "eur",
+                  amount: 1000,
+                }),
+                expect.objectContaining({
+                  id: expect.any(String),
+                  currency_code: "eur",
+                  amount: 500,
+                  rules_count: 3,
+                  price_rules: expect.arrayContaining([
+                    expect.objectContaining({
+                      attribute: "item_total",
+                      operator: "gt",
+                      value: "200",
+                    }),
+                    expect.objectContaining({
+                      attribute: "item_total",
+                      operator: "lt",
+                      value: "500",
+                    }),
+                    expect.objectContaining({
+                      attribute: "region_id",
+                      operator: "eq",
+                      value: region.id,
+                    }),
+                  ]),
+                }),
+                expect.objectContaining({
+                  id: expect.any(String),
+                  currency_code: "eur",
+                  amount: 0,
+                  rules_count: 2,
+                  price_rules: expect.arrayContaining([
+                    expect.objectContaining({
+                      attribute: "item_total",
+                      operator: "gt",
+                      value: "600",
+                    }),
+                    expect.objectContaining({
+                      attribute: "region_id",
+                      operator: "eq",
+                      value: region.id,
+                    }),
+                  ]),
+                }),
+              ]),
+            })
+          )
+        })
       })
 
       describe("POST /admin/shipping-options/:id", () => {
