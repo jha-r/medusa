@@ -510,6 +510,15 @@
           "nullable": false,
           "mappedType": "text"
         },
+        "created_by": {
+          "name": "created_by",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "mappedType": "text"
+        },
         "metadata": {
           "name": "metadata",
           "type": "jsonb",
