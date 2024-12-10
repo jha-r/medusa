@@ -1,6 +1,6 @@
 import { Migration } from '@mikro-orm/migrations';
 
-export class Migration20241206120119 extends Migration {
+export class Migration20241210051554 extends Migration {
 
   async up(): Promise<void> {
     this.addSql('alter table if exists "customer_group_customer" drop constraint if exists "customer_group_customer_customer_group_id_foreign";');
