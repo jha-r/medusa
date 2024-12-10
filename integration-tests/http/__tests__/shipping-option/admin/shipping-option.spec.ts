@@ -553,7 +553,7 @@ medusaIntegrationTestRunner({
           )
         })
 
-        it.only("should update prices accurate once created", async () => {
+        it("should update prices accurate once created", async () => {
           const createShippingOptionPayload = {
             name: "Test shipping option",
             service_zone_id: fulfillmentSet.service_zones[0].id,
@@ -583,6 +583,17 @@ medusaIntegrationTestRunner({
                     attribute: "item_total",
                     operator: "lt",
                     value: 500,
+                  },
+                ],
+              },
+              {
+                region_id: region.id,
+                amount: 400,
+                rules: [
+                  {
+                    attribute: "item_total",
+                    operator: "gt",
+                    value: 200,
                   },
                 ],
               },
@@ -629,6 +640,24 @@ medusaIntegrationTestRunner({
                     }),
                   ]),
                 }),
+                expect.objectContaining({
+                  id: expect.any(String),
+                  currency_code: "eur",
+                  amount: 400,
+                  rules_count: 2,
+                  price_rules: expect.arrayContaining([
+                    expect.objectContaining({
+                      attribute: "item_total",
+                      operator: "gt",
+                      value: "200",
+                    }),
+                    expect.objectContaining({
+                      attribute: "region_id",
+                      operator: "eq",
+                      value: region.id,
+                    }),
+                  ]),
+                }),
               ]),
             })
           )
@@ -651,18 +680,29 @@ medusaIntegrationTestRunner({
                   {
                     attribute: "item_total",
                     operator: "lt",
-                    value: 500,
+                    value: 600,
                   },
                 ],
               },
               {
                 region_id: region.id,
-                amount: 0,
+                amount: 400,
                 rules: [
                   {
                     attribute: "item_total",
                     operator: "gt",
-                    value: 600,
+                    value: 200,
+                  },
+                ],
+              },
+              {
+                region_id: region.id,
+                amount: 100,
+                rules: [
+                  {
+                    attribute: "item_total",
+                    operator: "gt",
+                    value: 200,
                   },
                 ],
               },
@@ -676,11 +716,6 @@ medusaIntegrationTestRunner({
               adminHeaders
             )
           ).data.shipping_option
-
-          console.log(
-            "updatedShippingOption -- ",
-            JSON.stringify(updatedShippingOption, null, 4)
-          )
 
           expect(updatedShippingOption).toEqual(
             expect.objectContaining({
@@ -705,7 +740,7 @@ medusaIntegrationTestRunner({
                     expect.objectContaining({
                       attribute: "item_total",
                       operator: "lt",
-                      value: "500",
+                      value: "600",
                     }),
                     expect.objectContaining({
                       attribute: "region_id",
@@ -717,13 +752,31 @@ medusaIntegrationTestRunner({
                 expect.objectContaining({
                   id: expect.any(String),
                   currency_code: "eur",
-                  amount: 0,
+                  amount: 400,
                   rules_count: 2,
                   price_rules: expect.arrayContaining([
                     expect.objectContaining({
                       attribute: "item_total",
                       operator: "gt",
-                      value: "600",
+                      value: "200",
+                    }),
+                    expect.objectContaining({
+                      attribute: "region_id",
+                      operator: "eq",
+                      value: region.id,
+                    }),
+                  ]),
+                }),
+                expect.objectContaining({
+                  id: expect.any(String),
+                  currency_code: "eur",
+                  amount: 100,
+                  rules_count: 2,
+                  price_rules: expect.arrayContaining([
+                    expect.objectContaining({
+                      attribute: "item_total",
+                      operator: "gt",
+                      value: "200",
                     }),
                     expect.objectContaining({
                       attribute: "region_id",

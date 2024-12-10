@@ -29,6 +29,10 @@ export interface PriceRuleDTO {
    */
   value: string
   /**
+   * The operator of the price rule.
+   */
+  operator: PricingRuleOperatorValues
+  /**
    * The priority of the price rule in comparison to other applicable price rules.
    */
   priority: number

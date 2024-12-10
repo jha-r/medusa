@@ -50,10 +50,10 @@ import {
   PriceSet,
 } from "@models"
 
+import { Collection } from "@mikro-orm/core"
 import { ServiceTypes } from "@types"
 import { eventBuilders, validatePriceListDates } from "@utils"
 import { joinerConfig } from "../joiner-config"
-import { Collection } from "@mikro-orm/core"
 
 type InjectedDependencies = {
   baseRepository: DAL.RepositoryService
@@ -537,6 +537,7 @@ export default class PricingModuleService
     })
 
     const prices = normalizedData.flatMap((priceSet) => priceSet.prices || [])
+
     const { entities: upsertedPrices } =
       await this.priceService_.upsertWithReplace(
         prices,
@@ -1588,6 +1589,7 @@ const hashPrice = (
 ): string => {
   const data = Object.entries({
     currency_code: price.currency_code,
+    amount: price.amount,
     price_set_id: "price_set_id" in price ? price.price_set_id ?? null : null,
     price_list_id:
       "price_list_id" in price ? price.price_list_id ?? null : null,
@@ -1596,6 +1598,7 @@ const hashPrice = (
     ...("price_rules" in price
       ? price.price_rules?.reduce((agg, pr) => {
           agg[pr.attribute] = pr.value
+          agg["operator"] = pr.operator
           return agg
         }, {})
       : {}),
