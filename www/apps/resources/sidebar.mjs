@@ -177,7 +177,7 @@ export const sidebar = sidebarAttachHrefCommonOptions([
                     type: "category",
                     title: "Data Models",
                     hasTitleStyling: true,
-                    autogenerate_path: "/references/api_key_models/classes",
+                    autogenerate_path: "/references/api_key_models/variables",
                   },
                 ],
               },
@@ -385,7 +385,7 @@ export const sidebar = sidebarAttachHrefCommonOptions([
                   {
                     type: "category",
                     title: "Data Models",
-                    autogenerate_path: "/references/cart_models/classes",
+                    autogenerate_path: "/references/cart_models/variables",
                   },
                 ],
               },
@@ -1285,7 +1285,7 @@ export const sidebar = sidebarAttachHrefCommonOptions([
                     type: "category",
                     title: "Data Models",
                     autogenerate_path:
-                      "/references/sales_channel_models/classes",
+                      "/references/sales_channel_models/variables",
                   },
                 ],
               },
@@ -1408,7 +1408,7 @@ export const sidebar = sidebarAttachHrefCommonOptions([
                   {
                     type: "category",
                     title: "Data Models",
-                    autogenerate_path: "/references/store_models/classes",
+                    autogenerate_path: "/references/store_models/variables",
                   },
                 ],
               },
