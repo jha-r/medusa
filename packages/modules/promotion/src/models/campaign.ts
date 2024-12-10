@@ -3,7 +3,7 @@ import CampaignBudget from "./campaign-budget"
 import Promotion from "./promotion"
 
 const Campaign_ = model
-  .define(
+  .define<any, any>(
     { name: "Campaign", tableName: "promotion_campaign" },
     {
       id: model.id({ prefix: "procamp" }).primaryKey(),
