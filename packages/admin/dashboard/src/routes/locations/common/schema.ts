@@ -101,7 +101,6 @@ function refineDuplicates(
       const price2Amount = castNumber(price2.amount)
 
       if (price1Amount === price2Amount) {
-        addDuplicateAmountError(ctx, i)
         addDuplicateAmountError(ctx, j)
       }
 
@@ -140,8 +139,7 @@ function refineDuplicates(
           )
 
           if (condition1Value === condition2Value) {
-            addOverlappingConditionError(ctx, i, condition1.type)
-            addOverlappingConditionError(ctx, j, condition2.type)
+            addOverlappingConditionError(ctx, j, condition1.type)
           }
         })
       })
