@@ -345,7 +345,7 @@ For example, suppose an administrator changes the product data in the ERP system
     Then, create the file `src/api/middlewares.ts` with the following content:
 
     ```ts title="src/api/middlewares.ts"
-    import { defineMiddlewares } from "@medusajs/medusa"
+    import { defineMiddlewares } from "@medusajs/framework/http"
     import { raw } from "body-parser"
 
     export default defineMiddlewares({
