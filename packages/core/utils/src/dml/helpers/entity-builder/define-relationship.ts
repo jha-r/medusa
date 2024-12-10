@@ -7,6 +7,7 @@ import {
 } from "@medusajs/types"
 import {
   BeforeCreate,
+  Cascade,
   ManyToMany,
   ManyToOne,
   OneToMany,
@@ -20,10 +21,10 @@ import { camelToSnakeCase, pluralize } from "../../../common"
 import { DmlEntity } from "../../entity"
 import { HasMany } from "../../relations/has-many"
 import { HasOne } from "../../relations/has-one"
+import { HasOneWithForeignKey } from "../../relations/has-one-fk"
 import { ManyToMany as DmlManyToMany } from "../../relations/many-to-many"
 import { applyEntityIndexes } from "../mikro-orm/apply-indexes"
 import { parseEntityName } from "./parse-entity-name"
-import { HasOneWithForeignKey } from "../../relations/has-one-fk"
 
 type Context = {
   MANY_TO_MANY_TRACKED_RELATIONS: Record<string, boolean>
@@ -147,14 +148,18 @@ export function defineHasOneRelationship(
     mappedBy = relationship.mappedBy
   }
 
-  OneToOne({
+  const oneToOneOptions = {
     entity: relatedModelName,
     nullable: relationship.nullable,
     ...(mappedBy ? { mappedBy } : {}),
-    cascade: shouldRemoveRelated
-      ? (["persist", "soft-remove"] as any)
-      : undefined,
-  } as OneToOneOptions<any, any>)(MikroORMEntity.prototype, relationship.name)
+    onDelete: shouldRemoveRelated ? "cascade" : undefined,
+  } as OneToOneOptions<any, any>
+
+  if (shouldRemoveRelated) {
+    oneToOneOptions.cascade = ["persist", "soft-remove"] as any
+  }
+
+  OneToOne(oneToOneOptions)(MikroORMEntity.prototype, relationship.name)
 }
 
 /**
@@ -324,25 +329,32 @@ export function defineBelongsToRelationship(
   ) {
     const foreignKeyName = camelToSnakeCase(`${relationship.name}Id`)
 
-    ManyToOne({
-      entity: relatedModelName,
-      columnType: "text",
-      mapToPk: true,
-      fieldName: foreignKeyName,
-      nullable: relationship.nullable,
-      onDelete: shouldCascade ? "cascade" : undefined,
-    })(MikroORMEntity.prototype, foreignKeyName)
-
     if (DmlManyToMany.isManyToMany(otherSideRelation)) {
       Property({
         type: relatedModelName,
-        persist: false,
+        columnType: "text",
+        fieldName: foreignKeyName,
         nullable: relationship.nullable,
-      })(MikroORMEntity.prototype, relationship.name)
-    } else {
-      // HasMany case
+      })(MikroORMEntity.prototype, foreignKeyName)
+
       ManyToOne({
         entity: relatedModelName,
+        nullable: relationship.nullable,
+        persist: false,
+      })(MikroORMEntity.prototype, relationship.name)
+    } else {
+      ManyToOne({
+        entity: relatedModelName,
+        columnType: "text",
+        mapToPk: true,
+        fieldName: foreignKeyName,
+        nullable: relationship.nullable,
+        onDelete: shouldCascade ? "cascade" : undefined,
+      })(MikroORMEntity.prototype, foreignKeyName)
+
+      ManyToOne({
+        entity: relatedModelName,
+        fieldName: foreignKeyName,
         persist: false,
         nullable: relationship.nullable,
       })(MikroORMEntity.prototype, relationship.name)
@@ -368,14 +380,6 @@ export function defineBelongsToRelationship(
   ) {
     const foreignKeyName = camelToSnakeCase(`${relationship.name}Id`)
 
-    OneToOne({
-      entity: relatedModelName,
-      nullable: relationship.nullable,
-      mappedBy: mappedBy,
-      owner: true,
-      onDelete: shouldCascade ? "cascade" : undefined,
-    })(MikroORMEntity.prototype, relationship.name)
-
     Object.defineProperty(MikroORMEntity.prototype, foreignKeyName, {
       value: null,
       configurable: true,
@@ -384,11 +388,26 @@ export function defineBelongsToRelationship(
     })
 
     Property({
-      type: "string",
       columnType: "text",
+      type: "string",
       nullable: relationship.nullable,
       persist: false,
     })(MikroORMEntity.prototype, foreignKeyName)
+
+    const oneToOneOptions: Parameters<typeof OneToOne>[0] = {
+      entity: relatedModelName,
+      nullable: relationship.nullable,
+      mappedBy: mappedBy,
+      fieldName: foreignKeyName,
+      owner: true,
+      onDelete: shouldCascade ? "cascade" : undefined,
+    }
+
+    if (shouldCascade) {
+      oneToOneOptions.cascade = [Cascade.PERSIST, "soft-remove"] as any
+    }
+
+    OneToOne(oneToOneOptions)(MikroORMEntity.prototype, relationship.name)
 
     const { tableName } = parseEntityName(entity)
     applyEntityIndexes(MikroORMEntity, tableName, [
@@ -434,9 +453,30 @@ export function defineManyToManyRelationship(
   let inversedBy: undefined | string
   let pivotEntityName: undefined | string
   let pivotTableName: undefined | string
-  let joinColumn: undefined | string = relationship.options.joinColumn
-  let inverseJoinColumn: undefined | string =
+
+  const joinColumn: undefined | string = !Array.isArray(
+    relationship.options.joinColumn
+  )
+    ? relationship.options.joinColumn
+    : undefined
+
+  const joinColumns: undefined | string[] = Array.isArray(
+    relationship.options.joinColumn
+  )
+    ? relationship.options.joinColumn
+    : undefined
+
+  const inverseJoinColumn: undefined | string = !Array.isArray(
     relationship.options.inverseJoinColumn
+  )
+    ? relationship.options.inverseJoinColumn
+    : undefined
+
+  const inverseJoinColumns: undefined | string[] = Array.isArray(
+    relationship.options.inverseJoinColumn
+  )
+    ? relationship.options.inverseJoinColumn
+    : undefined
 
   const [otherSideRelationshipProperty, otherSideRelationship] =
     retrieveOtherSideRelationshipManyToMany({
@@ -528,7 +568,9 @@ export function defineManyToManyRelationship(
 
   const configuresRelationship = !!(
     joinColumn ||
+    joinColumns ||
     inverseJoinColumn ||
+    inverseJoinColumns ||
     relationship.options.pivotTable
   )
   const relatedOneConfiguresRelationship = !!(
@@ -574,7 +616,16 @@ export function defineManyToManyRelationship(
   const mappedByPropValue =
     mappedBy ?? inversedBy ?? otherSideRelationshipProperty
 
-  ManyToMany({
+  const joinColumnProp = Array.isArray(relationship.options.joinColumn)
+    ? "joinColumns"
+    : "joinColumn"
+  const inverseJoinColumnProp = Array.isArray(
+    relationship.options.inverseJoinColumn
+  )
+    ? "inverseJoinColumns"
+    : "inverseJoinColumn"
+
+  const manytoManyOptions = {
     owner: isOwner,
     entity: relatedModelName,
     ...(pivotTableName
@@ -586,9 +637,11 @@ export function defineManyToManyRelationship(
       : {}),
     ...(pivotEntityName ? { pivotEntity: pivotEntityName } : {}),
     ...({ [mappedByProp]: mappedByPropValue } as any),
-    ...(joinColumn ? { joinColumn } : {}),
-    ...(inverseJoinColumn ? { inverseJoinColumn } : {}),
-  })(MikroORMEntity.prototype, relationship.name)
+    [joinColumnProp]: joinColumn ?? joinColumns,
+    [inverseJoinColumnProp]: inverseJoinColumn ?? inverseJoinColumns,
+  }
+
+  ManyToMany(manytoManyOptions)(MikroORMEntity.prototype, relationship.name)
 }
 
 /**

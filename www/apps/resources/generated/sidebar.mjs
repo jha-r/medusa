@@ -7996,6 +7996,46 @@ export const generatedSidebar = [
         "loaded": true,
         "isPathHref": true,
         "type": "category",
+        "title": "Auth",
+        "children": [
+          {
+            "loaded": true,
+            "isPathHref": true,
+            "type": "link",
+            "path": "/commerce-modules/auth/auth-providers/google",
+            "title": "Google",
+            "children": []
+          },
+          {
+            "loaded": true,
+            "isPathHref": true,
+            "type": "link",
+            "path": "/commerce-modules/auth/auth-providers/github",
+            "title": "GitHub",
+            "children": []
+          }
+        ]
+      },
+      {
+        "loaded": true,
+        "isPathHref": true,
+        "type": "category",
+        "title": "CMS",
+        "children": [
+          {
+            "loaded": true,
+            "isPathHref": true,
+            "type": "link",
+            "path": "/integrations/guides/sanity",
+            "title": "Sanity",
+            "children": []
+          }
+        ]
+      },
+      {
+        "loaded": true,
+        "isPathHref": true,
+        "type": "category",
         "title": "File",
         "children": [
           {
@@ -8021,6 +8061,14 @@ export const generatedSidebar = [
             "path": "/architectural-modules/notification/sendgrid",
             "title": "SendGrid",
             "children": []
+          },
+          {
+            "loaded": true,
+            "isPathHref": true,
+            "type": "link",
+            "path": "/integrations/guides/resend",
+            "title": "Resend",
+            "children": []
           }
         ]
       },
@@ -8039,30 +8087,6 @@ export const generatedSidebar = [
             "children": []
           }
         ]
-      },
-      {
-        "loaded": true,
-        "isPathHref": true,
-        "type": "category",
-        "title": "Guides",
-        "children": [
-          {
-            "loaded": true,
-            "isPathHref": true,
-            "type": "link",
-            "path": "/integrations/guides/sanity",
-            "title": "Sanity",
-            "children": []
-          },
-          {
-            "loaded": true,
-            "isPathHref": true,
-            "type": "link",
-            "path": "/integrations/guides/resend",
-            "title": "Resend",
-            "children": []
-          }
-        ]
       }
     ]
   },
@@ -8077,21 +8101,26 @@ export const generatedSidebar = [
       {
         "loaded": true,
         "isPathHref": true,
-        "type": "link",
-        "path": "/storefront-development/tips",
-        "title": "Tips",
-        "children": []
-      },
-      {
-        "loaded": true,
-        "isPathHref": true,
-        "type": "link",
-        "path": "/storefront-development/publishable-api-keys",
-        "title": "Publishable API Key",
-        "children": []
-      },
-      {
-        "type": "separator"
+        "type": "category",
+        "title": "General",
+        "children": [
+          {
+            "loaded": true,
+            "isPathHref": true,
+            "type": "link",
+            "path": "/storefront-development/tips",
+            "title": "Tips",
+            "children": []
+          },
+          {
+            "loaded": true,
+            "isPathHref": true,
+            "type": "link",
+            "path": "/storefront-development/publishable-api-keys",
+            "title": "Publishable API Key",
+            "children": []
+          }
+        ]
       },
       {
         "loaded": true,
@@ -9122,13 +9151,10 @@ export const generatedSidebar = [
         "isPathHref": true,
         "type": "link",
         "path": "/nextjs-starter",
-        "title": "Next.js Starter",
+        "title": "Next.js Starter Storefront",
         "children": []
       }
     ]
-  },
-  {
-    "type": "separator"
   },
   {
     "loaded": true,
@@ -9498,7 +9524,8 @@ export const generatedSidebar = [
         "isPathHref": true,
         "type": "link",
         "path": "/references/workflows",
-        "title": "Workflow API",
+        "title": "Workflows SDK",
+        "childSidebarTitle": "Workflows SDK Reference",
         "isChildSidebar": true,
         "children": [
           {
@@ -9565,8 +9592,8 @@ export const generatedSidebar = [
         "isPathHref": true,
         "type": "link",
         "path": "/references/data-model",
-        "title": "Data Model API",
-        "childSidebarTitle": "Data Model API Reference",
+        "title": "Data Model Language",
+        "childSidebarTitle": "Data Model Language Reference",
         "isChildSidebar": true,
         "children": [
           {
@@ -9949,7 +9976,7 @@ export const generatedSidebar = [
         "loaded": true,
         "isPathHref": true,
         "type": "link",
-        "title": "Medusa Workflows Reference",
+        "title": "Core Workflows Reference",
         "path": "/medusa-workflows-reference",
         "isChildSidebar": true,
         "custom_autogenerate": "core-flows",
@@ -10188,6 +10215,14 @@ export const generatedSidebar = [
                     "loaded": true,
                     "isPathHref": true,
                     "type": "link",
+                    "path": "/references/medusa-workflows/transferCartCustomerWorkflow",
+                    "title": "transferCartCustomerWorkflow",
+                    "children": []
+                  },
+                  {
+                    "loaded": true,
+                    "isPathHref": true,
+                    "type": "link",
                     "path": "/references/medusa-workflows/updateCartPromotionsWorkflow",
                     "title": "updateCartPromotionsWorkflow",
                     "children": []
@@ -10349,14 +10384,6 @@ export const generatedSidebar = [
                     "type": "link",
                     "path": "/references/medusa-workflows/steps/prepareAdjustmentsFromPromotionActionsStep",
                     "title": "prepareAdjustmentsFromPromotionActionsStep",
-                    "children": []
-                  },
-                  {
-                    "loaded": true,
-                    "isPathHref": true,
-                    "type": "link",
-                    "path": "/references/medusa-workflows/steps/refreshCartShippingMethodsStep",
-                    "title": "refreshCartShippingMethodsStep",
                     "children": []
                   },
                   {
@@ -10571,6 +10598,14 @@ export const generatedSidebar = [
                     "type": "link",
                     "path": "/references/medusa-workflows/steps/useRemoteQueryStep",
                     "title": "useRemoteQueryStep",
+                    "children": []
+                  },
+                  {
+                    "loaded": true,
+                    "isPathHref": true,
+                    "type": "link",
+                    "path": "/references/medusa-workflows/steps/validatePresenceOfStep",
+                    "title": "validatePresenceOfStep",
                     "children": []
                   }
                 ],
@@ -11071,6 +11106,14 @@ export const generatedSidebar = [
                     "loaded": true,
                     "isPathHref": true,
                     "type": "link",
+                    "path": "/references/medusa-workflows/steps/buildPriceSet",
+                    "title": "buildPriceSet",
+                    "children": []
+                  },
+                  {
+                    "loaded": true,
+                    "isPathHref": true,
+                    "type": "link",
                     "path": "/references/medusa-workflows/steps/cancelFulfillmentStep",
                     "title": "cancelFulfillmentStep",
                     "children": []
@@ -11544,6 +11587,14 @@ export const generatedSidebar = [
                     "loaded": true,
                     "isPathHref": true,
                     "type": "link",
+                    "path": "/references/medusa-workflows/acceptOrderTransferWorkflow",
+                    "title": "acceptOrderTransferWorkflow",
+                    "children": []
+                  },
+                  {
+                    "loaded": true,
+                    "isPathHref": true,
+                    "type": "link",
                     "path": "/references/medusa-workflows/addOrderLineItemsWorkflow",
                     "title": "addOrderLineItemsWorkflow",
                     "children": []
@@ -11650,6 +11701,14 @@ export const generatedSidebar = [
                     "type": "link",
                     "path": "/references/medusa-workflows/cancelOrderFulfillmentWorkflow",
                     "title": "cancelOrderFulfillmentWorkflow",
+                    "children": []
+                  },
+                  {
+                    "loaded": true,
+                    "isPathHref": true,
+                    "type": "link",
+                    "path": "/references/medusa-workflows/cancelOrderTransferRequestWorkflow",
+                    "title": "cancelOrderTransferRequestWorkflow",
                     "children": []
                   },
                   {
@@ -11808,6 +11867,14 @@ export const generatedSidebar = [
                     "loaded": true,
                     "isPathHref": true,
                     "type": "link",
+                    "path": "/references/medusa-workflows/createOrderWorkflow",
+                    "title": "createOrderWorkflow",
+                    "children": []
+                  },
+                  {
+                    "loaded": true,
+                    "isPathHref": true,
+                    "type": "link",
                     "path": "/references/medusa-workflows/createOrdersWorkflow",
                     "title": "createOrdersWorkflow",
                     "children": []
@@ -11826,6 +11893,14 @@ export const generatedSidebar = [
                     "type": "link",
                     "path": "/references/medusa-workflows/declineOrderChangeWorkflow",
                     "title": "declineOrderChangeWorkflow",
+                    "children": []
+                  },
+                  {
+                    "loaded": true,
+                    "isPathHref": true,
+                    "type": "link",
+                    "path": "/references/medusa-workflows/declineOrderTransferRequestWorkflow",
+                    "title": "declineOrderTransferRequestWorkflow",
                     "children": []
                   },
                   {
@@ -12048,6 +12123,14 @@ export const generatedSidebar = [
                     "loaded": true,
                     "isPathHref": true,
                     "type": "link",
+                    "path": "/references/medusa-workflows/requestOrderTransferWorkflow",
+                    "title": "requestOrderTransferWorkflow",
+                    "children": []
+                  },
+                  {
+                    "loaded": true,
+                    "isPathHref": true,
+                    "type": "link",
                     "path": "/references/medusa-workflows/updateClaimAddItemWorkflow",
                     "title": "updateClaimAddItemWorkflow",
                     "children": []
@@ -12130,6 +12213,14 @@ export const generatedSidebar = [
                     "type": "link",
                     "path": "/references/medusa-workflows/updateOrderTaxLinesWorkflow",
                     "title": "updateOrderTaxLinesWorkflow",
+                    "children": []
+                  },
+                  {
+                    "loaded": true,
+                    "isPathHref": true,
+                    "type": "link",
+                    "path": "/references/medusa-workflows/updateOrderWorkflow",
+                    "title": "updateOrderWorkflow",
                     "children": []
                   },
                   {
@@ -12391,6 +12482,14 @@ export const generatedSidebar = [
                     "loaded": true,
                     "isPathHref": true,
                     "type": "link",
+                    "path": "/references/medusa-workflows/steps/registerOrderChangesStep",
+                    "title": "registerOrderChangesStep",
+                    "children": []
+                  },
+                  {
+                    "loaded": true,
+                    "isPathHref": true,
+                    "type": "link",
                     "path": "/references/medusa-workflows/steps/registerOrderFulfillmentStep",
                     "title": "registerOrderFulfillmentStep",
                     "children": []
@@ -12447,6 +12546,14 @@ export const generatedSidebar = [
                     "loaded": true,
                     "isPathHref": true,
                     "type": "link",
+                    "path": "/references/medusa-workflows/steps/updateOrdersStep",
+                    "title": "updateOrdersStep",
+                    "children": []
+                  },
+                  {
+                    "loaded": true,
+                    "isPathHref": true,
+                    "type": "link",
                     "path": "/references/medusa-workflows/steps/updateReturnItemsStep",
                     "title": "updateReturnItemsStep",
                     "children": []
@@ -12457,6 +12564,14 @@ export const generatedSidebar = [
                     "type": "link",
                     "path": "/references/medusa-workflows/steps/updateReturnsStep",
                     "title": "updateReturnsStep",
+                    "children": []
+                  },
+                  {
+                    "loaded": true,
+                    "isPathHref": true,
+                    "type": "link",
+                    "path": "/references/medusa-workflows/acceptOrderTransferValidationStep",
+                    "title": "acceptOrderTransferValidationStep",
                     "children": []
                   },
                   {
@@ -12575,6 +12690,14 @@ export const generatedSidebar = [
                     "loaded": true,
                     "isPathHref": true,
                     "type": "link",
+                    "path": "/references/medusa-workflows/cancelTransferOrderRequestValidationStep",
+                    "title": "cancelTransferOrderRequestValidationStep",
+                    "children": []
+                  },
+                  {
+                    "loaded": true,
+                    "isPathHref": true,
+                    "type": "link",
                     "path": "/references/medusa-workflows/cancelValidateOrder",
                     "title": "cancelValidateOrder",
                     "children": []
@@ -12673,6 +12796,14 @@ export const generatedSidebar = [
                     "type": "link",
                     "path": "/references/medusa-workflows/createShipmentValidateOrder",
                     "title": "createShipmentValidateOrder",
+                    "children": []
+                  },
+                  {
+                    "loaded": true,
+                    "isPathHref": true,
+                    "type": "link",
+                    "path": "/references/medusa-workflows/declineTransferOrderRequestValidationStep",
+                    "title": "declineTransferOrderRequestValidationStep",
                     "children": []
                   },
                   {
@@ -12879,6 +13010,14 @@ export const generatedSidebar = [
                     "loaded": true,
                     "isPathHref": true,
                     "type": "link",
+                    "path": "/references/medusa-workflows/requestOrderTransferValidationStep",
+                    "title": "requestOrderTransferValidationStep",
+                    "children": []
+                  },
+                  {
+                    "loaded": true,
+                    "isPathHref": true,
+                    "type": "link",
                     "path": "/references/medusa-workflows/throwUnlessPaymentCollectionNotPaid",
                     "title": "throwUnlessPaymentCollectionNotPaid",
                     "children": []
@@ -12959,6 +13098,14 @@ export const generatedSidebar = [
                     "loaded": true,
                     "isPathHref": true,
                     "type": "link",
+                    "path": "/references/medusa-workflows/updateOrderValidationStep",
+                    "title": "updateOrderValidationStep",
+                    "children": []
+                  },
+                  {
+                    "loaded": true,
+                    "isPathHref": true,
+                    "type": "link",
                     "path": "/references/medusa-workflows/updateReceiveItemReturnRequestValidationStep",
                     "title": "updateReceiveItemReturnRequestValidationStep",
                     "children": []
@@ -13008,14 +13155,6 @@ export const generatedSidebar = [
                     "type": "link",
                     "path": "/references/medusa-workflows/capturePaymentWorkflow",
                     "title": "capturePaymentWorkflow",
-                    "children": []
-                  },
-                  {
-                    "loaded": true,
-                    "isPathHref": true,
-                    "type": "link",
-                    "path": "/references/medusa-workflows/onPaymentProcessedWorkflow",
-                    "title": "onPaymentProcessedWorkflow",
                     "children": []
                   },
                   {
@@ -14433,6 +14572,14 @@ export const generatedSidebar = [
                     "loaded": true,
                     "isPathHref": true,
                     "type": "link",
+                    "path": "/references/medusa-workflows/steps/canDeleteSalesChannelsOrThrowStep",
+                    "title": "canDeleteSalesChannelsOrThrowStep",
+                    "children": []
+                  },
+                  {
+                    "loaded": true,
+                    "isPathHref": true,
+                    "type": "link",
                     "path": "/references/medusa-workflows/steps/createDefaultSalesChannelStep",
                     "title": "createDefaultSalesChannelStep",
                     "children": []
@@ -14967,7 +15114,7 @@ export const generatedSidebar = [
         "loaded": true,
         "isPathHref": true,
         "type": "link",
-        "title": "Testing Tools Reference",
+        "title": "Testing Framework Reference",
         "path": "/test-tools-reference",
         "isChildSidebar": true,
         "children": [
