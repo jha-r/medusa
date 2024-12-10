@@ -2849,7 +2849,6 @@ describe("Entity builder", () => {
           name: "email",
           entity: "Email",
           mappedBy: "user",
-          cascade: ["persist", "soft-remove"],
           onDelete: "cascade",
         },
         created_at: {
