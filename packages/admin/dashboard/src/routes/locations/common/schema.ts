@@ -139,7 +139,7 @@ function refineDuplicates(
           )
 
           if (condition1Value === condition2Value) {
-            addOverlappingConditionError(ctx, j, condition1.type)
+            addOverlappingConditionError(ctx, j, condition2.type)
           }
         })
       })
