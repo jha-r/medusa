@@ -52959,13 +52959,8 @@ components:
           title: id
           description: The price rule's ID.
         value:
-          oneOf:
-            - type: string
-              title: value
-              description: The price rule's value.
-            - type: number
-              title: value
-              description: The price rule's value.
+          type: string
+          title: value
           description: The price rule's value.
         operator:
           type: string
@@ -52986,7 +52981,7 @@ components:
         price_id:
           type: string
           title: price_id
-          description: The price rule's price id.
+          description: The ID of the price this rule applies to.
         priority:
           type: number
           title: priority
@@ -52995,17 +52990,17 @@ components:
           type: string
           format: date-time
           title: created_at
-          description: The price rule's created at.
+          description: The date the price rule was created.
         updated_at:
           type: string
           format: date-time
           title: updated_at
-          description: The price rule's updated at.
+          description: The date the price rule was updated.
         deleted_at:
           type: string
           format: date-time
           title: deleted_at
-          description: The price rule's deleted at.
+          description: The date the price rule was deleted.
     AdminShippingOptionResponse:
       type: object
       description: The shipping option's details.
@@ -60391,43 +60386,47 @@ components:
         id:
           type: string
           title: id
-          description: The calculated price's ID.
+          description: The ID of the price set from which the price was selected.
         is_calculated_price_price_list:
           type: boolean
           title: is_calculated_price_price_list
-          description: The calculated price's is calculated price price list.
+          description: Whether the calculated price belongs to a price list.
         is_calculated_price_tax_inclusive:
           type: boolean
           title: is_calculated_price_tax_inclusive
-          description: The calculated price's is calculated price tax inclusive.
+          description: Whether the calculated price is tax inclusive.
+          externalDocs:
+            url: https://docs.medusajs.com/resources/commerce-modules/pricing/tax-inclusive-pricing
         calculated_amount:
           type: number
           title: calculated_amount
-          description: The calculated price's calculated amount.
+          description: The amount of the calculated price, or `null` if there isn't a calculated price. This is the amount shown to the customer.
         calculated_amount_with_tax:
           type: number
           title: calculated_amount_with_tax
-          description: The calculated price's calculated amount with tax.
+          description: The `calculated_amount` with taxes applied.
         calculated_amount_without_tax:
           type: number
           title: calculated_amount_without_tax
-          description: The calculated price's calculated amount without tax.
+          description: The `calculated_amount` without taxes applied.
         is_original_price_price_list:
           type: boolean
           title: is_original_price_price_list
-          description: The calculated price's is original price price list.
+          description: Whether the original price belongs to a price list.
         is_original_price_tax_inclusive:
           type: boolean
           title: is_original_price_tax_inclusive
-          description: The calculated price's is original price tax inclusive.
+          description: Whether the original price is tax inclusive.
+          externalDocs:
+            url: https://docs.medusajs.com/resources/commerce-modules/pricing/tax-inclusive-pricing
         original_amount:
           type: number
           title: original_amount
-          description: The calculated price's original amount.
+          description: The amount of the original price, or `null` if there isn't an original price. This amount is useful to compare with the `calculated_amount`, such as to check for discounted value.
         currency_code:
           type: string
           title: currency_code
-          description: The calculated price's currency code.
+          description: The currency code of the calculated price, or `null` if there isn't a calculated price.
         calculated_price:
           type: object
           description: The calculated price's details.
@@ -60441,26 +60440,26 @@ components:
             id:
               type: string
               title: id
-              description: The calculated price's ID.
+              description: The ID of the price.
             price_list_id:
               type: string
               title: price_list_id
-              description: The calculated price's price list id.
+              description: The ID of the associated price list.
             price_list_type:
               type: string
               title: price_list_type
-              description: The calculated price's price list type.
+              description: The price list's type. For example, `sale` or `override`.
             min_quantity:
               type: number
               title: min_quantity
-              description: The calculated price's min quantity.
+              description: The minimum quantity required in the cart for the price to apply.
             max_quantity:
               type: number
               title: max_quantity
-              description: The calculated price's max quantity.
+              description: The maximum quantity required in the cart for the price to apply.
         original_price:
           type: object
-          description: The calculated price's original price.
+          description: The origin price's details.
           required:
             - id
             - price_list_id
@@ -60471,23 +60470,23 @@ components:
             id:
               type: string
               title: id
-              description: The original price's ID.
+              description: The ID of the price.
             price_list_id:
               type: string
               title: price_list_id
-              description: The original price's price list id.
+              description: The ID of the associated price list.
             price_list_type:
               type: string
               title: price_list_type
-              description: The original price's price list type.
+              description: The price list's type. For example, `sale` or `override`.
             min_quantity:
               type: number
               title: min_quantity
-              description: The original price's min quantity.
+              description: The minimum quantity required in the cart for the price to apply.
             max_quantity:
               type: number
               title: max_quantity
-              description: The original price's max quantity.
+              description: The maximum quantity required in the cart for the price to apply.
     StoreCart:
       type: object
       description: The cart's details.
@@ -68253,7 +68252,7 @@ components:
         - status
     StorePrice:
       type: object
-      description: The price's prices.
+      description: The price's details.
       x-schemaName: StorePrice
       required:
         - id
@@ -68269,7 +68268,8 @@ components:
         currency_code:
           type: string
           title: currency_code
-          description: The price's currency code.
+          description: The price's ISO 2 currency code.
+          example: usd
         amount:
           type: number
           title: amount
@@ -68277,19 +68277,19 @@ components:
         min_quantity:
           type: number
           title: min_quantity
-          description: The price's min quantity.
+          description: The minimum quantity required in the cart for the price to apply.
         max_quantity:
           type: number
           title: max_quantity
-          description: The price's max quantity.
+          description: The maximum quantity required in the cart for the price to apply.
         price_rules:
           type: array
-          description: The price's price rules.
+          description: The price's rules.
           items:
             $ref: '#/components/schemas/StorePriceRule'
     StorePriceRule:
       type: object
-      description: The price rule's price rules.
+      description: The price rule's details.
       x-schemaName: StorePriceRule
       required:
         - id

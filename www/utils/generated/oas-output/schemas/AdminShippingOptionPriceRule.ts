@@ -19,13 +19,8 @@
  *     title: id
  *     description: The price rule's ID.
  *   value:
- *     oneOf:
- *       - type: string
- *         title: value
- *         description: The price rule's value.
- *       - type: number
- *         title: value
- *         description: The price rule's value.
+ *     type: string
+ *     title: value
  *     description: The price rule's value.
  *   operator:
  *     type: string
@@ -46,7 +41,7 @@
  *   price_id:
  *     type: string
  *     title: price_id
- *     description: The price rule's price id.
+ *     description: The ID of the price this rule applies to.
  *   priority:
  *     type: number
  *     title: priority
@@ -55,17 +50,17 @@
  *     type: string
  *     format: date-time
  *     title: created_at
- *     description: The price rule's created at.
+ *     description: The date the price rule was created.
  *   updated_at:
  *     type: string
  *     format: date-time
  *     title: updated_at
- *     description: The price rule's updated at.
+ *     description: The date the price rule was updated.
  *   deleted_at:
  *     type: string
  *     format: date-time
  *     title: deleted_at
- *     description: The price rule's deleted at.
+ *     description: The date the price rule was deleted.
  * 
 */
 
