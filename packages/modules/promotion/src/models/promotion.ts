@@ -18,12 +18,11 @@ const Promotion = model
         mappedBy: "promotions",
       })
       .nullable(),
-    application_method: model.hasOne<() => typeof ApplicationMethod>(
-      () => ApplicationMethod,
-      {
+    application_method: model
+      .hasOne<() => typeof ApplicationMethod>(() => ApplicationMethod, {
         mappedBy: "promotion",
-      }
-    ),
+      })
+      .nullable(),
     rules: model.manyToMany<() => typeof PromotionRule>(() => PromotionRule, {
       pivotTable: "promotion_promotion_rule",
       mappedBy: "promotions",

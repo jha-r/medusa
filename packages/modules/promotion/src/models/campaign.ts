@@ -2,7 +2,7 @@ import { model } from "@medusajs/framework/utils"
 import CampaignBudget from "./campaign-budget"
 import Promotion from "./promotion"
 
-const Campaign = model
+const Campaign_ = model
   .define(
     { name: "Campaign", tableName: "promotion_campaign" },
     {
@@ -33,4 +33,4 @@ const Campaign = model
     },
   ])
 
-export default Campaign
+export default Campaign_

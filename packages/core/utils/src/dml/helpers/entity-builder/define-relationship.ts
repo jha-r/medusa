@@ -7,7 +7,6 @@ import {
 } from "@medusajs/types"
 import {
   BeforeCreate,
-  Cascade,
   ManyToMany,
   ManyToOne,
   OneToMany,
@@ -17,14 +16,14 @@ import {
   Property,
   rel,
 } from "@mikro-orm/core"
-import { DmlEntity } from "../../entity"
-import { HasOne } from "../../relations/has-one"
-import { HasMany } from "../../relations/has-many"
-import { parseEntityName } from "./parse-entity-name"
 import { camelToSnakeCase, pluralize } from "../../../common"
-import { applyEntityIndexes } from "../mikro-orm/apply-indexes"
-import { ManyToMany as DmlManyToMany } from "../../relations/many-to-many"
+import { DmlEntity } from "../../entity"
+import { HasMany } from "../../relations/has-many"
+import { HasOne } from "../../relations/has-one"
 import { HasOneWithForeignKey } from "../../relations/has-one-fk"
+import { ManyToMany as DmlManyToMany } from "../../relations/many-to-many"
+import { applyEntityIndexes } from "../mikro-orm/apply-indexes"
+import { parseEntityName } from "./parse-entity-name"
 
 type Context = {
   MANY_TO_MANY_TRACKED_RELATIONS: Record<string, boolean>
