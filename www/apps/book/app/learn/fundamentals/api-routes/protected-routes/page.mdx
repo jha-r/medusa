@@ -28,7 +28,7 @@ Refer to the API Reference for [Admin](!api!/admin#authentication) and [Store](!
 
 ## Protect Custom API Routes
 
-To protect custom API Routes to only allow authenticated customer or admin users, use the `authenticate` middleware imported from `@medusajs/medusa`.
+To protect custom API Routes to only allow authenticated customer or admin users, use the `authenticate` middleware from the Medusa Framework.
 
 For example:
 
@@ -49,7 +49,7 @@ export const highlights = [
 import { 
   defineMiddlewares,
   authenticate,
-} from "@medusajs/medusa"
+} from "@medusajs/framework/http"
 
 export default defineMiddlewares({
   routes: [

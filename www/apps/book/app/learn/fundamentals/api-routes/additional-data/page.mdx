@@ -64,7 +64,7 @@ To do that, use the middleware route object defined in `src/api/middlewares.ts`.
 For example, create the file `src/api/middlewares.ts` with the following content:
 
 ```ts title="src/api/middlewares.ts"
-import { defineMiddlewares } from "@medusajs/medusa"
+import { defineMiddlewares } from "@medusajs/framework/http"
 import { z } from "zod"
 
 export default defineMiddlewares({
