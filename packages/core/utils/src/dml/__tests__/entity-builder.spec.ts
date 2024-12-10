@@ -6240,7 +6240,7 @@ describe("Entity builder", () => {
       })
     })
 
-    test.only("should define onDelete cascade on pivot entity when applying detach cascade", () => {
+    test("should define onDelete cascade on pivot entity when applying detach cascade", () => {
       const teamUser = model.define("teamUser", {
         id: model.number(),
         user: model.belongsTo(() => user, { mappedBy: "teams" }),
