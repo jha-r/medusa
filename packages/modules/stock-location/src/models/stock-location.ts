@@ -7,13 +7,9 @@ const StockLocation = model.define("StockLocation", {
   metadata: model.json().nullable(),
   address: model
     .belongsTo(() => StockLocationAddress, {
-      // foreignKey: true,
       mappedBy: "stock_locations",
     })
     .nullable(),
 })
-// .cascades({
-//   delete: ["address"],
-// })
 
 export default StockLocation
