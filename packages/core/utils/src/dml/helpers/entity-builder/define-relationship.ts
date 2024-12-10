@@ -336,25 +336,32 @@ export function defineBelongsToRelationship(
   ) {
     const foreignKeyName = camelToSnakeCase(`${relationship.name}Id`)
 
-    ManyToOne({
-      entity: relatedModelName,
-      columnType: "text",
-      mapToPk: true,
-      fieldName: foreignKeyName,
-      nullable: relationship.nullable,
-      onDelete: shouldCascade ? "cascade" : undefined,
-    })(MikroORMEntity.prototype, foreignKeyName)
-
     if (DmlManyToMany.isManyToMany(otherSideRelation)) {
       Property({
         type: relatedModelName,
-        persist: false,
+        columnType: "text",
+        fieldName: foreignKeyName,
         nullable: relationship.nullable,
-      })(MikroORMEntity.prototype, relationship.name)
-    } else {
-      // HasMany case
+      })(MikroORMEntity.prototype, foreignKeyName)
+
       ManyToOne({
         entity: relatedModelName,
+        nullable: relationship.nullable,
+        persist: false,
+      })(MikroORMEntity.prototype, relationship.name)
+    } else {
+      ManyToOne({
+        entity: relatedModelName,
+        columnType: "text",
+        mapToPk: true,
+        fieldName: foreignKeyName,
+        nullable: relationship.nullable,
+        onDelete: shouldCascade ? "cascade" : undefined,
+      })(MikroORMEntity.prototype, foreignKeyName)
+
+      ManyToOne({
+        entity: relatedModelName,
+        fieldName: foreignKeyName,
         persist: false,
         nullable: relationship.nullable,
       })(MikroORMEntity.prototype, relationship.name)
@@ -453,9 +460,30 @@ export function defineManyToManyRelationship(
   let inversedBy: undefined | string
   let pivotEntityName: undefined | string
   let pivotTableName: undefined | string
-  let joinColumn: undefined | string = relationship.options.joinColumn
-  let inverseJoinColumn: undefined | string =
+
+  const joinColumn: undefined | string = !Array.isArray(
+    relationship.options.joinColumn
+  )
+    ? relationship.options.joinColumn
+    : undefined
+
+  const joinColumns: undefined | string[] = Array.isArray(
+    relationship.options.joinColumn
+  )
+    ? relationship.options.joinColumn
+    : undefined
+
+  const inverseJoinColumn: undefined | string = !Array.isArray(
     relationship.options.inverseJoinColumn
+  )
+    ? relationship.options.inverseJoinColumn
+    : undefined
+
+  const inverseJoinColumns: undefined | string[] = Array.isArray(
+    relationship.options.inverseJoinColumn
+  )
+    ? relationship.options.inverseJoinColumn
+    : undefined
 
   const [otherSideRelationshipProperty, otherSideRelationship] =
     retrieveOtherSideRelationshipManyToMany({
@@ -547,7 +575,9 @@ export function defineManyToManyRelationship(
 
   const configuresRelationship = !!(
     joinColumn ||
+    joinColumns ||
     inverseJoinColumn ||
+    inverseJoinColumns ||
     relationship.options.pivotTable
   )
   const relatedOneConfiguresRelationship = !!(
@@ -593,7 +623,16 @@ export function defineManyToManyRelationship(
   const mappedByPropValue =
     mappedBy ?? inversedBy ?? otherSideRelationshipProperty
 
-  ManyToMany({
+  const joinColumnProp = Array.isArray(relationship.options.joinColumn)
+    ? "joinColumns"
+    : "joinColumn"
+  const inverseJoinColumnProp = Array.isArray(
+    relationship.options.inverseJoinColumn
+  )
+    ? "inverseJoinColumns"
+    : "inverseJoinColumn"
+
+  const manytoManyOptions = {
     owner: isOwner,
     entity: relatedModelName,
     ...(pivotTableName
@@ -605,9 +644,11 @@ export function defineManyToManyRelationship(
       : {}),
     ...(pivotEntityName ? { pivotEntity: pivotEntityName } : {}),
     ...({ [mappedByProp]: mappedByPropValue } as any),
-    ...(joinColumn ? { joinColumn } : {}),
-    ...(inverseJoinColumn ? { inverseJoinColumn } : {}),
-  })(MikroORMEntity.prototype, relationship.name)
+    [joinColumnProp]: joinColumn ?? joinColumns,
+    [inverseJoinColumnProp]: inverseJoinColumn ?? inverseJoinColumns,
+  }
+
+  ManyToMany(manytoManyOptions)(MikroORMEntity.prototype, relationship.name)
 }
 
 /**

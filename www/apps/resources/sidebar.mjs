@@ -1746,6 +1746,33 @@ export const sidebar = sidebarAttachHrefCommonOptions([
     children: [
       {
         type: "category",
+        title: "Auth",
+        children: [
+          {
+            type: "link",
+            path: "/commerce-modules/auth/auth-providers/google",
+            title: "Google",
+          },
+          {
+            type: "link",
+            path: "/commerce-modules/auth/auth-providers/github",
+            title: "GitHub",
+          },
+        ],
+      },
+      {
+        type: "category",
+        title: "CMS",
+        children: [
+          {
+            type: "link",
+            path: "/integrations/guides/sanity",
+            title: "Sanity",
+          },
+        ],
+      },
+      {
+        type: "category",
         title: "File",
         children: [
           {
@@ -1764,6 +1791,11 @@ export const sidebar = sidebarAttachHrefCommonOptions([
             path: "/architectural-modules/notification/sendgrid",
             title: "SendGrid",
           },
+          {
+            type: "link",
+            path: "/integrations/guides/resend",
+            title: "Resend",
+          },
         ],
       },
       {
@@ -1777,22 +1809,6 @@ export const sidebar = sidebarAttachHrefCommonOptions([
           },
         ],
       },
-      {
-        type: "category",
-        title: "Guides",
-        children: [
-          {
-            type: "link",
-            path: "/integrations/guides/sanity",
-            title: "Sanity",
-          },
-          {
-            type: "link",
-            path: "/integrations/guides/resend",
-            title: "Resend",
-          },
-        ],
-      },
     ],
   },
   {
@@ -1802,17 +1818,20 @@ export const sidebar = sidebarAttachHrefCommonOptions([
     isChildSidebar: true,
     children: [
       {
-        type: "link",
-        path: "/storefront-development/tips",
-        title: "Tips",
-      },
-      {
-        type: "link",
-        path: "/storefront-development/publishable-api-keys",
-        title: "Publishable API Key",
-      },
-      {
-        type: "separator",
+        type: "category",
+        title: "General",
+        children: [
+          {
+            type: "link",
+            path: "/storefront-development/tips",
+            title: "Tips",
+          },
+          {
+            type: "link",
+            path: "/storefront-development/publishable-api-keys",
+            title: "Publishable API Key",
+          },
+        ],
       },
       {
         type: "category",
@@ -2127,7 +2146,7 @@ export const sidebar = sidebarAttachHrefCommonOptions([
       {
         type: "link",
         path: "/nextjs-starter",
-        title: "Next.js Starter",
+        title: "Next.js Starter Storefront",
       },
     ],
   },
