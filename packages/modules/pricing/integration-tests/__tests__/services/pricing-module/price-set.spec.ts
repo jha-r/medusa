@@ -509,18 +509,31 @@ moduleIntegrationTestRunner<IPricingModuleService>({
             relations: ["prices", "prices.price_rules"],
           })
 
-          expect(priceSet.prices).toEqual([
-            expect.objectContaining({
-              amount: 200,
-              currency_code: "USD",
-              price_rules: [
-                expect.objectContaining({
-                  attribute: "region_id",
-                  value: "1234",
-                }),
-              ],
-            }),
-          ])
+          expect(priceSet.prices).toHaveLength(2)
+          expect(priceSet.prices).toEqual(
+            expect.arrayContaining([
+              expect.objectContaining({
+                amount: 100,
+                currency_code: "USD",
+                price_rules: [
+                  expect.objectContaining({
+                    attribute: "region_id",
+                    value: "1234",
+                  }),
+                ],
+              }),
+              expect.objectContaining({
+                amount: 200,
+                currency_code: "USD",
+                price_rules: [
+                  expect.objectContaining({
+                    attribute: "region_id",
+                    value: "1234",
+                  }),
+                ],
+              }),
+            ])
+          )
         })
       })
 
@@ -773,18 +786,31 @@ moduleIntegrationTestRunner<IPricingModuleService>({
             relations: ["prices", "prices.price_rules"],
           })
 
-          expect(priceSet.prices).toEqual([
-            expect.objectContaining({
-              amount: 200,
-              currency_code: "USD",
-              price_rules: [
-                expect.objectContaining({
-                  attribute: "region_id",
-                  value: "1234",
-                }),
-              ],
-            }),
-          ])
+          expect(priceSet.prices).toHaveLength(2)
+          expect(priceSet.prices).toEqual(
+            expect.arrayContaining([
+              expect.objectContaining({
+                amount: 100,
+                currency_code: "USD",
+                price_rules: [
+                  expect.objectContaining({
+                    attribute: "region_id",
+                    value: "1234",
+                  }),
+                ],
+              }),
+              expect.objectContaining({
+                amount: 200,
+                currency_code: "USD",
+                price_rules: [
+                  expect.objectContaining({
+                    attribute: "region_id",
+                    value: "1234",
+                  }),
+                ],
+              }),
+            ])
+          )
         })
       })
 

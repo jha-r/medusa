@@ -629,10 +629,23 @@ moduleIntegrationTestRunner<IPricingModuleService>({
             }
           )
 
+          expect(priceList.prices).toHaveLength(2)
           expect(priceList).toEqual(
             expect.objectContaining({
               id: expect.any(String),
-              prices: [
+              prices: expect.arrayContaining([
+                expect.objectContaining({
+                  rules_count: 1,
+                  price_rules: [
+                    expect.objectContaining({
+                      id: expect.any(String),
+                      value: "DE",
+                    }),
+                  ],
+                  amount: 400,
+                  currency_code: "EUR",
+                }),
+
                 expect.objectContaining({
                   rules_count: 1,
                   price_rules: [
@@ -644,7 +657,7 @@ moduleIntegrationTestRunner<IPricingModuleService>({
                   amount: 600,
                   currency_code: "EUR",
                 }),
-              ],
+              ]),
             })
           )
         })

@@ -1,7 +1,7 @@
 import { medusaIntegrationTestRunner } from "@medusajs/test-utils"
 import {
-  createAdminUser,
   adminHeaders,
+  createAdminUser,
 } from "../../../../helpers/create-admin-user"
 import {
   getPricelistFixture,
@@ -544,7 +544,7 @@ medusaIntegrationTestRunner({
           )
 
           expect(response.status).toEqual(200)
-          expect(response.data.price_list.prices.length).toEqual(2)
+          expect(response.data.price_list.prices.length).toEqual(4)
           expect(response.data.price_list.prices).toEqual(
             expect.arrayContaining([
               expect.objectContaining({
