@@ -8092,21 +8092,26 @@ export const generatedSidebar = [
       {
         "loaded": true,
         "isPathHref": true,
-        "type": "link",
-        "path": "/storefront-development/tips",
-        "title": "Tips",
-        "children": []
-      },
-      {
-        "loaded": true,
-        "isPathHref": true,
-        "type": "link",
-        "path": "/storefront-development/publishable-api-keys",
-        "title": "Publishable API Key",
-        "children": []
-      },
-      {
-        "type": "separator"
+        "type": "category",
+        "title": "General",
+        "children": [
+          {
+            "loaded": true,
+            "isPathHref": true,
+            "type": "link",
+            "path": "/storefront-development/tips",
+            "title": "Tips",
+            "children": []
+          },
+          {
+            "loaded": true,
+            "isPathHref": true,
+            "type": "link",
+            "path": "/storefront-development/publishable-api-keys",
+            "title": "Publishable API Key",
+            "children": []
+          }
+        ]
       },
       {
         "loaded": true,
