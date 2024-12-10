@@ -62,4 +62,10 @@ export const languages: Language[] = [
     ltr: true,
     date_locale: th,
   },
+  {
+    code: "ur",
+    display_name: "اردو",
+    ltr: false,
+    date_locale: enUS,
+  }
 ]

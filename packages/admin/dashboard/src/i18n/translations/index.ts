@@ -7,6 +7,7 @@ import ja from "./ja.json"
 import pl from "./pl.json"
 import ptBR from "./ptBR.json"
 import th from "./th.json"
+import ur from "./ur.json"
 import tr from "./tr.json"
 
 export default {
@@ -40,4 +41,7 @@ export default {
   tr: {
     translation: tr,
   },
+  ur: {
+    translation: ur,
+  }
 }
