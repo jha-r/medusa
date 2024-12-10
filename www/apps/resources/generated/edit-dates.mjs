@@ -5686,5 +5686,6 @@ export const generatedEditDates = {
   "references/modules/api_key_models/page.mdx": "2024-12-10T14:54:57.177Z",
   "references/modules/sales_channel_models/page.mdx": "2024-12-10T14:55:13.205Z",
   "references/types/DmlTypes/types/types.DmlTypes.KnownDataTypes/page.mdx": "2024-12-10T14:54:55.434Z",
-  "references/types/DmlTypes/types/types.DmlTypes.RelationshipTypes/page.mdx": "2024-12-10T14:54:55.435Z"
+  "references/types/DmlTypes/types/types.DmlTypes.RelationshipTypes/page.mdx": "2024-12-10T14:54:55.435Z",
+  "app/recipes/commerce-automation/restock-notification/page.mdx": "2024-12-10T14:15:39.178Z"
 }

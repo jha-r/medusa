@@ -96,7 +96,16 @@ export const generatedSidebar = [
         "type": "link",
         "path": "/recipes/commerce-automation",
         "title": "Commerce Automation",
-        "children": []
+        "children": [
+          {
+            "loaded": true,
+            "isPathHref": true,
+            "type": "link",
+            "path": "/recipes/commerce-automation/restock-notification",
+            "title": "Example: Restock Notifications",
+            "children": []
+          }
+        ]
       },
       {
         "loaded": true,
