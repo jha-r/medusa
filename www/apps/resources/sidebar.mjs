@@ -2404,7 +2404,7 @@ export const sidebar = sidebarAttachHrefCommonOptions([
       {
         type: "link",
         path: "/service-factory-reference",
-        title: "Service Factory Reference",
+        title: "Service Factory",
         isChildSidebar: true,
         children: [
           {
@@ -2422,20 +2422,20 @@ export const sidebar = sidebarAttachHrefCommonOptions([
       {
         type: "link",
         path: "/references/helper-steps",
-        title: "Helper Steps Reference",
+        title: "Helper Steps",
         isChildSidebar: true,
         autogenerate_path: "/references/helper_steps/functions",
       },
       {
         type: "link",
-        title: "Core Workflows Reference",
+        title: "Core Workflows",
         path: "/medusa-workflows-reference",
         isChildSidebar: true,
         custom_autogenerate: "core-flows",
       },
       {
         type: "link",
-        title: "Testing Framework Reference",
+        title: "Testing Framework",
         path: "/test-tools-reference",
         isChildSidebar: true,
         children: [

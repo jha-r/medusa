@@ -9802,7 +9802,7 @@ export const generatedSidebar = [
         "isPathHref": true,
         "type": "link",
         "path": "/service-factory-reference",
-        "title": "Service Factory Reference",
+        "title": "Service Factory",
         "isChildSidebar": true,
         "children": [
           {
@@ -9902,7 +9902,7 @@ export const generatedSidebar = [
         "isPathHref": true,
         "type": "link",
         "path": "/references/helper-steps",
-        "title": "Helper Steps Reference",
+        "title": "Helper Steps",
         "isChildSidebar": true,
         "autogenerate_path": "/references/helper_steps/functions",
         "children": [
@@ -9976,7 +9976,7 @@ export const generatedSidebar = [
         "loaded": true,
         "isPathHref": true,
         "type": "link",
-        "title": "Core Workflows Reference",
+        "title": "Core Workflows",
         "path": "/medusa-workflows-reference",
         "isChildSidebar": true,
         "custom_autogenerate": "core-flows",
@@ -15114,7 +15114,7 @@ export const generatedSidebar = [
         "loaded": true,
         "isPathHref": true,
         "type": "link",
-        "title": "Testing Framework Reference",
+        "title": "Testing Framework",
         "path": "/test-tools-reference",
         "isChildSidebar": true,
         "children": [
