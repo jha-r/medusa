@@ -68,6 +68,13 @@ export const sidebar = sidebarAttachHrefCommonOptions([
         type: "link",
         path: "/recipes/commerce-automation",
         title: "Commerce Automation",
+        children: [
+          {
+            type: "link",
+            path: "/recipes/commerce-automation/restock-notification",
+            title: "Example: Restock Notifications",
+          },
+        ],
       },
       {
         type: "link",
@@ -1818,17 +1825,20 @@ export const sidebar = sidebarAttachHrefCommonOptions([
     isChildSidebar: true,
     children: [
       {
-        type: "link",
-        path: "/storefront-development/tips",
-        title: "Tips",
-      },
-      {
-        type: "link",
-        path: "/storefront-development/publishable-api-keys",
-        title: "Publishable API Key",
-      },
-      {
-        type: "separator",
+        type: "category",
+        title: "General",
+        children: [
+          {
+            type: "link",
+            path: "/storefront-development/tips",
+            title: "Tips",
+          },
+          {
+            type: "link",
+            path: "/storefront-development/publishable-api-keys",
+            title: "Publishable API Key",
+          },
+        ],
       },
       {
         type: "category",

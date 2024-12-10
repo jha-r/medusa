@@ -193,7 +193,7 @@ export const generatedEditDates = {
   "app/storefront-development/regions/store-retrieve-region/page.mdx": "2024-09-11T10:07:42.887Z",
   "app/storefront-development/regions/page.mdx": "2024-06-09T15:19:09+02:00",
   "app/storefront-development/tips/page.mdx": "2024-10-22T11:01:01.298Z",
-  "app/storefront-development/page.mdx": "2024-06-09T15:19:09+02:00",
+  "app/storefront-development/page.mdx": "2024-12-10T09:23:20.666Z",
   "app/troubleshooting/cors-errors/page.mdx": "2024-05-03T17:36:38+03:00",
   "app/troubleshooting/create-medusa-app-errors/page.mdx": "2024-07-11T10:29:13+03:00",
   "app/troubleshooting/database-errors/page.mdx": "2024-05-03T17:36:38+03:00",
@@ -5659,5 +5659,6 @@ export const generatedEditDates = {
   "references/workflows/classes/workflows.WorkflowResponse/page.mdx": "2024-12-09T13:22:04.820Z",
   "references/workflows/interfaces/workflows.ApplyStepOptions/page.mdx": "2024-12-09T13:22:04.808Z",
   "references/workflows/types/workflows.WorkflowData/page.mdx": "2024-12-09T13:22:04.836Z",
-  "app/integrations/guides/resend/page.mdx": "2024-12-09T16:19:17.798Z"
+  "app/integrations/guides/resend/page.mdx": "2024-12-09T16:19:17.798Z",
+  "app/recipes/commerce-automation/restock-notification/page.mdx": "2024-12-10T14:15:39.178Z"
 }
