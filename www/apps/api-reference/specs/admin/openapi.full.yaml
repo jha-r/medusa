@@ -47651,6 +47651,9 @@ components:
         - email
         - accepted
         - token
+        - expires_at
+        - created_at
+        - updated_at
       properties:
         id:
           type: string
@@ -52943,15 +52946,66 @@ components:
       required:
         - id
         - value
+        - operator
+        - attribute
+        - price_id
+        - priority
+        - created_at
+        - updated_at
+        - deleted_at
       properties:
         id:
           type: string
           title: id
           description: The price rule's ID.
         value:
-          type: string
-          title: value
+          oneOf:
+            - type: string
+              title: value
+              description: The price rule's value.
+            - type: number
+              title: value
+              description: The price rule's value.
           description: The price rule's value.
+        operator:
+          type: string
+          description: The price rule's operator.
+          enum:
+            - gt
+            - lt
+            - eq
+            - ne
+            - in
+            - lte
+            - gte
+            - nin
+        attribute:
+          type: string
+          title: attribute
+          description: The price rule's attribute.
+        price_id:
+          type: string
+          title: price_id
+          description: The price rule's price id.
+        priority:
+          type: number
+          title: priority
+          description: The price rule's priority.
+        created_at:
+          type: string
+          format: date-time
+          title: created_at
+          description: The price rule's created at.
+        updated_at:
+          type: string
+          format: date-time
+          title: updated_at
+          description: The price rule's updated at.
+        deleted_at:
+          type: string
+          format: date-time
+          title: deleted_at
+          description: The price rule's deleted at.
     AdminShippingOptionResponse:
       type: object
       description: The shipping option's details.
@@ -59212,19 +59266,8 @@ components:
           title: no_notification
           description: Whether the customer should be notified about changes in the claim.
         refund_amount:
-          oneOf:
-            - type: string
-              title: refund_amount
-              description: The claim's refund amount.
-            - type: number
-              title: refund_amount
-              description: The claim's refund amount.
-            - type: string
-              title: refund_amount
-              description: The claim's refund amount.
-            - type: number
-              title: refund_amount
-              description: The claim's refund amount.
+          type: number
+          title: refund_amount
           description: The amount to be refunded.
         display_id:
           type: number
@@ -60335,6 +60378,116 @@ components:
         metadata:
           type: object
           description: The item's metadata, can hold custom key-value pairs.
+    StoreCalculatedPrice:
+      type: object
+      description: The shipping option's calculated price.
+      x-schemaName: StoreCalculatedPrice
+      required:
+        - id
+        - calculated_amount
+        - original_amount
+        - currency_code
+      properties:
+        id:
+          type: string
+          title: id
+          description: The calculated price's ID.
+        is_calculated_price_price_list:
+          type: boolean
+          title: is_calculated_price_price_list
+          description: The calculated price's is calculated price price list.
+        is_calculated_price_tax_inclusive:
+          type: boolean
+          title: is_calculated_price_tax_inclusive
+          description: The calculated price's is calculated price tax inclusive.
+        calculated_amount:
+          type: number
+          title: calculated_amount
+          description: The calculated price's calculated amount.
+        calculated_amount_with_tax:
+          type: number
+          title: calculated_amount_with_tax
+          description: The calculated price's calculated amount with tax.
+        calculated_amount_without_tax:
+          type: number
+          title: calculated_amount_without_tax
+          description: The calculated price's calculated amount without tax.
+        is_original_price_price_list:
+          type: boolean
+          title: is_original_price_price_list
+          description: The calculated price's is original price price list.
+        is_original_price_tax_inclusive:
+          type: boolean
+          title: is_original_price_tax_inclusive
+          description: The calculated price's is original price tax inclusive.
+        original_amount:
+          type: number
+          title: original_amount
+          description: The calculated price's original amount.
+        currency_code:
+          type: string
+          title: currency_code
+          description: The calculated price's currency code.
+        calculated_price:
+          type: object
+          description: The calculated price's details.
+          required:
+            - id
+            - price_list_id
+            - price_list_type
+            - min_quantity
+            - max_quantity
+          properties:
+            id:
+              type: string
+              title: id
+              description: The calculated price's ID.
+            price_list_id:
+              type: string
+              title: price_list_id
+              description: The calculated price's price list id.
+            price_list_type:
+              type: string
+              title: price_list_type
+              description: The calculated price's price list type.
+            min_quantity:
+              type: number
+              title: min_quantity
+              description: The calculated price's min quantity.
+            max_quantity:
+              type: number
+              title: max_quantity
+              description: The calculated price's max quantity.
+        original_price:
+          type: object
+          description: The calculated price's original price.
+          required:
+            - id
+            - price_list_id
+            - price_list_type
+            - min_quantity
+            - max_quantity
+          properties:
+            id:
+              type: string
+              title: id
+              description: The original price's ID.
+            price_list_id:
+              type: string
+              title: price_list_id
+              description: The original price's price list id.
+            price_list_type:
+              type: string
+              title: price_list_type
+              description: The original price's price list type.
+            min_quantity:
+              type: number
+              title: min_quantity
+              description: The original price's min quantity.
+            max_quantity:
+              type: number
+              title: max_quantity
+              description: The original price's max quantity.
     StoreCart:
       type: object
       description: The cart's details.
@@ -61191,6 +61344,8 @@ components:
         - type
         - provider
         - amount
+        - prices
+        - calculated_price
       properties:
         id:
           type: string
@@ -61267,6 +61422,13 @@ components:
           description: The shipping option's data, useful for the provider handling fulfillment.
           externalDocs:
             url: https://docs.medusajs.com/v2/resources/commerce-modules/fulfillment/shipping-option#data-property
+        prices:
+          type: array
+          description: The shipping option's prices.
+          items:
+            $ref: '#/components/schemas/StorePrice'
+        calculated_price:
+          $ref: '#/components/schemas/StoreCalculatedPrice'
     StoreCollection:
       type: object
       description: The collection's details.
@@ -68089,6 +68251,73 @@ components:
         - provider_id
         - data
         - status
+    StorePrice:
+      type: object
+      description: The price's prices.
+      x-schemaName: StorePrice
+      required:
+        - id
+        - currency_code
+        - amount
+        - min_quantity
+        - max_quantity
+      properties:
+        id:
+          type: string
+          title: id
+          description: The price's ID.
+        currency_code:
+          type: string
+          title: currency_code
+          description: The price's currency code.
+        amount:
+          type: number
+          title: amount
+          description: The price's amount.
+        min_quantity:
+          type: number
+          title: min_quantity
+          description: The price's min quantity.
+        max_quantity:
+          type: number
+          title: max_quantity
+          description: The price's max quantity.
+        price_rules:
+          type: array
+          description: The price's price rules.
+          items:
+            $ref: '#/components/schemas/StorePriceRule'
+    StorePriceRule:
+      type: object
+      description: The price rule's price rules.
+      x-schemaName: StorePriceRule
+      required:
+        - id
+        - attribute
+        - operator
+        - value
+      properties:
+        id:
+          type: string
+          title: id
+          description: The price rule's ID.
+        attribute:
+          type: string
+          title: attribute
+          description: The price rule's attribute.
+        operator:
+          type: string
+          description: The price rule's operator.
+          enum:
+            - gt
+            - lt
+            - eq
+            - lte
+            - gte
+        value:
+          type: string
+          title: value
+          description: The price rule's value.
     StoreProduct:
       type: object
       description: The product's details.

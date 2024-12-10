@@ -26,41 +26,6 @@
  *         fields. without prefix it will replace the entire default fields.
  *       externalDocs:
  *         url: "#select-fields-and-relations"
- *   - name: region_id
- *     in: query
- *     description: The ID of the region the product is being viewed from. This is required if you're retrieving product variant prices with taxes.
- *     required: false
- *     schema:
- *       type: string
- *       title: region_id
- *       description: The ID of the region the product is being viewed from. This is required if you're retrieving product variant prices with taxes.
- *       externalDocs:
- *         url: https://docs.medusajs.com/v2/resources/storefront-development/products/price/examples/tax-price
- *         description: "Storefront guide: How to show product variants' prices with taxes."
- *   - name: country_code
- *     in: query
- *     description: The country code the product is being viewed from. This is required if you're retrieving product variant prices with taxes.
- *     required: false
- *     schema:
- *       type: string
- *       title: country_code
- *       description: The country code the product is being viewed from. This is required if you're retrieving product variant prices with taxes.
- *   - name: province
- *     in: query
- *     description: The province the product is being viewed from. This is useful to narrow down the tax context when calculating product variant prices with taxes.
- *     required: false
- *     schema:
- *       type: string
- *       title: province
- *       description: The province the product is being viewed from. This is useful to narrow down the tax context when calculating product variant prices with taxes.
- *   - name: cart_id
- *     in: query
- *     description: The ID of the customer's cart. If set, the cart's region and shipping address's country code and province are used instead of the `region_id`, `country_code`, and `province` properties.
- *     required: false
- *     schema:
- *       type: string
- *       title: cart_id
- *       description: The ID of the customer's cart. If set, the cart's region and shipping address's country code and province are used instead of the `region_id`, `country_code`, and `province` properties.
  * x-codeSamples:
  *   - lang: Shell
  *     label: cURL
