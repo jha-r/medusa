@@ -82,7 +82,7 @@ Afterwards, the installation process will start, which will install the Medusa a
 
 <Note title="Why is the storefront installed separately?">
 
-The Medusa application is composed of a headless Node.js server and an admin dashboard. The storefront is installed or custom-built separately and connects to the Medusa application through its REST endpoints, called [API routes](!docs!/learn/basics/api-routes). Learn more about Medusa's architecture in [this documentation](!docs!/learn/advanced-development/architecture/overview).
+The Medusa application is composed of a headless Node.js server and an admin dashboard. The storefront is installed or custom-built separately and connects to the Medusa application through its REST endpoints, called [API routes](!docs!/learn/fundamentals/api-routes). Learn more about Medusa's architecture in [this documentation](!docs!/learn/introduction/architecture).
 
 </Note>
 
@@ -104,7 +104,7 @@ In this step, you'll create a Restock Module that adds a custom data model for r
 
 <Note>
 
-Learn more about modules in [this documentation](!docs!/learn/basics/modules).
+Learn more about modules in [this documentation](!docs!/learn/fundamentals/modules).
 
 </Note>
 
@@ -120,7 +120,7 @@ A data model represents a table in the database. You create data models using Me
 
 <Note>
 
-Learn more about data models in [this documentation](!docs!/learn/basics/modules#1-create-data-model).
+Learn more about data models in [this documentation](!docs!/learn/fundamentals/modules#1-create-data-model).
 
 </Note>
 
@@ -169,7 +169,7 @@ In the data model, you define the following properties:
 
 <Note>
 
-Learn more about data model [properties](!docs!/learn/advanced-development/data-models/property-types) and [relations](!docs!/learn/advanced-development/data-models/relationships).
+Learn more about data model [properties](!docs!/learn/fundamentals/data-models/property-types) and [relations](!docs!/learn/fundamentals/data-models/relationships).
 
 </Note>
 
@@ -177,7 +177,7 @@ You also define a unique index on the `variant_id`, `sales_channel_id`, and `ema
 
 <Note>
 
-Learn more about data model indexes in [this documentation](!docs!/learn/advanced-development/data-models/index).
+Learn more about data model indexes in [this documentation](!docs!/learn/fundamentals/data-models/index).
 
 </Note>
 
@@ -187,7 +187,7 @@ You define data-management methods of your data models in a service. A service i
 
 <Note>
 
-Learn more about services in [this documentation](!docs!/learn/basics/modules#2-create-service).
+Learn more about services in [this documentation](!docs!/learn/fundamentals/modules#2-create-service).
 
 </Note>
 
@@ -267,7 +267,7 @@ Since data models represent tables in the database, you define how they're creat
 
 <Note>
 
-Learn more about migrations in [this documentation](!docs!/learn/basics/modules#5-generate-migrations).
+Learn more about migrations in [this documentation](!docs!/learn/fundamentals/modules#5-generate-migrations).
 
 </Note>
 
@@ -295,13 +295,13 @@ The table of the Restock Module's data model are now created in the database.
 
 Since the `RestockSubscription` data model stores the product variant's ID, you may want to retrieve the product variant's details while retrieving a restock subscription record.
 
-However, modules are [isolated](!docs!/learn/advanced-development/modules/isolation) to ensure they're re-usable and don't have side effects when integrated into the Medusa application. So, to build associations between modules, you define [module links](!docs!/learn/advanced-development/module-links). A Module link associates two modules' data models while maintaining module isolation.
+However, modules are [isolated](!docs!/learn/fundamentals/modules/isolation) to ensure they're re-usable and don't have side effects when integrated into the Medusa application. So, to build associations between modules, you define [module links](!docs!/learn/fundamentals/module-links). A Module link associates two modules' data models while maintaining module isolation.
 
 In this section, you'll link the `RestockSubscription` data model to the [Product Module](../../../commerce-modules/product/page.mdx)'s `ProductVariant` data model.
 
 <Note>
 
-Learn more about module links in [this documentation](!docs!/learn/advanced-development/module-links).
+Learn more about module links in [this documentation](!docs!/learn/fundamentals/module-links).
 
 </Note>
 
@@ -346,7 +346,7 @@ In this section, you'll create a workflow that validates that a variant is out-o
 
 <Note>
 
-Learn more about workflows in [this documentation](!docs!/learn/basics/workflows)
+Learn more about workflows in [this documentation](!docs!/learn/fundamentals/workflows)
 
 </Note>
 
@@ -514,7 +514,7 @@ A compensation function defines the rollback logic of a step, and it's only exec
 
 <Note title="Tip">
 
-Learn more about compensation functions in [this documentation](!docs!/learn/advanced-development/workflows/compensation-function).
+Learn more about compensation functions in [this documentation](!docs!/learn/fundamentals/workflows/compensation-function).
 
 </Note>
 
@@ -662,13 +662,13 @@ You create a workflow using `createWorkflow` from the Workflows SDK. It accepts 
 
 It accepts as a second parameter a constructor function, which is the workflow's implementation. In the workflow, you:
 
-- Use [transform](!docs!/learn/advanced-development/workflows/variable-manipulation) from the Workflows SDK to create a `customerId` variable. Its value is either the ID of the customer passed in the workflow's input if it's not `undefined`, or an empty string.
-- Use [when-then](!docs!/learn/advanced-development/workflows/conditions) from the Workflows SDK that performs steps if a condition is met. If the customer's email isn't set in the workflow's input, you retrieve the customer using `useQueryGraphStep` by its ID.
+- Use [transform](!docs!/learn/fundamentals/workflows/variable-manipulation) from the Workflows SDK to create a `customerId` variable. Its value is either the ID of the customer passed in the workflow's input if it's not `undefined`, or an empty string.
+- Use [when-then](!docs!/learn/fundamentals/workflows/conditions) from the Workflows SDK that performs steps if a condition is met. If the customer's email isn't set in the workflow's input, you retrieve the customer using `useQueryGraphStep` by its ID.
 - Use `transform` again to create an `email` variable whose value is either the email passed in the workflow's input or the retrieved customer's email.
 
 <Note title="Tip">
 
-A workflow's constructor function has some constraints in implementation, which is why you need to use `transform` for variable manipulation and `when-then` to perform steps based on a condition. Learn more about these constraints in [this documentation](!docs!/learn/advanced-development/workflows/constructor-constraints).
+A workflow's constructor function has some constraints in implementation, which is why you need to use `transform` for variable manipulation and `when-then` to perform steps based on a condition. Learn more about these constraints in [this documentation](!docs!/learn/fundamentals/workflows/constructor-constraints).
 
 </Note>
 
@@ -744,7 +744,7 @@ You add the following steps to the workflow:
 
 - `validateVariantOutOfStockStep` to validate that the variant is out of stock in the specified sales channel. If not, an error is thrown, halting the workflow's execution.
 - `useQueryGraphStep` to retrieve the restock subscription in case it already exists.
-- Use [when-then](!docs!/learn/advanced-development/workflows/conditions) to perform an action if a condition is met.
+- Use [when-then](!docs!/learn/fundamentals/workflows/conditions) to perform an action if a condition is met.
     - The first when-then block checks if the restock subscription doesn't exist, then creates it using the `createRestockSubscriptionStep`.
     - The second when-then block checks if the restock subscription already exists, then updates it using the `updateRestockSubscriptionStep`.
 - `useQueryGraphStep` again to retrieve the restock subscription before returning it.
@@ -763,7 +763,7 @@ An API Route is an endpoint that exposes commerce features to external applicati
 
 <Note>
 
-Learn more about API routes in [this documentation](!docs!/learn/basics/api-routes).
+Learn more about API routes in [this documentation](!docs!/learn/fundamentals/api-routes).
 
 </Note>
 
@@ -906,7 +906,7 @@ To use the Zod schema for validation, you apply the `validateAndTransformBody` m
 
 <Note>
 
-Learn more about middlewares in [this documentation](!docs!/learn/advanced-development/api-routes/middlewares).
+Learn more about middlewares in [this documentation](!docs!/learn/fundamentals/api-routes/middlewares).
 
 </Note>
 
@@ -1375,7 +1375,7 @@ This workflow has the following steps:
 
 1. `getDistinctSubscriptionsStep` to retrieve the restock subscriptions by distinct variant and sales channel ID pairings.
 2. `getRestockedStep` to filter the subscriptions retrieved by the previous step and return only those whose variants have been restocked.
-1. `useQueryGraphStep` to retrieve all subscriptions that have a restocked variant and sales channel ID pairing using [Query](!docs!/learn/advanced-development/module-links/query). Notice that in the specified `fields` you pass `product_variant.*`, which retrieves the details of the subscription's variant from the Product Module. This is possible due to the module link you created between the `RestockSubscription` and `ProductVariant` models in an earlier step.
+1. `useQueryGraphStep` to retrieve all subscriptions that have a restocked variant and sales channel ID pairing using [Query](!docs!/learn/fundamentals/module-links/query). Notice that in the specified `fields` you pass `product_variant.*`, which retrieves the details of the subscription's variant from the Product Module. This is possible due to the module link you created between the `RestockSubscription` and `ProductVariant` models in an earlier step.
 3. `sendRestockNotificationStep` to send the notification to the subscribers of the restocked variants.
 4. `deleteRestockSubscriptionStep` to delete the restock subscriptions since their subscribers have been notified.
 
@@ -1393,7 +1393,7 @@ A scheduled job is an asynchronous function that the Medusa application runs at 
 
 <Note>
 
-Learn more about scheduled jobs in [this documentation](!docs!/learn/basics/scheduled-jobs).
+Learn more about scheduled jobs in [this documentation](!docs!/learn/fundamentals/scheduled-jobs).
 
 </Note>
 
