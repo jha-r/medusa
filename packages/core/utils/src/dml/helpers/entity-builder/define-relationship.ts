@@ -146,10 +146,7 @@ export function defineHasOneRelationship(
   { relatedModelName }: { relatedModelName: string },
   cascades: EntityCascades<string[]>
 ) {
-  const { cascades: relationCascades } = relatedEntity.parse()
-  const shouldRemoveRelated =
-    !!relationCascades.delete?.includes(relationship.name) ||
-    !!relationCascades.delete?.includes(relationship.name)
+  const shouldRemoveRelated = !!cascades.delete?.includes(relationship.name)
 
   let mappedBy: string | undefined = camelToSnakeCase(MikroORMEntity.name)
   if ("mappedBy" in relationship) {
@@ -160,7 +157,7 @@ export function defineHasOneRelationship(
 
   const oneToOneOptions = {
     entity: relatedModelName,
-    nullable: relationship.nullable,
+    ...(relationship.nullable ? { nullable: relationship.nullable } : {}),
     ...(mappedBy ? { mappedBy } : {}),
     onDelete: shouldRemoveRelated ? "cascade" : undefined,
   } as OneToOneOptions<any, any>
