@@ -1,0 +1,2839 @@
+{
+  "$schema": "./$schema.json",
+  "general": {
+    "ascending": "升序",
+    "descending": "降序",
+    "add": "添加",
+    "start": "开始",
+    "end": "结束",
+    "open": "打开",
+    "close": "关闭",
+    "apply": "应用",
+    "range": "范围",
+    "search": "搜索",
+    "of": "的",
+    "results": "结果",
+    "pages": "页",
+    "next": "下一页",
+    "prev": "上一页",
+    "is": "是",
+    "timeline": "时间线",
+    "success": "成功",
+    "warning": "警告",
+    "tip": "提示",
+    "error": "错误",
+    "select": "选择",
+    "selected": "已选择",
+    "enabled": "启用",
+    "disabled": "禁用",
+    "expired": "已过期",
+    "active": "活跃",
+    "revoked": "已撤销",
+    "new": "新的",
+    "modified": "已修改",
+    "added": "已添加",
+    "removed": "已移除",
+    "admin": "管理员",
+    "store": "商店",
+    "details": "详情",
+    "items_one": "{{count}} 项",
+    "items_other": "{{count}} 项",
+    "countSelected": "已选择 {{count}} 项",
+    "countOfTotalSelected": "已选择 {{total}} 项中的 {{count}} 项",
+    "plusCount": "+ {{count}}",
+    "plusCountMore": "再加上 {{count}} 项",
+    "areYouSure": "确定吗？",
+    "noRecordsFound": "未找到记录",
+    "typeToConfirm": "请键入 {val} 以确认：",
+    "noResultsTitle": "没有结果",
+    "noResultsMessage": "尝试更改筛选条件或搜索查询",
+    "noSearchResults": "无搜索结果",
+    "noSearchResultsFor": "没有与 <0>'{{query}}'</0> 匹配的搜索结果",
+    "noRecordsTitle": "没有记录",
+    "noRecordsMessage": "没有可显示的记录",
+    "unsavedChangesTitle": "确定要离开此表单吗？",
+    "unsavedChangesDescription": "您有未保存的更改，离开表单后这些更改将会丢失。",
+    "includesTaxTooltip": "此列中的价格已包含税费。",
+    "excludesTaxTooltip": "此列中的价格未包含税费。",
+    "noMoreData": "没有更多数据"
+  },
+  "json": {
+    "header": "JSON",
+    "numberOfKeys_one": "{{count}} 个键",
+    "numberOfKeys_other": "{{count}} 个键",
+    "drawer": {
+      "header_one": "JSON <0>· {{count}} 个键</0>",
+      "header_other": "JSON <0>· {{count}} 个键</0>",
+      "description": "查看此对象的 JSON 数据。"
+    }
+  },
+  "metadata": {
+    "header": "元数据",
+    "numberOfKeys_one": "{{count}} 个键",
+    "numberOfKeys_other": "{{count}} 个键",
+    "edit": {
+      "header": "编辑元数据",
+      "description": "编辑此对象的元数据。",
+      "successToast": "元数据已成功更新。",
+      "actions": {
+        "insertRowAbove": "在上方插入行",
+        "insertRowBelow": "在下方插入行",
+        "deleteRow": "删除行"
+      },
+      "labels": {
+        "key": "键",
+        "value": "值"
+      },
+      "complexRow": {
+        "label": "某些行已禁用",
+        "description": "此对象包含非原始元数据（如数组或对象），无法在此处编辑。要编辑禁用的行，请直接使用 API。",
+        "tooltip": "此行已禁用，因为它包含非原始数据。"
+      }
+    }
+  },
+  "validation": {
+    "mustBeInt": "该值必须是整数。",
+    "mustBePositive": "该值必须是正数。"
+  },
+  "actions": {
+    "save": "保存",
+    "saveAsDraft": "保存为草稿",
+    "copy": "复制",
+    "copied": "已复制",
+    "duplicate": "复制副本",
+    "publish": "发布",
+    "create": "创建",
+    "delete": "删除",
+    "remove": "移除",
+    "revoke": "撤销",
+    "cancel": "取消",
+    "forceConfirm": "强制确认",
+    "continueEdit": "继续编辑",
+    "enable": "启用",
+    "disable": "禁用",
+    "undo": "撤销",
+    "complete": "完成",
+    "viewDetails": "查看详情",
+    "back": "返回",
+    "close": "关闭",
+    "showMore": "显示更多",
+    "continue": "继续",
+    "continueWithEmail": "使用邮箱继续",
+    "idCopiedToClipboard": "ID 已复制到剪贴板",
+    "addReason": "添加原因",
+    "addNote": "添加备注",
+    "reset": "重置",
+    "confirm": "确认",
+    "edit": "编辑",
+    "addItems": "添加项目",
+    "download": "下载",
+    "clear": "清除",
+    "clearAll": "全部清除",
+    "apply": "应用",
+    "add": "添加",
+    "select": "选择",
+    "browse": "浏览",
+    "logout": "登出",
+    "hide": "隐藏",
+    "export": "导出",
+    "import": "导入",
+    "cannotUndo": "此操作无法撤销"
+  },
+  "operators": {
+    "in": "在"
+  },
+  "app": {
+    "search": {
+      "label": "搜索",
+      "title": "搜索",
+      "description": "搜索整个商店，包括订单、产品、客户等内容。",
+      "allAreas": "所有区域",
+      "navigation": "导航",
+      "openResult": "打开结果",
+      "showMore": "显示更多",
+      "placeholder": "跳转或查找任何内容...",
+      "noResultsTitle": "未找到结果",
+      "noResultsMessage": "我们无法找到与您的搜索匹配的内容。",
+      "emptySearchTitle": "输入以搜索",
+      "emptySearchMessage": "输入关键字或短语以探索。",
+      "loadMore": "加载 {{count}} 更多",
+      "groups": {
+        "all": "所有区域",
+        "customer": "客户",
+        "customerGroup": "客户组",
+        "product": "产品",
+        "productVariant": "产品变体",
+        "inventory": "库存",
+        "reservation": "预订",
+        "category": "分类",
+        "collection": "系列",
+        "order": "订单",
+        "promotion": "促销",
+        "campaign": "活动",
+        "priceList": "价格表",
+        "user": "用户",
+        "region": "地区",
+        "taxRegion": "税区",
+        "returnReason": "退货原因",
+        "salesChannel": "销售渠道",
+        "productType": "产品类型",
+        "productTag": "产品标签",
+        "location": "位置",
+        "shippingProfile": "配送模板",
+        "publishableApiKey": "可发布的 API 密钥",
+        "secretApiKey": "私密 API 密钥",
+        "command": "命令",
+        "navigation": "导航"
+      }
+    },
+    "keyboardShortcuts": {
+      "pageShortcut": "跳转到",
+      "settingShortcut": "设置",
+      "commandShortcut": "命令",
+      "then": "然后",
+      "navigation": {
+        "goToOrders": "订单",
+        "goToProducts": "产品",
+        "goToCollections": "系列",
+        "goToCategories": "分类",
+        "goToCustomers": "客户",
+        "goToCustomerGroups": "客户组",
+        "goToInventory": "库存",
+        "goToReservations": "预订",
+        "goToPriceLists": "价格表",
+        "goToPromotions": "促销",
+        "goToCampaigns": "活动"
+      },
+      "settings": {
+        "goToSettings": "设置",
+        "goToStore": "商店",
+        "goToUsers": "用户",
+        "goToRegions": "地区",
+        "goToTaxRegions": "税区",
+        "goToSalesChannels": "销售渠道",
+        "goToProductTypes": "产品类型",
+        "goToLocations": "位置",
+        "goToPublishableApiKeys": "可发布的 API 密钥",
+        "goToSecretApiKeys": "私密 API 密钥",
+        "goToWorkflows": "工作流",
+        "goToProfile": "个人资料",
+        "goToReturnReasons": "退货原因"
+      }
+    },
+    "menus": {
+      "user": {
+        "documentation": "文档",
+        "changelog": "更新日志",
+        "shortcuts": "快捷键",
+        "profileSettings": "个人资料设置",
+        "theme": {
+          "label": "主题",
+          "dark": "深色",
+          "light": "浅色",
+          "system": "系统"
+        }
+      },
+      "store": {
+        "label": "商店",
+        "storeSettings": "商店设置"
+      },
+      "actions": {
+        "logout": "登出"
+      }
+    },
+    "nav": {
+      "accessibility": {
+        "title": "导航",
+        "description": "仪表板的导航菜单。"
+      },
+      "common": {
+        "extensions": "扩展"
+      },
+      "main": {
+        "store": "商店",
+        "storeSettings": "商店设置"
+      },
+      "settings": {
+        "header": "设置",
+        "general": "通用",
+        "developer": "开发者",
+        "myAccount": "我的账户"
+      }
+    }
+  },
+  "dataGrid": {
+    "columns": {
+      "view": "查看",
+      "resetToDefault": "重置为默认",
+      "disabled": "更改哪些列可见已禁用。"
+    },
+    "shortcuts": {
+      "label": "快捷键",
+      "commands": {
+        "undo": "撤销",
+        "redo": "重做",
+        "copy": "复制",
+        "paste": "粘贴",
+        "edit": "编辑",
+        "delete": "删除",
+        "clear": "清除",
+        "moveUp": "向上移动",
+        "moveDown": "向下移动",
+        "moveLeft": "向左移动",
+        "moveRight": "向右移动",
+        "moveTop": "移动到顶部",
+        "moveBottom": "移动到底部",
+        "selectDown": "选择向下",
+        "selectUp": "选择向上",
+        "selectColumnDown": "选择列向下",
+        "selectColumnUp": "选择列向上",
+        "focusToolbar": "聚焦工具栏",
+        "focusCancel": "聚焦取消"
+      }
+    },
+    "errors": {
+      "fixError": "修复错误",
+      "count_one": "{{count}} 错误",
+      "count_other": "{{count}} 个错误"
+    }
+  },
+  "filters": {
+    "date": {
+      "today": "今天",
+      "lastSevenDays": "过去7天",
+      "lastThirtyDays": "过去30天",
+      "lastNinetyDays": "过去90天",
+      "lastTwelveMonths": "过去12个月",
+      "custom": "自定义",
+      "from": "从",
+      "to": "到"
+    },
+    "compare": {
+      "lessThan": "小于",
+      "greaterThan": "大于",
+      "exact": "精确",
+      "range": "范围",
+      "lessThanLabel": "小于 {{value}}",
+      "greaterThanLabel": "大于 {{value}}",
+      "andLabel": "和"
+    },
+    "addFilter": "添加筛选器"
+  },
+  "errorBoundary": {
+    "badRequestTitle": "400 - 错误的请求",
+    "badRequestMessage": "由于语法错误，服务器无法理解该请求。",
+    "notFoundTitle": "404 - 该地址没有页面",
+    "notFoundMessage": "检查URL并重试，或者使用搜索栏查找您要找的内容。",
+    "internalServerErrorTitle": "500 - 服务器内部错误",
+    "internalServerErrorMessage": "服务器发生了意外错误。请稍后再试。",
+    "defaultTitle": "发生错误",
+    "defaultMessage": "在渲染该页面时发生了意外错误。",
+    "noMatchMessage": "您要查找的页面不存在。",
+    "backToDashboard": "返回仪表盘"
+  },
+  "addresses": {
+    "shippingAddress": {
+      "header": "收货地址",
+      "editHeader": "编辑收货地址",
+      "editLabel": "收货地址",
+      "label": "收货地址"
+    },
+    "billingAddress": {
+      "header": "账单地址",
+      "editHeader": "编辑账单地址",
+      "editLabel": "账单地址",
+      "label": "账单地址",
+      "sameAsShipping": "与收货地址相同"
+    },
+    "contactHeading": "联系方式",
+    "locationHeading": "位置"
+  },
+  "email": {
+    "editHeader": "编辑电子邮件",
+    "editLabel": "电子邮件",
+    "label": "电子邮件"
+  },
+  "transferOwnership": {
+    "header": "转移所有权",
+    "label": "转移所有权",
+    "details": {
+      "order": "订单详情",
+      "draft": "草稿详情"
+    },
+    "currentOwner": {
+      "label": "当前所有者",
+      "hint": "当前订单的所有者。"
+    },
+    "newOwner": {
+      "label": "新所有者",
+      "hint": "转移订单的目标新所有者。"
+    },
+    "validation": {
+      "mustBeDifferent": "新所有者必须与当前所有者不同。",
+      "required": "新所有者为必填项。"
+    }
+  },
+  "sales_channels": {
+    "availableIn": "在 <0>{{x}}</0> 个 <1>{{y}}</1> 销售渠道中可用"
+  },
+  "products": {
+    "domain": "产品",
+    "list": {
+      "noRecordsMessage": "创建您的第一个产品开始销售。"
+    },
+    "edit": {
+      "header": "编辑产品",
+      "description": "编辑产品详细信息。",
+      "successToast": "产品 {{title}} 已成功更新。"
+    },
+    "create": {
+      "title": "创建产品",
+      "description": "创建新产品。",
+      "header": "基本信息",
+      "tabs": {
+        "details": "详情",
+        "organize": "组织",
+        "variants": "变体",
+        "inventory": "库存套件"
+      },
+      "errors": {
+        "variants": "请至少选择一个变体。",
+        "options": "请创建至少一个选项。",
+        "uniqueSku": "SKU 必须唯一。"
+      },
+      "inventory": {
+        "heading": "库存套件",
+        "label": "将库存项目添加到变体的库存套件。",
+        "itemPlaceholder": "选择库存项目",
+        "quantityPlaceholder": "该套件需要多少此项？"
+      },
+      "variants": {
+        "header": "变体",
+        "subHeadingTitle": "是的，这是一个带有变体的产品",
+        "subHeadingDescription": "未勾选时，我们将为您创建默认变体",
+        "optionTitle": {
+          "placeholder": "尺寸"
+        },
+        "optionValues": {
+          "placeholder": "小号，中号，大号"
+        },
+        "productVariants": {
+          "label": "产品变体",
+          "hint": "此排名将影响变体在您的店面中的顺序。",
+          "alert": "添加选项以创建变体。",
+          "tip": "未勾选的变体将不会创建。您可以随时创建和编辑变体，但此列表适用于您的产品选项中的变化。"
+        },
+        "productOptions": {
+          "label": "产品选项",
+          "hint": "定义产品的选项，例如颜色、尺寸等。"
+        }
+      },
+      "successToast": "产品 {{title}} 已成功创建。"
+    },
+    "export": {
+      "header": "导出产品列表",
+      "description": "将产品列表导出为 CSV 文件。",
+      "success": {
+        "title": "我们正在处理您的导出",
+        "description": "导出数据可能需要几分钟时间。完成后我们会通知您。"
+      },
+      "filters": {
+        "title": "筛选器",
+        "description": "在表格概览中应用筛选器以调整此视图"
+      },
+      "columns": {
+        "title": "列",
+        "description": "自定义导出的数据以满足特定需求"
+      }
+    },
+    "import": {
+      "header": "导入产品列表",
+      "uploadLabel": "导入产品",
+      "uploadHint": "拖放 CSV 文件或点击上传",
+      "description": "通过提供符合预定义格式的 CSV 文件来导入产品",
+      "template": {
+        "title": "不确定如何安排您的列表？",
+        "description": "下载下面的模板，确保您遵循正确的格式。"
+      },
+      "upload": {
+        "title": "上传 CSV 文件",
+        "description": "通过导入，您可以添加或更新产品。要更新现有产品，您必须使用现有的句柄和 ID；要更新现有变体，您必须使用现有的 ID。在我们导入产品之前，您将被要求确认。",
+        "preprocessing": "预处理...",
+        "productsToCreate": "将创建产品",
+        "productsToUpdate": "将更新产品"
+      },
+      "success": {
+        "title": "我们正在处理您的导入",
+        "description": "导入数据可能需要一段时间。完成后我们会通知您。"
+      }
+    },
+    "deleteWarning": "您即将删除产品 {{title}}。此操作无法撤销。",
+    "variants": "变体",
+    "attributes": "属性",
+    "editAttributes": "编辑属性",
+    "editOptions": "编辑选项",
+    "editPrices": "编辑价格",
+    "media": {
+      "label": "媒体",
+      "editHint": "为产品添加媒体以在您的店面展示。",
+      "makeThumbnail": "制作缩略图",
+      "uploadImagesLabel": "上传图片",
+      "uploadImagesHint": "将图片拖放到这里或点击上传。",
+      "invalidFileType": "'{{name}}' 不是支持的文件类型。支持的文件类型是：{{types}}。",
+      "failedToUpload": "上传添加的媒体失败，请重试。",
+      "deleteWarning_one": "您即将删除 {{count}} 张图片。此操作无法撤销。",
+      "deleteWarning_other": "您即将删除 {{count}} 张图片。此操作无法撤销。",
+      "deleteWarningWithThumbnail_one": "您即将删除 {{count}} 张图片（包括缩略图）。此操作无法撤销。",
+      "deleteWarningWithThumbnail_other": "您即将删除 {{count}} 张图片（包括缩略图）。此操作无法撤销。",
+      "thumbnailTooltip": "缩略图",
+      "galleryLabel": "图库",
+      "downloadImageLabel": "下载当前图片",
+      "deleteImageLabel": "删除当前图片",
+      "emptyState": {
+        "header": "还没有媒体",
+        "description": "为产品添加媒体以在您的店面展示。",
+        "action": "添加媒体"
+      },
+      "successToast": "媒体已成功更新。"
+    },
+    "discountableHint": "未勾选时，产品将无法应用折扣。",
+    "noSalesChannels": "未在任何销售渠道中提供",
+    "variantCount_one": "{{count}} 个变体",
+    "variantCount_other": "{{count}} 个变体",
+    "deleteVariantWarning": "您即将删除变体 {{title}}。此操作无法撤销。",
+    "productStatus": {
+      "draft": "草稿",
+      "published": "已发布",
+      "proposed": "已提议",
+      "rejected": "已拒绝"
+    },
+    "fields": {
+      "title": {
+        "label": "标题",
+        "hint": "给您的产品起个简短清晰的标题。<0/>50-60 个字符是搜索引擎推荐的长度。"
+      },
+      "subtitle": {
+        "label": "副标题"
+      },
+      "handle": {
+        "label": "句柄",
+        "tooltip": "句柄用于在您的店面中引用产品。如果没有指定，句柄将从产品标题中生成。"
+      },
+      "description": {
+        "label": "描述",
+        "hint": "为您的产品提供简短清晰的描述。<0/>120-160 个字符是搜索引擎推荐的长度。"
+      },
+      "discountable": {
+        "label": "可折扣",
+        "hint": "未勾选时，产品将无法应用折扣"
+      },
+      "type": {
+        "label": "类型"
+      },
+      "collection": {
+        "label": "系列"
+      },
+      "categories": {
+        "label": "类别"
+      },
+      "tags": {
+        "label": "标签"
+      },
+      "sales_channels": {
+        "label": "销售渠道",
+        "hint": "如果不做更改，产品将只在默认销售渠道中可用。"
+      },
+      "countryOrigin": {
+        "label": "原产国"
+      },
+      "material": {
+        "label": "材质"
+      },
+      "width": {
+        "label": "宽度"
+      },
+      "length": {
+        "label": "长度"
+      },
+      "height": {
+        "label": "高度"
+      },
+      "weight": {
+        "label": "重量"
+      },
+      "options": {
+        "label": "产品选项",
+        "hint": "选项用于定义产品的颜色、尺寸等",
+        "add": "添加选项",
+        "optionTitle": "选项标题",
+        "optionTitlePlaceholder": "颜色",
+        "variations": "变体（以逗号分隔）",
+        "variantionsPlaceholder": "红色，蓝色，绿色"
+      },
+      "variants": {
+        "label": "产品变体",
+        "hint": "未勾选的变体将不会创建，排名将影响变体在您的前端中的显示顺序。"
+      },
+      "mid_code": {
+        "label": "中码"
+      },
+      "hs_code": {
+        "label": "HS 代码"
+      }
+    },
+    "variant": {
+      "edit": {
+        "header": "编辑变体",
+        "success": "产品变体编辑成功"
+      },
+      "create": {
+        "header": "变体详情"
+      },
+      "deleteWarning": "您确定要删除此变体吗？",
+      "pricesPagination": "第 {{current}} 条 - 共 {{total}} 条价格",
+      "tableItemAvailable": "有 {{availableCount}} 件可用",
+      "tableItem_one": "{{availableCount}} 件可用，位于 {{locationCount}} 个位置",
+      "tableItem_other": "{{availableCount}} 件可用，位于 {{locationCount}} 个位置",
+      "inventory": {
+        "notManaged": "未管理",
+        "manageItems": "管理库存商品",
+        "notManagedDesc": "此变体未管理库存。开启“管理库存”以跟踪该变体的库存。",
+        "manageKit": "管理库存套件",
+        "navigateToItem": "转到库存商品",
+        "actions": {
+          "inventoryItems": "转到库存商品",
+          "inventoryKit": "查看库存商品"
+        },
+        "inventoryKit": "库存套件",
+        "inventoryKitHint": "此变体是否由多个库存商品组成？",
+        "validation": {
+          "itemId": "请选择库存商品。",
+          "quantity": "数量是必填项。请输入一个正数。"
+        },
+        "header": "库存与库存管理",
+        "editItemDetails": "编辑商品详情",
+        "manageInventoryLabel": "管理库存",
+        "manageInventoryHint": "启用后，当订单和退货发生时，我们会为您更新库存数量。",
+        "allowBackordersLabel": "允许缺货订购",
+        "allowBackordersHint": "启用后，客户即使没有库存，也可以购买该变体。",
+        "toast": {
+          "levelsBatch": "库存数量已更新。",
+          "update": "库存商品更新成功。",
+          "updateLevel": "库存数量更新成功。",
+          "itemsManageSuccess": "库存商品更新成功。"
+        }
+      }
+    },
+    "options": {
+      "header": "选项",
+      "edit": {
+        "header": "编辑选项",
+        "successToast": "选项 {{title}} 更新成功。"
+      },
+      "create": {
+        "header": "创建选项",
+        "successToast": "选项 {{title}} 创建成功。"
+      },
+      "deleteWarning": "您即将删除产品选项：{{title}}。此操作不可撤销。"
+    },
+    "organization": {
+      "header": "组织",
+      "edit": {
+        "header": "编辑组织",
+        "toasts": {
+          "success": "{{title}} 的组织更新成功。"
+        }
+      }
+    },
+    "toasts": {
+      "delete": {
+        "success": {
+          "header": "产品已删除",
+          "description": "{{title}} 已成功删除。"
+        },
+        "error": {
+          "header": "删除产品失败"
+        }
+      }
+    }
+  },
+  "collections": {
+    "domain": "集合",
+    "subtitle": "将产品组织到集合中。",
+    "createCollection": "创建集合",
+    "createCollectionHint": "创建一个新的集合以组织您的产品。",
+    "createSuccess": "集合创建成功。",
+    "editCollection": "编辑集合",
+    "handleTooltip": "该句柄用于在您的商店前端引用集合。如果未指定，句柄将从集合标题生成。",
+    "deleteWarning": "您即将删除集合 {{title}}。此操作不可撤销。",
+    "removeSingleProductWarning": "您即将将产品 {{title}} 从集合中移除。此操作不可撤销。",
+    "removeProductsWarning_one": "您即将将 {{count}} 个产品从集合中移除。此操作不可撤销。",
+    "removeProductsWarning_other": "您即将将 {{count}} 个产品从集合中移除。此操作不可撤销。",
+    "products": {
+      "list": {
+        "noRecordsMessage": "该集合中没有产品。"
+      },
+      "add": {
+        "successToast_one": "产品成功添加到集合中。",
+        "successToast_other": "产品成功添加到集合中。"
+      },
+      "remove": {
+        "successToast_one": "产品成功从集合中移除。",
+        "successToast_other": "产品成功从集合中移除。"
+      }
+    }
+  },
+  "categories": {
+    "domain": "类别",
+    "subtitle": "将产品组织到类别中，并管理这些类别的排名和层级。",
+    "create": {
+      "header": "创建类别",
+      "hint": "创建一个新的类别来组织您的产品。",
+      "tabs": {
+        "details": "详情",
+        "organize": "组织排名"
+      },
+      "successToast": "类别 {{name}} 创建成功。"
+    },
+    "edit": {
+      "header": "编辑类别",
+      "description": "编辑类别以更新其详情。",
+      "successToast": "类别更新成功。"
+    },
+    "delete": {
+      "confirmation": "您即将删除类别 {{name}}。此操作不可撤销。",
+      "successToast": "类别 {{name}} 删除成功。"
+    },
+    "products": {
+      "add": {
+        "disabledTooltip": "该产品已在此类别中。",
+        "successToast_one": "已将 {{count}} 个产品添加到类别中。",
+        "successToast_other": "已将 {{count}} 个产品添加到类别中。"
+      },
+      "remove": {
+        "confirmation_one": "您即将从类别中移除 {{count}} 个产品。此操作不可撤销。",
+        "confirmation_other": "您即将从类别中移除 {{count}} 个产品。此操作不可撤销。",
+        "successToast_one": "已从类别中移除 {{count}} 个产品。",
+        "successToast_other": "已从类别中移除 {{count}} 个产品。"
+      },
+      "list": {
+        "noRecordsMessage": "该类别中没有产品。"
+      }
+    },
+    "organize": {
+      "header": "组织",
+      "action": "编辑排名"
+    },
+    "fields": {
+      "visibility": {
+        "label": "可见性",
+        "internal": "内部",
+        "public": "公开"
+      },
+      "status": {
+        "label": "状态",
+        "active": "激活",
+        "inactive": "非激活"
+      },
+      "path": {
+        "label": "路径",
+        "tooltip": "显示类别的完整路径。"
+      },
+      "children": {
+        "label": "子项"
+      },
+      "new": {
+        "label": "新建"
+      }
+    }
+  },
+  "inventory": {
+    "domain": "库存",
+    "subtitle": "管理您的库存商品",
+    "reserved": "已预定",
+    "available": "可用",
+    "locationLevels": "位置",
+    "associatedVariants": "关联变体",
+    "manageLocations": "管理位置",
+    "deleteWarning": "您即将删除一个库存商品。此操作不可撤销。",
+    "editItemDetails": "编辑商品详情",
+    "create": {
+      "title": "创建库存商品",
+      "details": "详情",
+      "availability": "可用性",
+      "locations": "位置",
+      "attributes": "属性",
+      "requiresShipping": "需要配送",
+      "requiresShippingHint": "该库存商品是否需要配送？",
+      "successToast": "库存商品创建成功。"
+    },
+    "reservation": {
+      "header": "预定 {{itemName}}",
+      "editItemDetails": "编辑预定",
+      "lineItemId": "行项目ID",
+      "orderID": "订单ID",
+      "description": "描述",
+      "location": "位置",
+      "inStockAtLocation": "该位置有库存",
+      "availableAtLocation": "该位置可用",
+      "reservedAtLocation": "该位置已预定",
+      "reservedAmount": "预定数量",
+      "create": "创建预定",
+      "itemToReserve": "要预定的商品",
+      "quantityPlaceholder": "您要预定多少数量？",
+      "descriptionPlaceholder": "这是什么类型的预定？",
+      "successToast": "预定创建成功。",
+      "updateSuccessToast": "预定更新成功。",
+      "deleteSuccessToast": "预定删除成功。",
+      "errors": {
+        "noAvaliableQuantity": "库存位置没有可用的数量。",
+        "quantityOutOfRange": "最小数量为1，最大数量为 {{max}}"
+      }
+    },
+    "adjustInventory": {
+      "errors": {
+        "stockedQuantity": "库存数量不能更新为小于已预定数量的值 {{quantity}}。"
+      }
+    },
+    "toast": {
+      "updateLocations": "位置更新成功。",
+      "updateLevel": "库存数量更新成功。",
+      "updateItem": "库存商品更新成功。"
+    }
+  },
+  "giftCards": {
+    "domain": "礼品卡",
+    "editGiftCard": "编辑礼品卡",
+    "createGiftCard": "创建礼品卡",
+    "createGiftCardHint": "手动创建一张可以作为支付方式在您的商店中使用的礼品卡。",
+    "selectRegionFirst": "请先选择一个地区",
+    "deleteGiftCardWarning": "您即将删除礼品卡 {{code}}。此操作不可撤销。",
+    "balanceHigherThanValue": "余额不能高于原始金额。",
+    "balanceLowerThanZero": "余额不能为负数。",
+    "expiryDateHint": "不同国家对于礼品卡的有效期有不同的法律规定。请在设置有效期前检查当地的法规。",
+    "regionHint": "更改礼品卡的地区将同时更改其货币，这可能会影响其货币价值。",
+    "enabledHint": "指定礼品卡是启用还是禁用。",
+    "balance": "余额",
+    "currentBalance": "当前余额",
+    "initialBalance": "初始余额",
+    "personalMessage": "个人信息",
+    "recipient": "收件人"
+  },
+  "customers": {
+    "domain": "顾客",
+    "list": {
+      "noRecordsMessage": "您的顾客将在此处显示。"
+    },
+    "create": {
+      "header": "创建顾客",
+      "hint": "创建一个新的顾客并管理其详细信息。",
+      "successToast": "顾客 {{email}} 创建成功。"
+    },
+    "groups": {
+      "label": "顾客组",
+      "remove": "您确定要将顾客从 \"{{name}}\" 顾客组中移除吗？",
+      "removeMany": "您确定要将顾客从以下顾客组中移除：{{groups}}？",
+      "alreadyAddedTooltip": "该顾客已在此顾客组中。",
+      "list": {
+        "noRecordsMessage": "此顾客不属于任何顾客组。"
+      },
+      "add": {
+        "success": "顾客已添加到：{{groups}}。",
+        "list": {
+          "noRecordsMessage": "请先创建顾客组。"
+        }
+      },
+      "removed": {
+        "success": "顾客已从：{{groups}} 中移除。",
+        "list": {
+          "noRecordsMessage": "请先创建顾客组。"
+        }
+      }
+    },
+    "edit": {
+      "header": "编辑顾客",
+      "emailDisabledTooltip": "已注册的顾客无法更改电子邮件地址。",
+      "successToast": "顾客 {{email}} 更新成功。"
+    },
+    "delete": {
+      "title": "删除顾客",
+      "description": "您即将删除顾客 {{email}}。此操作不可撤销。",
+      "successToast": "顾客 {{email}} 删除成功。"
+    },
+    "fields": {
+      "guest": "游客",
+      "registered": "注册",
+      "groups": "顾客组"
+    },
+    "registered": "已注册",
+    "guest": "游客",
+    "hasAccount": "有账户"
+  },
+  "customerGroups": {
+    "domain": "顾客组",
+    "subtitle": "将顾客组织到不同的组中。组可以有不同的促销和价格。",
+    "create": {
+      "header": "创建顾客组",
+      "hint": "创建一个新的顾客组来细分您的顾客。",
+      "successToast": "顾客组 {{name}} 创建成功。"
+    },
+    "edit": {
+      "header": "编辑顾客组",
+      "successToast": "顾客组 {{name}} 更新成功。"
+    },
+    "delete": {
+      "title": "删除顾客组",
+      "description": "您即将删除顾客组 {{name}}。此操作不可撤销。",
+      "successToast": "顾客组 {{name}} 删除成功。"
+    },
+    "customers": {
+      "alreadyAddedTooltip": "该顾客已被添加到该组。",
+      "add": {
+        "successToast_one": "顾客成功添加到该组。",
+        "successToast_other": "顾客成功添加到该组。",
+        "list": {
+          "noRecordsMessage": "请先创建顾客。"
+        }
+      },
+      "remove": {
+        "title_one": "移除顾客",
+        "title_other": "移除顾客",
+        "description_one": "您即将从顾客组中移除 {{count}} 个顾客。此操作不可撤销。",
+        "description_other": "您即将从顾客组中移除 {{count}} 个顾客。此操作不可撤销。"
+      },
+      "list": {
+        "noRecordsMessage": "该组没有顾客。"
+      }
+    }
+  },
+  "orders": {
+    "domain": "订单",
+    "claim": "索赔",
+    "exchange": "交换",
+    "return": "退货",
+    "cancelWarning": "您即将取消订单 {{id}}。此操作无法撤销。",
+    "onDateFromSalesChannel": "{{date}} 来自 {{salesChannel}}",
+    "list": {
+      "noRecordsMessage": "您的订单将在这里显示。"
+    },
+    "summary": {
+      "requestReturn": "申请退货",
+      "allocateItems": "分配物品",
+      "editOrder": "编辑订单",
+      "editOrderContinue": "继续编辑订单",
+      "inventoryKit": "包含 {{count}} 个库存物品",
+      "itemTotal": "物品总计",
+      "shippingTotal": "运费总计",
+      "discountTotal": "折扣总计",
+      "taxTotalIncl": "税费总计（已包含）",
+      "itemSubtotal": "物品小计",
+      "shippingSubtotal": "运费小计",
+      "discountSubtotal": "折扣小计",
+      "taxTotal": "税费总额"
+    },
+    "transfer": {
+      "title": "转移所有权",
+      "requestSuccess": "订单转移请求已发送至: {{email}}。",
+      "currentOwner": "当前所有者",
+      "newOwner": "新所有者",
+      "currentOwnerDescription": "当前与此订单相关的客户。",
+      "newOwnerDescription": "将此订单转移给的客户。"
+    },
+    "payment": {
+      "title": "支付",
+      "isReadyToBeCaptured": "支付 <0/> 已准备好被捕获。",
+      "totalPaidByCustomer": "客户支付的总额",
+      "capture": "捕获支付",
+      "capture_short": "捕获",
+      "refund": "退款",
+      "markAsPaid": "标记为已支付",
+      "statusLabel": "支付状态",
+      "statusTitle": "支付状态",
+      "status": {
+        "notPaid": "未支付",
+        "authorized": "已授权",
+        "partiallyAuthorized": "部分授权",
+        "awaiting": "待处理",
+        "captured": "已捕获",
+        "partiallyRefunded": "部分退款",
+        "partiallyCaptured": "部分捕获",
+        "refunded": "已退款",
+        "canceled": "已取消",
+        "requiresAction": "需要操作"
+      },
+      "capturePayment": "支付金额 {{amount}} 将被捕获。",
+      "capturePaymentSuccess": "支付金额 {{amount}} 成功捕获",
+      "markAsPaidPayment": "支付金额 {{amount}} 将被标记为已支付。",
+      "markAsPaidPaymentSuccess": "支付金额 {{amount}} 成功标记为已支付",
+      "createRefund": "创建退款",
+      "refundPaymentSuccess": "退款金额 {{amount}} 成功",
+      "createRefundWrongQuantity": "数量应为 1 至 {{number}} 之间的数字",
+      "refundAmount": "退款 {{ amount }}",
+      "paymentLink": "复制支付链接 {{ amount }}",
+      "selectPaymentToRefund": "选择要退款的支付"
+    },
+    "edits": {
+      "title": "编辑订单",
+      "confirm": "确认编辑",
+      "confirmText": "您即将确认订单编辑。此操作无法撤销。",
+      "cancel": "取消编辑",
+      "currentItems": "当前物品",
+      "currentItemsDescription": "调整物品数量或移除。",
+      "addItemsDescription": "您可以向订单中添加新物品。",
+      "addItems": "添加物品",
+      "amountPaid": "已支付金额",
+      "newTotal": "新总额",
+      "differenceDue": "差额应付",
+      "create": "编辑订单",
+      "currentTotal": "当前总额",
+      "noteHint": "为编辑添加内部备注",
+      "cancelSuccessToast": "订单编辑已取消",
+      "createSuccessToast": "订单编辑请求已创建",
+      "activeChangeError": "此订单已有活动更改（退货、索赔、交换等）。请先完成或取消更改后再编辑订单。",
+      "panel": {
+        "title": "订单编辑请求",
+        "titlePending": "订单编辑待处理"
+      },
+      "toast": {
+        "canceledSuccessfully": "订单编辑已取消",
+        "confirmedSuccessfully": "订单编辑已确认"
+      },
+      "validation": {
+        "quantityLowerThanFulfillment": "不能将数量设置为小于或等于已履行的数量"
+      }
+    },
+    "edit": {
+      "email": {
+        "title": "编辑电子邮件",
+        "requestSuccess": "订单电子邮件已更新为 {{email}}。"
+      },
+      "shippingAddress": {
+        "title": "编辑送货地址",
+        "requestSuccess": "订单送货地址已更新。"
+      },
+      "billingAddress": {
+        "title": "编辑账单地址",
+        "requestSuccess": "订单账单地址已更新。"
+      }
+    },
+    "returns": {
+      "create": "创建退货",
+      "confirm": "确认退货",
+      "confirmText": "您即将确认退货。此操作无法撤销。",
+      "inbound": "入库",
+      "outbound": "出库",
+      "sendNotification": "发送通知",
+      "sendNotificationHint": "通知客户关于退货的信息。",
+      "returnTotal": "退货总额",
+      "inboundTotal": "入库总额",
+      "refundAmount": "退款金额",
+      "outstandingAmount": "未结金额",
+      "reason": "原因",
+      "reasonHint": "选择客户要退货的原因。",
+      "note": "备注",
+      "noInventoryLevel": "没有库存等级",
+      "noInventoryLevelDesc": "所选位置没有该物品的库存。可以请求退货，但在为所选位置创建库存之前，不能接收退货。",
+      "noteHint": "如果您想指定某些信息，可以自由输入。",
+      "location": "位置",
+      "locationHint": "选择您想退还物品的地点。",
+      "inboundShipping": "退货运输",
+      "inboundShippingHint": "选择您想使用的运输方式。",
+      "returnableQuantityLabel": "可退数量",
+      "refundableAmountLabel": "可退款金额",
+      "returnRequestedInfo": "已请求退货 {{requestedItemsCount}} 件物品",
+      "returnReceivedInfo": "已接收退货 {{requestedItemsCount}} 件物品",
+      "itemReceived": "物品已接收",
+      "returnRequested": "已请求退货",
+      "damagedItemReceived": "已接收损坏物品",
+      "damagedItemsReturned": "已退还 {{quantity}} 件损坏物品",
+      "activeChangeError": "此订单正在进行活动更改。请先完成或取消更改。",
+      "cancel": {
+        "title": "取消退货",
+        "description": "您确定要取消退货请求吗？"
+      },
+      "placeholders": {
+        "noReturnShippingOptions": {
+          "title": "未找到退货运输选项",
+          "hint": "未为该位置创建退货运输选项。您可以在 <LinkComponent>位置与运输</LinkComponent> 创建一个。"
+        },
+        "outboundShippingOptions": {
+          "title": "未找到出库运输选项",
+          "hint": "未为该位置创建出库运输选项。您可以在 <LinkComponent>位置与运输</LinkComponent> 创建一个。"
+        }
+      },
+      "receive": {
+        "action": "接收物品",
+        "receiveItems": "{{returnType}} {{id}}",
+        "restockAll": "重新库存所有物品",
+        "itemsLabel": "已接收物品",
+        "title": "接收 #{{returnId}} 的物品",
+        "sendNotificationHint": "通知客户关于接收到的退货。",
+        "inventoryWarning": "请注意，我们将根据您上面的输入自动调整库存数量。",
+        "writeOffInputLabel": "有多少物品损坏？",
+        "toast": {
+          "success": "退货接收成功。",
+          "errorLargeValue": "数量大于请求的物品数量。",
+          "errorNegativeValue": "数量不能为负值。",
+          "errorLargeDamagedValue": "损坏物品数量 + 非损坏物品数量超过退货的总物品数量。请减少非损坏物品的数量。"
+        }
+      },
+      "toast": {
+        "canceledSuccessfully": "退货已成功取消",
+        "confirmedSuccessfully": "退货已成功确认"
+      },
+      "panel": {
+        "title": "已启动退货",
+        "description": "有一个未完成的退货请求"
+      }
+    },
+    "claims": {
+      "create": "创建索赔",
+      "confirm": "确认索赔",
+      "confirmText": "您即将确认索赔。此操作无法撤销。",
+      "manage": "管理索赔",
+      "outbound": "出库",
+      "outboundItemAdded": "{{itemsCount}} 件物品通过索赔添加",
+      "outboundTotal": "出库总额",
+      "outboundShipping": "出库运输",
+      "outboundShippingHint": "选择您想使用的运输方式。",
+      "refundAmount": "预计差额",
+      "activeChangeError": "此订单已有活动更改。请完成或取消先前的更改。",
+      "actions": {
+        "cancelClaim": {
+          "successToast": "索赔已成功取消。"
+        }
+      },
+      "cancel": {
+        "title": "取消索赔",
+        "description": "您确定要取消此索赔吗？"
+      },
+      "tooltips": {
+        "onlyReturnShippingOptions": "此列表仅包含退货运输选项。"
+      },
+      "toast": {
+        "canceledSuccessfully": "索赔已成功取消",
+        "confirmedSuccessfully": "索赔已成功确认"
+      },
+      "panel": {
+        "title": "已启动索赔",
+        "description": "有一个未完成的索赔请求"
+      }
+    },
+    "exchanges": {
+      "create": "创建交换",
+      "manage": "管理交换",
+      "confirm": "确认交换",
+      "confirmText": "您即将确认交换。此操作无法撤销。",
+      "outbound": "出库",
+      "outboundItemAdded": "{{itemsCount}} 件物品通过交换添加",
+      "outboundTotal": "出库总额",
+      "outboundShipping": "出库运输",
+      "outboundShippingHint": "选择您想使用的运输方式。",
+      "refundAmount": "预计差额",
+      "activeChangeError": "此订单已有活动更改。请完成或取消先前的更改。",
+      "actions": {
+        "cancelExchange": {
+          "successToast": "交换已成功取消。"
+        }
+      },
+      "cancel": {
+        "title": "取消交换",
+        "description": "您确定要取消此交换吗？"
+      },
+      "tooltips": {
+        "onlyReturnShippingOptions": "此列表仅包含退货运输选项。"
+      },
+      "toast": {
+        "canceledSuccessfully": "交换已成功取消",
+        "confirmedSuccessfully": "交换已成功确认"
+      },
+      "panel": {
+        "title": "已启动交换",
+        "description": "有一个未完成的交换请求"
+      }
+    },
+    "reservations": {
+      "allocatedLabel": "已分配",
+      "notAllocatedLabel": "未分配"
+    },
+    "allocateItems": {
+      "action": "分配物品",
+      "title": "分配订单物品",
+      "locationDescription": "选择您希望从哪个位置进行分配。",
+      "itemsToAllocate": "待分配物品",
+      "itemsToAllocateDesc": "选择您希望分配的物品数量",
+      "search": "搜索物品",
+      "consistsOf": "由 {{num}} 件库存物品组成",
+      "requires": "每个变体需要 {{num}} 件",
+      "toast": {
+        "created": "物品已成功分配"
+      },
+      "error": {
+        "quantityNotAllocated": "存在未分配的物品。"
+      }
+    },
+    "shipment": {
+      "title": "标记履行已发货",
+      "trackingNumber": "追踪号码",
+      "addTracking": "添加追踪号码",
+      "sendNotification": "发送通知",
+      "sendNotificationHint": "通知客户此发货信息。",
+      "toastCreated": "发货创建成功。"
+    },
+    "fulfillment": {
+      "cancelWarning": "您即将取消履行。此操作无法撤销。",
+      "markAsDeliveredWarning": "您即将标记履行为已交付。此操作无法撤销。",
+      "unfulfilledItems": "未履行物品",
+      "statusLabel": "履行状态",
+      "statusTitle": "履行状态",
+      "fulfillItems": "履行物品",
+      "awaitingFulfillmentBadge": "等待履行",
+      "requiresShipping": "需要运输",
+      "number": "履行 #{{number}}",
+      "itemsToFulfill": "待履行物品",
+      "create": "创建履行",
+      "available": "可用",
+      "inStock": "库存中",
+      "markAsShipped": "标记为已发货",
+      "markAsDelivered": "标记为已交付",
+      "itemsToFulfillDesc": "选择要履行的物品和数量",
+      "locationDescription": "选择您希望从哪个位置履行物品。",
+      "sendNotificationHint": "通知客户已创建的履行信息。",
+      "methodDescription": "选择与客户选择的不同运输方式",
+      "error": {
+        "wrongQuantity": "仅有一个物品可供履行",
+        "wrongQuantity_other": "数量应为 1 至 {{number}} 之间的数字",
+        "noItems": "没有待履行的物品。"
+      },
+      "status": {
+        "notFulfilled": "未履行",
+        "partiallyFulfilled": "部分履行",
+        "fulfilled": "已履行",
+        "partiallyShipped": "部分发货",
+        "shipped": "已发货",
+        "delivered": "已交付",
+        "partiallyDelivered": "部分交付",
+        "partiallyReturned": "部分退货",
+        "returned": "已退货",
+        "canceled": "已取消",
+        "requiresAction": "需要操作"
+      },
+      "toast": {
+        "created": "履行创建成功",
+        "canceled": "履行已成功取消",
+        "fulfillmentShipped": "无法取消已发货的履行",
+        "fulfillmentDelivered": "履行已成功标记为交付"
+      },
+      "trackingLabel": "追踪",
+      "shippingFromLabel": "发货地",
+      "itemsLabel": "物品"
+    },
+    "refund": {
+      "title": "创建退款",
+      "sendNotificationHint": "通知客户已创建的退款信息。",
+      "systemPayment": "系统支付",
+      "systemPaymentDesc": "您的一个或多个支付是系统支付。请注意，Medusa 不处理这类支付的捕获和退款。",
+      "error": {
+        "amountToLarge": "不能退款超过原订单金额。",
+        "amountNegative": "退款金额必须为正数。",
+        "reasonRequired": "请选择退款原因。"
+      }
+    },
+    "customer": {
+      "contactLabel": "联系方式",
+      "editEmail": "编辑电子邮件",
+      "transferOwnership": "转移所有权",
+      "editBillingAddress": "编辑账单地址",
+      "editShippingAddress": "编辑收货地址"
+    },
+    "activity": {
+      "header": "活动",
+      "showMoreActivities_one": "显示 {{count}} 个更多活动",
+      "showMoreActivities_other": "显示 {{count}} 个更多活动",
+      "comment": {
+        "label": "评论",
+        "placeholder": "留下评论",
+        "addButtonText": "添加评论",
+        "deleteButtonText": "删除评论"
+      },
+      "from": "从",
+      "to": "到",
+      "events": {
+        "common": {
+          "toReturn": "待退货",
+          "toSend": "待发货"
+        },
+        "placed": {
+          "title": "订单已下单",
+          "fromSalesChannel": "来自 {{salesChannel}}"
+        },
+        "canceled": {
+          "title": "订单已取消"
+        },
+        "payment": {
+          "awaiting": "等待支付",
+          "captured": "支付已成功",
+          "canceled": "支付已取消",
+          "refunded": "支付已退款"
+        },
+        "fulfillment": {
+          "created": "物品已履行",
+          "canceled": "履行已取消",
+          "shipped": "物品已发货",
+          "delivered": "物品已交付",
+          "items_one": "{{count}} 件物品",
+          "items_other": "{{count}} 件物品"
+        },
+        "return": {
+          "created": "退货 #{{returnId}} 已请求",
+          "canceled": "退货 #{{returnId}} 已取消",
+          "received": "退货 #{{returnId}} 已收到",
+          "items_one": "退回 {{count}} 件物品",
+          "items_other": "退回 {{count}} 件物品"
+        },
+        "note": {
+          "comment": "评论",
+          "byLine": "由 {{author}}"
+        },
+        "claim": {
+          "created": "索赔 #{{claimId}} 已请求",
+          "canceled": "索赔 #{{claimId}} 已取消",
+          "itemsInbound": "{{count}} 件待退货物品",
+          "itemsOutbound": "{{count}} 件待发货物品"
+        },
+        "exchange": {
+          "created": "交换 #{{exchangeId}} 已请求",
+          "canceled": "交换 #{{exchangeId}} 已取消",
+          "itemsInbound": "{{count}} 件待退货物品",
+          "itemsOutbound": "{{count}} 件待发货物品"
+        },
+        "edit": {
+          "requested": "订单编辑 #{{editId}} 已请求",
+          "confirmed": "订单编辑 #{{editId}} 已确认"
+        },
+        "transfer": {
+          "requested": "订单转移 #{{transferId}} 已请求",
+          "confirmed": "订单转移 #{{transferId}} 已确认",
+          "declined": "订单转移 #{{transferId}} 已拒绝"
+        },
+        "update_order": {
+          "shipping_address": "收货地址已更新",
+          "billing_address": "账单地址已更新",
+          "email": "电子邮件已更新"
+        }
+      }
+    },
+    "fields": {
+      "displayId": "显示 ID",
+      "refundableAmount": "可退款金额",
+      "returnableQuantity": "可退货数量"
+    }
+  },
+  "draftOrders": {
+    "domain": "草稿订单",
+    "deleteWarning": "您即将删除草稿订单 {{id}}。此操作不可撤销。",
+    "paymentLinkLabel": "支付链接",
+    "cartIdLabel": "购物车 ID",
+    "markAsPaid": {
+      "label": "标记为已支付",
+      "warningTitle": "标记为已支付",
+      "warningDescription": "您即将将草稿订单标记为已支付。此操作不可撤销，并且以后将无法再收款。"
+    },
+    "status": {
+      "open": "打开",
+      "completed": "已完成"
+    },
+    "create": {
+      "createDraftOrder": "创建草稿订单",
+      "createDraftOrderHint": "创建一个新的草稿订单，以便在下单之前管理订单的详细信息。",
+      "chooseRegionHint": "选择地区",
+      "existingItemsLabel": "现有物品",
+      "existingItemsHint": "将现有产品添加到草稿订单。",
+      "customItemsLabel": "自定义物品",
+      "customItemsHint": "将自定义物品添加到草稿订单。",
+      "addExistingItemsAction": "添加现有物品",
+      "addCustomItemAction": "添加自定义物品",
+      "noCustomItemsAddedLabel": "尚未添加自定义物品",
+      "noExistingItemsAddedLabel": "尚未添加现有物品",
+      "chooseRegionTooltip": "首先选择一个地区",
+      "useExistingCustomerLabel": "使用现有客户",
+      "addShippingMethodsAction": "添加配送方式",
+      "unitPriceOverrideLabel": "单价覆盖",
+      "shippingOptionLabel": "配送选项",
+      "shippingOptionHint": "为草稿订单选择配送选项。",
+      "shippingPriceOverrideLabel": "配送价格覆盖",
+      "shippingPriceOverrideHint": "覆盖草稿订单的配送价格。",
+      "sendNotificationLabel": "发送通知",
+      "sendNotificationHint": "当草稿订单创建时，向客户发送通知。"
+    },
+    "validation": {
+      "requiredEmailOrCustomer": "电子邮件或客户是必填项。",
+      "requiredItems": "至少需要一个物品。",
+      "invalidEmail": "电子邮件必须是有效的电子邮件地址。"
+    }
+  },
+  "stockLocations": {
+    "domain": "位置与配送",
+    "list": {
+      "description": "管理您的商店库存位置和配送选项。"
+    },
+    "create": {
+      "header": "创建库存位置",
+      "hint": "库存位置是存储和从中发货的物理地点。",
+      "successToast": "位置 {{name}} 创建成功。"
+    },
+    "edit": {
+      "header": "编辑库存位置",
+      "viewInventory": "查看库存",
+      "successToast": "位置 {{name}} 更新成功。"
+    },
+    "delete": {
+      "confirmation": "您即将删除库存位置 {{name}}。此操作不可撤销。"
+    },
+    "fulfillmentProviders": {
+      "header": "配送服务提供商",
+      "shippingOptionsTooltip": "此下拉菜单仅包括已为该位置启用的服务提供商。如果下拉菜单禁用，请将它们添加到该位置。",
+      "label": "已连接的配送服务提供商",
+      "connectedTo": "已连接 {{count}} 个（共 {{total}} 个）配送服务提供商",
+      "noProviders": "该库存位置未连接任何配送服务提供商。",
+      "action": "连接服务提供商",
+      "successToast": "库存位置的配送服务提供商已成功更新。"
+    },
+    "fulfillmentSets": {
+      "pickup": {
+        "header": "自取"
+      },
+      "shipping": {
+        "header": "配送"
+      },
+      "disable": {
+        "confirmation": "您确定要禁用 {{name}} 吗？这将删除所有相关的服务区域和配送选项，并且无法撤销。",
+        "pickup": "自取已成功禁用。",
+        "shipping": "配送已成功禁用。"
+      },
+      "enable": {
+        "pickup": "自取已成功启用。",
+        "shipping": "配送已成功启用。"
+      }
+    },
+    "sidebar": {
+      "header": "配送配置",
+      "shippingProfiles": {
+        "label": "配送配置文件",
+        "description": "按配送需求对产品进行分组"
+      }
+    },
+    "salesChannels": {
+      "header": "销售渠道",
+      "label": "已连接的销售渠道",
+      "connectedTo": "已连接 {{count}} 个（共 {{total}} 个）销售渠道",
+      "noChannels": "该位置未连接任何销售渠道。",
+      "action": "连接销售渠道",
+      "successToast": "销售渠道已成功更新。"
+    },
+    "shippingOptions": {
+      "create": {
+        "shipping": {
+          "header": "为 {{zone}} 创建配送选项",
+          "hint": "创建新的配送选项，以定义从此位置配送产品的方式。",
+          "label": "配送选项",
+          "successToast": "配送选项 {{name}} 创建成功。"
+        },
+        "returns": {
+          "header": "为 {{zone}} 创建退货选项",
+          "hint": "创建新的退货选项，以定义将产品退还至此位置的方式。",
+          "label": "退货选项",
+          "successToast": "退货选项 {{name}} 创建成功。"
+        },
+        "tabs": {
+          "details": "详细信息",
+          "prices": "价格"
+        },
+        "action": "创建选项"
+      },
+      "delete": {
+        "confirmation": "您即将删除配送选项 {{name}}。此操作不可撤销。",
+        "successToast": "配送选项 {{name}} 删除成功。"
+      },
+      "edit": {
+        "header": "编辑配送选项",
+        "action": "编辑选项",
+        "successToast": "配送选项 {{name}} 更新成功。"
+      },
+      "pricing": {
+        "action": "编辑价格"
+      },
+      "conditionalPrices": {
+        "header": "为 {{name}} 设置条件价格",
+        "description": "根据购物车商品总金额管理此配送选项的条件价格。",
+        "attributes": {
+          "cartItemTotal": "购物车商品总金额"
+        },
+        "summaries": {
+          "range": "如果 <0>{{attribute}}</0> 在 <1>{{gte}}</1> 和 <2>{{lte}}</2> 之间",
+          "greaterThan": "如果 <0>{{attribute}}</0> ≥ <1>{{gte}}</1>",
+          "lessThan": "如果 <0>{{attribute}}</0> ≤ <1>{{lte}}</1>"
+        },
+        "actions": {
+          "addPrice": "添加价格",
+          "manageConditionalPrices": "管理条件价格"
+        },
+        "rules": {
+          "amount": "配送选项价格",
+          "gte": "最低购物车商品总金额",
+          "lte": "最高购物车商品总金额"
+        },
+        "customRules": {
+          "label": "自定义规则",
+          "tooltip": "此条件价格包含无法在仪表盘中管理的规则。",
+          "eq": "购物车商品总金额必须等于",
+          "gt": "购物车商品总金额必须大于",
+          "lt": "购物车商品总金额必须小于"
+        },
+        "errors": {
+          "amountRequired": "配送选项价格为必填项",
+          "minOrMaxRequired": "至少需要提供最低或最高购物车商品总金额",
+          "minGreaterThanMax": "最低购物车商品总金额必须小于或等于最高购物车商品总金额",
+          "duplicateAmount": "每个条件的配送选项价格必须唯一",
+          "overlappingConditions": "所有价格规则的条件必须唯一"
+        }
+      },
+      "fields": {
+        "count": {
+          "shipping_one": "{{count}} 个配送选项",
+          "shipping_other": "{{count}} 个配送选项",
+          "returns_one": "{{count}} 个退货选项",
+          "returns_other": "{{count}} 个退货选项"
+        },
+        "priceType": {
+          "label": "价格类型",
+          "options": {
+            "fixed": {
+              "label": "固定",
+              "hint": "配送选项的价格是固定的，不会根据订单内容变化。"
+            },
+            "calculated": {
+              "label": "计算",
+              "hint": "配送选项的价格由配送服务提供商在结账时计算。"
+            }
+          }
+        },
+        "enableInStore": {
+          "label": "在店内启用",
+          "hint": "是否允许客户在结账时使用此选项。"
+        },
+        "provider": "配送服务提供商",
+        "profile": "配送配置文件"
+      }
+    },
+    "serviceZones": {
+      "create": {
+        "headerPickup": "为 {{location}} 创建自取服务区域",
+        "headerShipping": "为 {{location}} 创建配送服务区域",
+        "action": "创建服务区域",
+        "successToast": "服务区域 {{name}} 创建成功。"
+      },
+      "edit": {
+        "header": "编辑服务区域",
+        "successToast": "服务区域 {{name}} 更新成功。"
+      },
+      "delete": {
+        "confirmation": "您即将删除服务区域 {{name}}。此操作不可撤销。",
+        "successToast": "服务区域 {{name}} 删除成功。"
+      },
+      "manageAreas": {
+        "header": "管理 {{name}} 的区域",
+        "action": "管理区域",
+        "label": "区域",
+        "hint": "选择服务区域覆盖的地理区域。",
+        "successToast": "服务区域 {{name}} 的区域已成功更新。"
+      },
+      "fields": {
+        "noRecords": "没有服务区域可以添加配送选项。",
+        "tip": "服务区域是地理区域的集合。用于限制可用的配送选项仅在定义的地点可用。"
+      }
+    }
+  },
+  "shippingProfile": {
+    "domain": "配送配置文件",
+    "subtitle": "将具有相似配送要求的产品分组到配置文件中。",
+    "create": {
+      "header": "创建配送配置文件",
+      "hint": "创建一个新的配送配置文件，将具有相似配送要求的产品分组到一起。",
+      "successToast": "配送配置文件 {{name}} 创建成功。"
+    },
+    "delete": {
+      "title": "删除配送配置文件",
+      "description": "您即将删除配送配置文件 {{name}}。此操作不可撤销。",
+      "successToast": "配送配置文件 {{name}} 删除成功。"
+    },
+    "tooltip": {
+      "type": "输入配送配置文件类型，例如：重型、超大、仅限货运等。"
+    }
+  },
+  "taxRegions": {
+    "domain": "税区",
+    "list": {
+      "hint": "管理不同国家和地区客户购物时所收取的税费。"
+    },
+    "delete": {
+      "confirmation": "您即将删除一个税区。此操作不可撤销。",
+      "successToast": "税区删除成功。"
+    },
+    "create": {
+      "header": "创建税区",
+      "hint": "创建一个新的税区，定义特定国家的税率。",
+      "errors": {
+        "rateIsRequired": "创建默认税率时需要提供税率。",
+        "nameIsRequired": "创建默认税率时需要提供名称。"
+      },
+      "successToast": "税区创建成功。"
+    },
+    "province": {
+      "header": "省",
+      "create": {
+        "header": "创建省税区",
+        "hint": "创建一个新的税区，定义特定省份的税率。"
+      }
+    },
+    "state": {
+      "header": "州",
+      "create": {
+        "header": "创建州税区",
+        "hint": "创建一个新的税区，定义特定州的税率。"
+      }
+    },
+    "stateOrTerritory": {
+      "header": "州或领土",
+      "create": {
+        "header": "创建州/领土税区",
+        "hint": "创建一个新的税区，定义特定州/领土的税率。"
+      }
+    },
+    "county": {
+      "header": "县",
+      "create": {
+        "header": "创建县税区",
+        "hint": "创建一个新的税区，定义特定县的税率。"
+      }
+    },
+    "region": {
+      "header": "地区",
+      "create": {
+        "header": "创建地区税区",
+        "hint": "创建一个新的税区，定义特定地区的税率。"
+      }
+    },
+    "department": {
+      "header": "部门",
+      "create": {
+        "header": "创建部门税区",
+        "hint": "创建一个新的税区，定义特定部门的税率。"
+      }
+    },
+    "territory": {
+      "header": "领土",
+      "create": {
+        "header": "创建领土税区",
+        "hint": "创建一个新的税区，定义特定领土的税率。"
+      }
+    },
+    "prefecture": {
+      "header": "省级行政区",
+      "create": {
+        "header": "创建省级行政区税区",
+        "hint": "创建一个新的税区，定义特定省级行政区的税率。"
+      }
+    },
+    "district": {
+      "header": "区",
+      "create": {
+        "header": "创建区税区",
+        "hint": "创建一个新的税区，定义特定区的税率。"
+      }
+    },
+    "governorate": {
+      "header": "省",
+      "create": {
+        "header": "创建省税区",
+        "hint": "创建一个新的税区，定义特定省的税率。"
+      }
+    },
+    "canton": {
+      "header": "州",
+      "create": {
+        "header": "创建州税区",
+        "hint": "创建一个新的税区，定义特定州的税率。"
+      }
+    },
+    "emirate": {
+      "header": "酋长国",
+      "create": {
+        "header": "创建酋长国税区",
+        "hint": "创建一个新的税区，定义特定酋长国的税率。"
+      }
+    },
+    "sublevel": {
+      "header": "子级",
+      "create": {
+        "header": "创建子级税区",
+        "hint": "创建一个新的税区，定义特定子级的税率。"
+      }
+    },
+    "taxOverrides": {
+      "header": "覆盖",
+      "create": {
+        "header": "创建覆盖",
+        "hint": "创建一个税率，覆盖选定条件下的默认税率。"
+      },
+      "edit": {
+        "header": "编辑覆盖",
+        "hint": "编辑覆盖选定条件下的默认税率。"
+      }
+    },
+    "taxRates": {
+      "create": {
+        "header": "创建税率",
+        "hint": "创建一个新的税率，定义某个地区的税率。",
+        "successToast": "税率创建成功。"
+      },
+      "edit": {
+        "header": "编辑税率",
+        "hint": "编辑税率，定义某个地区的税率。",
+        "successToast": "税率更新成功。"
+      },
+      "delete": {
+        "confirmation": "您即将删除税率 {{name}}。此操作不可撤销。",
+        "successToast": "税率删除成功。"
+      }
+    },
+    "fields": {
+      "isCombinable": {
+        "label": "可组合",
+        "hint": "此税率是否可以与税区的默认税率组合。",
+        "true": "可组合",
+        "false": "不可组合"
+      },
+      "defaultTaxRate": {
+        "label": "默认税率",
+        "tooltip": "此地区的默认税率。例如，某个国家或地区的标准增值税（VAT）税率。",
+        "action": "创建默认税率"
+      },
+      "taxRate": "税率",
+      "taxCode": "税码",
+      "targets": {
+        "label": "目标",
+        "hint": "选择此税率适用的目标。",
+        "options": {
+          "product": "产品",
+          "productCollection": "产品集合",
+          "productTag": "产品标签",
+          "productType": "产品类型",
+          "customerGroup": "客户群体"
+        },
+        "operators": {
+          "in": "在",
+          "on": "在",
+          "and": "和"
+        },
+        "placeholders": {
+          "product": "搜索产品",
+          "productCollection": "搜索产品集合",
+          "productTag": "搜索产品标签",
+          "productType": "搜索产品类型",
+          "customerGroup": "搜索客户群体"
+        },
+        "tags": {
+          "product": "产品",
+          "productCollection": "产品集合",
+          "productTag": "产品标签",
+          "productType": "产品类型",
+          "customerGroup": "客户群体"
+        },
+        "modal": {
+          "header": "添加目标"
+        },
+        "values_one": "{{count}} 个值",
+        "values_other": "{{count}} 个值",
+        "numberOfTargets_one": "{{count}} 个目标",
+        "numberOfTargets_other": "{{count}} 个目标",
+        "additionalValues_one": "和其他 {{count}} 个值",
+        "additionalValues_other": "和其他 {{count}} 个值",
+        "action": "添加目标"
+      },
+      "sublevels": {
+        "labels": {
+          "province": "省",
+          "state": "州",
+          "region": "地区",
+          "stateOrTerritory": "州/领土",
+          "department": "部门",
+          "county": "县",
+          "territory": "领土",
+          "prefecture": "省级行政区",
+          "district": "区",
+          "governorate": "省",
+          "emirate": "酋长国",
+          "canton": "州",
+          "sublevel": "子级代码"
+        },
+        "placeholders": {
+          "province": "选择省",
+          "state": "选择州",
+          "region": "选择地区",
+          "stateOrTerritory": "选择州/领土",
+          "department": "选择部门",
+          "county": "选择县",
+          "territory": "选择领土",
+          "prefecture": "选择省级行政区",
+          "district": "选择区",
+          "governorate": "选择省",
+          "emirate": "选择酋长国",
+          "canton": "选择州"
+        },
+        "tooltips": {
+          "sublevel": "输入子级税区的ISO 3166-2代码。",
+          "notPartOfCountry": "{{province}} 似乎不属于 {{country}}。请再次检查是否正确。"
+        },
+        "alert": {
+          "header": "子级地区在此税区中被禁用",
+          "description": "子级地区在此地区默认被禁用。您可以启用它们以创建如省、州或领土等子级地区。",
+          "action": "启用子级地区"
+        }
+      },
+      "noDefaultRate": {
+        "label": "没有默认税率",
+        "tooltip": "此税区没有默认税率。如果有标准税率，例如某个国家的增值税，请将其添加到此地区。"
+      }
+    }
+  },
+  "promotions": {
+    "domain": "促销",
+    "sections": {
+      "details": "促销详情"
+    },
+    "tabs": {
+      "template": "类型",
+      "details": "详情",
+      "campaign": "活动"
+    },
+    "fields": {
+      "type": "类型",
+      "value_type": "值类型",
+      "value": "值",
+      "campaign": "活动",
+      "method": "方式",
+      "allocation": "分配",
+      "addCondition": "添加条件",
+      "clearAll": "清空所有",
+      "amount": {
+        "tooltip": "选择货币代码以启用设置金额"
+      },
+      "conditions": {
+        "rules": {
+          "title": "谁可以使用此代码？",
+          "description": "哪些客户可以使用促销代码？如果不设置，所有客户都可以使用促销代码。"
+        },
+        "target-rules": {
+          "title": "该促销将应用于哪些商品？",
+          "description": "促销将应用于符合以下条件的商品。"
+        },
+        "buy-rules": {
+          "title": "购物车中需要有哪些商品才能解锁促销？",
+          "description": "如果这些条件满足，我们将在目标商品上启用促销。"
+        }
+      }
+    },
+    "tooltips": {
+      "campaignType": "必须在促销中选择货币代码以设置消费预算。"
+    },
+    "errors": {
+      "requiredField": "必填字段",
+      "promotionTabError": "请修复促销选项卡中的错误后再继续"
+    },
+    "toasts": {
+      "promotionCreateSuccess": "促销（{{code}}）已成功创建。"
+    },
+    "create": {},
+    "edit": {
+      "title": "编辑促销详情",
+      "rules": {
+        "title": "编辑使用条件"
+      },
+      "target-rules": {
+        "title": "编辑商品条件"
+      },
+      "buy-rules": {
+        "title": "编辑购买规则"
+      }
+    },
+    "campaign": {
+      "header": "活动",
+      "edit": {
+        "header": "编辑活动",
+        "successToast": "活动促销已成功更新。"
+      },
+      "actions": {
+        "goToCampaign": "进入活动"
+      }
+    },
+    "campaign_currency": {
+      "tooltip": "这是促销的货币。请在详情选项卡中更改。"
+    },
+    "form": {
+      "required": "必填",
+      "and": "和",
+      "selectAttribute": "选择属性",
+      "campaign": {
+        "existing": {
+          "title": "现有活动",
+          "description": "将促销添加到现有活动中。",
+          "placeholder": {
+            "title": "没有现有活动",
+            "desc": "您可以创建一个来追踪多个促销并设置预算限制。"
+          }
+        },
+        "new": {
+          "title": "新活动",
+          "description": "为此促销创建一个新活动。"
+        },
+        "none": {
+          "title": "没有活动",
+          "description": "继续进行而不与活动关联促销"
+        }
+      },
+      "status": {
+        "title": "状态"
+      },
+      "method": {
+        "label": "方式",
+        "code": {
+          "title": "促销代码",
+          "description": "客户在结账时必须输入此代码"
+        },
+        "automatic": {
+          "title": "自动",
+          "description": "客户在结账时将看到此促销"
+        }
+      },
+      "max_quantity": {
+        "title": "最大数量",
+        "description": "此促销适用于商品的最大数量。"
+      },
+      "type": {
+        "standard": {
+          "title": "标准",
+          "description": "标准促销"
+        },
+        "buyget": {
+          "title": "买 X 得 Y",
+          "description": "购买 X 件商品，得到 Y 件商品"
+        }
+      },
+      "allocation": {
+        "each": {
+          "title": "每个",
+          "description": "每个商品应用价值"
+        },
+        "across": {
+          "title": "跨越",
+          "description": "跨商品应用价值"
+        }
+      },
+      "code": {
+        "title": "代码",
+        "description": "客户在结账时输入的促销代码。"
+      },
+      "value": {
+        "title": "促销值"
+      },
+      "value_type": {
+        "fixed": {
+          "title": "促销值",
+          "description": "折扣金额。例如：100"
+        },
+        "percentage": {
+          "title": "促销值",
+          "description": "折扣百分比。例如：8%"
+        }
+      }
+    },
+    "deleteWarning": "您即将删除促销 {{code}}。此操作不可撤销。",
+    "createPromotionTitle": "创建促销",
+    "type": "促销类型",
+    "conditions": {
+      "add": "添加条件",
+      "list": {
+        "noRecordsMessage": "添加条件以限制促销适用于哪些商品。"
+      }
+    }
+  },
+  "campaigns": {
+    "domain": "活动",
+    "details": "活动详情",
+    "status": {
+      "active": "激活",
+      "expired": "过期",
+      "scheduled": "计划中"
+    },
+    "delete": {
+      "title": "您确定吗？",
+      "description": "您即将删除活动 '{{name}}'。此操作不可撤销。",
+      "successToast": "活动 '{{name}}' 已成功创建。"
+    },
+    "edit": {
+      "header": "编辑活动",
+      "description": "编辑活动的详细信息。",
+      "successToast": "活动 '{{name}}' 已成功更新。"
+    },
+    "configuration": {
+      "header": "配置",
+      "edit": {
+        "header": "编辑活动配置",
+        "description": "编辑活动的配置。",
+        "successToast": "活动配置已成功更新。"
+      }
+    },
+    "create": {
+      "title": "创建活动",
+      "description": "创建促销活动。",
+      "hint": "创建一个促销活动。",
+      "header": "创建活动",
+      "successToast": "活动 '{{name}}' 已成功创建。"
+    },
+    "fields": {
+      "name": "名称",
+      "identifier": "标识符",
+      "start_date": "开始日期",
+      "end_date": "结束日期",
+      "total_spend": "预算支出",
+      "total_used": "预算使用",
+      "budget_limit": "预算限制",
+      "campaign_id": {
+        "hint": "仅显示与促销具有相同货币代码的活动。"
+      }
+    },
+    "budget": {
+      "create": {
+        "hint": "为活动创建预算。",
+        "header": "活动预算"
+      },
+      "details": "活动预算",
+      "fields": {
+        "type": "类型",
+        "currency": "货币",
+        "limit": "限制",
+        "used": "已使用"
+      },
+      "type": {
+        "spend": {
+          "title": "支出",
+          "description": "设置所有促销使用的总折扣金额限制。"
+        },
+        "usage": {
+          "title": "使用",
+          "description": "设置促销使用次数的限制。"
+        }
+      },
+      "edit": {
+        "header": "编辑活动预算"
+      }
+    },
+    "promotions": {
+      "remove": {
+        "title": "从活动中移除促销",
+        "description": "您即将从活动中移除 {{count}} 个促销。此操作不可撤销。"
+      },
+      "alreadyAdded": "此促销已添加到活动中。",
+      "alreadyAddedDiffCampaign": "此促销已添加到其他活动中 ({{name}})。",
+      "currencyMismatch": "促销和活动的货币不匹配",
+      "toast": {
+        "success": "成功将 {{count}} 个促销添加到活动中"
+      },
+      "add": {
+        "list": {
+          "noRecordsMessage": "请先创建一个促销。"
+        }
+      },
+      "list": {
+        "noRecordsMessage": "该活动中没有促销。"
+      }
+    },
+    "deleteCampaignWarning": "您即将删除活动 {{name}}。此操作不可撤销。",
+    "totalSpend": "<0>{{amount}}</0> <1>{{currency}}</1>"
+  },
+  "priceLists": {
+    "domain": "价格清单",
+    "subtitle": "为特定条件创建销售或覆盖价格。",
+    "delete": {
+      "confirmation": "您即将删除价格清单 {{title}}。此操作不可撤销。",
+      "successToast": "价格清单 {{title}} 已成功删除。"
+    },
+    "create": {
+      "header": "创建价格清单",
+      "subheader": "创建一个新的价格清单以管理产品的价格。",
+      "tabs": {
+        "details": "详情",
+        "products": "产品",
+        "prices": "价格"
+      },
+      "successToast": "价格清单 {{title}} 已成功创建。",
+      "products": {
+        "list": {
+          "noRecordsMessage": "请先创建一个产品。"
+        }
+      }
+    },
+    "edit": {
+      "header": "编辑价格清单",
+      "successToast": "价格清单 {{title}} 已成功更新。"
+    },
+    "configuration": {
+      "header": "配置",
+      "edit": {
+        "header": "编辑价格清单配置",
+        "description": "编辑价格清单的配置。",
+        "successToast": "价格清单配置已成功更新。"
+      }
+    },
+    "products": {
+      "header": "产品",
+      "actions": {
+        "addProducts": "添加产品",
+        "editPrices": "编辑价格"
+      },
+      "delete": {
+        "confirmation_one": "您即将删除价格清单中 {{count}} 个产品的价格。此操作不可撤销。",
+        "confirmation_other": "您即将删除价格清单中 {{count}} 个产品的价格。此操作不可撤销。",
+        "successToast_one": "成功删除了 {{count}} 个产品的价格。",
+        "successToast_other": "成功删除了 {{count}} 个产品的价格。"
+      },
+      "add": {
+        "successToast": "价格已成功添加到价格清单中。"
+      },
+      "edit": {
+        "successToast": "价格已成功更新。"
+      }
+    },
+    "fields": {
+      "priceOverrides": {
+        "label": "价格覆盖",
+        "header": "价格覆盖"
+      },
+      "status": {
+        "label": "状态",
+        "options": {
+          "active": "激活",
+          "draft": "草稿",
+          "expired": "过期",
+          "scheduled": "计划中"
+        }
+      },
+      "type": {
+        "label": "类型",
+        "hint": "选择您要创建的价格清单类型。",
+        "options": {
+          "sale": {
+            "label": "促销",
+            "description": "促销价格是产品的临时价格变动。"
+          },
+          "override": {
+            "label": "覆盖",
+            "description": "覆盖通常用于创建特定客户的价格。"
+          }
+        }
+      },
+      "startsAt": {
+        "label": "价格清单有开始日期吗？",
+        "hint": "安排价格清单在未来生效。"
+      },
+      "endsAt": {
+        "label": "价格清单有到期日期吗？",
+        "hint": "安排价格清单在未来失效。"
+      },
+      "customerAvailability": {
+        "header": "选择客户组",
+        "label": "客户可用性",
+        "hint": "选择价格清单适用的客户组。",
+        "placeholder": "搜索客户组",
+        "attribute": "客户组"
+      }
+    }
+  },
+  "profile": {
+    "domain": "个人资料",
+    "manageYourProfileDetails": "管理您的个人资料详情。",
+    "fields": {
+      "languageLabel": "语言",
+      "usageInsightsLabel": "使用情况分析"
+    },
+    "edit": {
+      "header": "编辑个人资料",
+      "languageHint": "您希望在管理后台使用的语言。此操作不会更改您商店的语言。",
+      "languagePlaceholder": "选择语言",
+      "usageInsightsHint": "分享使用情况分析，帮助我们改进 Medusa。您可以在我们的 <0>文档</0> 中查看更多关于我们收集内容和使用方式的信息。"
+    },
+    "toast": {
+      "edit": "个人资料更改已保存"
+    }
+  },
+  "users": {
+    "domain": "用户",
+    "editUser": "编辑用户",
+    "inviteUser": "邀请用户",
+    "inviteUserHint": "邀请新用户加入您的商店。",
+    "sendInvite": "发送邀请",
+    "pendingInvites": "待处理的邀请",
+    "deleteInviteWarning": "您即将删除对 {{email}} 的邀请。此操作不可撤销。",
+    "resendInvite": "重新发送邀请",
+    "copyInviteLink": "复制邀请链接",
+    "expiredOnDate": "于 {{date}} 到期",
+    "validFromUntil": "有效期从 <0>{{from}}</0> 到 <1>{{until}}</1>",
+    "acceptedOnDate": "于 {{date}} 被接受",
+    "inviteStatus": {
+      "accepted": "已接受",
+      "pending": "待处理",
+      "expired": "已过期"
+    },
+    "roles": {
+      "admin": "管理员",
+      "developer": "开发者",
+      "member": "成员"
+    },
+    "deleteUserWarning": "您即将删除用户 {{name}}。此操作不可撤销。",
+    "invite": "邀请"
+  },
+  "store": {
+    "domain": "商店",
+    "manageYourStoresDetails": "管理商店的详情",
+    "editStore": "编辑商店",
+    "defaultCurrency": "默认货币",
+    "defaultRegion": "默认区域",
+    "swapLinkTemplate": "交换链接模板",
+    "paymentLinkTemplate": "支付链接模板",
+    "inviteLinkTemplate": "邀请链接模板",
+    "currencies": "货币",
+    "addCurrencies": "添加货币",
+    "enableTaxInclusivePricing": "启用含税定价",
+    "disableTaxInclusivePricing": "禁用含税定价",
+    "removeCurrencyWarning_one": "您即将从商店中删除 {{count}} 种货币。在继续之前，请确保已删除所有使用该货币的价格。",
+    "removeCurrencyWarning_other": "您即将从商店中删除 {{count}} 种货币。在继续之前，请确保已删除所有使用这些货币的价格。",
+    "currencyAlreadyAdded": "该货币已添加到您的商店。",
+    "edit": {
+      "header": "编辑商店"
+    },
+    "toast": {
+      "update": "商店已成功更新",
+      "currenciesUpdated": "货币已成功更新",
+      "currenciesRemoved": "成功从商店中移除货币",
+      "updatedTaxInclusivitySuccessfully": "成功更新含税定价"
+    }
+  },
+  "regions": {
+    "domain": "区域",
+    "subtitle": "区域是您销售产品的地区。它可以包含多个国家，并有不同的税率、提供商和货币。",
+    "createRegion": "创建区域",
+    "createRegionHint": "为一组国家管理税率和提供商。",
+    "addCountries": "添加国家",
+    "editRegion": "编辑区域",
+    "countriesHint": "添加此区域包含的国家。",
+    "deleteRegionWarning": "您即将删除区域 {{name}}。此操作不可撤销。",
+    "removeCountriesWarning_one": "您即将从区域中移除 {{count}} 个国家。此操作不可撤销。",
+    "removeCountriesWarning_other": "您即将从区域中移除 {{count}} 个国家。此操作不可撤销。",
+    "removeCountryWarning": "您即将从区域中移除国家 {{name}}。此操作不可撤销。",
+    "automaticTaxesHint": "启用后，税费将在结账时根据发货地址计算。",
+    "taxInclusiveHint": "启用后，区域内的价格将包括税费。",
+    "providersHint": "添加此区域可用的支付提供商。",
+    "shippingOptions": "运送选项",
+    "deleteShippingOptionWarning": "您即将删除运送选项 {{name}}。此操作不可撤销。",
+    "return": "退货",
+    "outbound": "发货",
+    "priceType": "价格类型",
+    "flatRate": "固定费率",
+    "calculated": "计算费率",
+    "list": {
+      "noRecordsMessage": "为您销售的地区创建一个区域。"
+    },
+    "toast": {
+      "delete": "区域已成功删除",
+      "edit": "区域编辑已保存",
+      "create": "区域已成功创建",
+      "countries": "区域国家已成功更新"
+    },
+    "shippingOption": {
+      "createShippingOption": "创建运送选项",
+      "createShippingOptionHint": "为区域创建一个新的运送选项。",
+      "editShippingOption": "编辑运送选项",
+      "fulfillmentMethod": "履约方式",
+      "type": {
+        "outbound": "发货",
+        "outboundHint": "如果您正在为向客户发送产品创建运送选项，请使用此选项。",
+        "return": "退货",
+        "returnHint": "如果您正在为客户退还产品创建运送选项，请使用此选项。"
+      },
+      "priceType": {
+        "label": "价格类型",
+        "flatRate": "固定费率",
+        "calculated": "计算费率"
+      },
+      "availability": {
+        "adminOnly": "仅管理员",
+        "adminOnlyHint": "启用后，运送选项仅在管理后台可用，而在商店前端不可用。"
+      },
+      "taxInclusiveHint": "启用后，运送选项的价格将包括税费。",
+      "requirements": {
+        "label": "要求",
+        "hint": "指定运送选项的要求。"
+      }
+    }
+  },
+  "taxes": {
+    "domain": "税务区域",
+    "domainDescription": "管理您的税务区域",
+    "countries": {
+      "taxCountriesHint": "税务设置适用于列出的国家。"
+    },
+    "settings": {
+      "editTaxSettings": "编辑税务设置",
+      "taxProviderLabel": "税务提供商",
+      "systemTaxProviderLabel": "系统税务提供商",
+      "calculateTaxesAutomaticallyLabel": "自动计算税费",
+      "calculateTaxesAutomaticallyHint": "启用时，税率将自动计算并应用到购物车中。禁用时，税费必须在结账时手动计算。手动计算税费推荐用于与第三方税务提供商一起使用。",
+      "applyTaxesOnGiftCardsLabel": "对礼品卡应用税费",
+      "applyTaxesOnGiftCardsHint": "启用时，税费将在结账时应用于礼品卡。在某些国家/地区，税务法规要求在购买礼品卡时应用税费。",
+      "defaultTaxRateLabel": "默认税率",
+      "defaultTaxCodeLabel": "默认税务编码"
+    },
+    "defaultRate": {
+      "sectionTitle": "默认税率"
+    },
+    "taxRate": {
+      "sectionTitle": "税率",
+      "createTaxRate": "创建税率",
+      "createTaxRateHint": "为区域创建新的税率。",
+      "deleteRateDescription": "您即将删除税率 {{name}}。此操作不可撤销。",
+      "editTaxRate": "编辑税率",
+      "editRateAction": "编辑税率",
+      "editOverridesAction": "编辑覆盖项",
+      "editOverridesTitle": "编辑税率覆盖项",
+      "editOverridesHint": "指定税率的覆盖项。",
+      "deleteTaxRateWarning": "您即将删除税率 {{name}}。此操作不可撤销。",
+      "productOverridesLabel": "产品覆盖项",
+      "productOverridesHint": "指定税率的产品覆盖项。",
+      "addProductOverridesAction": "添加产品覆盖项",
+      "productTypeOverridesLabel": "产品类型覆盖项",
+      "productTypeOverridesHint": "指定税率的产品类型覆盖项。",
+      "addProductTypeOverridesAction": "添加产品类型覆盖项",
+      "shippingOptionOverridesLabel": "运送选项覆盖项",
+      "shippingOptionOverridesHint": "指定税率的运送选项覆盖项。",
+      "addShippingOptionOverridesAction": "添加运送选项覆盖项",
+      "productOverridesHeader": "产品",
+      "productTypeOverridesHeader": "产品类型",
+      "shippingOptionOverridesHeader": "运送选项"
+    }
+  },
+  "locations": {
+    "domain": "位置",
+    "editLocation": "编辑位置",
+    "addSalesChannels": "添加销售渠道",
+    "noLocationsFound": "未找到位置",
+    "selectLocations": "选择存储该商品的位置。",
+    "deleteLocationWarning": "您即将删除位置 {{name}}。此操作不可撤销。",
+    "removeSalesChannelsWarning_one": "您即将从该位置移除 {{count}} 个销售渠道。",
+    "removeSalesChannelsWarning_other": "您即将从该位置移除 {{count}} 个销售渠道。",
+    "toast": {
+      "create": "位置创建成功",
+      "update": "位置更新成功",
+      "removeChannel": "销售渠道移除成功"
+    }
+  },
+  "reservations": {
+    "domain": "预留",
+    "subtitle": "管理库存商品的预留数量。",
+    "deleteWarning": "您即将删除一个预留。此操作不可撤销。"
+  },
+  "salesChannels": {
+    "domain": "销售渠道",
+    "subtitle": "管理您销售产品的线上和线下渠道。",
+    "createSalesChannel": "创建销售渠道",
+    "createSalesChannelHint": "创建一个新的销售渠道来销售您的产品。",
+    "enabledHint": "指定是否启用销售渠道。",
+    "removeProductsWarning_one": "您即将从 {{sales_channel}} 移除 {{count}} 个产品。",
+    "removeProductsWarning_other": "您即将从 {{sales_channel}} 移除 {{count}} 个产品。",
+    "addProducts": "添加产品",
+    "editSalesChannel": "编辑销售渠道",
+    "productAlreadyAdded": "该产品已被添加到销售渠道。",
+    "deleteSalesChannelWarning": "您即将删除销售渠道 {{name}}。此操作不可撤销。",
+    "toast": {
+      "create": "销售渠道创建成功",
+      "update": "销售渠道更新成功",
+      "delete": "销售渠道删除成功"
+    },
+    "tooltip": {
+      "cannotDeleteDefault": "无法删除默认销售渠道"
+    },
+    "products": {
+      "list": {
+        "noRecordsMessage": "销售渠道中没有产品。"
+      },
+      "add": {
+        "list": {
+          "noRecordsMessage": "请先创建产品。"
+        }
+      }
+    }
+  },
+  "apiKeyManagement": {
+    "domain": {
+      "publishable": "可发布的 API 密钥",
+      "secret": "秘密 API 密钥"
+    },
+    "subtitle": {
+      "publishable": "管理用于 storefront 的 API 密钥，以限制请求的作用域到特定的销售渠道。",
+      "secret": "管理用于在管理应用程序中认证管理员用户的 API 密钥。"
+    },
+    "status": {
+      "active": "激活",
+      "revoked": "已撤销"
+    },
+    "type": {
+      "publishable": "可发布的",
+      "secret": "秘密"
+    },
+    "create": {
+      "createPublishableHeader": "创建可发布的 API 密钥",
+      "createPublishableHint": "创建一个新的可发布 API 密钥，以限制请求的作用域到特定的销售渠道。",
+      "createSecretHeader": "创建秘密 API 密钥",
+      "createSecretHint": "创建一个新的秘密 API 密钥，以便作为认证管理员用户访问 Medusa API。",
+      "secretKeyCreatedHeader": "秘密密钥已创建",
+      "secretKeyCreatedHint": "您的新秘密密钥已生成。现在复制并安全存储它。它只会显示一次。",
+      "copySecretTokenSuccess": "秘密密钥已复制到剪贴板。",
+      "copySecretTokenFailure": "复制秘密密钥到剪贴板失败。",
+      "successToast": "API 密钥创建成功。"
+    },
+    "edit": {
+      "header": "编辑 API 密钥",
+      "description": "编辑 API 密钥的标题。",
+      "successToast": "API 密钥 {{title}} 更新成功。"
+    },
+    "salesChannels": {
+      "title": "添加销售渠道",
+      "description": "添加 API 密钥应该限制的销售渠道。",
+      "successToast_one": "{{count}} 个销售渠道已成功添加到 API 密钥。",
+      "successToast_other": "{{count}} 个销售渠道已成功添加到 API 密钥。",
+      "alreadyAddedTooltip": "该销售渠道已添加到 API 密钥。",
+      "list": {
+        "noRecordsMessage": "可发布的 API 密钥作用域内没有销售渠道。"
+      }
+    },
+    "delete": {
+      "warning": "您即将删除 API 密钥 {{title}}。此操作不可撤销。",
+      "successToast": "API 密钥 {{title}} 删除成功。"
+    },
+    "revoke": {
+      "warning": "您即将撤销 API 密钥 {{title}}。此操作不可撤销。",
+      "successToast": "API 密钥 {{title}} 撤销成功。"
+    },
+    "addSalesChannels": {
+      "list": {
+        "noRecordsMessage": "请先创建销售渠道。"
+      }
+    },
+    "removeSalesChannel": {
+      "warning": "您即将从 API 密钥中移除销售渠道 {{name}}。此操作不可撤销。",
+      "warningBatch_one": "您即将从 API 密钥中移除 {{count}} 个销售渠道。此操作不可撤销。",
+      "warningBatch_other": "您即将从 API 密钥中移除 {{count}} 个销售渠道。此操作不可撤销。",
+      "successToast": "销售渠道已成功从 API 密钥中移除。",
+      "successToastBatch_one": "{{count}} 个销售渠道已成功从 API 密钥中移除。",
+      "successToastBatch_other": "{{count}} 个销售渠道已成功从 API 密钥中移除。"
+    },
+    "actions": {
+      "revoke": "撤销 API 密钥",
+      "copy": "复制 API 密钥",
+      "copySuccessToast": "API 密钥已复制到剪贴板。"
+    },
+    "table": {
+      "lastUsedAtHeader": "最后使用时间",
+      "createdAtHeader": "撤销时间"
+    },
+    "fields": {
+      "lastUsedAtLabel": "最后使用时间",
+      "revokedByLabel": "撤销者",
+      "revokedAtLabel": "撤销时间",
+      "createdByLabel": "创建者"
+    }
+  },
+  "returnReasons": {
+    "domain": "退货原因",
+    "subtitle": "管理退货商品的原因。",
+    "calloutHint": "管理用于分类退货的原因。",
+    "editReason": "编辑退货原因",
+    "create": {
+      "header": "添加退货原因",
+      "subtitle": "指定最常见的退货原因。",
+      "hint": "创建一个新的退货原因以分类退货。",
+      "successToast": "退货原因 {{label}} 创建成功。"
+    },
+    "edit": {
+      "header": "编辑退货原因",
+      "subtitle": "编辑退货原因的值。",
+      "successToast": "退货原因 {{label}} 更新成功。"
+    },
+    "delete": {
+      "confirmation": "您即将删除退货原因 {{label}}。此操作不可撤销。",
+      "successToast": "退货原因 {{label}} 删除成功。"
+    },
+    "fields": {
+      "value": {
+        "label": "值",
+        "placeholder": "wrong_size",
+        "tooltip": "值应该是退货原因的唯一标识符。"
+      },
+      "label": {
+        "label": "标签",
+        "placeholder": "错误尺寸"
+      },
+      "description": {
+        "label": "描述",
+        "placeholder": "顾客收到了错误的尺寸"
+      }
+    }
+  },
+  "login": {
+    "forgotPassword": "忘记密码？- <0>重置</0>",
+    "title": "欢迎来到 Medusa",
+    "hint": "登录以访问帐户区域"
+  },
+  "invite": {
+    "title": "欢迎来到 Medusa",
+    "hint": "在下面创建您的帐户",
+    "backToLogin": "返回登录",
+    "createAccount": "创建帐户",
+    "alreadyHaveAccount": "已经有帐户？- <0>登录</0>",
+    "emailTooltip": "您的电子邮件无法更改。如果您想使用其他电子邮件，必须重新发送邀请。",
+    "invalidInvite": "邀请无效或已过期。",
+    "successTitle": "您的帐户已注册",
+    "successHint": "立即开始使用 Medusa 管理后台。",
+    "successAction": "开始使用 Medusa 管理后台",
+    "invalidTokenTitle": "您的邀请令牌无效",
+    "invalidTokenHint": "尝试请求一个新的邀请链接。",
+    "passwordMismatch": "密码不匹配",
+    "toast": {
+      "accepted": "邀请成功接受"
+    }
+  },
+  "resetPassword": {
+    "title": "重置密码",
+    "hint": "在下面输入您的电子邮件，我们将发送重置密码的说明。",
+    "email": "电子邮件",
+    "sendResetInstructions": "发送重置说明",
+    "backToLogin": "<0>返回登录</0>",
+    "newPasswordHint": "在下面选择一个新密码。",
+    "invalidTokenTitle": "您的重置令牌无效",
+    "invalidTokenHint": "请尝试请求一个新的重置链接。",
+    "expiredTokenTitle": "您的重置令牌已过期",
+    "goToResetPassword": "前往重置密码",
+    "resetPassword": "重置密码",
+    "newPassword": "新密码",
+    "repeatNewPassword": "重复新密码",
+    "tokenExpiresIn": "令牌将在 <0>{{time}}</0> 分钟后过期",
+    "successfulRequestTitle": "成功向您发送了电子邮件",
+    "successfulRequest": "我们已经向您发送了一封电子邮件，您可以使用该邮件重置密码。如果几分钟后未收到，请检查垃圾邮件文件夹。",
+    "successfulResetTitle": "密码重置成功",
+    "successfulReset": "请在登录页面登录。",
+    "passwordMismatch": "密码不匹配",
+    "invalidLinkTitle": "您的重置链接无效",
+    "invalidLinkHint": "请尝试再次重置密码。"
+  },
+  "workflowExecutions": {
+    "domain": "工作流",
+    "subtitle": "查看并跟踪您在 Medusa 应用中的工作流执行。",
+    "transactionIdLabel": "交易 ID",
+    "workflowIdLabel": "工作流 ID",
+    "progressLabel": "进度",
+    "stepsCompletedLabel_one": "{{completed}} / {{count}} 步骤",
+    "stepsCompletedLabel_other": "{{completed}} / {{count}} 步骤",
+    "list": {
+      "noRecordsMessage": "尚未执行任何工作流。"
+    },
+    "history": {
+      "sectionTitle": "历史",
+      "runningState": "运行中...",
+      "awaitingState": "等待中",
+      "failedState": "失败",
+      "skippedState": "跳过",
+      "skippedFailureState": "跳过（失败）",
+      "definitionLabel": "定义",
+      "outputLabel": "输出",
+      "compensateInputLabel": "补偿输入",
+      "revertedLabel": "已恢复",
+      "errorLabel": "错误"
+    },
+    "state": {
+      "done": "完成",
+      "failed": "失败",
+      "reverted": "已恢复",
+      "invoking": "调用中",
+      "compensating": "补偿中",
+      "notStarted": "未开始"
+    },
+    "transaction": {
+      "state": {
+        "waitingToCompensate": "等待补偿"
+      }
+    },
+    "step": {
+      "state": {
+        "skipped": "跳过",
+        "skippedFailure": "跳过（失败）",
+        "dormant": "休眠",
+        "timeout": "超时"
+      }
+    }
+  },
+  "productTypes": {
+    "domain": "产品类型",
+    "subtitle": "将您的产品按类型进行分类。",
+    "create": {
+      "header": "创建产品类型",
+      "hint": "创建一个新的产品类型来对您的产品进行分类。",
+      "successToast": "产品类型 {{value}} 已成功创建。"
+    },
+    "edit": {
+      "header": "编辑产品类型",
+      "successToast": "产品类型 {{value}} 已成功更新。"
+    },
+    "delete": {
+      "confirmation": "您即将删除产品类型 {{value}}。此操作无法撤销。",
+      "successToast": "产品类型 {{value}} 已成功删除。"
+    },
+    "fields": {
+      "value": "值"
+    }
+  },
+  "productTags": {
+    "domain": "产品标签",
+    "create": {
+      "header": "创建产品标签",
+      "subtitle": "创建一个新的产品标签来对您的产品进行分类。",
+      "successToast": "产品标签 {{value}} 已成功创建。"
+    },
+    "edit": {
+      "header": "编辑产品标签",
+      "subtitle": "编辑产品标签的值。",
+      "successToast": "产品标签 {{value}} 已成功更新。"
+    },
+    "delete": {
+      "confirmation": "您即将删除产品标签 {{value}}。此操作无法撤销。",
+      "successToast": "产品标签 {{value}} 已成功删除。"
+    },
+    "fields": {
+      "value": "值"
+    }
+  },
+  "notifications": {
+    "domain": "通知",
+    "emptyState": {
+      "title": "没有通知",
+      "description": "您当前没有任何通知，但一旦有通知，它们将显示在这里。"
+    },
+    "accessibility": {
+      "description": "有关 Medusa 活动的通知将在此列出。"
+    }
+  },
+  "errors": {
+    "serverError": "服务器错误 - 请稍后再试。",
+    "invalidCredentials": "错误的电子邮件或密码"
+  },
+  "statuses": {
+    "scheduled": "已安排",
+    "expired": "已过期",
+    "active": "活动中",
+    "enabled": "已启用",
+    "disabled": "已禁用"
+  },
+  "labels": {
+    "productVariant": "产品变体",
+    "prices": "价格",
+    "available": "可用",
+    "inStock": "库存中",
+    "added": "已添加",
+    "removed": "已移除",
+    "from": "从",
+    "to": "到"
+  },
+  "fields": {
+    "amount": "金额",
+    "refundAmount": "退款金额",
+    "name": "姓名",
+    "default": "默认",
+    "lastName": "姓",
+    "firstName": "名",
+    "title": "标题",
+    "customTitle": "自定义标题",
+    "manageInventory": "管理库存",
+    "inventoryKit": "有库存套件",
+    "inventoryItems": "库存项目",
+    "inventoryItem": "库存项目",
+    "requiredQuantity": "所需数量",
+    "description": "描述",
+    "email": "电子邮件",
+    "password": "密码",
+    "repeatPassword": "重复密码",
+    "confirmPassword": "确认密码",
+    "newPassword": "新密码",
+    "repeatNewPassword": "重复新密码",
+    "categories": "分类",
+    "shippingMethod": "运输方式",
+    "configurations": "配置",
+    "conditions": "条件",
+    "category": "类别",
+    "collection": "集合",
+    "discountable": "可折扣",
+    "handle": "处理",
+    "subtitle": "副标题",
+    "by": "由",
+    "item": "项目",
+    "qty": "数量",
+    "limit": "限制",
+    "tags": "标签",
+    "type": "类型",
+    "reason": "原因",
+    "none": "无",
+    "all": "所有",
+    "search": "搜索",
+    "percentage": "百分比",
+    "sales_channels": "销售渠道",
+    "customer_groups": "客户组",
+    "product_tags": "产品标签",
+    "product_types": "产品类型",
+    "product_collections": "产品集合",
+    "status": "状态",
+    "code": "代码",
+    "value": "值",
+    "disabled": "禁用",
+    "dynamic": "动态",
+    "normal": "普通",
+    "years": "年",
+    "months": "月",
+    "days": "天",
+    "hours": "小时",
+    "minutes": "分钟",
+    "totalRedemptions": "总兑换次数",
+    "countries": "国家",
+    "paymentProviders": "支付提供商",
+    "refundReason": "退款原因",
+    "fulfillmentProviders": "履行提供商",
+    "fulfillmentProvider": "履行提供商",
+    "providers": "提供商",
+    "availability": "可用性",
+    "inventory": "库存",
+    "optional": "可选",
+    "note": "备注",
+    "automaticTaxes": "自动税收",
+    "taxInclusivePricing": "含税定价",
+    "currency": "货币",
+    "address": "地址",
+    "address2": "公寓、套房等",
+    "city": "城市",
+    "postalCode": "邮政编码",
+    "country": "国家",
+    "state": "州",
+    "province": "省",
+    "company": "公司",
+    "phone": "电话",
+    "metadata": "元数据",
+    "selectCountry": "选择国家",
+    "products": "产品",
+    "variants": "变体",
+    "orders": "订单",
+    "account": "账户",
+    "total": "订单总计",
+    "paidTotal": "已支付总额",
+    "totalExclTax": "税前总额",
+    "subtotal": "小计",
+    "shipping": "运费",
+    "outboundShipping": "发货运费",
+    "returnShipping": "退货运费",
+    "tax": "税费",
+    "created": "创建",
+    "key": "键",
+    "customer": "客户",
+    "date": "日期",
+    "order": "订单",
+    "fulfillment": "履行",
+    "provider": "提供商",
+    "payment": "支付",
+    "items": "项目",
+    "salesChannel": "销售渠道",
+    "region": "地区",
+    "discount": "折扣",
+    "role": "角色",
+    "sent": "已发送",
+    "salesChannels": "销售渠道",
+    "product": "产品",
+    "createdAt": "创建时间",
+    "updatedAt": "更新时间",
+    "revokedAt": "撤销时间",
+    "true": "是",
+    "false": "否",
+    "giftCard": "礼品卡",
+    "tag": "标签",
+    "dateIssued": "发放日期",
+    "issuedDate": "发放日期",
+    "expiryDate": "到期日期",
+    "price": "价格",
+    "priceTemplate": "价格 {{regionOrCurrency}}",
+    "height": "高度",
+    "width": "宽度",
+    "length": "长度",
+    "weight": "重量",
+    "midCode": "MID 代码",
+    "hsCode": "HS 代码",
+    "ean": "EAN",
+    "upc": "UPC",
+    "inventoryQuantity": "库存数量",
+    "barcode": "条形码",
+    "countryOfOrigin": "原产国",
+    "material": "材质",
+    "thumbnail": "缩略图",
+    "sku": "SKU",
+    "managedInventory": "托管库存",
+    "allowBackorder": "允许缺货订购",
+    "inStock": "有库存",
+    "location": "位置",
+    "quantity": "数量",
+    "variant": "变体",
+    "id": "ID",
+    "parent": "父项",
+    "minSubtotal": "最小小计",
+    "maxSubtotal": "最大小计",
+    "shippingProfile": "运输配置",
+    "summary": "摘要",
+    "details": "详情",
+    "label": "标签",
+    "rate": "税率",
+    "requiresShipping": "需要运输",
+    "unitPrice": "单价",
+    "startDate": "开始日期",
+    "endDate": "结束日期",
+    "draft": "草稿",
+    "values": "值"
+  },
+  "dateTime": {
+    "years_one": "年",
+    "years_other": "年",
+    "months_one": "月",
+    "months_other": "月",
+    "weeks_one": "周",
+    "weeks_other": "周",
+    "days_one": "天",
+    "days_other": "天",
+    "hours_one": "小时",
+    "hours_other": "小时",
+    "minutes_one": "分钟",
+    "minutes_other": "分钟",
+    "seconds_one": "秒",
+    "seconds_other": "秒"
+  }
+}

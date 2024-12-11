@@ -9,6 +9,7 @@ import ptBR from "./ptBR.json"
 import th from "./th.json"
 import tr from "./tr.json"
 import uk from "./uk.json"
+import zh from "./zh.json"
 
 export default {
   de: {
@@ -43,5 +44,8 @@ export default {
   },
   uk: {
     translation: uk,
+  },
+  zh: {
+    translation: zh,
   },
 }
