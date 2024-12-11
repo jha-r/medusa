@@ -1,6 +1,6 @@
 import { Migration } from "@mikro-orm/migrations"
 
-export class Migration20241210051937 extends Migration {
+export class Migration20241211074630 extends Migration {
   async up(): Promise<void> {
     this.addSql(
       'alter table if exists "customer_group_customer" drop constraint if exists "customer_group_customer_customer_group_id_foreign";'
@@ -34,6 +34,7 @@ export class Migration20241210051937 extends Migration {
     this.addSql(
       'alter table if exists "customer_group_customer" add constraint "customer_group_customer_customer_id_foreign" foreign key ("customer_id") references "customer" ("id") on update cascade on delete cascade;'
     )
+
     this.addSql(
       'CREATE INDEX IF NOT EXISTS "IDX_customer_group_customer_customer_group_id" ON "customer_group_customer" (customer_group_id) WHERE deleted_at IS NULL;'
     )
@@ -43,13 +44,6 @@ export class Migration20241210051937 extends Migration {
   }
 
   async down(): Promise<void> {
-    this.addSql(
-      'alter table if exists "customer_group_customer" drop constraint if exists "customer_group_customer_customer_id_foreign";'
-    )
-    this.addSql(
-      'alter table if exists "customer_group_customer" drop constraint if exists "customer_group_customer_customer_group_id_foreign";'
-    )
-
     this.addSql('drop index if exists "IDX_customer_deleted_at";')
 
     this.addSql('drop index if exists "IDX_customer_address_deleted_at";')
@@ -69,10 +63,10 @@ export class Migration20241210051937 extends Migration {
       'alter table if exists "customer_group_customer" drop column if exists "deleted_at";'
     )
     this.addSql(
-      'alter table if exists "customer_group_customer" add constraint "customer_group_customer_customer_id_foreign" foreign key ("customer_id") references "customer" ("id") on delete cascade;'
+      'alter table if exists "customer_group_customer" add constraint "customer_group_customer_customer_group_id_foreign" foreign key ("customer_group_id") references "customer_group" ("id") on delete cascade;'
     )
     this.addSql(
-      'alter table if exists "customer_group_customer" add constraint "customer_group_customer_customer_group_id_foreign" foreign key ("customer_group_id") references "customer_group" ("id") on delete cascade;'
+      'alter table if exists "customer_group_customer" add constraint "customer_group_customer_customer_id_foreign" foreign key ("customer_id") references "customer" ("id") on delete cascade;'
     )
     this.addSql(
       'create index if not exists "IDX_customer_group_customer_group_id" on "customer_group_customer" ("customer_group_id");'

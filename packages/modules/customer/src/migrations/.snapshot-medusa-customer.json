@@ -617,34 +617,7 @@
         }
       ],
       "checks": [],
-      "foreignKeys": {
-        "customer_group_customer_customer_id_foreign": {
-          "constraintName": "customer_group_customer_customer_id_foreign",
-          "columnNames": [
-            "customer_id"
-          ],
-          "localTableName": "public.customer_group_customer",
-          "referencedColumnNames": [
-            "id"
-          ],
-          "referencedTableName": "public.customer",
-          "deleteRule": "cascade",
-          "updateRule": "cascade"
-        },
-        "customer_group_customer_customer_group_id_foreign": {
-          "constraintName": "customer_group_customer_customer_group_id_foreign",
-          "columnNames": [
-            "customer_group_id"
-          ],
-          "localTableName": "public.customer_group_customer",
-          "referencedColumnNames": [
-            "id"
-          ],
-          "referencedTableName": "public.customer_group",
-          "deleteRule": "cascade",
-          "updateRule": "cascade"
-        }
-      }
+      "foreignKeys": {}
     }
   ]
 }
