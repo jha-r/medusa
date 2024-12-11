@@ -101,32 +101,27 @@ export const LocationEditFulfillmentProvidersForm = ({
   const { mutateAsync, isPending: isMutating } =
     useUpdateStockLocationFulfillmentProviders(location.id)
 
-  const handleSubmit = form.handleSubmit(
-    async (data) => {
-      const originalIds = location.fulfillment_providers?.map((sc) => sc.id)
+  const handleSubmit = form.handleSubmit(async (data) => {
+    const originalIds = location.fulfillment_providers?.map((sc) => sc.id)
 
-      const arr = data.fulfillment_providers ?? []
+    const arr = data.fulfillment_providers ?? []
 
-      await mutateAsync(
-        {
-          add: arr.filter((i) => !originalIds?.includes(i)),
-          remove: originalIds?.filter((i) => !arr.includes(i)),
+    await mutateAsync(
+      {
+        add: arr.filter((i) => !originalIds?.includes(i)),
+        remove: originalIds?.filter((i) => !arr.includes(i)),
+      },
+      {
+        onSuccess: ({ stock_location }) => {
+          toast.success(t("stockLocations.fulfillmentProviders.successToast"))
+          handleSuccess(`/settings/locations/${stock_location.id}`)
         },
-        {
-          onSuccess: ({ stock_location }) => {
-            toast.success(t("stockLocations.fulfillmentProviders.successToast"))
-            handleSuccess(`/settings/locations/${stock_location.id}`)
-          },
-          onError: (e) => {
-            toast.error(e.message)
-          },
-        }
-      )
-    },
-    (e) => {
-      console.log("error", e)
-    }
-  )
+        onError: (e) => {
+          toast.error(e.message)
+        },
+      }
+    )
+  })
 
   if (isError) {
     throw error
