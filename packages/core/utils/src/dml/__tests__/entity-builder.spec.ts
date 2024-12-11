@@ -1496,6 +1496,7 @@ describe("Entity builder", () => {
           columnType: "numeric",
           name: "rate",
           fieldName: "rate",
+          serializer: Number,
           nullable: false,
           getter: false,
           setter: false,

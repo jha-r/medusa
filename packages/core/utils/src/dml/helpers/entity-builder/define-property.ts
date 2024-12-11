@@ -280,6 +280,31 @@ export function defineProperty(
   }
 
   /**
+   * Handling serial property separately to set the column type
+   */
+  if (field.dataType.name === "float") {
+    Property({
+      columnType: "numeric",
+      type: "number",
+      nullable: field.nullable,
+      fieldName: field.fieldName,
+      /**
+       * Applying number serializer to convert value back to a
+       * JavaScript number
+       */
+      serializer: Number,
+      /**
+       * MikroORM does not ignore undefined values for default when generating
+       * the database schema SQL. Conditionally add it here to prevent undefined
+       * from being set as default value in SQL.
+       */
+      ...(isDefined(field.defaultValue) && { default: field.defaultValue }),
+    })(MikroORMEntity.prototype, field.fieldName)
+
+    return
+  }
+
+  /**
    * Define rest of properties
    */
   const columnType = COLUMN_TYPES[field.dataType.name]
