@@ -164,6 +164,11 @@ export function prepareLineItemData(data: PrepareLineItemDataInput) {
     lineItem.cart_id = cartId
   }
 
+  // If there are still no unit price after checking the variant and item, we reject the request
+  if (!lineItem.unit_price) {
+    throw new Error(`Unit price missing on line item: ${item?.title}`)
+  }
+
   return lineItem
 }
 

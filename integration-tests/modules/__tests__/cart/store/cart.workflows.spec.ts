@@ -1410,7 +1410,7 @@ medusaIntegrationTestRunner({
                 variant_id: product.variants[0].id,
                 quantity: 1,
                 unit_price: 5000,
-                title: "Test item",
+                title: "Test variant",
               },
             ],
           })
@@ -1730,7 +1730,7 @@ medusaIntegrationTestRunner({
               unit_price: 4000,
               is_custom_price: true,
               quantity: 2,
-              title: "Test item",
+              title: "Test variant",
             })
           )
         })

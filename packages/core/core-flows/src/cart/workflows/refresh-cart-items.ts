@@ -75,7 +75,7 @@ export const refreshCartItemsWorkflow = createWorkflow(
 
     const lineItems = transform({ cart, variants }, ({ cart, variants }) => {
       const items = cart.items.map((item) => {
-        const variant = variants.find((v) => v.id === item.variant_id)!
+        const variant = (variants ?? []).find((v) => v.id === item.variant_id)!
 
         const input: PrepareLineItemDataInput = {
           item,

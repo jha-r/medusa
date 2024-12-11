@@ -139,7 +139,9 @@ export const createCartWorkflow = createWorkflow(
 
     const lineItems = transform({ input, variants }, (data) => {
       const items = (data.input.items ?? []).map((item) => {
-        const variant = data.variants.find((v) => v.id === item.variant_id)!
+        const variant = (data.variants ?? []).find(
+          (v) => v.id === item.variant_id
+        )!
 
         const input: PrepareLineItemDataInput = {
           item,
@@ -153,6 +155,13 @@ export const createCartWorkflow = createWorkflow(
           input.unitPrice = variant.calculated_price?.calculated_amount
           input.isTaxInclusive =
             variant.calculated_price?.is_calculated_price_tax_inclusive
+        }
+
+        if (!input.unitPrice) {
+          throw new MedusaError(
+            MedusaError.Types.INVALID_DATA,
+            `Unit price missing on line item: ${item.title}`
+          )
         }
 
         return prepareLineItemData(input)
