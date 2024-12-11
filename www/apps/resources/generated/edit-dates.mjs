@@ -5688,5 +5688,6 @@ export const generatedEditDates = {
   "references/types/DmlTypes/types/types.DmlTypes.KnownDataTypes/page.mdx": "2024-12-10T14:54:55.434Z",
   "references/types/DmlTypes/types/types.DmlTypes.RelationshipTypes/page.mdx": "2024-12-10T14:54:55.435Z",
   "app/recipes/commerce-automation/restock-notification/page.mdx": "2024-12-11T08:47:27.471Z",
-  "app/troubleshooting/workflow-errors/page.mdx": "2024-12-11T08:44:36.598Z"
+  "app/troubleshooting/workflow-errors/page.mdx": "2024-12-11T08:44:36.598Z",
+  "app/commerce-modules/fulfillment/calculate-shipping-options/page.mdx": "2024-12-11T14:23:30.199Z"
 }

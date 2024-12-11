@@ -236,6 +236,10 @@ export const filesMap = [
     "pathname": "/commerce-modules/customer"
   },
   {
+    "filePath": "/www/apps/resources/app/commerce-modules/fulfillment/calculate-shipping-options/page.mdx",
+    "pathname": "/commerce-modules/fulfillment/calculate-shipping-options"
+  },
+  {
     "filePath": "/www/apps/resources/app/commerce-modules/fulfillment/concepts/page.mdx",
     "pathname": "/commerce-modules/fulfillment/concepts"
   },

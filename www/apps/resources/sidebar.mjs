@@ -575,6 +575,11 @@ export const sidebar = sidebarAttachHrefCommonOptions([
                 path: "/references/fulfillment/provider",
                 title: "Create Fulfillment Provider Module",
               },
+              {
+                type: "link",
+                path: "/references/fulfillment/provider",
+                title: "Calculate Shipping Price in Provider",
+              },
             ],
           },
           {
