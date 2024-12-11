@@ -15,7 +15,7 @@ import {
 import ts, { SyntaxKind, VariableStatement } from "typescript"
 import { WorkflowManager, WorkflowDefinition } from "@medusajs/orchestration"
 import Helper from "./utils/helper"
-import { isWorkflow, isWorkflowStep } from "utils"
+import { findReflectionInNamespaces, isWorkflow, isWorkflowStep } from "utils"
 import { StepType } from "./types"
 
 type ParsedStep = {
@@ -68,6 +68,10 @@ class WorkflowsPlugin {
    * @param context - The project's context.
    */
   handleResolve(context: Context) {
+    const isEnabled = this.app.options.getValue("enableWorkflowsPlugins")
+    if (!isEnabled) {
+      return
+    }
     for (const reflection of context.project.getReflectionsByKind(
       ReflectionKind.All
     )) {
@@ -84,6 +88,7 @@ class WorkflowsPlugin {
 
         if (
           !initializer ||
+          !initializer.arguments ||
           (!ts.isArrowFunction(initializer.arguments[1]) &&
             !ts.isFunctionExpression(initializer.arguments[1]))
         ) {
@@ -248,8 +253,10 @@ class WorkflowsPlugin {
           workflowName: workflowVarName,
         })
       } else {
-        const initializerReflection =
-          context.project.getChildByName(initializerName)
+        const initializerReflection = findReflectionInNamespaces(
+          context.project,
+          initializerName
+        )
 
         if (
           !initializerReflection ||

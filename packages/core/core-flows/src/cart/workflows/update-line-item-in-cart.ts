@@ -1,29 +1,18 @@
 import { UpdateLineItemInCartWorkflowInputDTO } from "@medusajs/framework/types"
-import { CartWorkflowEvents, isDefined, MedusaError } from "@medusajs/framework/utils"
+import { isDefined, MedusaError } from "@medusajs/framework/utils"
 import {
   createWorkflow,
-  parallelize,
   transform,
   when,
   WorkflowData,
-  WorkflowResponse,
 } from "@medusajs/framework/workflows-sdk"
-import { emitEventStep } from "../../common/steps/emit-event"
 import { useRemoteQueryStep } from "../../common/steps/use-remote-query"
 import { updateLineItemsStepWithSelector } from "../../line-item/steps"
-import { refreshCartShippingMethodsStep } from "../steps"
 import { validateCartStep } from "../steps/validate-cart"
 import { validateVariantPricesStep } from "../steps/validate-variant-prices"
-import {
-  cartFieldsForRefreshSteps,
-  productVariantsFields,
-} from "../utils/fields"
+import { productVariantsFields } from "../utils/fields"
 import { confirmVariantInventoryWorkflow } from "./confirm-variant-inventory"
-import { refreshPaymentCollectionForCartWorkflow } from "./refresh-payment-collection"
-import { updateCartPromotionsWorkflow } from "./update-cart-promotions"
-
-// TODO: The UpdateLineItemsWorkflow are missing the following steps:
-// - Validate shipping methods for new items (fulfillment module)
+import { refreshCartItemsWorkflow } from "./refresh-cart-items"
 
 export const updateLineItemInCartWorkflowId = "update-line-item-in-cart"
 /**
@@ -112,35 +101,10 @@ export const updateLineItemInCartWorkflow = createWorkflow(
       }
     })
 
-    const result = updateLineItemsStepWithSelector(lineItemUpdate)
+    updateLineItemsStepWithSelector(lineItemUpdate)
 
-    const cart = useRemoteQueryStep({
-      entry_point: "cart",
-      fields: cartFieldsForRefreshSteps,
-      variables: { id: input.cart.id },
-      list: false,
-    }).config({ name: "refetch–cart" })
-
-    refreshCartShippingMethodsStep({ cart })
-
-    updateCartPromotionsWorkflow.runAsStep({
-      input: {
-        cart_id: input.cart.id,
-      },
+    refreshCartItemsWorkflow.runAsStep({
+      input: { cart_id: input.cart.id },
     })
-
-    parallelize(
-      refreshPaymentCollectionForCartWorkflow.runAsStep({
-        input: { cart_id: input.cart.id },
-      }),
-      emitEventStep({
-        eventName: CartWorkflowEvents.UPDATED,
-        data: { id: input.cart.id },
-      })
-    )
-
-    const updatedItem = transform({ result }, (data) => data.result?.[0])
-
-    return new WorkflowResponse(updatedItem)
   }
 )
