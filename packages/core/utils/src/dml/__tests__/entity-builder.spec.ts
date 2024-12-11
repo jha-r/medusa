@@ -1493,7 +1493,7 @@ describe("Entity builder", () => {
         rate: {
           reference: "scalar",
           type: "number",
-          columnType: "numeric",
+          columnType: "real",
           name: "rate",
           fieldName: "rate",
           serializer: Number,

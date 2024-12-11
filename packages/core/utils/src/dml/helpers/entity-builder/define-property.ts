@@ -33,7 +33,7 @@ const COLUMN_TYPES: {
   dateTime: "timestamptz",
   number: "integer",
   bigNumber: "numeric",
-  float: "numeric",
+  float: "real",
   serial: "number",
   text: "text",
   json: "jsonb",
@@ -284,7 +284,7 @@ export function defineProperty(
    */
   if (field.dataType.name === "float") {
     Property({
-      columnType: "numeric",
+      columnType: "real",
       type: "number",
       nullable: field.nullable,
       fieldName: field.fieldName,
