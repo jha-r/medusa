@@ -2,8 +2,8 @@ import { model } from "@medusajs/framework/utils"
 import CampaignBudget from "./campaign-budget"
 import Promotion from "./promotion"
 
-const Campaign_ = model
-  .define<any, any>(
+const Campaign = model
+  .define(
     { name: "Campaign", tableName: "promotion_campaign" },
     {
       id: model.id({ prefix: "procamp" }).primaryKey(),
@@ -13,7 +13,7 @@ const Campaign_ = model
       starts_at: model.dateTime().nullable(),
       ends_at: model.dateTime().nullable(),
       budget: model
-        .hasOne(() => CampaignBudget, {
+        .hasOne<() => typeof CampaignBudget>(() => CampaignBudget, {
           mappedBy: "campaign",
         })
         .nullable(),
@@ -33,4 +33,4 @@ const Campaign_ = model
     },
   ])
 
-export default Campaign_
+export default Campaign
