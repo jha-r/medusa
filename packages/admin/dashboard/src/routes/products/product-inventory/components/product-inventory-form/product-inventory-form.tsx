@@ -1,9 +1,14 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { HttpTypes } from "@medusajs/types"
 import { Button } from "@medusajs/ui"
+import { useMemo } from "react"
 import { DefaultValues, useForm } from "react-hook-form"
+import { useTranslation } from "react-i18next"
 import { DataGrid } from "../../../../../components/data-grid"
-import { RouteFocusModal } from "../../../../../components/modals"
+import {
+  RouteFocusModal,
+  useRouteModal,
+} from "../../../../../components/modals"
 import { useProductInventoryColumns } from "../../hooks/use-product-inventory-columns"
 import {
   ProductInventoryInventoryItemSchema,
@@ -12,7 +17,10 @@ import {
   ProductVariantLocationSchema,
 } from "../../schema"
 import { ProductVariantInventoryItemLink } from "../../types"
-import { isProductVariantWithInventoryPivot } from "../../utils"
+import {
+  getDisabledInventoryRows,
+  isProductVariantWithInventoryPivot,
+} from "../../utils"
 
 type ProductInventoryFormProps = {
   variants: HttpTypes.AdminProductVariant[]
@@ -23,9 +31,8 @@ export const ProductInventoryForm = ({
   variants,
   locations,
 }: ProductInventoryFormProps) => {
-  console.log(variants)
-
-  console.log("defaultValues", getDefaultValue(variants as any, locations))
+  const { t } = useTranslation()
+  const { setCloseOnEscape } = useRouteModal()
 
   const form = useForm<ProductInventorySchema>({
     // TODO: Update ProductVariant type to include inventory_items
@@ -33,7 +40,11 @@ export const ProductInventoryForm = ({
     resolver: zodResolver(ProductInventorySchema),
   })
 
-  const columns = useProductInventoryColumns(locations)
+  const disabled = useMemo(
+    () => getDisabledInventoryRows(variants as any),
+    [variants]
+  )
+  const columns = useProductInventoryColumns(locations, disabled)
 
   return (
     <RouteFocusModal.Form form={form}>
@@ -44,14 +55,19 @@ export const ProductInventoryForm = ({
           columns={columns}
           data={variants}
           getSubRows={getSubRows}
+          onEditingChange={(editing) => setCloseOnEscape(!editing)}
         />
       </RouteFocusModal.Body>
       <RouteFocusModal.Footer>
         <div className="flex items-center justify-end gap-2">
           <RouteFocusModal.Close asChild>
-            <Button variant="secondary">Cancel</Button>
+            <Button variant="secondary" size="small" type="button">
+              {t("actions.cancel")}
+            </Button>
           </RouteFocusModal.Close>
-          <Button>Save</Button>
+          <Button type="submit" size="small">
+            {t("actions.save")}
+          </Button>
         </div>
       </RouteFocusModal.Footer>
     </RouteFocusModal.Form>

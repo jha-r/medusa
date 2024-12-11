@@ -16,7 +16,7 @@ export const DataGridReadonlyCell = <TData, TValue = any>({
 
   return (
     <div className="bg-ui-bg-subtle txt-compact-small text-ui-fg-subtle flex size-full cursor-not-allowed items-center justify-between overflow-hidden px-4 py-2.5 outline-none">
-      <span className="truncate">{children}</span>
+      <div className="flex-1 truncate">{children}</div>
       <DataGridRowErrorIndicator rowErrors={rowErrors} />
     </div>
   )

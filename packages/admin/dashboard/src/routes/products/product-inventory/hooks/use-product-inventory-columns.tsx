@@ -1,11 +1,13 @@
+import { InformationCircle } from "@medusajs/icons"
 import { HttpTypes } from "@medusajs/types"
-import { useMemo } from "react"
-import { Thumbnail } from "../../../../components/common/thumbnail"
+import { Tooltip } from "@medusajs/ui"
+import { useCallback, useMemo } from "react"
 import { createDataGridHelper } from "../../../../components/data-grid"
 import {
   DataGridNumberCell,
   DataGridReadOnlyCell,
 } from "../../../../components/data-grid/components"
+import { DataGridDuplicateCell } from "../../../../components/data-grid/components/data-grid-duplicate-cell"
 import { ProductInventorySchema } from "../schema"
 import { ProductVariantInventoryItemLink } from "../types"
 import { isProductVariant } from "../utils"
@@ -15,9 +17,41 @@ const helper = createDataGridHelper<
   ProductInventorySchema
 >()
 
+type DisabledItem = { id: string; title: string; sku: string }
+type DisabledResult =
+  | {
+      isDisabled: true
+      item: DisabledItem
+    }
+  | {
+      isDisabled: false
+      item: undefined
+    }
+
 export const useProductInventoryColumns = (
-  locations: HttpTypes.AdminStockLocation[] = []
+  locations: HttpTypes.AdminStockLocation[] = [],
+  disabled: Record<string, DisabledItem> = {}
 ) => {
+  const getIsDisabled = useCallback(
+    (item: ProductVariantInventoryItemLink): DisabledResult => {
+      const disabledItem = disabled[item.inventory_item_id]
+      const isDisabled = !!disabledItem && disabledItem.id !== item.variant_id
+
+      if (!isDisabled) {
+        return {
+          isDisabled: false,
+          item: undefined,
+        }
+      }
+
+      return {
+        isDisabled,
+        item: disabledItem,
+      }
+    },
+    [disabled]
+  )
+
   return useMemo(
     () => [
       helper.column({
@@ -35,14 +69,33 @@ export const useProductInventoryColumns = (
             )
           }
 
+          const { isDisabled, item: disabledItem } = getIsDisabled(item)
+
+          if (isDisabled) {
+            return (
+              <DataGridReadOnlyCell context={context}>
+                <div className="flex size-full items-center justify-between gap-x-2">
+                  <span
+                    title={item.inventory.title || undefined}
+                    className="opacity-30"
+                  >
+                    {item.inventory.title || "-"}
+                  </span>
+                  <Tooltip
+                    content={`This inventory item is already editable under ${
+                      disabledItem.title
+                    }${disabledItem.sku ? ` (${disabledItem.sku})` : ""}`}
+                  >
+                    <InformationCircle />
+                  </Tooltip>
+                </div>
+              </DataGridReadOnlyCell>
+            )
+          }
+
           return (
             <DataGridReadOnlyCell context={context}>
-              <div className="flex items-center gap-x-1">
-                <Thumbnail src={item.inventory.thumbnail} />
-                <span title={item.inventory.title || undefined}>
-                  {item.inventory.title || "-"}
-                </span>
-              </div>
+              {item.inventory.title || "-"}
             </DataGridReadOnlyCell>
           )
         },
@@ -59,6 +112,16 @@ export const useProductInventoryColumns = (
             return (
               <DataGridReadOnlyCell context={context}>
                 {item.sku || "-"}
+              </DataGridReadOnlyCell>
+            )
+          }
+
+          const { isDisabled } = getIsDisabled(item)
+
+          if (isDisabled) {
+            return (
+              <DataGridReadOnlyCell context={context}>
+                <span className="opacity-30">{item.inventory.sku || "-"}</span>
               </DataGridReadOnlyCell>
             )
           }
@@ -83,6 +146,12 @@ export const useProductInventoryColumns = (
               return null
             }
 
+            const { isDisabled, item: disabledItem } = getIsDisabled(item)
+
+            if (isDisabled) {
+              return `variants.${disabledItem.id}.inventory_items.${item.inventory_item_id}.locations.${location.id}.quantity` as const
+            }
+
             return `variants.${item.variant_id}.inventory_items.${item.inventory_item_id}.locations.${location.id}.quantity` as const
           },
           type: "number",
@@ -93,11 +162,25 @@ export const useProductInventoryColumns = (
               return <DataGridReadOnlyCell context={context} />
             }
 
+            const { isDisabled } = getIsDisabled(item)
+
+            if (isDisabled) {
+              return (
+                <DataGridDuplicateCell context={context}>
+                  {({ value }) => (
+                    <span className="size-full opacity-30">
+                      {value as number | string}
+                    </span>
+                  )}
+                </DataGridDuplicateCell>
+              )
+            }
+
             return <DataGridNumberCell context={context} />
           },
         })
       ),
     ],
-    [locations]
+    [locations, getIsDisabled]
   )
 }

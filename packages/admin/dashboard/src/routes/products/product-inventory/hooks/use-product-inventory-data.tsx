@@ -1,8 +1,12 @@
 import { useProductVariants, useStockLocations } from "../../../../hooks/api"
 
-export const useProductInventoryData = (id: string) => {
+export const useProductInventoryData = (
+  id: string,
+  productVariantIds?: string[]
+) => {
   const variantData = useProductVariants(id, {
-    limit: 9999,
+    id: productVariantIds,
+    limit: !productVariantIds ? 9999 : undefined,
     fields:
       "id,title,sku,inventory_items,inventory_items.*,inventory_items.inventory,inventory_items.inventory.id,inventory_items.inventory.title,inventory_items.inventory.sku,*inventory_items.inventory.location_levels",
   })
