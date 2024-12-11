@@ -68,6 +68,13 @@ export const sidebar = sidebarAttachHrefCommonOptions([
         type: "link",
         path: "/recipes/commerce-automation",
         title: "Commerce Automation",
+        children: [
+          {
+            type: "link",
+            path: "/recipes/commerce-automation/restock-notification",
+            title: "Example: Restock Notifications",
+          },
+        ],
       },
       {
         type: "link",
@@ -177,7 +184,7 @@ export const sidebar = sidebarAttachHrefCommonOptions([
                     type: "category",
                     title: "Data Models",
                     hasTitleStyling: true,
-                    autogenerate_path: "/references/api_key_models/classes",
+                    autogenerate_path: "/references/api_key_models/variables",
                   },
                 ],
               },
@@ -385,7 +392,7 @@ export const sidebar = sidebarAttachHrefCommonOptions([
                   {
                     type: "category",
                     title: "Data Models",
-                    autogenerate_path: "/references/cart_models/classes",
+                    autogenerate_path: "/references/cart_models/variables",
                   },
                 ],
               },
@@ -1285,7 +1292,7 @@ export const sidebar = sidebarAttachHrefCommonOptions([
                     type: "category",
                     title: "Data Models",
                     autogenerate_path:
-                      "/references/sales_channel_models/classes",
+                      "/references/sales_channel_models/variables",
                   },
                 ],
               },
@@ -1408,7 +1415,7 @@ export const sidebar = sidebarAttachHrefCommonOptions([
                   {
                     type: "category",
                     title: "Data Models",
-                    autogenerate_path: "/references/store_models/classes",
+                    autogenerate_path: "/references/store_models/variables",
                   },
                 ],
               },
@@ -1818,17 +1825,20 @@ export const sidebar = sidebarAttachHrefCommonOptions([
     isChildSidebar: true,
     children: [
       {
-        type: "link",
-        path: "/storefront-development/tips",
-        title: "Tips",
-      },
-      {
-        type: "link",
-        path: "/storefront-development/publishable-api-keys",
-        title: "Publishable API Key",
-      },
-      {
-        type: "separator",
+        type: "category",
+        title: "General",
+        children: [
+          {
+            type: "link",
+            path: "/storefront-development/tips",
+            title: "Tips",
+          },
+          {
+            type: "link",
+            path: "/storefront-development/publishable-api-keys",
+            title: "Publishable API Key",
+          },
+        ],
       },
       {
         type: "category",
@@ -2394,7 +2404,7 @@ export const sidebar = sidebarAttachHrefCommonOptions([
       {
         type: "link",
         path: "/service-factory-reference",
-        title: "Service Factory Reference",
+        title: "Service Factory",
         isChildSidebar: true,
         children: [
           {
@@ -2412,20 +2422,20 @@ export const sidebar = sidebarAttachHrefCommonOptions([
       {
         type: "link",
         path: "/references/helper-steps",
-        title: "Helper Steps Reference",
+        title: "Helper Steps",
         isChildSidebar: true,
         autogenerate_path: "/references/helper_steps/functions",
       },
       {
         type: "link",
-        title: "Core Workflows Reference",
+        title: "Core Workflows",
         path: "/medusa-workflows-reference",
         isChildSidebar: true,
         custom_autogenerate: "core-flows",
       },
       {
         type: "link",
-        title: "Testing Framework Reference",
+        title: "Testing Framework",
         path: "/test-tools-reference",
         isChildSidebar: true,
         children: [
