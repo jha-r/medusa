@@ -252,12 +252,12 @@
           "unique": true
         },
         {
-          "keyName": "IDX_promotion_campaign_budget_type",
+          "keyName": "IDX_campaign_budget_type",
           "columnNames": [],
           "composite": false,
           "primary": false,
           "unique": false,
-          "expression": "CREATE INDEX IF NOT EXISTS \"IDX_promotion_campaign_budget_type\" ON \"promotion_campaign_budget\" (type) WHERE deleted_at IS NULL"
+          "expression": "CREATE INDEX IF NOT EXISTS \"IDX_campaign_budget_type\" ON \"promotion_campaign_budget\" (type) WHERE deleted_at IS NULL"
         },
         {
           "keyName": "IDX_promotion_campaign_budget_campaign_id",
@@ -617,28 +617,28 @@
           "unique": true
         },
         {
-          "keyName": "IDX_promotion_application_method_type",
+          "keyName": "IDX_application_method_type",
           "columnNames": [],
           "composite": false,
           "primary": false,
           "unique": false,
-          "expression": "CREATE INDEX IF NOT EXISTS \"IDX_promotion_application_method_type\" ON \"promotion_application_method\" (type) WHERE deleted_at IS NULL"
+          "expression": "CREATE INDEX IF NOT EXISTS \"IDX_application_method_type\" ON \"promotion_application_method\" (type) WHERE deleted_at IS NULL"
         },
         {
-          "keyName": "IDX_promotion_application_method_target_type",
+          "keyName": "IDX_application_method_target_type",
           "columnNames": [],
           "composite": false,
           "primary": false,
           "unique": false,
-          "expression": "CREATE INDEX IF NOT EXISTS \"IDX_promotion_application_method_target_type\" ON \"promotion_application_method\" (target_type) WHERE deleted_at IS NULL"
+          "expression": "CREATE INDEX IF NOT EXISTS \"IDX_application_method_target_type\" ON \"promotion_application_method\" (target_type) WHERE deleted_at IS NULL"
         },
         {
-          "keyName": "IDX_promotion_application_method_allocation",
+          "keyName": "IDX_application_method_allocation",
           "columnNames": [],
           "composite": false,
           "primary": false,
           "unique": false,
-          "expression": "CREATE INDEX IF NOT EXISTS \"IDX_promotion_application_method_allocation\" ON \"promotion_application_method\" (allocation) WHERE deleted_at IS NULL"
+          "expression": "CREATE INDEX IF NOT EXISTS \"IDX_application_method_allocation\" ON \"promotion_application_method\" (allocation) WHERE deleted_at IS NULL"
         },
         {
           "keyName": "IDX_promotion_application_method_promotion_id",

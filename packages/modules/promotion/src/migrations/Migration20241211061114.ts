@@ -1,6 +1,6 @@
 import { Migration } from "@mikro-orm/migrations"
 
-export class Migration20241203074045 extends Migration {
+export class Migration20241211061114 extends Migration {
   async up(): Promise<void> {
     this.addSql(
       'alter table if exists "promotion_campaign_budget" drop constraint if exists "promotion_campaign_budget_campaign_id_foreign";'
@@ -10,12 +10,8 @@ export class Migration20241203074045 extends Migration {
       'CREATE INDEX IF NOT EXISTS "IDX_promotion_campaign_deleted_at" ON "promotion_campaign" (deleted_at) WHERE deleted_at IS NULL;'
     )
 
-    // this.addSql('drop index if exists "IDX_campaign_budget_type";')
     this.addSql(
       'alter table if exists "promotion_campaign_budget" add constraint "promotion_campaign_budget_campaign_id_foreign" foreign key ("campaign_id") references "promotion_campaign" ("id") on update cascade on delete cascade;'
-    )
-    this.addSql(
-      'CREATE INDEX IF NOT EXISTS "IDX_promotion_campaign_budget_type" ON "promotion_campaign_budget" (type) WHERE deleted_at IS NULL;'
     )
     this.addSql(
       'CREATE INDEX IF NOT EXISTS "IDX_promotion_campaign_budget_campaign_id" ON "promotion_campaign_budget" (campaign_id) WHERE deleted_at IS NULL;'
@@ -52,18 +48,6 @@ export class Migration20241203074045 extends Migration {
     this.addSql(
       'alter table if exists "promotion_application_method" alter column "buy_rules_min_quantity" type integer using ("buy_rules_min_quantity"::integer);'
     )
-    this.addSql('drop index if exists "IDX_application_method_type";')
-    this.addSql('drop index if exists "IDX_application_method_target_type";')
-    this.addSql('drop index if exists "IDX_application_method_allocation";')
-    this.addSql(
-      'CREATE INDEX IF NOT EXISTS "IDX_promotion_application_method_type" ON "promotion_application_method" (type) WHERE deleted_at IS NULL;'
-    )
-    this.addSql(
-      'CREATE INDEX IF NOT EXISTS "IDX_promotion_application_method_target_type" ON "promotion_application_method" (target_type) WHERE deleted_at IS NULL;'
-    )
-    this.addSql(
-      'CREATE INDEX IF NOT EXISTS "IDX_promotion_application_method_allocation" ON "promotion_application_method" (allocation) WHERE deleted_at IS NULL;'
-    )
     this.addSql(
       'CREATE INDEX IF NOT EXISTS "IDX_promotion_application_method_promotion_id" ON "promotion_application_method" (promotion_id) WHERE deleted_at IS NULL;'
     )
@@ -93,7 +77,6 @@ export class Migration20241203074045 extends Migration {
 
     this.addSql('drop index if exists "IDX_promotion_campaign_deleted_at";')
 
-    this.addSql('drop index if exists "IDX_promotion_campaign_budget_type";')
     this.addSql(
       'drop index if exists "IDX_promotion_campaign_budget_campaign_id";'
     )
@@ -102,9 +85,6 @@ export class Migration20241203074045 extends Migration {
     )
     this.addSql(
       'alter table if exists "promotion_campaign_budget" add constraint "promotion_campaign_budget_campaign_id_foreign" foreign key ("campaign_id") references "promotion_campaign" ("id") on update cascade;'
-    )
-    this.addSql(
-      'create index if not exists "IDX_campaign_budget_type" on "promotion_campaign_budget" ("type");'
     )
 
     this.addSql('drop index if exists "IDX_promotion_campaign_id";')
@@ -131,27 +111,11 @@ export class Migration20241203074045 extends Migration {
     this.addSql(
       'alter table if exists "promotion_application_method" alter column "raw_value" set not null;'
     )
-    this.addSql('drop index if exists "IDX_promotion_application_method_type";')
-    this.addSql(
-      'drop index if exists "IDX_promotion_application_method_target_type";'
-    )
-    this.addSql(
-      'drop index if exists "IDX_promotion_application_method_allocation";'
-    )
     this.addSql(
       'drop index if exists "IDX_promotion_application_method_promotion_id";'
     )
     this.addSql(
       'drop index if exists "IDX_promotion_application_method_deleted_at";'
-    )
-    this.addSql(
-      'create index if not exists "IDX_application_method_type" on "promotion_application_method" ("type");'
-    )
-    this.addSql(
-      'create index if not exists "IDX_application_method_target_type" on "promotion_application_method" ("target_type");'
-    )
-    this.addSql(
-      'create index if not exists "IDX_application_method_allocation" on "promotion_application_method" ("allocation");'
     )
 
     this.addSql('drop index if exists "IDX_promotion_rule_deleted_at";')
