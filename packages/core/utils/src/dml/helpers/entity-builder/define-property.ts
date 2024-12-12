@@ -79,6 +79,7 @@ const SPECIAL_PROPERTIES: {
       columnType: "timestamptz",
       type: "date",
       nullable: false,
+      persist: true,
       fieldName: field.fieldName,
       defaultRaw: "now()",
       onCreate: () => new Date(),
@@ -89,6 +90,7 @@ const SPECIAL_PROPERTIES: {
       columnType: "timestamptz",
       type: "date",
       nullable: false,
+      persist: true,
       fieldName: field.fieldName,
       defaultRaw: "now()",
       onCreate: () => new Date(),
@@ -100,6 +102,7 @@ const SPECIAL_PROPERTIES: {
       columnType: "timestamptz",
       type: "date",
       nullable: true,
+      persist: true,
       fieldName: field.fieldName,
     })(MikroORMEntity.prototype, field.fieldName)
 
@@ -156,6 +159,7 @@ export function defineProperty(
     MikroOrmBigNumberProperty({
       nullable: field.nullable,
       fieldName: field.fieldName,
+      persist: !field.computed,
       /**
        * MikroORM does not ignore undefined values for default when generating
        * the database schema SQL. Conditionally add it here to prevent undefined
@@ -172,6 +176,7 @@ export function defineProperty(
       type: ArrayType,
       fieldName: field.fieldName,
       nullable: field.nullable,
+      persist: !field.computed,
       /**
        * MikroORM does not ignore undefined values for default when generating
        * the database schema SQL. Conditionally add it here to prevent undefined
@@ -248,6 +253,7 @@ export function defineProperty(
       columnType: "jsonb",
       type: "any",
       nullable: field.nullable,
+      persist: !field.computed,
       fieldName: field.fieldName,
       /**
        * MikroORM does not ignore undefined values for default when generating
@@ -287,6 +293,7 @@ export function defineProperty(
       columnType: "real",
       type: "number",
       nullable: field.nullable,
+      persist: !field.computed,
       fieldName: field.fieldName,
       /**
        * Applying number serializer to convert value back to a
@@ -328,6 +335,7 @@ export function defineProperty(
     columnType,
     type: propertyType,
     nullable: field.nullable,
+    persist: !field.computed,
     fieldName: field.fieldName,
     /**
      * MikroORM does not ignore undefined values for default when generating

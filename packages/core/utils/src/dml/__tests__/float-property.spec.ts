@@ -12,6 +12,7 @@ describe("Float property", () => {
         name: "float",
       },
       nullable: false,
+      computed: false,
       indexes: [],
       relationships: [],
     })

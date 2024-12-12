@@ -25,8 +25,8 @@ const InventoryItem = model
     reservation_items: model.hasMany(() => ReservationItem, {
       mappedBy: "inventory_item",
     }),
-    reserved_quantity: model.number().nullable(), // .readonly?
-    stocked_quantity: model.number().nullable(), // .readonly?
+    reserved_quantity: model.number().computed(),
+    stocked_quantity: model.number().computed(),
   })
   .indexes([
     {

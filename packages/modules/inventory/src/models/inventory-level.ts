@@ -8,11 +8,11 @@ const InventoryLevel = model
     stocked_quantity: model.bigNumber().default(0),
     reserved_quantity: model.bigNumber().default(0),
     incoming_quantity: model.bigNumber().default(0),
-    // available_quantity: model.bigNumber().nullable(), // readonly
     metadata: model.json().nullable(),
     inventory_item: model.belongsTo(() => InventoryItem, {
       mappedBy: "location_levels",
     }),
+    available_quantity: model.bigNumber().computed(),
   })
   .indexes([
     {
