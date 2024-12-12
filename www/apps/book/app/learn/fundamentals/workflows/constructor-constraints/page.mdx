@@ -255,6 +255,72 @@ const myWorkflow = createWorkflow(
 })
 ```
 
+### Ternary Alternative
+
+```ts
+// Don't
+const myWorkflow = createWorkflow(
+  "hello-world", 
+  function (input: WorkflowInput) {
+    step1({
+      message: input.is_active ? "active" : "inactive"
+    })
+})
+
+// Do
+// other imports...
+import { transform } from "@medusajs/framework/workflows-sdk"
+
+const myWorkflow = createWorkflow(
+  "hello-world", 
+  function (input: WorkflowInput) {
+    const message = transform(
+      {
+        input,
+      },
+      (data) => data.input.is_active ? "active" : "inactive"
+    )
+    
+    step1({
+      message
+    })
+})
+```
+
+### Optional Chaining (?.) Alternative
+
+```ts
+// Don't
+const myWorkflow = createWorkflow(
+  "hello-world", 
+  function (input: WorkflowInput) {
+    step1({
+      name: input.customer?.name
+    })
+})
+
+// Do
+// other imports...
+import { transform } from "@medusajs/framework/workflows-sdk"
+
+const myWorkflow = createWorkflow(
+  "hello-world", 
+  function (input: WorkflowInput) {
+    const name = transform(
+      {
+        input,
+      },
+      (data) => name: data.input.customer?.name
+    )
+    
+    step1({
+      name
+    })
+})
+```
+
+
+
 ---
 
 ## Step Constraints
