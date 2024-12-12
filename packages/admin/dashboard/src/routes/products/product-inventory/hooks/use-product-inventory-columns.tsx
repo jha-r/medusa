@@ -1,13 +1,11 @@
 import { InformationCircle } from "@medusajs/icons"
 import { HttpTypes } from "@medusajs/types"
-import { Tooltip } from "@medusajs/ui"
+import { Switch, Tooltip } from "@medusajs/ui"
 import { useCallback, useMemo } from "react"
 import { createDataGridHelper } from "../../../../components/data-grid"
-import {
-  DataGridNumberCell,
-  DataGridReadOnlyCell,
-} from "../../../../components/data-grid/components"
+import { DataGridReadOnlyCell } from "../../../../components/data-grid/components"
 import { DataGridDuplicateCell } from "../../../../components/data-grid/components/data-grid-duplicate-cell"
+import { DataGridTogglableNumberCell } from "../../../../components/data-grid/components/data-grid-toggleable-number-cell"
 import { ProductInventorySchema } from "../schema"
 import { ProductVariantInventoryItemLink } from "../types"
 import { isProductVariant } from "../utils"
@@ -149,12 +147,12 @@ export const useProductInventoryColumns = (
             const { isDisabled, item: disabledItem } = getIsDisabled(item)
 
             if (isDisabled) {
-              return `variants.${disabledItem.id}.inventory_items.${item.inventory_item_id}.locations.${location.id}.quantity` as const
+              return `variants.${disabledItem.id}.inventory_items.${item.inventory_item_id}.locations.${location.id}` as const
             }
 
-            return `variants.${item.variant_id}.inventory_items.${item.inventory_item_id}.locations.${location.id}.quantity` as const
+            return `variants.${item.variant_id}.inventory_items.${item.inventory_item_id}.locations.${location.id}` as const
           },
-          type: "number",
+          type: "togglable-number",
           cell: (context) => {
             const item = context.row.original
 
@@ -167,16 +165,43 @@ export const useProductInventoryColumns = (
             if (isDisabled) {
               return (
                 <DataGridDuplicateCell context={context}>
-                  {({ value }) => (
-                    <span className="size-full opacity-30">
-                      {value as number | string}
-                    </span>
-                  )}
+                  {({ value }) => {
+                    const { checked, quantity } = value as {
+                      checked: boolean
+                      quantity: number | string
+                    }
+
+                    return (
+                      <div className="flex size-full items-center gap-x-2 opacity-30">
+                        <Switch
+                          className="shrink-0 cursor-not-allowed"
+                          tabIndex={-1}
+                          size="small"
+                          checked={checked}
+                        />
+                        <span className="flex size-full items-center justify-end">
+                          {quantity}
+                        </span>
+                      </div>
+                    )
+                  }}
                 </DataGridDuplicateCell>
               )
             }
 
-            return <DataGridNumberCell context={context} />
+            // Depending on how we want to handle the checked state, we might need
+            // to move this to the form state.
+            // const locationLevel = item.inventory.location_levels?.find(
+            //   (level) => level.location_id === location.id
+            // )
+
+            // const disableToggle = Boolean(
+            //   locationLevel &&
+            //     (locationLevel.reserved_quantity > 0 ||
+            //       locationLevel.incoming_quantity > 0)
+            // )
+
+            return <DataGridTogglableNumberCell context={context} />
           },
         })
       ),

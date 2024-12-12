@@ -1,11 +1,8 @@
 import { HttpTypes } from "@medusajs/types"
 import { useMemo } from "react"
-import { Thumbnail } from "../../../../components/common/thumbnail"
 import { createDataGridHelper } from "../../../../components/data-grid"
-import {
-  DataGridNumberCell,
-  DataGridReadOnlyCell,
-} from "../../../../components/data-grid/components"
+import { DataGridReadOnlyCell } from "../../../../components/data-grid/components"
+import { DataGridTogglableNumberCell } from "../../../../components/data-grid/components/data-grid-toggleable-number-cell"
 import { InventoryStockSchema } from "../schema"
 
 const helper = createDataGridHelper<
@@ -26,10 +23,7 @@ export const useInventoryStockColumns = (
           const item = context.row.original
           return (
             <DataGridReadOnlyCell context={context}>
-              <div className="flex items-center gap-x-1">
-                <Thumbnail src={item.thumbnail} />
-                <span title={item.title || undefined}>{item.title || "-"}</span>
-              </div>
+              <span title={item.title || undefined}>{item.title || "-"}</span>
             </DataGridReadOnlyCell>
           )
         },
@@ -44,7 +38,7 @@ export const useInventoryStockColumns = (
 
           return (
             <DataGridReadOnlyCell context={context}>
-              {item.sku || "-"}
+              <span title={item.sku || undefined}>{item.sku || "-"}</span>
             </DataGridReadOnlyCell>
           )
         },
@@ -58,11 +52,11 @@ export const useInventoryStockColumns = (
           field: (context) => {
             const item = context.row.original
 
-            return `inventory_items.${item.id}.locations.${location.id}.quantity` as const
+            return `inventory_items.${item.id}.locations.${location.id}` as const
           },
-          type: "number",
+          type: "togglable-number",
           cell: (context) => {
-            return <DataGridNumberCell context={context} />
+            return <DataGridTogglableNumberCell context={context} />
           },
         })
       ),

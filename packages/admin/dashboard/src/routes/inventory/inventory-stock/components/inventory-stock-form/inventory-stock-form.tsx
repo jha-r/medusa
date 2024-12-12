@@ -73,12 +73,15 @@ function getDefaultValues(
   return {
     inventory_items: items.reduce((acc, item) => {
       const locationsMap = locations.reduce((locationAcc, location) => {
-        const stockedQuantity =
-          item.location_levels?.find(
-            (level) => level.location_id === location.id
-          )?.stocked_quantity ?? ""
+        const level = item.location_levels?.find(
+          (level) => level.location_id === location.id
+        )
 
-        locationAcc[location.id] = { quantity: stockedQuantity }
+        locationAcc[location.id] = {
+          id: level?.id,
+          quantity: level?.stocked_quantity ?? "",
+          checked: !!level,
+        }
         return locationAcc
       }, {} as InventoryLocationsSchema)
 

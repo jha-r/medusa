@@ -92,12 +92,15 @@ function getDefaultValue(
     variants: variants.reduce((variantAcc, variant) => {
       const inventoryItems = variant.inventory_items.reduce((itemAcc, item) => {
         const locationsMap = locations.reduce((locationAcc, location) => {
-          const stockedQuantity =
-            item.inventory.location_levels?.find(
-              (level) => level.location_id === location.id
-            )?.stocked_quantity ?? ""
+          const levels = item.inventory.location_levels?.find(
+            (level) => level.location_id === location.id
+          )
 
-          locationAcc[location.id] = { quantity: stockedQuantity }
+          locationAcc[location.id] = {
+            quantity: levels?.stocked_quantity || "",
+            levels_id: levels?.id,
+            checked: !!levels,
+          }
           return locationAcc
         }, {} as ProductVariantLocationSchema)
 
