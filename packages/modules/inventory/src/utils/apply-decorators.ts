@@ -4,20 +4,36 @@ import {
   MathBN,
   toMikroORMEntity,
 } from "@medusajs/framework/utils"
-import { MetadataStorage, OnLoad } from "@mikro-orm/core"
+import { MetadataStorage } from "@mikro-orm/core"
 
 import InventoryItem from "../models/inventory-item"
 import InventoryLevel from "../models/inventory-level"
 
-const MikroORMEntity = toMikroORMEntity(InventoryLevel)
-MikroORMEntity.prototype["onLoad"] = function () {
-  if (isDefined(this.stocked_quantity) && isDefined(this.reserved_quantity)) {
-    this.available_quantity = new BigNumber(
-      MathBN.sub(this.raw_stocked_quantity, this.raw_reserved_quantity)
-    )
+function applyHook() {
+  const MikroORMEntity = toMikroORMEntity(InventoryLevel)
+  const meta = MetadataStorage.getMetadataFromDecorator(
+    MikroORMEntity.prototype.constructor
+  )
+
+  meta.hooks.onInit ??= []
+  if (meta.hooks.onInit.includes("onInit")) {
+    return
   }
+
+  MikroORMEntity.prototype["onInit"] = function (row) {
+    const entity = row.entity
+    if (
+      isDefined(entity.stocked_quantity) &&
+      isDefined(entity.reserved_quantity)
+    ) {
+      entity.available_quantity = new BigNumber(
+        MathBN.sub(entity.raw_stocked_quantity, entity.raw_reserved_quantity)
+      )
+    }
+  }
+
+  meta.hooks.onInit.push("onInit")
 }
-OnLoad()(MikroORMEntity.prototype, "onLoad")
 
 function applyFormulas() {
   const MikroORMEntity = toMikroORMEntity(InventoryItem)
@@ -42,4 +58,8 @@ function applyFormulas() {
     stockedQuantity.lazy = true
   }
 }
-applyFormulas()
+
+export const applyEntityHooks = () => {
+  applyHook()
+  applyFormulas()
+}

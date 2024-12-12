@@ -1,5 +1,6 @@
 import { Context } from "@medusajs/framework/types"
 import { BigNumber, ModulesSdkUtils } from "@medusajs/framework/utils"
+import { applyEntityHooks } from "../utils/apply-decorators"
 
 import { InventoryLevel } from "@models"
 import { InventoryLevelRepository } from "@repositories"
@@ -67,3 +68,5 @@ export default class InventoryLevelService extends ModulesSdkUtils.MedusaInterna
     )
   }
 }
+
+applyEntityHooks()

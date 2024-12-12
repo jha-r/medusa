@@ -30,9 +30,8 @@ import {
 } from "@medusajs/framework/utils"
 import { InventoryItem, InventoryLevel, ReservationItem } from "@models"
 import { joinerConfig } from "../joiner-config"
+import { applyEntityHooks } from "../utils/apply-decorators"
 import InventoryLevelService from "./inventory-level"
-
-import "../utils/apply-decorators"
 
 type InjectedDependencies = {
   baseRepository: DAL.RepositoryService
@@ -48,6 +47,8 @@ type InventoryItemCheckLevel = {
   quantity?: BigNumberInput
   allow_backorder?: boolean
 }
+
+applyEntityHooks()
 
 export default class InventoryModuleService
   extends MedusaService<{
@@ -98,6 +99,16 @@ export default class InventoryModuleService
 
   __joinerConfig(): ModuleJoinerConfig {
     return joinerConfig
+  }
+
+  // @ts-ignore
+  async listAndCountInventoryLevels() {
+    return await super.listAndCountInventoryLevels.apply(this, ...arguments)
+  }
+
+  // @ts-ignore
+  async listAndCountInventoryItems() {
+    return await super.listAndCountInventoryItems.apply(this, ...arguments)
   }
 
   private async ensureInventoryLevels(
