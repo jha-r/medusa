@@ -5,7 +5,7 @@ import TaxRegion from "./tax-region"
 const TaxRate = model
   .define("TaxRate", {
     id: model.id({ prefix: "txr" }).primaryKey(),
-    rate: model.number().nullable(),
+    rate: model.float().nullable(),
     code: model.text().searchable(),
     name: model.text().searchable(),
     is_default: model.boolean().default(false),
