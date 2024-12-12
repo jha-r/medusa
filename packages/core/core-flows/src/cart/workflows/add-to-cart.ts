@@ -27,6 +27,8 @@ import { prepareLineItemData } from "../utils/prepare-line-item-data"
 import { confirmVariantInventoryWorkflow } from "./confirm-variant-inventory"
 import { refreshCartItemsWorkflow } from "./refresh-cart-items"
 
+const cartFields = ["completed_at"].concat(cartFieldsForPricingContext)
+
 export const addToCartWorkflowId = "add-to-cart"
 /**
  * This workflow adds items to a cart.
@@ -37,7 +39,7 @@ export const addToCartWorkflow = createWorkflow(
     const cartQuery = useQueryGraphStep({
       entity: "cart",
       filters: { id: input.cart_id },
-      fields: cartFieldsForPricingContext,
+      fields: cartFields,
       options: { throwIfKeyNotFound: true },
     }).config({ name: "get-cart" })
 
@@ -63,7 +65,7 @@ export const addToCartWorkflow = createWorkflow(
 
     validateVariantPricesStep({ variants })
 
-    const lineItems = transform({ input, variants, cart }, (data) => {
+    const lineItems = transform({ input, variants }, (data) => {
       const items = (data.input.items ?? []).map((item) => {
         const variant = data.variants.find((v) => v.id === item.variant_id)!
 
@@ -76,7 +78,7 @@ export const addToCartWorkflow = createWorkflow(
             variant.calculated_price.is_calculated_price_tax_inclusive,
           quantity: item.quantity,
           metadata: item?.metadata ?? {},
-          cartId: data.cart.id,
+          cartId: input.cart_id,
         }) as CreateLineItemForCartDTO
       })
 
@@ -90,7 +92,7 @@ export const addToCartWorkflow = createWorkflow(
 
     confirmVariantInventoryWorkflow.runAsStep({
       input: {
-        sales_channel_id: cart.sales_channel_id as string,
+        sales_channel_id: cart.sales_channel_id,
         variants,
         items: input.items,
         itemsToUpdate,
