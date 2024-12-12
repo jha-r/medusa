@@ -117,6 +117,7 @@ export class DashboardExtensionManager {
         to: item.path,
         icon: item.icon ? <item.icon /> : undefined,
         items: [],
+        nested: item.nested,
       }
 
       if (parentPath !== "/" && tempRegistry[parentPath]) {

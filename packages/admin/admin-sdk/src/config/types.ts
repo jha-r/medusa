@@ -24,6 +24,17 @@ export interface RouteConfig {
    * An optional icon to display in the sidebar together with the label. If no label is provided, the icon will be ignored.
    */
   icon?: ComponentType
+
+  /**
+   * The nested route to display under existing route in the sidebar.
+   */
+  nested?:
+    | "/orders"
+    | "/products"
+    | "/inventory"
+    | "/customers"
+    | "/promotions"
+    | "/price-list"
 }
 
 export type CustomFormField<

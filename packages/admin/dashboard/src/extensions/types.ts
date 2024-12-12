@@ -19,6 +19,7 @@ export type MenuItemExtension = {
   label: string
   path: string
   icon?: ComponentType
+  nested?: string
 }
 
 export type WidgetExtension = {
