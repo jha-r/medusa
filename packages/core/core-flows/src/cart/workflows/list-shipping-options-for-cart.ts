@@ -64,6 +64,7 @@ export const listShippingOptionsForCartWorkflow = createWorkflow(
         "shipping_address.country_code",
         "shipping_address.province",
         "shipping_address.postal_code",
+        "items.*",
         "item_total",
         "total",
       ],
@@ -136,12 +137,18 @@ export const listShippingOptionsForCartWorkflow = createWorkflow(
       })
     )
 
+    /**
+     * We need to prefetch exact same SO as in the final result but only to determine pricing calculations first.
+     */
     const initialOptions = useRemoteQueryStep({
       entry_point: "shipping_options",
       variables: typeQueryFilters,
       fields: ["id", "price_type"],
     }).config({ name: "shipping-options-price-type-query" })
 
+    /**
+     * Prepare queries for flat rate and calculated shipping options since price calculations are different for each.
+     */
     const { flatRateOptionsQuery, calculatedShippingOptionsQuery } = transform(
       {
         cart,

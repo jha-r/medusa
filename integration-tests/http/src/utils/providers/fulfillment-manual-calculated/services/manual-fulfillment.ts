@@ -25,7 +25,8 @@ export class ManualFulfillmentService extends AbstractFulfillmentProviderService
 
   async calculatePrice(optionData, data, context) {
     return {
-      calculated_price: context.cart.items.length * 1.5,
+      calculated_price:
+        context.cart.items.reduce((acc, i) => acc + i.quantity, 0) * 1.5, // mock caluclation as 1.5 per item
       is_calculated_price_tax_inclusive: false,
     }
   }
