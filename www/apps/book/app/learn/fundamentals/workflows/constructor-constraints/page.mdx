@@ -231,7 +231,7 @@ const myWorkflow = createWorkflow(
   "hello-world", 
   function (input: WorkflowInput) {
     step1({
-      isActive: !!input.is_active
+      isActive: !!input.is_active,
     })
 })
 
@@ -250,7 +250,7 @@ const myWorkflow = createWorkflow(
     )
     
     step1({
-      isActive
+      isActive,
     })
 })
 ```
@@ -263,7 +263,7 @@ const myWorkflow = createWorkflow(
   "hello-world", 
   function (input: WorkflowInput) {
     step1({
-      message: input.is_active ? "active" : "inactive"
+      message: input.is_active ? "active" : "inactive",
     })
 })
 
@@ -278,11 +278,13 @@ const myWorkflow = createWorkflow(
       {
         input,
       },
-      (data) => data.input.is_active ? "active" : "inactive"
+      (data) => {
+        return data.input.is_active ? "active" : "inactive"
+      }
     )
     
     step1({
-      message
+      message,
     })
 })
 ```
@@ -295,7 +297,7 @@ const myWorkflow = createWorkflow(
   "hello-world", 
   function (input: WorkflowInput) {
     step1({
-      name: input.customer?.name
+      name: input.customer?.name,
     })
 })
 
@@ -310,11 +312,11 @@ const myWorkflow = createWorkflow(
       {
         input,
       },
-      (data) => name: data.input.customer?.name
+      (data) => data.input.customer?.name
     )
     
     step1({
-      name
+      name,
     })
 })
 ```
