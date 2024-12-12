@@ -788,7 +788,7 @@ medusaIntegrationTestRunner({
                   quantity: 1,
                 },
               ],
-              cart,
+              cart_id: cart.id,
             },
           })
 
@@ -877,7 +877,7 @@ medusaIntegrationTestRunner({
                   quantity: 1,
                 },
               ],
-              cart,
+              cart_id: cart.id,
             },
             throwOnError: false,
           })
@@ -908,7 +908,7 @@ medusaIntegrationTestRunner({
                   quantity: 1,
                 },
               ],
-              cart,
+              cart_id: cart.id,
             },
             throwOnError: false,
           })
@@ -1049,7 +1049,7 @@ medusaIntegrationTestRunner({
                   quantity: 1,
                 },
               ],
-              cart,
+              cart_id: cart.id,
             },
           })
 
@@ -1179,6 +1179,7 @@ medusaIntegrationTestRunner({
           let cart = await cartModuleService.createCarts({
             currency_code: "usd",
             sales_channel_id: salesChannel.id,
+            customer_id: customer.id,
             items: [
               {
                 variant_id: product.variants[0].id,
@@ -1200,8 +1201,8 @@ medusaIntegrationTestRunner({
             appContainer
           ).run({
             input: {
-              cart,
-              item,
+              cart_id: cart.id,
+              item_id: item.id,
               update: {
                 metadata: {
                   foo: "bar",
@@ -1209,7 +1210,7 @@ medusaIntegrationTestRunner({
                 quantity: 2,
               },
             },
-            throwOnError: false,
+            throwOnError: true,
           })
 
           const updatedItem = await cartModuleService.retrieveLineItem(item.id)
@@ -1219,7 +1220,6 @@ medusaIntegrationTestRunner({
               id: item.id,
               unit_price: 1500,
               quantity: 2,
-              title: "Test item",
             })
           )
         })
@@ -1324,8 +1324,8 @@ medusaIntegrationTestRunner({
 
             const { errors } = await workflow.run({
               input: {
-                cart,
-                item,
+                cart_id: cart.id,
+                item_id: item.id,
                 update: {
                   metadata: {
                     foo: "bar",

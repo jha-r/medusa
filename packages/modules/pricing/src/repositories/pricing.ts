@@ -1,5 +1,6 @@
 import {
   flattenObjectToKeyValuePairs,
+  isPresent,
   MedusaError,
   MikroOrmBase,
   PriceListStatus,
@@ -61,6 +62,10 @@ export class PricingRepository
 
     const flattenedContext = Object.entries(
       flattenObjectToKeyValuePairs(context)
+    ).filter(
+      ([key, value]) =>
+        (isPresent(value) && !Array.isArray(value)) ||
+        (Array.isArray(value) && value.flat(1).length)
     )
 
     // Gets all the prices where rules match for each of the contexts

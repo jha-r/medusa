@@ -16,7 +16,7 @@ import {
 import { confirmVariantInventoryWorkflow } from "./confirm-variant-inventory"
 import { refreshCartItemsWorkflow } from "./refresh-cart-items"
 
-const cartFields = ["items.*"].concat(cartFieldsForPricingContext)
+const cartFields = cartFieldsForPricingContext.concat(["items.*"])
 
 export const updateLineItemInCartWorkflowId = "update-line-item-in-cart"
 /**
@@ -80,7 +80,7 @@ export const updateLineItemInCartWorkflow = createWorkflow(
             !!variant.calculated_price.is_calculated_price_tax_inclusive,
         },
         selector: {
-          id: input.item_id,
+          id: data.input.item_id,
         },
       }
     })
