@@ -1,4 +1,5 @@
 import {
+  flattenObjectToKeyValuePairs,
   MedusaError,
   MikroOrmBase,
   PriceListStatus,
@@ -58,7 +59,9 @@ export class PricingRepository
       return []
     }
 
-    const flattenedContext = Object.entries(context)
+    const flattenedContext = Object.entries(
+      flattenObjectToKeyValuePairs(context)
+    )
 
     // Gets all the prices where rules match for each of the contexts
     // that the price set is configured for

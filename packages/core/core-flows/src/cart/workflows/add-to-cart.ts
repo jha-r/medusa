@@ -41,7 +41,9 @@ export const addToCartWorkflow = createWorkflow(
       options: { throwIfKeyNotFound: true },
     }).config({ name: "get-cart" })
 
-    const cart = transform({ cartQuery }, ({ cartQuery }) => cartQuery.data[0])
+    const cart = transform({ cartQuery }, ({ cartQuery }) => {
+      return cartQuery.data[0]
+    })
 
     validateCartStep({ cart })
 
