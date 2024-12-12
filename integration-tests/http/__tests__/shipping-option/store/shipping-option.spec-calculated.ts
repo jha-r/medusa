@@ -172,7 +172,7 @@ medusaIntegrationTestRunner({
                 description: "Test description",
                 code: "test-code",
               },
-              prices: [],
+              prices: [], // TODO: Update endpoint validator to not require prices if type is calculated
               rules: [],
             },
             adminHeaders
@@ -261,20 +261,101 @@ medusaIntegrationTestRunner({
                 name: "Flat rate shipping option",
                 price_type: "flat",
                 amount: 1100,
+                is_tax_inclusive: false,
+                provider_id: "manual_test-provider",
                 calculated_price: expect.objectContaining({
                   calculated_amount: 1100,
+                  is_calculated_price_tax_inclusive: false,
                 }),
               }),
               expect.objectContaining({
                 id: shippingOptionCalculated.id,
                 name: "Calculated shipping option",
                 price_type: "calculated",
+                provider_id: "manual-calculated_test-provider-calculated",
                 amount: 3,
+                is_tax_inclusive: false,
                 // calculated_price: expect.objectContaining({
-                //   calculated_amount: 300,
+                //   calculated_amount: 3,
+                //   is_calculated_price_tax_inclusive: false,
                 // }),
               }),
             ])
+          )
+        })
+
+        it("should add shipping method with calculated price to cart", async () => {
+          cart = (
+            await api.post(
+              `/store/carts`,
+              {
+                region_id: region.id,
+                sales_channel_id: salesChannel.id,
+                currency_code: "usd",
+                email: "test@admin.com",
+                items: [
+                  {
+                    variant_id: product.variants[0].id,
+                    quantity: 2,
+                  },
+                ],
+              },
+              storeHeaders
+            )
+          ).data.cart
+
+          // Select shipping optin and create shipping method
+
+          let response = await api.post(
+            `/store/carts/${cart.id}/shipping-methods?fields=*shipping_methods`,
+            {
+              option_id: shippingOptionCalculated.id,
+              data: { pin_id: "test" },
+            },
+            storeHeaders
+          )
+
+          expect(response.status).toEqual(200)
+          expect(response.data.cart).toEqual(
+            expect.objectContaining({
+              id: cart.id,
+              shipping_methods: expect.arrayContaining([
+                expect.objectContaining({
+                  shipping_option_id: shippingOptionCalculated.id,
+                  amount: 3,
+                  is_tax_inclusive: false,
+                  data: { pin_id: "test" },
+                }),
+              ]),
+              shipping_total: 3,
+            })
+          )
+
+          // Update cart and refresh shipping methods
+
+          response = await api.post(
+            `/store/carts/${cart.id}/line-items?fields=*shipping_methods`,
+            {
+              variant_id: product.variants[0].id,
+              quantity: 1,
+            },
+            storeHeaders
+          )
+
+          expect(response.status).toEqual(200)
+          expect(response.data.cart).toEqual(
+            expect.objectContaining({
+              id: cart.id,
+              shipping_methods: expect.arrayContaining([
+                expect.objectContaining({
+                  shipping_option_id: shippingOptionCalculated.id,
+                  amount: 4.5,
+                  is_tax_inclusive: false,
+                  data: { pin_id: "test" },
+                }),
+              ]),
+              shipping_subtotal: 4.5,
+            })
           )
         })
       })

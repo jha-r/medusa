@@ -241,9 +241,10 @@ export const listShippingOptionsForCartWorkflow = createWorkflow(
           ...shippingOptionsCalculated.map((shippingOption, index) => {
             return {
               ...shippingOption,
-              amount: prices[index]?.calculated_price,
+              amount: prices[index]?.calculated_amount,
               is_tax_inclusive:
                 prices[index]?.is_calculated_price_tax_inclusive,
+              calculated_price: prices[index],
             }
           }),
         ]

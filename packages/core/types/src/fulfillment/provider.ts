@@ -13,7 +13,7 @@ export type FulfillmentOption = {
 }
 
 export type CalculatedShippingOptionPrice = {
-  calculated_price: number
+  calculated_amount: number
   is_calculated_price_tax_inclusive: boolean
 }
 
