@@ -106,11 +106,6 @@ export default class InventoryModuleService
     return await super.listAndCountInventoryLevels.apply(this, ...arguments)
   }
 
-  // @ts-ignore
-  async listAndCountInventoryItems() {
-    return await super.listAndCountInventoryItems.apply(this, ...arguments)
-  }
-
   private async ensureInventoryLevels(
     data: InventoryItemCheckLevel[],
     options?: {
