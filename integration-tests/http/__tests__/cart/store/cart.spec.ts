@@ -712,6 +712,71 @@ medusaIntegrationTestRunner({
         })
       })
 
+      // TODO: enable this when cart issue is fixed
+      describe.skip("POST /store/carts/:id/line-items/:id", () => {
+        let item
+
+        beforeEach(async () => {
+          cart = (
+            await api.post(
+              `/store/carts`,
+              {
+                currency_code: "usd",
+                sales_channel_id: salesChannel.id,
+                region_id: region.id,
+                shipping_address: shippingAddressData,
+                items: [{ variant_id: product.variants[0].id, quantity: 1 }],
+              },
+              storeHeadersWithCustomer
+            )
+          ).data.cart
+
+          item = cart.items[0]
+        })
+
+        it("should update cart's line item", async () => {
+          let response = await api.post(
+            `/store/carts/${cart.id}/line-items/${item.id}`,
+            {
+              quantity: 2,
+            },
+            storeHeaders
+          )
+
+          expect(response.status).toEqual(200)
+          expect(response.data.cart).toEqual(
+            expect.objectContaining({
+              id: cart.id,
+              currency_code: "usd",
+              items: expect.arrayContaining([
+                expect.objectContaining({
+                  unit_price: 1500,
+                  compare_at_unit_price: null,
+                  is_tax_inclusive: true,
+                  quantity: 2,
+                  tax_lines: [
+                    expect.objectContaining({
+                      description: "CA Default Rate",
+                      code: "CADEFAULT",
+                      rate: 5,
+                      provider_id: "system",
+                    }),
+                  ],
+                  adjustments: [
+                    {
+                      id: expect.any(String),
+                      code: "PROMOTION_APPLIED",
+                      promotion_id: promotion.id,
+                      amount: 100,
+                    },
+                  ],
+                }),
+              ]),
+            })
+          )
+        })
+      })
+
       describe("POST /store/carts/:id/complete", () => {
         beforeEach(async () => {
           cart = (
