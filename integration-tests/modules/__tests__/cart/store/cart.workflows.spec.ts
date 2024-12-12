@@ -1005,8 +1005,8 @@ medusaIntegrationTestRunner({
                 },
               ],
               rules: {
-                "customer_group_id": [customer_group.id]
-              }
+                "customer.groups.id": [customer_group.id],
+              },
             },
           ])
 
@@ -1144,8 +1144,8 @@ medusaIntegrationTestRunner({
                 },
               ],
               rules: {
-                "customer_group_id": [customer_group.id]
-              }
+                "customer.groups.id": [customer_group.id],
+              },
             },
           ])
 
