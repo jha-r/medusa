@@ -49,7 +49,7 @@ export const listShippingOptionsForCartWorkflow = createWorkflow(
     }>
   ) => {
     const optionIds = transform({ input }, ({ input }) =>
-      (input.options || [])?.map(({ id }) => id)
+      (input.options ?? []).map(({ id }) => id)
     )
 
     const cartQuery = useQueryGraphStep({
@@ -107,68 +107,70 @@ export const listShippingOptionsForCartWorkflow = createWorkflow(
       }
     )
 
-    const shippingOptionsQuery = useQueryGraphStep({
-      entity: "shipping_options",
-      filters: { id: optionIds },
+    const commonOptions = transform(
+      { input, cart, fulfillmentSetIds },
+      ({ input, cart, fulfillmentSetIds }) => ({
+        context: {
+          is_return: input.is_return ?? false,
+          enabled_in_store: input.enabled_in_store ?? true,
+        },
+
+        filters: {
+          fulfillment_set_id: fulfillmentSetIds,
+
+          address: {
+            country_code: cart.shipping_address?.country_code,
+            province_code: cart.shipping_address?.province,
+            city: cart.shipping_address?.city,
+            postal_expression: cart.shipping_address?.postal_code,
+          },
+        },
+      })
+    )
+
+    const typeQueryFilters = transform(
+      { optionIds, commonOptions },
+      ({ optionIds, commonOptions }) => ({
+        id: optionIds.length ? optionIds : undefined,
+        ...commonOptions,
+      })
+    )
+
+    const initialOptions = useRemoteQueryStep({
+      entry_point: "shipping_options",
+      variables: typeQueryFilters,
       fields: ["id", "price_type"],
     }).config({ name: "shipping-options-price-type-query" })
 
-    const optionPriceTypeMap = transform(
-      { shippingOptionsQuery },
-      ({ shippingOptionsQuery }) => {
-        return new Map(
-          shippingOptionsQuery.data.map((shippingOption) => [
-            shippingOption.id,
-            shippingOption.price_type,
-          ])
-        )
-      }
-    )
+    const { flatRateOptionsQuery, calculatedShippingOptionsQuery } = transform(
+      {
+        cart,
+        initialOptions,
+        commonOptions,
+      },
+      ({ cart, initialOptions, commonOptions }) => {
+        const flatRateShippingOptionIds: string[] = []
+        const calculatedShippingOptionIds: string[] = []
 
-    const [flatRateOptionsQuery, calculatedShippingOptionsQuery] = transform(
-      { input, fulfillmentSetIds, cart, optionPriceTypeMap, optionIds },
-      ({ input, fulfillmentSetIds, cart, optionPriceTypeMap, optionIds }) => {
-        // TODO: one pass
-        const flatRateShippingOptionIds = optionIds.filter(
-          (option_id) =>
-            optionPriceTypeMap.get(option_id) === ShippingOptionPriceType.FLAT
-        )
+        initialOptions.forEach((option) => {
+          if (option.price_type === ShippingOptionPriceType.FLAT) {
+            flatRateShippingOptionIds.push(option.id)
+          } else {
+            calculatedShippingOptionIds.push(option.id)
+          }
+        })
 
-        const calculatedShippingOptionIds = optionIds.filter(
-          (option_id) =>
-            optionPriceTypeMap.get(option_id) ===
-            ShippingOptionPriceType.CALCULATED
-        )
-
-        const commonOptions = {
-          context: {
-            is_return: input.is_return ?? false,
-            enabled_in_store: input.enabled_in_store ?? true,
-          },
-
-          filters: {
-            fulfillment_set_id: fulfillmentSetIds,
-
-            address: {
-              country_code: cart.shipping_address?.country_code,
-              province_code: cart.shipping_address?.province,
-              city: cart.shipping_address?.city,
-              postal_expression: cart.shipping_address?.postal_code,
-            },
-          },
-        }
-
-        return [
-          {
+        return {
+          flatRateOptionsQuery: {
             ...commonOptions,
-            ids: flatRateShippingOptionIds,
+            id: flatRateShippingOptionIds,
             calculated_price: { context: cart },
           },
-          {
+          calculatedShippingOptionsQuery: {
             ...commonOptions,
-            ids: calculatedShippingOptionIds,
+            id: calculatedShippingOptionIds,
           },
-        ]
+        }
       }
     )
 
@@ -191,10 +193,10 @@ export const listShippingOptionsForCartWorkflow = createWorkflow(
     )
 
     const calculateShippingOptionsPricesData = transform(
-      { shippingOptionsCalculated, cart },
-      ({ shippingOptionsCalculated, cart }) => {
+      { shippingOptionsCalculated, cart, input },
+      ({ shippingOptionsCalculated, cart, input }) => {
         const optionDataMap = new Map(
-          (input.options || [])?.map(({ id, data }) => [id, data])
+          (input.options ?? []).map(({ id, data }) => [id, data])
         )
 
         return shippingOptionsCalculated.map(
@@ -217,8 +219,8 @@ export const listShippingOptionsForCartWorkflow = createWorkflow(
     )
 
     const shippingOptionsWithPrice = transform(
-      { shippingOptionsFlatRate, shippingOptionsCalculated, prices, input },
-      ({ shippingOptionsFlatRate, shippingOptionsCalculated, input }) => {
+      { shippingOptionsFlatRate, shippingOptionsCalculated, prices },
+      ({ shippingOptionsFlatRate, shippingOptionsCalculated, prices }) => {
         return [
           ...shippingOptionsFlatRate.map((shippingOption) => {
             const price = shippingOption.calculated_price
@@ -232,7 +234,7 @@ export const listShippingOptionsForCartWorkflow = createWorkflow(
           ...shippingOptionsCalculated.map((shippingOption, index) => {
             return {
               ...shippingOption,
-              amount: prices[index]?.calculated_amount,
+              amount: prices[index]?.calculated_price,
               is_tax_inclusive:
                 prices[index]?.is_calculated_price_tax_inclusive,
             }
