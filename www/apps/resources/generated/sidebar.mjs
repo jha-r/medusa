@@ -1784,7 +1784,7 @@ export const generatedSidebar = [
                 "loaded": true,
                 "isPathHref": true,
                 "type": "link",
-                "path": "/references/fulfillment/provider",
+                "path": "/commerce-modules/fulfillment/calculate-shipping-options",
                 "title": "Calculate Shipping Price in Provider",
                 "children": []
               }
