@@ -226,7 +226,7 @@ medusaIntegrationTestRunner({
       })
 
       describe("GET /store/shipping-options?cart_id=", () => {
-        it("should get calculated and flat rateshipping options for a cart successfully", async () => {
+        it("should get calculated and flat rate shipping options for a cart successfully", async () => {
           cart = (
             await api.post(
               `/store/carts`,
@@ -275,10 +275,10 @@ medusaIntegrationTestRunner({
                 provider_id: "manual-calculated_test-provider-calculated",
                 amount: 3,
                 is_tax_inclusive: false,
-                // calculated_price: expect.objectContaining({
-                //   calculated_amount: 3,
-                //   is_calculated_price_tax_inclusive: false,
-                // }),
+                calculated_price: expect.objectContaining({
+                  calculated_amount: 3,
+                  is_calculated_price_tax_inclusive: false,
+                }),
               }),
             ])
           )
@@ -304,7 +304,7 @@ medusaIntegrationTestRunner({
             )
           ).data.cart
 
-          // Select shipping optin and create shipping method
+          // Select shipping option and create shipping method
 
           let response = await api.post(
             `/store/carts/${cart.id}/shipping-methods?fields=*shipping_methods`,

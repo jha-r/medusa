@@ -27,5 +27,7 @@ export const POST = async (
   const shippingOption = data[0]
   const priceData = result[0]
 
+  shippingOption.calculated_price = priceData
+
   res.status(200).json({ shipping_option: { ...shippingOption, ...priceData } })
 }
