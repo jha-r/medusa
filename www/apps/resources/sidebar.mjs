@@ -1660,7 +1660,7 @@ export const sidebar = sidebarAttachHrefCommonOptions([
       },
       {
         type: "category",
-        title: "File Provider Modules",
+        title: "File Module Providers",
         children: [
           {
             type: "link",
@@ -1692,7 +1692,7 @@ export const sidebar = sidebarAttachHrefCommonOptions([
       },
       {
         type: "category",
-        title: "Notification Provider Modules",
+        title: "Notification Module Providers",
         children: [
           {
             type: "link",
@@ -1722,6 +1722,11 @@ export const sidebar = sidebarAttachHrefCommonOptions([
                 type: "link",
                 path: "/references/notification-provider-module",
                 title: "Create Notification Provider",
+              },
+              {
+                type: "link",
+                path: "/integrations/guides/resend",
+                title: "Integrate Resend",
               },
             ],
           },
