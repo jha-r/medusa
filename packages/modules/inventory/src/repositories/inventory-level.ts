@@ -1,6 +1,12 @@
-import { Context } from "@medusajs/framework/types"
+import {
+  BigNumberInput,
+  Context,
+  DAL,
+  InferEntityType,
+} from "@medusajs/framework/types"
 import {
   BigNumber,
+  isDefined,
   MathBN,
   mikroOrmBaseRepositoryFactory,
 } from "@medusajs/framework/utils"
@@ -71,5 +77,63 @@ export class InventoryLevelRepository extends mikroOrmBaseRepositoryFactory(
     return new BigNumber(
       MathBN.sum(...result.map((r) => r.raw_stocked_quantity))
     )
+  }
+
+  async find(
+    params?: DAL.FindOptions<typeof InventoryLevel>,
+    context?: Context
+  ): Promise<InferEntityType<typeof InventoryLevel>[]> {
+    const manager = this.getActiveManager(context) as SqlEntityManager
+
+    const resultset = (await manager.find(
+      this.entity,
+      params?.where!,
+      params?.options as any
+    )) as unknown as InferEntityType<typeof InventoryLevel>[]
+
+    resultset.forEach((item) => {
+      if (
+        isDefined(item.stocked_quantity) &&
+        isDefined(item.reserved_quantity)
+      ) {
+        ;(item as any).available_quantity = new BigNumber(
+          MathBN.sub(
+            item.raw_stocked_quantity as BigNumberInput,
+            item.raw_reserved_quantity as BigNumberInput
+          )
+        ) as any
+      }
+    })
+
+    return resultset
+  }
+
+  async findAndCount(
+    params?: DAL.FindOptions<typeof InventoryLevel>,
+    context?: Context
+  ): Promise<[InferEntityType<typeof InventoryLevel>[], number]> {
+    const manager = this.getActiveManager(context) as SqlEntityManager
+
+    const [resultset, count] = (await manager.findAndCount(
+      this.entity,
+      params?.where!,
+      params?.options as any
+    )) as unknown as [InferEntityType<typeof InventoryLevel>[], number]
+
+    resultset.forEach((item) => {
+      if (
+        isDefined(item.stocked_quantity) &&
+        isDefined(item.reserved_quantity)
+      ) {
+        ;(item as any).available_quantity = new BigNumber(
+          MathBN.sub(
+            item.raw_stocked_quantity as BigNumberInput,
+            item.raw_reserved_quantity as BigNumberInput
+          )
+        ) as any
+      }
+    })
+
+    return [resultset, count]
   }
 }

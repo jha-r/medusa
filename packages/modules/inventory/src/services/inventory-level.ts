@@ -1,8 +1,8 @@
 import { Context } from "@medusajs/framework/types"
 import { BigNumber, ModulesSdkUtils } from "@medusajs/framework/utils"
 
+import { InventoryLevel } from "@models"
 import { InventoryLevelRepository } from "@repositories"
-import { InventoryLevel } from "../models/inventory-level"
 
 type InjectedDependencies = {
   inventoryLevelRepository: InventoryLevelRepository
@@ -10,7 +10,7 @@ type InjectedDependencies = {
 
 export default class InventoryLevelService extends ModulesSdkUtils.MedusaInternalService<
   InjectedDependencies,
-  InventoryLevel
+  typeof InventoryLevel
 >(InventoryLevel) {
   protected readonly inventoryLevelRepository: InventoryLevelRepository
 
