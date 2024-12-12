@@ -58,7 +58,7 @@ export const addShippingMethodToCartWorkflow = createWorkflow(
 
     const shippingOptions = listShippingOptionsForCartWorkflow.runAsStep({
       input: {
-        option_ids: optionIds,
+        options: input.options,
         cart_id: cart.id,
         is_return: false,
       },

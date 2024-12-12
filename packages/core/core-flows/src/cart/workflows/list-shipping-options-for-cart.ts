@@ -1,12 +1,37 @@
-import { deepFlatMap } from "@medusajs/framework/utils"
+import { deepFlatMap, ShippingOptionPriceType } from "@medusajs/framework/utils"
 import {
   createWorkflow,
+  parallelize,
   transform,
   WorkflowData,
   WorkflowResponse,
 } from "@medusajs/framework/workflows-sdk"
 import { useQueryGraphStep, validatePresenceOfStep } from "../../common"
 import { useRemoteQueryStep } from "../../common/steps/use-remote-query"
+import { calculateShippingOptionsPricesStep } from "../../fulfillment"
+import { CalculateShippingOptionPriceDTO } from "@medusajs/types"
+
+const COMMON_OPTIONS_FIELDS = [
+  "id",
+  "name",
+  "price_type",
+  "service_zone_id",
+  "shipping_profile_id",
+  "provider_id",
+  "data",
+
+  "type.id",
+  "type.label",
+  "type.description",
+  "type.code",
+
+  "provider.id",
+  "provider.is_enabled",
+
+  "rules.attribute",
+  "rules.value",
+  "rules.operator",
+]
 
 export const listShippingOptionsForCartWorkflowId =
   "list-shipping-options-for-cart"
@@ -18,11 +43,15 @@ export const listShippingOptionsForCartWorkflow = createWorkflow(
   (
     input: WorkflowData<{
       cart_id: string
-      option_ids?: string[]
+      options?: { id: string; data?: Record<string, unknown> }[]
       is_return?: boolean
       enabled_in_store?: boolean
     }>
   ) => {
+    const optionIds = transform({ input }, ({ input }) =>
+      (input.options || [])?.map(({ id }) => id)
+    )
+
     const cartQuery = useQueryGraphStep({
       entity: "cart",
       filters: { id: input.cart_id },
@@ -78,73 +107,138 @@ export const listShippingOptionsForCartWorkflow = createWorkflow(
       }
     )
 
-    const queryVariables = transform(
-      { input, fulfillmentSetIds, cart },
-      ({ input, fulfillmentSetIds, cart }) => ({
-        id: input.option_ids,
+    const shippingOptionsQuery = useQueryGraphStep({
+      entity: "shipping_options",
+      filters: { id: optionIds },
+      fields: ["id", "price_type"],
+    }).config({ name: "shipping-options-price-type-query" })
 
-        context: {
-          is_return: input.is_return ?? false,
-          enabled_in_store: input.enabled_in_store ?? true,
-        },
-
-        filters: {
-          fulfillment_set_id: fulfillmentSetIds,
-
-          address: {
-            country_code: cart.shipping_address?.country_code,
-            province_code: cart.shipping_address?.province,
-            city: cart.shipping_address?.city,
-            postal_expression: cart.shipping_address?.postal_code,
-          },
-        },
-
-        calculated_price: { context: cart },
-      })
+    const optionPriceTypeMap = transform(
+      { shippingOptionsQuery },
+      ({ shippingOptionsQuery }) => {
+        return new Map(
+          shippingOptionsQuery.data.map((shippingOption) => [
+            shippingOption.id,
+            shippingOption.price_type,
+          ])
+        )
+      }
     )
 
-    const shippingOptions = useRemoteQueryStep({
-      entry_point: "shipping_options",
-      fields: [
-        "id",
-        "name",
-        "price_type",
-        "service_zone_id",
-        "shipping_profile_id",
-        "provider_id",
-        "data",
+    const [flatRateOptionsQuery, calculatedShippingOptionsQuery] = transform(
+      { input, fulfillmentSetIds, cart, optionPriceTypeMap, optionIds },
+      ({ input, fulfillmentSetIds, cart, optionPriceTypeMap, optionIds }) => {
+        // TODO: one pass
+        const flatRateShippingOptionIds = optionIds.filter(
+          (option_id) =>
+            optionPriceTypeMap.get(option_id) === ShippingOptionPriceType.FLAT
+        )
 
-        "type.id",
-        "type.label",
-        "type.description",
-        "type.code",
+        const calculatedShippingOptionIds = optionIds.filter(
+          (option_id) =>
+            optionPriceTypeMap.get(option_id) ===
+            ShippingOptionPriceType.CALCULATED
+        )
 
-        "provider.id",
-        "provider.is_enabled",
+        const commonOptions = {
+          context: {
+            is_return: input.is_return ?? false,
+            enabled_in_store: input.enabled_in_store ?? true,
+          },
 
-        "rules.attribute",
-        "rules.value",
-        "rules.operator",
+          filters: {
+            fulfillment_set_id: fulfillmentSetIds,
 
-        "calculated_price.*",
-        "prices.*",
-        "prices.price_rules.*",
-      ],
-      variables: queryVariables,
-    }).config({ name: "shipping-options-query" })
+            address: {
+              country_code: cart.shipping_address?.country_code,
+              province_code: cart.shipping_address?.province,
+              city: cart.shipping_address?.city,
+              postal_expression: cart.shipping_address?.postal_code,
+            },
+          },
+        }
+
+        return [
+          {
+            ...commonOptions,
+            ids: flatRateShippingOptionIds,
+            calculated_price: { context: cart },
+          },
+          {
+            ...commonOptions,
+            ids: calculatedShippingOptionIds,
+          },
+        ]
+      }
+    )
+
+    const [shippingOptionsFlatRate, shippingOptionsCalculated] = parallelize(
+      useRemoteQueryStep({
+        entry_point: "shipping_options",
+        fields: [
+          ...COMMON_OPTIONS_FIELDS,
+          "calculated_price.*",
+          "prices.*",
+          "prices.price_rules.*",
+        ],
+        variables: flatRateOptionsQuery,
+      }).config({ name: "shipping-options-query-flat-rate" }),
+      useRemoteQueryStep({
+        entry_point: "shipping_options",
+        fields: [...COMMON_OPTIONS_FIELDS],
+        variables: calculatedShippingOptionsQuery,
+      }).config({ name: "shipping-options-query-calculated" })
+    )
+
+    const calculateShippingOptionsPricesData = transform(
+      { shippingOptionsCalculated, cart },
+      ({ shippingOptionsCalculated, cart }) => {
+        const optionDataMap = new Map(
+          (input.options || [])?.map(({ id, data }) => [id, data])
+        )
+
+        return shippingOptionsCalculated.map(
+          (so) =>
+            ({
+              id: so.id as string,
+              optionData: so.data,
+              context: {
+                cart,
+              },
+              data: optionDataMap.get(so.id),
+              provider_id: so.provider_id,
+            } as CalculateShippingOptionPriceDTO)
+        )
+      }
+    )
+
+    const prices = calculateShippingOptionsPricesStep(
+      calculateShippingOptionsPricesData
+    )
 
     const shippingOptionsWithPrice = transform(
-      { shippingOptions },
-      ({ shippingOptions }) =>
-        shippingOptions.map((shippingOption) => {
-          const price = shippingOption.calculated_price
+      { shippingOptionsFlatRate, shippingOptionsCalculated, prices, input },
+      ({ shippingOptionsFlatRate, shippingOptionsCalculated, input }) => {
+        return [
+          ...shippingOptionsFlatRate.map((shippingOption) => {
+            const price = shippingOption.calculated_price
 
-          return {
-            ...shippingOption,
-            amount: price?.calculated_amount,
-            is_tax_inclusive: !!price?.is_calculated_price_tax_inclusive,
-          }
-        })
+            return {
+              ...shippingOption,
+              amount: price?.calculated_amount,
+              is_tax_inclusive: !!price?.is_calculated_price_tax_inclusive,
+            }
+          }),
+          ...shippingOptionsCalculated.map((shippingOption, index) => {
+            return {
+              ...shippingOption,
+              amount: prices[index]?.calculated_amount,
+              is_tax_inclusive:
+                prices[index]?.is_calculated_price_tax_inclusive,
+            }
+          }),
+        ]
+      }
     )
 
     return new WorkflowResponse(shippingOptionsWithPrice)

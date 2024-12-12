@@ -32,24 +32,28 @@ export const refreshCartShippingMethodsWorkflow = createWorkflow(
         "shipping_address.country_code",
         "shipping_address.province",
         "shipping_methods.shipping_option_id",
+        "shipping_methods.data",
         "total",
       ],
       options: { throwIfKeyNotFound: true },
     }).config({ name: "get-cart" })
 
     const cart = transform({ cartQuery }, ({ cartQuery }) => cartQuery.data[0])
-    const shippingOptionIds: string[] = transform({ cart }, ({ cart }) =>
+    const listShippingOptionsInput = transform({ cart }, ({ cart }) =>
       (cart.shipping_methods || [])
-        .map((shippingMethod) => shippingMethod.shipping_option_id)
+        .map((shippingMethod) => ({
+          id: shippingMethod.shipping_option_id,
+          data: shippingMethod.data,
+        }))
         .filter(Boolean)
     )
 
-    when({ shippingOptionIds }, ({ shippingOptionIds }) => {
-      return !!shippingOptionIds?.length
+    when({ listShippingOptionsInput }, ({ listShippingOptionsInput }) => {
+      return !!listShippingOptionsInput?.length
     }).then(() => {
       const shippingOptions = listShippingOptionsForCartWorkflow.runAsStep({
         input: {
-          option_ids: shippingOptionIds,
+          options: listShippingOptionsInput,
           cart_id: cart.id,
           is_return: false,
         },
