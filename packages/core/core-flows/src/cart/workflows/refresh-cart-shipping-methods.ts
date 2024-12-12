@@ -9,7 +9,7 @@ import {
 import { useQueryGraphStep } from "../../common"
 import { removeShippingMethodFromCartStep } from "../steps"
 import { updateShippingMethodsStep } from "../steps/update-shipping-methods"
-import { listShippingOptionsForCartWorkflow } from "./list-shipping-options-for-cart"
+import { listShippingOptionsForCartWithPricingWorkflow } from "./list-shipping-options-for-cart-with-pricing"
 
 export const refreshCartShippingMethodsWorkflowId =
   "refresh-cart-shipping-methods"
@@ -51,13 +51,14 @@ export const refreshCartShippingMethodsWorkflow = createWorkflow(
     when({ listShippingOptionsInput }, ({ listShippingOptionsInput }) => {
       return !!listShippingOptionsInput?.length
     }).then(() => {
-      const shippingOptions = listShippingOptionsForCartWorkflow.runAsStep({
-        input: {
-          options: listShippingOptionsInput,
-          cart_id: cart.id,
-          is_return: false,
-        },
-      })
+      const shippingOptions =
+        listShippingOptionsForCartWithPricingWorkflow.runAsStep({
+          input: {
+            options: listShippingOptionsInput,
+            cart_id: cart.id,
+            is_return: false,
+          },
+        })
 
       // Creates an object on which shipping methods to remove or update depending
       // on the validity of the shipping options for the cart

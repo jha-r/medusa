@@ -273,12 +273,9 @@ medusaIntegrationTestRunner({
                 name: "Calculated shipping option",
                 price_type: "calculated",
                 provider_id: "manual-calculated_test-provider-calculated",
-                amount: 3,
-                is_tax_inclusive: false,
-                calculated_price: expect.objectContaining({
-                  calculated_amount: 3,
-                  is_calculated_price_tax_inclusive: false,
-                }),
+                calculated_price: null,
+                prices: [],
+                // amount doesn't exist for calculated shipping options -> /calculate needs to be called
               }),
             ])
           )
