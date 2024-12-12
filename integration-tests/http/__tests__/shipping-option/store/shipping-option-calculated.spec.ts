@@ -281,6 +281,49 @@ medusaIntegrationTestRunner({
           )
         })
 
+        it("should get fetch pricing for calculated shipping options", async () => {
+          cart = (
+            await api.post(
+              `/store/carts`,
+              {
+                region_id: region.id,
+                sales_channel_id: salesChannel.id,
+                currency_code: "usd",
+                email: "test@admin.com",
+                items: [
+                  {
+                    variant_id: product.variants[0].id,
+                    quantity: 2,
+                  },
+                ],
+              },
+              storeHeaders
+            )
+          ).data.cart
+
+          const resp = await api.post(
+            `/store/shipping-options/${shippingOptionCalculated.id}/calculate?fields=+provider_id`,
+            { cart_id: cart.id, data: { pin_id: "test" } },
+            storeHeaders
+          )
+
+          const shippingOption = resp.data.shipping_option
+
+          expect(shippingOption).toEqual(
+            expect.objectContaining({
+              id: shippingOptionCalculated.id,
+              name: "Calculated shipping option",
+              price_type: "calculated",
+              provider_id: "manual-calculated_test-provider-calculated",
+              calculated_price: expect.objectContaining({
+                calculated_amount: 3,
+                is_calculated_price_tax_inclusive: false,
+              }),
+              amount: 3,
+            })
+          )
+        })
+
         it("should add shipping method with calculated price to cart", async () => {
           cart = (
             await api.post(
