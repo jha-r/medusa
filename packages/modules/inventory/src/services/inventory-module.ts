@@ -30,8 +30,9 @@ import {
 } from "@medusajs/framework/utils"
 import { InventoryItem, InventoryLevel, ReservationItem } from "@models"
 import { joinerConfig } from "../joiner-config"
-import "../utils/apply-decorators"
 import InventoryLevelService from "./inventory-level"
+
+import "../utils/apply-decorators"
 
 type InjectedDependencies = {
   baseRepository: DAL.RepositoryService
