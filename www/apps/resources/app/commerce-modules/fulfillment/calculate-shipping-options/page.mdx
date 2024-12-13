@@ -1,0 +1,393 @@
+import { Prerequisites } from "docs-ui"
+
+export const metadata = {
+  title: `Calculate Shipping Option Prices in Fulfillment Provider`,
+}
+
+# {metadata.title}
+
+In this guide, you'll learn how to support calculating shipping option prices in your custom fulfillment provider.
+
+Medusa supports integrating third-party fulfillment providers to fulfill and ship order items. Some third-party systems support shipping options with dynamic prices that are calculated based on the customer's cart details, such as the number of items in the cart, their dimensions, or the customer's shipping address.
+
+In this guide, you'll learn how to calculate a shipping option's price in a custom fulfillment provider. This price will be shown to the customer during checkout.
+
+<Prerequisites
+  items={[
+    {
+      text: "Medusa application installed",
+      link: "!docs!/learn/installation"
+    },
+  ]}
+/>
+
+---
+
+## Step 1: Create Fulfillment Module Provider
+
+The [Fulfillment Module](../page.mdx) provides the data models and functionalities that are the backbone of fulfillment-related features in your Medusa application. The module has providers that implement the logic to fulfill items, typically integrating a third-party system.
+
+<Note title="Tip">
+
+Learn more about modules in [this documentation](!docs!/learn/fundamentals/modules).
+
+</Note>
+
+This step will briefly guide you into creating a fulfillment module provider. For extensive details on how to create a fulfillment module provider, refer to [this guide](/references/fulfillment/provider).
+
+### Create Fulfillment Module Provider Directory
+
+Modules and module providers are created under the `src/modules` directory.
+
+So, create the directory `src/modules/my-fulfillment` that will hold the Fulfillment Module provider's files.
+
+![The directory structure of the Medusa application after adding the Fulfillment Module provider](https://res.cloudinary.com/dza7lstvk/image/upload/v1733926717/Medusa%20Resources/so-calc-dir-overview-1_p0qb7y.jpg)
+
+### Create Fulfillment Module Provider Service
+
+A fulfillment module provider must have a service that extends the `AbstractFulfillmentProviderService` class from the Medusa Framework. The service's methods use the third-party provider to implement fulfillment-related logic.
+
+Create the file `src/modules/my-fulfillment/service.ts` with the following content:
+
+![Directory structure of the Medusa application after creating the service](https://res.cloudinary.com/dza7lstvk/image/upload/v1733926802/Medusa%20Resources/so-calc-dir-overview-2_jharq2.jpg)
+
+export const highlights = [
+  ["3", "Options", "The type of options that the Fulfillment Module provider expects."],
+  ["7", "AbstractFulfillmentProviderService"],
+  ["8", "identifier", "A unique identifier of the provider."],
+  ["11", "client", "A client to connect to a third-party system."],
+  ["13", "options", "Options passed to the module provider."]
+]
+
+```ts title="src/modules/my-fulfillment/service.ts" highlights={highlights}
+import { AbstractFulfillmentProviderService } from "@medusajs/framework/utils"
+
+type Options = {
+  apiKey: string
+}
+
+class MyFulfillmentProviderService extends AbstractFulfillmentProviderService {
+  static identifier = "my-fulfillment"
+  protected options_: Options
+  // assuming you're initializing a client
+  protected client
+
+  constructor({}, options: Options) {
+    super()
+
+    this.options_ = options
+    // TODO initialize client
+  }
+}
+
+export default MyFulfillmentProviderService
+```
+
+You create a service that extends the `AbstractFulfillmentProviderService`. In the service, you define an `identifier` static property that holds the unique ID of the Fulfillment Module provider.
+
+In the constructor, the service receives the options passed to the module provider as a second parameter. These options are useful to pass secret variables, such as an API key for the third-party provider you're integrating.
+
+In the constructor, you set the options in the `options_` property. You can also initialize the client that connects to the third-party system here. You'll use that client in the service's methods.
+
+Since your fulfillment provider will calculate prices for shipping options, add the following method to the service:
+
+```ts title="src/modules/my-fulfillment/service.ts"
+class MyFulfillmentProviderService extends AbstractFulfillmentProviderService {
+  // ...
+  async canCalculate(data: Record<string, unknown>): Promise<boolean> {
+    return true
+  }
+}
+```
+
+The `canCalculate` method accepts a shipping option's details and returns whether the fulfillment provider can calculate its prices. You can change the logic to be based on the shipping option's profile, for example.
+
+To find other methods that you can implement in your fulfillment provider, refer to [this guide](/references/fulfillment/provider#2-create-the-fulfillment-provider-service).
+
+### Export Module Provider Definition
+
+A module provider must define an `index.ts` file that specifies which module this provider belongs to, and what are the provider's services.
+
+Create the file `src/modules/my-fulfillment/index.ts` with the following content:
+
+![Directory structure after adding the module definition file.](https://res.cloudinary.com/dza7lstvk/image/upload/v1733926916/Medusa%20Resources/so-calc-dir-overview-3_etewaq.jpg)
+
+```ts title="src/modules/my-fulfillment/index.ts"
+import MyFulfillmentProviderService from "./service"
+import { 
+  ModuleProvider, 
+  Modules
+} from "@medusajs/framework/utils"
+
+export default ModuleProvider(Modules.FULFILLMENT, {
+  services: [MyFulfillmentProviderService],
+})
+```
+
+The file uses `ModuleProvider` from the Modules SDK to specify that this provider belongs to the Fulfillment Module, and that `MyFulfillmentProviderService` is its service.
+
+### Add Module Provider to Medusa's Configurations
+
+The last step is to add the module provider to Medusa's configurations in `medusa-config.ts`. Add it in the `modules` property:
+
+export const configHighlights = [
+  ["17", "options", "Options to pass to the custom fulfillment module provider."]
+]
+
+```ts title="medusa-config.ts" highlights={configHighlights}
+module.exports = defineConfig({
+  // ...
+  modules: [
+    // ...
+    {
+      resolve: "@medusajs/medusa/fulfillment",
+      options: {
+        providers: [
+          {
+            resolve: "@medusajs/medusa/fulfillment-manual",
+            id: "manual",
+          },
+          // ...
+          {
+            resolve: "./src/modules/my-fulfillment",
+            id: "my-fulfillment",
+            options: {
+              apiKey: process.env.FULFILLMENT_API_KEY
+            },
+          },
+        ],
+      },
+    },
+  ]
+})
+```
+
+You add the Fulfillment Module provider to `modules` and pass in it the manual fulfillment provider, which is available in Medusa by default, and your custom provider.
+
+You pass the `apiKey` property to the module provider's options. Its value is an API key from your third-party fulfillment provider, and you set it as an environment variable in `.env`:
+
+```plain
+FULFILLMENT_API_KEY=sk_123
+```
+
+You've now finished creating your fulfillment module provider. You'll add the logic to calculate prices next.
+
+---
+
+## Step 2: Implement calculatePrice Method
+
+A fulfillment provider's service has a [calculatePrice method](/references/fulfillment/provider#calculateprice) to calculate the prices of a shipping option. In this method, you can send a request to your third-party provider to retrieve the shipping price based on custom rules.
+
+For example, assuming your third-party provider calculates the shipping price based on the address and the number of items in the cart, add the `calculatePrice` method to `MyFulfillmentProviderService`:
+
+```ts title="src/modules/my-fulfillment/service.ts"
+// other imports...
+import { 
+  CalculatedShippingOptionPrice, 
+  CalculateShippingOptionPriceDTO
+} from "@medusajs/framework/types"
+
+class MyFulfillmentProviderService extends AbstractFulfillmentProviderService {
+  // ...
+  async calculatePrice(
+    optionData: CalculateShippingOptionPriceDTO["optionData"], 
+    data: CalculateShippingOptionPriceDTO["data"], 
+    context: CalculateShippingOptionPriceDTO["context"]
+  ): Promise<CalculatedShippingOptionPrice> {
+    const amount = await this.client.getPrice({
+      address: {
+        country: context.cart.shipping_address?.country_code,
+        city: context.cart.shipping_address?.city
+      },
+      itemsCount: context.cart.items?.length || 0
+    })
+
+    return {
+      calculated_amount: amount,
+      is_calculated_price_tax_inclusive: false
+    }
+  }
+}
+```
+
+The `calculatePrice` method accepts the following parameters:
+
+- `optionData`: the `data` property of the shipping option. This can be used to hold data relevant for your shipping provider, such as the ID of the shipping option in the third-party provider.
+- `data`: the `data` property of the selected shipping method in the cart. This can also hold data useful for later fulfilling the items in the cart, such as specific drop off spot.
+- `context`: An object of details related to the customer's cart. It has a `cart` property that holds the cart's items, shipping address, and email.
+
+In the method, assuming you have a `client` property that connects to the third-party provider, you use a `getPrice` method of the client that accepts the shipping address and number of items in the cart to get the shipping option's price. You can replace this with your custom logic of retrieving the price.
+
+The method returns an object having the following properties:
+
+- `calculated_amount`: The shipping option's price retrieved from the third-party service.
+- `is_calculated_price_tax_inclusive`: Whether the calculated price includes taxes. If enabled, Medusa will calculate the applied taxes from the price. Otherwise, Medusa will calculate and add applied taxes to the price.
+
+<Note>
+
+Refer to the [Create Fulfillment Provider guide](/references/fulfillment/provider#calculateprice) for more details on the method's parameters and return value.
+
+</Note>
+
+
+---
+
+## Step 3: Test it Out
+
+To test out your price calculation logic, start your Medusa application:
+
+```bash npm2yarn
+npm run dev
+```
+
+### Add Shipping Option for Fulfillment Provider
+
+Before using the fulfillment provider during checkout, you have to add it to a location and create a shipping option for it. You can do that by opening the admin dashboard at `http://localhost:9000/app`, then:
+
+1. Log in with your user.
+2. Go to Settings -> Locations & Shipping
+
+![The Locations & Shipping item is in the sidebar.](https://res.cloudinary.com/dza7lstvk/image/upload/v1733923761/Medusa%20Resources/Screenshot_2024-12-11_at_2.41.25_PM_wjbq5f.png)
+
+3. Click on View Details of a location.
+
+![Every location card has a View details link at the top right of the card.](https://res.cloudinary.com/dza7lstvk/image/upload/v1733923793/Medusa%20Resources/Screenshot_2024-12-11_at_2.41.50_PM_idglsu.png)
+
+4. On the location's page, click on the three dots icon in the Fulfillment Providers section, then choose Edit.
+
+![The Fulfillment Providers section at the right has a three dots icon that shows a dropdown when clicked](https://res.cloudinary.com/dza7lstvk/image/upload/v1733923832/Medusa%20Resources/Screenshot_2024-12-11_at_2.42.47_PM_rzbjbf.png)
+
+5. This opens a modal with the list of fulfillment providers. Click the checkbox next to your fulfillment provider, then click the Save button.
+
+![Select your fulfillment provider from the list, then click Save at the bottom right.](https://res.cloudinary.com/dza7lstvk/image/upload/v1733923890/Medusa%20Resources/Screenshot_2024-12-11_at_2.43.14_PM_i1byki.png)
+
+6. In the Shipping section, click on Create option.
+
+![The Shipping section in the middle has a Create option link at the right.](https://res.cloudinary.com/dza7lstvk/image/upload/v1733923970/Medusa%20Resources/Screenshot_2024-12-11_at_2.43.50_PM_gupqpu.png)
+
+7. In the form that opens:
+    - Choose "Calculated" for the price type.
+    - Enter a name for the shipping option, and choose a shipping profile.
+    - For Fulfillment Provider, choose your custom provider.
+    - Click the Save button.
+
+![Choose and enter the correct value for each field, then click Save at the bottom right.](https://res.cloudinary.com/dza7lstvk/image/upload/v1733924032/Medusa%20Resources/Screenshot_2024-12-11_at_2.44.35_PM_ltcx1z.png)
+
+### Calculate Shipping Option Price Using API Route
+
+You'll now retrieve the calculated shipping option price for a cart. To do so:
+
+1. Send a request to the [Create Cart](!api!/store#collections_collection_schema) API route:
+
+```bash
+curl -X POST 'http://localhost:9000/store/carts' \
+-H 'Content-Type: application/json' \
+-H 'x-publishable-api-key: {your_publishable_api_key}' \
+--data-raw '{
+  "region_id": "{region_id}",
+}'
+```
+
+Make sure to replace:
+
+- `{your_publishable_api_key}` with your store's publishable API key, which you can find in the Medusa Admin under Settings -> Publishable API keys.
+- `{region_id}` with an ID of a region, which you can find in the Medusa Admin under Settings -> Regions.
+
+This will create a cart and return its details.
+
+2. Send a request to [Add Line Item](!api!/store#carts_postcartsidlineitems) API route:
+
+```bash
+curl -X POST 'http://localhost:9000/store/carts/{id}/line-items' \
+-H 'Content-Type: application/json' \
+-H 'x-publishable-api-key: {your_publishable_api_key}' \
+--data-raw '{
+  "variant_id": "{variant_id}",
+  "quantity": 1
+}'
+```
+
+Make sure to replace:
+
+- `{id}` with the ID of the cart from the previous request.
+- `{variant_id}` with the ID of a variant. You can retrieve products and their variants using the [List Products API route](!api!/store#products_getproducts).
+
+3. Send a request to the [Update Cart](!api!/store#carts_postcartsid) API route to add shipping and billing addresses:
+
+```bash
+curl -X POST 'http://localhost:9000/store/carts/{id}' \
+-H 'Content-Type: application/json' \
+-H 'x-publishable-api-key: {your_publishable_api_key}' \
+--data-raw '{
+  "shipping_address": {
+    "country_code": "dk",
+    "first_name": "John",
+    "last_name": "Doe",
+    "address_1": "Line 1",
+    "city": "Copenhagen"
+  },
+  "billing_address": {
+    "country_code": "dk",
+    "first_name": "John",
+    "last_name": "Doe",
+    "address_1": "Line 1",
+    "city": "Copenhagen"
+  }
+}'
+```
+
+Make sure to replace `{id}` with the ID of the cart from the previous request. Also, specify the country code of the location that your custom fulfillment provider is available in.
+
+4. Send a request to the [List Shipping Options for Cart](!api!/store#shipping-options_getshippingoptions) API route:
+
+```bash
+curl 'http://localhost:9000/store/shipping-options?cart_id={cart_id}' \
+-H 'x-publishable-api-key: {your_publishable_api_key}'
+```
+
+Make sure to replace `{id}` with the ID of the cart from the previous request. This will return the list of shipping options that can be used with the cart, including the one you created for the custom fulfillment provider. Copy its ID for the next request.
+
+5. Send a request to the Calculate Shipping Options for Cart API route:
+
+```bash
+curl -X POST 'http://localhost:9000/store/shipping-options/{so_id}/calculate' \
+-H 'Content-Type: application/json' \
+-H 'x-publishable-api-key: {your_publishable_api_key}' \
+--data-raw '{
+  "cart_id": "{cart_id}",
+  "data": {}
+}'
+```
+
+Make sure to replace:
+
+- `{so_id}` with the ID of the shipping option you copied in the previous step.
+- `{cart_id}` with the cart's ID.
+
+The request will return the shipping option's details with its calculated price. For example:
+
+```json title="Example Response"
+{
+  "shipping_option": {
+    "id": "so_01JETW0RA034MJX40AWVJNY1AR",
+    "name": "Express shipping",
+    "price_type": "calculated",
+    "service_zone_id": "serzo_01JETPT6WNP5WB0P8JM18T0DRG",
+    "shipping_profile_id": "sp_01JETPT6WJT1JCM8BS7X67T98B",
+    "shipping_option_type_id": "sotype_01JETW0RA0T05QJFN1AX6JPDYK",
+    "amount": 10,
+    "is_tax_inclusive": false
+  }
+}
+```
+
+The response has a `shipping_option` object that has among its properties the following:
+
+- `amount`: The shipping option's calculated price.
+- `is_tax_inclusive`: Whether the calculated price includes taxes.
+
+---
+
+## Related Guides
+
+- [Implement Checkout in a Storefront](../../../storefront-development/checkout/page.mdx).
