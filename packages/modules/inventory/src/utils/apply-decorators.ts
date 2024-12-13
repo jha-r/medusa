@@ -4,16 +4,13 @@ import {
   MathBN,
   toMikroORMEntity,
 } from "@medusajs/framework/utils"
-import { MetadataStorage, OnInit } from "@mikro-orm/core"
+import { Formula, OnInit } from "@mikro-orm/core"
 
 import InventoryItem from "../models/inventory-item"
 import InventoryLevel from "../models/inventory-level"
 
 function applyHook() {
   const MikroORMEntity = toMikroORMEntity(InventoryLevel)
-  if (MikroORMEntity.prototype["onInit"]) {
-    return
-  }
 
   MikroORMEntity.prototype["onInit"] = function () {
     if (isDefined(this.stocked_quantity) && isDefined(this.reserved_quantity)) {
@@ -29,25 +26,17 @@ function applyHook() {
 function applyFormulas() {
   const MikroORMEntity = toMikroORMEntity(InventoryItem)
 
-  const meta = MetadataStorage.getMetadataFromDecorator(
-    MikroORMEntity.prototype.constructor
-  )
+  Formula(
+    (item) =>
+      `(SELECT SUM(reserved_quantity) FROM inventory_level il WHERE il.inventory_item_id = ${item}.id AND il.deleted_at IS NULL)`,
+    { lazy: true, serializer: Number, hidden: true, type: "number" }
+  )(MikroORMEntity.prototype, "reserved_quantity")
 
-  const props = meta.properties
-
-  const reservedQuantity = props["reserved_quantity"]
-  if (!reservedQuantity.formula) {
-    reservedQuantity.formula = (item) =>
-      `(SELECT SUM(reserved_quantity)::float FROM inventory_level il WHERE il.inventory_item_id = ${item}.id AND il.deleted_at IS NULL)`
-    reservedQuantity.lazy = true
-  }
-
-  const stockedQuantity = props["stocked_quantity"]
-  if (!stockedQuantity.formula) {
-    stockedQuantity.formula = (item) =>
-      `(SELECT SUM(stocked_quantity)::float FROM inventory_level il WHERE il.inventory_item_id = ${item}.id AND il.deleted_at IS NULL)`
-    stockedQuantity.lazy = true
-  }
+  Formula(
+    (item) =>
+      `(SELECT SUM(stocked_quantity) FROM inventory_level il WHERE il.inventory_item_id = ${item}.id AND il.deleted_at IS NULL)`,
+    { lazy: true, serializer: Number, hidden: true, type: "number" }
+  )(MikroORMEntity.prototype, "stocked_quantity")
 }
 
 export const applyEntityHooks = () => {
