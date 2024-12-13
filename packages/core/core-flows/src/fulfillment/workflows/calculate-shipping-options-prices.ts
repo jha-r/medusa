@@ -49,9 +49,7 @@ export const calculateShippingOptionsPricesWorkflow = createWorkflow(
           provider_id: shippingOption.provider_id,
           optionData: shippingOption.data,
           data: shippingOptionDataMap.get(shippingOption.id) ?? {},
-          context: {
-            cart,
-          },
+          context: cart,
         }))
       }
     )

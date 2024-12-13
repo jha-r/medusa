@@ -151,7 +151,5 @@ export interface CalculateShippingOptionPriceDTO {
   /**
    * The calculation context needed for the associated fulfillment provider to calculate the price of a shipping option.
    */
-  context: {
-    cart: Pick<CartDTO, "id" | "items" | "shipping_address" | "email">
-  } & Record<string, unknown>
+  context: CartDTO & Record<string, unknown>
 }

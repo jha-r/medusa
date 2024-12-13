@@ -211,9 +211,7 @@ export const listShippingOptionsForCartWithPricingWorkflow = createWorkflow(
             ({
               id: so.id as string,
               optionData: so.data,
-              context: {
-                cart,
-              },
+              context: cart,
               data: optionDataMap.get(so.id),
               provider_id: so.provider_id,
             } as CalculateShippingOptionPriceDTO)
