@@ -16,6 +16,7 @@ import {
   normalizePath,
 } from "../utils"
 import { getRoute } from "./helpers"
+import { NESTED_ROUTE_POSITIONS } from "@medusajs/admin-shared"
 
 type RouteConfig = {
   label: boolean
@@ -122,7 +123,7 @@ function generateMenuItem(
     label: `${configName}.label`,
     icon: config.icon ? `${configName}.icon` : undefined,
     path: getRoute(file),
-    nested: config.nested
+    nested: config.nested,
   }
 }
 
@@ -133,7 +134,10 @@ async function getRouteConfig(file: string): Promise<RouteConfig | null> {
   try {
     ast = parse(code, getParserOptions(file))
   } catch (e) {
-    logger.error(`An error occurred while parsing the file.`, { file, error: e })
+    logger.error(`An error occurred while parsing the file.`, {
+      file,
+      error: e,
+    })
     return null
   }
 
@@ -143,28 +147,51 @@ async function getRouteConfig(file: string): Promise<RouteConfig | null> {
     traverse(ast, {
       ExportNamedDeclaration(path) {
         const properties = getConfigObjectProperties(path)
-        if (!properties) return
+        if (!properties) {
+          return
+        }
 
-        const hasProperty = (name: string) => properties.some(
-          (prop) => isObjectProperty(prop) && isIdentifier(prop.key, { name })
-        )
+        const hasProperty = (name: string) =>
+          properties.some(
+            (prop) => isObjectProperty(prop) && isIdentifier(prop.key, { name })
+          )
 
         const hasLabel = hasProperty("label")
-        if (!hasLabel) return
+        if (!hasLabel) {
+          return
+        }
 
         const nested = properties.find(
-          (prop) => isObjectProperty(prop) && isIdentifier(prop.key, { name: "nested" })
+          (prop) =>
+            isObjectProperty(prop) && isIdentifier(prop.key, { name: "nested" })
         )
+
+        const nestedValue = nested ? (nested as any).value.value : undefined
+
+        if (nestedValue && !NESTED_ROUTE_POSITIONS.includes(nestedValue)) {
+          logger.error(
+            `Invalid nested route position: "${nestedValue}". Allowed values are: ${NESTED_ROUTE_POSITIONS.join(
+              ", "
+            )}`,
+            {
+              file,
+            }
+          )
+          return
+        }
 
         config = {
           label: hasLabel,
           icon: hasProperty("icon"),
-          nested: nested ? (nested as any).value.value : undefined
+          nested: nestedValue,
         }
       },
     })
   } catch (e) {
-    logger.error(`An error occurred while traversing the file.`, { file, error: e })
+    logger.error(`An error occurred while traversing the file.`, {
+      file,
+      error: e,
+    })
   }
 
   return config
