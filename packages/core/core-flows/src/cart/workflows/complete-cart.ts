@@ -5,7 +5,7 @@ import {
 import {
   Modules,
   OrderStatus,
-  OrderWorkflowEvents,
+  OrderWorkflowEvents
 } from "@medusajs/framework/utils"
 import {
   createWorkflow,
@@ -31,6 +31,7 @@ import { prepareConfirmInventoryInput } from "../utils/prepare-confirm-inventory
 import {
   prepareAdjustmentsData,
   prepareLineItemData,
+  PrepareLineItemDataInput,
   prepareTaxLinesData,
 } from "../utils/prepare-line-item-data"
 
@@ -115,18 +116,17 @@ export const completeCartWorkflow = createWorkflow(
           }) ?? []
 
         const allItems = (cart.items ?? []).map((item) => {
-          return prepareLineItemData({
+          const input: PrepareLineItemDataInput = {
             item,
             variant: item.variant,
-            unitPrice: item.raw_unit_price ?? item.unit_price,
-            compareAtUnitPrice:
-              item.raw_compare_at_unit_price ?? item.compare_at_unit_price,
+            cartId: cart.id,
+            unitPrice: item.unit_price,
             isTaxInclusive: item.is_tax_inclusive,
-            quantity: item.raw_quantity ?? item.quantity,
-            metadata: item?.metadata,
             taxLines: item.tax_lines ?? [],
             adjustments: item.adjustments ?? [],
-          })
+          }
+
+          return prepareLineItemData(input)
         })
 
         const shippingMethods = (cart.shipping_methods ?? []).map((sm) => {
