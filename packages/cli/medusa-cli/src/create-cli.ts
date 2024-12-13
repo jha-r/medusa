@@ -1,5 +1,5 @@
-import { sync as existsSync } from "fs-exists-cached"
 import { setTelemetryEnabled } from "@medusajs/telemetry"
+import { sync as existsSync } from "fs-exists-cached"
 import path from "path"
 import resolveCwd from "resolve-cwd"
 import { newStarter } from "./commands/new"
@@ -56,7 +56,7 @@ function buildLocalCommands(cli, isLocalProject) {
 
   cli
     .command({
-      command: `new [root] [starter]`,
+      command: `new [root]`,
       builder: (_) =>
         _.option(`seed`, {
           type: `boolean`,
@@ -103,11 +103,6 @@ function buildLocalCommands(cli, isLocalProject) {
           .option(`db-host`, {
             type: `string`,
             describe: `The database host to use for database setup and migrations.`,
-          })
-          .option(`v2`, {
-            type: `boolean`,
-            describe: `Install Medusa with the V2 feature flag enabled. WARNING: Medusa V2 is still in development and shouldn't be used in production.`,
-            default: false,
           })
           .option(`branch`, {
             type: `string`,

@@ -2,6 +2,7 @@
  * Adapted from https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-cli/src/init-starter.ts
  */
 
+import { track } from "@medusajs/telemetry"
 import { execSync } from "child_process"
 import execa from "execa"
 import { sync as existsSync } from "fs-exists-cached"
@@ -9,11 +10,9 @@ import fs from "fs-extra"
 import hostedGitInfo from "hosted-git-info"
 import isValid from "is-valid-path"
 import sysPath from "path"
-import path from "path"
-import prompts from "prompts"
 import { Pool } from "pg"
+import prompts from "prompts"
 import url from "url"
-import { track } from "@medusajs/telemetry"
 // @ts-ignore
 import inquirer from "inquirer"
 import { createDatabase } from "pg-god"
@@ -23,6 +22,8 @@ import reporter from "../reporter"
 import { PanicId } from "../reporter/panic-handler"
 import { clearProject } from "../util/clear-project"
 import { getPackageManager, setPackageManager } from "../util/package-manager"
+
+const STARTER_PATH = `medusajs/medusa-starter-default`
 
 const removeUndefined = (obj) => {
   return Object.fromEntries(
@@ -171,7 +172,7 @@ const copy = async (starterPath, rootPath) => {
 }
 
 // Clones starter from URI.
-const clone = async (hostInfo, rootPath, v2 = false, inputBranch) => {
+const clone = async (hostInfo, rootPath, inputBranch) => {
   let url
   // Let people use private repos accessed over SSH.
   if (hostInfo.getDefaultRepresentation() === `sshurl`) {
@@ -181,14 +182,7 @@ const clone = async (hostInfo, rootPath, v2 = false, inputBranch) => {
     url = hostInfo.https({ noCommittish: true, noGitPlus: true })
   }
 
-  let branch =
-    inputBranch || hostInfo.committish
-      ? [`-b`, inputBranch || hostInfo.committish]
-      : []
-
-  if (v2) {
-    branch = [`-b`, inputBranch || "master"]
-  }
+  const branch = [`-b`, inputBranch || "master"]
 
   const createAct = reporter.activity(`Creating new project from git: ${url}`)
 
@@ -219,11 +213,9 @@ const clone = async (hostInfo, rootPath, v2 = false, inputBranch) => {
   if (!isGit) await createInitialGitCommit(rootPath, url)
 }
 
-const getPaths = async (starterPath, rootPath, v2 = false) => {
-  let selectedOtherStarter = false
-
+const getRootPath = async (rootPath) => {
   // if no args are passed, prompt user for path and starter
-  if (!starterPath && !rootPath) {
+  if (rootPath) {
     const response = await prompts.prompt([
       {
         type: `text`,
@@ -231,35 +223,22 @@ const getPaths = async (starterPath, rootPath, v2 = false) => {
         message: `What is your project called?`,
         initial: `my-medusa-store`,
       },
-      !v2 && {
-        type: `select`,
-        name: `starter`,
-        message: `What starter would you like to use?`,
-        choices: [
-          { title: `medusa-starter-default`, value: `medusa-starter-default` },
-          { title: `(Use a different starter)`, value: `different` },
-        ],
-        initial: 0,
-      },
     ])
 
     // exit gracefully if responses aren't provided
-    if ((!v2 && !response.starter) || !response.path.trim()) {
+    if (!response.path.trim()) {
       throw new Error(
-        `Please mention both starter package and project name along with path(if its not in the root)`
+        `Please mention project name along and path (if not in the root)`
       )
     }
 
-    selectedOtherStarter = response.starter === `different`
-    starterPath = `medusajs/${v2 ? "medusa-starter-default" : response.starter}`
     rootPath = response.path
   }
 
   // set defaults if no root or starter has been set yet
   rootPath = rootPath || process.cwd()
-  starterPath = starterPath || `medusajs/medusa-starter-default`
 
-  return { starterPath, rootPath, selectedOtherStarter }
+  return rootPath
 }
 
 const successMessage = (path) => {
@@ -434,20 +413,15 @@ const setupEnvVars = async (rootPath, dbName, dbCreds = {}) => {
     dbUrl = `postgres://${credentials.host}:${credentials.port}/${dbName}`
   }
 
-  fs.appendFileSync(destination, `DATABASE_URL=${dbUrl}\n`)
+  fs.appendFileSync(destination, `\nDATABASE_URL=${dbUrl}\n`)
 }
 
 const runMigrations = async (rootPath) => {
   const migrationActivity = reporter.activity("Applying database migrations...")
 
-  const cliPath = sysPath.join(
-    `node_modules`,
-    `@medusajs`,
-    `medusa-cli`,
-    `cli.js`
-  )
+  const cliPath = sysPath.join("node_modules", "@medusajs", "cli", "cli.js")
 
-  return await execa(cliPath, [`migrations`, `run`], {
+  return await execa(cliPath, [`db:migrate`], {
     cwd: rootPath,
   })
     .then(() => {
@@ -472,9 +446,6 @@ const attemptSeed = async (rootPath) => {
       const proc = execa(getPackageManager(), [`run`, `seed`], {
         cwd: rootPath,
       })
-
-      // Useful for development
-      // proc.stdout.pipe(process.stdout)
 
       await proc
         .then(() => {
@@ -509,7 +480,6 @@ export const newStarter = async (args) => {
   track("CLI_NEW")
 
   const {
-    starter,
     root,
     skipDb,
     skipMigrations,
@@ -521,7 +491,6 @@ export const newStarter = async (args) => {
     dbPass,
     dbPort,
     dbHost,
-    v2,
     branch,
   } = args
 
@@ -533,40 +502,11 @@ export const newStarter = async (args) => {
     host: dbHost,
   })
 
-  const { starterPath, rootPath, selectedOtherStarter } = await getPaths(
-    starter,
-    root,
-    v2
-  )
+  const rootPath = await getRootPath(root)
 
   const urlObject = url.parse(rootPath)
 
-  if (selectedOtherStarter) {
-    reporter.info(
-      `Find the url of the Medusa starter you wish to create and run:
-
-medusa new ${rootPath} [url-to-starter]
-
-`
-    )
-    return
-  }
-
   if (urlObject.protocol && urlObject.host) {
-    const isStarterAUrl =
-      starter && !url.parse(starter).hostname && !url.parse(starter).protocol
-
-    if (/medusa-starter/gi.test(rootPath) && isStarterAUrl) {
-      reporter.panic({
-        id: PanicId.InvalidProjectName,
-        context: {
-          starter,
-          rootPath,
-        },
-      })
-      return
-    }
-
     reporter.panic({
       id: PanicId.InvalidProjectName,
       context: {
@@ -596,11 +536,12 @@ medusa new ${rootPath} [url-to-starter]
     return
   }
 
-  const hostedInfo = hostedGitInfo.fromUrl(starterPath)
+  const hostedInfo = hostedGitInfo.fromUrl(STARTER_PATH)
+
   if (hostedInfo) {
-    await clone(hostedInfo, rootPath, v2, branch)
+    await clone(hostedInfo, rootPath, branch)
   } else {
-    await copy(starterPath, rootPath)
+    await copy(STARTER_PATH, rootPath)
   }
 
   track("CLI_NEW_LAYOUT_COMPLETED")
@@ -639,16 +580,14 @@ medusa new ${rootPath} [url-to-starter]
     }
   }
 
-  if (!selectedOtherStarter) {
-    reporter.info("Final project preparations...")
-    // remove demo files
-    clearProject(rootPath)
-    // remove .git directory
-    fs.rmSync(path.join(rootPath, ".git"), {
-      recursive: true,
-      force: true,
-    })
-  }
+  reporter.info("Final project preparations...")
+  // remove demo files
+  clearProject(rootPath)
+  // remove .git directory
+  fs.rmSync(sysPath.join(rootPath, ".git"), {
+    recursive: true,
+    force: true,
+  })
 
   successMessage(rootPath)
   track("CLI_NEW_SUCCEEDED")
