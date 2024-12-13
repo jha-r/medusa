@@ -1,7 +1,7 @@
 import { CompensateFn, createStep, InvokeFn } from "./create-step"
 import { OrchestrationUtils } from "@medusajs/utils"
-import { CreateWorkflowComposerContext } from "./type"
-import { createStepHandler } from "./helpers/create-step-handler"
+import { CreateWorkflowComposerContext } from "../type"
+import { createStepHandler } from "./create-step-handler"
 
 /**
  * Representation of a hook definition.
@@ -23,7 +23,7 @@ export type Hook<Name extends string, Input> = {
  *
  * A handler hook can later be registered to consume the hook and perform custom functionality.
  *
- * Learn more in [this documentation](https://docs.medusajs.com/learn/fundamentals/workflows/workflow-hooks).
+ * Learn more in [this documentation](https://docs.medusajs.com/advanced-development/workflows/add-workflow-hook).
  *
  * @param name - The hook's name. This is used when the hook handler is registered to consume the workflow.
  * @param input - The input to pass to the hook handler.

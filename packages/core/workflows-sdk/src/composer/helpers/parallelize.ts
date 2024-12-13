@@ -1,4 +1,4 @@
-import { CreateWorkflowComposerContext, WorkflowData } from "./type"
+import { CreateWorkflowComposerContext, WorkflowData } from "../type"
 import { OrchestrationUtils } from "@medusajs/utils"
 
 /**

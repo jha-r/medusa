@@ -6,16 +6,17 @@ import {
 } from "@medusajs/orchestration"
 import { isString, OrchestrationUtils } from "@medusajs/utils"
 import { ulid } from "ulid"
-import { resolveValue, StepResponse } from "./helpers"
-import { createStepHandler } from "./helpers/create-step-handler"
-import { proxify } from "./helpers/proxy"
 import {
   CreateWorkflowComposerContext,
   StepExecutionContext,
   StepFunction,
   StepFunctionResult,
   WorkflowData,
-} from "./type"
+} from "../type"
+import { StepResponse } from "./step-response"
+import { createStepHandler } from "./create-step-handler"
+import { proxify } from "./proxy"
+import { resolveValue } from "./resolve-value"
 
 /**
  * The type of invocation function passed to a step.

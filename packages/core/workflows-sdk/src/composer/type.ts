@@ -8,9 +8,9 @@ import {
   WorkflowHandler,
 } from "@medusajs/orchestration"
 import { Context, LoadedModule, MedusaContainer } from "@medusajs/types"
-import { ExportedWorkflow } from "../../helper"
-import { Hook } from "./create-hook"
-import { CompensateFn, InvokeFn } from "./create-step"
+import { ExportedWorkflow } from "../helper"
+import { Hook } from "./helpers/create-hook"
+import { CompensateFn, InvokeFn } from "./helpers/create-step"
 
 export type StepFunctionResult<TOutput extends unknown | unknown[] = unknown> =
   (this: CreateWorkflowComposerContext) => WorkflowData<TOutput>
@@ -222,7 +222,7 @@ export type ReturnWorkflow<TData, TResult, THooks extends any[]> = {
   /**
    * This method executes the workflow as a step. Useful when running a workflow within another.
    *
-   * Learn more in [this documentation](https://docs.medusajs.com/learn/fundamentals/workflows/execute-another-workflow).
+   * Learn more in [this documentation](https://docs.medusajs.com/advanced-development/workflows/execute-another-workflow).
    *
    * @param param0 - The options to execute the workflow.
    * @returns The workflow's result
@@ -259,7 +259,7 @@ export type ReturnWorkflow<TData, TResult, THooks extends any[]> = {
   /**
    * The workflow's exposed hooks, used to register a handler to consume the hook.
    *
-   * Learn more in [this documentation](https://docs.medusajs.com/learn/fundamentals/workflows/workflow-hooks#how-to-consume-a-hook).
+   * Learn more in [this documentation](https://docs.medusajs.com/advanced-development/workflows/add-workflow-hook#how-to-consume-a-hook).
    */
   hooks: ConvertHooksToFunctions<THooks>
 }
