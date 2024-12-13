@@ -4,6 +4,7 @@ import type {
   CustomFieldModelContainerMap,
   CustomFieldModelFormTabsMap,
   InjectionZone,
+  NestedRoutePosition,
 } from "@medusajs/admin-shared"
 import type { ComponentType } from "react"
 import { ZodFirstPartySchemaTypes } from "zod"
@@ -28,13 +29,7 @@ export interface RouteConfig {
   /**
    * The nested route to display under existing route in the sidebar.
    */
-  nested?:
-    | "/orders"
-    | "/products"
-    | "/inventory"
-    | "/customers"
-    | "/promotions"
-    | "/price-list"
+  nested?: NestedRoutePosition
 }
 
 export type CustomFormField<
