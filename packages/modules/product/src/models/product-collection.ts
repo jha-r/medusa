@@ -6,6 +6,9 @@ const ProductCollection = model
     id: model.id({ prefix: "pcol" }).primaryKey(),
     title: model.text().searchable(),
     handle: model.text(),
+    description: model.text().nullable(),
+    thumbnail: model.text().nullable(),
+    is_active: model.boolean().default(true),
     metadata: model.json().nullable(),
     products: model.hasMany(() => Product, {
       mappedBy: "collection",
