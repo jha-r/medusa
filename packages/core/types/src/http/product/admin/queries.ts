@@ -1,6 +1,10 @@
 import { BaseFilterable, OperatorMap } from "../../../dal"
 import { FindParams } from "../../common"
-import { BaseProductListParams, BaseProductOptionParams } from "../common"
+import {
+  BaseProductListParams,
+  BaseProductMetadataParams,
+  BaseProductOptionParams,
+} from "../common"
 
 export interface AdminProductOptionParams
   extends Omit<BaseProductOptionParams, "product_id"> {}
@@ -47,4 +51,5 @@ export interface AdminProductListParams
    * Apply filters on the product variants.
    */
   variants?: AdminProductVariantParams
+  metadata?: BaseProductMetadataParams
 }
