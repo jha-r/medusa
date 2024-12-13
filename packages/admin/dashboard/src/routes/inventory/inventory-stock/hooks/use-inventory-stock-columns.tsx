@@ -22,7 +22,7 @@ export const useInventoryStockColumns = (
         cell: (context) => {
           const item = context.row.original
           return (
-            <DataGridReadOnlyCell context={context}>
+            <DataGridReadOnlyCell context={context} color="normal">
               <span title={item.title || undefined}>{item.title || "-"}</span>
             </DataGridReadOnlyCell>
           )
@@ -37,7 +37,7 @@ export const useInventoryStockColumns = (
           const item = context.row.original
 
           return (
-            <DataGridReadOnlyCell context={context}>
+            <DataGridReadOnlyCell context={context} color="normal">
               <span title={item.sku || undefined}>{item.sku || "-"}</span>
             </DataGridReadOnlyCell>
           )

@@ -8,7 +8,7 @@ export const useProductInventoryData = (
     id: productVariantIds,
     limit: !productVariantIds ? 9999 : undefined,
     fields:
-      "id,title,sku,inventory_items,inventory_items.*,inventory_items.inventory,inventory_items.inventory.id,inventory_items.inventory.title,inventory_items.inventory.sku,*inventory_items.inventory.location_levels",
+      "id,title,sku,inventory_items,inventory_items.*,inventory_items.inventory,inventory_items.inventory.id,inventory_items.inventory.title,inventory_items.inventory.sku,*inventory_items.inventory.location_levels,product.thumbnail",
   })
 
   const locationData = useStockLocations({

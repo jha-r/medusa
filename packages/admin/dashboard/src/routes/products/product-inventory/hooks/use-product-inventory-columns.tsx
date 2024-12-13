@@ -2,6 +2,7 @@ import { InformationCircle } from "@medusajs/icons"
 import { HttpTypes } from "@medusajs/types"
 import { Switch, Tooltip } from "@medusajs/ui"
 import { useCallback, useMemo } from "react"
+import { Thumbnail } from "../../../../components/common/thumbnail"
 import { createDataGridHelper } from "../../../../components/data-grid"
 import { DataGridReadOnlyCell } from "../../../../components/data-grid/components"
 import { DataGridDuplicateCell } from "../../../../components/data-grid/components/data-grid-duplicate-cell"
@@ -62,7 +63,10 @@ export const useProductInventoryColumns = (
           if (isProductVariant(item)) {
             return (
               <DataGridReadOnlyCell context={context}>
-                {item.title || "-"}
+                <div className="flex items-center gap-x-2">
+                  <Thumbnail size="small" src={item.product?.thumbnail} />
+                  <span>{item.title || "-"}</span>
+                </div>
               </DataGridReadOnlyCell>
             )
           }
@@ -71,7 +75,7 @@ export const useProductInventoryColumns = (
 
           if (isDisabled) {
             return (
-              <DataGridReadOnlyCell context={context}>
+              <DataGridReadOnlyCell context={context} color="normal">
                 <div className="flex size-full items-center justify-between gap-x-2">
                   <span
                     title={item.inventory.title || undefined}
@@ -92,7 +96,7 @@ export const useProductInventoryColumns = (
           }
 
           return (
-            <DataGridReadOnlyCell context={context}>
+            <DataGridReadOnlyCell context={context} color="normal">
               {item.inventory.title || "-"}
             </DataGridReadOnlyCell>
           )
@@ -118,14 +122,14 @@ export const useProductInventoryColumns = (
 
           if (isDisabled) {
             return (
-              <DataGridReadOnlyCell context={context}>
+              <DataGridReadOnlyCell context={context} color="normal">
                 <span className="opacity-30">{item.inventory.sku || "-"}</span>
               </DataGridReadOnlyCell>
             )
           }
 
           return (
-            <DataGridReadOnlyCell context={context}>
+            <DataGridReadOnlyCell context={context} color="normal">
               {item.inventory.sku || "-"}
             </DataGridReadOnlyCell>
           )

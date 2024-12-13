@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { HttpTypes } from "@medusajs/types"
-import { Button } from "@medusajs/ui"
-import { useMemo } from "react"
+import { Button, toast } from "@medusajs/ui"
+import { useMemo, useRef } from "react"
 import { DefaultValues, useForm } from "react-hook-form"
 import { useTranslation } from "react-i18next"
 import { DataGrid } from "../../../../../components/data-grid"
@@ -9,6 +9,9 @@ import {
   RouteFocusModal,
   useRouteModal,
 } from "../../../../../components/modals"
+import { KeyboundForm } from "../../../../../components/utilities/keybound-form"
+import { useBatchInventoryLevels } from "../../../../../hooks/api"
+import { castNumber } from "../../../../../lib/cast-number"
 import { useProductInventoryColumns } from "../../hooks/use-product-inventory-columns"
 import {
   ProductInventoryInventoryItemSchema,
@@ -33,6 +36,7 @@ export const ProductInventoryForm = ({
 }: ProductInventoryFormProps) => {
   const { t } = useTranslation()
   const { setCloseOnEscape } = useRouteModal()
+  const { handleSuccess } = useRouteModal()
 
   const form = useForm<ProductInventorySchema>({
     // TODO: Update ProductVariant type to include inventory_items
@@ -40,36 +44,93 @@ export const ProductInventoryForm = ({
     resolver: zodResolver(ProductInventorySchema),
   })
 
+  const initialValues = useRef(getDefaultValue(variants as any, locations))
+
   const disabled = useMemo(
     () => getDisabledInventoryRows(variants as any),
     [variants]
   )
   const columns = useProductInventoryColumns(locations, disabled)
 
+  const { mutateAsync, isPending } = useBatchInventoryLevels()
+
+  const onSubmit = form.handleSubmit(async (data) => {
+    const payload: HttpTypes.AdminBatchInventoryItemLevels = {
+      create: [],
+      update: [],
+      delete: [],
+    }
+
+    for (const [variantId, variant] of Object.entries(data.variants)) {
+      for (const [inventory_item_id, item] of Object.entries(
+        variant.inventory_items
+      )) {
+        for (const [location_id, level] of Object.entries(item.locations)) {
+          if (level.levels_id) {
+            const newQuantity =
+              level.quantity !== "" ? castNumber(level.quantity) : undefined
+            const originalQuantity =
+              initialValues.current?.variants?.[variantId]?.inventory_items?.[
+                inventory_item_id
+              ]?.locations?.[location_id]?.quantity
+
+            if (newQuantity !== originalQuantity) {
+              payload.update.push({
+                inventory_item_id,
+                location_id,
+                stocked_quantity: newQuantity,
+              })
+            }
+          }
+
+          if (!level.levels_id && level.quantity !== "") {
+            payload.create.push({
+              inventory_item_id,
+              location_id,
+              stocked_quantity: castNumber(level.quantity),
+            })
+          }
+        }
+      }
+    }
+
+    await mutateAsync(payload, {
+      onSuccess: () => {
+        toast.success("Updated inventory levels!")
+        handleSuccess()
+      },
+      onError: (error) => {
+        toast.error(error.message)
+      },
+    })
+  })
+
   return (
     <RouteFocusModal.Form form={form}>
-      <RouteFocusModal.Header />
-      <RouteFocusModal.Body>
-        <DataGrid
-          state={form}
-          columns={columns}
-          data={variants}
-          getSubRows={getSubRows}
-          onEditingChange={(editing) => setCloseOnEscape(!editing)}
-        />
-      </RouteFocusModal.Body>
-      <RouteFocusModal.Footer>
-        <div className="flex items-center justify-end gap-2">
-          <RouteFocusModal.Close asChild>
-            <Button variant="secondary" size="small" type="button">
-              {t("actions.cancel")}
+      <KeyboundForm onSubmit={onSubmit}>
+        <RouteFocusModal.Header />
+        <RouteFocusModal.Body>
+          <DataGrid
+            state={form}
+            columns={columns}
+            data={variants}
+            getSubRows={getSubRows}
+            onEditingChange={(editing) => setCloseOnEscape(!editing)}
+          />
+        </RouteFocusModal.Body>
+        <RouteFocusModal.Footer>
+          <div className="flex items-center justify-end gap-2">
+            <RouteFocusModal.Close asChild>
+              <Button variant="secondary" size="small" type="button">
+                {t("actions.cancel")}
+              </Button>
+            </RouteFocusModal.Close>
+            <Button type="submit" size="small" isLoading={isPending}>
+              {t("actions.save")}
             </Button>
-          </RouteFocusModal.Close>
-          <Button type="submit" size="small">
-            {t("actions.save")}
-          </Button>
-        </div>
-      </RouteFocusModal.Footer>
+          </div>
+        </RouteFocusModal.Footer>
+      </KeyboundForm>
     </RouteFocusModal.Form>
   )
 }
