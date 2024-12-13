@@ -140,6 +140,10 @@ export function defineProperty(
     BeforeCreate()(MikroORMEntity.prototype, defaultValueSetterHookName)
   }
 
+  if (field.computed) {
+    return
+  }
+
   if (SPECIAL_PROPERTIES[field.fieldName]) {
     SPECIAL_PROPERTIES[field.fieldName](MikroORMEntity, field, tableName)
     return
