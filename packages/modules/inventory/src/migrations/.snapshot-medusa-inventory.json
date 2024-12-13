@@ -142,24 +142,6 @@
           "nullable": true,
           "mappedType": "json"
         },
-        "reserved_quantity": {
-          "name": "reserved_quantity",
-          "type": "integer",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": true,
-          "mappedType": "integer"
-        },
-        "stocked_quantity": {
-          "name": "stocked_quantity",
-          "type": "integer",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": true,
-          "mappedType": "integer"
-        },
         "created_at": {
           "name": "created_at",
           "type": "timestamptz",
@@ -418,6 +400,7 @@
             "id"
           ],
           "referencedTableName": "public.inventory_item",
+          "deleteRule": "cascade",
           "updateRule": "cascade"
         }
       }
@@ -614,6 +597,7 @@
             "id"
           ],
           "referencedTableName": "public.inventory_item",
+          "deleteRule": "cascade",
           "updateRule": "cascade"
         }
       }

@@ -4,35 +4,26 @@ import {
   MathBN,
   toMikroORMEntity,
 } from "@medusajs/framework/utils"
-import { MetadataStorage } from "@mikro-orm/core"
+import { MetadataStorage, OnInit } from "@mikro-orm/core"
 
 import InventoryItem from "../models/inventory-item"
 import InventoryLevel from "../models/inventory-level"
 
 function applyHook() {
   const MikroORMEntity = toMikroORMEntity(InventoryLevel)
-  const meta = MetadataStorage.getMetadataFromDecorator(
-    MikroORMEntity.prototype.constructor
-  )
-
-  meta.hooks.onInit ??= []
-  if (meta.hooks.onInit.includes("onInit")) {
+  if (MikroORMEntity.prototype["onInit"]) {
     return
   }
 
-  MikroORMEntity.prototype["onInit"] = function (row) {
-    const entity = row.entity
-    if (
-      isDefined(entity.stocked_quantity) &&
-      isDefined(entity.reserved_quantity)
-    ) {
-      entity.available_quantity = new BigNumber(
-        MathBN.sub(entity.raw_stocked_quantity, entity.raw_reserved_quantity)
+  MikroORMEntity.prototype["onInit"] = function () {
+    if (isDefined(this.stocked_quantity) && isDefined(this.reserved_quantity)) {
+      this.available_quantity = new BigNumber(
+        MathBN.sub(this.raw_stocked_quantity, this.raw_reserved_quantity)
       )
     }
   }
 
-  meta.hooks.onInit.push("onInit")
+  OnInit()(MikroORMEntity.prototype, "onInit")
 }
 
 function applyFormulas() {

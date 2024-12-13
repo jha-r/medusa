@@ -149,6 +149,10 @@ export function defineProperty(
   }
 
   if (field.dataType.name === "bigNumber") {
+    if (field.computed) {
+      return
+    }
+
     /**
      * Defining an big number property
      * A big number property always comes with a raw_{{ fieldName }} column

@@ -18,15 +18,18 @@ const InventoryLevel = model
     {
       name: "IDX_inventory_level_inventory_item_id",
       on: ["inventory_item_id"],
+      where: "deleted_at IS NULL",
     },
     {
       name: "IDX_inventory_level_location_id",
       on: ["location_id"],
+      where: "deleted_at IS NULL",
     },
     {
       name: "IDX_inventory_level_location_id_inventory_item_id",
       on: ["inventory_item_id", "location_id"],
       unique: true,
+      where: "deleted_at IS NULL",
     },
   ])
 

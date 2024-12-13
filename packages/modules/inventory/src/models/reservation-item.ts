@@ -23,14 +23,17 @@ const ReservationItem = model
     {
       name: "IDX_reservation_item_line_item_id",
       on: ["line_item_id"],
+      where: "deleted_at IS NULL",
     },
     {
       name: "IDX_reservation_item_location_id",
       on: ["location_id"],
+      where: "deleted_at IS NULL",
     },
     {
       name: "IDX_reservation_item_inventory_item_id",
       on: ["inventory_item_id"],
+      where: "deleted_at IS NULL",
     },
   ])
 

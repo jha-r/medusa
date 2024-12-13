@@ -28,13 +28,10 @@ const InventoryItem = model
     reserved_quantity: model.number().computed(),
     stocked_quantity: model.number().computed(),
   })
+  .cascades({
+    delete: ["location_levels", "reservation_items"],
+  })
   .indexes([
-    {
-      name: "IDX_inventory_item_deleted_at",
-      on: ["deleted_at"],
-      unique: false,
-      where: "deleted_at IS NOT NULL",
-    },
     {
       name: "IDX_inventory_item_sku",
       on: ["sku"],
