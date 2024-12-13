@@ -2460,6 +2460,18 @@ export interface IFulfillmentModuleService extends IModuleService {
   ): Promise<FulfillmentDTO>
 
   /**
+   * This method deletes fulfillment by IDs after cancelation.
+   *
+   * @param {string} id - The ID of the fulfillment.
+   * @param {Context} sharedContext - A context used to share resources, such as transaction manager, between the application and the module.
+   * @returns {Promise<void>} Resolves when the fulfillment set is deleted successfully.
+   *
+   * @example
+   * await fulfillmentModuleService.deleteFulfillment("ful_123")
+   */
+  deleteFulfillment(id: string, sharedContext?: Context): Promise<void>
+
+  /**
    * This method creates a fulfillment and call the provider to create a return.
    *
    * @param {CreateFulfillmentDTO} data - The fulfillment to be created.
