@@ -8,6 +8,7 @@ import pl from "./pl.json"
 import ptBR from "./ptBR.json"
 import th from "./th.json"
 import tr from "./tr.json"
+import zhCN from "./zh-CN.json"
 import uk from "./uk.json"
 
 export default {
@@ -41,6 +42,8 @@ export default {
   tr: {
     translation: tr,
   },
+  zhCN: {
+    translation: zhCN,
   uk: {
     translation: uk,
   },
