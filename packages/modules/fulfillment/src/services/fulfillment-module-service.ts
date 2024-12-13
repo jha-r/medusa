@@ -655,6 +655,28 @@ export default class FulfillmentModuleService
 
   @InjectManager()
   @EmitEvents()
+  async deleteFulfillment(
+    id: string,
+    @MedusaContext() sharedContext: Context = {}
+  ): Promise<void> {
+    const fulfillment = await this.fulfillmentService_.retrieve(
+      id,
+      {},
+      sharedContext
+    )
+
+    if (!isPresent(fulfillment.canceled_at)) {
+      throw new MedusaError(
+        MedusaError.Types.INVALID_DATA,
+        `Fulfillment with id ${fulfillment.id} needs to be canceled first before deleting`
+      )
+    }
+
+    await this.fulfillmentService_.delete(id, sharedContext)
+  }
+
+  @InjectManager()
+  @EmitEvents()
   async createReturnFulfillment(
     data: FulfillmentTypes.CreateFulfillmentDTO,
     @MedusaContext() sharedContext: Context = {}
