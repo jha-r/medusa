@@ -1,4 +1,5 @@
 import de from "./de.json"
+import el from "./el.json"
 import en from "./en.json"
 import es from "./es.json"
 import fr from "./fr.json"
@@ -13,6 +14,9 @@ import uk from "./uk.json"
 export default {
   de: {
     translation: de,
+  },
+  el: {
+    translation: el,
   },
   en: {
     translation: en,
