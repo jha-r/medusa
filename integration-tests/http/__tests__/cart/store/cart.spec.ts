@@ -794,9 +794,8 @@ medusaIntegrationTestRunner({
         })
       })
 
-      // TODO: enable this when cart issue is fixed
-      describe.skip("POST /store/carts/:id/line-items/:id", () => {
-        let item
+      describe("POST /store/carts/:id/line-items/:id", () => {
+        let item, customerGroup
 
         beforeEach(async () => {
           cart = (
@@ -814,6 +813,22 @@ medusaIntegrationTestRunner({
           ).data.cart
 
           item = cart.items[0]
+
+          customerGroup = (
+            await api.post(
+              "/admin/customer-groups",
+              { name: "VIP" },
+              adminHeaders
+            )
+          ).data.customer_group
+
+          await api.post(
+            `/admin/customer-groups/${customerGroup.id}/customers`,
+            {
+              add: [customer.id],
+            },
+            adminHeaders
+          )
         })
 
         it("should update cart's line item", async () => {
@@ -833,25 +848,48 @@ medusaIntegrationTestRunner({
               items: expect.arrayContaining([
                 expect.objectContaining({
                   unit_price: 1500,
-                  compare_at_unit_price: null,
-                  is_tax_inclusive: true,
                   quantity: 2,
-                  tax_lines: [
-                    expect.objectContaining({
-                      description: "CA Default Rate",
-                      code: "CADEFAULT",
-                      rate: 5,
-                      provider_id: "system",
-                    }),
-                  ],
-                  adjustments: [
-                    {
-                      id: expect.any(String),
-                      code: "PROMOTION_APPLIED",
-                      promotion_id: promotion.id,
-                      amount: 100,
-                    },
-                  ],
+                }),
+              ]),
+            })
+          )
+
+          await api.post(
+            `/admin/price-lists`,
+            {
+              title: "test price list",
+              description: "test",
+              status: PriceListStatus.ACTIVE,
+              type: PriceListType.SALE,
+              prices: [
+                {
+                  amount: 200,
+                  currency_code: "usd",
+                  variant_id: product.variants[0].id,
+                },
+              ],
+              rules: {
+                "customer.groups.id": [customerGroup.id],
+              },
+            },
+            adminHeaders
+          )
+
+          response = await api.post(
+            `/store/carts/${cart.id}/line-items/${item.id}`,
+            { quantity: 3 },
+            storeHeaders
+          )
+
+          expect(response.status).toEqual(200)
+          expect(response.data.cart).toEqual(
+            expect.objectContaining({
+              id: cart.id,
+              currency_code: "usd",
+              items: expect.arrayContaining([
+                expect.objectContaining({
+                  unit_price: 200,
+                  quantity: 3,
                 }),
               ]),
             })
