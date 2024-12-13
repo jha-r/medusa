@@ -89,7 +89,20 @@ In the constructor, the service receives the options passed to the module provid
 
 In the constructor, you set the options in the `options_` property. You can also initialize the client that connects to the third-party system here. You'll use that client in the service's methods.
 
-To find methods that you can implement in your fulfillment provider, refer to [this guide](/references/fulfillment/provider#2-create-the-fulfillment-provider-service).
+Since your fulfillment provider will calculate prices for shipping options, add the following method to the service:
+
+```ts title="src/modules/my-fulfillment/service.ts"
+class MyFulfillmentProviderService extends AbstractFulfillmentProviderService {
+  // ...
+  async canCalculate(data: Record<string, unknown>): Promise<boolean> {
+    return true
+  }
+}
+```
+
+The `canCalculate` method accepts a shipping option's details and returns whether the fulfillment provider can calculate its prices. You can change the logic to be based on the shipping option's profile, for example.
+
+To find other methods that you can implement in your fulfillment provider, refer to [this guide](/references/fulfillment/provider#2-create-the-fulfillment-provider-service).
 
 ### Export Module Provider Definition
 
@@ -177,8 +190,8 @@ import {
 class MyFulfillmentProviderService extends AbstractFulfillmentProviderService {
   // ...
   async calculatePrice(
-    optionData: Record<string, unknown>, 
-    data: Record<string, unknown>, 
+    optionData: CalculateShippingOptionPriceDTO["optionData"], 
+    data: CalculateShippingOptionPriceDTO["data"], 
     context: CalculateShippingOptionPriceDTO["context"]
   ): Promise<CalculatedShippingOptionPrice> {
     const amount = await this.client.getPrice({
@@ -190,7 +203,7 @@ class MyFulfillmentProviderService extends AbstractFulfillmentProviderService {
     })
 
     return {
-      calculated_price: amount,
+      calculated_amount: amount,
       is_calculated_price_tax_inclusive: false
     }
   }
@@ -207,7 +220,7 @@ In the method, assuming you have a `client` property that connects to the third-
 
 The method returns an object having the following properties:
 
-- `calculated_price`: The shipping option's price retrieved from the third-party service.
+- `calculated_amount`: The shipping option's price retrieved from the third-party service.
 - `is_calculated_price_tax_inclusive`: Whether the calculated price includes taxes. If enabled, Medusa will calculate the applied taxes from the price. Otherwise, Medusa will calculate and add applied taxes to the price.
 
 <Note>
@@ -362,16 +375,16 @@ The request will return the shipping option's details with its calculated price.
     "service_zone_id": "serzo_01JETPT6WNP5WB0P8JM18T0DRG",
     "shipping_profile_id": "sp_01JETPT6WJT1JCM8BS7X67T98B",
     "shipping_option_type_id": "sotype_01JETW0RA0T05QJFN1AX6JPDYK",
-    "calculated_price": 10,
-    "is_calculated_price_tax_inclusive": false
+    "amount": 10,
+    "is_tax_inclusive": false
   }
 }
 ```
 
-The response has a `shipping_option` object that has among its properties the following data returned by the `calculatePrice` method:
+The response has a `shipping_option` object that has among its properties the following:
 
-- `calculated_price`: The shipping option's price.
-- `is_calculated_price_tax_inclusive`: Whether the calculated price includes taxes.
+- `amount`: The shipping option's calculated price.
+- `is_tax_inclusive`: Whether the calculated price includes taxes.
 
 ---
 
