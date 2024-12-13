@@ -68,6 +68,13 @@ export const sidebar = sidebarAttachHrefCommonOptions([
         type: "link",
         path: "/recipes/commerce-automation",
         title: "Commerce Automation",
+        children: [
+          {
+            type: "link",
+            path: "/recipes/commerce-automation/restock-notification",
+            title: "Example: Restock Notifications",
+          },
+        ],
       },
       {
         type: "link",
@@ -177,7 +184,7 @@ export const sidebar = sidebarAttachHrefCommonOptions([
                     type: "category",
                     title: "Data Models",
                     hasTitleStyling: true,
-                    autogenerate_path: "/references/api_key_models/classes",
+                    autogenerate_path: "/references/api_key_models/variables",
                   },
                 ],
               },
@@ -385,7 +392,7 @@ export const sidebar = sidebarAttachHrefCommonOptions([
                   {
                     type: "category",
                     title: "Data Models",
-                    autogenerate_path: "/references/cart_models/classes",
+                    autogenerate_path: "/references/cart_models/variables",
                   },
                 ],
               },
@@ -1285,7 +1292,7 @@ export const sidebar = sidebarAttachHrefCommonOptions([
                     type: "category",
                     title: "Data Models",
                     autogenerate_path:
-                      "/references/sales_channel_models/classes",
+                      "/references/sales_channel_models/variables",
                   },
                 ],
               },
@@ -1408,7 +1415,7 @@ export const sidebar = sidebarAttachHrefCommonOptions([
                   {
                     type: "category",
                     title: "Data Models",
-                    autogenerate_path: "/references/store_models/classes",
+                    autogenerate_path: "/references/store_models/variables",
                   },
                 ],
               },
@@ -1648,7 +1655,7 @@ export const sidebar = sidebarAttachHrefCommonOptions([
       },
       {
         type: "category",
-        title: "File Provider Modules",
+        title: "File Module Providers",
         children: [
           {
             type: "link",
@@ -1680,7 +1687,7 @@ export const sidebar = sidebarAttachHrefCommonOptions([
       },
       {
         type: "category",
-        title: "Notification Provider Modules",
+        title: "Notification Module Providers",
         children: [
           {
             type: "link",
@@ -1710,6 +1717,11 @@ export const sidebar = sidebarAttachHrefCommonOptions([
                 type: "link",
                 path: "/references/notification-provider-module",
                 title: "Create Notification Provider",
+              },
+              {
+                type: "link",
+                path: "/integrations/guides/resend",
+                title: "Integrate Resend",
               },
             ],
           },
@@ -1746,6 +1758,33 @@ export const sidebar = sidebarAttachHrefCommonOptions([
     children: [
       {
         type: "category",
+        title: "Auth",
+        children: [
+          {
+            type: "link",
+            path: "/commerce-modules/auth/auth-providers/google",
+            title: "Google",
+          },
+          {
+            type: "link",
+            path: "/commerce-modules/auth/auth-providers/github",
+            title: "GitHub",
+          },
+        ],
+      },
+      {
+        type: "category",
+        title: "CMS",
+        children: [
+          {
+            type: "link",
+            path: "/integrations/guides/sanity",
+            title: "Sanity",
+          },
+        ],
+      },
+      {
+        type: "category",
         title: "File",
         children: [
           {
@@ -1764,6 +1803,11 @@ export const sidebar = sidebarAttachHrefCommonOptions([
             path: "/architectural-modules/notification/sendgrid",
             title: "SendGrid",
           },
+          {
+            type: "link",
+            path: "/integrations/guides/resend",
+            title: "Resend",
+          },
         ],
       },
       {
@@ -1777,22 +1821,6 @@ export const sidebar = sidebarAttachHrefCommonOptions([
           },
         ],
       },
-      {
-        type: "category",
-        title: "Guides",
-        children: [
-          {
-            type: "link",
-            path: "/integrations/guides/sanity",
-            title: "Sanity",
-          },
-          {
-            type: "link",
-            path: "/integrations/guides/resend",
-            title: "Resend",
-          },
-        ],
-      },
     ],
   },
   {
@@ -1802,17 +1830,20 @@ export const sidebar = sidebarAttachHrefCommonOptions([
     isChildSidebar: true,
     children: [
       {
-        type: "link",
-        path: "/storefront-development/tips",
-        title: "Tips",
-      },
-      {
-        type: "link",
-        path: "/storefront-development/publishable-api-keys",
-        title: "Publishable API Key",
-      },
-      {
-        type: "separator",
+        type: "category",
+        title: "General",
+        children: [
+          {
+            type: "link",
+            path: "/storefront-development/tips",
+            title: "Tips",
+          },
+          {
+            type: "link",
+            path: "/storefront-development/publishable-api-keys",
+            title: "Publishable API Key",
+          },
+        ],
       },
       {
         type: "category",
@@ -2127,7 +2158,7 @@ export const sidebar = sidebarAttachHrefCommonOptions([
       {
         type: "link",
         path: "/nextjs-starter",
-        title: "Next.js Starter",
+        title: "Next.js Starter Storefront",
       },
     ],
   },
@@ -2222,6 +2253,11 @@ export const sidebar = sidebarAttachHrefCommonOptions([
                 type: "link",
                 path: "/troubleshooting/dist-imports",
                 title: "Importing from /dist",
+              },
+              {
+                type: "link",
+                path: "/troubleshooting/workflow-errors",
+                title: "Workflow Errors",
               },
             ],
           },
@@ -2378,7 +2414,7 @@ export const sidebar = sidebarAttachHrefCommonOptions([
       {
         type: "link",
         path: "/service-factory-reference",
-        title: "Service Factory Reference",
+        title: "Service Factory",
         isChildSidebar: true,
         children: [
           {
@@ -2396,20 +2432,20 @@ export const sidebar = sidebarAttachHrefCommonOptions([
       {
         type: "link",
         path: "/references/helper-steps",
-        title: "Helper Steps Reference",
+        title: "Helper Steps",
         isChildSidebar: true,
         autogenerate_path: "/references/helper_steps/functions",
       },
       {
         type: "link",
-        title: "Core Workflows Reference",
+        title: "Core Workflows",
         path: "/medusa-workflows-reference",
         isChildSidebar: true,
         custom_autogenerate: "core-flows",
       },
       {
         type: "link",
-        title: "Testing Framework Reference",
+        title: "Testing Framework",
         path: "/test-tools-reference",
         isChildSidebar: true,
         children: [
