@@ -97,6 +97,44 @@ The S3 File Module Provider integrates Amazon S3 and services following a compat
       4. Click ALL for "Allowed Operations", click the "Review" button, then the "Save policy" button.
 
     </TabsContent>
+    <TabsContent value="Cloudflare R2">
+    1. Create a [Cloudflare free account](https://supabase.com/dashboard/sign-in) if you don’t have.
+    2. Set up your R2 bucket:
+       - Navigate to R2 Object Storage in your dashboard
+       - Click "Create bucket"
+       - Enter a unique bucket name
+       - Select "Automatic" for location
+       - Choose "Standard" for storage class
+       - Confirm by clicking "Create bucket"
+    3. Configure public access:
+       - Open your bucket's Settings
+       - Locate the Public Access section
+       - Enable R2.dev subdomain access
+       - Type 'allow' to confirm
+       - Copy the Public R2.dev Bucket URL for your `S3_FILE_URL`
+    4. Set up your credentials:
+    
+       - Find your Account ID in the R2 dashboard's top right corner
+       - [Generate API tokens](https://dash.cloudflare.com/?to=/:account/r2/api-tokens):
+         - Select **Create API token**
+         - Edit the **R2 Token** name
+         - Under **Permissions**, select appropriate permission types
+         - Optionally scope token to specific buckets for Object Read/Write permissions
+         - Click **Create API Token**
+         - Save the generated token as your **`S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY`**
+       - Record your bucket name for configuration
+       - Save your public bucket URL for reference
+    
+       ```scheme
+       S3_FILE_URL="https://<Public-R2.dev-Bucket-URL-Generated-on-step-3"
+       S3_ACCESS_KEY_ID="generated-on-step-4"
+       S3_SECRET_ACCESS_KEY="generated-on-step-4"
+       S3_REGION="auto"
+       S3_BUCKET="your-bucket-name"
+       S3_ENDPOINT="https://<your-account-id>.r2.cloudflarestorage.com"
+       ```
+    
+    </TabsContent>
   </TabsContentWrapper>
 </Tabs>
 
@@ -170,6 +208,7 @@ module.exports = {
       - For MinIO, it's the URL to the MinIO server with the bucket's name. For example, `https://{server-domain}/{bucket}`.
       - For DigitalOcean Spaces, it's either the Origin Endpoint or the CDN endpoint of your Spaces Object Storage bucket.
       - for Supabase, it's `https://{uniqueID}.supabase.co/storage/v1/object/public/{bucket}`. You can retrieve the `uniqueID` from [Storage Settings](https://supabase.com/docs/guides/storage/s3/authentication?queryGroups=language&language=javascript#s3-access-keys) page in the Endpoint URL.
+      - For Cloudflare R2, it's `Public R2.dev Bucket URL`.
       
       </Table.Cell>
       <Table.Cell>
@@ -223,6 +262,8 @@ module.exports = {
       The bucket's region code.
 
       For MinIO, use `us-east-1`.
+
+      For Cloudflare, use `auto`.
       
       </Table.Cell>
       <Table.Cell>
@@ -262,6 +303,7 @@ module.exports = {
       - For MinIO, it's the URL to the MinIO server.
       - For DigitalOcean Spaces, it's the Spaces Origin Endpoint of the format `https://{region}.digitaloceanspaces.com`.
       - For Supabase, it's the Endpoint URL in the [Storage Settings](https://supabase.com/docs/guides/storage/s3/authentication?queryGroups=language&language=javascript#s3-access-keys).
+      - For Cloudflare, it's `https://{your-account-id}.r2.cloudflarestorage.com`.
       
       </Table.Cell>
       <Table.Cell>
