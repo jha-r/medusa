@@ -53,7 +53,7 @@ export const generatedEditDates = {
   "app/commerce-modules/payment/payment/page.mdx": "2024-10-09T10:59:08.463Z",
   "app/commerce-modules/payment/payment-collection/page.mdx": "2024-10-09T10:56:49.510Z",
   "app/commerce-modules/payment/payment-flow/page.mdx": "2024-10-09T11:18:53.332Z",
-  "app/commerce-modules/payment/payment-provider/stripe/page.mdx": "2024-11-19T11:46:31.140Z",
+  "app/commerce-modules/payment/payment-provider/stripe/page.mdx": "2024-12-12T12:46:28.557Z",
   "app/commerce-modules/payment/payment-provider/page.mdx": "2024-10-09T11:07:27.269Z",
   "app/commerce-modules/payment/payment-session/page.mdx": "2024-10-09T10:58:00.960Z",
   "app/commerce-modules/payment/webhook-events/page.mdx": "2024-11-19T11:45:02.167Z",
@@ -123,7 +123,7 @@ export const generatedEditDates = {
   "app/medusa-cli/page.mdx": "2024-08-28T11:25:32.382Z",
   "app/medusa-container-resources/page.mdx": "2024-12-09T16:18:38.852Z",
   "app/medusa-workflows-reference/page.mdx": "2024-12-09T16:22:32.129Z",
-  "app/nextjs-starter/page.mdx": "2024-12-10T08:44:33.783Z",
+  "app/nextjs-starter/page.mdx": "2024-12-12T12:31:16.661Z",
   "app/recipes/b2b/page.mdx": "2024-10-03T13:07:44.153Z",
   "app/recipes/commerce-automation/page.mdx": "2024-10-16T08:52:01.585Z",
   "app/recipes/digital-products/examples/standard/page.mdx": "2024-12-13T16:04:34.105Z",
@@ -5688,5 +5688,6 @@ export const generatedEditDates = {
   "references/types/DmlTypes/types/types.DmlTypes.KnownDataTypes/page.mdx": "2024-12-10T14:54:55.434Z",
   "references/types/DmlTypes/types/types.DmlTypes.RelationshipTypes/page.mdx": "2024-12-10T14:54:55.435Z",
   "app/recipes/commerce-automation/restock-notification/page.mdx": "2024-12-11T08:47:27.471Z",
-  "app/troubleshooting/workflow-errors/page.mdx": "2024-12-11T08:44:36.598Z"
+  "app/troubleshooting/workflow-errors/page.mdx": "2024-12-11T08:44:36.598Z",
+  "app/nextjs-starter/guides/customize-stripe/page.mdx": "2024-12-12T12:46:33.999Z"
 }
