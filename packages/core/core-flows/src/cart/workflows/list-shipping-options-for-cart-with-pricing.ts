@@ -1,4 +1,4 @@
-import { deepFlatMap, ShippingOptionPriceType } from "@medusajs/framework/utils"
+import { ShippingOptionPriceType } from "@medusajs/framework/utils"
 import {
   createWorkflow,
   parallelize,
@@ -16,6 +16,7 @@ const COMMON_OPTIONS_FIELDS = [
   "name",
   "price_type",
   "service_zone_id",
+  "service_zone.fulfillment_set_id",
   "shipping_profile_id",
   "provider_id",
   "data",
@@ -81,7 +82,12 @@ export const listShippingOptionsForCartWithPricingWorkflow = createWorkflow(
     const scFulfillmentSetQuery = useQueryGraphStep({
       entity: "sales_channels",
       filters: { id: cart.sales_channel_id },
-      fields: ["stock_locations.fulfillment_sets.id"],
+      fields: [
+        "stock_locations.id",
+        "stock_locations.name",
+        "stock_locations.address.*",
+        "stock_locations.fulfillment_sets.id",
+      ],
     }).config({ name: "sales_channels-fulfillment-query" })
 
     const scFulfillmentSets = transform(
@@ -89,22 +95,23 @@ export const listShippingOptionsForCartWithPricingWorkflow = createWorkflow(
       ({ scFulfillmentSetQuery }) => scFulfillmentSetQuery.data[0]
     )
 
-    const fulfillmentSetIds = transform(
-      { options: scFulfillmentSets },
-      (data) => {
+    const { fulfillmentSetIds, fulfillmentSetLocationMap } = transform(
+      { scFulfillmentSets },
+      ({ scFulfillmentSets }) => {
         const fulfillmentSetIds = new Set<string>()
+        const fulfillmentSetLocationMap = {}
 
-        deepFlatMap(
-          data.options,
-          "stock_locations.fulfillment_sets",
-          ({ fulfillment_sets: fulfillmentSet }) => {
-            if (fulfillmentSet?.id) {
-              fulfillmentSetIds.add(fulfillmentSet.id)
-            }
-          }
-        )
+        scFulfillmentSets.stock_locations.forEach((stockLocation) => {
+          stockLocation.fulfillment_sets.forEach((fulfillmentSet) => {
+            fulfillmentSetLocationMap[fulfillmentSet.id] = stockLocation
+            fulfillmentSetIds.add(fulfillmentSet.id)
+          })
+        })
 
-        return Array.from(fulfillmentSetIds)
+        return {
+          fulfillmentSetIds: Array.from(fulfillmentSetIds),
+          fulfillmentSetLocationMap,
+        }
       }
     )
 
@@ -200,8 +207,18 @@ export const listShippingOptionsForCartWithPricingWorkflow = createWorkflow(
     )
 
     const calculateShippingOptionsPricesData = transform(
-      { shippingOptionsCalculated, cart, input },
-      ({ shippingOptionsCalculated, cart, input }) => {
+      {
+        shippingOptionsCalculated,
+        cart,
+        input,
+        fulfillmentSetLocationMap,
+      },
+      ({
+        shippingOptionsCalculated,
+        cart,
+        input,
+        fulfillmentSetLocationMap,
+      }) => {
         const optionDataMap = new Map(
           (input.options ?? []).map(({ id, data }) => [id, data])
         )
@@ -211,7 +228,11 @@ export const listShippingOptionsForCartWithPricingWorkflow = createWorkflow(
             ({
               id: so.id as string,
               optionData: so.data,
-              context: cart,
+              context: {
+                ...cart,
+                from_location:
+                  fulfillmentSetLocationMap[so.service_zone.fulfillment_set_id],
+              },
               data: optionDataMap.get(so.id),
               provider_id: so.provider_id,
             } as CalculateShippingOptionPriceDTO)
